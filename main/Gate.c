@@ -19,6 +19,8 @@ static const char TAG[] = "Gate";
 	u8(ledgpio,16)	\
 	u8(ledchan,0)	\
 	u8(leds,72)	\
+	u8(ledtop,36)	\
+	u8(ledspace,8)	\
 
 #define u32(n,d)        uint32_t n;
 #define s8(n,d) int8_t n;
@@ -87,9 +89,8 @@ void app_main()
    REVK_ERR_CHECK(strip->clear(strip, 100));
    while (1)
    {
-	   // TODO offset and spacing for chevrons
 	   // Wait for trigger
-	   // 7 x Run a blue light around and clock each chevron yellow
+	   // 7 x Run a blue light around and clock each chevron yellow (ledtop/ledspace)
 	   // Fad up white quickly
 	   // Fade from solid white to 50% white with random white
 	   // Hold
