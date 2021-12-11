@@ -87,11 +87,18 @@ void app_main()
    REVK_ERR_CHECK(strip->clear(strip, 100));
    while (1)
    {
+	   // TODO offset and spacing for chevrons
+	   // Wait for trigger
+	   // 7 x Run a blue light around and clock each chevron yellow
+	   // Fad up white quickly
+	   // Fade from solid white to 50% white with random white
+	   // Hold
+	   // Fade out quickly
 
       static uint8_t t = 0;
       for (int p = 0; p < leds; p++)
       {
-         t++;
+         t+=10;
          ESP_ERROR_CHECK(strip->set_pixel(strip, p, t, t + 85, t + 85*2));
       }
       ESP_ERROR_CHECK(strip->refresh(strip, 100));
