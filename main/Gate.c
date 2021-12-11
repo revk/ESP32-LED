@@ -36,35 +36,35 @@ static const char TAG[] = "Gate";
 #define PORT_INV 0x40
 #define port_mask(p) ((p)&63)
 static uint8_t  input[MAXGPIO];
-//Input GPIOs
+/* Input GPIOs */
 static uint8_t  output[MAXGPIO];
-//Output GPIOs
+/* Output GPIOs */
 static uint32_t outputmark[MAXGPIO];
-//Output mark time(ms)
-   static uint32_t outputspace[MAXGPIO];
-//Output mark time(ms)
-   static uint8_t  power[MAXGPIO];
-//Fixed output GPIOs
-   int             holding = 0;
+/* Output mark time(ms) */
+static uint32_t outputspace[MAXGPIO];
+/* Output mark time(ms) */
+static uint8_t  power[MAXGPIO];
+/* Fixed output GPIOs */
+int             holding = 0;
 
-//Dynamic
-   static uint64_t volatile outputbits = 0;
-//Requested output
-   static uint64_t volatile outputraw = 0;
-//Current output
-   static uint32_t outputremaining[MAXGPIO] = {};
-//Output remaining time(ms)
-   static uint32_t outputcount[MAXGPIO] = {};
-//Output count
+/* Dynamic */
+static uint64_t volatile outputbits = 0;
+/* Requested output */
+static uint64_t volatile outputraw = 0;
+/* Current output */
+static uint32_t outputremaining[MAXGPIO] = {};
+/* Output remaining time(ms) */
+static uint32_t outputcount[MAXGPIO] = {};
+/* Output count */
 
 #define	settings		\
 	u32(period,0)	\
 	u32(awake,0)	\
-	io(usb,22)	\
-	io(charger,23)	\
-	io(led,-25)	\
-	io(adcon,32)	\
-	u8(adc,5)		\
+	io(usb,0)	\
+	io(charger,0)	\
+	io(led,0)	\
+	io(adcon,0)	\
+	u8(adc,0)		\
 	u32(adcr1,18000)	\
 	u32(adcr2,1000)	\
 	b(ranger0x)	\
@@ -72,8 +72,8 @@ static uint32_t outputmark[MAXGPIO];
 	io(rangerpwr,)	\
 	io(rangerscl,)	\
 	io(rangersda,)	\
-        u8(rangeraddress,0x29)  \
-	u8(ledgpio,13)	\
+        u8(rangeraddress,0)  \
+	io(ledgpio,16)	\
 	u8(ledchan,0)	\
 	u8(leds,144)	\
 
@@ -91,14 +91,15 @@ settings
 #undef b
 #undef s
 uint64_t busy = 0;
-   char            usb_present = 0;
-   char            charger_present = 0;
-   const char     *rangererr = NULL;
-   uint16_t        range = 0;
-   uint32_t        voltage = 0;
+char            usb_present = 0;
+char            charger_present = 0;
+const char     *rangererr = NULL;
+uint16_t        range = 0;
+uint32_t        voltage = 0;
 
 
-   void            input_task(void *arg)
+void
+input_task(void *arg)
 {
    arg = arg;
    while (1)
@@ -124,22 +125,22 @@ output_task(void *arg)
             int             p = port_mask(output[i]);
             if (outputremaining[i] && !--outputremaining[i])
                outputbits ^= (1ULL << i);
-            //timeout
-               if ((outputbits ^ outputraw) & (1ULL << i))
+            /* timeout */
+            if ((outputbits ^ outputraw) & (1ULL << i))
             {
-               //Change output
-                  outputraw ^= (1ULL << i);
+               /* Change output */
+               outputraw ^= (1ULL << i);
                REVK_ERR_CHECK(gpio_hold_dis(p));
                REVK_ERR_CHECK(gpio_set_level(p, ((output[i] & PORT_INV) ? 1 : 0) ^ ((outputbits >> i) & 1)));
                REVK_ERR_CHECK(gpio_hold_en(p));
                if (outputbits & (1ULL << i))
                   outputremaining[i] = outputmark[i];
-               //Time
-                  else if (!outputcount[i] || !--outputcount[i])
+               /* Time */
+               else if (!outputcount[i] || !--outputcount[i])
                   outputremaining[i] = 0;
                else
                   outputremaining[i] = outputspace[i];
-               //Time
+               /* Time */
             }
          }
    }
@@ -186,12 +187,12 @@ app_callback(int client, const char *prefix, const char *target, const char *suf
       {
          outputcount[i] = c;
          outputbits |= (1ULL << i);
-         //On
+         /* On */
       } else
       {
          outputcount[i] = 0;
          outputbits &= ~(1ULL << i);
-         //Off
+         /* Off */
       }
       return "";
    }
@@ -295,7 +296,7 @@ app_main()
             gpio_set_pull_mode(1, GPIO_PULLDOWN_ONLY);
          }
          busy = 0;
-         //No point waiting, powered via USB port
+         /* No point waiting, powered via USB port */
       }
    }
    if (adcon)
@@ -423,13 +424,7 @@ app_main()
       revk_info(NULL, &j);
    }
 
-   if (!period)
-   {
-      //We run forever, not sleeping
-         ESP_LOGE(TAG, "Idle");
-      return;
-   }
-   if (!busy)
+   if (!busy && period)
    {
       ESP_LOGI(TAG, "Wait for %d", awake);      /* wait a bit */
       if (awake)
@@ -437,7 +432,7 @@ app_main()
       else
          usleep(50000);         /* just long enough ? */
    }
-   if (busy)
+   if (busy && period)
    {
       ESP_LOGI(TAG, "Waiting %d", (int)((busy - esp_timer_get_time()) / 1000000ULL));
       while (busy > esp_timer_get_time())
@@ -453,34 +448,36 @@ app_main()
    if (led)
       gpio_set_level(port_mask(led), (led & PORT_INV) ? 1 : 0); /* Off */
 
-   time_t          next = (time(0) + 5) / period * period + period;
+   if (period)
    {
-      char            reason[100];
-      struct tm       tm;
-      gmtime_r(&next, &tm);
-      sprintf(reason, "Sleep after %lldms until %04d-%02d-%02dT%02d:%02d:%02dZ", esp_timer_get_time() / 1000, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
-      revk_mqtt_close(reason);
-      revk_wifi_close();
-      if (holding)
-         gpio_deep_sleep_hold_en();
-      else
-         gpio_deep_sleep_hold_dis();
-      esp_sleep_config_gpio_isolate();
-      ESP_LOGI(TAG, "%s", reason);
+      time_t          next = (time(0) + 5) / period * period + period;
+      {
+         char            reason[100];
+         struct tm       tm;
+         gmtime_r(&next, &tm);
+         sprintf(reason, "Sleep after %lldms until %04d-%02d-%02dT%02d:%02d:%02dZ", esp_timer_get_time() / 1000, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+         revk_mqtt_close(reason);
+         revk_wifi_close();
+         if (holding)
+            gpio_deep_sleep_hold_en();
+         else
+            gpio_deep_sleep_hold_dis();
+         esp_sleep_config_gpio_isolate();
+         ESP_LOGI(TAG, "%s", reason);
+      }
+      if (usb_present && !charger_present)
+         sleep(1);
+      struct timeval  tv;
+      gettimeofday(&tv, NULL);
+      if (next < tv.tv_sec + 1)
+         next = tv.tv_sec + 1;
+      esp_deep_sleep(((uint64_t) next - tv.tv_sec - 1) * 1000000LL + 1000000LL - tv.tv_usec);
    }
-   if (usb_present && !charger_present)
-      sleep(1);
-   struct timeval  tv;
-   gettimeofday(&tv, NULL);
-   if (next < tv.tv_sec + 1)
-      next = tv.tv_sec + 1;
-   esp_deep_sleep(((uint64_t) next - tv.tv_sec - 1) * 1000000LL + 1000000LL - tv.tv_usec);
-
    led_strip_t    *strip = NULL;
    if (leds)
    {
-      //RMT control
-         rmt_config_t config = RMT_DEFAULT_CONFIG_TX(ledgpio, ledchan);
+      /* RMT control */
+      rmt_config_t    config = RMT_DEFAULT_CONFIG_TX(port_mask(ledgpio), ledchan);
       config.clk_div = 2;
       REVK_ERR_CHECK(rmt_config(&config));
       REVK_ERR_CHECK(rmt_driver_install(config.channel, 0, 0));
@@ -491,25 +488,18 @@ app_main()
       else
          REVK_ERR_CHECK(strip->clear(strip, 100));
    }
-   /* Should not get here */
-   ESP_LOGE(TAG, "Still awake!");
    while (1)
    {
-      sleep(1);
+      static uint8_t t = 0;
       if (strip)
       {
-         static uint32_t t = 0;
-         jo_t            j = jo_object_alloc();
-         jo_litf(j, "t", "%u", t);
-         revk_info(NULL, &j);
-
-
          for (int p = 0; p < leds; p++)
          {
-            t += 100;
-            ESP_ERROR_CHECK(strip->set_pixel(strip, p, t, t, t));
+            t ++;
+            ESP_ERROR_CHECK(strip->set_pixel(strip, p, t, t+1, t+2));
          }
          ESP_ERROR_CHECK(strip->refresh(strip, 100));
       }
+      usleep(10000);
    }
 }
