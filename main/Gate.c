@@ -20,7 +20,7 @@ static const char TAG[] = "Gate";
 	u8(ledchan,0)	\
 	u8(leds,72)	\
 	u8(ledtop,36)	\
-	s8(ledspace,8)	\
+	s8(ledspace,31)	\
 	u8(ledmax,50)	\
 	u32(gateopen,100)	\
 
@@ -150,12 +150,12 @@ void app_main()
 
       // 7 x Run a blue light around and clock each chevron yellow (ledtop/ledspace)
       memset(led1, 0, leds);    // Use led1 as flags
-      spin(1, ledtop - 1 * ledspace);
-      spin(-1, ledtop - 2 * ledspace);
-      spin(1, ledtop - 3 * ledspace);
-      spin(-1, ledtop + 3 * ledspace);
-      spin(1, ledtop + 2 * ledspace);
-      spin(-1, ledtop + 1 * ledspace);
+      spin(1, ledtop - 1 * ledspace / 4);
+      spin(-1, ledtop - 2 * ledspace / 4);
+      spin(1, ledtop - 3 * ledspace / 4);
+      spin(-1, ledtop + 3 * ledspace / 4);
+      spin(1, ledtop + 2 * ledspace / 4);
+      spin(-1, ledtop + 1 * ledspace / 4);
       spin(1, ledtop);
       usleep(500000);
 
@@ -168,7 +168,7 @@ void app_main()
 
       // Fade from solid white to 50% white with random white
       int sparkle = gateopen;
-      while (sparkle--&&!dial)
+      while (sparkle-- && !dial)
       {
          esp_fill_random(led2, leds);
          for (pos = 0; pos < leds; pos++)
