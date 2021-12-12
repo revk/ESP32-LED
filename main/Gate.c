@@ -121,19 +121,19 @@ void app_main()
          memcpy(led1, led2, leds);
       }
       void spin(int dir, int chevron) {
-         int p = 0;
+         int p = ledtop;
          do
          {
-            for (pos = 0; pos < leds; pos++)
-               strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : 0);
-            ESP_ERROR_CHECK(strip->refresh(strip, 100));
-            usleep(10000);
             p += dir;
             if (p == -1)
                p = leds - 1;
             else if (p == leds)
                p = 0;
-         } while (p);
+            for (pos = 0; pos < leds; pos++)
+               strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : 0);
+            ESP_ERROR_CHECK(strip->refresh(strip, 100));
+            usleep(10000);
+         } while (p != ledtop);
          for (fade = 0; fade < 255; fade += 10)
          {
             strip->set_pixel(strip, chevron, fade * ledmax / 255, fade * ledmax / 255, 0);
