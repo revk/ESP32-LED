@@ -127,7 +127,7 @@ void app_main()
             for (pos = 0; pos < leds; pos++)
                strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : 0);
             ESP_ERROR_CHECK(strip->refresh(strip, 100));
-            usleep(5000);
+            usleep(10000);
             p += dir;
             if (p == -1)
                p = leds - 1;
@@ -138,7 +138,7 @@ void app_main()
          {
             strip->set_pixel(strip, chevron, fade * ledmax / 255, fade * ledmax / 255, 0);
             ESP_ERROR_CHECK(strip->refresh(strip, 100));
-            usleep(1000);
+            usleep(2000);
          }
          led1[chevron] = 1;
       }
