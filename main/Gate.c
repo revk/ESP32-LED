@@ -150,12 +150,12 @@ void app_main()
 
       // 7 x Run a blue light around and clock each chevron yellow (ledtop/ledspace)
       memset(led1, 0, leds);    // Use led1 as flags
-      spin(1, ledtop - 1 * ledspace / 4);
-      spin(-1, ledtop - 2 * ledspace / 4);
-      spin(1, ledtop - 3 * ledspace / 4);
-      spin(-1, ledtop + 3 * ledspace / 4);
+      spin(1, ledtop + 3 * ledspace / 4);
+      spin(-1, ledtop - 3 * ledspace / 4);
       spin(1, ledtop + 2 * ledspace / 4);
-      spin(-1, ledtop + 1 * ledspace / 4);
+      spin(-1, ledtop - 2 * ledspace / 4);
+      spin(1, ledtop + 1 * ledspace / 4);
+      spin(-1, ledtop - 1 * ledspace / 4);
       spin(1, ledtop);
       usleep(500000);
 
