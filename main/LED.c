@@ -19,10 +19,13 @@ static const char TAG[] = "LED";
 	u8(ledgpio,16)	\
 	u8(ledchan,0)	\
 	u8(leds,72)	\
-	u8(ledtop,36)	\
-	s8(ledspace,31)	\
 	u8(ledmax,50)	\
+	s8(gatetop,36)	\
+	s8(gatechevron1,8)	\
+	s8(gatechevron2,16)	\
+	s8(gatechevron3,23)	\
 	u32(gateopen,100)	\
+	s8(clocktop,-1)		\
 
 #define u32(n,d)        uint32_t n;
 #define s8(n,d) int8_t n;
@@ -101,84 +104,101 @@ void app_main()
    REVK_ERR_CHECK(strip->clear(strip, 100));
    ESP_ERROR_CHECK(strip->refresh(strip, 100));
 
-   uint8_t led1[leds];
-   uint8_t led2[leds];
-   while (1)
-   {
-      int fade,
-       pos;
-      void fader(int step) {    // Fade led1 to led2
-         for (fade = 0; fade < 255; fade += step)
-         {
-            for (pos = 0; pos < leds; pos++)
-            {
-               uint8_t white = (fade * led2[pos] + (255 - fade) * led1[pos]) / 255;
-               strip->set_pixel(strip, pos, white, white, white);
-            }
-            ESP_ERROR_CHECK(strip->refresh(strip, 100));
-            usleep(5000);
-         }
-         memcpy(led1, led2, leds);
-      }
-      void spin(int dir, int chevron) {
-         int p = ledtop;
-         do
-         {
-            p += dir;
-            if (p == -1)
-               p = leds - 1;
-            else if (p == leds)
-               p = 0;
-            for (pos = 0; pos < leds; pos++)
-               strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : 0);
-            ESP_ERROR_CHECK(strip->refresh(strip, 100));
-            usleep(10000);
-         } while (p != ledtop);
-         for (fade = 0; fade < 255; fade += 10)
-         {
-            strip->set_pixel(strip, chevron, fade * ledmax / 255, fade * ledmax / 255, 0);
-            ESP_ERROR_CHECK(strip->refresh(strip, 100));
-            usleep(2000);
-         }
-         led1[chevron] = 1;
-      }
-
-      // Wait for trigger
-      while (!dial)
-         usleep(100000);
-      dial = 0;
-
-      // 7 x Run a blue light around and clock each chevron yellow (ledtop/ledspace)
-      memset(led1, 0, leds);    // Use led1 as flags
-      spin(1, ledtop + 3 * ledspace / 4);
-      spin(-1, ledtop - 3 * ledspace / 4);
-      spin(1, ledtop + 2 * ledspace / 4);
-      spin(-1, ledtop - 2 * ledspace / 4);
-      spin(1, ledtop + 1 * ledspace / 4);
-      spin(-1, ledtop - 1 * ledspace / 4);
-      spin(1, ledtop);
-      usleep(500000);
-
-      // Fade up white quickly
-      memset(led1, 0, leds);
-      memset(led2, ledmax * 2, leds);
-      fader(5);
-      memset(led2, ledmax, leds);
-      fader(1);
-
-      // Fade from solid white to 50% white with random white
-      int sparkle = gateopen;
-      while (sparkle-- && !dial)
+   if (gatetop >= 0)
+   {                            // Start gate
+      uint8_t led1[leds];
+      uint8_t led2[leds];
+      while (1)
       {
-         esp_fill_random(led2, leds);
-         for (pos = 0; pos < leds; pos++)
-            led2[pos] = ((int) led2[pos] * ledmax / 255);
-         fader(5);
-      }
-      // Fade out
-      memset(led2, 0, leds);
-      fader(5);
+         int fade,
+          pos;
+         void fader(int step) { // Fade led1 to led2
+            for (fade = 0; fade < 255; fade += step)
+            {
+               for (pos = 0; pos < leds; pos++)
+               {
+                  uint8_t white = (fade * led2[pos] + (255 - fade) * led1[pos]) / 255;
+                  strip->set_pixel(strip, pos, white, white, white);
+               }
+               ESP_ERROR_CHECK(strip->refresh(strip, 100));
+               usleep(5000);
+            }
+            memcpy(led1, led2, leds);
+         }
+         void spin(int dir, int chevron) {
+            int p = gatetop;
+            do
+            {
+               p += dir;
+               if (p == -1)
+                  p = leds - 1;
+               else if (p == leds)
+                  p = 0;
+               for (pos = 0; pos < leds; pos++)
+                  strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : 0);
+               ESP_ERROR_CHECK(strip->refresh(strip, 100));
+               usleep(10000);
+            } while (p != gatetop);
+            for (fade = 0; fade < 255; fade += 10)
+            {
+               strip->set_pixel(strip, chevron, fade * ledmax / 255, fade * ledmax / 255, 0);
+               ESP_ERROR_CHECK(strip->refresh(strip, 100));
+               usleep(2000);
+            }
+            led1[chevron] = 1;
+         }
 
-      sleep(1);
+         // Wait for trigger
+         while (!dial)
+            usleep(100000);
+         dial = 0;
+
+         // 7 x Run a blue light around and clock each chevron yellow (gatetop/ledspace)
+         memset(led1, 0, leds); // Use led1 as flags
+         if (gatechevron3)
+         {
+            spin(1, gatetop + gatechevron3);
+            spin(-1, gatetop - gatechevron3);
+         }
+         if (gatechevron2)
+         {
+            spin(1, gatetop + gatechevron2);
+            spin(-1, gatetop - gatechevron2);
+         }
+         if (gatechevron1)
+         {
+            spin(1, gatetop + gatechevron1);
+            spin(-1, gatetop - gatechevron1);
+         }
+         spin(1, gatetop);
+         usleep(500000);
+
+         // Fade up white quickly
+         memset(led1, 0, leds);
+         memset(led2, ledmax * 2, leds);
+         fader(5);
+         memset(led2, ledmax, leds);
+         fader(1);
+
+         // Fade from solid white to 50% white with random white
+         int sparkle = gateopen;
+         while (sparkle-- && !dial)
+         {
+            esp_fill_random(led2, leds);
+            for (pos = 0; pos < leds; pos++)
+               led2[pos] = ((int) led2[pos] * ledmax / 255);
+            fader(5);
+         }
+         // Fade out
+         memset(led2, 0, leds);
+         fader(5);
+
+         sleep(1);
+      }
+   }
+
+   if (clocktop >= 0)
+   {                            // Simple clock
+
    }
 }
