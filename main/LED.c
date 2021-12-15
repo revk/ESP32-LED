@@ -219,7 +219,7 @@ void app_main()
                   return sub;
                return 0;
             }
-            strip->set_pixel(strip, pos, col(t.tm_hour * 60 + t.tm_min, 12 * 60), col(t.tm_min * 60 + t.tm_sec, 60 * 60), col(t.tm_sec * 1000 + tv.tv_usec / 1000, 60000));
+            strip->set_pixel(strip, pos, col(t.tm_hour % 12 * 60 + t.tm_min, 12 * 60), col(t.tm_min * 60 + t.tm_sec, 60 * 60), col(t.tm_sec * 1000 + tv.tv_usec / 1000, 60000));
          }
          ESP_ERROR_CHECK(strip->refresh(strip, 100));
          usleep(10000);
