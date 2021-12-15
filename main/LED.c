@@ -40,7 +40,7 @@ settings
 #undef u8
 #undef b
 #undef s
-int dial = 0;
+uint8_t gatedial = 0;
 
 const char *app_callback(int client, const char *prefix, const char *target, const char *suffix, jo_t j)
 {
@@ -58,8 +58,8 @@ const char *app_callback(int client, const char *prefix, const char *target, con
          return "Too long";
    }
    if (!strcmp(suffix, "dial"))
-   {
-      dial = 1;
+   { // Dial the gate
+      gatedial = 1;
       return "";
    }
 
@@ -149,9 +149,9 @@ void app_main()
          }
 
          // Wait for trigger
-         while (!dial)
+         while (!gatedial)
             usleep(100000);
-         dial = 0;
+         gatedial = 0;
 
          // 7 x Run a blue light around and clock each chevron yellow (gatetop/ledspace)
          memset(led1, 0, leds); // Use led1 as flags
@@ -182,7 +182,7 @@ void app_main()
 
          // Fade from solid white to 50% white with random white
          int sparkle = gateopen;
-         while (sparkle-- && !dial)
+         while (sparkle-- && !gatedial)
          {
             esp_fill_random(led2, leds);
             for (pos = 0; pos < leds; pos++)
