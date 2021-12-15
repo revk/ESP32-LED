@@ -40,7 +40,7 @@ settings
 #undef u8
 #undef b
 #undef s
-uint8_t gatedial = 0;
+    uint8_t gatedial = 0;
 
 const char *app_callback(int client, const char *prefix, const char *target, const char *suffix, jo_t j)
 {
@@ -58,7 +58,7 @@ const char *app_callback(int client, const char *prefix, const char *target, con
          return "Too long";
    }
    if (!strcmp(suffix, "dial"))
-   { // Dial the gate
+   {                            // Dial the gate
       gatedial = 1;
       return "";
    }
@@ -145,7 +145,8 @@ void app_main()
                ESP_ERROR_CHECK(strip->refresh(strip, 100));
                usleep(2000);
             }
-            led1[chevron] = 1;
+            if (chevron >= 0 && chevron < leds)
+               led1[chevron] = 1;
          }
 
          // Wait for trigger
@@ -199,6 +200,29 @@ void app_main()
 
    if (clocktop >= 0)
    {                            // Simple clock
-
+      while (1)
+      {
+         struct tm t;
+         struct timeval tv;
+         gettimeofday(&tv, NULL);
+         localtime_r(&tv.tv_sec, &t);
+         for (int pos = 0; pos < leds; pos++)
+         {
+            int clock = (pos + clocktop) % leds;
+            int col(int v, int u) {
+               int hand = leds * v / u;
+               int sub = ledmax * (leds * v % u) / u;
+               if (hand == clock)
+                  return ledmax - sub;
+               hand = (hand + 1) % leds;
+               if (hand == clock)
+                  return sub;
+               return 0;
+            }
+            strip->set_pixel(strip, pos, col(t.tm_hour * 60 + t.tm_min, 12 * 60), col(t.tm_min * 60 + t.tm_sec, 60 * 60), col(t.tm_sec * 1000 + tv.tv_usec / 1000, 60000));
+         }
+         ESP_ERROR_CHECK(strip->refresh(strip, 100));
+         usleep(10000);
+      }
    }
 }
