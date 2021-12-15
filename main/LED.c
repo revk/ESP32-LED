@@ -1,7 +1,7 @@
-/* Gate app */
+/* LED app */
 /* Copyright ©2019 - 21 Adrian Kennard, Andrews & Arnold Ltd.See LICENCE file for details .GPL 3.0 */
 
-static const char TAG[] = "Gate";
+static const char TAG[] = "LED";
 
 #include "revk.h"
 #include "esp_sleep.h"

@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := Gate
+PROJECT_NAME := LED
 
 all:
 	idf.py build
@@ -38,7 +38,7 @@ zap:    bootmode flash
 
 # Program the FTDI
 ftdi: ftdizap/ftdizap
-	./ftdizap/ftdizap --serial="RevK" --description="Gate" --cbus0-mode=7 --cbus1-mode=13 --invert-rts=1 --invert-dtr=1
+	./ftdizap/ftdizap --serial="RevK" --description="LED" --cbus0-mode=7 --cbus1-mode=13 --invert-rts=1 --invert-dtr=1
 
 ftdizap/ftdizap: ftdizap/ftdizap.c
 	make -C ftdizap
