@@ -26,7 +26,7 @@ static const char TAG[] = "LED";
 	s8(gatechevron3,23)	\
 	u32(gateopen,100)	\
 	s8(clocktop,-1)		\
-	u8(clockfade,5)	\
+	u32(clockfade,1000)	\
 
 #define u32(n,d)        uint32_t n;
 #define s8(n,d) int8_t n;
@@ -213,23 +213,28 @@ void app_main()
          struct timeval tv;
          gettimeofday(&tv, NULL);
          localtime_r(&tv.tv_sec, &t);
+         uint32_t usecs = (((t.tm_hour % 12) * 60 + t.tm_min) * 60 + t.tm_sec) * 1000 + tv.tv_usec / 1000;
          for (int pos = 0; pos < leds; pos++)
          {
             int clock = (pos + clocktop) % leds;
-            int col(int v, int u, int scale) {
-               int fade = clockfade * scale;
-               int hand = leds * v / u;
-               int sub = ledmax * fade * (leds * v % u) / u - ledmax * (fade - 1);
-               if (sub < 0)
-                  sub = 0;
+            int col(int scale) {
+               scale *= 1000;   // ms
+               uint32_t u = usecs % scale;      // What ms in the clock face we are on
+               int hand = leds * u / scale;     // What hand position we are on
+               int perhand = scale / leds;      // How many ms per hand to hand step
+               int sub = u - hand * perhand;    // Where we are in the hand to hand steps
+               if (sub > perhand - clockfade)
+               {                // Last clockfade period (ms)
+                  if (hand == clock)
+                     return (perhand - sub) * ledmax / 1000;    // Fade out in last period
+                  if ((hand + 1) % leds == clock)
+                     return ledmax - (perhand - sub) * ledmax / 1000;   // Fade in next in last period
+               }
                if (hand == clock)
-                  return ledmax - sub;
-               hand = (hand + 1) % leds;
-               if (hand == clock)
-                  return sub;
+                  return ledmax;
                return 0;
             }
-            strip->set_pixel(strip, pos, col((t.tm_hour % 12) * 60 + t.tm_min, 12 * 60, 60 * 60), col(t.tm_min * 60 + t.tm_sec, 60 * 60, 60), col(t.tm_sec * 1000 + tv.tv_usec / 1000, 60000, 1));
+            strip->set_pixel(strip, pos, col(12 * 60 * 60), col(60 * 60), col(60));
          }
          ESP_ERROR_CHECK(strip->refresh(strip, 100));
          usleep(10000);
