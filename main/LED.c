@@ -26,6 +26,7 @@ static const char TAG[] = "LED";
 	s8(gatechevron3,23)	\
 	u32(gateopen,100)	\
 	s8(clocktop,-1)		\
+	u8(clockfade,10)	\
 
 #define u32(n,d)        uint32_t n;
 #define s8(n,d) int8_t n;
@@ -200,6 +201,9 @@ void app_main()
 
    if (clocktop >= 0)
    {                            // Simple clock
+      strip->set_pixel(strip, clocktop, ledmax, ledmax, ledmax);
+      ESP_ERROR_CHECK(strip->refresh(strip, 100));
+      sleep(5);
       while (1)
       {
          struct tm t;
@@ -211,7 +215,9 @@ void app_main()
             int clock = (pos + clocktop) % leds;
             int col(int v, int u) {
                int hand = leds * v / u;
-               int sub = ledmax * (leds * v % u) / u;
+               int sub = ledmax * clockfade * (leds * v % u) / u - ledmax * (clockfade - 1);
+               if (sub < 0)
+                  sub = 0;
                if (hand == clock)
                   return ledmax - sub;
                hand = (hand + 1) % leds;
@@ -219,7 +225,7 @@ void app_main()
                   return sub;
                return 0;
             }
-            strip->set_pixel(strip, pos, col(t.tm_hour % 12 * 60 + t.tm_min, 12 * 60), col(t.tm_min * 60 + t.tm_sec, 60 * 60), col(t.tm_sec * 1000 + tv.tv_usec / 1000, 60000));
+            strip->set_pixel(strip, pos, col((t.tm_hour % 12) * 60 + t.tm_min, 12 * 60), col(t.tm_min * 60 + t.tm_sec, 60 * 60), col(t.tm_sec * 1000 + tv.tv_usec / 1000, 60000));
          }
          ESP_ERROR_CHECK(strip->refresh(strip, 100));
          usleep(10000);
