@@ -222,13 +222,14 @@ void app_main()
                uint32_t u = usecs % scale;      // What ms in the clock face we are on
                int hand = leds * u / scale;     // What hand position we are on
                int perhand = scale / leds;      // How many ms per hand to hand step
+               int fade = (!clockfade || clockfade > perhand ? perhand : clockfade);
                int sub = u - hand * perhand;    // Where we are in the hand to hand steps
-               if (sub > perhand - clockfade)
-               {                // Last clockfade period (ms)
+               if (sub > perhand - fade)
+               {                // Last fade period (ms)
                   if (hand == clock)
-                     return (perhand - sub) * ledmax / 1000;    // Fade out in last period
+                     return (perhand - sub) * ledmax / fade;    // Fade out in last period
                   if ((hand + 1) % leds == clock)
-                     return ledmax - (perhand - sub) * ledmax / 1000;   // Fade in next in last period
+                     return ledmax - (perhand - sub) * ledmax / fade;   // Fade in next in last period
                }
                if (hand == clock)
                   return ledmax;
