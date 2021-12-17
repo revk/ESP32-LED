@@ -19,8 +19,9 @@ static const char TAG[] = "LED";
 	u8(ledgpio,16)	\
 	u8(ledchan,0)	\
 	u8(leds,80)	\
-	u8(ledmax,50)	\
+	u8(ledmax,15)	\
 	u8(ledtop,36)	\
+	u8(gatemax,64)	\
 	s8n(gatechevron,3)	\
 	u32(gateopen,10)	\
 	u32(gatespin,2000)	\
@@ -141,10 +142,18 @@ void led_task(void *x)
                else if (p == leds)
                   p = 0;
                for (pos = 0; pos < leds; pos++)
-                  strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : 0);
+                  strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : (pos + dir) % leds == p ? ledmax / 2 : (pos + 2 * dir) % leds == p && p != (ledtop + dir) % leds ? ledmax / 4 : 0);
                ESP_ERROR_CHECK(strip->refresh(strip, 100));
                usleep(gatespin * 1000 / leds);
             } while (p != ledtop);
+            for (pos = 0; pos < leds; pos++)
+               strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : (pos + dir) % leds == p ? ledmax / 4 : 0);
+            ESP_ERROR_CHECK(strip->refresh(strip, 100));
+            usleep(gatespin * 1000 / leds);
+            for (pos = 0; pos < leds; pos++)
+               strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : 0);
+            ESP_ERROR_CHECK(strip->refresh(strip, 100));
+            usleep(gatespin * 1000 / leds);
             if (chevron >= 0)
             {
                for (fade = 0; fade < 255; fade += 10)
@@ -171,8 +180,9 @@ void led_task(void *x)
 
          // Fade up white quickly
          memset(led1, 0, leds);
-         memset(led2, ledmax * 2, leds);
+         memset(led2, gatemax, leds);
          fader(5);
+         // Down to full
          memset(led2, ledmax, leds);
          fader(1);
 
