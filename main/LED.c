@@ -131,6 +131,7 @@ void led_task(void *x)
                dir = -dir;
                chevron = -chevron;
             }
+            chevron = (ledtop + chevron + leds) % leds;
             int p = ledtop;
             do
             {
@@ -144,15 +145,17 @@ void led_task(void *x)
                ESP_ERROR_CHECK(strip->refresh(strip, 100));
                usleep(gatespin * 1000 / leds);
             } while (p != ledtop);
-            for (fade = 0; fade < 255; fade += 10)
-            {
-               strip->set_pixel(strip, chevron, fade * ledmax / 255, fade * ledmax / 255, 0);
-               ESP_ERROR_CHECK(strip->refresh(strip, 100));
-               usleep(2000);
-            }
-            chevron = (ledtop + chevron + leds) % leds;
             if (chevron >= 0)
-               led1[chevron] = 1;
+            {
+               for (fade = 0; fade < 255; fade += 10)
+               {
+                  strip->set_pixel(strip, chevron, fade * ledmax / 255, fade * ledmax / 255, 0);
+                  ESP_ERROR_CHECK(strip->refresh(strip, 100));
+                  usleep(2000);
+               }
+               if (chevron >= 0)
+                  led1[chevron] = 1;
+            }
          }
 
          // 7 x Run a blue light around and clock each chevron yellow
