@@ -24,7 +24,7 @@ static const char TAG[] = "LED";
 	s8n(gatechevron,3)	\
 	u32(gateopen,10)	\
 	u32(gatespin,2000)	\
-	u32(clockfade,1000)	\
+	u32(clockfade,500)	\
 	b(reverse)		\
 
 #define u32(n,d)        uint32_t n;
