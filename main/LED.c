@@ -20,12 +20,12 @@ static const char TAG[] = "LED";
 	u8(ledchan,0)	\
 	u8(leds,72)	\
 	u8(ledmax,50)	\
-	s8(gatetop,36)	\
+	u8(ledtop,36)	\
 	s8(gatechevron1,8)	\
 	s8(gatechevron2,16)	\
 	s8(gatechevron3,23)	\
-	u32(gateopen,100)	\
-	s8(clocktop,-1)		\
+	u32(gateopen,10)	\
+	u32(gatespin,2000)	\
 	u32(clockfade,1000)	\
 
 #define u32(n,d)        uint32_t n;
@@ -105,12 +105,20 @@ void app_main()
    REVK_ERR_CHECK(strip->clear(strip, 100));
    ESP_ERROR_CHECK(strip->refresh(strip, 100));
 
-   if (gatetop >= 0)
-   {                            // Start gate
-      uint8_t led1[leds];
-      uint8_t led2[leds];
-      while (1)
-      {
+   // Startup
+   strip->set_pixel(strip, ledtop % leds, ledmax, ledmax, ledmax);
+   strip->set_pixel(strip, (ledtop + leds / 4) % leds, ledmax, 0, 0);
+   strip->set_pixel(strip, (ledtop + 2 * leds / 4) % leds, 0, ledmax, 0);
+   strip->set_pixel(strip, (ledtop + 3 * leds / 4) % leds, 0, 0, ledmax);
+   ESP_ERROR_CHECK(strip->refresh(strip, 100));
+   sleep(5);
+
+   while (1)
+   {                            // Main loop
+      if (gatedial)
+      {                         // Do gate dialling sequence
+         uint8_t led1[leds];
+         uint8_t led2[leds];
          int fade,
           pos;
          void fader(int step) { // Fade led1 to led2
@@ -127,7 +135,7 @@ void app_main()
             memcpy(led1, led2, leds);
          }
          void spin(int dir, int chevron) {
-            int p = gatetop;
+            int p = ledtop;
             do
             {
                p += dir;
@@ -138,8 +146,8 @@ void app_main()
                for (pos = 0; pos < leds; pos++)
                   strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : 0);
                ESP_ERROR_CHECK(strip->refresh(strip, 100));
-               usleep(10000);
-            } while (p != gatetop);
+               usleep(gatespin * 1000 / leds);
+            } while (p != ledtop);
             for (fade = 0; fade < 255; fade += 10)
             {
                strip->set_pixel(strip, chevron, fade * ledmax / 255, fade * ledmax / 255, 0);
@@ -150,29 +158,24 @@ void app_main()
                led1[chevron] = 1;
          }
 
-         // Wait for trigger
-         while (!gatedial)
-            usleep(100000);
-         gatedial = 0;
-
-         // 7 x Run a blue light around and clock each chevron yellow (gatetop/ledspace)
+         // 7 x Run a blue light around and clock each chevron yellow
          memset(led1, 0, leds); // Use led1 as flags
          if (gatechevron3)
          {
-            spin(1, gatetop + gatechevron3);
-            spin(-1, gatetop - gatechevron3);
+            spin(1, ledtop + gatechevron3);
+            spin(-1, ledtop - gatechevron3);
          }
          if (gatechevron2)
          {
-            spin(1, gatetop + gatechevron2);
-            spin(-1, gatetop - gatechevron2);
+            spin(1, ledtop + gatechevron2);
+            spin(-1, ledtop - gatechevron2);
          }
          if (gatechevron1)
          {
-            spin(1, gatetop + gatechevron1);
-            spin(-1, gatetop - gatechevron1);
+            spin(1, ledtop + gatechevron1);
+            spin(-1, ledtop - gatechevron1);
          }
-         spin(1, gatetop);
+         spin(1, ledtop);
          usleep(500000);
 
          // Fade up white quickly
@@ -183,8 +186,8 @@ void app_main()
          fader(1);
 
          // Fade from solid white to 50% white with random white
-         int sparkle = gateopen;
-         while (sparkle-- && !gatedial)
+         time_t done = time(0) + gateopen;
+         while (gatedial && (!gateopen || done > time(0)))
          {
             esp_fill_random(led2, leds);
             for (pos = 0; pos < leds; pos++)
@@ -194,51 +197,46 @@ void app_main()
          // Fade out
          memset(led2, 0, leds);
          fader(5);
-
          sleep(1);
+         gatedial = 0;
       }
-   }
 
-   if (clocktop >= 0)
-   {                            // Simple clock
-      strip->set_pixel(strip, clocktop, ledmax, ledmax, ledmax);
-      strip->set_pixel(strip, (clocktop + leds / 4) % leds, ledmax, 0, 0);
-      strip->set_pixel(strip, (clocktop + 2 * leds / 4) % leds, 0, ledmax, 0);
-      strip->set_pixel(strip, (clocktop + 3 * leds / 4) % leds, 0, 0, ledmax);
-      ESP_ERROR_CHECK(strip->refresh(strip, 100));
-      sleep(5);
-      while (1)
-      {
-         struct tm t;
-         struct timeval tv;
-         gettimeofday(&tv, NULL);
-         localtime_r(&tv.tv_sec, &t);
-         uint32_t usecs = (((t.tm_hour % 12) * 60 + t.tm_min) * 60 + t.tm_sec) * 1000 + tv.tv_usec / 1000;
-         for (int pos = 0; pos < leds; pos++)
-         {
-            int clock = (pos + clocktop) % leds;
-            int col(int scale) {
-               scale *= 1000;   // ms
-               uint32_t u = usecs % scale;      // What ms in the clock face we are on
-               int hand = leds * u / scale;     // What hand position we are on
-               int perhand = scale / leds;      // How many ms per hand to hand step
-               int fade = (!clockfade || clockfade > perhand ? perhand : clockfade);
-               int sub = u - hand * perhand;    // Where we are in the hand to hand steps
-               if (sub > perhand - fade)
-               {                // Last fade period (ms)
+      if (clockfade)
+      {                         // Clock
+         while (!gatedial)
+         {                      // Clock runs when not dialling request
+            struct tm t;
+            struct timeval tv;
+            gettimeofday(&tv, NULL);
+            localtime_r(&tv.tv_sec, &t);
+            uint32_t usecs = (((t.tm_hour % 12) * 60 + t.tm_min) * 60 + t.tm_sec) * 1000 + tv.tv_usec / 1000;
+            for (int pos = 0; pos < leds; pos++)
+            {
+               int clock = (pos + ledtop) % leds;
+               int col(int scale) {
+                  scale *= 1000;        // ms
+                  uint32_t u = usecs % scale;   // What ms in the clock face we are on
+                  int hand = leds * u / scale;  // What hand position we are on
+                  int perhand = scale / leds;   // How many ms per hand to hand step
+                  int fade = (!clockfade || clockfade > perhand ? perhand : clockfade);
+                  int sub = u - hand * perhand; // Where we are in the hand to hand steps
+                  if (sub > perhand - fade)
+                  {             // Last fade period (ms)
+                     if (hand == clock)
+                        return (perhand - sub) * ledmax / fade; // Fade out in last period
+                     if ((hand + 1) % leds == clock)
+                        return ledmax - (perhand - sub) * ledmax / fade;        // Fade in next in last period
+                  }
                   if (hand == clock)
-                     return (perhand - sub) * ledmax / fade;    // Fade out in last period
-                  if ((hand + 1) % leds == clock)
-                     return ledmax - (perhand - sub) * ledmax / fade;   // Fade in next in last period
+                     return ledmax;
+                  return 0;
                }
-               if (hand == clock)
-                  return ledmax;
-               return 0;
+               strip->set_pixel(strip, pos, col(12 * 60 * 60), col(60 * 60), col(60));
             }
-            strip->set_pixel(strip, pos, col(12 * 60 * 60), col(60 * 60), col(60));
+            ESP_ERROR_CHECK(strip->refresh(strip, 100));
+            usleep(10000);
          }
-         ESP_ERROR_CHECK(strip->refresh(strip, 100));
-         usleep(10000);
       }
+      usleep(10000);
    }
 }
