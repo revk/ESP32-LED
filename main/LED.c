@@ -19,28 +19,32 @@ static const char TAG[] = "LED";
 	u8(ledgpio,16)	\
 	u8(ledchan,0)	\
 	u8(leds,80)	\
-	u8(ledmax,15)	\
-	u8(ledtop,36)	\
-	u8(gatemax,64)	\
+	u8l(ledmax,15)	\
+	u8l(ledtop,36)	\
+	u8l(gatemax,64)	\
 	s8n(gatechevron,3)	\
-	u32(gateopen,10)	\
-	u32(gatespin,2000)	\
-	u32(clockfade,500)	\
+	u32l(gateopen,10)	\
+	u32l(gatespin,2000)	\
+	u32l(clockfade,500)	\
 	b(reverse)		\
 
 #define u32(n,d)        uint32_t n;
+#define u32l(n,d)        uint32_t n;
 #define s8(n,d) int8_t n;
 #define s8n(n,d) int8_t n[d];
 #define u8(n,d) uint8_t n;
+#define u8l(n,d) uint8_t n;
 #define b(n) uint8_t n;
 #define s(n) char * n;
 #define io(n,d)           uint8_t n;
 settings
 #undef io
 #undef u32
+#undef u32l
 #undef s8
 #undef s8n
 #undef u8
+#undef u8l
 #undef b
 #undef s
     uint8_t gatedial = 0;
@@ -145,7 +149,7 @@ void led_task(void *x)
                   strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : (pos + dir) % leds == p ? ledmax / 2 : (pos + 2 * dir) % leds == p && p != (ledtop + dir) % leds ? ledmax / 4 : 0);
                ESP_ERROR_CHECK(strip->refresh(strip, 100));
                usleep(gatespin * 1000 / leds);
-            } while (p != ledtop);
+            } while (p != ledtop && gatedial);
             for (pos = 0; pos < leds; pos++)
                strip->set_pixel(strip, pos, led1[pos] ? ledmax : 0, led1[pos] ? ledmax : 0, pos == p ? ledmax : (pos + dir) % leds == p ? ledmax / 4 : 0);
             ESP_ERROR_CHECK(strip->refresh(strip, 100));
@@ -156,7 +160,7 @@ void led_task(void *x)
             usleep(gatespin * 1000 / leds);
             if (chevron >= 0)
             {
-               for (fade = 0; fade < 255; fade += 10)
+               for (fade = 0; fade < 255; fade += 5)
                {
                   strip->set_pixel(strip, chevron, fade * ledmax / 255, fade * ledmax / 255, 0);
                   ESP_ERROR_CHECK(strip->refresh(strip, 100));
@@ -165,6 +169,7 @@ void led_task(void *x)
                if (chevron >= 0)
                   led1[chevron] = 1;
             }
+            usleep(100000);
          }
 
          // 7 x Run a blue light around and clock each chevron yellow
@@ -248,16 +253,20 @@ void app_main()
 #define io(n,d)           revk_register(#n,0,sizeof(n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD);
 #define b(n) revk_register(#n,0,sizeof(n),&n,NULL,SETTING_BOOLEAN);
 #define u32(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
+#define u32l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
 #define s8(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_SIGNED);
 #define s8n(n,d) revk_register(#n,d,sizeof(*n),&n,NULL,SETTING_SIGNED);
 #define u8(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
+#define u8l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
 #define s(n) revk_register(#n,0,0,&n,NULL,0);
    settings
 #undef io
 #undef u32
+#undef u32l
 #undef s8
 #undef s8n
 #undef u8
+#undef u8l
 #undef b
 #undef s
        revk_start();
