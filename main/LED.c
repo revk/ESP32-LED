@@ -63,7 +63,11 @@ const char *app_callback(int client, const char *prefix, const char *target, con
       gatedial = 1;
       return "";
    }
-
+   if (!strcmp(suffix, "close"))
+   {                            // Close the gate
+      gatedial = 0;
+      return "";
+   }
 
    return NULL;
 }
