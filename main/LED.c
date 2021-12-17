@@ -131,6 +131,8 @@ void led_task(void *x)
             memcpy(led1, led2, leds);
          }
          void spin(int dir, int chevron) {
+            if (!gatedial)
+               return;
             if (reverse)
             {
                dir = -dir;
@@ -181,16 +183,16 @@ void led_task(void *x)
                spin(-1, -gatechevron[c]);
             }
          spin(1, 0);
-         usleep(500000);
-
-         // Fade up white quickly
          memset(led1, 0, leds);
-         memset(led2, gatemax, leds);
-         fader(5);
-         // Down to full
-         memset(led2, ledmax, leds);
-         fader(1);
-
+         if (gatedial)
+         {                      // Fade up white quickly
+            usleep(500000);
+            memset(led2, gatemax, leds);
+            fader(5);
+            // Down to full
+            memset(led2, ledmax, leds);
+            fader(1);
+         }
          // Fade from solid white to 50% white with random white
          time_t done = time(0) + gateopen;
          while (gatedial && (!gateopen || done > time(0)))
