@@ -154,7 +154,8 @@ void app_main()
                ESP_ERROR_CHECK(strip->refresh(strip, 100));
                usleep(2000);
             }
-            if (chevron >= 0 && chevron < leds)
+            chevron = (ledtop + chevron + leds) % leds;
+            if (chevron >= 0)
                led1[chevron] = 1;
          }
 
@@ -162,18 +163,18 @@ void app_main()
          memset(led1, 0, leds); // Use led1 as flags
          if (gatechevron3)
          {
-            spin(1, ledtop + gatechevron3);
-            spin(-1, ledtop - gatechevron3);
+            spin(1, gatechevron3);
+            spin(-1, -gatechevron3);
          }
          if (gatechevron2)
          {
-            spin(1, ledtop + gatechevron2);
-            spin(-1, ledtop - gatechevron2);
+            spin(1, gatechevron2);
+            spin(-1, -gatechevron2);
          }
          if (gatechevron1)
          {
-            spin(1, ledtop + gatechevron1);
-            spin(-1, ledtop - gatechevron1);
+            spin(1, gatechevron1);
+            spin(-1, -gatechevron1);
          }
          spin(1, ledtop);
          usleep(500000);
