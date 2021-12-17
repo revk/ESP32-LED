@@ -18,18 +18,18 @@ static const char TAG[] = "LED";
 #define	settings		\
 	u8(ledgpio,16)	\
 	u8(ledchan,0)	\
-	u8(leds,72)	\
+	u8(leds,80)	\
 	u8(ledmax,50)	\
 	u8(ledtop,36)	\
-	s8(gatechevron1,8)	\
-	s8(gatechevron2,16)	\
-	s8(gatechevron3,23)	\
+	s8n(gatechevron,3)	\
 	u32(gateopen,10)	\
 	u32(gatespin,2000)	\
 	u32(clockfade,1000)	\
+	b(reverse)		\
 
 #define u32(n,d)        uint32_t n;
 #define s8(n,d) int8_t n;
+#define s8n(n,d) int8_t n[d];
 #define u8(n,d) uint8_t n;
 #define b(n) uint8_t n;
 #define s(n) char * n;
@@ -38,6 +38,7 @@ settings
 #undef io
 #undef u32
 #undef s8
+#undef s8n
 #undef u8
 #undef b
 #undef s
@@ -72,24 +73,8 @@ const char *app_callback(int client, const char *prefix, const char *target, con
    return NULL;
 }
 
-void app_main()
+void led_task(void *x)
 {
-   revk_boot(&app_callback);
-#define io(n,d)           revk_register(#n,0,sizeof(n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD);
-#define b(n) revk_register(#n,0,sizeof(n),&n,NULL,SETTING_BOOLEAN);
-#define u32(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
-#define s8(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_SIGNED);
-#define u8(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
-#define s(n) revk_register(#n,0,0,&n,NULL,0);
-   settings
-#undef io
-#undef u32
-#undef s8
-#undef u8
-#undef b
-#undef s
-       revk_start();
-
    led_strip_t *strip = NULL;
    if (leds)
    {
@@ -109,18 +94,20 @@ void app_main()
    REVK_ERR_CHECK(strip->clear(strip, 100));
    ESP_ERROR_CHECK(strip->refresh(strip, 100));
 
-   // Startup
-   strip->set_pixel(strip, ledtop % leds, ledmax, ledmax, ledmax);
-   strip->set_pixel(strip, (ledtop + leds / 4) % leds, ledmax, 0, 0);
-   strip->set_pixel(strip, (ledtop + 2 * leds / 4) % leds, 0, ledmax, 0);
-   strip->set_pixel(strip, (ledtop + 3 * leds / 4) % leds, 0, 0, ledmax);
-   ESP_ERROR_CHECK(strip->refresh(strip, 100));
-   sleep(5);
+   {                            // Startup
+      int dir = reverse ? -1 : 1;
+      strip->set_pixel(strip, ledtop % leds, ledmax, ledmax, ledmax);
+      strip->set_pixel(strip, (ledtop + leds + dir * leds / 4) % leds, ledmax, 0, 0);
+      strip->set_pixel(strip, (ledtop + leds + dir * 2 * leds / 4) % leds, 0, ledmax, 0);
+      strip->set_pixel(strip, (ledtop + leds + dir * 3 * leds / 4) % leds, 0, 0, ledmax);
+      ESP_ERROR_CHECK(strip->refresh(strip, 100));
+      sleep(5);
+   }
 
    while (1)
    {                            // Main loop
       if (gatedial)
-      {                         // Do gate dialling sequence
+      {                         // Do gate dialling sequence (note leds should be for full ring even if there are actually fewer, and ledtop set accordingly)
          uint8_t led1[leds];
          uint8_t led2[leds];
          int fade,
@@ -139,6 +126,11 @@ void app_main()
             memcpy(led1, led2, leds);
          }
          void spin(int dir, int chevron) {
+            if (reverse)
+            {
+               dir = -dir;
+               chevron = -chevron;
+            }
             int p = ledtop;
             do
             {
@@ -165,22 +157,13 @@ void app_main()
 
          // 7 x Run a blue light around and clock each chevron yellow
          memset(led1, 0, leds); // Use led1 as flags
-         if (gatechevron3)
-         {
-            spin(1, gatechevron3);
-            spin(-1, -gatechevron3);
-         }
-         if (gatechevron2)
-         {
-            spin(1, gatechevron2);
-            spin(-1, -gatechevron2);
-         }
-         if (gatechevron1)
-         {
-            spin(1, gatechevron1);
-            spin(-1, -gatechevron1);
-         }
-         spin(1, ledtop);
+         for (int c = 2; c >= 0; c--)
+            if (gatechevron[c])
+            {
+               spin(1, gatechevron[c]);
+               spin(-1, -gatechevron[c]);
+            }
+         spin(1, 0);
          usleep(500000);
 
          // Fade up white quickly
@@ -217,7 +200,7 @@ void app_main()
             uint32_t usecs = (((t.tm_hour % 12) * 60 + t.tm_min) * 60 + t.tm_sec) * 1000 + tv.tv_usec / 1000;
             for (int pos = 0; pos < leds; pos++)
             {
-               int clock = (pos + ledtop) % leds;
+               int clock = (ledtop + leds + (reverse ? -pos : pos)) % leds;
                int col(int scale) {
                   scale *= 1000;        // ms
                   uint32_t u = usecs % scale;   // What ms in the clock face we are on
@@ -244,4 +227,27 @@ void app_main()
       }
       usleep(10000);
    }
+}
+
+void app_main()
+{
+   revk_boot(&app_callback);
+#define io(n,d)           revk_register(#n,0,sizeof(n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD);
+#define b(n) revk_register(#n,0,sizeof(n),&n,NULL,SETTING_BOOLEAN);
+#define u32(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
+#define s8(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_SIGNED);
+#define s8n(n,d) revk_register(#n,d,sizeof(*n),&n,NULL,SETTING_SIGNED);
+#define u8(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
+#define s(n) revk_register(#n,0,0,&n,NULL,0);
+   settings
+#undef io
+#undef u32
+#undef s8
+#undef s8n
+#undef u8
+#undef b
+#undef s
+       revk_start();
+
+   revk_task("LED", led_task, NULL);
 }
