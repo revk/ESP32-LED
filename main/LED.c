@@ -220,7 +220,7 @@ void led_task(void *x)
             uint32_t usecs = (((t.tm_hour % 12) * 60 + t.tm_min) * 60 + t.tm_sec) * 1000 + tv.tv_usec / 1000;
             for (int pos = 0; pos < leds; pos++)
             {
-               int clock = (ledtop + leds + (reverse ? -pos : pos)) % leds;
+               int clock = (leds + (reverse ? -pos : pos) - ledtop) % leds;
                int col(int scale) {
                   scale *= 1000;        // ms
                   uint32_t u = usecs % scale;   // What ms in the clock face we are on
