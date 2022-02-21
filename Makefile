@@ -10,9 +10,6 @@ all:
 	idf.py build
 	cp build/$(PROJECT_NAME).bin build/$(PROJECT_NAME)$(SUFFIX).bin
 
-all:
-	idf.py build
-
 flash:
 	idf.py flash
 
