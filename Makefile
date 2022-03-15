@@ -4,13 +4,25 @@
 #
 
 PROJECT_NAME := LED
-SUFFIX := $(shell components/ESP32-RevK/suffix)
+SUFFIX := $(shell components/ESP32-RevK/buildsuffix)
 
 all:
 	@echo Make: build/$(PROJECT_NAME)$(SUFFIX).bin
 	@idf.py build
 	@cp build/$(PROJECT_NAME).bin build/$(PROJECT_NAME)$(SUFFIX).bin
 	@echo Done: build/$(PROJECT_NAME)$(SUFFIX).bin
+
+pico:
+	components/ESP32-RevK/setbuildsuffix -S1-PICO
+	@make
+
+wroom:
+	components/ESP32-RevK/setbuildsuffix -S1
+	@make
+
+solo:
+	components/ESP32-RevK/setbuildsuffix -S1-SOLO
+	@make
 
 flash:
 	idf.py flash
