@@ -16,12 +16,13 @@ static const char TAG[] = "LED";
 #include "led_strip.h"
 
 #define	settings		\
-	u8(ledgpio,16)	\
+	u8(ledgpio,)	\
 	u8(ledchan,0)	\
 	u8(leds,80)	\
 	u8l(ledmax,15)	\
 	u8l(ledtop,36)	\
 	u8l(gatemax,64)	\
+	u8(buzz,)	\
 	s8n(gatechevron,3)	\
 	u32l(gateopen,10)	\
 	u32l(gatespin,2000)	\
