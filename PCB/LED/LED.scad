@@ -1,6 +1,6 @@
 // Generated case design for PCB/LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2023-04-08 07:12:27
+// Generated 2023-04-08 15:50:32
 // title:	Generic ESP32-PICO-MINI Module
 // date:	${DATE}
 // rev:	1
@@ -11,8 +11,8 @@
 margin=0.500000;
 overlap=2.000000;
 lip=0.000000;
-casebase=2.600000;
-casetop=5.000000;
+casebase=6.000000;
+casetop=3.600000;
 casewall=3.000000;
 fit=0.000000;
 edge=2.000000;
@@ -32,7 +32,7 @@ pcblength=28.700000;
 module board(pushed=false,hulled=false){
 translate([5.750000,13.800000,0.800000])rotate([0,0,90.000000])m0(pushed,hulled); // RevK:ESP32-PICO-MINI-02 ESP32-PICO-MINI-02 (back)
 translate([7.750000,26.000000,0.800000])rotate([0,0,180.000000])m3(pushed,hulled); // RevK:R_0603 R_0603_1608Metric (back)
-translate([4.450000,24.200000,0.800000])rotate([0,0,-90.000000])m5(pushed,hulled); // RevK:SOT-323_SC-70 SOT-323_SC-70 (back)
+translate([4.300000,24.250000,0.800000])rotate([0,0,-90.000000])m5(pushed,hulled); // RevK:SOT-323_SC-70 SOT-323_SC-70 (back)
 translate([9.645000,24.700000,0.800000])rotate([0,0,-90.000000])translate([0.000000,-0.100000,0.400000])rotate([-90.000000,-0.000000,-0.000000])m7(pushed,hulled); // RevK:MHS190RGBCT LED_0603_1608Metric (back)
 translate([7.750000,23.600000,0.800000])rotate([0,0,180.000000])m3(pushed,hulled); // RevK:R_0603 R_0603_1608Metric (back)
 translate([1.850000,24.200000,0.800000])rotate([0,0,90.000000])m5(pushed,hulled); // RevK:SOT-323_SC-70 SOT-323_SC-70 (back)
