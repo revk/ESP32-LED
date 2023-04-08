@@ -9,3 +9,4 @@
 secure_boot_signing_key.pem
 build/*
 sdkconfig
+*.BAK
