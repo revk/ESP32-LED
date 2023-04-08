@@ -72,5 +72,5 @@ PCBCase/case: PCBCase/case.c
 stl:    PCB/LED/LED.stl
 
 PCB/LED/LED.scad: PCB/LED/LED.kicad_pcb PCBCase/case Makefile
-	PCBCase/case -o $@ $< --edge=2 --base=6 --top=3.6
+	PCBCase/case -o $@ $< --edge=2 --base=6 --top=3
 
