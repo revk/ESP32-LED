@@ -64,3 +64,13 @@ ftdizap/ftdizap: ftdizap/ftdizap.c
 PCBCase/case: PCBCase/case.c
 	make -C PCBCase
 
+%.stl: %.scad
+	echo "Making $@"
+	/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD $< -o $@
+	echo "Made $@"
+
+stl:    PCB/LED/LED.stl
+
+PCB/LED/LED.scad: PCB/LED/LED.kicad_pcb PCBCase/case Makefile
+	PCBCase/case -o $@ $< --edge=2 --base=2.6
+
