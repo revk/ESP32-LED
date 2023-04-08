@@ -1,6 +1,6 @@
 // Generated case design for PCB/LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2023-04-08 15:50:32
+// Generated 2023-04-08 16:40:32
 // title:	Generic ESP32-PICO-MINI Module
 // date:	${DATE}
 // rev:	1
@@ -11,8 +11,8 @@
 margin=0.500000;
 overlap=2.000000;
 lip=0.000000;
-casebase=6.000000;
-casetop=3.600000;
+casebase=5.600000;
+casetop=3.000000;
 casewall=3.000000;
 fit=0.000000;
 edge=2.000000;
