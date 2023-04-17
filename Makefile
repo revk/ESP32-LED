@@ -9,8 +9,11 @@ SUFFIX := $(shell components/ESP32-RevK/buildsuffix)
 all:
 	@echo Make: build/$(PROJECT_NAME)$(SUFFIX).bin
 	@idf.py build
-	@cp build/$(PROJECT_NAME).bin build/$(PROJECT_NAME)$(SUFFIX).bin
+	@cp --remove-destination build/$(PROJECT_NAME).bin build/$(PROJECT_NAME)$(SUFFIX).bin
 	@echo Done: build/$(PROJECT_NAME)$(SUFFIX).bin
+
+issue:  set
+	cp --remove-destination LED*.bin release
 
 set:	solo wroom pico
 
