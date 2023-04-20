@@ -11,7 +11,7 @@ static const char TAG[] = "LED";
 #include "led_strip.h"
 
 #define	settings		\
-	io(ledgpio,-22)	\
+	io(ledgpio,22)	\
 	u8(bright,63)	\
 	u8(leds,1)	\
 
