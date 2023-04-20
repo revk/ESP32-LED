@@ -11,7 +11,8 @@ static const char TAG[] = "LED";
 #include "led_strip.h"
 
 #define	settings		\
-	io(ledgpio,)	\
+	io(ledgpio,-22)	\
+	u8(bright,63)	\
 	u8(leds,1)	\
 
 #define u32(n,d)        uint32_t n;
@@ -33,31 +34,59 @@ settings
 #undef u8l
 #undef b
 #undef s
-    uint8_t gatedial = 0;
+   uint8_t gatedial = 0;
 
-const char *app_callback(int client, const char *prefix, const char *target, const char *suffix, jo_t j)
+const char *
+app_callback (int client, const char *prefix, const char *target, const char *suffix, jo_t j)
 {
-   if (client || !prefix || target || strcmp(prefix, prefixcommand) || !suffix)
-      return NULL; // Not for us or not a command from main MQTT
+   if (client || !prefix || target || strcmp (prefix, prefixcommand) || !suffix)
+      return NULL;              // Not for us or not a command from main MQTT
 
 
 
    return NULL;
 }
 
-void led_task(void *x)
+void
+led_task (void *x)
 {
-ESP_LOGI(TAG,"Started");
+   ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & 63, ledgpio & 64 ? " (inverted)" : "");
+
+   led_strip_handle_t led_strip;
+
+   led_strip_config_t strip_config = {
+      .strip_gpio_num = (ledgpio & 0x63),
+      .max_leds = leds,         // The number of LEDs in the strip,
+      .led_pixel_format = LED_PIXEL_FORMAT_GRB, // Pixel format of your LED strip
+      .led_model = LED_MODEL_WS2812,    // LED strip model
+      .flags.invert_out = ((ledgpio & 64) ? 1 : 0),     // whether to invert the output signal (useful when your hardware has a level inverter)
+   };
+
+   led_strip_rmt_config_t rmt_config = {
+      .clk_src = RMT_CLK_SRC_DEFAULT,   // different clock source can lead to different power consumption
+      .resolution_hz = 10 * 1000 * 1000,        // 10MHz
+      .flags.with_dma = false,  // whether to enable the DMA feature
+   };
+
+   REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &led_strip));
+
+   REVK_ERR_CHECK (led_strip_clear (led_strip));
+
+   led_strip_set_pixel(led_strip,0,bright,0,0);
+   led_strip_set_pixel(led_strip,1,0,bright,0);
+   led_strip_set_pixel(led_strip,2,0,0,bright);
+
    while (1)
    {                            // Main loop
-      usleep(10000);
-
+      sleep (1);
+      REVK_ERR_CHECK (led_strip_refresh (led_strip));
    }
 }
 
-void app_main()
+void
+app_main ()
 {
-   revk_boot(&app_callback);
+   revk_boot (&app_callback);
 #define io(n,d)           revk_register(#n,0,sizeof(n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD);
 #define b(n) revk_register(#n,0,sizeof(n),&n,NULL,SETTING_BOOLEAN);
 #define u32(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
@@ -77,7 +106,7 @@ void app_main()
 #undef u8l
 #undef b
 #undef s
-       revk_start();
+      revk_start ();
 
-   revk_task("LED", led_task, NULL);
+   revk_task ("LED", led_task, NULL);
 }
