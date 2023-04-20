@@ -9,6 +9,19 @@ static const char TAG[] = "LED";
 #include <driver/gpio.h>
 #include <driver/uart.h>
 #include "led_strip.h"
+#include "app.h"
+
+#define a(app)	extern void app(app_t*);
+#include "apps.h"
+
+struct applist_s
+{
+	const char *appname;
+	app_f*app;
+} applist[]={
+#define a(app)	{#app,&app},
+#include "apps.h"
+};
 
 #define	settings		\
 	io(ledgpio,22)	\
