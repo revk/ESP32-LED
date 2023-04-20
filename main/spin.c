@@ -2,7 +2,7 @@
 
 #include "app.h"
 
-void
+const char *
 spin (app_t * a)
 {
    if (!a->stage)
@@ -13,15 +13,12 @@ spin (app_t * a)
          a->len = ringlen ? : leds;
       if (!a->top)
          a->top = ringtop ? : 1;
-      if(!a->r&&!a->g&&!a->b)
-      {
-	      a->r=255;// TODo dummy
-      }
-      if (a->start + a->len - 1 > leds || a->top > leds || a->len <= 1)
-      { // Sanity checks
-         a->app = NULL;
-         return;
-      }
+      if (a->start + a->len - 1 > leds)
+         return "Len wrong";
+      if (a->top > leds)
+         return "Top outside strip";
+      if (a->len <= 1)
+         return "Not a ring - TODO this can go when we sort tail";
       a->stage++;
       // TODO speed
       // TODO tail len
@@ -30,8 +27,9 @@ spin (app_t * a)
       a->step = 0;
    for (unsigned int i = 0; i < a->len; i++)
    {
-      led[a->start - 1 + ((a->step + i) % a->len)].r = (unsigned int) a->r *i / (a->len - 1);  
-      led[a->start - 1 + ((a->step + i) % a->len)].g = (unsigned int) a->g *i / (a->len - 1); 
-      led[a->start - 1 + ((a->step + i) % a->len)].b = (unsigned int) a->b *i / (a->len - 1);
+      ledr[a->start - 1 + ((a->step + i) % a->len)] = (unsigned int) a->colour.r * i / (a->len - 1);
+      ledg[a->start - 1 + ((a->step + i) % a->len)] = (unsigned int) a->colour.g * i / (a->len - 1);
+      ledb[a->start - 1 + ((a->step + i) % a->len)] = (unsigned int) a->colour.b * i / (a->len - 1);
    }
+   return NULL;
 }

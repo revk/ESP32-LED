@@ -2,8 +2,8 @@
 
 #include "app.h"
 
-void
+const char *
 stargate (app_t * a)
 {
-
+   return "No stargate yet";
 }

@@ -11,7 +11,7 @@ static const char TAG[] = "LED";
 #include "led_strip.h"
 #include "app.h"
 
-#define a(app)	extern void app(app_t*);
+#define a(app)	extern const char* app(app_t*);
 #include "apps.h"
 
 struct applist_s
@@ -23,7 +23,9 @@ struct applist_s
 #include "apps.h"
 };
 
-colour_t *led = NULL;
+uint8_t *ledr = NULL;
+uint8_t *ledg = NULL;
+uint8_t *ledb = NULL;
 
 #define u32(n,d)        uint32_t n;
 #define u32l(n,d)        uint32_t n;
@@ -51,8 +53,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 {
    if (client || !prefix || target || strcmp (prefix, prefixcommand) || !suffix)
       return NULL;              // Not for us or not a command from main MQTT
-
-
+   // TODO command to set active apps
 
    return NULL;
 }
@@ -81,22 +82,45 @@ led_task (void *x)
 
    REVK_ERR_CHECK (led_strip_clear (strip));
 
-   led = calloc (leds, sizeof (*led));
+   ledr = calloc (leds, sizeof (*ledr));
+   ledg = calloc (leds, sizeof (*ledg));
+   ledb = calloc (leds, sizeof (*ledb));
 
 #define	MAXAPPS 10
    app_t active[MAXAPPS] = { 0 };
    active[0].app = spin;        // Dummy start
+   active[0].colour.cycle=1;
 
    while (1)
    {                            // Main loop
       usleep (100000LL - (esp_timer_get_time () % 100000LL));
       for (unsigned int i = 0; i < MAXAPPS; i++)
          if (active[i].app)
-            active[i].app (&active[i]);
+         {
+		 if(active[i].colour.cycle)
+		 { // Cycle the colour
+			 active[i].colour.r=active[i].cycle;
+			 active[i].colour.g=active[i].cycle+85;
+			 active[i].colour.b=active[i].cycle+170;
+			 // TODO proper cycle
+		 }
+            const char *e = active[i].app (&active[i]);
+            if (e)
+            {
+               active[i].app = NULL;    // Done
+               if (*e)
+               {
+                  ESP_LOGI (TAG, "App failed %s", e);   // TODO report via MQTT
+               }
+            }
+            active[i].cycle++;
+	    if(active[i].time&&active[i].cycle>=active[i].time)active[i].app = NULL;    // Complete
+         }
+
       for (unsigned int i = 0; i < leds; i++)
       {
-         led_strip_set_pixel (strip, i, (unsigned int) bright * led[i].r / 255, (unsigned int) bright * led[i].g / 255,
-                              (unsigned int) bright * led[i].b / 255);
+         led_strip_set_pixel (strip, i, (unsigned int) bright * ledr[i] / 255, (unsigned int) bright * ledg[i] / 255,
+                              (unsigned int) bright * ledb[i] / 255);
       }
       REVK_ERR_CHECK (led_strip_refresh (strip));
    }

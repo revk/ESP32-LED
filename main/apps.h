@@ -4,8 +4,5 @@
 #define	a(n)
 #endif
 
-a(idle)
-a(stargate)
-a(spin)
-
+a (idle) a (stargate) a (spin)
 #undef a
