@@ -2,8 +2,8 @@
 
 #include "app.h"
 
-void stargate(app_t*a)
+void
+stargate (app_t * a)
 {
 
 }
-

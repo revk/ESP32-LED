@@ -2,22 +2,55 @@
 
 #include "revk.h"
 
+#define settings                \
+        io(ledgpio,22)  \
+        u8(bright,63)   \
+        u8(leds,1)      \
+	u8(ringstart,)	\
+	u8(ringlen,)	\
+	u8(ringtop,)	\
+
+#define u32(n,d)	extern uint32_t n;
+#define u32l(n,d)	extern uint32_t n;
+#define s8(n,d)		extern int8_t n;
+#define s8n(n,d)	extern int8_t n[d];
+#define u8(n,d)		extern uint8_t n;
+#define u8l(n,d)	extern uint8_t n;
+#define b(n)		extern uint8_t n;
+#define s(n)		extern char * n;
+#define io(n,d)           extern uint8_t n;
+settings
+#undef io
+#undef u32
+#undef u32l
+#undef s8
+#undef s8n
+#undef u8
+#undef u8l
+#undef b
+#undef s
+
 typedef struct app_s app_t;
 typedef struct colour_s colour_t;
 typedef void app_f(app_t *);
 
 struct colour_s
 {
-	uint8_t r,g,b,w;	// Full scale colours
+	uint8_t r,g,b;	// Full scale colours
 };
 
+extern colour_t *led;	// The current LED, set by the apps
+
 struct app_s
-{
+{ // Note LED number start from 1 with 0 meaning not set, stage 0 means app should sanity check parameters
 	app_f *app;
 	// Common settings
-	uint8_t start;	// Start LEDs
+	uint8_t start;	// LED number Start LEDs
 	uint8_t len;	// Number of LEDs
-	colour_t colour;	// Base colour
+	uint8_t	top;	// LED number Top (of ring)
+	uint8_t	tail;	// Use for fading / moving like spin or cylon - how many LEDs trail
+	uint8_t	speed;	// This depends on app, e.g. spin uses this to mean how many calls (10th second) per full ring (default is number of LEDs in ring)
+	uint8_t r,g,b;	// Base colour - assumed all zero mean unset for most cases
 	// Scratchpad for apps
 	uint8_t stage;	// The stage of a sequential display
 	uint8_t step;	// Steps in the stage

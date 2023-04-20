@@ -6,5 +6,6 @@
 
 a(idle)
 a(stargate)
+a(spin)
 
 #undef a

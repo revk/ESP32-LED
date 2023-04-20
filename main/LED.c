@@ -16,17 +16,14 @@ static const char TAG[] = "LED";
 
 struct applist_s
 {
-	const char *appname;
-	app_f*app;
-} applist[]={
+   const char *appname;
+   app_f *app;
+} applist[] = {
 #define a(app)	{#app,&app},
 #include "apps.h"
 };
 
-#define	settings		\
-	io(ledgpio,22)	\
-	u8(bright,63)	\
-	u8(leds,1)	\
+colour_t *led = NULL;
 
 #define u32(n,d)        uint32_t n;
 #define u32l(n,d)        uint32_t n;
@@ -65,7 +62,7 @@ led_task (void *x)
 {
    ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & 63, ledgpio & 64 ? " (inverted)" : "");
 
-   led_strip_handle_t led=NULL;
+   led_strip_handle_t strip = NULL;
 
    led_strip_config_t strip_config = {
       .strip_gpio_num = (ledgpio & 63),
@@ -80,18 +77,28 @@ led_task (void *x)
       .resolution_hz = 10 * 1000 * 1000,        // 10MHz
       .flags.with_dma = false,  // whether to enable the DMA feature
    };
-   REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &led));
+   REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip));
 
-   REVK_ERR_CHECK (led_strip_clear (led));
+   REVK_ERR_CHECK (led_strip_clear (strip));
 
-   led_strip_set_pixel(led,0,bright,0,0);
-   led_strip_set_pixel(led,1,0,bright,0);
-   led_strip_set_pixel(led,2,0,0,bright);
+   led = calloc (leds, sizeof (*led));
+
+#define	MAXAPPS 10
+   app_t active[MAXAPPS] = { 0 };
+   active[0].app = spin;        // Dummy start
 
    while (1)
    {                            // Main loop
-      sleep (1);
-      REVK_ERR_CHECK (led_strip_refresh (led));
+      usleep (100000LL - (esp_timer_get_time () % 100000LL));
+      for (unsigned int i = 0; i < MAXAPPS; i++)
+         if (active[i].app)
+            active[i].app (&active[i]);
+      for (unsigned int i = 0; i < leds; i++)
+      {
+         led_strip_set_pixel (strip, i, (unsigned int) bright * led[i].r / 255, (unsigned int) bright * led[i].g / 255,
+                              (unsigned int) bright * led[i].b / 255);
+      }
+      REVK_ERR_CHECK (led_strip_refresh (strip));
    }
 }
 

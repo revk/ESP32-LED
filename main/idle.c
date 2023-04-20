@@ -2,8 +2,8 @@
 
 #include "app.h"
 
-void idle(app_t*a)
+void
+idle (app_t * a)
 {
 
 }
-
