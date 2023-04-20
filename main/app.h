@@ -36,6 +36,8 @@ extern uint8_t *ledr;           // The current LED, set by the apps
 extern uint8_t *ledg;           // The current LED, set by the apps
 extern uint8_t *ledb;           // The current LED, set by the apps
 
+extern const uint8_t sin256[256];
+
 struct app_s
 {                               // Note LED number start from 1 with 0 meaning not set, stage 0 means app should sanity check parameters
    app_f *app;
