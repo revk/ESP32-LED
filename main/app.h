@@ -5,7 +5,7 @@
 #define settings	\
 	u8(cps,10)	\
         io(ledgpio,22)  \
-        u8(bright,63)   \
+        u8(bright,255)  \
         u8(leds,12)     \
 	s(app,spin)	\
 
@@ -59,7 +59,7 @@ extern uint8_t *ledr;           // The current LED, set by the apps
 extern uint8_t *ledg;           // The current LED, set by the apps
 extern uint8_t *ledb;           // The current LED, set by the apps
 
-extern const uint8_t cos256[256];
+extern const uint8_t cos8[256];
 
 static inline void
 clear (uint8_t start, uint8_t len)
