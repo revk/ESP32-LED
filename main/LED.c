@@ -134,7 +134,28 @@ addapp (int index, const char *name, jo_t j)
                   {
                      char temp[20];
                      jo_strncpy (j, temp, sizeof (temp));
-                     // TODO
+                     if (!strcasecmp (temp, "rainbow"))
+                        active[index].colourset = active[index].rainbow = 1;
+                     else if (!strcasecmp (temp, "cycling"))
+                        active[index].colourset = active[index].cycling = 1;
+#define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
+                     colours
+#undef c
+#define x(n)((temp[n] & 0xF) + (isalpha ((uint8_t)temp[n]) ? 9 : 0))
+                        if (strlen (temp) == 3)
+                     {
+                        active[index].colourset = 1;
+                        active[index].r = x (0) * 17;
+                        active[index].g = x (1) * 17;
+                        active[index].b = x (2) * 17;
+                     } else if (strlen (temp) == 6)
+                     {
+                        active[index].colourset = 1;
+                        active[index].r = x (0) * 16 + x (1);
+                        active[index].g = x (2) * 16 + x (3);
+                        active[index].b = x (4) * 16 + x (5);
+                     }
+#undef x
                   }
                   continue;
                }
@@ -145,6 +166,10 @@ addapp (int index, const char *name, jo_t j)
             active[index].start = 1;
          if (!active[index].len)
             active[index].len = leds;
+         if (!active[index].speed)
+            active[index].speed = cps;
+         if (!active[index].fade)
+            active[index].fade = cps;
          active[index].app = applist[i].app;
          ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, active[index].cycle);
          return &active[index];
@@ -163,7 +188,6 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 {
    if (client || !prefix || target || strcmp (prefix, prefixcommand))
       return NULL;              // Not for us or not a command from main MQTT
-
    if (!suffix || !strcmp (suffix, "add"))
    {                            // Process command to set apps
       xSemaphoreTake (app_mutex, portMAX_DELAY);
@@ -224,9 +248,7 @@ void
 led_task (void *x)
 {
    ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & 63, ledgpio & 64 ? " (inverted)" : "");
-
    led_strip_handle_t strip = NULL;
-
    led_strip_config_t strip_config = {
       .strip_gpio_num = (ledgpio & 63),
       .max_leds = leds,         // The number of LEDs in the strip,
@@ -234,28 +256,22 @@ led_task (void *x)
       .led_model = LED_MODEL_WS2812,    // LED strip model
       .flags.invert_out = ((ledgpio & 64) ? 1 : 0),     // whether to invert the output signal (useful when your hardware has a level inverter)
    };
-
    led_strip_rmt_config_t rmt_config = {
       .clk_src = RMT_CLK_SRC_DEFAULT,   // different clock source can lead to different power consumption
       .resolution_hz = 10 * 1000 * 1000,        // 10MHz
       .flags.with_dma = false,  // whether to enable the DMA feature
    };
    REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip));
-
    REVK_ERR_CHECK (led_strip_clear (strip));
-
    ledr = calloc (leds, sizeof (*ledr));
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
-
    addapp (0, app, NULL);
-
    if (!cps)
       cps = 10;
    uint32_t tick = 1000000LL / cps;
    if (!leds)
       leds = 1;
-
    while (1)
    {                            // Main loop
       usleep (tick - (esp_timer_get_time () % tick));
@@ -292,7 +308,13 @@ led_task (void *x)
 #undef  u8
 #undef  u8r
 #undef  u32
-                  revk_info ("start", &j);
+                  if (active[i].rainbow)
+                  jo_string (j, "colour", "rainbow");
+               else if (active[i].cycling)
+                  jo_string (j, "colour", "cycling");
+               else if (active[i].colourset)
+                  jo_stringf (j, "colour", "%02X%02X%02X", active[i].r, active[i].g, active[i].b);
+               revk_info ("start", &j);
             }
             const char *e = active[i].app (&active[i]);
             if (e)
@@ -313,8 +335,9 @@ led_task (void *x)
       xSemaphoreGive (app_mutex);
       for (unsigned int i = 0; i < leds; i++)
       {
-         led_strip_set_pixel (strip, i, (unsigned int) bright * ledr[i] / 255, (unsigned int) bright * ledg[i] / 255,
-                              (unsigned int) bright * ledb[i] / 255);
+         led_strip_set_pixel (strip, i,
+                              (unsigned int) bright * ledr[i] / 255,
+                              (unsigned int) bright * ledg[i] / 255, (unsigned int) bright * ledb[i] / 255);
       }
       REVK_ERR_CHECK (led_strip_refresh (strip));
    }
@@ -349,6 +372,5 @@ app_main ()
 #undef b
 #undef s
       revk_start ();
-
    revk_task ("LED", led_task, NULL);
 }

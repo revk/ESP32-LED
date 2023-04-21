@@ -18,6 +18,16 @@
 	u32(delay,)	\
 	u32(limit,)	\
 
+#define	colours		\
+	c(000,black)	\
+	c(F00,red)	\
+	c(FF0,yellow)	\
+	c(0F0,green)	\
+	c(0FF,cyan)	\
+	c(00F,blue)	\
+	c(F0F,magenta)	\
+	c(FFF,white)	\
+
 #define	MAXAPPS	10
 
 #define u32(n,d)	extern uint32_t n;
