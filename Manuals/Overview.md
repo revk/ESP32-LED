@@ -14,7 +14,9 @@ e.g. `{"rainbow":{"time":10},"cylon":{"color":"F00"}}`
 
 Note: Unlike valid JSON the same app can appear more than once in the object if needed.
 
-Each app is applied to the LED strip on top of the previous one, and they run concurrently. This means you can have different apps covering different parts of the LED strip, or have a time limited app over writing part of an underlying app, and then showing it once the time limited app stops, etc.
+The app list is replaced with those specified, and each app in turn is applied to the LED strip on top of the previous one, and they run concurrently. This means you can have different apps covering different parts of the LED strip, or have a time limited app over writing part of an underlying app, and then showing it once the time limited app stops, etc.
+
+The command `add` can be used to add new apps on existing ones without replacing the existing ones - this is idea for time limited apps and reverting to previous working.
 
 ## Power and wiring
 

@@ -89,10 +89,11 @@ const uint8_t wheel[256] =
 app_t active[MAXAPPS] = { 0 };
 
 app_t *
-addapp (int index, const char *name)
+addapp (int index, const char *name,jo_t j)
 {                               // Set app, and defaults
    if (index >= MAXAPPS)
       return NULL;
+   // TODO mutex?
    memset (&active[index], 0, sizeof (active[index]));
    if (!name || !*name)
       return &active[index];
@@ -154,7 +155,7 @@ led_task (void *x)
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
 
-   addapp (0, app);
+   addapp (0, app,NULL);
 
    if (!cps)
       cps = 10;
