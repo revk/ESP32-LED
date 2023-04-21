@@ -6,7 +6,7 @@
 	u8(cps,10)	\
         io(ledgpio,22)  \
         u8(bright,63)   \
-        u8(leds,1)      \
+        u8(leds,12)      \
 	u8(ringstart,)	\
 	u8(ringlen,)	\
 	u8(ringtop,)	\
