@@ -14,6 +14,7 @@
 	u8r(len,)	\
 	u8r(top,)	\
 	u8(speed,)	\
+	u8(fade,)	\
 	u32(delay,)	\
 	u32(limit,)	\
 
@@ -85,10 +86,10 @@ struct app_s
 #undef	u8r
 #undef	u32
       // Common settings
-     uint8_t r, g, b;		// Colour
+     uint8_t r, g, b;           // Colour
    uint8_t colourset:1;         // Colour is set
    uint8_t rainbow:1;           // Colour should be cycled
-   uint8_t rainbow2:1;          // Colour should be cycled
+   uint8_t cycling:1;           // Colour should be cycled - more overlap than rainbow
    // Scratchpad for apps
    uint32_t cycle;              // This is set by caller - counts the cycle since started
    uint8_t stage;               // The stage of a sequential display

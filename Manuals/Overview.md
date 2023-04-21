@@ -14,7 +14,9 @@ e.g. `{"rainbow":{"time":10},"cylon":{"color":"F00"}}`
 
 Note: Unlike valid JSON the same app can appear more than once in the object if needed.
 
-Each app is applied to the LED strip on top of the previous one, and they run concurrently. This means you can have different apps covering different parts of the LED strip, or have a time limited app over writing part of an underlying app, and then showing it once the time limited app stops, etc.
+The app list is replaced with those specified, and each app in turn is applied to the LED strip on top of the previous one, and they run concurrently. This means you can have different apps covering different parts of the LED strip, or have a time limited app over writing part of an underlying app, and then showing it once the time limited app stops, etc.
+
+The command `add` can be used to add new apps on existing ones without replacing the existing ones - this is idea for time limited apps and reverting to previous working.
 
 ## Power and wiring
 
@@ -62,20 +64,22 @@ Each app can have arguments.
 |Argument|Meaning|
 |--------|-------|
 |`time`|How long to run the app for. Some apps go forever if not set to a limited time.|
-|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red.|
+|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. Also allowed is `randbow` and `cycle`|
 |`start`|The first LED|
 |`len`|The number of LEDs|
 
 ### Simple apps
 
-- [Idle](idle.md) Simple all LEDs off or specific colour.
-- [Rainbow](rainbow.md) Cycling pattern of colours (not actually rainbow order).
-- [Cylon](cylon.md) Back and forth colour LED with fading trail behind it (Cylon style).
+|App|Meaning|
+|---|-------|
+|`idle`|This simply displays all LEDs with defined colour, which by default is black (off). If a colour set `fade` can be set to fade up at start and down at `limit`|
+|`cylon`|This runs an LED of colour specified (default is red) backwards and forwards, Cylon/Knightrider style|
+|`pulse`|This fades up and down the specified colour (default `cycle`) on all LEDs constantly.|
 
 ### Ring apps
 
-- [Ring Idle](ringidle.md) All LEDS in ring off or specific colour.
-- [Clock](clock.md) A clock, red LED as hours, Green as minutes, Blue as seconds.
-- [Stargate](stargate.md) A stargate, dialling chevrons and opening and then staying open for a number of seconds.
-- [Spin](spin.md) A constantly circling pattern of specified colour fading to black as it spins as a tail.
-
+|App|Meaning|
+|---|-------|
+|`spin`|This is intended for a ring but can work on a strip quite well - it rotates the specified colour (default `cycle`) around the ring|
+|`clock`|This operates a clock on the ring, red for hour, green for minute, blue for second, obviously a ring with 60 LEDs is best|
+|`stargate`|This dials a stargate, setting each chevron, and then opens the gate. Gate closes after a period even if `limit` is not set|
