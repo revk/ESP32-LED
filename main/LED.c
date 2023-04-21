@@ -152,6 +152,7 @@ addapp (int index, const char *name, jo_t j)
    memset (&active[index], 0, sizeof (active[index]));
    ESP_LOGI (TAG, "App not found %s", name);
    jo_t e = jo_object_alloc ();
+   jo_int (j, "level", index);
    jo_string (e, "app", name);
    revk_error ("not-found", &e);
    return NULL;
@@ -282,6 +283,7 @@ led_task (void *x)
             if (!active[i].cycle)
             {                   // Starting
                jo_t j = jo_object_alloc ();
+               jo_int (j, "level", i);
                jo_string (j, "app", active[i].name);
 #define u8(n,d)         if(active[i].n)jo_int(j,#n,active[i].n);
 #define u8r(n,d)        u8(n,d)
@@ -294,17 +296,19 @@ led_task (void *x)
             }
             const char *e = active[i].app (&active[i]);
             if (e)
-            {
                active[i].app = NULL;    // Done
-               jo_t j = jo_object_alloc ();
-               jo_string (j, "app", active[i].name);
-               if (e)
-                  jo_string (j, "error", e);
-               revk_info ("done", &j);
-            }
             active[i].cycle++;
             if (active[i].limit && active[i].cycle >= active[i].limit)
                active[i].app = NULL;    // Complete
+            if (!active[i].app)
+            {                   // Done
+               jo_t j = jo_object_alloc ();
+               jo_int (j, "level", i);
+               jo_string (j, "app", active[i].name);
+               if (e && *e)
+                  jo_string (j, "error", e);
+               revk_info ("done", &j);
+            }
          }
       xSemaphoreGive (app_mutex);
       for (unsigned int i = 0; i < leds; i++)
