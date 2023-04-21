@@ -9,10 +9,10 @@ clockface (app_t * a)
    int8_t dir = 1;
    if (a->top < 0)
    {
-      top = (a->start - 1) - a->top;
+      top = (leds + a->start + a->top) % leds;
       dir = -1;
    } else
-      top = a->top - (a->start - 1);
+      top = (leds + a->top - a->start) % leds;
 
    if (!a->cycle)
    {                            // Sanity checks, etc
