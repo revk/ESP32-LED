@@ -89,7 +89,7 @@ const uint8_t wheel[256] =
 app_t active[MAXAPPS] = { 0 };
 
 app_t *
-addapp (int index, const char *name,jo_t j)
+addapp (int index, const char *name, jo_t j)
 {                               // Set app, and defaults
    if (index >= MAXAPPS)
       return NULL;
@@ -155,7 +155,7 @@ led_task (void *x)
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
 
-   addapp (0, app,NULL);
+   addapp (0, app, NULL);
 
    if (!cps)
       cps = 10;
@@ -178,7 +178,7 @@ led_task (void *x)
                active[i].r = wheel[(active[i].cycle) & 255];
                active[i].g = wheel[(active[i].cycle + 85) & 255];
                active[i].b = wheel[(active[i].cycle + 170) & 255];
-            } else if (active[i].rainbow2)
+            } else if (active[i].cycle)
             {                   // Cycle the colour
                active[i].r = cos256[(active[i].cycle) & 255];
                active[i].g = cos256[(active[i].cycle + 85) & 255];
