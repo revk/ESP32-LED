@@ -16,6 +16,8 @@ clockface (app_t * a)
 
    if (!a->cycle)
    {                            // Sanity checks, etc
+      if (a->start + a->len - 1 > leds)
+         return "Bad start";
       a->t1 = a->start + top;
       a->t2 = a->start + top;
       a->t3 = a->start + top;
