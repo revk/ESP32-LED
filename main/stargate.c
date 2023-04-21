@@ -7,6 +7,7 @@ stargate (app_t * a)
 {
    if (!a->cycle)
    {                            // Sanity checks, etc
+	   if(!a->limit)a->limit=60*cps;
    }
    uint8_t top;
    int8_t dir = 1;

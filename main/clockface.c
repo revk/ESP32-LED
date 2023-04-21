@@ -64,7 +64,7 @@ clockface (app_t * a)
       return NULL;
    }
 
-   time_t now = time (0);
+   time_t now = time (0) - 1;
    struct tm t;
    localtime_r (&now, &t);
    uint32_t s = t.tm_hour * 3600 + t.tm_min * 60 + t.tm_sec;
