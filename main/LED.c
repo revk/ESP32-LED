@@ -97,18 +97,18 @@ addapp (int index, const char *name, jo_t j)
       return NULL;
    if (!name || !*name)
    {                            // No app
+      ESP_LOGI (TAG, "Zap app %d", index);
       memset (&active[index], 0, sizeof (active[index]));
       return &active[index];
    }
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
       {
-         if (!active[index].app && active[index].name != applist[i].name)
+         if (!active[index].app || active[index].name != applist[i].name)
          {                      // Change app, reset (yes, we can compare pointer as linked to applist)
             memset (&active[index], 0, sizeof (active[index]));
             active[index].name = applist[i].name;
          }
-         active[index].app = applist[i].app;
          // Defaults
 #define u8(n,d)         active[index].n=n;
 #define u8r(n,d)        if(applist[i].ring)active[index].n=(ring##n?:n); else u8(n,d)
@@ -141,8 +141,16 @@ addapp (int index, const char *name, jo_t j)
                jo_next (j);     // Skip
             }
          }
+         if (!active[index].start)
+            active[index].start = 1;
+         if (!active[index].len)
+            active[index].len = leds;
+         active[index].app = applist[i].app;
+         ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, active[index].cycle);
          return &active[index];
       }
+   memset (&active[index], 0, sizeof (active[index]));
+   ESP_LOGI (TAG, "App not found %s", name);
    jo_t e = jo_object_alloc ();
    jo_string (e, "app", name);
    revk_error ("not-found", &e);
@@ -159,7 +167,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    {                            // Process command to set apps
       xSemaphoreTake (app_mutex, portMAX_DELAY);
       int index = 0;
-      if (*suffix)
+      if (suffix)
       {                         // Pack existing apps to add to end
          for (int i = 0; i < MAXAPPS; i++)
          {
@@ -244,6 +252,8 @@ led_task (void *x)
    if (!cps)
       cps = 10;
    uint32_t tick = 1000000LL / cps;
+   if (!leds)
+      leds = 1;
 
    while (1)
    {                            // Main loop
@@ -273,7 +283,7 @@ led_task (void *x)
             {                   // Starting
                jo_t j = jo_object_alloc ();
                jo_string (j, "app", active[i].name);
-#define u8(n,d)         jo_int(j,#n,active[i].n);
+#define u8(n,d)         if(active[i].n)jo_int(j,#n,active[i].n);
 #define u8r(n,d)        u8(n,d)
 #define u32(n,d)        u8(n,d)
                params
