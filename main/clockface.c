@@ -9,10 +9,10 @@ clockface (app_t * a)
    int8_t dir = 1;
    if (a->top < 0)
    {
-      top = a->start - a->top;
+      top = (a->start - 1) - a->top;
       dir = -1;
    } else
-      top = a->top - a->start;
+      top = a->top - (a->start - 1);
 
    if (!a->cycle)
    {                            // Sanity checks, etc
