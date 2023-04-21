@@ -11,6 +11,7 @@ spin (app_t * a)
          a->len = leds;
       if (!a->start)
          a->start = 1;
+      if(!a->colourset)a->rainbow2=1;
    }
    a->step += 256 / a->len;
    for (unsigned int i = 1; i <= a->len; i++)

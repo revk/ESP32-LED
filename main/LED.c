@@ -16,10 +16,12 @@ static const char TAG[] = "LED";
 
 struct applist_s
 {
-   const char *appname;
+   const char *name;
    app_f *app;
+   uint8_t ring:1;              // Is a ring based app
 } applist[] = {
-#define a(app)	{#app,&app},
+#define a(app)	{#app,&app,0},
+#define r(app)	{#app,&app,1},
 #include "apps.h"
 };
 
@@ -32,17 +34,20 @@ uint8_t *ledb = NULL;
 #define s8(n,d) int8_t n;
 #define s8n(n,d) int8_t n[d];
 #define u8(n,d) uint8_t n;
+#define u8r(n,d) uint8_t n,ring##n;
 #define u8l(n,d) uint8_t n;
 #define b(n) uint8_t n;
-#define s(n) char * n;
+#define s(n,d) char * n;
 #define io(n,d)           uint8_t n;
-settings
+settings                        //
+   params                       //
 #undef io
 #undef u32
 #undef u32l
 #undef s8
 #undef s8n
 #undef u8
+#undef u8r
 #undef u8l
 #undef b
 #undef s
@@ -80,6 +85,36 @@ const uint8_t wheel[256] =
    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
    0, 0, 0, 0
 };
+
+app_t active[MAXAPPS] = { 0 };
+
+app_t *
+addapp (int index, const char *name)
+{                               // Set app, and defaults
+   if (index >= MAXAPPS)
+      return NULL;
+   memset (&active[index], 0, sizeof (active[index]));
+   if (!name || !*name)
+      return &active[index];
+   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+      if (!strcasecmp (name, applist[i].name))
+      {
+         active[index].name = applist[i].name;
+         active[index].app = applist[i].app;
+         // Defaults
+#define u8(n,d)         active[index].n=n;
+#define u8r(n,d)        if(applist[i].ring)active[index].n=(ring##n?:n); else active[index].n=n;
+#define u32(n,d)        active[index].n=n;
+         params
+#undef  u8
+#undef  u8r
+#undef  u32
+            // TODO JSON
+            return &active[index];
+      }
+   ESP_LOGI (TAG, "Not found %s", name);
+   return NULL;
+}
 
 const char *
 app_callback (int client, const char *prefix, const char *target, const char *suffix, jo_t j)
@@ -119,11 +154,7 @@ led_task (void *x)
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
 
-#define	MAXAPPS 10
-   app_t active[MAXAPPS] = { 0 };
-   active[0].name = "spin";
-   active[0].app = spin;        // Dummy start
-   active[0].rainbow2 = 1;
+   addapp (0, app);
 
    if (!cps)
       cps = 10;
@@ -162,7 +193,7 @@ led_task (void *x)
                }
             }
             active[i].cycle++;
-            if (active[i].time && active[i].cycle >= active[i].time)
+            if (active[i].limit && active[i].cycle >= active[i].limit)
                active[i].app = NULL;    // Complete
          }
 
@@ -186,15 +217,18 @@ app_main ()
 #define s8(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_SIGNED);
 #define s8n(n,d) revk_register(#n,d,sizeof(*n),&n,NULL,SETTING_SIGNED);
 #define u8(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
+#define u8r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,0);
 #define u8l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
-#define s(n) revk_register(#n,0,0,&n,NULL,0);
-   settings
+#define s(n,d) revk_register(#n,0,0,&n,#d,0);
+   settings                     //
+      params                    //
 #undef io
 #undef u32
 #undef u32l
 #undef s8
 #undef s8n
 #undef u8
+#undef u8r
 #undef u8l
 #undef b
 #undef s

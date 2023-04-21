@@ -6,10 +6,8 @@
 	u8(cps,10)	\
         io(ledgpio,22)  \
         u8(bright,63)   \
-        u8(leds,12)      \
-	u8(ringstart,)	\
-	u8(ringlen,)	\
-	u8(ringtop,)	\
+        u8(leds,12)     \
+	s(app,spin)	\
 
 #define	params		\
 	u8r(start,)	\
@@ -17,19 +15,22 @@
 	u8r(top,)	\
 	u8(speed,)	\
 	u32(delay,)	\
-	u32(time,)	\
+	u32(limit,)	\
+
+#define	MAXAPPS	10
 
 #define u32(n,d)	extern uint32_t n;
 #define u32l(n,d)	extern uint32_t n;
 #define s8(n,d)		extern int8_t n;
 #define s8n(n,d)	extern int8_t n[d];
 #define u8(n,d)		extern uint8_t n;
-#define u8r(n,d)	extern uint8_t n;
+#define u8r(n,d)	extern uint8_t n,ring##n;
 #define u8l(n,d)	extern uint8_t n;
 #define b(n)		extern uint8_t n;
-#define s(n)		extern char * n;
+#define s(n,d)		extern char * n;
 #define io(n,d)         extern uint8_t n;
-settings
+settings                        //
+   params                       //
 #undef io
 #undef u32
 #undef u32l
@@ -81,11 +82,11 @@ struct app_s
 #define u32(n,d)	uint32_t n;
      params
 #undef	u8
-#undef	ur
+#undef	u8r
 #undef	u32
       // Common settings
-     uint8_t r, g, b;
-   uint8_t set:1;               // Colour is set
+     uint8_t r, g, b;		// Colour
+   uint8_t colourset:1;         // Colour is set
    uint8_t rainbow:1;           // Colour should be cycled
    uint8_t rainbow2:1;          // Colour should be cycled
    // Scratchpad for apps
