@@ -1,9 +1,9 @@
-// Simple spin color
+// Simple pulse color
 
 #include "app.h"
 
 const char *
-spin (app_t * a)
+pulse (app_t * a)
 {
    if (!a->cycle)
    {                            // Sanity check / defaults
@@ -12,7 +12,8 @@ spin (app_t * a)
    }
 
    a->step += 256 / a->speed;
+   uint8_t l = cos8[a->step];
    for (unsigned int i = 0; i < a->len; i++)
-      setl (a->start + i, a, cos8[(256 * i / a->len + a->step) & 255]);
+      setl (a->start + i, a, l);
    return NULL;
 }

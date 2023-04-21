@@ -8,6 +8,8 @@
 #endif
 
 a (idle)                        //
+   a (pulse)                    //
+   a (cylon)                    //
    r (stargate)                 //
    r (spin)                     //
 #undef a
