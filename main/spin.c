@@ -11,7 +11,7 @@ spin (app_t * a)
          a->cycling = 1;
    }
 
-   a->step += 256 / a->len;
+   a->step += 256 / a->speed;
    for (unsigned int i = 1; i <= a->len; i++)
       setl (i, a, cos8[(256 * i / a->len + a->step) & 255]);
    return NULL;
