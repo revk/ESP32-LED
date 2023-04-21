@@ -89,7 +89,7 @@ struct app_s
      uint8_t r, g, b;           // Colour
    uint8_t colourset:1;         // Colour is set
    uint8_t rainbow:1;           // Colour should be cycled
-   uint8_t cycle:1;             // Colour should be cycled - more overlap than rainbow
+   uint8_t cycling:1;           // Colour should be cycled - more overlap than rainbow
    // Scratchpad for apps
    uint32_t cycle;              // This is set by caller - counts the cycle since started
    uint8_t stage;               // The stage of a sequential display

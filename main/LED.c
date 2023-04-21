@@ -88,42 +88,126 @@ const uint8_t wheel[256] =
 
 app_t active[MAXAPPS] = { 0 };
 
+static SemaphoreHandle_t app_mutex = NULL;
+
 app_t *
 addapp (int index, const char *name, jo_t j)
-{                               // Set app, and defaults
+{                               // Set app, and defaults (assumes mutex done if needed)
    if (index >= MAXAPPS)
       return NULL;
-   // TODO mutex?
-   memset (&active[index], 0, sizeof (active[index]));
    if (!name || !*name)
+   {                            // No app
+      memset (&active[index], 0, sizeof (active[index]));
       return &active[index];
+   }
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
       {
-         active[index].name = applist[i].name;
+         if (!active[index].app && active[index].name != applist[i].name)
+         {                      // Change app, reset (yes, we can compare pointer as linked to applist)
+            memset (&active[index], 0, sizeof (active[index]));
+            active[index].name = applist[i].name;
+         }
          active[index].app = applist[i].app;
          // Defaults
 #define u8(n,d)         active[index].n=n;
-#define u8r(n,d)        if(applist[i].ring)active[index].n=(ring##n?:n); else active[index].n=n;
-#define u32(n,d)        active[index].n=n;
+#define u8r(n,d)        if(applist[i].ring)active[index].n=(ring##n?:n); else u8(n,d)
+#define u32(n,d)        u8(n,d)
          params
 #undef  u8
 #undef  u8r
 #undef  u32
-            // TODO JSON
-            return &active[index];
+            if (j && jo_here (j) == JO_OBJECT)
+         {                      // Expects to be at start of object
+            while (jo_next (j) == JO_TAG)
+            {
+#define u8(n,d)         if(!jo_strcmp(j,#n)){if(jo_next(j)==JO_NUMBER)active[index].n=jo_read_int(j);continue;}
+#define u8r(n,d)        u8(n,d)
+#define u32(n,d)        u8(n,d)
+               params
+#undef  u8
+#undef  u8r
+#undef  u32
+                  if (!jo_strcmp (j, "colour"))
+               {
+                  if (jo_next (j) == JO_STRING)
+                  {
+                     char temp[20];
+                     jo_strncpy (j, temp, sizeof (temp));
+                     // TODO
+                  }
+                  continue;
+               }
+               jo_next (j);     // Skip
+            }
+         }
+         return &active[index];
       }
-   ESP_LOGI (TAG, "Not found %s", name);
+   jo_t e = jo_object_alloc ();
+   jo_string (e, "app", name);
+   revk_error ("not-found", &e);
    return NULL;
 }
 
 const char *
 app_callback (int client, const char *prefix, const char *target, const char *suffix, jo_t j)
 {
-   if (client || !prefix || target || strcmp (prefix, prefixcommand) || !suffix)
+   if (client || !prefix || target || strcmp (prefix, prefixcommand))
       return NULL;              // Not for us or not a command from main MQTT
-   // TODO command to set active apps
 
+   if (!suffix || !strcmp (suffix, "add"))
+   {                            // Process command to set apps
+      xSemaphoreTake (app_mutex, portMAX_DELAY);
+      int index = 0;
+      if (*suffix)
+      {                         // Pack existing apps to add to end
+         for (int i = 0; i < MAXAPPS; i++)
+         {
+            if (active[i].app)
+            {
+               if (index != i)
+               {                // Copy back
+                  active[index] = active[i];
+                  memset (&active[i], 0, sizeof (active[i]));
+               }
+               index++;
+            }
+         }
+      }
+      jo_type_t t = jo_here (j);
+      if (t == JO_STRING)
+      {                         // Simple add app
+         char temp[20];
+         jo_strncpy (j, temp, sizeof (temp));
+         addapp (index++, temp, NULL);
+      } else if (t == JO_ARRAY)
+      {
+         while ((t = jo_next (j)) == JO_STRING)
+         {
+            char temp[20];
+            jo_strncpy (j, temp, sizeof (temp));
+            addapp (index++, temp, NULL);
+         }
+      } else if (t == JO_OBJECT)
+      {
+         while ((t = jo_next (j)) == JO_TAG)
+         {
+            char temp[20];
+            jo_strncpy (j, temp, sizeof (temp));
+            t = jo_next (j);
+            if (t != JO_OBJECT)
+               break;
+            addapp (index++, temp, j);
+         }
+      }
+      while (index < MAXAPPS)
+      {
+         memset (&active[index], 0, sizeof (active[index]));
+         index++;
+      }
+      xSemaphoreGive (app_mutex);
+      return "";
+   }
    return NULL;
 }
 
@@ -165,6 +249,7 @@ led_task (void *x)
    {                            // Main loop
       usleep (tick - (esp_timer_get_time () % tick));
       clear (1, leds);
+      xSemaphoreTake (app_mutex, portMAX_DELAY);
       for (unsigned int i = 0; i < MAXAPPS; i++)
          if (active[i].app)
          {
@@ -178,26 +263,40 @@ led_task (void *x)
                active[i].r = wheel[(active[i].cycle) & 255];
                active[i].g = wheel[(active[i].cycle + 85) & 255];
                active[i].b = wheel[(active[i].cycle + 170) & 255];
-            } else if (active[i].cycle)
+            } else if (active[i].cycling)
             {                   // Cycle the colour
                active[i].r = cos256[(active[i].cycle) & 255];
                active[i].g = cos256[(active[i].cycle + 85) & 255];
                active[i].b = cos256[(active[i].cycle + 170) & 255];
             }
+            if (!active[i].cycle)
+            {                   // Starting
+               jo_t j = jo_object_alloc ();
+               jo_string (j, "app", active[i].name);
+#define u8(n,d)         jo_int(j,#n,active[i].n);
+#define u8r(n,d)        u8(n,d)
+#define u32(n,d)        u8(n,d)
+               params
+#undef  u8
+#undef  u8r
+#undef  u32
+                  revk_info ("start", &j);
+            }
             const char *e = active[i].app (&active[i]);
             if (e)
             {
                active[i].app = NULL;    // Done
-               if (*e)
-               {
-                  ESP_LOGI (TAG, "App failed %s", e);   // TODO report via MQTT
-               }
+               jo_t j = jo_object_alloc ();
+               jo_string (j, "app", active[i].name);
+               if (e)
+                  jo_string (j, "error", e);
+               revk_info ("done", &j);
             }
             active[i].cycle++;
             if (active[i].limit && active[i].cycle >= active[i].limit)
                active[i].app = NULL;    // Complete
          }
-
+      xSemaphoreGive (app_mutex);
       for (unsigned int i = 0; i < leds; i++)
       {
          led_strip_set_pixel (strip, i, (unsigned int) bright * ledr[i] / 255, (unsigned int) bright * ledg[i] / 255,
@@ -210,6 +309,8 @@ led_task (void *x)
 void
 app_main ()
 {
+   app_mutex = xSemaphoreCreateBinary ();
+   xSemaphoreGive (app_mutex);
    revk_boot (&app_callback);
 #define io(n,d)           revk_register(#n,0,sizeof(n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD);
 #define b(n) revk_register(#n,0,sizeof(n),&n,NULL,SETTING_BOOLEAN);
