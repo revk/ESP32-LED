@@ -51,7 +51,7 @@ For example, some apps are designed to work on an LED ring - this may be the who
 |-------|-------|
 |`ringstart`|Number of first LED in the ring, electrically, numbered as 1st LED in chain as LED `1`.|
 |`ringlen`|How many LEDs in the ring, starting at `ringstart` (or 1st LED if not set).|
-|`ringtop`|For ring apps that need to know the orientation (e.g. `clock` and `stargate`) this is the LED number of the LED at the top of the ring. If not set then `ringstart` is assumed to be at the top.|
+|`ringtop`|For ring apps that need to know the orientation (e.g. `clock` and `stargate`) this is the LED number of the LED at the top of the ring. If not set then `ringstart` is assumed to be at the top. This can be set negative meaning reverse the ring.|
 
 ## "Apps"
 

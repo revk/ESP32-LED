@@ -12,7 +12,7 @@
 #define	params		\
 	u8r(start,)	\
 	u8r(len,)	\
-	u8r(top,)	\
+	s8r(top,)	\
 	u8(speed,)	\
 	u8(fade,)	\
 	u32(delay,)	\
@@ -36,6 +36,7 @@
 #define s8n(n,d)	extern int8_t n[d];
 #define u8(n,d)		extern uint8_t n;
 #define u8r(n,d)	extern uint8_t n,ring##n;
+#define s8r(n,d)	extern int8_t n,ring##n;
 #define u8l(n,d)	extern uint8_t n;
 #define b(n)		extern uint8_t n;
 #define s(n,d)		extern char * n;
@@ -49,6 +50,7 @@ settings                        //
 #undef s8n
 #undef u8
 #undef u8r
+#undef s8r
 #undef u8l
 #undef b
 #undef s
@@ -92,10 +94,12 @@ struct app_s
    app_f *app;
 #define u8(n,d)		uint8_t n;
 #define u8r(n,d)	uint8_t n;
+#define s8r(n,d)	int8_t n;
 #define u32(n,d)	uint32_t n;
      params
 #undef	u8
 #undef	u8r
+#undef	s8r
 #undef	u32
       // Common settings
      uint8_t r, g, b;           // Colour
