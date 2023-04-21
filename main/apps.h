@@ -10,6 +10,7 @@
 a (idle)                        //
    a (pulse)                    //
    a (cylon)                    //
+   r (clockface)                //
    r (stargate)                 //
    r (spin)                     //
 #undef a

@@ -60,6 +60,8 @@ extern uint8_t *ledg;           // The current LED, set by the apps
 extern uint8_t *ledb;           // The current LED, set by the apps
 
 extern const uint8_t cos8[256];
+extern const uint8_t wheel[256];
+extern const uint8_t zig[256];
 
 static inline void
 clear (uint8_t start, uint8_t len)
@@ -104,4 +106,10 @@ struct app_s
    uint32_t cycle;              // This is set by caller - counts the cycle since started
    uint8_t stage;               // The stage of a sequential display
    uint8_t step;                // Steps in the stage
+   uint8_t t1,
+     t2,
+     t3,
+     t4,
+     t5,
+     t6;                        // Temp
 };
