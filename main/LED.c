@@ -406,8 +406,8 @@ led_task (void *x)
       for (unsigned int i = 0; i < leds; i++)
       {
          led_strip_set_pixel (strip, i,
-                              gamma8[(unsigned int) bright * ledr[i] / 255],
-                              gamma8[(unsigned int) bright * ledg[i] / 255], gamma8[(unsigned int) bright * ledb[i] / 255]);
+                              gamma8[(unsigned int) maxr * ledr[i] / 255],
+                              gamma8[(unsigned int) maxg * ledg[i] / 255], gamma8[(unsigned int) maxb * ledb[i] / 255]);
       }
       REVK_ERR_CHECK (led_strip_refresh (strip));
    }

@@ -77,11 +77,11 @@ appclock (app_t * a)
       return NULL;
    }
 
-      struct timeval tv;
-   gettimeofday(&tv, NULL);
+   struct timeval tv;
+   gettimeofday (&tv, NULL);
    struct tm t;
    localtime_r (&tv.tv_sec, &t);
-   uint32_t s = t.tm_hour * 3600000 + t.tm_min * 60000 + t.tm_sec*1000 +tv.tv_usec/1000;;
+   uint32_t s = t.tm_hour * 3600000 + t.tm_min * 60000 + t.tm_sec * 1000 + tv.tv_usec / 1000;;
 
    c->h0 = a->start + (a->len + top + dir * (a->len * (s % 43200000) / 43200000)) % a->len;
    c->m0 = a->start + (a->len + top + dir * (a->len * (s % 3600000) / 3600000)) % a->len;
@@ -92,6 +92,6 @@ appclock (app_t * a)
    setb (c->s1, 255);
 
    if (c->h0 != c->h1 || c->m0 != c->m1 || c->s0 != c->s1)
-      a->step = a->fade - 1; // -1 because a fade default of cps means we can be out of step
+      a->step = (a->fade - 1) ? : 1;    // -1 because a fade default of cps means we can be out of step
    return NULL;
 }
