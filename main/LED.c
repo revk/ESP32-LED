@@ -247,7 +247,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
          if (!strcasecmp (suffix, applist[i].name))
          {                      // Direct command
             addapp (0, suffix, j);
-            for (int index = 1; index < MAXAPP; index++)
+            for (int index = 1; index < MAXAPPS; index++)
             {
                free (active[index].data);
                memset (&active[index], 0, sizeof (active[index]));
