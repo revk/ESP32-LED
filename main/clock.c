@@ -22,7 +22,7 @@ appclock (app_t * a)
    int8_t dir = 1;
    if (a->top < 0)
    {
-      top = (leds + -a->top-a->start) % leds;
+      top = (leds + -a->top - a->start) % leds;
       dir = -1;
    } else
       top = (leds + a->top - a->start) % leds;
@@ -41,8 +41,8 @@ appclock (app_t * a)
    clear (a->start, a->len);
    if (a->step)
    {                            // Second fade from one to another
-      uint8_t l = 255 * a->step / (cps - 1);
-      if (a->step >= cps)
+      uint8_t l = 255 * a->step / a->fade;
+      if (a->step > a->fade)
          l = 255;
 
       if (c->h0 == c->h1)
@@ -77,20 +77,21 @@ appclock (app_t * a)
       return NULL;
    }
 
-   time_t now = time (0) + 1;
+      struct timeval tv;
+   gettimeofday(&tv, NULL);
    struct tm t;
-   localtime_r (&now, &t);
-   uint32_t s = t.tm_hour * 3600 + t.tm_min * 60 + t.tm_sec;
+   localtime_r (&tv.tv_sec, &t);
+   uint32_t s = t.tm_hour * 3600000 + t.tm_min * 60000 + t.tm_sec*1000 +tv.tv_usec/1000;;
 
-   c->h0 = a->start + (a->len + top + dir * (a->len * (s % 43200) / 43200)) % a->len;
-   c->m0 = a->start + (a->len + top + dir * (a->len * (s % 3600) / 3600)) % a->len;
-   c->s0 = a->start + (a->len + top + dir * (a->len * (s % 60) / 60)) % a->len;
+   c->h0 = a->start + (a->len + top + dir * (a->len * (s % 43200000) / 43200000)) % a->len;
+   c->m0 = a->start + (a->len + top + dir * (a->len * (s % 3600000) / 3600000)) % a->len;
+   c->s0 = a->start + (a->len + top + dir * (a->len * (s % 60000) / 60000)) % a->len;
 
    setr (c->h1, 255);
    setg (c->m1, 255);
    setb (c->s1, 255);
 
    if (c->h0 != c->h1 || c->m0 != c->m1 || c->s0 != c->s1)
-      a->step = cps - 1;
+      a->step = a->fade - 1; // -1 because a fade default of cps means we can be out of step
    return NULL;
 }
