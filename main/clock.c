@@ -35,25 +35,25 @@ appclock (app_t * a)
          l = 255;
 
       if (a->t1 == a->t4)
-         ledr[a->t1 - 1] = 255;
+         setr (a->t1, 255);
       else
       {
-         ledr[a->t1 - 1] = 255 - l;
-         ledr[a->t4 - 1] = l;
+         setr (a->t1, 255 - l);
+         setr (a->t4, l);
       }
       if (a->t2 == a->t5)
-         ledg[a->t2 - 1] = 255;
+         setg (a->t2, 255);
       else
       {
-         ledg[a->t2 - 1] = 255 - l;
-         ledg[a->t5 - 1] = l;
+         setg (a->t2, 255 - l);
+         setg (a->t5, l);
       }
       if (a->t3 == a->t6)
-         ledb[a->t3 - 1] = 255;
+         setb (a->t3, 255);
       else
       {
-         ledb[a->t3 - 1] = 255 - l;
-         ledb[a->t6 - 1] = l;
+         setb (a->t3, 255 - l);
+         setb (a->t6, l);
       }
 
       if (!--a->step)
@@ -75,9 +75,9 @@ appclock (app_t * a)
    a->t2 = a->start + (a->len + top + dir * (a->len * (s % 3600) / 3600)) % a->len;
    a->t3 = a->start + (a->len + top + dir * (a->len * (s % 60) / 60)) % a->len;
 
-   ledr[a->t4 - 1] = 255;
-   ledg[a->t5 - 1] = 255;
-   ledb[a->t6 - 1] = 255;
+   setr (a->t4, 255);
+   setg (a->t5, 255);
+   setb (a->t6, 255);
 
    if (a->t1 != a->t4 || a->t2 != a->t5 || a->t3 != a->t6)
       a->step = cps - 1;
