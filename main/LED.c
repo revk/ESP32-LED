@@ -367,7 +367,8 @@ led_task (void *x)
    ledr = calloc (leds, sizeof (*ledr));
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
-   addapp (0, app, NULL);
+   if (*app)
+      addapp (0, app, NULL);
    if (!cps)
       cps = 10;
    uint32_t tick = 1000000LL / cps;
