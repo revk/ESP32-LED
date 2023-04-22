@@ -75,6 +75,54 @@ clear (uint8_t start, uint8_t len)
    memset (ledb + start - 1, 0, len);
 }
 
+static inline uint8_t
+getr (uint8_t index)
+{
+   if (!index || index > leds)
+      return 0;
+   return ledr[index - 1];
+}
+
+static inline uint8_t
+getg (uint8_t index)
+{
+   if (!index || index > leds)
+      return 0;
+   return ledg[index - 1];
+}
+
+static inline uint8_t
+getb (uint8_t index)
+{
+   if (!index || index > leds)
+      return 0;
+   return ledb[index - 1];
+}
+
+static inline void
+setr (uint8_t index, uint8_t v)
+{
+   if (!index || index > leds)
+      return;
+   ledr[index - 1] = v;
+}
+
+static inline void
+setg (uint8_t index, uint8_t v)
+{
+   if (!index || index > leds)
+      return;
+   ledg[index - 1] = v;
+}
+
+static inline void
+setb (uint8_t index, uint8_t v)
+{
+   if (!index || index > leds)
+      return;
+   ledb[index - 1] = v;
+}
+
 static inline void
 setrgb (uint8_t index, uint8_t r, uint8_t g, uint8_t b)
 {

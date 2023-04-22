@@ -3,7 +3,7 @@
 #include "app.h"
 
 const char *
-idle (app_t * a)
+appidle (app_t * a)
 {
    uint8_t l = 255;
    if (a->fade && a->cycle < a->fade)

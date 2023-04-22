@@ -3,7 +3,7 @@
 #include "app.h"
 
 const char *
-clockface (app_t * a)
+appclock (app_t * a)
 {
    uint8_t top;
    int8_t dir = 1;

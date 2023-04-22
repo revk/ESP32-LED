@@ -3,9 +3,9 @@
 #include "app.h"
 
 const char *
-stargate (app_t * a)
+appstargate (app_t * a)
 {
-      uint8_t top;
+   uint8_t top;
    int8_t dir = 1;
    if (a->top < 0)
    {
@@ -15,7 +15,8 @@ stargate (app_t * a)
       top = (leds + a->top - a->start) % leds;
    if (!a->cycle)
    {                            // Sanity checks, etc
-	   if(!a->limit)a->limit=60*cps;
+      if (!a->limit)
+         a->limit = 60 * cps;
    }
 
    return "No stargate yet";

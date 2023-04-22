@@ -3,7 +3,7 @@
 #include "app.h"
 
 const char *
-spin (app_t * a)
+appspin (app_t * a)
 {
    if (!a->cycle)
    {                            // Sanity check / defaults

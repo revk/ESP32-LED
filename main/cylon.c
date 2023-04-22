@@ -3,7 +3,7 @@
 #include "app.h"
 
 const char *
-cylon (app_t * a)
+appcylon (app_t * a)
 {
    if (!a->cycle)
    {                            // Sanity check / defaults

@@ -11,7 +11,7 @@ static const char TAG[] = "LED";
 #include "led_strip.h"
 #include "app.h"
 
-#define a(app)	extern const char* app(app_t*);
+#define a(a)	extern const char* app##a(app_t*);
 #include "apps.h"
 
 struct applist_s
@@ -20,8 +20,8 @@ struct applist_s
    app_f *app;
    uint8_t ring:1;              // Is a ring based app
 } applist[] = {
-#define a(app)	{#app,&app,0},
-#define r(app)	{#app,&app,1},
+#define a(a)	{#a,&app##a,0},
+#define r(a)	{#a,&app##a,1},
 #include "apps.h"
 };
 
