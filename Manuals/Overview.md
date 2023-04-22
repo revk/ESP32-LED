@@ -18,6 +18,10 @@ The app list is replaced with those specified, and each app in turn is applied t
 
 The command `add` can be used to add new apps on existing ones without replacing the existing ones - this is idea for time limited apps and reverting to previous working.
 
+You can also use an app name as a command where the payload is the parameters. This replaces the list of apps with this one app.
+
+Whilst app parameters are normally an object with one or more parameters, if it is just a string, that sets `colour`, and if a number, that sets `limit`. E.g. `command/LED/whatever/spin red`.
+
 ## Power and wiring
 
 The PCB passes on the USB supplied power. Each LED could use something like 60mA when on full, so consider total power. A USB port only has to provide 0.5A which would be only 8 LEDs, but obviously the LEDs may not all be on full white usually.

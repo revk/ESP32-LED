@@ -145,6 +145,33 @@ addapp (int index, const char *name, jo_t j)
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
       {
+         void setcolour (jo_t j)
+         {
+            char temp[20];
+            jo_strncpy (j, temp, sizeof (temp));
+            if (!strcasecmp (temp, "rainbow"))
+               active[index].colourset = active[index].rainbow = 1;
+            else if (!strcasecmp (temp, "cycling"))
+               active[index].colourset = active[index].cycling = 1;
+#define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
+            colours
+#undef c
+#define x(n)((temp[n] & 0xF) + (isalpha ((uint8_t)temp[n]) ? 9 : 0))
+               if (strlen (temp) == 3)
+            {
+               active[index].colourset = 1;
+               active[index].r = x (0) * 17;
+               active[index].g = x (1) * 17;
+               active[index].b = x (2) * 17;
+            } else if (strlen (temp) == 6)
+            {
+               active[index].colourset = 1;
+               active[index].r = x (0) * 16 + x (1);
+               active[index].g = x (2) * 16 + x (3);
+               active[index].b = x (4) * 16 + x (5);
+            }
+#undef x
+         }
          if (!active[index].app || active[index].name != applist[i].name)
          {                      // Change app, reset (yes, we can compare pointer as linked to applist)
             free (active[index].data);
@@ -177,37 +204,15 @@ addapp (int index, const char *name, jo_t j)
                   if (!jo_strcmp (j, "colour"))
                {
                   if (jo_next (j) == JO_STRING)
-                  {
-                     char temp[20];
-                     jo_strncpy (j, temp, sizeof (temp));
-                     if (!strcasecmp (temp, "rainbow"))
-                        active[index].colourset = active[index].rainbow = 1;
-                     else if (!strcasecmp (temp, "cycling"))
-                        active[index].colourset = active[index].cycling = 1;
-#define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
-                     colours
-#undef c
-#define x(n)((temp[n] & 0xF) + (isalpha ((uint8_t)temp[n]) ? 9 : 0))
-                        if (strlen (temp) == 3)
-                     {
-                        active[index].colourset = 1;
-                        active[index].r = x (0) * 17;
-                        active[index].g = x (1) * 17;
-                        active[index].b = x (2) * 17;
-                     } else if (strlen (temp) == 6)
-                     {
-                        active[index].colourset = 1;
-                        active[index].r = x (0) * 16 + x (1);
-                        active[index].g = x (2) * 16 + x (3);
-                        active[index].b = x (4) * 16 + x (5);
-                     }
-#undef x
-                  }
+                     setcolour (j);
                   continue;
                }
                jo_next (j);     // Skip
             }
-         }
+         } else if (j && jo_here (j) == JO_STRING)
+            setcolour (j);
+         else if (j && jo_here (j) == JO_NUMBER)
+            active[index].limit = jo_read_int (j);
          if (!active[index].start)
             active[index].start = 1;
          if (!active[index].top)
@@ -237,6 +242,18 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 {
    if (client || !prefix || target || strcmp (prefix, prefixcommand))
       return NULL;              // Not for us or not a command from main MQTT
+   if (suffix)
+      for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+         if (!strcasecmp (suffix, applist[i].name))
+         {                      // Direct command
+            addapp (0, suffix, j);
+            for (int index = 1; index < MAXAPP; index++)
+            {
+               free (active[index].data);
+               memset (&active[index], 0, sizeof (active[index]));
+            }
+            return "";
+         }
    if (!suffix || !strcmp (suffix, "add"))
    {                            // Process command to set apps
       xSemaphoreTake (app_mutex, portMAX_DELAY);
