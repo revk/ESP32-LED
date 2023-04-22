@@ -22,6 +22,8 @@ You can also use an app name as a command where the payload is the parameters. T
 
 Whilst app parameters are normally an object with one or more parameters, if it is just a string, that sets `colour`, and if a number, that sets `limit`. E.g. `command/LED/whatever/spin red`.
 
+The `stop` command sets the limit on all active apps to be `fade` from now. For most apps this is a controlled stop, e.g. fade out.
+
 ## Power and wiring
 
 The PCB passes on the USB supplied power. Each LED could use something like 60mA when on full, so consider total power. A USB port only has to provide 0.5A which would be only 8 LEDs, but obviously the LEDs may not all be on full white usually.

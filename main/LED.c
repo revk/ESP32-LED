@@ -260,16 +260,31 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 {
    if (client || !prefix || target || strcmp (prefix, prefixcommand))
       return NULL;              // Not for us or not a command from main MQTT
+   if (suffix && !strcasecmp (suffix, "stop"))
+   {
+      xSemaphoreTake (app_mutex, portMAX_DELAY);
+      for (int index = 0; index < MAXAPPS; index++)
+         if (active[index].delay)
+         {                      // Delete
+            free (active[index].data);
+            memset (&active[index], 0, sizeof (active[index]));
+         } else if (active[index].app)
+            active[index].limit = active[index].cycle + active[index].fade;
+      xSemaphoreGive (app_mutex);
+      return "";
+   }
    if (suffix)
       for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
          if (!strcasecmp (suffix, applist[i].name))
          {                      // Direct command
+            xSemaphoreTake (app_mutex, portMAX_DELAY);
             addapp (0, suffix, j);
             for (int index = 1; index < MAXAPPS; index++)
             {
                free (active[index].data);
                memset (&active[index], 0, sizeof (active[index]));
             }
+            xSemaphoreGive (app_mutex);
             return "";
          }
    if (!suffix || !strcmp (suffix, "add"))
