@@ -22,10 +22,10 @@ appclock (app_t * a)
    int8_t dir = 1;
    if (a->top < 0)
    {
-      top = (leds + -a->top - a->start) % leds;
+      top = -a->top - a->start;
       dir = -1;
    } else
-      top = (leds + a->top - a->start) % leds;
+      top = a->top - a->start;
 
    if (!a->cycle)
    {                            // Sanity checks, etc

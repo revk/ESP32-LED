@@ -236,7 +236,7 @@ addapp (int index, const char *name, jo_t j)
          if (!active[index].top)
             active[index].top = 1;
          if (!active[index].len)
-            active[index].len = leds + 1 - start;
+            active[index].len = leds + 1 - active[index].start;
          if (!active[index].speed)
             active[index].speed = cps;
          if (!active[index].fade)
