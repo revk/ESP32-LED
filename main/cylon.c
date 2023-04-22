@@ -14,11 +14,11 @@ appcylon (app_t * a)
    }
    // Not speed based, one step per
 
-   if (a->t1)
+   if (a->stage)
    {
       if (a->step == a->len - 1)
       {
-         a->t1 = 0;
+         a->stage = 0;
          a->step--;
       } else
          a->step++;
@@ -27,7 +27,7 @@ appcylon (app_t * a)
       if (!a->step)
       {
          a->step++;
-         a->t1 = 1;
+         a->stage = 1;
       } else
          a->step--;
    }

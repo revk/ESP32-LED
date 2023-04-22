@@ -138,6 +138,7 @@ addapp (int index, const char *name, jo_t j)
    if (!name || !*name)
    {                            // No app
       ESP_LOGI (TAG, "Zap app %d", index);
+      free (active[index].data);
       memset (&active[index], 0, sizeof (active[index]));
       return &active[index];
    }
@@ -146,6 +147,7 @@ addapp (int index, const char *name, jo_t j)
       {
          if (!active[index].app || active[index].name != applist[i].name)
          {                      // Change app, reset (yes, we can compare pointer as linked to applist)
+            free (active[index].data);
             memset (&active[index], 0, sizeof (active[index]));
             active[index].name = applist[i].name;
          }
@@ -220,6 +222,7 @@ addapp (int index, const char *name, jo_t j)
          ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, active[index].cycle);
          return &active[index];
       }
+   free (active[index].data);
    memset (&active[index], 0, sizeof (active[index]));
    ESP_LOGI (TAG, "App not found %s", name);
    jo_t e = jo_object_alloc ();
@@ -247,6 +250,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
                if (index != i)
                {                // Copy back
                   active[index] = active[i];
+                  // .data was moved, do not free
                   memset (&active[i], 0, sizeof (active[i]));
                }
                index++;
@@ -281,6 +285,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       }
       while (index < MAXAPPS)
       {
+         free (active[index].data);
          memset (&active[index], 0, sizeof (active[index]));
          index++;
       }

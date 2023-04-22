@@ -158,10 +158,5 @@ struct app_s
    uint32_t cycle;              // This is set by caller - counts the cycle since started
    uint8_t stage;               // The stage of a sequential display
    uint8_t step;                // Steps in the stage
-   uint8_t t1,
-     t2,
-     t3,
-     t4,
-     t5,
-     t6;                        // Temp
+   void *data;                  // Malloc'd data area
 };
