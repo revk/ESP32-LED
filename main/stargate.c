@@ -28,7 +28,7 @@ appstargate (app_t * a)
       a->step = a->fade;
       pos = esp_random ();
       if (!a->colourset)
-         a->b = 63;            // Default ring blue
+         a->b = 63;             // Default ring blue
    }
 
    void ring (uint8_t l)

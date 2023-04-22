@@ -5,16 +5,16 @@
 #define settings	\
 	u8(cps,10)	\
         io(ledgpio,22)  \
-        u8(maxr,255)  \
-        u8(maxg,255)  \
-        u8(maxb,255)  \
-        u8(leds,12)     \
+        u8(maxr,255)	\
+        u8(maxg,255)	\
+        u8(maxb,255)	\
+        u16(leds,12)	\
 	s(app,spin)	\
 
 #define	params		\
-	u8r(start,)	\
-	u8r(len,)	\
-	s8r(top,)	\
+	u16r(start,)	\
+	u16r(len,)	\
+	s16r(top,)	\
 	u8(speed,)	\
 	u8(fade,)	\
 	u32(delay,)	\
@@ -38,6 +38,9 @@
 #define s8n(n,d)	extern int8_t n[d];
 #define u8(n,d)		extern uint8_t n;
 #define u8r(n,d)	extern uint8_t n,ring##n;
+#define u16(n,d)	extern uint16_t n;
+#define u16r(n,d)	extern uint16_t n,ring##n;
+#define s16r(n,d)	extern int16_t n,ring##n;
 #define s8r(n,d)	extern int8_t n,ring##n;
 #define u8l(n,d)	extern uint8_t n;
 #define b(n)		extern uint8_t n;
@@ -52,7 +55,10 @@ settings                        //
 #undef s8n
 #undef u8
 #undef u8r
+#undef u16
+#undef u16r
 #undef s8r
+#undef s16r
 #undef u8l
 #undef b
 #undef s
@@ -68,7 +74,7 @@ extern const uint8_t wheel[256];
 extern const uint8_t zig[256];
 
 static inline void
-clear (uint8_t start, uint8_t len)
+clear (uint16_t start, uint16_t len)
 {
    if (!start || start > leds || start + len - 1 > leds)
       return;
@@ -78,7 +84,7 @@ clear (uint8_t start, uint8_t len)
 }
 
 static inline uint8_t
-getr (uint8_t index)
+getr (uint16_t index)
 {
    if (!index || index > leds)
       return 0;
@@ -86,7 +92,7 @@ getr (uint8_t index)
 }
 
 static inline uint8_t
-getg (uint8_t index)
+getg (uint16_t index)
 {
    if (!index || index > leds)
       return 0;
@@ -94,7 +100,7 @@ getg (uint8_t index)
 }
 
 static inline uint8_t
-getb (uint8_t index)
+getb (uint16_t index)
 {
    if (!index || index > leds)
       return 0;
@@ -102,7 +108,7 @@ getb (uint8_t index)
 }
 
 static inline void
-setr (uint8_t index, uint8_t v)
+setr (uint16_t index, uint8_t v)
 {
    if (!index || index > leds)
       return;
@@ -110,7 +116,7 @@ setr (uint8_t index, uint8_t v)
 }
 
 static inline void
-setg (uint8_t index, uint8_t v)
+setg (uint16_t index, uint8_t v)
 {
    if (!index || index > leds)
       return;
@@ -118,7 +124,7 @@ setg (uint8_t index, uint8_t v)
 }
 
 static inline void
-setb (uint8_t index, uint8_t v)
+setb (uint16_t index, uint8_t v)
 {
    if (!index || index > leds)
       return;
@@ -126,7 +132,7 @@ setb (uint8_t index, uint8_t v)
 }
 
 static inline void
-setrgb (uint8_t index, uint8_t r, uint8_t g, uint8_t b)
+setrgb (uint16_t index, uint8_t r, uint8_t g, uint8_t b)
 {
    if (!index || index > leds)
       return;
@@ -144,12 +150,18 @@ struct app_s
    app_f *app;
 #define u8(n,d)		uint8_t n;
 #define u8r(n,d)	uint8_t n;
+#define u16(n,d)	uint16_t n;
+#define u16r(n,d)	uint16_t n;
 #define s8r(n,d)	int8_t n;
+#define s16r(n,d)	int16_t n;
 #define u32(n,d)	uint32_t n;
      params
 #undef	u8
 #undef	u8r
+#undef	u16
+#undef	u16r
 #undef	s8r
+#undef	s16r
 #undef	u32
       // Common settings
      uint8_t r, g, b;           // Colour
@@ -158,7 +170,7 @@ struct app_s
    uint8_t cycling:1;           // Colour should be cycled - more overlap than rainbow
    // Scratchpad for apps
    uint32_t cycle;              // This is set by caller - counts the cycle since started
-   uint8_t stage;               // The stage of a sequential display
-   uint8_t step;                // Steps in the stage
+   uint16_t stage;              // The stage of a sequential display
+   uint16_t step;               // Steps in the stage
    void *data;                  // Malloc'd data area
 };

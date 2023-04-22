@@ -35,7 +35,10 @@ uint8_t *ledb = NULL;
 #define s8n(n,d) int8_t n[d];
 #define u8(n,d) uint8_t n;
 #define u8r(n,d) uint8_t n,ring##n;
+#define u16(n,d) uint16_t n;
+#define u16r(n,d) uint16_t n,ring##n;
 #define s8r(n,d) int8_t n,ring##n;
+#define s16r(n,d) int16_t n,ring##n;
 #define u8l(n,d) uint8_t n;
 #define b(n) uint8_t n;
 #define s(n,d) char * n;
@@ -49,7 +52,10 @@ settings                        //
 #undef s8n
 #undef u8
 #undef u8r
+#undef u16
+#undef u16r
 #undef s8r
+#undef s16r
 #undef u8l
 #undef b
 #undef s
@@ -181,12 +187,18 @@ addapp (int index, const char *name, jo_t j)
          // Defaults
 #define u8(n,d)         active[index].n=n;
 #define u8r(n,d)        if(applist[i].ring)active[index].n=(ring##n?:n); else u8(n,d)
+#define u16(n,d)         u8(n,d)
+#define u16r(n,d)        u8r(n,d)
 #define s8r(n,d)        u8r(n,d)
+#define s16r(n,d)        u16r(n,d)
 #define u32(n,d)        u8(n,d)
          params
 #undef  u8
 #undef  u8r
+#undef  u16
+#undef  u16r
 #undef  s8r
+#undef  s16r
 #undef  u32
             if (j && jo_here (j) == JO_OBJECT)
          {                      // Expects to be at start of object
@@ -194,12 +206,18 @@ addapp (int index, const char *name, jo_t j)
             {
 #define u8(n,d)         if(!jo_strcmp(j,#n)){if(jo_next(j)==JO_NUMBER)active[index].n=jo_read_int(j);continue;}
 #define u8r(n,d)        u8(n,d)
+#define u16(n,d)        u8(n,d)
+#define u16r(n,d)        u8(n,d)
 #define s8r(n,d)        u8(n,d)
+#define s16r(n,d)        u8(n,d)
 #define u32(n,d)        u8(n,d)
                params
 #undef  u8
 #undef  u8r
+#undef  u16
+#undef  u16r
 #undef  s8r
+#undef  s16r
 #undef  u32
                   if (!jo_strcmp (j, "colour"))
                {
@@ -218,7 +236,7 @@ addapp (int index, const char *name, jo_t j)
          if (!active[index].top)
             active[index].top = 1;
          if (!active[index].len)
-            active[index].len = leds;
+            active[index].len = leds + 1 - start;
          if (!active[index].speed)
             active[index].speed = cps;
          if (!active[index].fade)
@@ -371,12 +389,18 @@ led_task (void *x)
                jo_string (j, "app", active[i].name);
 #define u8(n,d)         if(active[i].n)jo_int(j,#n,active[i].n);
 #define u8r(n,d)        u8(n,d)
+#define u16(n,d)         u8(n,d)
+#define u16r(n,d)        u8(n,d)
 #define s8r(n,d)        u8(n,d)
+#define s16r(n,d)        u8(n,d)
 #define u32(n,d)        u8(n,d)
                params
 #undef  u8
 #undef  u8r
+#undef  u16
+#undef  u16r
 #undef  s8r
+#undef  s16r
 #undef  u32
                   if (active[i].rainbow)
                   jo_string (j, "colour", "rainbow");
@@ -427,7 +451,10 @@ app_main ()
 #define s8n(n,d) revk_register(#n,d,sizeof(*n),&n,NULL,SETTING_SIGNED);
 #define u8(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
 #define u8r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,0);
+#define u16(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
+#define u16r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,0);
 #define s8r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,SETTING_SIGNED);
+#define s16r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,SETTING_SIGNED);
 #define u8l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
 #define s(n,d) revk_register(#n,0,0,&n,#d,0);
    settings                     //
@@ -439,7 +466,10 @@ app_main ()
 #undef s8n
 #undef u8
 #undef u8r
+#undef u16
+#undef u16r
 #undef s8r
+#undef s16r
 #undef u8l
 #undef b
 #undef s
