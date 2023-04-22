@@ -16,7 +16,7 @@ appstargate (app_t * a)
    int8_t dir = 1;
    if (a->top < 0)
    {
-      top = (leds + a->start + a->top) % leds;
+      top = (leds - a->top - a->start) % leds;
       dir = -1;
    } else
       top = (leds + a->top - a->start) % leds;
