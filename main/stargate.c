@@ -77,7 +77,7 @@ appstargate (app_t * a)
       memcpy (old, new, a->len);
       esp_fill_random (new, a->len);
       for (int i = 0; i < a->len; i++)
-         new[i] = (new[i] | 0x80) / 2;
+         new[i] = new[i] / 4 + 32;
    }
 
    if (!a->stage)
