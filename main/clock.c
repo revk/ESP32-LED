@@ -29,8 +29,6 @@ appclock (app_t * a)
 
    if (!a->cycle)
    {                            // Sanity checks, etc
-      if (a->start + a->len - 1 > leds)
-         return "Bad start";
       c->h0 = a->start + top;
       c->m0 = a->start + top;
       c->s0 = a->start + top;
