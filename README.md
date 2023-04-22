@@ -6,6 +6,8 @@ Various stuff in one app that handles WS2812 LED strips, including
 - Clock
 - Other stuff in due course
 
+Available on [Amazon](https://www.amazon.co.uk/dp/B0C1W1XJS8)
+
 ## PCB
 
 Includes PCB design (note, output in inverted).
