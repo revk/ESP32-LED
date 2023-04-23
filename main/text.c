@@ -4,7 +4,7 @@
 #include "chars.h"
 
 static const char *
-showtext (app_t * a, const char *data)
+showtext (app_t * a, const char *data, uint8_t dokern)
 {
    uint8_t flip = 0;
    uint8_t h = a->height;
@@ -31,7 +31,9 @@ showtext (app_t * a, const char *data)
       l = 255 * (a->limit - a->cycle + 1) / a->fade;
    else if (a->fade && a->cycle < a->fade)
       l = 255 * (a->cycle + 1) / a->fade;
-   int c = -(int)a->step;
+   unsigned char k[8];
+   memset (k, 0xFE, 8);
+   int c = -(int) a->step;
    while (c < w)
    {
       char t[5],
@@ -54,31 +56,63 @@ showtext (app_t * a, const char *data)
             a->stage++;         // Skip
          continue;
       }
+      if (dokern)
+      {
+         unsigned char k2[8];
+         if (!i)
+            memset (k2, 0xF8, 8);       // Space
+         else
+         {
+            unsigned char k3[8];
+            for (int y = 0; y < 8; y++)
+               k3[y] = ((chars[i].b[y]) | (chars[i].b[y] >> 1) | (chars[i].b[y] >> 2));
+            k2[0] = (k3[0] | k3[1]);
+            for (int y = 1; y < 7; y++)
+               k2[y] = (k3[y - 1] | k3[y] | k3[y + 1]);
+            k2[7] = (k3[6] | k3[7]);
+         }
+         for (int x = 6; x > 0; x--)
+         {
+            int y;
+            for (y = 0; y < 8; y++)
+               if (((int) k[y] << x) & k2[y])
+                  break;
+            if (y < 8)
+               break;
+            c--;
+         }
+         memcpy (k, k2, 8);
+      }
       for (int x = 0; x < 6; x++)
       {
          if (c >= 0 && c < w)
          {
             if ((c ^ flip) & 1)
                for (int y = 0; y < h; y++)
-                  setl (a->start + c * h + y, a, y < 8 ? chars[i].b[y] & (0x80 >> x) ? l : 0 : 0);
-            else
+               {
+                  if (y < 8 && chars[i].b[y] & (0x80 >> x))
+                     setl (a->start + c * h + y, a, l);
+            } else
+            {
                for (int y = 0; y < h; y++)
-                  setl (a->start + c * h + h - 1 - y, a, y < 8 ? chars[i].b[y] & (0x80 >> x) ? l : 0 : 0);
+                  if (y < 8 && chars[i].b[y] & (0x80 >> x))
+                     setl (a->start + c * h + h - 1 - y, a, l);
+            }
          }
          c++;
       }
    }
-   if (*data)
-   {
-      if (++a->step == 6)
-      { // slide
-         a->stage++;
-         a->step = 0;
-      }
-   } else
+   if (!*data)
    {                            // Back to start
       a->stage = 0;
       a->step = 0;
+   } else
+   {
+      if (++a->step == 6)
+      {
+         a->stage++;
+         a->step = 0;
+      }
    }
    return NULL;
 }
@@ -96,7 +130,7 @@ apptime (app_t * a)
    struct tm tm;
    localtime_r (&now, &tm);
    snprintf (temp, sizeof (temp), "%02d:%02d", tm.tm_hour, tm.tm_min);
-   return showtext (a, temp);
+   return showtext (a, temp, 1);
 }
 
 const char *
@@ -109,5 +143,18 @@ apptext (app_t * a)
       if (!a->colourset)
          a->cycling = 1;
    }
-   return showtext (a, (const char *) a->data);
+   return showtext (a, (const char *) a->data, 0);
+}
+
+const char *
+appkern (app_t * a)
+{
+   if (!a->cycle)
+   {
+      if (!a->data)
+         return "No data";
+      if (!a->colourset)
+         a->cycling = 1;
+   }
+   return showtext (a, (const char *) a->data, 1);
 }

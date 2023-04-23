@@ -17,6 +17,7 @@ a (idle)                        //
    r (stargate)                 //
    r (spin)                     //
    t (text)                     //
+   t (kern)                     //
    t (time)                     //
 #undef a
 #undef r
