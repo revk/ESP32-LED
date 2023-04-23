@@ -17,7 +17,7 @@
 	s16r(top,)	\
 	u8(speed,)	\
 	u8(fade,)	\
-	u8(height,)	\
+	s8(height,)	\
 	u32(delay,)	\
 	u32(limit,)	\
 
@@ -155,6 +155,7 @@ struct app_s
 #define u8r(n,d)	uint8_t n;
 #define u16(n,d)	uint16_t n;
 #define u16r(n,d)	uint16_t n;
+#define s8(n,d)		int8_t n;
 #define s8r(n,d)	int8_t n;
 #define s16r(n,d)	int16_t n;
 #define u32(n,d)	uint32_t n;
@@ -163,6 +164,7 @@ struct app_s
 #undef	u8r
 #undef	u16
 #undef	u16r
+#undef	s8
 #undef	s8r
 #undef	s16r
 #undef	u32

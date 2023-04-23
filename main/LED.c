@@ -141,12 +141,13 @@ addapp (int index, const char *name, jo_t j)
 {                               // Set app, and defaults (assumes mutex done if needed)
    if (index >= MAXAPPS)
       return NULL;
+   app_t *a = &active[index];
    if (!name || !*name)
    {                            // No app
       ESP_LOGI (TAG, "Zap app %d", index);
-      free (active[index].data);
-      memset (&active[index], 0, sizeof (active[index]));
-      return &active[index];
+      free (a->data);
+      memset (a, 0, sizeof (*a));
+      return a;
    }
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
@@ -156,39 +157,40 @@ addapp (int index, const char *name, jo_t j)
             char temp[20];
             jo_strncpy (j, temp, sizeof (temp));
             if (!strcasecmp (temp, "rainbow"))
-               active[index].colourset = active[index].rainbow = 1;
+               a->colourset = a->rainbow = 1;
             else if (!strcasecmp (temp, "cycling"))
-               active[index].colourset = active[index].cycling = 1;
+               a->colourset = a->cycling = 1;
 #define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
             colours
 #undef c
 #define x(n)((temp[n] & 0xF) + (isalpha ((uint8_t)temp[n]) ? 9 : 0))
                if (strlen (temp) == 3)
             {
-               active[index].colourset = 1;
-               active[index].r = x (0) * 17;
-               active[index].g = x (1) * 17;
-               active[index].b = x (2) * 17;
+               a->colourset = 1;
+               a->r = x (0) * 17;
+               a->g = x (1) * 17;
+               a->b = x (2) * 17;
             } else if (strlen (temp) == 6)
             {
-               active[index].colourset = 1;
-               active[index].r = x (0) * 16 + x (1);
-               active[index].g = x (2) * 16 + x (3);
-               active[index].b = x (4) * 16 + x (5);
+               a->colourset = 1;
+               a->r = x (0) * 16 + x (1);
+               a->g = x (2) * 16 + x (3);
+               a->b = x (4) * 16 + x (5);
             }
 #undef x
          }
-         if (!active[index].app || active[index].name != applist[i].name)
+         if (!a->app || a->name != applist[i].name)
          {                      // Change app, reset (yes, we can compare pointer as linked to applist)
-            free (active[index].data);
-            memset (&active[index], 0, sizeof (active[index]));
-            active[index].name = applist[i].name;
+            free (a->data);
+            memset (a, 0, sizeof (*a));
+            a->name = applist[i].name;
          }
          // Defaults
-#define u8(n,d)         active[index].n=n;
-#define u8r(n,d)        if(applist[i].ring)active[index].n=(ring##n?:n); else u8(n,d)
+#define u8(n,d)         a->n=n;
+#define u8r(n,d)        if(applist[i].ring)a->n=(ring##n?:n); else u8(n,d)
 #define u16(n,d)         u8(n,d)
 #define u16r(n,d)        u8r(n,d)
+#define s8(n,d)        u8(n,d)
 #define s8r(n,d)        u8r(n,d)
 #define s16r(n,d)        u16r(n,d)
 #define u32(n,d)        u8(n,d)
@@ -197,6 +199,7 @@ addapp (int index, const char *name, jo_t j)
 #undef  u8r
 #undef  u16
 #undef  u16r
+#undef  s8
 #undef  s8r
 #undef  s16r
 #undef  u32
@@ -204,10 +207,11 @@ addapp (int index, const char *name, jo_t j)
          {                      // Expects to be at start of object
             while (jo_next (j) == JO_TAG)
             {
-#define u8(n,d)         if(!jo_strcmp(j,#n)){if(jo_next(j)==JO_NUMBER)active[index].n=jo_read_int(j);continue;}
+#define u8(n,d)         if(!jo_strcmp(j,#n)){if(jo_next(j)==JO_NUMBER)a->n=jo_read_int(j);continue;}
 #define u8r(n,d)        u8(n,d)
 #define u16(n,d)        u8(n,d)
 #define u16r(n,d)        u8(n,d)
+#define s8(n,d)        u8(n,d)
 #define s8r(n,d)        u8(n,d)
 #define s16r(n,d)        u8(n,d)
 #define u32(n,d)        u8(n,d)
@@ -216,6 +220,7 @@ addapp (int index, const char *name, jo_t j)
 #undef  u8r
 #undef  u16
 #undef  u16r
+#undef  s8
 #undef  s8r
 #undef  s16r
 #undef  u32
@@ -229,9 +234,9 @@ addapp (int index, const char *name, jo_t j)
                {
                   if (jo_next (j) == JO_STRING)
                   {
-                     free (active[index].data);
-                     active[index].data = malloc (jo_strlen (j) + 1);
-                     jo_strncpy (j, active[index].data, jo_strlen (j) + 1);
+                     free (a->data);
+                     a->data = malloc (jo_strlen (j) + 1);
+                     jo_strncpy (j, a->data, jo_strlen (j) + 1);
                   }
                   continue;
                }
@@ -240,25 +245,25 @@ addapp (int index, const char *name, jo_t j)
          } else if (j && jo_here (j) == JO_STRING)
             setcolour (j);
          else if (j && jo_here (j) == JO_NUMBER)
-            active[index].limit = jo_read_int (j);
-         if (!active[index].start)
-            active[index].start = 1;
-         if (!active[index].top)
-            active[index].top = 1;
-         if (!active[index].len)
-            active[index].len = leds + 1 - active[index].start;
-         if (!active[index].speed)
-            active[index].speed = cps;
-         if (!active[index].fade)
-            active[index].fade = cps;
-         if (!active[index].height)
-            active[index].height = 8;
-         active[index].app = applist[i].app;
-         ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, active[index].cycle);
-         return &active[index];
+            a->limit = jo_read_int (j);
+         if (!a->start)
+            a->start = 1;
+         if (!a->top)
+            a->top = 1;
+         if (!a->len)
+            a->len = leds + 1 - a->start;
+         if (!a->speed)
+            a->speed = cps;
+         if (!a->fade)
+            a->fade = cps;
+         if (!a->height)
+            a->height = 8;
+         a->app = applist[i].app;
+         ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, a->cycle);
+         return a;
       }
-   free (active[index].data);
-   memset (&active[index], 0, sizeof (active[index]));
+   free (a->data);
+   memset (a, 0, sizeof (*a));
    ESP_LOGI (TAG, "App not found %s", name);
    jo_t e = jo_object_alloc ();
    jo_int (j, "level", index);
@@ -392,33 +397,36 @@ led_task (void *x)
       clear (1, leds);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
       for (unsigned int i = 0; i < MAXAPPS; i++)
-         if (active[i].app)
+      {
+         app_t *a = &active[i];
+         if (a->app)
          {
-            if (active[i].delay)
+            if (a->delay)
             {                   // Delayed start
-               active[i].delay--;
+               a->delay--;
                continue;
             }
-            if (active[i].rainbow)
+            if (a->rainbow)
             {                   // Cycle the colour
-               active[i].r = wheel[(active[i].cycle) & 255];
-               active[i].g = wheel[(active[i].cycle + 85) & 255];
-               active[i].b = wheel[(active[i].cycle + 170) & 255];
-            } else if (active[i].cycling)
+               a->r = wheel[(a->cycle) & 255];
+               a->g = wheel[(a->cycle + 85) & 255];
+               a->b = wheel[(a->cycle + 170) & 255];
+            } else if (a->cycling)
             {                   // Cycle the colour
-               active[i].r = cos8[(active[i].cycle) & 255];
-               active[i].g = cos8[(active[i].cycle + 85) & 255];
-               active[i].b = cos8[(active[i].cycle + 170) & 255];
+               a->r = cos8[(a->cycle) & 255];
+               a->g = cos8[(a->cycle + 85) & 255];
+               a->b = cos8[(a->cycle + 170) & 255];
             }
-            if (!active[i].cycle)
+            if (!a->cycle)
             {                   // Starting
                jo_t j = jo_object_alloc ();
                jo_int (j, "level", i);
-               jo_string (j, "app", active[i].name);
-#define u8(n,d)         if(active[i].n)jo_int(j,#n,active[i].n);
+               jo_string (j, "app", a->name);
+#define u8(n,d)         if(a->n)jo_int(j,#n,a->n);
 #define u8r(n,d)        u8(n,d)
 #define u16(n,d)         u8(n,d)
 #define u16r(n,d)        u8(n,d)
+#define s8(n,d)        u8(n,d)
 #define s8r(n,d)        u8(n,d)
 #define s16r(n,d)        u8(n,d)
 #define u32(n,d)        u8(n,d)
@@ -427,33 +435,42 @@ led_task (void *x)
 #undef  u8r
 #undef  u16
 #undef  u16r
+#undef  s8
 #undef  s8r
 #undef  s16r
 #undef  u32
-                  if (active[i].rainbow)
+                  if (a->rainbow)
                   jo_string (j, "colour", "rainbow");
-               else if (active[i].cycling)
+               else if (a->cycling)
                   jo_string (j, "colour", "cycling");
-               else if (active[i].colourset)
-                  jo_stringf (j, "colour", "%02X%02X%02X", active[i].r, active[i].g, active[i].b);
+               else if (a->colourset)
+               {
+                  if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
+                     jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
+                  else
+                     jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
+               }
+               if (a->data)
+                  jo_string (j, "data", (char *) a->data);
                revk_info ("start", &j);
             }
-            const char *e = active[i].app (&active[i]);
+            const char *e = a->app (a);
             if (e)
-               active[i].app = NULL;    // Done
-            active[i].cycle++;
-            if (active[i].limit && active[i].cycle >= active[i].limit)
-               active[i].app = NULL;    // Complete
-            if (!active[i].app)
+               a->app = NULL;   // Done
+            a->cycle++;
+            if (a->limit && a->cycle >= a->limit)
+               a->app = NULL;   // Complete
+            if (!a->app)
             {                   // Done
                jo_t j = jo_object_alloc ();
                jo_int (j, "level", i);
-               jo_string (j, "app", active[i].name);
+               jo_string (j, "app", a->name);
                if (e && *e)
                   jo_string (j, "error", e);
                revk_info ("done", &j);
             }
          }
+      }
       xSemaphoreGive (app_mutex);
       for (unsigned int i = 0; i < leds; i++)
       {
