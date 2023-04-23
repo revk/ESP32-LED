@@ -95,4 +95,5 @@ Each app can have arguments.
 |App|Meaning|
 |---|-------|
 |`text`|Show text|
+|`kern`|Show text with kernin|
 |`time`|Show time as text|
