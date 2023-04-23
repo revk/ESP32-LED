@@ -225,6 +225,16 @@ addapp (int index, const char *name, jo_t j)
                      setcolour (j);
                   continue;
                }
+               if (!jo_strcmp (j, "data"))
+               {
+                  if (jo_next (j) == JO_STRING)
+                  {
+                     free (active[index].data);
+                     active[index].data = malloc (jo_strlen (j) + 1);
+                     jo_strncpy (j, active[index].data, jo_strlen (j) + 1);
+                  }
+                  continue;
+               }
                jo_next (j);     // Skip
             }
          } else if (j && jo_here (j) == JO_STRING)
@@ -241,6 +251,8 @@ addapp (int index, const char *name, jo_t j)
             active[index].speed = cps;
          if (!active[index].fade)
             active[index].fade = cps;
+         if (!active[index].height)
+            active[index].height = 8;
          active[index].app = applist[i].app;
          ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, active[index].cycle);
          return &active[index];

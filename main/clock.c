@@ -15,8 +15,11 @@ struct clock_s
 const char *
 appclock (app_t * a)
 {
-   if (!a->data)
+   if (!a->cycle)
+   {
+      free (a->data);           // Not used supplied
       a->data = malloc (sizeof (struct clock_s));
+   }
    struct clock_s *c = a->data;
    uint8_t top;
    int8_t dir = 1;

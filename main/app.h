@@ -17,6 +17,7 @@
 	s16r(top,)	\
 	u8(speed,)	\
 	u8(fade,)	\
+	u8(height,)	\
 	u32(delay,)	\
 	u32(limit,)	\
 
@@ -29,6 +30,8 @@
 	c(00F,blue)	\
 	c(F0F,magenta)	\
 	c(FFF,white)	\
+	c(F80,orange)	\
+	c(F88,pink)	\
 
 #define	MAXAPPS	10
 

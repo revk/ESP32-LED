@@ -6,8 +6,11 @@
 const char *
 appstargate (app_t * a)
 {
-   if (!a->data)
+   if (!a->cycle)
+   {
+      free (a->data);           // Not used supplied
       a->data = malloc (a->len * 2 + 1);
+   }
    uint8_t *old = a->data,
       *new = old + a->len,
       *posp = new + a->len,
