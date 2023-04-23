@@ -16,11 +16,8 @@ showtext (app_t * a, const char *data)
    uint8_t w = a->len / h;      // Width
    if (!w)
       return "No space";
-   // TODO control characters - special colours
-   // TODO stage and step for chars and pixels maybe so we can do proportional spaced?
-   // Where to start in text...
    {
-      int c = a->stage / 6;     // Whole to skip
+      int c = a->stage;         // Whole characters
       while (c && *data)
       {
          c--;
@@ -34,7 +31,7 @@ showtext (app_t * a, const char *data)
       l = 255 * (a->limit - a->cycle + 1) / a->fade;
    else if (a->fade && a->cycle < a->fade)
       l = 255 * (a->cycle + 1) / a->fade;
-   int c = -(a->stage % 6);     // Column
+   int c = -(int)a->step;
    while (c < w)
    {
       char t[5],
@@ -52,7 +49,11 @@ showtext (app_t * a, const char *data)
             if (!strcmp (chars[i].c, t))
                break;
       if (i == sizeof (chars) / sizeof (*chars))
-         i = 0;                 // Space
+      {                         // Unknown character
+         if (c < 0)
+            a->stage++;         // Skip
+         continue;
+      }
       for (int x = 0; x < 6; x++)
       {
          if (c >= 0 && c < w)
@@ -68,9 +69,17 @@ showtext (app_t * a, const char *data)
       }
    }
    if (*data)
-      a->stage++;
-   else
+   {
+      if (++a->step == 6)
+      { // slide
+         a->stage++;
+         a->step = 0;
+      }
+   } else
+   {                            // Back to start
       a->stage = 0;
+      a->step = 0;
+   }
    return NULL;
 }
 
