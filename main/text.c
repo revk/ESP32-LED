@@ -32,8 +32,9 @@ showtext (app_t * a, const char *data, uint8_t dokern)
    else if (a->fade && a->cycle < a->fade)
       l = 255 * (a->cycle + 1) / a->fade;
    unsigned char k[8];
-   memset (k, 0xFE, 8);
-   int c = -(int) a->step;
+   memset (k, 0xFE, 8);         // Previous character - stretched
+   int c = -(int) a->step;      // Column, starts off left
+   uint32_t pos = 0;
    while (c < w)
    {
       char t[5],
@@ -58,9 +59,9 @@ showtext (app_t * a, const char *data, uint8_t dokern)
       }
       if (dokern)
       {
-         unsigned char k2[8];
+         unsigned char k2[8];   // This character, stretched
          if (!i)
-            memset (k2, 0xF8, 8);       // Space
+            memset (k2, 0xFC, 8);       // Space 4 pixels
          else
          {
             unsigned char k3[8];
@@ -71,17 +72,23 @@ showtext (app_t * a, const char *data, uint8_t dokern)
                k2[y] = (k3[y - 1] | k3[y] | k3[y + 1]);
             k2[7] = (k3[6] | k3[7]);
          }
-         for (int x = 6; x > 0; x--)
-         {
-            int y;
-            for (y = 0; y < 8; y++)
-               if (((int) k[y] << x) & k2[y])
+         if (i)
+            for (int x = 6; x > 0; x--)
+            {
+               int y;
+               for (y = 0; y < 8; y++)
+                  if (((uint32_t) k[y] << x) & chars[i].b[y])
+                     break;
+               if (y < 8)
                   break;
-            if (y < 8)
-               break;
-            c--;
-         }
+               c--;
+            }
          memcpy (k, k2, 8);
+      }
+      if (c <= w && pos == 1)
+      {                         // First whole character off left - this is where to start next character
+         a->stage++;
+         a->step = -c;
       }
       for (int x = 0; x < 6; x++)
       {
@@ -101,19 +108,14 @@ showtext (app_t * a, const char *data, uint8_t dokern)
          }
          c++;
       }
+      pos++;
    }
-   if (!*data)
+   if (c <= w && !*data)
    {                            // Back to start
       a->stage = 0;
       a->step = 0;
    } else
-   {
-      if (++a->step == 6)
-      {
-         a->stage++;
-         a->step = 0;
-      }
-   }
+      a->step++;                // Scroll
    return NULL;
 }
 
