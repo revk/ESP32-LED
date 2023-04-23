@@ -34,7 +34,7 @@ appstargate (app_t * a)
    void ring (uint8_t l)
    {
       for (unsigned int i = 0; i < a->len; i++)
-         setl (a->start + i, a, (int) l * cos8[(256 * i / a->len + pos) & 255] / 255);
+         setl (a->start + i, a, (int) l * wheel[(256 * i / a->len + pos) & 255] / 255);
    }
    void chevron (uint8_t n, uint8_t l)
    {
