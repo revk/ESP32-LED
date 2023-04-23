@@ -35,7 +35,7 @@ showtext (app_t * a, const char *data, uint8_t dokern)
    memset (k, 0xFE, 8);         // Previous character - stretched
    int c = -(int) a->step;      // Column, starts off left
    uint32_t pos = 0;
-   while (c < w)
+   while (c < w && *data)
    {
       char t[5],
        *o = t;
@@ -85,7 +85,7 @@ showtext (app_t * a, const char *data, uint8_t dokern)
             }
          memcpy (k, k2, 8);
       }
-      if (c <= w && pos == 1)
+      if (c <= 0 && pos == 1)
       {                         // First whole character off left - this is where to start next character
          a->stage++;
          a->step = -c;

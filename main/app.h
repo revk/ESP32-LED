@@ -175,7 +175,7 @@ struct app_s
    uint8_t cycling:1;           // Colour should be cycled - more overlap than rainbow
    // Scratchpad for apps
    uint32_t cycle;              // This is set by caller - counts the cycle since started
-   uint16_t stage;              // The stage of a sequential display
-   uint16_t step;               // Steps in the stage
+   uint32_t stage;              // The stage of a sequential display
+   uint32_t step;               // Steps in the stage
    void *data;                  // Malloc'd data area
 };
