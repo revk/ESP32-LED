@@ -12,6 +12,8 @@ appcountdown (app_t * a)
       if (!a->limit)
          a->limit = 60 * cps;
    }
+   if (a->cycle >= a->limit)
+      return "";                // done
    uint8_t l = 255;
    if (a->stop)
       l = 255 * a->stop / a->fade;
