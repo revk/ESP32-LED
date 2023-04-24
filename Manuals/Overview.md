@@ -82,6 +82,7 @@ Each app can have arguments.
 |`cylon`|This runs an LED of colour specified (default is red) backwards and forwards, Cylon/Knightrider style|
 |`pulse`|This fades up and down the specified colour (default `cycle`) on all LEDs constantly.|
 |`countdown`|Count LEDs until limit (default 60 seconds)|
+|`random`|Fading between random colours|
 
 ### Ring apps
 
