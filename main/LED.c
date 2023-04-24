@@ -286,7 +286,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
             free (active[index].data);
             memset (&active[index], 0, sizeof (active[index]));
          } else if (active[index].app)
-            active[index].limit = active[index].cycle + active[index].fade;
+            active[index].stop = active[index].fade;
       xSemaphoreGive (app_mutex);
       return "";
    }
@@ -458,8 +458,10 @@ led_task (void *x)
             if (e)
                a->app = NULL;   // Done
             a->cycle++;
-            if (a->limit && a->cycle >= a->limit)
-               a->app = NULL;   // Complete
+            if (a->stop && !--a->stop)
+               a->app = NULL;   // Stopped
+            else if (!a->stop && a->limit && a->cycle >= a->limit)
+               a->stop = a->fade;       // Tell app to stop
             if (!a->app)
             {                   // Done
                jo_t j = jo_object_alloc ();

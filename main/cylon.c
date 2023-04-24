@@ -31,12 +31,14 @@ appcylon (app_t * a)
       } else
          a->step--;
    }
-
+   uint8_t l = 255;
+   if (a->stop)
+      l = 255 * a->stop / a->fade;
    clear (a->start, a->len);
    if (a->step > 0)
-      setl (a->start + a->step - 1, a, 127);
-   setl (a->start + a->step, a, 255);
+      setl (a->start + a->step - 1, a, l / 2);
+   setl (a->start + a->step, a, l);
    if (a->step + 1 < a->len)
-      setl (a->start + a->step + 1, a, 127);
+      setl (a->start + a->step + 1, a, l / 2);
    return NULL;
 }

@@ -27,10 +27,10 @@ showtext (app_t * a, const char *data, uint8_t dokern)
       }
    }
    uint8_t l = 255;
-   if (a->limit && a->limit - a->cycle < a->fade)
-      l = 255 * (a->limit - a->cycle + 1) / a->fade;
+   if (a->stop)
+      l = 255 * a->stop / a->fade;
    else if (a->fade && a->cycle < a->fade)
-      l = 255 * (a->cycle + 1) / a->fade;
+      l = 255 * a->cycle / a->fade;
    unsigned char k[8];
    memset (k, 0xFE, 8);         // Previous character - stretched
    int c = -(int) a->step;      // Column, starts off left

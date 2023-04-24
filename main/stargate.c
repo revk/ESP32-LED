@@ -150,8 +150,8 @@ appstargate (app_t * a)
       for (int i = 0; i < a->len; i++)
       {
          uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
-         if (a->limit && (a->limit - a->cycle) < a->fade)
-            l = (a->limit - a->cycle) * l / a->fade;
+         if (a->stop)
+            l = 255 * a->stop / a->fade;
          setrgb (a->start + i, l, l, l);
       }
       if (!--a->step)

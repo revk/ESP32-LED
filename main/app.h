@@ -170,6 +170,7 @@ struct app_s
 #undef	u32
       // Common settings
      uint8_t r, g, b;           // Colour
+   uint8_t stop;                // If set this is a count down to stopping, typically to fade out
    uint8_t colourset:1;         // Colour is set
    uint8_t rainbow:1;           // Colour should be cycled
    uint8_t cycling:1;           // Colour should be cycled - more overlap than rainbow

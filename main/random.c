@@ -24,7 +24,7 @@ apprandom (app_t * a)
    {
       a->stage = a->fade;
       memcpy (r0, r1, a->len * 3);
-      if (a->limit && a->cycle + a->fade * 2 > a->limit)
+      if (a->stop)
          memset (r1, 0, a->len * 3);
       else
          esp_fill_random (r1, a->len * 3);

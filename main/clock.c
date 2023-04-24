@@ -42,6 +42,15 @@ appclock (app_t * a)
    }
 
    clear (a->start, a->len);
+
+   if (a->stop)
+   {
+      uint8_t l = 255 * a->stop / a->fade;
+      setr (c->h1, l);
+      setg (c->m1, l);
+      setb (c->s1, l);
+      return NULL;
+   }
    if (a->step)
    {                            // Second fade from one to another
       uint8_t l = 255 * a->step / a->fade;
