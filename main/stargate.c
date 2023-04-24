@@ -33,6 +33,9 @@ appstargate (app_t * a)
       if (!a->colourset)
          a->b = 63;             // Default ring blue
    }
+   uint8_t q = 255;
+   if (a->stop)
+      q = 255 * a->stop / a->fade;
 
    void ring (uint8_t l)
    {
@@ -41,6 +44,8 @@ appstargate (app_t * a)
    }
    void chevron (uint8_t n, uint8_t l)
    {
+      if (l > q)
+         l = q;
       switch (n)
       {
       case 0:
@@ -150,8 +155,8 @@ appstargate (app_t * a)
       for (int i = 0; i < a->len; i++)
       {
          uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
-         if (a->stop)
-            l = 255 * a->stop / a->fade;
+         if (l > q)
+            l = q;
          setrgb (a->start + i, l, l, l);
       }
       if (!--a->step)
