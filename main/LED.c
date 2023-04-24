@@ -249,7 +249,7 @@ addapp (int index, const char *name, jo_t j)
          if (!a->start)
             a->start = 1;
          if (!a->top)
-            a->top = 1;
+            a->top = a->start;
          if (!a->len)
             a->len = leds + 1 - a->start;
          if (!a->speed)
