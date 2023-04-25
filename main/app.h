@@ -144,7 +144,16 @@ setrgb (uint16_t index, uint8_t r, uint8_t g, uint8_t b)
    ledb[index - 1] = b;
 }
 
-#define	setrgbl(i,r,g,b,l)	setrgb(i,(int)(l)*(r)/255,(int)(l)*(g)/255,(int)(l)*(b)/255)
+static inline void
+setrgbl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t l)
+{
+   if (!index || index > leds)
+      return;
+   ledr[index - 1] = ((int) l * r + (int) (255 - l) * ledr[index - 1]) / 255;
+   ledg[index - 1] = ((int) l * g + (int) (255 - l) * ledg[index - 1]) / 255;
+   ledb[index - 1] = ((int) l * b + (int) (255 - l) * ledb[index - 1]) / 255;
+}
+
 #define	setl(i,a,l)		setrgbl(i,a->r,a->g,a->b,l)
 
 struct app_s

@@ -75,10 +75,7 @@ appstargate (app_t * a)
       default:
          return;
       }
-      if (getr (a->start + n) < l)
-         setr (a->start + n, l);
-      if (getg (a->start + n) < l)
-         setg (a->start + n, l);
+      setrgbl (a->start + n, 255, 255, 0, l);
    }
    void twinkle (void)
    {
@@ -155,9 +152,7 @@ appstargate (app_t * a)
       for (int i = 0; i < a->len; i++)
       {
          uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
-         if (l > q)
-            l = q;
-         setrgb (a->start + i, l, l, l);
+         setrgbl (a->start + i, l, l, l, q);
       }
       if (!--a->step)
       {                         // Next

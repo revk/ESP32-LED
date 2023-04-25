@@ -22,7 +22,7 @@ You can also use an app name as a command where the payload is the parameters. T
 
 Whilst app parameters are normally an object with one or more parameters, if it is just a string, that sets `colour`, and if a number, that sets `limit`. E.g. `command/LED/whatever/spin red`.
 
-The `stop` command sets the limit on all active apps to be `fade` from now. For most apps this is a controlled stop, e.g. fade out.
+The `stop` command forces all active apps to end gracefully (usually a fade out).
 
 ## Power and wiring
 
