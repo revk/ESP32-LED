@@ -25,6 +25,6 @@ appcountdown (app_t * a)
    for (unsigned int i = 0; i < n; i++)
       setl (a->start + i, a, l);
    if (!a->stop)
-      setl (a->start + n, a, (int)l*f/255);
+      setl (a->start + n, a, (int) l * f / 255);
    return NULL;
 }
