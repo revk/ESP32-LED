@@ -136,19 +136,21 @@ app_t active[MAXAPPS] = { 0 };
 
 static SemaphoreHandle_t app_mutex = NULL;
 
+void
+appzap (app_t * a)
+{                               // Assumes mutex, Delete an app
+   free (a->data);
+   memset (a, 0, sizeof (*a));
+}
+
 app_t *
 addapp (int index, const char *name, jo_t j)
-{                               // Set app, and defaults (assumes mutex done if needed)
+{                               // Assumes mutex, store an app
    if (index >= MAXAPPS)
       return NULL;
    app_t *a = &active[index];
    if (!name || !*name)
-   {                            // No app
-      ESP_LOGI (TAG, "Zap app %d", index);
-      free (a->data);
-      memset (a, 0, sizeof (*a));
-      return a;
-   }
+      appzap (a);
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
       {
@@ -179,12 +181,9 @@ addapp (int index, const char *name, jo_t j)
             }
 #undef x
          }
-         if (!a->app || a->name != applist[i].name)
-         {                      // Change app, reset (yes, we can compare pointer as linked to applist)
-            free (a->data);
-            memset (a, 0, sizeof (*a));
-            a->name = applist[i].name;
-         }
+         if (!a->app || a->name != applist[i].name || a->stop)
+            appzap (a);
+         a->name = applist[i].name;
          // Defaults
 #define u8(n,d)         a->n=n;
 #define u8r(n,d)        if(applist[i].ring)a->n=(ring##n?:n); else u8(n,d)
@@ -262,14 +261,46 @@ addapp (int index, const char *name, jo_t j)
          ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, a->cycle);
          return a;
       }
-   free (a->data);
-   memset (a, 0, sizeof (*a));
+   appzap (a);
    ESP_LOGI (TAG, "App not found %s", name);
    jo_t e = jo_object_alloc ();
    jo_int (j, "level", index);
    jo_string (e, "app", name);
    revk_error ("not-found", &e);
    return NULL;
+}
+
+void
+appzapall (int index)
+{                               // Assumes mutex, clears all apps at index to end
+   while (index < MAXAPPS)
+      appzap (&active[index++]);
+}
+
+int
+apptidy (uint8_t stop)
+{                               // Assumes mutex, packs all apps to start, if stop set then stops active apps, returns first unused app (must be checked against MAXAPPS)
+   int i = 0,
+      o = 0;
+   while (i < MAXAPPS)
+   {
+      app_t *a = &active[i];
+      if (stop && a->delay)
+         appzap (a);            // Not started, so simply zap
+      if (stop && a->app && !a->stop)
+         a->stop = a->fade;     // Running, so controlled stop
+      if (a->app)
+      {                         // Copy down running apps
+         if (i != o)
+         {
+            active[o++] = *a;
+            memset (a, 0, sizeof (*a)); // Does not free stuff in it as moved down.
+         }
+         o++;
+      }
+      i++;
+   }
+   return o;
 }
 
 const char *
@@ -280,13 +311,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    if (suffix && !strcasecmp (suffix, "stop"))
    {
       xSemaphoreTake (app_mutex, portMAX_DELAY);
-      for (int index = 0; index < MAXAPPS; index++)
-         if (active[index].delay)
-         {                      // Delete
-            free (active[index].data);
-            memset (&active[index], 0, sizeof (active[index]));
-         } else if (active[index].app)
-            active[index].stop = active[index].fade;
+      apptidy (1);
       xSemaphoreGive (app_mutex);
       return "";
    }
@@ -295,35 +320,17 @@ app_callback (int client, const char *prefix, const char *target, const char *su
          if (!strcasecmp (suffix, applist[i].name))
          {                      // Direct command
             xSemaphoreTake (app_mutex, portMAX_DELAY);
-            addapp (0, suffix, j);
-            for (int index = 1; index < MAXAPPS; index++)
-            {
-               free (active[index].data);
-               memset (&active[index], 0, sizeof (active[index]));
-            }
+            int index = apptidy (1);
+            addapp (index++, suffix, j);
             xSemaphoreGive (app_mutex);
             return "";
          }
    if (!suffix || !strcmp (suffix, "add"))
    {                            // Process command to set apps
       xSemaphoreTake (app_mutex, portMAX_DELAY);
-      int index = 0;
-      if (suffix)
-      {                         // Pack existing apps to add to end
-         for (int i = 0; i < MAXAPPS; i++)
-         {
-            if (active[i].app)
-            {
-               if (index != i)
-               {                // Copy back
-                  active[index] = active[i];
-                  // .data was moved, do not free
-                  memset (&active[i], 0, sizeof (active[i]));
-               }
-               index++;
-            }
-         }
-      }
+      int index = apptidy (suffix ? 0 : 1);
+      if (!suffix)
+         index = 0;             // Overwrite existing
       jo_type_t t = jo_here (j);
       if (t == JO_STRING)
       {                         // Simple add app
@@ -350,12 +357,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
             addapp (index++, temp, j);
          }
       }
-      while (index < MAXAPPS)
-      {
-         free (active[index].data);
-         memset (&active[index], 0, sizeof (active[index]));
-         index++;
-      }
+      appzapall (index);
       xSemaphoreGive (app_mutex);
       return "";
    }
@@ -456,10 +458,10 @@ led_task (void *x)
             }
             const char *e = a->app (a);
             if (e)
-               a->app = NULL;   // Done
+               appzap (a);
             a->cycle++;
             if (a->stop && !--a->stop)
-               a->app = NULL;   // Stopped
+               appzap (a);
             else if (!a->stop && a->limit && a->cycle >= a->limit)
                a->stop = a->fade;       // Tell app to stop
             if (!a->app)
