@@ -393,6 +393,7 @@ led_task (void *x)
    uint32_t tick = 1000000LL / cps;
    if (!leds)
       leds = 1;
+   uint8_t idle = 0;
    while (1)
    {                            // Main loop
       usleep (tick - (esp_timer_get_time () % tick));
@@ -408,6 +409,7 @@ led_task (void *x)
                a->delay--;
                continue;
             }
+            idle = 0;
             if (a->rainbow)
             {                   // Cycle the colour
                a->r = wheel[(a->cycle) & 255];
@@ -482,7 +484,11 @@ led_task (void *x)
                               gamma8[(unsigned int) maxr * ledr[i] / 255],
                               gamma8[(unsigned int) maxg * ledg[i] / 255], gamma8[(unsigned int) maxb * ledb[i] / 255]);
       }
-      REVK_ERR_CHECK (led_strip_refresh (strip));
+      if (idle < 2)
+      {
+         idle++;
+         REVK_ERR_CHECK (led_strip_refresh (strip));
+      }
    }
 }
 
