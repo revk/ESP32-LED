@@ -27,8 +27,7 @@ main(int argc, const char *argv[])
    int             edge = 8;
    int             cx = 150;
    int             cy = 100;
-   int             notchw = 10;
-   int             notchh = 8;
+   int             notch = 10;
    const char     *led = "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm";
    const char     *cap = "RevK:C_0603";
    const char     *hole = "RevK:LEDHOLE";
@@ -43,8 +42,7 @@ main(int argc, const char *argv[])
          {"cx", 'x', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &cx, 0, "Centre X", "mm"},
          {"cy", 'y', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &cy, 0, "Centre Y", "mm"},
          {"edge", 'e', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &edge, 0, "Border Edges", "N"},
-         {"notchw", 'n', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &notchw, 0, "Border notch width", "mm"},
-         {"notchh", 'N', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &notchh, 0, "Border notch height", "mm"},
+         {"notch", 'n', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &notch, 0, "Border notch", "mm"},
          {"debug", 'v', POPT_ARG_NONE, &debug, 0, "Debug"},
          POPT_AUTOHELP {}
       };
@@ -79,7 +77,7 @@ main(int argc, const char *argv[])
       {
          if (!strcmp(line, ")\n"))
             break;              /* end */
-         if (!strncmp(line, "  (gr_line ", 11) && strstr(line, "(layer \"Edge.Cuts\")") && strstr(lined, "(width 0.05)"))
+         if (!strncmp(line, "  (gr_line ", 11) && strstr(line, "(layer \"Edge.Cuts\")") && strstr(line, "(width 0.05)"))
             continue;           /* edge cuts (size is how we know it is ours) */
          if (skipping)
          {
@@ -113,7 +111,7 @@ main(int argc, const char *argv[])
       }
    }
 
-   void            addborder(float x, float y, int nx, int ny)
+   void            addborder(float x, float y, int n)
    {
       float           w = width / cos(M_PI * 2 * 0.5 / edge);
       for             (int i = 0; i < edge; i++)
@@ -122,13 +120,10 @@ main(int argc, const char *argv[])
          float           y1 = y + w * cos(M_PI * 2 * (i + 0.5) / edge) / 2;
          float           x2 = x + w * sin(M_PI * 2 * (i + 1.5) / edge) / 2;
          float           y2 = y + w * cos(M_PI * 2 * (i + 1.5) / edge) / 2;
-         if              (nx && ny && y1 == y2 && y1 > y)
+         if              (n && y1 == y2 && y1 > y)
          {
-            fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y1, x - nx / 2, y2);
-            fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x - nx / 2, y1, x - nx / 2, y2 - ny);
-            fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x - nx / 2, y1 - ny, x + nx / 2, y2 - ny);
-            fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x + nx / 2, y1 - ny, x + nx / 2, y2);
-            fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x + nx / 2, y1, x2, y2);
+            fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y1, x - n / 2, y2);
+            fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x + n / 2, y1, x2, y2);
          } else if       (join && x1 == x2 && (x < cx ? x1 > x : x1 < x))
          {
             fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y1, x2, y2 > y1 ? y - 2 : y + 2);
@@ -161,10 +156,10 @@ main(int argc, const char *argv[])
       }
    }
 
-                   addborder(cx - width / 2 - 1, cy, notchw, notchh);
+                   addborder(cx - width / 2 - 1, cy, 0 );
    if (hole)
       addleds(cx - width / 2 - 1, cy, 0, 180, "H", hole);
-   addborder(cx + width / 2 + 1, cy, 0, 0);
+   addborder(cx + width / 2 + 1, cy, notch);
    if (led)
       addleds(cx + width / 2 + 1, cy, 0, 270, "D", led);
    if (cap)
