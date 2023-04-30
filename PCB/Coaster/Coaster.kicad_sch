@@ -2038,7 +2038,7 @@
   (symbol (lib_id "power:GND") (at 160.02 146.05 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 077aeece-90ee-45dc-903a-8fe281e5a53c)
-    (property "Reference" "#PWR?" (id 0) (at 153.67 146.05 0)
+    (property "Reference" "#PWR0119" (id 0) (at 153.67 146.05 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 153.67 146.05 90))
@@ -2087,7 +2087,7 @@
   (symbol (lib_id "power:GND") (at 160.02 149.86 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 0ba7056c-2c55-4233-b7b4-f969b54f174a)
-    (property "Reference" "#PWR?" (id 0) (at 153.67 149.86 0)
+    (property "Reference" "#PWR0122" (id 0) (at 153.67 149.86 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 153.67 149.86 90))
@@ -2158,7 +2158,7 @@
   (symbol (lib_id "power:GND2") (at 177.8 153.67 90) (mirror x) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 16834351-e3db-40ae-834b-fcc308a697f1)
-    (property "Reference" "#PWR?" (id 0) (at 184.15 153.67 0)
+    (property "Reference" "#PWR0125" (id 0) (at 184.15 153.67 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND2" (id 1) (at 186.69 153.67 90)
@@ -2277,7 +2277,7 @@
   (symbol (lib_id "power:GND") (at 160.02 142.24 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 30ef273a-c7f1-400d-a809-3c83efb09136)
-    (property "Reference" "#PWR?" (id 0) (at 153.67 142.24 0)
+    (property "Reference" "#PWR0121" (id 0) (at 153.67 142.24 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 153.67 142.24 90))
@@ -2411,7 +2411,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 160.02 146.05 270) (mirror x) (unit 1)
     (in_bom no) (on_board yes)
     (uuid 382c6bbb-fb1a-44f9-9858-69b2d74b1ae6)
-    (property "Reference" "P?" (id 0) (at 165.1 146.05 90)
+    (property "Reference" "P15" (id 0) (at 165.1 146.05 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 164.719 144.3478 90)
@@ -2518,7 +2518,7 @@
   (symbol (lib_id "power:GND2") (at 177.8 149.86 90) (mirror x) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 452a0754-1d5b-45ab-bcbe-38ccf6eeab3d)
-    (property "Reference" "#PWR?" (id 0) (at 184.15 149.86 0)
+    (property "Reference" "#PWR0126" (id 0) (at 184.15 149.86 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND2" (id 1) (at 186.69 149.86 90)
@@ -3014,7 +3014,7 @@
   (symbol (lib_id "power:GND") (at 160.02 153.67 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 7230ae76-35ac-4173-bdc6-e1e76b3d19b4)
-    (property "Reference" "#PWR?" (id 0) (at 153.67 153.67 0)
+    (property "Reference" "#PWR0120" (id 0) (at 153.67 153.67 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 153.67 153.67 90))
@@ -3200,7 +3200,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 177.8 149.86 90) (mirror x) (unit 1)
     (in_bom no) (on_board yes)
     (uuid 7d5b4a89-2067-4503-a23f-bff88787fe94)
-    (property "Reference" "T?" (id 0) (at 172.72 149.86 90)
+    (property "Reference" "T16" (id 0) (at 172.72 149.86 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 173.101 151.5622 90)
@@ -3252,7 +3252,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 177.8 142.24 90) (mirror x) (unit 1)
     (in_bom no) (on_board yes)
     (uuid 8378ecbf-b20f-4bf3-860f-2eb5b09bdcda)
-    (property "Reference" "T?" (id 0) (at 172.72 142.24 90)
+    (property "Reference" "T14" (id 0) (at 172.72 142.24 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 173.101 143.9422 90)
@@ -3458,7 +3458,7 @@
   (symbol (lib_id "power:GND2") (at 177.8 142.24 90) (mirror x) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid a07ba548-438d-4931-840b-126d5da147e7)
-    (property "Reference" "#PWR?" (id 0) (at 184.15 142.24 0)
+    (property "Reference" "#PWR0123" (id 0) (at 184.15 142.24 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND2" (id 1) (at 186.69 142.24 90)
@@ -3643,7 +3643,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 177.8 153.67 90) (mirror x) (unit 1)
     (in_bom no) (on_board yes)
     (uuid b37e1a0b-361f-48fd-b6a3-05a4d4d437c5)
-    (property "Reference" "T?" (id 0) (at 172.72 153.67 90)
+    (property "Reference" "T17" (id 0) (at 172.72 153.67 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 173.101 155.3722 90)
@@ -3661,7 +3661,7 @@
   (symbol (lib_id "power:GND2") (at 177.8 146.05 90) (mirror x) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid b90d6ac4-cd4a-4bb0-b040-a39295528cde)
-    (property "Reference" "#PWR?" (id 0) (at 184.15 146.05 0)
+    (property "Reference" "#PWR0124" (id 0) (at 184.15 146.05 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND2" (id 1) (at 186.69 146.05 90)
@@ -3712,7 +3712,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 160.02 149.86 270) (mirror x) (unit 1)
     (in_bom no) (on_board yes)
     (uuid bcaee71a-fc72-4d59-86ac-7b8cf30b9a0a)
-    (property "Reference" "P?" (id 0) (at 165.1 149.86 90)
+    (property "Reference" "P16" (id 0) (at 165.1 149.86 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 164.719 148.1578 90)
@@ -3889,7 +3889,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 160.02 142.24 270) (mirror x) (unit 1)
     (in_bom no) (on_board yes)
     (uuid df493c42-d8bc-40f4-81f5-b929eb9163b3)
-    (property "Reference" "P?" (id 0) (at 165.1 142.24 90)
+    (property "Reference" "P14" (id 0) (at 165.1 142.24 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 164.719 140.5378 90)
@@ -3907,7 +3907,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 177.8 146.05 90) (mirror x) (unit 1)
     (in_bom no) (on_board yes)
     (uuid e05172ae-ada1-48da-8329-b6cceb7f7713)
-    (property "Reference" "T?" (id 0) (at 172.72 146.05 90)
+    (property "Reference" "T15" (id 0) (at 172.72 146.05 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 173.101 147.7522 90)
@@ -4093,7 +4093,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 160.02 153.67 270) (mirror x) (unit 1)
     (in_bom no) (on_board yes)
     (uuid fe8c4bbf-14fa-410c-84d6-8d3881a53ab7)
-    (property "Reference" "P?" (id 0) (at 165.1 153.67 90)
+    (property "Reference" "P17" (id 0) (at 165.1 153.67 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 164.719 151.9678 90)
@@ -4195,28 +4195,28 @@
       (reference "#PWR0118") (unit 1) (value "+3.3V") (footprint "")
     )
     (path "/077aeece-90ee-45dc-903a-8fe281e5a53c"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/0ba7056c-2c55-4233-b7b4-f969b54f174a"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/16834351-e3db-40ae-834b-fcc308a697f1"
-      (reference "#PWR?") (unit 1) (value "GND2") (footprint "")
-    )
-    (path "/30ef273a-c7f1-400d-a809-3c83efb09136"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/452a0754-1d5b-45ab-bcbe-38ccf6eeab3d"
-      (reference "#PWR?") (unit 1) (value "GND2") (footprint "")
+      (reference "#PWR0119") (unit 1) (value "GND") (footprint "")
     )
     (path "/7230ae76-35ac-4173-bdc6-e1e76b3d19b4"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+      (reference "#PWR0120") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/30ef273a-c7f1-400d-a809-3c83efb09136"
+      (reference "#PWR0121") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/0ba7056c-2c55-4233-b7b4-f969b54f174a"
+      (reference "#PWR0122") (unit 1) (value "GND") (footprint "")
     )
     (path "/a07ba548-438d-4931-840b-126d5da147e7"
-      (reference "#PWR?") (unit 1) (value "GND2") (footprint "")
+      (reference "#PWR0123") (unit 1) (value "GND2") (footprint "")
     )
     (path "/b90d6ac4-cd4a-4bb0-b040-a39295528cde"
-      (reference "#PWR?") (unit 1) (value "GND2") (footprint "")
+      (reference "#PWR0124") (unit 1) (value "GND2") (footprint "")
+    )
+    (path "/16834351-e3db-40ae-834b-fcc308a697f1"
+      (reference "#PWR0125") (unit 1) (value "GND2") (footprint "")
+    )
+    (path "/452a0754-1d5b-45ab-bcbe-38ccf6eeab3d"
+      (reference "#PWR0126") (unit 1) (value "GND2") (footprint "")
     )
     (path "/e86cc638-a81f-4cb4-8994-a8593b7c68f7"
       (reference "C1") (unit 1) (value "10nF") (footprint "RevK:C_0603")
@@ -4395,17 +4395,17 @@
     (path "/57395985-ffd2-4932-a85f-3a7b6544338d"
       (reference "P13") (unit 1) (value "TestPoint") (footprint "RevK:PAD")
     )
+    (path "/df493c42-d8bc-40f4-81f5-b929eb9163b3"
+      (reference "P14") (unit 1) (value "TestPoint") (footprint "RevK:PAD")
+    )
     (path "/382c6bbb-fb1a-44f9-9858-69b2d74b1ae6"
-      (reference "P?") (unit 1) (value "TestPoint") (footprint "RevK:PAD")
+      (reference "P15") (unit 1) (value "TestPoint") (footprint "RevK:PAD")
     )
     (path "/bcaee71a-fc72-4d59-86ac-7b8cf30b9a0a"
-      (reference "P?") (unit 1) (value "TestPoint") (footprint "RevK:PAD")
-    )
-    (path "/df493c42-d8bc-40f4-81f5-b929eb9163b3"
-      (reference "P?") (unit 1) (value "TestPoint") (footprint "RevK:PAD")
+      (reference "P16") (unit 1) (value "TestPoint") (footprint "RevK:PAD")
     )
     (path "/fe8c4bbf-14fa-410c-84d6-8d3881a53ab7"
-      (reference "P?") (unit 1) (value "TestPoint") (footprint "RevK:PAD")
+      (reference "P17") (unit 1) (value "TestPoint") (footprint "RevK:PAD")
     )
     (path "/3b6e2e43-685e-4e7b-97b9-8f290ca51417"
       (reference "R1") (unit 1) (value "10k") (footprint "RevK:R_0603")
@@ -4461,17 +4461,17 @@
     (path "/06bc9557-01bb-4b25-a74b-8b194a5d60a8"
       (reference "T13") (unit 1) (value "TestPoint") (footprint "RevK:PAD-LINK")
     )
-    (path "/7d5b4a89-2067-4503-a23f-bff88787fe94"
-      (reference "T?") (unit 1) (value "TestPoint") (footprint "RevK:PAD-LINK")
-    )
     (path "/8378ecbf-b20f-4bf3-860f-2eb5b09bdcda"
-      (reference "T?") (unit 1) (value "TestPoint") (footprint "RevK:PAD-LINK")
-    )
-    (path "/b37e1a0b-361f-48fd-b6a3-05a4d4d437c5"
-      (reference "T?") (unit 1) (value "TestPoint") (footprint "RevK:PAD-LINK")
+      (reference "T14") (unit 1) (value "TestPoint") (footprint "RevK:PAD-LINK")
     )
     (path "/e05172ae-ada1-48da-8329-b6cceb7f7713"
-      (reference "T?") (unit 1) (value "TestPoint") (footprint "RevK:PAD-LINK")
+      (reference "T15") (unit 1) (value "TestPoint") (footprint "RevK:PAD-LINK")
+    )
+    (path "/7d5b4a89-2067-4503-a23f-bff88787fe94"
+      (reference "T16") (unit 1) (value "TestPoint") (footprint "RevK:PAD-LINK")
+    )
+    (path "/b37e1a0b-361f-48fd-b6a3-05a4d4d437c5"
+      (reference "T17") (unit 1) (value "TestPoint") (footprint "RevK:PAD-LINK")
     )
     (path "/7943a3d5-b195-4a57-b3e1-ee29355f1eeb"
       (reference "U1") (unit 1) (value "ESP32-PICO-MINI-02") (footprint "RevK:ESP32-PICO-MINI-02")
