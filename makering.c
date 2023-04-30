@@ -24,11 +24,11 @@ main(int argc, const char *argv[])
    int             radius = 35;
    int             width = 100;
    int             debug = 0;
-   int             edge = 8;
+   int             edge = 0;
    int             cx = 150;
    int             cy = 100;
    int             notch = 10;
-   const char     *led = "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm";
+   const char     *led = "RevK:SMD5050";
    const char     *cap = "RevK:C_0603";
    const char     *hole = "RevK:LEDHOLE";
    const char     *join = "RevK:PCB-Join";
@@ -41,7 +41,7 @@ main(int argc, const char *argv[])
          {"width", 'w', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &width, 0, "Width", "mm"},
          {"cx", 'x', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &cx, 0, "Centre X", "mm"},
          {"cy", 'y', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &cy, 0, "Centre Y", "mm"},
-         {"edge", 'e', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &edge, 0, "Border Edges", "N"},
+         {"edge", 'e', POPT_ARG_INT, &edge, 0, "Border Edges", "N"},
          {"notch", 'n', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &notch, 0, "Border notch", "mm"},
          {"debug", 'v', POPT_ARG_NONE, &debug, 0, "Debug"},
          POPT_AUTOHELP {}
@@ -56,6 +56,8 @@ main(int argc, const char *argv[])
 
       poptFreeContext(optCon);
    }
+   if (!edge)
+      edge = leds;
 
    FILE           *i = fopen(filename, "r");
    if (!i)
@@ -156,7 +158,7 @@ main(int argc, const char *argv[])
       }
    }
 
-                   addborder(cx - width / 2 - 1, cy, 0 );
+                   addborder(cx - width / 2 - 1, cy, 0);
    if (hole)
       addleds(cx - width / 2 - 1, cy, 0, 180, "H", hole);
    addborder(cx + width / 2 + 1, cy, notch);
