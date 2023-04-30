@@ -79,8 +79,8 @@ main(int argc, const char *argv[])
       {
          if (!strcmp(line, ")\n"))
             break;              /* end */
-         if (!strncmp(line, "  (gr_line ", 11) && strstr(line, "(layer \"Edge.Cuts\")"))
-            continue;           /* edge cuts */
+         if (!strncmp(line, "  (gr_line ", 11) && strstr(line, "(layer \"Edge.Cuts\")") && strstr(lined, "(width 0.05)"))
+            continue;           /* edge cuts (size is how we know it is ours) */
          if (skipping)
          {
             if (!strncmp(line, "  )", 3))
@@ -129,7 +129,7 @@ main(int argc, const char *argv[])
             fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x - nx / 2, y1 - ny, x + nx / 2, y2 - ny);
             fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x + nx / 2, y1 - ny, x + nx / 2, y2);
             fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x + nx / 2, y1, x2, y2);
-         } else if       (join && x1 == x2 && (x<cx?x1>x:x1<x))
+         } else if       (join && x1 == x2 && (x < cx ? x1 > x : x1 < x))
          {
             fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y1, x2, y2 > y1 ? y - 2 : y + 2);
             fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y2 > y1 ? y + 2 : y - 2, x2, y2);
