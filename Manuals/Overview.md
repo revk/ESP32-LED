@@ -18,6 +18,12 @@ The app list is replaced with those specified, and each app in turn is applied t
 
 The command `add` can be used to add new apps on existing ones without replacing the existing ones - this is idea for time limited apps and reverting to previous working.
 
+You can also use an app name as a command where the payload is the parameters. This replaces the list of apps with this one app.
+
+Whilst app parameters are normally an object with one or more parameters, if it is just a string, that sets `colour`, and if a number, that sets `limit`. E.g. `command/LED/whatever/spin red`.
+
+The `stop` command forces all active apps to end gracefully (usually a fade out).
+
 ## Power and wiring
 
 The PCB passes on the USB supplied power. Each LED could use something like 60mA when on full, so consider total power. A USB port only has to provide 0.5A which would be only 8 LEDs, but obviously the LEDs may not all be on full white usually.
@@ -36,7 +42,7 @@ The main settings are :-
 |-------|-------|
 |`ledgpio`|The GPIO for output, prefix `-` for inverted.|
 |`leds`|This is how many LEDs in the chain. This defaults to `1` so if only the first LED does something, you have failed to set this.|
-|`bright`|This is the top value for brightless, defaults to `63` but depends on the LEDs. All output is scaled to this.|
+|`maxr` `maxg` `maxb`|This is the top value for brightness (before applying gamma). Output is scaled to this.|
 |`app`|The default app name, using default arguments|
 
 Important, the settings and commands that take an LED position all start from LED `1` as the first LED. This is not as one would internally address an array, and is done deliberately to make `0` mean *unset* rather than the *first LED*.
@@ -51,7 +57,7 @@ For example, some apps are designed to work on an LED ring - this may be the who
 |-------|-------|
 |`ringstart`|Number of first LED in the ring, electrically, numbered as 1st LED in chain as LED `1`.|
 |`ringlen`|How many LEDs in the ring, starting at `ringstart` (or 1st LED if not set).|
-|`ringtop`|For ring apps that need to know the orientation (e.g. `clock` and `stargate`) this is the LED number of the LED at the top of the ring. If not set then `ringstart` is assumed to be at the top.|
+|`ringtop`|For ring apps that need to know the orientation (e.g. `clock` and `stargate`) this is the LED number of the LED at the top of the ring. If not set then `ringstart` is assumed to be at the top. This can be set negative meaning reverse the ring.|
 
 ## "Apps"
 
@@ -75,6 +81,8 @@ Each app can have arguments.
 |`idle`|This simply displays all LEDs with defined colour, which by default is black (off). If a colour set `fade` can be set to fade up at start and down at `limit`|
 |`cylon`|This runs an LED of colour specified (default is red) backwards and forwards, Cylon/Knightrider style|
 |`pulse`|This fades up and down the specified colour (default `cycle`) on all LEDs constantly.|
+|`countdown`|Count LEDs until limit (default 60 seconds)|
+|`random`|Fading between random colours|
 
 ### Ring apps
 
@@ -83,3 +91,11 @@ Each app can have arguments.
 |`spin`|This is intended for a ring but can work on a strip quite well - it rotates the specified colour (default `cycle`) around the ring|
 |`clock`|This operates a clock on the ring, red for hour, green for minute, blue for second, obviously a ring with 60 LEDs is best|
 |`stargate`|This dials a stargate, setting each chevron, and then opens the gate. Gate closes after a period even if `limit` is not set|
+
+### Text apps
+
+|App|Meaning|
+|---|-------|
+|`text`|Show text|
+|`kern`|Show text with kernin|
+|`time`|Show time as text|

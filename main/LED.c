@@ -11,7 +11,7 @@ static const char TAG[] = "LED";
 #include "led_strip.h"
 #include "app.h"
 
-#define a(app)	extern const char* app(app_t*);
+#define a(a)	extern const char* app##a(app_t*);
 #include "apps.h"
 
 struct applist_s
@@ -20,8 +20,8 @@ struct applist_s
    app_f *app;
    uint8_t ring:1;              // Is a ring based app
 } applist[] = {
-#define a(app)	{#app,&app,0},
-#define r(app)	{#app,&app,1},
+#define a(a)	{#a,&app##a,0},
+#define r(a)	{#a,&app##a,1},
 #include "apps.h"
 };
 
@@ -35,6 +35,10 @@ uint8_t *ledb = NULL;
 #define s8n(n,d) int8_t n[d];
 #define u8(n,d) uint8_t n;
 #define u8r(n,d) uint8_t n,ring##n;
+#define u16(n,d) uint16_t n;
+#define u16r(n,d) uint16_t n,ring##n;
+#define s8r(n,d) int8_t n,ring##n;
+#define s16r(n,d) int16_t n,ring##n;
 #define u8l(n,d) uint8_t n;
 #define b(n) uint8_t n;
 #define s(n,d) char * n;
@@ -48,12 +52,16 @@ settings                        //
 #undef s8n
 #undef u8
 #undef u8r
+#undef u16
+#undef u16r
+#undef s8r
+#undef s16r
 #undef u8l
 #undef b
 #undef s
    uint8_t gatedial = 0;
 
-const uint8_t cos256[256] =
+const uint8_t cos8[256] =
    { 255, 255, 255, 255, 255, 255, 254, 254, 253, 252, 252, 251, 250, 249, 248, 247, 246, 245, 243, 242, 240, 239, 237, 236, 234,
    232, 230, 228, 226, 224, 222, 220, 218, 216, 213, 211, 209, 206, 204, 201, 199, 196, 193, 191, 188, 185, 182, 179, 176, 174, 171,
    168, 165, 162, 159,
@@ -86,67 +94,213 @@ const uint8_t wheel[256] =
    0, 0, 0, 0
 };
 
+const uint8_t zig[256] =
+   { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64,
+   66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 122,
+   124, 126, 128, 130,
+   132, 134, 136, 138, 140, 142, 144, 146, 148, 150, 152, 154, 156, 158, 160, 162, 164, 166, 168, 170, 172, 174, 176, 178, 180, 182,
+   184, 186, 188,
+   190, 192, 194, 196, 198, 200, 202, 204, 206, 208, 210, 212, 214, 216, 218, 220, 222, 224, 226, 228, 230, 232, 234, 236, 238, 240,
+   242, 244, 246,
+   248, 250, 252, 255, 253, 251, 249, 247, 245, 243, 241, 239, 237, 235, 233, 231, 229, 227, 225, 223, 221, 219, 217, 215, 213, 211,
+   209, 207, 205,
+   203, 201, 199, 197, 195, 193, 191, 189, 187, 185, 183, 181, 179, 177, 175, 173, 171, 169, 167, 165, 163, 161, 159, 157, 155, 153,
+   151, 149, 147,
+   145, 143, 141, 139, 137, 135, 133, 131, 129, 127, 125, 123, 121, 119, 117, 115, 113, 111, 109, 107, 105, 103, 101, 99, 97, 95,
+   93, 91, 89, 87, 85,
+   83, 81, 79, 77, 75, 73, 71, 69, 67, 65, 63, 61, 59, 57, 55, 53, 51, 49, 47, 45, 43, 41, 39, 37, 35, 33, 31, 29, 27, 25, 23, 21,
+   19, 17, 15, 13, 11,
+   9, 7, 5, 3, 1
+};
+
+const uint8_t gamma8[256] = {
+   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+   1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2,
+   2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5,
+   5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10,
+   10, 10, 11, 11, 11, 12, 12, 13, 13, 13, 14, 14, 15, 15, 16, 16,
+   17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 24, 24, 25,
+   25, 26, 27, 27, 28, 29, 29, 30, 31, 32, 32, 33, 34, 35, 35, 36,
+   37, 38, 39, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 50,
+   51, 52, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 67, 68,
+   69, 70, 72, 73, 74, 75, 77, 78, 79, 81, 82, 83, 85, 86, 87, 89,
+   90, 92, 93, 95, 96, 98, 99, 101, 102, 104, 105, 107, 109, 110, 112, 114,
+   115, 117, 119, 120, 122, 124, 126, 127, 129, 131, 133, 135, 137, 138, 140, 142,
+   144, 146, 148, 150, 152, 154, 156, 158, 160, 162, 164, 167, 169, 171, 173, 175,
+   177, 180, 182, 184, 186, 189, 191, 193, 196, 198, 200, 203, 205, 208, 210, 213,
+   215, 218, 220, 223, 225, 228, 231, 233, 236, 239, 241, 244, 247, 249, 252, 255
+};
+
 app_t active[MAXAPPS] = { 0 };
 
 static SemaphoreHandle_t app_mutex = NULL;
 
+void
+appzap (app_t * a)
+{                               // Assumes mutex, Delete an app
+   free (a->data);
+   memset (a, 0, sizeof (*a));
+}
+
 app_t *
 addapp (int index, const char *name, jo_t j)
-{                               // Set app, and defaults (assumes mutex done if needed)
+{                               // Assumes mutex, store an app
    if (index >= MAXAPPS)
       return NULL;
+   app_t *a = &active[index];
    if (!name || !*name)
-   {                            // No app
-      memset (&active[index], 0, sizeof (active[index]));
-      return &active[index];
-   }
+      appzap (a);
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
       {
-         if (!active[index].app && active[index].name != applist[i].name)
-         {                      // Change app, reset (yes, we can compare pointer as linked to applist)
-            memset (&active[index], 0, sizeof (active[index]));
-            active[index].name = applist[i].name;
+         void setcolour (jo_t j)
+         {
+            char temp[20];
+            jo_strncpy (j, temp, sizeof (temp));
+            if (!strcasecmp (temp, "rainbow"))
+               a->colourset = a->rainbow = 1;
+            else if (!strcasecmp (temp, "cycling"))
+               a->colourset = a->cycling = 1;
+#define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
+            colours
+#undef c
+#define x(n)((temp[n] & 0xF) + (isalpha ((uint8_t)temp[n]) ? 9 : 0))
+               if (strlen (temp) == 3)
+            {
+               a->colourset = 1;
+               a->r = x (0) * 17;
+               a->g = x (1) * 17;
+               a->b = x (2) * 17;
+            } else if (strlen (temp) == 6)
+            {
+               a->colourset = 1;
+               a->r = x (0) * 16 + x (1);
+               a->g = x (2) * 16 + x (3);
+               a->b = x (4) * 16 + x (5);
+            }
+#undef x
          }
-         active[index].app = applist[i].app;
+         if (!a->app || a->name != applist[i].name || a->stop)
+            appzap (a);
+         a->name = applist[i].name;
          // Defaults
-#define u8(n,d)         active[index].n=n;
-#define u8r(n,d)        if(applist[i].ring)active[index].n=(ring##n?:n); else u8(n,d)
+#define u8(n,d)         a->n=n;
+#define u8r(n,d)        if(applist[i].ring)a->n=(ring##n?:n); else u8(n,d)
+#define u16(n,d)         u8(n,d)
+#define u16r(n,d)        u8r(n,d)
+#define s8(n,d)        u8(n,d)
+#define s8r(n,d)        u8r(n,d)
+#define s16r(n,d)        u16r(n,d)
 #define u32(n,d)        u8(n,d)
          params
 #undef  u8
 #undef  u8r
+#undef  u16
+#undef  u16r
+#undef  s8
+#undef  s8r
+#undef  s16r
 #undef  u32
             if (j && jo_here (j) == JO_OBJECT)
          {                      // Expects to be at start of object
             while (jo_next (j) == JO_TAG)
             {
-#define u8(n,d)         if(!jo_strcmp(j,#n)){if(jo_next(j)==JO_NUMBER)active[index].n=jo_read_int(j);continue;}
+#define u8(n,d)         if(!jo_strcmp(j,#n)){if(jo_next(j)==JO_NUMBER)a->n=jo_read_int(j);continue;}
 #define u8r(n,d)        u8(n,d)
+#define u16(n,d)        u8(n,d)
+#define u16r(n,d)        u8(n,d)
+#define s8(n,d)        u8(n,d)
+#define s8r(n,d)        u8(n,d)
+#define s16r(n,d)        u8(n,d)
 #define u32(n,d)        u8(n,d)
                params
 #undef  u8
 #undef  u8r
+#undef  u16
+#undef  u16r
+#undef  s8
+#undef  s8r
+#undef  s16r
 #undef  u32
                   if (!jo_strcmp (j, "colour"))
                {
                   if (jo_next (j) == JO_STRING)
+                     setcolour (j);
+                  continue;
+               }
+               if (!jo_strcmp (j, "data"))
+               {
+                  if (jo_next (j) == JO_STRING)
                   {
-                     char temp[20];
-                     jo_strncpy (j, temp, sizeof (temp));
-                     // TODO
+                     free (a->data);
+                     a->data = malloc (jo_strlen (j) + 1);
+                     jo_strncpy (j, a->data, jo_strlen (j) + 1);
                   }
                   continue;
                }
                jo_next (j);     // Skip
             }
-         }
-         return &active[index];
+         } else if (j && jo_here (j) == JO_STRING)
+            setcolour (j);
+         else if (j && jo_here (j) == JO_NUMBER)
+            a->limit = jo_read_int (j);
+         if (!a->start)
+            a->start = 1;
+         if (!a->top)
+            a->top = a->start;
+         if (!a->len)
+            a->len = leds + 1 - a->start;
+         if (!a->speed)
+            a->speed = cps;
+         if (!a->fade)
+            a->fade = cps;
+         if (!a->height)
+            a->height = 8;
+         a->app = applist[i].app;
+         ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, a->cycle);
+         return a;
       }
+   appzap (a);
+   ESP_LOGI (TAG, "App not found %s", name);
    jo_t e = jo_object_alloc ();
+   jo_int (j, "level", index);
    jo_string (e, "app", name);
    revk_error ("not-found", &e);
    return NULL;
+}
+
+void
+appzapall (int index)
+{                               // Assumes mutex, clears all apps at index to end
+   while (index < MAXAPPS)
+      appzap (&active[index++]);
+}
+
+int
+apptidy (uint8_t stop)
+{                               // Assumes mutex, packs all apps to start, if stop set then stops active apps, returns first unused app (must be checked against MAXAPPS)
+   int i = 0,
+      o = 0;
+   while (i < MAXAPPS)
+   {
+      app_t *a = &active[i];
+      if (stop && a->delay)
+         appzap (a);            // Not started, so simply zap
+      if (stop && a->app && !a->stop)
+         a->stop = a->fade;     // Running, so controlled stop
+      if (a->app)
+      {                         // Copy down running apps
+         if (i != o)
+         {
+            active[o++] = *a;
+            memset (a, 0, sizeof (*a)); // Does not free stuff in it as moved down.
+         }
+         o++;
+      }
+      i++;
+   }
+   return o;
 }
 
 const char *
@@ -154,26 +308,29 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 {
    if (client || !prefix || target || strcmp (prefix, prefixcommand))
       return NULL;              // Not for us or not a command from main MQTT
-
+   if (suffix && !strcasecmp (suffix, "stop"))
+   {
+      xSemaphoreTake (app_mutex, portMAX_DELAY);
+      apptidy (1);
+      xSemaphoreGive (app_mutex);
+      return "";
+   }
+   if (suffix)
+      for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+         if (!strcasecmp (suffix, applist[i].name))
+         {                      // Direct command
+            xSemaphoreTake (app_mutex, portMAX_DELAY);
+            int index = apptidy (1);
+            addapp (index++, suffix, j);
+            xSemaphoreGive (app_mutex);
+            return "";
+         }
    if (!suffix || !strcmp (suffix, "add"))
    {                            // Process command to set apps
       xSemaphoreTake (app_mutex, portMAX_DELAY);
-      int index = 0;
-      if (*suffix)
-      {                         // Pack existing apps to add to end
-         for (int i = 0; i < MAXAPPS; i++)
-         {
-            if (active[i].app)
-            {
-               if (index != i)
-               {                // Copy back
-                  active[index] = active[i];
-                  memset (&active[i], 0, sizeof (active[i]));
-               }
-               index++;
-            }
-         }
-      }
+      int index = apptidy (suffix ? 0 : 1);
+      if (!suffix)
+         index = 0;             // Overwrite existing
       jo_type_t t = jo_here (j);
       if (t == JO_STRING)
       {                         // Simple add app
@@ -200,11 +357,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
             addapp (index++, temp, j);
          }
       }
-      while (index < MAXAPPS)
-      {
-         memset (&active[index], 0, sizeof (active[index]));
-         index++;
-      }
+      appzapall (index);
       xSemaphoreGive (app_mutex);
       return "";
    }
@@ -215,9 +368,7 @@ void
 led_task (void *x)
 {
    ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & 63, ledgpio & 64 ? " (inverted)" : "");
-
    led_strip_handle_t strip = NULL;
-
    led_strip_config_t strip_config = {
       .strip_gpio_num = (ledgpio & 63),
       .max_leds = leds,         // The number of LEDs in the strip,
@@ -225,84 +376,119 @@ led_task (void *x)
       .led_model = LED_MODEL_WS2812,    // LED strip model
       .flags.invert_out = ((ledgpio & 64) ? 1 : 0),     // whether to invert the output signal (useful when your hardware has a level inverter)
    };
-
    led_strip_rmt_config_t rmt_config = {
       .clk_src = RMT_CLK_SRC_DEFAULT,   // different clock source can lead to different power consumption
       .resolution_hz = 10 * 1000 * 1000,        // 10MHz
       .flags.with_dma = false,  // whether to enable the DMA feature
    };
    REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip));
-
    REVK_ERR_CHECK (led_strip_clear (strip));
-
    ledr = calloc (leds, sizeof (*ledr));
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
-
-   addapp (0, app, NULL);
-
+   if (*app)
+      addapp (0, app, NULL);
    if (!cps)
       cps = 10;
    uint32_t tick = 1000000LL / cps;
-
+   if (!leds)
+      leds = 1;
+   uint8_t idle = 0;
    while (1)
    {                            // Main loop
       usleep (tick - (esp_timer_get_time () % tick));
       clear (1, leds);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
       for (unsigned int i = 0; i < MAXAPPS; i++)
-         if (active[i].app)
+      {
+         app_t *a = &active[i];
+         if (a->app)
          {
-            if (active[i].delay)
+            if (a->delay)
             {                   // Delayed start
-               active[i].delay--;
+               a->delay--;
                continue;
             }
-            if (active[i].rainbow)
+            idle = 0;
+            if (a->rainbow)
             {                   // Cycle the colour
-               active[i].r = wheel[(active[i].cycle) & 255];
-               active[i].g = wheel[(active[i].cycle + 85) & 255];
-               active[i].b = wheel[(active[i].cycle + 170) & 255];
-            } else if (active[i].cycling)
+               a->r = wheel[(a->cycle) & 255];
+               a->g = wheel[(a->cycle + 85) & 255];
+               a->b = wheel[(a->cycle + 170) & 255];
+            } else if (a->cycling)
             {                   // Cycle the colour
-               active[i].r = cos256[(active[i].cycle) & 255];
-               active[i].g = cos256[(active[i].cycle + 85) & 255];
-               active[i].b = cos256[(active[i].cycle + 170) & 255];
+               a->r = cos8[(a->cycle) & 255];
+               a->g = cos8[(a->cycle + 85) & 255];
+               a->b = cos8[(a->cycle + 170) & 255];
             }
-            if (!active[i].cycle)
+            if (!a->cycle)
             {                   // Starting
                jo_t j = jo_object_alloc ();
-               jo_string (j, "app", active[i].name);
-#define u8(n,d)         jo_int(j,#n,active[i].n);
+               jo_int (j, "level", i);
+               jo_string (j, "app", a->name);
+#define u8(n,d)         if(a->n)jo_int(j,#n,a->n);
 #define u8r(n,d)        u8(n,d)
+#define u16(n,d)         u8(n,d)
+#define u16r(n,d)        u8(n,d)
+#define s8(n,d)        u8(n,d)
+#define s8r(n,d)        u8(n,d)
+#define s16r(n,d)        u8(n,d)
 #define u32(n,d)        u8(n,d)
                params
 #undef  u8
 #undef  u8r
+#undef  u16
+#undef  u16r
+#undef  s8
+#undef  s8r
+#undef  s16r
 #undef  u32
-                  revk_info ("start", &j);
+                  if (a->rainbow)
+                  jo_string (j, "colour", "rainbow");
+               else if (a->cycling)
+                  jo_string (j, "colour", "cycling");
+               else if (a->colourset)
+               {
+                  if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
+                     jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
+                  else
+                     jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
+               }
+               if (a->data)
+                  jo_string (j, "data", (char *) a->data);
+               revk_info ("start", &j);
             }
-            const char *e = active[i].app (&active[i]);
+            const char *e = a->app (a);
             if (e)
-            {
-               active[i].app = NULL;    // Done
+               appzap (a);
+            a->cycle++;
+            if (a->stop && !--a->stop)
+               appzap (a);
+            else if (!a->stop && a->limit && a->cycle >= a->limit)
+               a->stop = a->fade;       // Tell app to stop
+            if (!a->app)
+            {                   // Done
                jo_t j = jo_object_alloc ();
-               jo_string (j, "app", active[i].name);
-               if (e)
+               jo_int (j, "level", i);
+               jo_string (j, "app", a->name);
+               if (e && *e)
                   jo_string (j, "error", e);
                revk_info ("done", &j);
             }
-            active[i].cycle++;
-            if (active[i].limit && active[i].cycle >= active[i].limit)
-               active[i].app = NULL;    // Complete
          }
+      }
       xSemaphoreGive (app_mutex);
       for (unsigned int i = 0; i < leds; i++)
       {
-         led_strip_set_pixel (strip, i, (unsigned int) bright * ledr[i] / 255, (unsigned int) bright * ledg[i] / 255,
-                              (unsigned int) bright * ledb[i] / 255);
+         led_strip_set_pixel (strip, i,
+                              gamma8[(unsigned int) maxr * ledr[i] / 255],
+                              gamma8[(unsigned int) maxg * ledg[i] / 255], gamma8[(unsigned int) maxb * ledb[i] / 255]);
       }
-      REVK_ERR_CHECK (led_strip_refresh (strip));
+      if (idle < 2)
+      {
+         idle++;
+         REVK_ERR_CHECK (led_strip_refresh (strip));
+      }
    }
 }
 
@@ -320,6 +506,10 @@ app_main ()
 #define s8n(n,d) revk_register(#n,d,sizeof(*n),&n,NULL,SETTING_SIGNED);
 #define u8(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
 #define u8r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,0);
+#define u16(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
+#define u16r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,0);
+#define s8r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,SETTING_SIGNED);
+#define s16r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,SETTING_SIGNED);
 #define u8l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
 #define s(n,d) revk_register(#n,0,0,&n,#d,0);
    settings                     //
@@ -331,10 +521,13 @@ app_main ()
 #undef s8n
 #undef u8
 #undef u8r
+#undef u16
+#undef u16r
+#undef s8r
+#undef s16r
 #undef u8l
 #undef b
 #undef s
       revk_start ();
-
    revk_task ("LED", led_task, NULL);
 }

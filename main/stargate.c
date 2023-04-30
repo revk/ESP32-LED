@@ -1,9 +1,165 @@
 // Stargate
 
 #include "app.h"
+#define SPEED 2                 // Seconds per spin?
 
 const char *
-stargate (app_t * a)
+appstargate (app_t * a)
 {
-   return "No stargate yet";
+   if (!a->cycle)
+   {
+      free (a->data);           // Not used supplied
+      a->data = malloc (a->len * 2 + 1);
+   }
+   uint8_t *old = a->data,
+      *new = old + a->len,
+      *posp = new + a->len,
+      pos = *posp;
+   uint8_t top;
+   int8_t dir = 1;
+   if (a->top < 0)
+   {
+      top = -a->top - a->start;
+      dir = -1;
+   } else
+      top = a->top - a->start;
+
+   if (!a->cycle)
+   {                            // Sanity checks, etc
+      if (!a->limit)
+         a->limit = 60 * cps;
+      a->step = a->fade;
+      pos = esp_random ();
+      if (!a->colourset)
+         a->b = 63;             // Default ring blue
+   }
+   uint8_t q = 255;
+   if (a->stop)
+      q = 255 * a->stop / a->fade;
+
+   void ring (uint8_t l)
+   {
+      for (unsigned int i = 0; i < a->len; i++)
+         setl (a->start + i, a, (int) l * wheel[(256 * i / a->len + pos) & 255] / 255);
+   }
+   void chevron (uint8_t n, uint8_t l)
+   {
+      if (l > q)
+         l = q;
+      switch (n)
+      {
+      case 0:
+         n = top;
+         break;
+      case 1:
+         n = (top + a->len - dir * 4 * a->len / 39) % a->len;
+         break;
+      case 2:
+         n = (top + a->len + dir * 4 * a->len / 39) % a->len;
+         break;
+      case 3:
+         n = (top + a->len - dir * 8 * a->len / 39) % a->len;
+         break;
+      case 4:
+         n = (top + a->len + dir * 8 * a->len / 39) % a->len;
+         break;
+      case 5:
+         n = (top + a->len - dir * 12 * a->len / 39) % a->len;
+         break;
+      case 6:
+         n = (top + a->len + dir * 12 * a->len / 39) % a->len;
+         break;
+      case 7:
+         n = top;
+         break;
+      default:
+         return;
+      }
+      setrgbl (a->start + n, 255, 255, 0, l);
+   }
+   void twinkle (void)
+   {
+      memcpy (old, new, a->len);
+      esp_fill_random (new, a->len);
+      for (int i = 0; i < a->len; i++)
+         new[i] = new[i] / 4 + 32;
+   }
+
+   if (!a->stage)
+   {                            // Fade up
+      ring (255 * (a->fade - a->step) / a->fade);
+      if (!--a->step)
+      {
+         a->stage = 10;
+         a->step = a->speed + esp_random () % (a->speed * 2);
+      }
+   } else if (a->stage < 100)
+   {                            // Dialling
+      ring (255);
+      for (int i = 1; i < a->stage / 10; i++)
+         chevron (i, 255);
+      if (!(a->stage % 10))
+      {                         // Dial
+         if ((a->stage / 20) % 2)
+            pos += 256 / a->speed / SPEED;
+         else
+            pos -= 256 / a->speed / SPEED;
+         if (!--a->step)
+         {
+            a->stage++;
+            a->step = a->fade;
+         }
+      } else if ((a->stage % 10) == 1)
+      {                         // Lock top
+         chevron (0, 255 * (a->fade - a->step) / a->fade);
+         if (!--a->step)
+         {
+            a->stage++;
+            a->step = a->fade;
+         }
+      } else if (a->stage == 72)
+      {                         // Open gate
+         chevron (0, 255);
+         uint8_t l = 255 * (a->fade - a->step) / a->fade;
+         for (int i = 0; i < a->len; i++)
+         {
+            if (getr (a->start + i) < l)
+               setr (a->start + i, l);
+            if (getg (a->start + i) < l)
+               setg (a->start + i, l);
+            if (getb (a->start + i) < l)
+               setb (a->start + i, l);
+         }
+         if (!--a->step)
+         {                      // Next chevron
+            a->stage = 100;
+            a->step = a->fade;
+            memset (new, 255, a->len);
+            twinkle ();
+         }
+      } else if ((a->stage % 10) == 2)
+      {                         // Chevron
+         chevron (0, 255 * a->step / a->fade);
+         chevron (a->stage / 10, 255 * (a->fade - a->step) / a->fade);
+         if (!--a->step)
+         {                      // Next chevron
+            a->stage += 8;
+            a->step = a->speed + esp_random () % (a->speed * 2);
+         }
+      }
+   } else
+   {                            // Twinkling
+      for (int i = 0; i < a->len; i++)
+      {
+         uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
+         setrgbl (a->start + i, l, l, l, q);
+      }
+      if (!--a->step)
+      {                         // Next
+         a->step = a->fade;
+         twinkle ();
+      }
+   }
+   *posp = pos;
+   return NULL;
 }

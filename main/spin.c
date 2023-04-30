@@ -3,19 +3,23 @@
 #include "app.h"
 
 const char *
-spin (app_t * a)
+appspin (app_t * a)
 {
    if (!a->cycle)
-   {                            // Any defaults or sanity checks
-      if (!a->len)
-         a->len = leds;
-      if (!a->start)
-         a->start = 1;
+   {                            // Sanity check / defaults
       if (!a->colourset)
-         a->cycle = 1;
+         a->cycling = 1;
    }
-   a->step += 256 / a->len;
-   for (unsigned int i = 1; i <= a->len; i++)
-      setl (i, a, cos256[(256 * i / a->len + a->step) & 255]);
+   if (a->top > 0)
+      a->step -= 256 / a->speed;
+   else
+      a->step += 256 / a->speed;
+   uint8_t l = 255;
+   if (a->stop)
+      l = 255 * a->stop / a->fade;
+   else if (a->fade && a->cycle < a->fade)
+      l = 255 * a->cycle / a->fade;
+   for (unsigned int i = 0; i < a->len; i++)
+      setl (a->start + i, a, l * cos8[(256 * i / a->len + a->step) & 255] / 255);
    return NULL;
 }

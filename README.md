@@ -2,9 +2,15 @@
 
 Various stuff in one app that handles WS2812 LED strips, including
 
+- Fading/pulsing lights
+- Spinning rings
 - Stargate LED strip
 - Clock
 - Other stuff in due course
+
+See [Overview](Manuals/Overview.md)
+
+Available on [Amazon](https://www.amazon.co.uk/dp/B0C1W1XJS8)
 
 ## PCB
 
