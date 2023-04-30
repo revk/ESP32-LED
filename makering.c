@@ -1,0 +1,153 @@
+/* Make a ring of LEDs */
+/* (c) 2023 Adrian Kennard Andrews & Arnold Ltd */
+
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include <popt.h>
+#include <err.h>
+#include <float.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <math.h>
+
+int
+main(int argc, const char *argv[])
+{
+   const char     *filename = "PCB/Coaster/Coaster.kicad_pcb";
+   int             leds = 12;
+   int             radius = 40;
+   int             width = 110;
+   int             debug = 0;
+   int             edge = 8;
+   int             cx = 150;
+   int             cy = 100;
+   const char     *led = "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm";
+   const char     *cap = "RevK:C_0603";
+   const char     *hole = "RevK:LEDHOLE";
+   {
+      poptContext     optCon;   /* context for parsing  command - line options */
+      const struct poptOption optionsTable[] = {
+         {"file", 'f', POPT_ARG_STRING | POPT_ARGFLAG_SHOW_DEFAULT, &filename, 0, "File", "filename"},
+         {"leds", 'l', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &leds, 0, "LEDs", "N"},
+         {"radius", 'r', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &radius, 0, "Radius", "mm"},
+         {"width", 'w', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &width, 0, "Width", "mm"},
+         {"cx", 'x', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &cx, 0, "Centre X", "mm"},
+         {"cy", 'y', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &cy, 0, "Centre Y", "mm"},
+         {"edge", 'e', POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &edge, 0, "Border Edges", "N"},
+         {"debug", 'v', POPT_ARG_NONE, &debug, 0, "Debug"},
+         POPT_AUTOHELP {}
+      };
+
+      optCon = poptGetContext(NULL, argc, argv, optionsTable, 0);
+      /* poptSetOtherOptionHelp(optCon, ""); */
+
+      int             c;
+      if ((c = poptGetNextOpt(optCon)) < -1)
+         errx(1, "%s: %s\n", poptBadOption(optCon, POPT_BADOPTION_NOALIAS), poptStrerror(c));
+
+      poptFreeContext(optCon);
+   }
+
+   FILE           *i = fopen(filename, "r");
+   if (!i)
+      err(1, "This works on an existing file, create first: %s", filename);
+   char           *temp;
+   if (asprintf(&temp, "%s-new", filename) < 0)
+      errx(1, "malloc");
+   FILE           *o = fopen(temp, "w");
+   if (!o)
+      err(1, "Cannot make temp file: %s", temp);
+
+   {
+      //Copy to end
+         char           *line = NULL;
+      size_t          linecap = 0;
+      ssize_t         linelen;
+      char            skipping = 0;
+      while ((linelen = getline(&line, &linecap, i)) > 0)
+      {
+         if (!strcmp(line, ")\n"))
+            break;              /* end */
+         if (!strncmp(line, "  (gr_line ", 11) && strstr(line, "(layer \"Edge.Cuts\")"))
+            continue;           /* edge cuts */
+         if (skipping)
+         {
+            if (!strncmp(line, "  )", 3))
+               skipping = 0;
+            continue;
+         }
+         int             found(const char *f)
+         {
+            if (!f)
+               return 0;
+            if (strncmp(line, "  (footprint \"", 14))
+               return 0;
+            int             l = strlen(f);
+            if              (strncmp(line + 14, f, l))
+                               return 0;
+            if              (line[14 + l] != '"')
+                               return 0;
+                            skipping = 1;
+                            return 1;
+         }
+         if              (found(led))
+                            continue;
+         if (found(hole))
+            continue;
+         if (found(cap))
+            continue;
+         fwrite(line, linelen, 1, o);
+      }
+   }
+
+   void            addborder(int x, int y)
+   {
+      for (int i = 0; i < edge; i++)
+      {
+         float           x1 = (float)x + (float)width * sin(M_PI * 2 * (i + 0.5) / edge) / 2;
+         float           y1 = (float)y + (float)width * cos(M_PI * 2 * (i + 0.5) / edge) / 2;
+         float           x2 = (float)x + (float)width * sin(M_PI * 2 * (i + 1.5) / edge) / 2;
+         float           y2 = (float)y + (float)width * cos(M_PI * 2 * (i + 1.5) / edge) / 2;
+                         fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y1, x2, y2);
+      }
+   }
+
+   void            addleds(int x, int y, int p, int r, const char *id, const char *part)
+   {
+      for (int i = 0; i < leds; i++)
+      {
+         float           xc = (float)x + (float)(radius + p) * sin(M_PI * 2 * i / leds);
+         float           yc = (float)y + (float)(radius + p) * cos(M_PI * 2 * i / leds);
+                         fprintf(o, "  (footprint \"%s\" (layer \"F.Cu\")\n", part);
+                         fprintf(o, "    (at %.2f %.2f %d)\n", xc, yc, (360 * i / leds + r) % 360);
+                         fprintf(o, "    (fp_text reference \"%s%d\" (at 0 -3.5) (layer \"F.SilkS\")\n", id, i + 1);
+                         fprintf(o, "      (effects (font (size 1 1) (thickness 0.15)))\n");
+                         fprintf(o, "    )\n");
+                         fprintf(o, "  )\n");
+      }
+   }
+
+                   addborder(cx - width / 2, cy);
+   if (hole)
+      addleds(cx - width / 2, cy, 0, 0, "H", hole);
+   addborder(cx + width / 2, cy);
+   if (led)
+      addleds(cx + width / 2, cy, 0, 270, "D", led);
+   if (cap)
+      addleds(cx + width / 2, cy, 4, 180, "C", cap);
+
+   fprintf(o, ")\n");
+   fclose(i);
+   fclose(o);
+   if (rename(temp, filename))
+   {
+      unlink(temp);
+      err(1, "Cannot overwrite: %s", filename);
+   }
+}
