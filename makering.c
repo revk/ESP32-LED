@@ -231,7 +231,7 @@ main(int argc, const char *argv[])
       {
          float           xc = (float)x - (float)(radius + oy) * sin(M_PI * 2 * i / leds + ox / radius);
          float           yc = (float)y + (float)(radius + oy) * cos(M_PI * 2 * i / leds + ox / radius);
-                         footprint(xc, yc, (360 * (leds - i) / leds + r), id, i + idbase, part);
+                         footprint(xc, yc, (360 * (leds - i) / leds + r - (360 * ox / radius / 2 / M_PI)), id, i + idbase, part);
       }
    }
 
@@ -287,7 +287,7 @@ main(int argc, const char *argv[])
    }
    void            addtracks(int x, int y)
    {
-      float           s = radius * 2 * M_PI / leds - ledx*2;
+      float           s = radius * 2 * M_PI / leds - ledx * 2;
       for             (int i = 1; i < leds; i++)
       {
          float           lx = 0,
@@ -314,7 +314,7 @@ main(int argc, const char *argv[])
          }
          segment(i, -ledx, ledy, NAN, NAN);
          segment(i, -1 - ledx, 0, -ledx - 0.3, ledy * 0.3);
-	 segment(i,1-s-ledx,0,-s/2-ledx,0);
+         segment(i, 1 - s - ledx, 0, -s / 2 - ledx, 0);
          segment(i - 1, ledx, -ledy, ledx + 0.3, -ledy * 0.3);
       }
    }
