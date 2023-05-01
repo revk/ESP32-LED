@@ -130,10 +130,7 @@ main(int argc, const char *argv[])
                   int             led;
                   for (led = 0; led < leds && net != netled[led]; led++);
                   if (led < leds)
-                  {
-                     skipping = 1;
-                     continue;
-                  }
+                     continue; // Skip just this line
                }
             }
          }
@@ -228,13 +225,13 @@ main(int argc, const char *argv[])
       fprintf(o, "  )\n");
    }
 
-   void            addleds(int x, int y, float ox, float oy, int r, const char *id, const char *part,int idbase)
+   void            addleds(int x, int y, float ox, float oy, int r, const char *id, const char *part, int idbase)
    {
-      float           rx = (float)ox * M_PI / radius;
+      float           rx = ox / radius;
       for             (int i = 0; i < leds; i++)
       {
-         float           xc = (float)x - (float)(radius + oy) * sin(M_PI * 2 * (i + rx) / leds);
-         float           yc = (float)y + (float)(radius + oy) * cos(M_PI * 2 * (i + rx) / leds);
+         float           xc = (float)x - (float)(radius + oy) * sin(M_PI * 2 * i / leds + rx);
+         float           yc = (float)y + (float)(radius + oy) * cos(M_PI * 2 * i / leds + rx);
                          footprint(xc, yc, (360 * (leds - i) / leds + r), id, i + idbase, part);
       }
    }
@@ -298,9 +295,9 @@ main(int argc, const char *argv[])
                          ly = 0;
          void            segment(int i, float nx, float ny)
          {
-            float           rx = (float)nx * M_PI / radius;
-            float           cx = (float)x - (float)(radius + ny) * sin(M_PI * 2 * (i + rx) / leds);
-            float           cy = (float)y + (float)(radius + ny) * cos(M_PI * 2 * (i + rx) / leds);
+            float           rx = nx / radius;
+            float           cx = (float)x - (float)(radius + ny) * sin(M_PI * 2 * i / leds + rx);
+            float           cy = (float)y + (float)(radius + ny) * cos(M_PI * 2 * i / leds + rx);
             if              (lx || ly)
             {
                fprintf(o, "  (segment ");
@@ -322,14 +319,14 @@ main(int argc, const char *argv[])
    addzones(cx - width / 2 - 1, cy, netgnd, zonegnd, 0, NULL);
    addborder(cx - width / 2 - 1, cy, 0);
    if (hole)
-      addleds(cx - width / 2 - 1, cy, 0, 0, 180, "H", hole,1);
+      addleds(cx - width / 2 - 1, cy, 0, 0, 180, "H", hole, 1);
    addborder(cx + width / 2 + 1, cy, notch);
    if (led)
-      addleds(cx + width / 2 + 1, cy, 0, 0, 270, "D", led,1);
+      addleds(cx + width / 2 + 1, cy, 0, 0, 270, "D", led, 1);
    if (cap)
    {
-      addleds(cx + width / 2 + 1, cy, -ledw / 2 - 1.25, 0, 270, "C", cap,1);
-      addleds(cx + width / 2 + 1, cy, +ledw / 2 + 1.25, 0, 270, "C", cap,1+leds);
+      addleds(cx + width / 2 + 1, cy, -ledw / 2 - 1, 0, 270, "C", cap, 1);
+      addleds(cx + width / 2 + 1, cy, +ledw / 2 + 1, 0, 270, "C", cap, 1 + leds);
    }
    addzones(cx + width / 2 + 1, cy, netgnd2, zonegnd2, netvcc, zonevcc);
    addtracks(cx + width / 2 + 1, cy);
