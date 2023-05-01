@@ -119,7 +119,7 @@ main(int argc, const char *argv[])
                }
             }
          }
-         if (!strncmp(line, "  (segment ", 11))
+         if (!strncmp(line, "  (segment ", 11) || !strncmp(line, "  (arc ", 7))
          {
             const char     *n = strstr(line, "(net ");
             if (n)
@@ -130,7 +130,7 @@ main(int argc, const char *argv[])
                   int             led;
                   for (led = 0; led < leds && net != netled[led]; led++);
                   if (led < leds)
-                     continue; // Skip just this line
+                     continue;  /* Skip just this line */
                }
             }
          }
@@ -227,11 +227,10 @@ main(int argc, const char *argv[])
 
    void            addleds(int x, int y, float ox, float oy, int r, const char *id, const char *part, int idbase)
    {
-      float           rx = ox / radius;
-      for             (int i = 0; i < leds; i++)
+      for (int i = 0; i < leds; i++)
       {
-         float           xc = (float)x - (float)(radius + oy) * sin(M_PI * 2 * i / leds + rx);
-         float           yc = (float)y + (float)(radius + oy) * cos(M_PI * 2 * i / leds + rx);
+         float           xc = (float)x - (float)(radius + oy) * sin(M_PI * 2 * i / leds + ox / radius);
+         float           yc = (float)y + (float)(radius + oy) * cos(M_PI * 2 * i / leds + ox / radius);
                          footprint(xc, yc, (360 * (leds - i) / leds + r), id, i + idbase, part);
       }
    }
@@ -288,31 +287,35 @@ main(int argc, const char *argv[])
    }
    void            addtracks(int x, int y)
    {
-      float           s = radius * 2 * M_PI / leds - ledx;
+      float           s = radius * 2 * M_PI / leds - ledx*2;
       for             (int i = 1; i < leds; i++)
       {
          float           lx = 0,
                          ly = 0;
-         void            segment(int i, float nx, float ny)
+         void            segment(int i, float nx, float ny, float mx, float my)
          {
-            float           rx = nx / radius;
-            float           cx = (float)x - (float)(radius + ny) * sin(M_PI * 2 * i / leds + rx);
-            float           cy = (float)y + (float)(radius + ny) * cos(M_PI * 2 * i / leds + rx);
+            float           Nx = (float)x - (float)(radius + ny) * sin(M_PI * 2 * i / leds + nx / radius);
+            float           Ny = (float)y + (float)(radius + ny) * cos(M_PI * 2 * i / leds + nx / radius);
             if              (lx || ly)
             {
-               fprintf(o, "  (segment ");
+               fprintf(o, "  (%s ", isnan(mx) ? "segment" : "arc");
                fprintf(o, "(start %.2f %.2f) ", lx, ly);
-               fprintf(o, "(end %.2f %.2f) ", cx, cy);
-               fprintf(o, "(width 0.25) (layer \"F.Cu\") (net %d))\n", netled[i]);
+               if (!isnan(mx))
+               {
+                  float           Mx = (float)x - (float)(radius + my) * sin(M_PI * 2 * i / leds + mx / radius);
+                  float           My = (float)y + (float)(radius + my) * cos(M_PI * 2 * i / leds + mx / radius);
+                                  fprintf(o, "(mid %.2f %.2f) ", Mx, My);
+               }
+                               fprintf(o, "(end %.2f %.2f) ", Nx, Ny);
+                               fprintf(o, "(width 0.25) (layer \"F.Cu\") (net %d))\n", netled[i]);
             }
-                            lx = cx;
-                            ly = cy;
+                            lx = Nx;
+            ly = Ny;
          }
-                         segment(i, -ledx, ledy);
-         for (int d = 0; d < s - ledx * 2; d++)
-            segment(i, -d - ledx, 0);
-         segment(i - 1, ledx, 0);
-         segment(i - 1, ledx, -ledy);
+         segment(i, -ledx, ledy, NAN, NAN);
+         segment(i, -1 - ledx, 0, -ledx - 0.3, ledy * 0.3);
+	 segment(i,1-s-ledx,0,-s/2-ledx,0);
+         segment(i - 1, ledx, -ledy, ledx + 0.3, -ledy * 0.3);
       }
    }
 
