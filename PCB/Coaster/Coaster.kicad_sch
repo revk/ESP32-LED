@@ -1270,6 +1270,7 @@
     )
   )
 
+
   (junction (at 231.14 107.95) (diameter 0) (color 0 0 0 0)
     (uuid 008c49c4-ee13-4c32-aeb4-f536a1502e68)
   )
@@ -5379,24 +5380,6 @@
     )
   )
 
-  (symbol (lib_id "power:GND") (at 201.93 124.46 90) (unit 1)
-    (in_bom yes) (on_board yes)
-    (uuid f24f61f1-1e8f-4317-a8e3-4bee4ea734dc)
-    (property "Reference" "#PWR017" (id 0) (at 208.28 124.46 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "GND" (id 1) (at 207.01 124.46 90)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "" (id 2) (at 201.93 124.46 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (id 3) (at 201.93 124.46 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid fef619b6-a3ec-4c12-a6f8-0710db004707))
-  )
-
   (symbol (lib_id "Connector:TestPoint") (at 194.31 31.75 270) (mirror x) (unit 1)
     (in_bom no) (on_board yes)
     (uuid f2861458-cd4e-450f-bb46-bb4580329993)
@@ -5601,9 +5584,6 @@
     )
     (path "/00000000-0000-0000-0000-000060464020"
       (reference "#PWR016") (unit 1) (value "VBUS") (footprint "")
-    )
-    (path "/f24f61f1-1e8f-4317-a8e3-4bee4ea734dc"
-      (reference "#PWR017") (unit 1) (value "GND") (footprint "")
     )
     (path "/6ba66b7d-ef7e-4863-836d-ddeb42277047"
       (reference "#PWR018") (unit 1) (value "+3.3V") (footprint "")
