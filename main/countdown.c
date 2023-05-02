@@ -19,12 +19,31 @@ appcountdown (app_t * a)
       l = 255 * a->stop / a->fade;
    else if (a->fade && a->cycle < a->fade)
       l = 255 * a->cycle / a->fade;
-   uint32_t n = (uint32_t) 256 * a->len * (a->limit - a->cycle) / a->limit;
-   uint8_t f = n & 255;
-   n /= 256;
-   for (unsigned int i = 0; i < n; i++)
-      setl (a->start + i, a, l);
-   if (!a->stop)
-      setl (a->start + n, a, (int) l * f / 255);
+
+   int t = a->top;
+   if (t < 0)
+      t = -t;
+   if (t > a->start)
+   {
+      int N = t - a->start;
+      uint32_t n = (uint32_t) 256 * N * (a->limit - a->cycle) / a->limit;
+      uint8_t f = n & 255;
+      n /= 256;
+      for (unsigned int i = 0; i < n; i++)
+         setl (t - i, a, l);
+      if (!a->stop)
+         setl (t - n, a, (int) l * f / 255);
+   }
+   if (t < a->start + a->len - 1)
+   {
+      int N = a->start + a->len - 1 - t;
+      uint32_t n = (uint32_t) 256 * N * (a->limit - a->cycle) / a->limit;
+      uint8_t f = n & 255;
+      n /= 256;
+      for (unsigned int i = 0; i < n; i++)
+         setl (t + i, a, l);
+      if (!a->stop)
+         setl (t + n, a, (int) l * f / 255);
+   }
    return NULL;
 }
