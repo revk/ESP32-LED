@@ -404,6 +404,7 @@ led_task (void *x)
          app_t *a = &active[i];
          if (a->app)
          {
+	    const char *name=a->name;
             if (a->delay)
             {                   // Delayed start
                a->delay--;
@@ -470,7 +471,7 @@ led_task (void *x)
             {                   // Done
                jo_t j = jo_object_alloc ();
                jo_int (j, "level", i);
-               jo_string (j, "app", a->name);
+               jo_string (j, "app", name);
                if (e && *e)
                   jo_string (j, "error", e);
                revk_info ("done", &j);
