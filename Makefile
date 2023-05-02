@@ -12,6 +12,9 @@ all:
 	@cp --remove-destination build/$(PROJECT_NAME).bin $(PROJECT_NAME)$(SUFFIX).bin
 	@echo Done: build/$(PROJECT_NAME)$(SUFFIX).bin
 
+makering: makering.c
+	gcc -I/usr/local/include -L/usr/local/lib -O -o $@ $< -lpopt -lm -g
+
 issue:  set
 	cp --remove-destination LED*.bin release
 
