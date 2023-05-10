@@ -13,21 +13,27 @@ apptwinkle (app_t * a)
       memset (a->data, 0, a->len * 2);
       if (!a->colourset)
          a->r = a->g = a->b = 255;      // default white
+      a->step = a->fade;
    }
    uint8_t *old = a->data,
       *new = old + a->len;
-      uint8_t q = 255;
+   uint8_t q = 255;
    if (a->stop)
       q = 255 * a->stop / a->fade;
 
-   memcpy (old, new, a->len);
-   esp_fill_random (new, a->len);
-   for (int i = 0; i < a->len; i++)
-      new[i] = new[i] / 4 + 32;
+   if (!--a->step)
+   {                            // Next
+      a->step = a->fade;
+      memcpy (old, new, a->len);
+      esp_fill_random (new, a->len);
+      for (int i = 0; i < a->len; i++)
+         new[i] = new[i] / 4 + 32;
+   }
+
    for (int i = 0; i < a->len; i++)
    {
       uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
-      setl (a->start + i, a,l * q / 255);
+      setl (a->start + i, a, l * q / 255);
    }
 
    return NULL;
