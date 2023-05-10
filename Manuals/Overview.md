@@ -83,6 +83,7 @@ Each app can have arguments.
 |`pulse`|This fades up and down the specified colour (default `cycle`) on all LEDs constantly.|
 |`countdown`|Count LEDs until limit (default 60 seconds)|
 |`random`|Fading between random colours|
+|`twinkle`|All lights constantly fading different random levels of selected colour|
 
 ### Ring apps
 

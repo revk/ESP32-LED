@@ -15,6 +15,7 @@ a (idle)                        //
    a (cylon)                    //
    a (countdown)                //
    a (random)                   //
+   a (twinkle)			//
    r (clock)                    //
    r (stargate)                 //
    r (spin)                     //
