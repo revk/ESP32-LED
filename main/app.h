@@ -8,7 +8,7 @@
         u8(maxr,255)	\
         u8(maxg,255)	\
         u8(maxb,255)	\
-        u16(leds,12)	\
+        u16(leds,24)	\
 	s(app,spin)	\
 
 #define	params		\
