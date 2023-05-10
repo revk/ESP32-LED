@@ -312,10 +312,10 @@ main(int argc, const char *argv[])
                             lx = Nx;
             ly = Ny;
          }
-         segment(i, -ledx, ledy, NAN, NAN);
-         segment(i, -1 - ledx, 0, -ledx - 0.3, ledy * 0.3);
+         segment(i, -ledx, -ledy, NAN, NAN);
+         segment(i, -1 - ledx, 0, -ledx - 0.3, -ledy * 0.3);
          segment(i, 1 - s - ledx, 0, -s / 2 - ledx, 0);
-         segment(i - 1, ledx, -ledy, ledx + 0.3, -ledy * 0.3);
+         segment(i - 1, ledx, ledy, ledx + 0.3, ledy * 0.3);
       }
    }
 
