@@ -203,10 +203,6 @@ main(int argc, const char *argv[])
          {
             fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y1, x1 < x2 ? x - n / 2 : x + n / 2, y2);
             fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1 < x2 ? x + n / 2 : x - n / 2, y1, x2, y2);
-         } else if       (x1 == x2 && (x < cx ? x1 > x : x1 < x))
-         {
-            fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y1, x2, y2 > y1 ? y - 2 : y + 2);
-            fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y2 > y1 ? y + 2 : y - 2, x2, y2);
          } else
             fprintf(o, "  (gr_line (start %.2f %.2f) (end %.2f %.2f) (layer \"Edge.Cuts\") (width 0.05))\n", x1, y1, x2, y2);
       }
@@ -244,7 +240,7 @@ main(int argc, const char *argv[])
          fprintf(o, "  (zone (net %d) (net_name \"%s\") (layers \"%s\") (hatch edge 0.508)\n", netid, net, layer);
          fprintf(o, "    (connect_pads (clearance 0.2))\n");
          fprintf(o, "    (min_thickness 0.254) (filled_areas_thickness no)\n");
-         fprintf(o, "    (fill yes (thermal_gap 0.508) (thermal_bridge_width 0.508))\n");
+         fprintf(o, "    (fill yes (thermal_gap 0.5) (thermal_bridge_width 1))\n");
          fprintf(o, "    (polygon\n");
          fprintf(o, "      (pts\n");
       }

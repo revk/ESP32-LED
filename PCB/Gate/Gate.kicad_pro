@@ -355,7 +355,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "Coaster.kicad_pro",
+    "filename": "Gate.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -475,8 +475,6 @@
     ]
   ],
   "text_variables": {
-    "DATE": "2023-05-11",
-    "NAME1": "Name1",
-    "NAME2": "Name2"
+    "DATE": "2023-05-04"
   }
 }
