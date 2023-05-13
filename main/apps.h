@@ -15,13 +15,14 @@ a (idle)                        //
    a (cylon)                    //
    a (countdown)                //
    a (random)                   //
-   a (twinkle)			//
+   a (twinkle)                  //
    r (clock)                    //
    r (stargate)                 //
    r (spin)                     //
    t (text)                     //
    t (kern)                     //
    t (time)                     //
+   r (lava)                     //
 #undef a
 #undef r
 #undef t

@@ -404,7 +404,7 @@ led_task (void *x)
          app_t *a = &active[i];
          if (a->app)
          {
-	    const char *name=a->name;
+            const char *name = a->name;
             if (a->delay)
             {                   // Delayed start
                a->delay--;

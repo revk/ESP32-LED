@@ -92,6 +92,7 @@ Each app can have arguments.
 |`spin`|This is intended for a ring but can work on a strip quite well - it rotates the specified colour (default `cycle`) around the ring|
 |`clock`|This operates a clock on the ring, red for hour, green for minute, blue for second, obviously a ring with 60 LEDs is best|
 |`stargate`|This dials a stargate, setting each chevron, and then opens the gate. Gate closes after a period even if `limit` is not set|
+|`lava`|Fade up and down each of red/green/blue at random positions on the ring and random speeds.|
 
 ### Text apps
 
