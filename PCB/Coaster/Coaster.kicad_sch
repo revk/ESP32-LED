@@ -1273,7 +1273,6 @@
     )
   )
 
-
   (junction (at 100.33 111.76) (diameter 0) (color 0 0 0 0)
     (uuid 001baf85-7eeb-4b78-a717-dc50790a4633)
   )
@@ -2927,7 +2926,7 @@
   (symbol (lib_id "power:GND") (at 236.22 62.23 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 15b0f297-93c4-465f-9531-fa8fbc96574c)
-    (property "Reference" "#PWR022" (at 229.87 62.23 0)
+    (property "Reference" "#PWR025" (at 229.87 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 229.87 62.23 90)
@@ -2943,7 +2942,7 @@
     (instances
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "#PWR022") (unit 1)
+          (reference "#PWR025") (unit 1)
         )
       )
     )
@@ -3109,7 +3108,7 @@
   (symbol (lib_id "power:GND") (at 236.22 73.66 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1fb8d7b5-87d8-40a5-838f-fcde85a909f8)
-    (property "Reference" "#PWR025" (at 229.87 73.66 0)
+    (property "Reference" "#PWR028" (at 229.87 73.66 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 229.87 73.66 90)
@@ -3125,7 +3124,7 @@
     (instances
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "#PWR025") (unit 1)
+          (reference "#PWR028") (unit 1)
         )
       )
     )
@@ -3453,6 +3452,39 @@
     )
   )
 
+  (symbol (lib_id "RevK:Hidden") (at 262.89 27.305 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 323aa897-0024-4b4d-ac90-f50c229e23d7)
+    (property "Reference" "L1" (at 264.16 27.305 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "6.8uH" (at 276.225 27.305 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "RevK:L_4x4_" (at 262.89 27.305 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 262.89 27.305 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC Part #" "C354575" (at 262.89 27.305 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "~" (uuid 45415be6-4537-43fa-8966-44e3aa3b73cf))
+    (instances
+      (project "EnvHT"
+        (path "/12422a89-3d0c-485c-9386-f77121fd68fd"
+          (reference "L1") (unit 1)
+        )
+      )
+      (project "Coaster"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "L1") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "RevK:WS2812B-2mm") (at 36.83 19.05 90) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 323de283-7840-4d20-bb27-972be99fc38e)
@@ -3588,7 +3620,7 @@
   (symbol (lib_id "power:GND") (at 236.22 69.85 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3815a175-0f00-418a-8bbe-afc834dc5b76)
-    (property "Reference" "#PWR024" (at 229.87 69.85 0)
+    (property "Reference" "#PWR027" (at 229.87 69.85 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 229.87 69.85 90)
@@ -3604,7 +3636,7 @@
     (instances
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "#PWR024") (unit 1)
+          (reference "#PWR027") (unit 1)
         )
       )
     )
@@ -3811,6 +3843,42 @@
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
           (reference "C33") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "RevK:Hidden") (at 262.89 25.4 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 3fa6b2cc-8cd5-4241-a4d7-ff62fdc0125a)
+    (property "Reference" "C3" (at 264.16 25.4 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "10uF" (at 276.225 25.4 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "RevK:C_0805_" (at 262.89 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 262.89 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Note" "0603 or 0805" (at 262.89 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC Part #" "C17024" (at 262.89 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "~" (uuid 2ad1bc63-98bb-41f8-a7d2-044673759397))
+    (instances
+      (project "EnvHT"
+        (path "/12422a89-3d0c-485c-9386-f77121fd68fd"
+          (reference "C3") (unit 1)
+        )
+      )
+      (project "Coaster"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "C52") (unit 1)
         )
       )
     )
@@ -4330,6 +4398,42 @@
     )
   )
 
+  (symbol (lib_id "RevK:Hidden") (at 262.89 21.59 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 59cb59ad-a8d0-4d5b-b76c-6b94f91d2f58)
+    (property "Reference" "C1" (at 264.16 21.59 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nF" (at 276.225 21.59 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "RevK:C_0603_" (at 262.89 21.59 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 262.89 21.59 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Note" "X7R or X5R 0603" (at 262.89 21.59 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC Part #" "C30926" (at 262.89 21.59 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "~" (uuid bbc9a664-057d-4414-937b-454a0451db94))
+    (instances
+      (project "EnvHT"
+        (path "/12422a89-3d0c-485c-9386-f77121fd68fd"
+          (reference "C1") (unit 1)
+        )
+      )
+      (project "Coaster"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "C50") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "RevK:WS2812B-2mm") (at 36.83 49.53 90) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5be2e301-e90a-4f58-98d3-b18ad2f61e93)
@@ -4514,7 +4618,7 @@
   (symbol (lib_id "power:+3.3V") (at 235.585 29.21 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 67a49736-6bd6-4bc7-9c43-4c057665cfff)
-    (property "Reference" "#PWR029" (at 239.395 29.21 0)
+    (property "Reference" "#PWR023" (at 239.395 29.21 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 232.41 29.21 90)
@@ -4530,7 +4634,7 @@
     (instances
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "#PWR029") (unit 1)
+          (reference "#PWR023") (unit 1)
         )
       )
     )
@@ -4629,43 +4733,6 @@
     )
   )
 
-  (symbol (lib_id "RevK:Hidden") (at 262.89 29.21 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 7056f4d3-e0d4-4626-99ee-0004d2244c9f)
-    (property "Reference" "D25" (at 264.16 29.21 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "Schottky" (at 276.225 29.21 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "RevK:Hidden" (at 262.89 29.21 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "https://www.mouser.co.uk/datasheet/2/54/CD1206-B220_B2100-777245.pdf" (at 262.89 29.21 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Manufacturer" "Bourns" (at 262.89 29.21 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC Part #" "C143805" (at 262.89 29.21 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Part No" "" (at 262.89 29.21 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Note" "" (at 262.89 29.21 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "~" (uuid 705bbdde-66cb-4049-9b13-f6bb7a36a49e))
-    (instances
-      (project "Coaster"
-        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "D25") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:C") (at 129.54 187.96 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 7436bd9d-2e8e-41c2-a270-facb4b3103d8)
@@ -4687,40 +4754,6 @@
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
           (reference "C48") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "RevK:Hidden") (at 262.89 21.59 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 760f515e-b784-4ec2-8481-b7349460e7f8)
-    (property "Reference" "C50" (at 264.16 21.59 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "100nF" (at 276.225 21.59 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "RevK:Hidden" (at 262.89 21.59 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 262.89 21.59 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Note" "X7R or X5R 0603" (at 262.89 21.59 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC Part #" "C30926" (at 262.89 21.59 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Part No" "" (at 262.89 21.59 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "~" (uuid 42ecf067-206d-45df-b6c2-e7e61dc708d5))
-    (instances
-      (project "Coaster"
-        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "C50") (unit 1)
         )
       )
     )
@@ -5491,40 +5524,6 @@
     )
   )
 
-  (symbol (lib_id "RevK:Hidden") (at 262.89 23.495 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 9b12ac61-7102-44a1-ba2f-907aa980710c)
-    (property "Reference" "C51" (at 264.16 23.495 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "2.2uF" (at 276.225 23.495 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "RevK:Hidden" (at 262.89 23.495 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 262.89 23.495 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Note" "0603 or 0805" (at 262.89 23.495 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC Part #" "C19110" (at 262.89 23.495 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Part No" "" (at 262.89 23.495 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "~" (uuid 42c858ce-5d8c-4ef9-91c5-0bf4d614fca4))
-    (instances
-      (project "Coaster"
-        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "C51") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:C") (at 129.54 50.8 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 9b7bd252-0805-4cdd-92a3-5322dc5acea2)
@@ -5864,7 +5863,7 @@
   (symbol (lib_id "power:GND") (at 236.22 58.42 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b2dccf67-9a16-43fc-b528-8a8d243b98a9)
-    (property "Reference" "#PWR021" (at 229.87 58.42 0)
+    (property "Reference" "#PWR024" (at 229.87 58.42 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 229.87 58.42 90)
@@ -5880,7 +5879,7 @@
     (instances
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "#PWR021") (unit 1)
+          (reference "#PWR024") (unit 1)
         )
       )
     )
@@ -5968,40 +5967,6 @@
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
           (reference "P13") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "RevK:Hidden") (at 262.89 25.4 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid bb65ace0-ddbe-4b6e-ab6b-e61627a48c28)
-    (property "Reference" "C52" (at 264.16 25.4 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "10uF" (at 276.225 25.4 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "RevK:Hidden" (at 262.89 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 262.89 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Note" "0603 or 0805" (at 262.89 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC Part #" "C17024" (at 262.89 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Part No" "" (at 262.89 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "~" (uuid 7ce49758-b90b-4951-8889-0c4c221db09b))
-    (instances
-      (project "Coaster"
-        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "C52") (unit 1)
         )
       )
     )
@@ -6251,7 +6216,7 @@
   (symbol (lib_id "power:GND") (at 236.22 66.04 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c8c70a31-c626-405a-acc4-cdd4fe83d261)
-    (property "Reference" "#PWR023" (at 229.87 66.04 0)
+    (property "Reference" "#PWR026" (at 229.87 66.04 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 229.87 66.04 90)
@@ -6267,7 +6232,7 @@
     (instances
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "#PWR023") (unit 1)
+          (reference "#PWR026") (unit 1)
         )
       )
     )
@@ -6449,10 +6414,46 @@
     )
   )
 
+  (symbol (lib_id "RevK:Hidden") (at 262.89 29.21 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid d85ad9c6-fa82-4bbb-a095-434da27bf163)
+    (property "Reference" "D1" (at 264.16 29.21 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "Schottky" (at 276.225 29.21 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "RevK:D_1206_" (at 262.89 29.21 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "https://www.mouser.co.uk/datasheet/2/54/CD1206-B220_B2100-777245.pdf" (at 262.89 29.21 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Manufacturer" "Bourns" (at 262.89 29.21 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC Part #" "C143805" (at 262.89 29.21 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "~" (uuid 645ad7c8-c174-45ec-bdd0-4477c3bd3ac9))
+    (instances
+      (project "EnvHT"
+        (path "/12422a89-3d0c-485c-9386-f77121fd68fd"
+          (reference "D1") (unit 1)
+        )
+      )
+      (project "Coaster"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "D25") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:GND") (at 235.585 26.67 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid da6fa288-1333-4abb-aa25-cc01648eb576)
-    (property "Reference" "#PWR028" (at 229.235 26.67 0)
+    (property "Reference" "#PWR022" (at 229.235 26.67 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 232.3338 26.797 90)
@@ -6468,7 +6469,7 @@
     (instances
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "#PWR028") (unit 1)
+          (reference "#PWR022") (unit 1)
         )
       )
     )
@@ -6631,40 +6632,6 @@
     )
   )
 
-  (symbol (lib_id "RevK:Hidden") (at 262.89 27.305 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid e2ab68c1-b99d-4cc9-a4fa-42055ad778a4)
-    (property "Reference" "L1" (at 264.16 27.305 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "6.8uH" (at 276.225 27.305 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "RevK:Hidden" (at 262.89 27.305 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 262.89 27.305 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC Part #" "C354575" (at 262.89 27.305 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Part No" "" (at 262.89 27.305 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Note" "" (at 262.89 27.305 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "~" (uuid 83b8c2e7-041a-4d0b-a326-948a99c81d29))
-    (instances
-      (project "Coaster"
-        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "L1") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Connector:TestPoint") (at 231.14 115.57 90) (mirror x) (unit 1)
     (in_bom no) (on_board yes) (dnp no)
     (uuid e2f6b544-e51b-4494-b156-1e4e71cb1a9d)
@@ -6685,6 +6652,42 @@
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
           (reference "T6") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "RevK:Hidden") (at 262.89 23.495 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid e4568c6d-4ca5-43aa-886c-7dcbfb6ba495)
+    (property "Reference" "C2" (at 264.16 23.495 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "2.2uF" (at 276.225 23.495 0)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "RevK:C_0805_" (at 262.89 23.495 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 262.89 23.495 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Note" "0603 or 0805" (at 262.89 23.495 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC Part #" "C19110" (at 262.89 23.495 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "~" (uuid 7fb5e282-9194-496b-8bf7-815d81694ad2))
+    (instances
+      (project "EnvHT"
+        (path "/12422a89-3d0c-485c-9386-f77121fd68fd"
+          (reference "C2") (unit 1)
+        )
+      )
+      (project "Coaster"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "C51") (unit 1)
         )
       )
     )
@@ -6744,7 +6747,7 @@
   (symbol (lib_id "power:VBUS") (at 235.585 21.59 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ecfeecf2-9f2a-428c-9189-52d358d802fc)
-    (property "Reference" "#PWR027" (at 239.395 21.59 0)
+    (property "Reference" "#PWR021" (at 239.395 21.59 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VBUS" (at 231.1908 21.209 0)
@@ -6760,7 +6763,7 @@
     (instances
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "#PWR027") (unit 1)
+          (reference "#PWR021") (unit 1)
         )
       )
     )
@@ -6818,7 +6821,7 @@
   (symbol (lib_id "power:GND") (at 236.22 77.47 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f2078254-bc1a-49c1-a737-14a2abc2455f)
-    (property "Reference" "#PWR026" (at 229.87 77.47 0)
+    (property "Reference" "#PWR029" (at 229.87 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 229.87 77.47 90)
@@ -6834,7 +6837,7 @@
     (instances
       (project "Coaster"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-          (reference "#PWR026") (unit 1)
+          (reference "#PWR029") (unit 1)
         )
       )
     )

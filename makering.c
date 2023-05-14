@@ -135,7 +135,7 @@ main(int argc, const char *argv[])
             }
          }
          if (!strncmp(line, "  (gr_line ", 11) && strstr(line, "(layer \"Edge.Cuts\")") && strstr(line, "(width 0.05)"))
-            continue;           /* edge cuts (size is how we know it is ours) */
+            continue;           /* edge cuts (size is how we know it is ours) */ /* DOES NOT WORK ON VERSION 7 */
          if (skipping)
          {
             if (!strncmp(line, "  )", 3))
@@ -218,6 +218,7 @@ main(int argc, const char *argv[])
       fprintf(o, "    (fp_text value \"-\" (at 0 0) (layer \"F.SilkS\") hide\n");
       fprintf(o, "      (effects (font (size 1 1) (thickness 0.15)))\n");
       fprintf(o, "    )\n");
+      fprintf(o, "    (attr smd)\n");
       fprintf(o, "  )\n");
    }
 
@@ -240,7 +241,7 @@ main(int argc, const char *argv[])
          fprintf(o, "  (zone (net %d) (net_name \"%s\") (layers \"%s\") (hatch edge 0.508)\n", netid, net, layer);
          fprintf(o, "    (connect_pads (clearance 0.2))\n");
          fprintf(o, "    (min_thickness 0.254) (filled_areas_thickness no)\n");
-         fprintf(o, "    (fill yes (thermal_gap 0.5) (thermal_bridge_width 1))\n");
+         fprintf(o, "    (fill yes (thermal_gap 0.5) (thermal_bridge_width 0.75))\n");
          fprintf(o, "    (polygon\n");
          fprintf(o, "      (pts\n");
       }
