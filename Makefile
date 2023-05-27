@@ -8,7 +8,6 @@ SUFFIX := $(shell components/ESP32-RevK/buildsuffix)
 
 all:
 	@echo Make: build/$(PROJECT_NAME)$(SUFFIX).bin
-	@touch $(IDF_PATH)/components/esp_app_format/esp_app_desc.c
 	@idf.py build
 	@cp --remove-destination build/$(PROJECT_NAME).bin $(PROJECT_NAME)$(SUFFIX).bin
 	@echo Done: build/$(PROJECT_NAME)$(SUFFIX).bin
