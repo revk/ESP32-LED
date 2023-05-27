@@ -17,8 +17,12 @@ makering: makering.c
 	gcc -I/usr/local/include -L/usr/local/lib -O -o $@ $< -lpopt -lm -g
 
 issue:  
+	-git pull
+	-git submodule update --recursive
+	-git commit -a -m checkpoint
 	@make set
 	cp --remove-destination LED*.bin release
+	git commit -a -m release
 
 set:	solo wroom pico
 
