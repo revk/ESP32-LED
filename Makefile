@@ -16,7 +16,8 @@ all:
 makering: makering.c
 	gcc -I/usr/local/include -L/usr/local/lib -O -o $@ $< -lpopt -lm -g
 
-issue:  set
+issue:  
+	@make set
 	cp --remove-destination LED*.bin release
 
 set:	solo wroom pico
