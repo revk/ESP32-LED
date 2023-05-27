@@ -23,6 +23,7 @@ issue:
 	@make set
 	cp --remove-destination LED*.bin release
 	git commit -a -m release
+	git push
 
 set:	solo wroom pico
 
