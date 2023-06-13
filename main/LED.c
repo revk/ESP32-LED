@@ -499,7 +499,7 @@ app_main ()
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    revk_boot (&app_callback);
-#define io(n,d)           revk_register(#n,0,sizeof(n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD);
+#define io(n,d)           revk_register(#n,0,sizeof(n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD|SETTING_FIX);
 #define b(n) revk_register(#n,0,sizeof(n),&n,NULL,SETTING_BOOLEAN);
 #define u32(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
 #define u32l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
