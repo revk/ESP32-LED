@@ -828,7 +828,7 @@
 
   (footprint "MountingHole:MountingHole_2mm" (layer "F.Cu")
     (tstamp 3477164a-1655-4c6a-9a34-9871cef66f6b)
-    (at 106 40)
+    (at 105 39.5)
     (descr "Mounting Hole 2mm, no annular")
     (tags "mounting hole 2mm no annular")
     (property "Sheetfile" "LED.kicad_sch")
