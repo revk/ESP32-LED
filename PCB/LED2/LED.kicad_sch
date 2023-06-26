@@ -1449,6 +1449,9 @@
   (junction (at 227.965 24.765) (diameter 0) (color 0 0 0 0)
     (uuid 11bcfcbf-ef74-42db-89e5-7aff5bbe4e49)
   )
+  (junction (at 247.015 46.355) (diameter 0) (color 0 0 0 0)
+    (uuid 4c99c549-e55b-4903-ac43-05594e919bda)
+  )
   (junction (at 115.57 90.17) (diameter 0) (color 0 0 0 0)
     (uuid 944aaefa-0e27-456f-b061-a2513f120c6b)
   )
@@ -1555,6 +1558,10 @@
     (stroke (width 0) (type default))
     (uuid aa8e79d5-4110-472a-8939-dffc4dee8b42)
   )
+  (wire (pts (xy 238.125 46.355) (xy 247.015 46.355))
+    (stroke (width 0) (type default))
+    (uuid c579ff96-2201-4bb1-b90d-01047824e368)
+  )
   (wire (pts (xy 173.355 31.75) (xy 175.895 31.75))
     (stroke (width 0) (type default))
     (uuid c5ec54f0-0d08-4954-a314-8acf9272ac84)
@@ -1574,6 +1581,10 @@
   (wire (pts (xy 227.965 24.765) (xy 229.235 24.765))
     (stroke (width 0) (type default))
     (uuid d180a2ce-dffb-4c6a-85a9-88b06e05437b)
+  )
+  (wire (pts (xy 247.015 46.355) (xy 252.73 46.355))
+    (stroke (width 0) (type default))
+    (uuid ffa68311-0832-4276-8f40-64b62ad1e1a6)
   )
 
   (global_label "D-" (shape bidirectional) (at 217.805 41.275 180) (fields_autoplaced)
@@ -1681,10 +1692,10 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "GPIO0" (shape output) (at 238.125 46.355 0) (fields_autoplaced)
+  (global_label "GPIO0" (shape output) (at 252.73 46.355 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid ba3491b7-0714-4022-b960-753f84157f8b)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 246.0614 46.355 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 260.6664 46.355 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
@@ -2374,6 +2385,36 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 198.12 65.405 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 5d4148b6-80c1-4f33-8dce-88378ecd944e)
+    (property "Reference" "#PWR0105" (at 198.12 71.755 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 198.12 69.8484 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 198.12 65.405 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 198.12 65.405 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 92b5e137-dac1-4720-8a6b-217d9080bda3))
+    (instances
+      (project "USBA"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "#PWR0105") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR016") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:R") (at 104.14 36.195 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5f1ed596-4f38-45d8-aca6-1d537920c6ea)
@@ -2547,6 +2588,36 @@
     )
   )
 
+  (symbol (lib_id "power:+3.3V") (at 247.015 38.735 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 7e3992aa-00ad-4e4d-90cf-500c06406a18)
+    (property "Reference" "#PWR03" (at 247.015 42.545 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3.3V" (at 247.015 35.2331 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 247.015 38.735 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 247.015 38.735 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 3e605303-d1f3-44bb-99ff-5aac7f039a9b))
+    (instances
+      (project "USBA"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "#PWR03") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR014") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:+3.3V") (at 38.1 34.925 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 81514976-f35a-41bf-a0cd-9802079092a5)
@@ -2625,6 +2696,36 @@
     )
   )
 
+  (symbol (lib_id "power:+3.3V") (at 198.12 57.785 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 83fd19fb-b52a-4199-8278-0de4c4e2328a)
+    (property "Reference" "#PWR0106" (at 198.12 61.595 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3.3V" (at 198.12 54.2092 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 198.12 57.785 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 198.12 57.785 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 9878e3c1-51ba-415b-811f-fffb405bb045))
+    (instances
+      (project "USBA"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "#PWR0106") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR015") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:+3.3V") (at 227.965 23.495 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 85b88be4-804c-4a8c-bf96-d579cd3cd0ec)
@@ -2684,6 +2785,32 @@
       (project "Reference"
         (path "/825c70b0-4860-42b7-97dc-86bfa46e06fd"
           (reference "FID2") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:R") (at 247.015 42.545 180) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 889a8429-3531-464a-8d64-2e9d1aa689c7)
+    (property "Reference" "R2" (at 245.11 42.545 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "4k7" (at 247.015 42.545 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "RevK:R_0402" (at 248.793 42.545 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 247.015 42.545 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a76803bd-cee1-4d16-9904-9764e30d0159))
+    (pin "2" (uuid 1fc9e742-82a3-4fd2-994e-a1f0d4eca0c5))
+    (instances
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "R2") (unit 1)
         )
       )
     )
@@ -2821,6 +2948,37 @@
       (project "Reference"
         (path "/825c70b0-4860-42b7-97dc-86bfa46e06fd"
           (reference "#PWR04") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:C") (at 198.12 61.595 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 913a8923-dfa2-44c1-85c5-34db762af97e)
+    (property "Reference" "C4" (at 201.041 60.7603 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nF" (at 201.041 63.2972 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "RevK:C_0402" (at 199.0852 65.405 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 198.12 61.595 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid fbe9ddb7-c2ad-4a3a-b1c7-5b05c9e7c8ae))
+    (pin "2" (uuid eabec086-19ca-4c6f-85fb-27fe18b6de51))
+    (instances
+      (project "USBA"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "C4") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "C6") (unit 1)
         )
       )
     )
