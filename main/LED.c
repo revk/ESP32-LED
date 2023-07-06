@@ -530,5 +530,5 @@ app_main ()
 #undef b
 #undef s
       revk_start ();
-   revk_task ("LED", led_task, NULL);
+   revk_task ("LED", led_task, NULL,4);
 }
