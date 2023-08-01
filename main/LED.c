@@ -530,9 +530,5 @@ app_main ()
 #undef b
 #undef s
       revk_start ();
-<<<<<<< HEAD
    revk_task ("LED", led_task, NULL, 4);
-=======
-   revk_task ("LED", led_task, NULL,4);
->>>>>>> e94b3340d2a9b29b2609ee75f80c2af3d8e7ec38
 }
