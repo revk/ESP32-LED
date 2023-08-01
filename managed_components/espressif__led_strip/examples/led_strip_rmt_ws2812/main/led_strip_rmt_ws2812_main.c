@@ -11,21 +11,16 @@
 #include "esp_err.h"
 
 // GPIO assignment
-#define LED_STRIP_BLINK_GPIO  8
-
-// LED numbers in the strip
-#define LED_STRIP_LED_NUMBERS 1
-
+#define LED_STRIP_BLINK_GPIO  2
+// Numbers of the LED in the strip
+#define LED_STRIP_LED_NUMBERS 24
 // 10MHz resolution, 1 tick = 0.1us (led strip needs a high resolution)
 #define LED_STRIP_RMT_RES_HZ  (10 * 1000 * 1000)
 
 static const char *TAG = "example";
 
-void app_main(void)
+led_strip_handle_t configure_led(void)
 {
-    // LED Strip object handle
-    led_strip_handle_t led_strip;
-
     // LED strip general initialization, according to your led board design
     led_strip_config_t strip_config = {
         .strip_gpio_num = LED_STRIP_BLINK_GPIO,   // The GPIO that connected to the LED strip's data line
@@ -41,21 +36,33 @@ void app_main(void)
         .resolution_hz = LED_STRIP_RMT_RES_HZ, // RMT counter clock frequency
         .flags.with_dma = false,               // DMA feature is available on ESP target like ESP32-S3
     };
+
+    // LED Strip object handle
+    led_strip_handle_t led_strip;
     ESP_ERROR_CHECK(led_strip_new_rmt_device(&strip_config, &rmt_config, &led_strip));
     ESP_LOGI(TAG, "Created LED strip object with RMT backend");
+    return led_strip;
+}
 
+void app_main(void)
+{
+    led_strip_handle_t led_strip = configure_led();
     bool led_on_off = false;
 
     ESP_LOGI(TAG, "Start blinking LED strip");
     while (1) {
         if (led_on_off) {
             /* Set the LED pixel using RGB from 0 (0%) to 255 (100%) for each color */
-            ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, 0, 16, 16, 16));
+            for (int i = 0; i < LED_STRIP_LED_NUMBERS; i++) {
+                ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, 5, 5, 5));
+            }
             /* Refresh the strip to send data */
             ESP_ERROR_CHECK(led_strip_refresh(led_strip));
+            ESP_LOGI(TAG, "LED ON!");
         } else {
             /* Set all LED off to clear all pixels */
             ESP_ERROR_CHECK(led_strip_clear(led_strip));
+            ESP_LOGI(TAG, "LED OFF!");
         }
 
         led_on_off = !led_on_off;
