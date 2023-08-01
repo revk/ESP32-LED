@@ -12,3 +12,4 @@ sdkconfig
 *.BAK
 makering
 *.dSYM
+managed_components

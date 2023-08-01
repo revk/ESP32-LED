@@ -6,6 +6,12 @@ Various stuff in one app that handles WS2812 LED strips, including
 - Spinning rings
 - Stargate LED strip
 - Clock
+- Cylon/knightrider
+- Random
+- Twinkle
+- Block text: Scrolling text
+- Block text: Time
+- Laval lamp random effect
 - Other stuff in due course
 
 See [Overview](Manuals/Overview.md)
