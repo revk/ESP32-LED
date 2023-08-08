@@ -94,7 +94,7 @@
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
         "silk_edge_clearance": "ignore",
-        "silk_over_copper": "warning",
+        "silk_over_copper": "ignore",
         "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
@@ -181,6 +181,7 @@
         0.2,
         0.25,
         0.4,
+        0.46,
         0.5
       ],
       "via_dimensions": [
