@@ -13,3 +13,4 @@ sdkconfig
 makering
 *.dSYM
 managed_components
+dependencies.lock

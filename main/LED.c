@@ -379,7 +379,9 @@ led_task (void *x)
    led_strip_rmt_config_t rmt_config = {
       .clk_src = RMT_CLK_SRC_DEFAULT,   // different clock source can lead to different power consumption
       .resolution_hz = 10 * 1000 * 1000,        // 10MHz
-      .flags.with_dma = false,  // whether to enable the DMA feature
+#ifdef	CONFIG_IDF_TARGET_ESP32S3
+      .flags.with_dma = true, 
+#endif
    };
    REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip));
    REVK_ERR_CHECK (led_strip_clear (strip));
