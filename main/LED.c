@@ -12,7 +12,7 @@ static const char TAG[] = "LED";
 #include "app.h"
 #include <esp_http_server.h>
 
-#define a(a)	extern const char* app##a(app_t*);
+#define a(a,d)	extern const char* app##a(app_t*);
 #include "apps.h"
 
 struct applist_s
@@ -21,8 +21,8 @@ struct applist_s
    app_f *app;
    uint8_t ring:1;              // Is a ring based app
 } applist[] = {
-#define a(a)	{#a,&app##a,0},
-#define r(a)	{#a,&app##a,1},
+#define a(a,d)	{#a,&app##a,0},
+#define r(a,d)	{#a,&app##a,1},
 #include "apps.h"
 };
 
@@ -547,20 +547,42 @@ web_root (httpd_req_t * req)
       return revk_web_settings (req);   // Direct to web set up
    revk_web_head (req, "LED");
 
-   size_t l=httpd_req_get_url_query_len(req);
-   if(l>0&&l<20)
+   size_t l = httpd_req_get_url_query_len (req);
+   if (l > 0 && l < 20)
    {
-	   char query[21];
-	   if(!httpd_req_get_url_query_str(req,query,sizeof(query)))
-			   {
-ESP_LOGE(TAG,"query=%s",query);
-			   }
-
+      char query[21];
+      if (!httpd_req_get_url_query_str (req, query, sizeof (query)))
+         app_callback (0, prefixcommand, NULL, query, NULL);
    }
 
-   httpd_resp_sendstr_chunk(req,"<a href='?stop'>Stop</a>");
-#define a(x) httpd_resp_sendstr_chunk(req,"<a href='?"); httpd_resp_sendstr_chunk(req,#x); httpd_resp_sendstr_chunk(req,"</a>");
+   httpd_resp_sendstr_chunk (req, "<h1>LED controller</h1><ul>");
+   xSemaphoreTake (app_mutex, portMAX_DELAY);
+   for (unsigned int i = 0; i < MAXAPPS; i++)
+   {
+      app_t *a = &active[i];
+      if (a->app&&*a->name&&!a->stop)
+      {
+         httpd_resp_sendstr_chunk (req, "<li>");
+         httpd_resp_sendstr_chunk (req, a->name);
+         httpd_resp_sendstr_chunk (req, "</li>");
+      }
+   }
+   xSemaphoreGive (app_mutex);
+   httpd_resp_sendstr_chunk (req, "</ul><fieldset><legend>Select command</legend>");
+
+   void button (const char *tag, const char *value)
+   {
+      httpd_resp_sendstr_chunk (req, "<a href='?");
+      httpd_resp_sendstr_chunk (req, tag);
+      httpd_resp_sendstr_chunk (req, "'><button>");
+      httpd_resp_sendstr_chunk (req, value);
+      httpd_resp_sendstr_chunk (req, "</button></a> ");
+   }
+   button ("stop", "Stop");
+#define a(x,d) button(#x,#d);
+#define t(x,d)
 #include "apps.h"
+   httpd_resp_sendstr_chunk (req, "</fieldset>");
 
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0);
 }

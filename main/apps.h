@@ -1,28 +1,28 @@
 // The list of apps
 
 #ifndef	a
-#define	a(n)
+#define	a(n,d)
 #endif
 #ifndef	r
-#define	r(n) a(n)
+#define	r(n,d) a(n,d)
 #endif
 #ifndef	t
-#define	t(n) a(n)
+#define	t(n,d) a(n,d)
 #endif
 
-a (idle)                        //
-   a (pulse)                    //
-   a (cylon)                    //
-   a (countdown)                //
-   a (random)                   //
-   a (twinkle)                  //
-   r (clock)                    //
-   r (stargate)                 //
-   r (spin)                     //
-   t (text)                     //
-   t (kern)                     //
-   t (time)                     //
-   r (lava)                     //
+a (idle,Idle)                        //
+   a (pulse,Pulse)                    //
+   a (cylon,Cylon)                    //
+   a (countdown,Countdown)                //
+   a (random,Random)                   //
+   a (twinkle,Twinkle)                  //
+   r (clock,Clock face)                    //
+   r (stargate,Stargate dialling)                 //
+   r (spin,Spin)                     //
+   r (lava,Lava Lamp)                     //
+   t (text,Text)                     //
+   t (kern,Text (kerned))                     //
+   t (time,Text time)                     //
 #undef a
 #undef r
 #undef t
