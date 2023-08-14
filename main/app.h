@@ -22,7 +22,8 @@
         u8(maxg,255)	\
         u8(maxb,255)	\
         u16(leds,12)	\
-	s(app,spin)	\
+        u8(webcontrol,2)\
+	s(app,pulse)	\
 	gpio		\
 
 #define	params		\
@@ -62,8 +63,8 @@
 #define u8l(n,d)	extern uint8_t n;
 #define b(n)		extern uint8_t n;
 #define s(n,d)		extern char * n;
-#define io(n,d)         extern uint16_t n;
-#define led(n,a,d)      extern uint16_t n[a];
+#define io(n,d)         extern uint8_t n;
+#define led(n,a,d)      extern uint8_t n[a];
 settings                        //
    params                       //
 #undef led
