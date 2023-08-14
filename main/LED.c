@@ -42,7 +42,7 @@ uint8_t *ledb = NULL;
 #define u8l(n,d) uint8_t n;
 #define b(n) uint8_t n;
 #define s(n,d) char * n;
-#define io(n,d)           uint8_t n;
+#define io(n,d)           uint16_t n;
 settings                        //
    params                       //
 #undef io
@@ -367,14 +367,14 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 void
 led_task (void *x)
 {
-   ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & 63, ledgpio & 64 ? " (inverted)" : "");
+   ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & 0x3FFF, ledgpio & 0x4000 ? " (inverted)" : "");
    led_strip_handle_t strip = NULL;
    led_strip_config_t strip_config = {
-      .strip_gpio_num = (ledgpio & 63),
+      .strip_gpio_num = (ledgpio & 0x3FFF),
       .max_leds = leds,         // The number of LEDs in the strip,
       .led_pixel_format = LED_PIXEL_FORMAT_GRB, // Pixel format of your LED strip
       .led_model = LED_MODEL_WS2812,    // LED strip model
-      .flags.invert_out = ((ledgpio & 64) ? 1 : 0),     // whether to invert the output signal (useful when your hardware has a level inverter)
+      .flags.invert_out = ((ledgpio & 0x4000) ? 1 : 0),     // whether to invert the output signal (useful when your hardware has a level inverter)
    };
    led_strip_rmt_config_t rmt_config = {
       .clk_src = RMT_CLK_SRC_DEFAULT,   // different clock source can lead to different power consumption

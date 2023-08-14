@@ -2,14 +2,26 @@
 
 #include "revk.h"
 
+#ifdef	CONFIG_IDF_TARGET_ESP32
+#define	gpio	\
+	io(ledgpio,22)	\
+
+#endif
+
+#ifdef	CONFIG_IDF_TARGET_ESP32S3
+#define	gpio	\
+	io(ledgpio,8)	\
+
+#endif
+
 #define settings	\
 	u8(cps,10)	\
-        io(ledgpio,22)  \
         u8(maxr,255)	\
         u8(maxg,255)	\
         u8(maxb,255)	\
-        u16(leds,24)	\
+        u16(leds,12)	\
 	s(app,spin)	\
+	gpio		\
 
 #define	params		\
 	u16r(start,)	\
@@ -48,7 +60,7 @@
 #define u8l(n,d)	extern uint8_t n;
 #define b(n)		extern uint8_t n;
 #define s(n,d)		extern char * n;
-#define io(n,d)         extern uint8_t n;
+#define io(n,d)         extern uint16_t n;
 settings                        //
    params                       //
 #undef io
