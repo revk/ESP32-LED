@@ -547,6 +547,21 @@ web_root (httpd_req_t * req)
       return revk_web_settings (req);   // Direct to web set up
    revk_web_head (req, "LED");
 
+   size_t l=httpd_req_get_url_query_len(req);
+   if(l>0&&l<20)
+   {
+	   char query[21];
+	   if(!httpd_req_get_url_query_str(req,query,sizeof(query)))
+			   {
+ESP_LOGE(TAG,"query=%s",query);
+			   }
+
+   }
+
+   httpd_resp_sendstr_chunk(req,"<a href='?stop'>Stop</a>");
+#define a(x) httpd_resp_sendstr_chunk(req,"<a href='?"); httpd_resp_sendstr_chunk(req,#x); httpd_resp_sendstr_chunk(req,"</a>");
+#include "apps.h"
+
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0);
 }
 
