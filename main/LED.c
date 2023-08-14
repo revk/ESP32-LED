@@ -510,7 +510,7 @@ led_task (void *x)
 void
 revk_web_extra (httpd_req_t * req)
 {
-   httpd_resp_sendstr_chunk (req, "<tr><td>LEDS</td><td><input size=3 name=leds value='");
+   httpd_resp_sendstr_chunk (req, "<tr><td>LEDs</td><td><input size=3 name=leds value='");
    char temp[20];
    sprintf (temp, "%d", leds);
    httpd_resp_sendstr_chunk (req, temp);
