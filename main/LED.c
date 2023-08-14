@@ -514,7 +514,7 @@ revk_web_extra (httpd_req_t * req)
    char temp[20];
    sprintf (temp, "%d", leds);
    httpd_resp_sendstr_chunk (req, temp);
-   httpd_resp_sendstr_chunk (req, "</td></tr>");
+   httpd_resp_sendstr_chunk (req, "'></td></tr>");
 }
 
 
@@ -555,12 +555,14 @@ web_root (httpd_req_t * req)
          app_callback (0, prefixcommand, NULL, query, NULL);
    }
 
-   httpd_resp_sendstr_chunk (req, "<h1>LED controller</h1><ul>");
+   httpd_resp_sendstr_chunk (req, "<h1>LED controller: ");
+   httpd_resp_sendstr_chunk (req, hostname);
+   httpd_resp_sendstr_chunk (req, "</h1><ul>");
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    for (unsigned int i = 0; i < MAXAPPS; i++)
    {
       app_t *a = &active[i];
-      if (a->app&&*a->name&&!a->stop)
+      if (a->app && *a->name && !a->stop)
       {
          httpd_resp_sendstr_chunk (req, "<li>");
          httpd_resp_sendstr_chunk (req, a->name);
@@ -569,7 +571,6 @@ web_root (httpd_req_t * req)
    }
    xSemaphoreGive (app_mutex);
    httpd_resp_sendstr_chunk (req, "</ul><fieldset><legend>Select command</legend>");
-
    void button (const char *tag, const char *value)
    {
       httpd_resp_sendstr_chunk (req, "<a href='?");
@@ -583,7 +584,6 @@ web_root (httpd_req_t * req)
 #define t(x,d)
 #include "apps.h"
    httpd_resp_sendstr_chunk (req, "</fieldset>");
-
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0);
 }
 
@@ -633,11 +633,9 @@ app_main ()
    {
       // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();
-
       // When updating the code below, make sure this is enough
       // Note that we're also 4 adding revk's web config handlers
       config.max_uri_handlers = 8;
-
       if (!httpd_start (&webserver, &config))
       {
          if (webcontrol >= 2)
