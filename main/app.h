@@ -62,8 +62,8 @@
 #define u8l(n,d)	extern uint8_t n;
 #define b(n)		extern uint8_t n;
 #define s(n,d)		extern char * n;
-#define io(n,d)         extern uint16_t n;
-#define led(n,a,d)      extern uint16_t n[a];
+#define io(n,d)         extern uint8_t n;
+#define led(n,a,d)      extern uint8_t n[a];
 settings                        //
    params                       //
 #undef led
