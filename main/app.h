@@ -22,6 +22,7 @@
         u8(maxg,255)	\
         u8(maxb,255)	\
         u16(leds,12)	\
+        u8(webcontrol,2)\
 	s(app,pulse)	\
 	gpio		\
 

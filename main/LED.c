@@ -26,6 +26,8 @@ struct applist_s
 #include "apps.h"
 };
 
+static httpd_handle_t webserver = NULL;
+
 uint8_t *ledr = NULL;
 uint8_t *ledg = NULL;
 uint8_t *ledb = NULL;
@@ -512,12 +514,48 @@ revk_web_extra (httpd_req_t * req)
    char temp[20];
    sprintf (temp, "%d", leds);
    httpd_resp_sendstr_chunk (req, temp);
-httpd_resp_sendstr_chunk (req, "</td></tr>");
+   httpd_resp_sendstr_chunk (req, "</td></tr>");
 }
 
-                          void app_main ()
-                          {
-                          app_mutex = xSemaphoreCreateBinary (); xSemaphoreGive (app_mutex); revk_boot (&app_callback);
+
+static void
+register_uri (const httpd_uri_t * uri_struct)
+{
+   esp_err_t res = httpd_register_uri_handler (webserver, uri_struct);
+   if (res != ESP_OK)
+   {
+      ESP_LOGE (TAG, "Failed to register %s, error code %d", uri_struct->uri, res);
+   }
+}
+
+static void
+register_get_uri (const char *uri, esp_err_t (*handler) (httpd_req_t * r))
+{
+   httpd_uri_t uri_struct = {
+      .uri = uri,
+      .method = HTTP_GET,
+      .handler = handler,
+   };
+
+   register_uri (&uri_struct);
+}
+
+static esp_err_t
+web_root (httpd_req_t * req)
+{
+   if (revk_link_down () && webcontrol >= 2)
+      return revk_web_settings (req);   // Direct to web set up
+   revk_web_head (req, "LED");
+
+   return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0);
+}
+
+void
+app_main ()
+{
+   app_mutex = xSemaphoreCreateBinary ();
+   xSemaphoreGive (app_mutex);
+   revk_boot (&app_callback);
 #ifndef CONFIG_REVK_BLINK
 #define led(n,a,d)      revk_register(#n,a,sizeof(*n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD|SETTING_FIX);
 #else
@@ -537,8 +575,8 @@ httpd_resp_sendstr_chunk (req, "</td></tr>");
 #define s16r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,SETTING_SIGNED);
 #define u8l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
 #define s(n,d) revk_register(#n,0,0,&n,#d,0);
-                          settings      //
-                          params        //
+   settings                     //
+      params                    //
 #undef io
 #undef u32
 #undef u32l
@@ -553,4 +591,22 @@ httpd_resp_sendstr_chunk (req, "</td></tr>");
 #undef u8l
 #undef b
 #undef s
-                          revk_start (); revk_task ("LED", led_task, NULL, 4);}
+      revk_start ();
+   if (webcontrol)
+   {
+      // Web interface
+      httpd_config_t config = HTTPD_DEFAULT_CONFIG ();
+
+      // When updating the code below, make sure this is enough
+      // Note that we're also 4 adding revk's web config handlers
+      config.max_uri_handlers = 8;
+
+      if (!httpd_start (&webserver, &config))
+      {
+         if (webcontrol >= 2)
+            revk_web_settings_add (webserver);
+         register_get_uri ("/", web_root);
+      }
+   }
+   revk_task ("LED", led_task, NULL, 4);
+}
