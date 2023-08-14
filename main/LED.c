@@ -10,6 +10,7 @@ static const char TAG[] = "LED";
 #include <driver/uart.h>
 #include "led_strip.h"
 #include "app.h"
+#include <esp_http_server.h>
 
 #define a(a)	extern const char* app##a(app_t*);
 #include "apps.h"
@@ -380,13 +381,13 @@ led_task (void *x)
       .max_leds = leds,         // The number of LEDs in the strip,
       .led_pixel_format = LED_PIXEL_FORMAT_GRB, // Pixel format of your LED strip
       .led_model = LED_MODEL_WS2812,    // LED strip model
-      .flags.invert_out = ((ledgpio & 0x4000) ? 1 : 0),     // whether to invert the output signal (useful when your hardware has a level inverter)
+      .flags.invert_out = ((ledgpio & 0x4000) ? 1 : 0), // whether to invert the output signal (useful when your hardware has a level inverter)
    };
    led_strip_rmt_config_t rmt_config = {
       .clk_src = RMT_CLK_SRC_DEFAULT,   // different clock source can lead to different power consumption
       .resolution_hz = 10 * 1000 * 1000,        // 10MHz
 #ifdef	CONFIG_IDF_TARGET_ESP32S3
-      .flags.with_dma = true, 
+      .flags.with_dma = true,
 #endif
    };
    REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip));
@@ -502,11 +503,18 @@ led_task (void *x)
 }
 
 void
-app_main ()
+revk_web_extra (httpd_req_t * req)
 {
-   app_mutex = xSemaphoreCreateBinary ();
-   xSemaphoreGive (app_mutex);
-   revk_boot (&app_callback);
+   httpd_resp_sendstr_chunk (req, "<tr><td>LEDS</td><td><input maxlength=3 name=leds value='");
+   char temp[20];
+   sprintf (temp, "%d", leds);
+   httpd_resp_sendstr_chunk (req, temp);
+httpd_resp_sendstr_chunk (req, "</td></tr>");
+}
+
+                          void app_main ()
+                          {
+                          app_mutex = xSemaphoreCreateBinary (); xSemaphoreGive (app_mutex); revk_boot (&app_callback);
 #ifndef CONFIG_REVK_BLINK
 #define led(n,a,d)      revk_register(#n,a,sizeof(*n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD|SETTING_FIX);
 #else
@@ -526,8 +534,8 @@ app_main ()
 #define s16r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,SETTING_SIGNED);
 #define u8l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
 #define s(n,d) revk_register(#n,0,0,&n,#d,0);
-   settings                     //
-      params                    //
+                          settings      //
+                          params        //
 #undef io
 #undef u32
 #undef u32l
@@ -542,6 +550,4 @@ app_main ()
 #undef u8l
 #undef b
 #undef s
-      revk_start ();
-   revk_task ("LED", led_task, NULL, 4);
-}
+                          revk_start (); revk_task ("LED", led_task, NULL, 4);}
