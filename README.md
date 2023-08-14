@@ -22,5 +22,4 @@ Available on [Amazon](https://www.amazon.co.uk/dp/B0C1W1XJS8)
 
 Includes PCB design (note, output in inverted).
 
-![Top](PCB/LED/top.png)
-![Bottom](PCB/LED/bottom.png)
+![Uploading 311667.jpg…]()
