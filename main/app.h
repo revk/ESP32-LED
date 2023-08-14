@@ -22,7 +22,7 @@
         u8(maxg,255)	\
         u8(maxb,255)	\
         u16(leds,12)	\
-	s(app,)	\
+	s(app,pulse)	\
 	gpio		\
 
 #define	params		\
