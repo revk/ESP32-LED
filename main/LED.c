@@ -46,7 +46,7 @@ uint8_t *ledb = NULL;
 #define u8l(n,d) uint8_t n;
 #define b(n) uint8_t n;
 #define s(n,d) char * n;
-#define io(n,d)           uint16_t n;
+#define io(n,d)           uint8_t n;
 #ifdef  CONFIG_REVK_BLINK
 #define led(n,a,d)      extern uint8_t n[a];
 #else
