@@ -5,7 +5,7 @@
 #ifdef	CONFIG_IDF_TARGET_ESP32
 #define	gpio	\
 	io(ledgpio,22)	\
-	led(blink,3,-34 -33 -48)\
+	led(blink,3,-20 -8 -21)\
 
 #endif
 
