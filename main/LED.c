@@ -30,6 +30,9 @@ uint8_t *ledr = NULL;
 uint8_t *ledg = NULL;
 uint8_t *ledb = NULL;
 
+#define	IO_MASK	0x3F
+#define	IO_INV	0x40
+
 #define u32(n,d)        uint32_t n;
 #define u32l(n,d)        uint32_t n;
 #define s8(n,d) int8_t n;
@@ -45,9 +48,9 @@ uint8_t *ledb = NULL;
 #define s(n,d) char * n;
 #define io(n,d)           uint16_t n;
 #ifdef  CONFIG_REVK_BLINK
-#define led(n,a,d)      extern uint16_t n[a];
+#define led(n,a,d)      extern uint8_t n[a];
 #else
-#define led(n,a,d)      uint16_t n[a];
+#define led(n,a,d)      uint8_t n[a];
 #endif
 settings                        //
    params                       //
@@ -374,14 +377,14 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 void
 led_task (void *x)
 {
-   ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & 0x3FFF, ledgpio & 0x4000 ? " (inverted)" : "");
+   ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & IO_MASK, ledgpio & IO_INV ? " (inverted)" : "");
    led_strip_handle_t strip = NULL;
    led_strip_config_t strip_config = {
-      .strip_gpio_num = (ledgpio & 0x3FFF),
+      .strip_gpio_num = (ledgpio & IO_MASK),
       .max_leds = leds,         // The number of LEDs in the strip,
       .led_pixel_format = LED_PIXEL_FORMAT_GRB, // Pixel format of your LED strip
       .led_model = LED_MODEL_WS2812,    // LED strip model
-      .flags.invert_out = ((ledgpio & 0x4000) ? 1 : 0), // whether to invert the output signal (useful when your hardware has a level inverter)
+      .flags.invert_out = ((ledgpio & IO_INV) ? 1 : 0), // whether to invert the output signal (useful when your hardware has a level inverter)
    };
    led_strip_rmt_config_t rmt_config = {
       .clk_src = RMT_CLK_SRC_DEFAULT,   // different clock source can lead to different power consumption
