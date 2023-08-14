@@ -5,12 +5,14 @@
 #ifdef	CONFIG_IDF_TARGET_ESP32
 #define	gpio	\
 	io(ledgpio,22)	\
+	led(blink,3,-34 -33 -48)\
 
 #endif
 
 #ifdef	CONFIG_IDF_TARGET_ESP32S3
 #define	gpio	\
 	io(ledgpio,8)	\
+	led(blink,3,-10 -9 -11)\
 
 #endif
 
@@ -61,8 +63,10 @@
 #define b(n)		extern uint8_t n;
 #define s(n,d)		extern char * n;
 #define io(n,d)         extern uint16_t n;
+#define led(n,a,d)      extern uint16_t n[a];
 settings                        //
    params                       //
+#undef led
 #undef io
 #undef u32
 #undef u32l

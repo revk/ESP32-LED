@@ -43,8 +43,14 @@ uint8_t *ledb = NULL;
 #define b(n) uint8_t n;
 #define s(n,d) char * n;
 #define io(n,d)           uint16_t n;
+#ifdef  CONFIG_REVK_BLINK
+#define led(n,a,d)      extern uint16_t n[a];
+#else
+#define led(n,a,d)      uint16_t n[a];
+#endif
 settings                        //
    params                       //
+#undef led
 #undef io
 #undef u32
 #undef u32l
@@ -501,6 +507,11 @@ app_main ()
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    revk_boot (&app_callback);
+#ifndef CONFIG_REVK_BLINK
+#define led(n,a,d)      revk_register(#n,a,sizeof(*n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD|SETTING_FIX);
+#else
+#define led(n,a,d)
+#endif
 #define io(n,d)           revk_register(#n,0,sizeof(n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD|SETTING_FIX);
 #define b(n) revk_register(#n,0,sizeof(n),&n,NULL,SETTING_BOOLEAN);
 #define u32(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
