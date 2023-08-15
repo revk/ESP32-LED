@@ -5,6 +5,6 @@
 	path = ftdizap
 	url = https://github.com/revk/ftdizap
 	branch = main
-[submodule "PCBCase"]
-	path = PCBCase
+[submodule "PCB/PCBCase"]
+	path = PCB/PCBCase
 	url = https://github.com/revk/PCBCase
