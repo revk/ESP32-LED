@@ -1,6 +1,6 @@
 // Generated case design for LED2/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2023-08-15 10:56:48
+// Generated 2023-08-15 11:42:54
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -139,7 +139,7 @@ rotate([-90,0,0])translate([-4.47,-3.84,0])
 
 module m25(pushed=false,hulled=false)
 { // RevK:ESP32-S3-MINI-1 ESP32-S3-MINI-1
-translate([-15.4/2,-16.6/2+2.7,0])
+translate([-15.4/2,-15.45/2,0])
 {
 	if(!hulled)cube([15.4,20.5,0.8]);
 	translate([0.7,0.5,0])cube([14,13.55,2.4]);
