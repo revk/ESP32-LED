@@ -1,3 +1,5 @@
+#include "revk.h"
+
 #ifdef  CONFIG_REVK_MATTER
 
 #include <esp_err.h>
@@ -16,7 +18,7 @@
 
 #include <app/server/CommissioningWindowManager.h>
 #include <app/server/Server.h>
-
+x
 extern "C" void matter_main(void)
 {
     esp_err_t err = ESP_OK;
@@ -84,3 +86,4 @@ extern "C" void matter_main(void)
 #endif          
 }               
 #endif
+
