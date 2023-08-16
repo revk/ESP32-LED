@@ -1,4 +1,5 @@
-  
+#ifdef  CONFIG_REVK_MATTER
+
 #include <esp_err.h>
 #include <esp_log.h>
 #include <nvs_flash.h>
@@ -16,7 +17,6 @@
 #include <app/server/CommissioningWindowManager.h>
 #include <app/server/Server.h>
 
-#ifdef  CONFIG_REVK_MATTER
 extern "C" void matter_main(void)
 {
     esp_err_t err = ESP_OK;
