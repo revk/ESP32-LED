@@ -121,7 +121,7 @@ extern "C" void matter_main(void)
     nvs_flash_init();
 
     /* Initialize driver */
-    app_driver_handle_t light_handle = app_driver_light_init();
+    //app_driver_handle_t light_handle = app_driver_light_init();
     //app_driver_handle_t button_handle = app_driver_button_init();
     //app_reset_button_register(button_handle);
 
@@ -137,7 +137,7 @@ extern "C" void matter_main(void)
     light_config.color_control.color_mode = EMBER_ZCL_COLOR_MODE_COLOR_TEMPERATURE;
     light_config.color_control.enhanced_color_mode = EMBER_ZCL_ENHANCED_COLOR_MODE_COLOR_TEMPERATURE;
     light_config.color_control.color_temperature.startup_color_temperature_mireds = nullptr;
-    endpoint_t *endpoint = extended_color_light::create(node, &light_config, ENDPOINT_FLAG_NONE, light_handle);
+    endpoint_t *endpoint = extended_color_light::create(node, &light_config, ENDPOINT_FLAG_NONE, NULL);
 
     /* These node and endpoint handles can be used to create/add other endpoints and clusters. */
     if (!node || !endpoint) {
