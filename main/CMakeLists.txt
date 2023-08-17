@@ -3,7 +3,7 @@ set (COMPONENT_REQUIRES "ESP32-RevK" "led_strip")
 
 if(CONFIG_REVK_MATTER)
 
-set(PRIV_REQUIRES_LIST device esp_matter esp_matter_console app_reset)
+set(PRIV_REQUIRES_LIST esp_matter esp_matter_console app_reset)
 
 idf_component_register(
 	SRCS ${COMPONENT_SRCS}
