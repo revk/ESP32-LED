@@ -1,5 +1,5 @@
 set (COMPONENT_SRCS "LED.c" "idle.c" "stargate.c" "spin.c" "pulse.c" "cylon.c" "clock.c" "text.c" "countdown.c" "random.c" "twinkle.c" "lava.c" "matter_main.cpp")
-set (COMPONENT_REQUIRES "ESP32-RevK" "led_strip")
+set (COMPONENT_REQUIRES "ESP32-RevK" "led_strip" "esp_netif" "esp_matter")
 
 if(CONFIG_REVK_MATTER)
 
