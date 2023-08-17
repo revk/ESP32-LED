@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-if(CONFIG_REVK_MATTER)
+if("$ENV{SUFFIX}" MATCHES ".*-MT.*")
 
 if(NOT DEFINED ENV{ESP_MATTER_PATH})
     message(FATAL_ERROR "Please set ESP_MATTER_PATH to the path of esp-matter repo")

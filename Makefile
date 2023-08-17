@@ -5,6 +5,7 @@
 
 PROJECT_NAME := LED
 SUFFIX := $(shell components/ESP32-RevK/buildsuffix)
+export SUFFIX
 
 all:
 	@echo Make: build/$(PROJECT_NAME)$(SUFFIX).bin
