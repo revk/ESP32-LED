@@ -23,45 +23,55 @@ const char TAG[]="Matter";
 
 constexpr auto k_timeout_seconds = 300;
 
+uint16_t light_endpoint_id = 0;
+
 using namespace esp_matter;
 using namespace esp_matter::attribute;
 using namespace esp_matter::endpoint;
 using namespace chip::app::Clusters;
 
+#if CONFIG_ENABLE_ENCRYPTED_OTA
+extern const char decryption_key_start[] asm("_binary_esp_image_encryption_key_pem_start");
+extern const char decryption_key_end[] asm("_binary_esp_image_encryption_key_pem_end");
+
+static const char *s_decryption_key = decryption_key_start;
+static const uint16_t s_decryption_key_len = decryption_key_end - decryption_key_start;
+#endif // CONFIG_ENABLE_ENCRYPTED_OTA
+
 static void app_event_cb(const ChipDeviceEvent *event, intptr_t arg)
 {
     switch (event->Type) {
     case chip::DeviceLayer::DeviceEventType::kInterfaceIpAddressChanged:
-        ESP_LOGI(TAG, "Interface IP Address changed");
+        ESP_LOGE(TAG, "Interface IP Address changed");
         break;
 
     case chip::DeviceLayer::DeviceEventType::kCommissioningComplete:
-        ESP_LOGI(TAG, "Commissioning complete");
+        ESP_LOGE(TAG, "Commissioning complete");
         break;
 
     case chip::DeviceLayer::DeviceEventType::kFailSafeTimerExpired:
-        ESP_LOGI(TAG, "Commissioning failed, fail safe timer expired");
+        ESP_LOGE(TAG, "Commissioning failed, fail safe timer expired");
         break;
 
     case chip::DeviceLayer::DeviceEventType::kCommissioningSessionStarted:
-        ESP_LOGI(TAG, "Commissioning session started");
+        ESP_LOGE(TAG, "Commissioning session started");
         break;
 
     case chip::DeviceLayer::DeviceEventType::kCommissioningSessionStopped:
-        ESP_LOGI(TAG, "Commissioning session stopped");
+        ESP_LOGE(TAG, "Commissioning session stopped");
         break;
 
     case chip::DeviceLayer::DeviceEventType::kCommissioningWindowOpened:
-        ESP_LOGI(TAG, "Commissioning window opened");
+        ESP_LOGE(TAG, "Commissioning window opened");
         break;
 
     case chip::DeviceLayer::DeviceEventType::kCommissioningWindowClosed:
-        ESP_LOGI(TAG, "Commissioning window closed");
+        ESP_LOGE(TAG, "Commissioning window closed");
         break;
 
     case chip::DeviceLayer::DeviceEventType::kFabricRemoved:
         {
-            ESP_LOGI(TAG, "Fabric removed successfully");
+            ESP_LOGE(TAG, "Fabric removed successfully");
             if (chip::Server::GetInstance().GetFabricTable().FabricCount() == 0)
             {
                 chip::CommissioningWindowManager & commissionMgr = chip::Server::GetInstance().GetCommissioningWindowManager();
@@ -83,17 +93,18 @@ static void app_event_cb(const ChipDeviceEvent *event, intptr_t arg)
         }
 
     case chip::DeviceLayer::DeviceEventType::kFabricWillBeRemoved:
-        ESP_LOGI(TAG, "Fabric will be removed");
+        ESP_LOGE(TAG, "Fabric will be removed");
         break;
 
     case chip::DeviceLayer::DeviceEventType::kFabricUpdated:
-        ESP_LOGI(TAG, "Fabric is updated");
+        ESP_LOGE(TAG, "Fabric is updated");
         break;
 
     case chip::DeviceLayer::DeviceEventType::kFabricCommitted:
-        ESP_LOGI(TAG, "Fabric is committed");
+        ESP_LOGE(TAG, "Fabric is committed");
         break;
     default:
+	ESP_LOGE(TAG,"CB %d",event->Type);
         break;
     }
 }
@@ -101,12 +112,14 @@ static void app_event_cb(const ChipDeviceEvent *event, intptr_t arg)
 static esp_err_t app_identification_cb(identification::callback_type_t type, uint16_t endpoint_id, uint8_t effect_id,
                                        uint8_t effect_variant, void *priv_data)
 {
+	ESP_LOGE(TAG,"ID CB");
     return ESP_OK;
 }
 
 static esp_err_t app_attribute_update_cb(attribute::callback_type_t type, uint16_t endpoint_id, uint32_t cluster_id,
                                          uint32_t attribute_id, esp_matter_attr_val_t *val, void *priv_data)
 {
+	ESP_LOGE(TAG,"ATT CB");
     esp_err_t err = ESP_OK;
     if (type == PRE_UPDATE) {
     }
@@ -118,7 +131,7 @@ extern "C" void matter_main(void)
     esp_err_t err = ESP_OK;
 
     /* Initialize the ESP NVS layer */
-    nvs_flash_init();
+    //nvs_flash_init();
 
     /* Initialize driver */
     //app_driver_handle_t light_handle = app_driver_light_init();
@@ -127,7 +140,7 @@ extern "C" void matter_main(void)
 
     /* Create a Matter node and add the mandatory Root Node device type on endpoint 0 */
     node::config_t node_config;
-    node_t *node = node::create(NULL, app_attribute_update_cb, app_identification_cb);
+    node_t *node = node::create(&node_config, app_attribute_update_cb, app_identification_cb);
 
     extended_color_light::config_t light_config;
     light_config.on_off.on_off = DEFAULT_POWER;
@@ -144,8 +157,8 @@ extern "C" void matter_main(void)
         ESP_LOGE(TAG, "Matter node creation failed");
     }
     
-    //light_endpoint_id = endpoint::get_id(endpoint);
-    //ESP_LOGI(TAG, "Light created with endpoint_id %d", light_endpoint_id);
+    light_endpoint_id = endpoint::get_id(endpoint);
+    ESP_LOGI(TAG, "Light created with endpoint_id %d", light_endpoint_id);
         
 #if CHIP_DEVICE_CONFIG_ENABLE_THREAD
     /* Set OpenThread platform config */
