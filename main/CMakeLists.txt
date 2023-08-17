@@ -5,7 +5,7 @@ if("$ENV{SUFFIX}" MATCHES ".*-MT.*")
 
 list(APPEND COMPONENT_REQUIRES "esp_matter")
 
-set(PRIV_REQUIRES_LIST esp_matter esp_matter_console app_reset)
+set(PRIV_REQUIRES_LIST esp_matter esp_matter_console)
 
 idf_component_register(
 	SRCS ${COMPONENT_SRCS}
