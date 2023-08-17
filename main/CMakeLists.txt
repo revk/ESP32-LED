@@ -1,7 +1,9 @@
 set (COMPONENT_SRCS "LED.c" "idle.c" "stargate.c" "spin.c" "pulse.c" "cylon.c" "clock.c" "text.c" "countdown.c" "random.c" "twinkle.c" "lava.c" "matter_main.cpp")
-set (COMPONENT_REQUIRES "ESP32-RevK" "led_strip" "esp_netif" "esp_matter")
+set (COMPONENT_REQUIRES "ESP32-RevK" "led_strip" "esp_netif")
 
-if(CONFIG_REVK_MATTER)
+if("$ENV{SUFFIX}" MATCHES ".*-MT.*")
+
+list(APPEND COMPONENT_REQUIRES "esp_matter")
 
 set(PRIV_REQUIRES_LIST esp_matter esp_matter_console app_reset)
 
