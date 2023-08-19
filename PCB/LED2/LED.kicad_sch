@@ -1530,7 +1530,30 @@
     (uuid fa1e8fe6-8a7e-493a-8bed-79ecf07d0db3)
   )
 
+  (no_connect (at 66.04 96.52) (uuid 11cfcea4-3058-4296-a927-aaad30b258c4))
+  (no_connect (at 66.04 76.2) (uuid 196a5940-6f03-45bf-9a2f-cc2db8b63c90))
+  (no_connect (at 66.04 101.6) (uuid 3c7f284f-a1d5-46d5-b2f3-fbf91f6f2a24))
+  (no_connect (at 66.04 93.98) (uuid 3c982520-5fe7-45a4-bb55-3134495f3d6a))
+  (no_connect (at 35.56 91.44) (uuid 4e8d3fd9-f685-4535-b0b3-93dcafed5bcc))
+  (no_connect (at 35.56 55.88) (uuid 53793876-56a8-4ad8-83d2-eb3d841ee88b))
+  (no_connect (at 35.56 101.6) (uuid 55410358-8541-4af1-ad0d-95e1e46928a3))
+  (no_connect (at 66.04 81.28) (uuid 72ea0aa6-9903-4cf8-93fd-38dc302b53d3))
+  (no_connect (at 35.56 88.9) (uuid 770f93d4-06cf-4ecf-808d-34907976d754))
   (no_connect (at 167.005 93.98) (uuid 7d5c449e-70fb-4c4b-83f2-051d308a91d6))
+  (no_connect (at 35.56 81.28) (uuid 8becee86-c390-4ea8-b8da-7f313b047f13))
+  (no_connect (at 66.04 86.36) (uuid 8e222fe2-4187-4db2-be7c-1b0e637659f7))
+  (no_connect (at 35.56 93.98) (uuid 8ea5a801-1422-497c-be83-e434efd10b21))
+  (no_connect (at 66.04 78.74) (uuid 9eef314b-0de0-4617-83e1-0e71b2cf5697))
+  (no_connect (at 35.56 78.74) (uuid af4999b4-fd72-4fe4-8df7-d8ee06d48dc1))
+  (no_connect (at 66.04 73.66) (uuid b7233bb7-3dce-4ad2-bd44-ae24db729de6))
+  (no_connect (at 66.04 71.12) (uuid c053934f-d73a-4026-8bbb-3f21a0847732))
+  (no_connect (at 66.04 66.04) (uuid d29d1e6e-53a4-4bbb-bcc6-429dc4a9be9a))
+  (no_connect (at 66.04 83.82) (uuid d2bf2e65-268d-4fc6-a098-f40c9c4430ba))
+  (no_connect (at 35.56 83.82) (uuid d2fc5b2d-da79-448d-8d5b-3f5586e7a252))
+  (no_connect (at 66.04 99.06) (uuid e19d8f39-3465-4295-9e39-de9ed0ec9840))
+  (no_connect (at 66.04 88.9) (uuid e504029b-07e0-45f7-a0b1-0288c1b45d2b))
+  (no_connect (at 66.04 68.58) (uuid f6b7b0f5-1df1-4ed6-975e-3712cb72383b))
+  (no_connect (at 35.56 86.36) (uuid fefe2d5b-51a0-4347-ace5-07f1eef2e4b4))
 
   (wire (pts (xy 183.515 33.02) (xy 183.515 34.29))
     (stroke (width 0) (type default))
@@ -1972,6 +1995,36 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 35.56 58.42 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 0e9e84d5-4b89-448b-ae3a-ad7e597bfe01)
+    (property "Reference" "#PWR0105" (at 29.21 58.42 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 32.3851 58.42 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 35.56 58.42 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 35.56 58.42 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid ede74ff1-783b-4a1e-afb9-261fcfc8fffb))
+    (instances
+      (project "GenericS3"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "#PWR0105") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR04") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "RevK:Hidden") (at 199.39 92.075 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0f3f354b-b95b-4a3a-a98f-1e9d9b6e30d3)
@@ -2037,6 +2090,36 @@
       (project "LED"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
           (reference "#PWR022") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 35.56 63.5 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 172a4bc7-c332-4bad-92ac-f7403d0da2ae)
+    (property "Reference" "#PWR0105" (at 29.21 63.5 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 32.3851 63.5 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 35.56 63.5 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 35.56 63.5 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 0ed36454-bc50-41db-babb-1b60b03b81f4))
+    (instances
+      (project "GenericS3"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "#PWR0105") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR06") (unit 1)
         )
       )
     )
@@ -2522,6 +2605,36 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 35.56 53.34 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 8320a354-757f-496b-a006-e33aaa6c5b12)
+    (property "Reference" "#PWR0105" (at 29.21 53.34 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 32.3851 53.34 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 35.56 53.34 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 35.56 53.34 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 18438383-7c43-4fa9-b4f5-1ba85815cc20))
+    (instances
+      (project "GenericS3"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "#PWR0105") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR03") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_name "GND_1") (lib_id "power:GND") (at 66.04 60.96 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 8aa7825e-5e62-407e-b327-bf2684c0497a)
@@ -2698,6 +2811,36 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 35.56 50.8 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid a99f686e-7669-45c3-bf83-56199f9f3dd3)
+    (property "Reference" "#PWR0105" (at 29.21 50.8 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 32.3851 50.8 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 35.56 50.8 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 35.56 50.8 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 0c5f8ce1-b7f4-4456-99e3-c40cfcb297a6))
+    (instances
+      (project "GenericS3"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "#PWR0105") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR02") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:R") (at 80.01 101.6 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b64227d6-4eb9-48b8-ab35-26037cb2edaf)
@@ -2858,6 +3001,36 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 35.56 66.04 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid c00abcc3-bf20-42f5-8b59-6259cccd8dba)
+    (property "Reference" "#PWR0105" (at 29.21 66.04 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 32.3851 66.04 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 35.56 66.04 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 35.56 66.04 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 8f0c6030-0c1f-4bc8-8863-8f2469de8482))
+    (instances
+      (project "GenericS3"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "#PWR0105") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR07") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "RevK:VCUT") (at 259.715 176.53 0) (unit 1)
     (in_bom no) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid c7de6ae2-be24-44b6-b876-c2bd9bb0ace3)
@@ -2880,6 +3053,36 @@
       (project "LED"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
           (reference "V2") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 35.56 60.96 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid c916a834-d91f-4da0-9431-9efff00cb973)
+    (property "Reference" "#PWR0105" (at 29.21 60.96 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 32.3851 60.96 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 35.56 60.96 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 35.56 60.96 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 8876a78a-c066-48e7-b7de-4aef09dfb608))
+    (instances
+      (project "GenericS3"
+        (path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+          (reference "#PWR0105") (unit 1)
+        )
+      )
+      (project "LED"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR05") (unit 1)
         )
       )
     )
