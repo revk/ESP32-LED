@@ -653,4 +653,8 @@ app_main ()
       }
    }
    revk_task ("LED", led_task, NULL, 4);
+#ifdef	CONFIG_REVK_MATTER
+   extern void matter_main(void);
+   matter_main();
+#endif
 }

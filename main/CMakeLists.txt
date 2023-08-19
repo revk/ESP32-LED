@@ -1,3 +1,25 @@
-set (COMPONENT_SRCS "LED.c" "idle.c" "stargate.c" "spin.c" "pulse.c" "cylon.c" "clock.c" "text.c" "countdown.c" "random.c" "twinkle.c" "lava.c")
-set (COMPONENT_REQUIRES "ESP32-RevK" "led_strip")
+set (COMPONENT_SRCS "LED.c" "idle.c" "stargate.c" "spin.c" "pulse.c" "cylon.c" "clock.c" "text.c" "countdown.c" "random.c" "twinkle.c" "lava.c" "matter_main.cpp")
+set (COMPONENT_REQUIRES "ESP32-RevK" "led_strip" "esp_netif")
+
+if("$ENV{SUFFIX}" MATCHES ".*-MT.*")
+
+list(APPEND COMPONENT_REQUIRES "esp_matter")
+
+set(PRIV_REQUIRES_LIST esp_matter esp_matter_console)
+
+idf_component_register(
+	SRCS ${COMPONENT_SRCS}
+	REQUIRES ${COMPONENT_REQUIRES}
+	SRC_DIRS          "."
+	PRIV_INCLUDE_DIRS  "."
+	PRIV_REQUIRES      ${PRIV_REQUIRES_LIST})
+
+set_property(TARGET ${COMPONENT_LIB} PROPERTY CXX_STANDARD 14)
+target_compile_options(${COMPONENT_LIB} PRIVATE "-DCHIP_HAVE_CONFIG_H")
+
+else()
+
 register_component ()
+
+endif()
+
