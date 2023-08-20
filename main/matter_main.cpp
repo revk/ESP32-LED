@@ -116,12 +116,36 @@ static esp_err_t app_identification_cb(identification::callback_type_t type, uin
     return ESP_OK;
 }
 
+// TODO make a light state call back here from LED.c
+
 static esp_err_t app_attribute_update_cb(attribute::callback_type_t type, uint16_t endpoint_id, uint32_t cluster_id,
                                          uint32_t attribute_id, esp_matter_attr_val_t *val, void *priv_data)
 {
-	ESP_LOGE(TAG,"ATT CB");
+	// See esp-matter/components/esp_matter/esp_matter_attribute_utils.h
+	ESP_LOGE(TAG,"ATT CB endpoint=%u cluster=%lu attribute=%lu type %d, val->type=%d%s",endpoint_id,cluster_id,attribute_id,type,val->type&0x7F,val->type&ESP_MATTER_VAL_NULLABLE_BASE?" (nullable)":"");
     esp_err_t err = ESP_OK;
-    if (type == PRE_UPDATE) {
+    switch(type)
+    {
+	    case PRE_UPDATE:
+		    if(val->type==1)
+		    {
+#if 0 // Can't call from here as locked
+    node_t *node = node::get();
+    endpoint_t *endpoint = endpoint::get(node, endpoint_id);
+    cluster_t *cluster = cluster::get(endpoint, cluster_id);
+    attribute_t *attribute = attribute::get(cluster, attribute_id);
+
+    esp_matter_attr_val_t v = esp_matter_invalid(NULL);
+    attribute::get_val(attribute, &v);
+    v.val.b = val->val.b;
+    attribute::update(endpoint_id, cluster_id, attribute_id, &v);
+#endif
+		    }
+		    break;
+	    case POST_UPDATE:
+	    case READ:
+	    case WRITE:
+		    break;
     }
     return err;
 }
