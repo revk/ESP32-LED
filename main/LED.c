@@ -638,7 +638,6 @@ app_main ()
 #undef b
 #undef s
 
-#ifndef	CONFIG_REVK_MATTER
       revk_start ();
    if (webcontrol)
    {
@@ -654,7 +653,6 @@ app_main ()
          register_get_uri ("/", web_root);
       }
    }
-#endif
 #ifdef	CONFIG_REVK_MATTER
    extern void matter_main(void);
    matter_main();
