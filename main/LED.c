@@ -590,10 +590,6 @@ web_root (httpd_req_t * req)
 void
 app_main ()
 {
-#ifdef	CONFIG_REVK_MATTER
-   extern void matter_main(void);
-   matter_main();
-#endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
    {                            // All unused input pins pull down
       gpio_config_t c = {.pull_down_en = 1,.mode = GPIO_MODE_DISABLE };
@@ -656,5 +652,9 @@ app_main ()
          register_get_uri ("/", web_root);
       }
    }
+#ifdef	CONFIG_REVK_MATTER
+   extern void matter_main(void);
+   matter_main();
+#endif
    revk_task ("LED", led_task, NULL, 4);
 }
