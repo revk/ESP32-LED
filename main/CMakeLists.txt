@@ -1,9 +1,10 @@
-set (COMPONENT_SRCS "LED.c" "idle.c" "stargate.c" "spin.c" "pulse.c" "cylon.c" "clock.c" "text.c" "countdown.c" "random.c" "twinkle.c" "lava.c" "matter_main.cpp")
-set (COMPONENT_REQUIRES "ESP32-RevK" "led_strip" "esp_netif")
+set (COMPONENT_SRCS "LED.c" "idle.c" "stargate.c" "spin.c" "pulse.c" "cylon.c" "clock.c" "text.c" "countdown.c" "random.c" "twinkle.c" "lava.c")
+set (COMPONENT_REQUIRES "ESP32-RevK" "led_strip")
 
 if("$ENV{SUFFIX}" MATCHES ".*-MT.*")
 
 list(APPEND COMPONENT_REQUIRES "esp_matter")
+list(APPEND COMPONENT_SRCS "matter_main.cpp")
 
 set(PRIV_REQUIRES_LIST esp_matter esp_matter_console)
 

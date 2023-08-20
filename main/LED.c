@@ -637,12 +637,12 @@ app_main ()
 #undef u8l
 #undef b
 #undef s
-
 #ifdef	CONFIG_REVK_MATTER
-   extern void matter_main(void);
-   matter_main();
+   extern void matter_main (void);
+   matter_main ();
 #endif
-      revk_start ();
+
+   revk_start ();
    if (webcontrol)
    {
       // Web interface

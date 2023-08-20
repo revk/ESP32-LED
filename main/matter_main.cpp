@@ -131,7 +131,7 @@ extern "C" void matter_main(void)
     esp_err_t err = ESP_OK;
 
     /* Initialize the ESP NVS layer */
-    //nvs_flash_init();
+    nvs_flash_init();
 
     /* Initialize driver */
     //app_driver_handle_t light_handle = app_driver_light_init();
