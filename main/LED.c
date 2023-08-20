@@ -638,6 +638,10 @@ app_main ()
 #undef b
 #undef s
 
+#ifdef	CONFIG_REVK_MATTER
+   extern void matter_main(void);
+   matter_main();
+#endif
       revk_start ();
    if (webcontrol)
    {
@@ -653,9 +657,5 @@ app_main ()
          register_get_uri ("/", web_root);
       }
    }
-#ifdef	CONFIG_REVK_MATTER
-   extern void matter_main(void);
-   matter_main();
-#endif
    revk_task ("LED", led_task, NULL, 4);
 }
