@@ -590,6 +590,10 @@ web_root (httpd_req_t * req)
 void
 app_main ()
 {
+#ifdef	CONFIG_REVK_MATTER
+   extern void matter_main(void);
+   matter_main();
+#endif
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    revk_boot (&app_callback);
@@ -644,8 +648,4 @@ app_main ()
       }
    }
    revk_task ("LED", led_task, NULL, 4);
-#ifdef	CONFIG_REVK_MATTER
-   extern void matter_main(void);
-   matter_main();
-#endif
 }
