@@ -316,64 +316,74 @@ apptidy (uint8_t stop)
 }
 
 const char *
+led_stop (void)
+{
+   ESP_LOGE (TAG, "Stop");
+   xSemaphoreTake (app_mutex, portMAX_DELAY);
+   apptidy (1);
+   xSemaphoreGive (app_mutex);
+   return "";
+}
+
+const char *
+led_add (const char *tag, jo_t j)
+{
+   ESP_LOGE (TAG, "Add %s", tag);
+   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+      if (!strcasecmp (tag, applist[i].name))
+      {                         // Direct command
+         xSemaphoreTake (app_mutex, portMAX_DELAY);
+         int index = apptidy (1);
+         addapp (index++, tag, j);
+         xSemaphoreGive (app_mutex);
+         return "";
+      }
+   return "Unknown";
+}
+
+const char *
 app_callback (int client, const char *prefix, const char *target, const char *suffix, jo_t j)
 {
    if (client || !prefix || target || strcmp (prefix, prefixcommand))
       return NULL;              // Not for us or not a command from main MQTT
    if (suffix && !strcasecmp (suffix, "stop"))
+      return led_stop ();
+   if (suffix && strcmp (suffix, "add"))
+      return led_add (suffix, j);
+   // Process command to set apps
+   xSemaphoreTake (app_mutex, portMAX_DELAY);
+   int index = apptidy (suffix ? 0 : 1);
+   if (!suffix)
+      index = 0;                // Overwrite existing
+   jo_type_t t = jo_here (j);
+   if (t == JO_STRING)
+   {                            // Simple add app
+      char temp[20];
+      jo_strncpy (j, temp, sizeof (temp));
+      addapp (index++, temp, NULL);
+   } else if (t == JO_ARRAY)
    {
-      xSemaphoreTake (app_mutex, portMAX_DELAY);
-      apptidy (1);
-      xSemaphoreGive (app_mutex);
-      return "";
-   }
-   if (suffix)
-      for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-         if (!strcasecmp (suffix, applist[i].name))
-         {                      // Direct command
-            xSemaphoreTake (app_mutex, portMAX_DELAY);
-            int index = apptidy (1);
-            addapp (index++, suffix, j);
-            xSemaphoreGive (app_mutex);
-            return "";
-         }
-   if (!suffix || !strcmp (suffix, "add"))
-   {                            // Process command to set apps
-      xSemaphoreTake (app_mutex, portMAX_DELAY);
-      int index = apptidy (suffix ? 0 : 1);
-      if (!suffix)
-         index = 0;             // Overwrite existing
-      jo_type_t t = jo_here (j);
-      if (t == JO_STRING)
-      {                         // Simple add app
+      while ((t = jo_next (j)) == JO_STRING)
+      {
          char temp[20];
          jo_strncpy (j, temp, sizeof (temp));
          addapp (index++, temp, NULL);
-      } else if (t == JO_ARRAY)
-      {
-         while ((t = jo_next (j)) == JO_STRING)
-         {
-            char temp[20];
-            jo_strncpy (j, temp, sizeof (temp));
-            addapp (index++, temp, NULL);
-         }
-      } else if (t == JO_OBJECT)
-      {
-         while ((t = jo_next (j)) == JO_TAG)
-         {
-            char temp[20];
-            jo_strncpy (j, temp, sizeof (temp));
-            t = jo_next (j);
-            if (t != JO_OBJECT)
-               break;
-            addapp (index++, temp, j);
-         }
       }
-      appzapall (index);
-      xSemaphoreGive (app_mutex);
-      return "";
+   } else if (t == JO_OBJECT)
+   {
+      while ((t = jo_next (j)) == JO_TAG)
+      {
+         char temp[20];
+         jo_strncpy (j, temp, sizeof (temp));
+         t = jo_next (j);
+         if (t != JO_OBJECT)
+            break;
+         addapp (index++, temp, j);
+      }
    }
-   return NULL;
+   appzapall (index);
+   xSemaphoreGive (app_mutex);
+   return "";
 }
 
 void
