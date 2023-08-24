@@ -648,6 +648,10 @@ app_main ()
 #undef b
 #undef s
 
+#ifdef	CONFIG_REVK_MATTER
+   extern void matter_main (void);
+   matter_main ();
+#endif
    revk_start ();
    if (webcontrol)
    {
@@ -664,9 +668,4 @@ app_main ()
       }
    }
    revk_task ("LED", led_task, NULL, 4);
-   revk_wait_wifi(30);
-#ifdef	CONFIG_REVK_MATTER
-   extern void matter_main (void);
-   matter_main ();
-#endif
 }
