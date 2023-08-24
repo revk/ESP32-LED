@@ -590,7 +590,7 @@ web_root (httpd_req_t * req)
       httpd_resp_sendstr_chunk (req, "</button></a> ");
    }
    button ("stop", "Stop");
-#define a(x,d) button(#x,#d);
+#define a(x,d) if(strcmp(#x,"idle"))button(#x,#d);
 #define t(x,d)
 #include "apps.h"
    httpd_resp_sendstr_chunk (req, "</fieldset>");
@@ -647,10 +647,6 @@ app_main ()
 #undef u8l
 #undef b
 #undef s
-#ifdef	CONFIG_REVK_MATTER
-   extern void matter_main (void);
-   matter_main ();
-#endif
 
    revk_start ();
    if (webcontrol)
@@ -668,4 +664,9 @@ app_main ()
       }
    }
    revk_task ("LED", led_task, NULL, 4);
+   revk_wait_wifi(30);
+#ifdef	CONFIG_REVK_MATTER
+   extern void matter_main (void);
+   matter_main ();
+#endif
 }
