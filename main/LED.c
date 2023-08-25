@@ -328,7 +328,6 @@ led_stop (void)
 const char *
 led_add (const char *tag, jo_t j)
 {
-   ESP_LOGE (TAG, "Add %s", tag);
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (tag, applist[i].name))
       {                         // Direct command
