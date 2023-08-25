@@ -24,6 +24,7 @@
         u16(leds,12)	\
         u8(webcontrol,2)\
 	s(app,pulse)	\
+	b(dark)		\
 	gpio		\
 
 #define	params		\
