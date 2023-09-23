@@ -379,7 +379,8 @@
     (uuid e827488a-7df3-489a-87ec-e0510d4e1f69)
   )
 
-  (text "Rework for caps and vias at top/bottom" (at 96.52 93.98 0)
+  (text "Rework for caps and vias at top/bottom\nMaybe long strip 8 picels high to allow scrolling text"
+    (at 96.52 93.98 0)
     (effects (font (size 5 5)) (justify left bottom))
     (uuid eb20a2f7-1deb-4ff9-b8d2-5bffdf9bf49f)
   )
