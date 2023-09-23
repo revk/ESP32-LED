@@ -379,6 +379,11 @@
     (uuid e827488a-7df3-489a-87ec-e0510d4e1f69)
   )
 
+  (text "Rework for caps and vias at top/bottom" (at 96.52 93.98 0)
+    (effects (font (size 5 5)) (justify left bottom))
+    (uuid eb20a2f7-1deb-4ff9-b8d2-5bffdf9bf49f)
+  )
+
   (symbol (lib_id "power:GND") (at 50.8 168.275 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 00288ab0-3f32-462f-8a8a-a4153e595a50)
