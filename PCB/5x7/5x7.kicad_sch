@@ -429,6 +429,31 @@
     )
   )
 
+  (symbol (lib_id "power:VDD") (at 172.72 33.655 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 012c1200-75a9-45d8-b7e5-09f4eb4efb8e)
+    (property "Reference" "#PWR095" (at 172.72 37.465 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "VDD" (at 172.72 29.5219 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 172.72 33.655 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 172.72 33.655 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid bdd97c7a-6e64-43c5-93b3-49424a1470a1))
+    (instances
+      (project "5x7"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR095") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "RevK:WS2812B-1mm") (at 43.18 120.015 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 03f6ca87-172a-44d1-9f1f-401188ebfd5e)
@@ -979,6 +1004,31 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 178.435 41.275 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 1d1301b1-22f8-4bbc-b79d-a48326317fc1)
+    (property "Reference" "#PWR098" (at 178.435 47.625 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 178.435 45.4081 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 178.435 41.275 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 178.435 41.275 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 50af8449-8a39-4e09-8ef8-071c00691ebe))
+    (instances
+      (project "5x7"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR098") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:VDD") (at 35.56 93.98 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1d67f96c-8873-47d1-8411-0a53003522d2)
@@ -1488,6 +1538,31 @@
     )
   )
 
+  (symbol (lib_id "power:VDD") (at 178.435 33.655 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 4047d4ca-0dac-4f27-8720-a1ef17aadc82)
+    (property "Reference" "#PWR097" (at 178.435 37.465 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "VDD" (at 178.435 29.5219 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 178.435 33.655 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 178.435 33.655 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 808e6535-185f-4ad6-9272-658c0586ea45))
+    (instances
+      (project "5x7"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR097") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:GND") (at 43.18 146.05 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 405b5021-5eb2-472c-8e55-8123e23cc498)
@@ -1752,6 +1827,32 @@
       (project "5x7"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
           (reference "D35") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:C") (at 178.435 37.465 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 4ef4519f-fc8d-45d4-88b5-9b6b6832febf)
+    (property "Reference" "C14" (at 178.435 35.56 0)
+      (effects (font (size 1 1)))
+    )
+    (property "Value" "330nF" (at 178.435 37.465 0)
+      (effects (font (size 1 1)))
+    )
+    (property "Footprint" "RevK:C_0402" (at 179.4002 41.275 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 178.435 37.465 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 946dc02c-e45d-4815-a45c-31c9e598aa19))
+    (pin "2" (uuid b9010b7a-a31c-4469-8722-297134b85778))
+    (instances
+      (project "5x7"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "C14") (unit 1)
         )
       )
     )
@@ -2916,6 +3017,32 @@
     )
   )
 
+  (symbol (lib_id "Device:C") (at 172.72 37.465 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 98780191-7cea-4acd-bb46-a13b35c1b891)
+    (property "Reference" "C13" (at 172.72 35.56 0)
+      (effects (font (size 1 1)))
+    )
+    (property "Value" "330nF" (at 172.72 37.465 0)
+      (effects (font (size 1 1)))
+    )
+    (property "Footprint" "RevK:C_0402" (at 173.6852 41.275 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 172.72 37.465 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 7225ea71-0401-492f-89e6-b6acc3529a65))
+    (pin "2" (uuid f64d68a4-e981-4727-a712-f55f40a7cd81))
+    (instances
+      (project "5x7"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "C13") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:GND") (at 132.715 41.275 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 9a8ffd54-f0c4-424d-a311-d26af67be6c5)
@@ -3568,6 +3695,31 @@
       (project "5x7"
         (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
           (reference "#PWR039") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 172.72 41.275 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid c47f31cf-d3f0-4d62-b73b-43965c3e7e5d)
+    (property "Reference" "#PWR096" (at 172.72 47.625 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 172.72 45.4081 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 172.72 41.275 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 172.72 41.275 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 26f08756-04b1-4ba9-a8e8-ac47b1318566))
+    (instances
+      (project "5x7"
+        (path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+          (reference "#PWR096") (unit 1)
         )
       )
     )
