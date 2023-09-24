@@ -25,12 +25,13 @@ main (int argc, const char *argv[])
    double widthend = 0;
    double widthjoin = 0;
    double widthpower = 0;
-   double padoffset = 0.425;
+   double padoffset = 0.6010407;
    double capoffset = 1.15;
    double viaoffset = 1.9;
    double left = NAN;
    double top = NAN;
    int sides = 0;
+   const char *layer=NULL;
    poptContext optCon;
    {
       const struct poptOption optionsTable[] = {
@@ -128,16 +129,17 @@ main (int argc, const char *argv[])
             continue;
          t = pcb_find (footprint, "at", NULL);
          if (!t || t->valuen < 2 || !t->values[0].isnum || !t->values[1].isnum)
-         {
-            warnx ("Cannot place %s", ref);
             continue;
-         }
          left = t->values[0].num;
          top = t->values[1].num;
+	          t = pcb_find (footprint, "layer", NULL);
+		  if(!t||t->valuen<1||!t->values[0].istxt)continue;
+		  layer=t->values[0].txt;
       }
    }
-   if (isnan (left) || isnan (top))
+   if (isnan (left) || isnan (top)||!layer)
       warnx ("Cannot find start point (i.e. D%d)", diode);
+   int leds=0;
    while ((footprint = pcb_find (pcb, "footprint", footprint)))
    {
       pcb_t *t = pcb_find (footprint, "fp_text", NULL);
@@ -161,6 +163,7 @@ main (int argc, const char *argv[])
          pcb_append_num (t, diodex (d));
          pcb_append_num (t, diodey (d));
          pcb_append_num (t, dioder (d));
+	 leds++;
          continue;
       }
       if (*ref == 'C')
@@ -181,12 +184,40 @@ main (int argc, const char *argv[])
          continue;
       }
    }
+   if(sides)
+	   rows=leds/cols;
+   else
+	   cols=leds/rows;
+   void track(double x1,double y1,double x2,double y2,double w)
+   { // Add a track
+    pcb_t *s=pcb_append_obj(pcb,"segment");
+    pcb_t *o=pcb_append_obj(s,"start");
+    pcb_append_num(o,x1);
+    pcb_append_num(o,y1);
+    o=pcb_append_obj(s,"end");
+    pcb_append_num(o,x2);
+    pcb_append_num(o,y2);
+    o=pcb_append_obj(s,"width");
+    pcb_append_num(o,w);
+    o=pcb_append_obj(s,"layer");
+    pcb_append_txt(o,layer);
+   }
    if (widthend)
    {                            // Data at ends
+
    }
    if (widthjoin)
    {                            // Data joining adjacent LEDs
-
+	   if(sides)
+	   {
+		   for(int r=0;r<rows;r++)
+		   for(int c=0;c<cols-1;c++)
+			   track(diodex(diode+c+r*cols)+padoffset,diodey(diode+c+r*cols),diodex(diode+c+r*cols+1)-padoffset,diodey(diode+c+r*cols+1),widthjoin);
+	   }else{
+		   for(int c=0;c<cols;c++)
+		   for(int r=0;r<rows-1;r++)
+			   track(diodex(diode+r+c*rows),diodey(diode+r+c*rows)+padoffset,diodex(diode+r+c*rows+1),diodey(diode+r+c*rows+1)-padoffset,widthjoin);
+	   }
    }
    if (widthpower)
    {                            // Joining power
