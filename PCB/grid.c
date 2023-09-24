@@ -31,6 +31,7 @@ main (int argc, const char *argv[])
    double left = NAN;
    double top = NAN;
    int sides = 0;
+   int vias=0;
    const char *layer=NULL;
    poptContext optCon;
    {
@@ -48,6 +49,7 @@ main (int argc, const char *argv[])
          {"pad-offset", 0, POPT_ARG_DOUBLE | POPT_ARGFLAG_SHOW_DEFAULT, &padoffset, 0, "Pad offset (square)", "mm"},
          {"cap-offset", 0, POPT_ARG_DOUBLE | POPT_ARGFLAG_SHOW_DEFAULT, &capoffset, 0, "Cap offset", "mm"},
          {"via-offset", 0, POPT_ARG_DOUBLE | POPT_ARGFLAG_SHOW_DEFAULT, &viaoffset, 0, "Via offset", "mm"},
+         {"vias", 0, POPT_ARG_NONE, &vias, 0, "Add vias"},
          {"left", 0, POPT_ARG_DOUBLE, &left, 0, "Left", "mm"},
          {"top", 0, POPT_ARG_DOUBLE, &top, 0, "Top", "mm"},
          {"debug", 'v', POPT_ARG_NONE, &debug, 0, "Debug"},
@@ -74,40 +76,34 @@ main (int argc, const char *argv[])
    pcb_t *pcb = pcb_load (pcbfile);
    double diodex (int d)
    {
-      d -= diode;
       if (sides)
          return left + spacing * (d % cols);
       return left + spacing * (d / rows);
    }
    double diodey (int d)
    {
-      d -= diode;
       if (sides)
          return top + spacing * (d / cols);
       return top + spacing * (d % rows);
    }
    int dioder (int d)
    {
-      d -= diode;
       return sides ? -135 : 135;
    }
    double capx (int c)
    {
-      c -= cap;
       if (sides)
          return (c & 1) ? left + spacing * (cols - 1) + capoffset : left - capoffset;
       return left + spacing * (c / 2);
    }
    double capy (int c)
    {
-      c -= cap;
       if (sides)
          return top + spacing * (c / 2);
       return (c & 1) ? top + spacing * (rows - 1) + capoffset : top - capoffset;
    }
    int capr (int c)
    {
-      c -= cap;
       return sides ? 90 : 0;
    }
 
@@ -160,6 +156,7 @@ main (int argc, const char *argv[])
             t = pcb_append_obj (footprint, "at");
          else
             pcb_clear (t);
+	 d-=diode;
          pcb_append_num (t, diodex (d));
          pcb_append_num (t, diodey (d));
          pcb_append_num (t, dioder (d));
@@ -178,6 +175,7 @@ main (int argc, const char *argv[])
             t = pcb_append_obj (footprint, "at");
          else
             pcb_clear (t);
+	 c-=cap;
          pcb_append_num (t, capx (c));
          pcb_append_num (t, capy (c));
          pcb_append_num (t, capr (c));
@@ -204,7 +202,18 @@ main (int argc, const char *argv[])
    }
    if (widthend)
    {                            // Data at ends
-
+				 if(sides)
+					  for(int r=0;r<rows;r++)
+					  {
+						  track(diodex(r*cols)-viaoffset,diodey(r*cols),diodex(r*cols)-padoffset,diodey(r*cols),widthend);
+						  track(diodex(r*cols+cols-1)+padoffset,diodey(r*cols+cols-1),diodex(r*cols+cols-1)+viaoffset,diodey(r*cols+cols-1),widthend);
+					  }
+				 else
+					  for(int c=0;c<cols;c++)
+					  {
+						  track(diodex(c*rows),diodey(c*rows)-viaoffset,diodex(c*rows),diodey(c*rows)-padoffset,widthend);
+						  track(diodex(c*rows+rows-1),diodey(c*rows+rows-1)+padoffset,diodex(c*rows+rows-1),diodey(c*rows+rows-1)+viaoffset,widthend);
+					  }
    }
    if (widthjoin)
    {                            // Data joining adjacent LEDs
@@ -212,15 +221,46 @@ main (int argc, const char *argv[])
 	   {
 		   for(int r=0;r<rows;r++)
 		   for(int c=0;c<cols-1;c++)
-			   track(diodex(diode+c+r*cols)+padoffset,diodey(diode+c+r*cols),diodex(diode+c+r*cols+1)-padoffset,diodey(diode+c+r*cols+1),widthjoin);
+			   track(diodex(c+r*cols)+padoffset,diodey(c+r*cols),diodex(c+r*cols+1)-padoffset,diodey(c+r*cols+1),widthjoin);
 	   }else{
 		   for(int c=0;c<cols;c++)
 		   for(int r=0;r<rows-1;r++)
-			   track(diodex(diode+r+c*rows),diodey(diode+r+c*rows)+padoffset,diodex(diode+r+c*rows+1),diodey(diode+r+c*rows+1)-padoffset,widthjoin);
+			   track(diodex(r+c*rows),diodey(r+c*rows)+padoffset,diodex(r+c*rows+1),diodey(r+c*rows+1)-padoffset,widthjoin);
 	   }
    }
    if (widthpower)
    {                            // Joining power
+	   if(sides)
+	   {
+		   for(int r=0;r<rows;r++)
+		   {
+			   track(diodex(r*cols)-capoffset,diodey(r*cols)-padoffset,diodex(r*cols),diodey(r*cols)-padoffset,widthpower);
+			   track(diodex(r*cols)-capoffset,diodey(r*cols)+padoffset,diodex(r*cols),diodey(r*cols)+padoffset,widthpower);
+		   for(int c=0;c<cols-1;c++)
+		   {
+			   track(diodex(c+r*cols),diodey(c+r*cols)-padoffset,diodex(c+r*cols+1),diodey(c+r*cols+1)-padoffset,widthpower);
+			   track(diodex(c+r*cols),diodey(c+r*cols)+padoffset,diodex(c+r*cols+1),diodey(c+r*cols+1)+padoffset,widthpower);
+		   }
+			   track(diodex(r*cols+cols-1),diodey(r*cols+cols-1)-padoffset,diodex(r*cols+cols-1)+capoffset,diodey(r*cols+cols-1)-padoffset,widthpower);
+			   track(diodex(r*cols+cols-1),diodey(r*cols+cols-1)+padoffset,diodex(r*cols+cols-1)+capoffset,diodey(r*cols+cols-1)+padoffset,widthpower);
+		   }
+	   }else{
+		   for(int c=0;c<cols;c++)
+		   {
+			   track(diodex(c*rows)-padoffset,diodey(c*rows)-capoffset,diodex(c*rows)-padoffset,diodey(c*rows),widthpower);
+			   track(diodex(c*rows)+padoffset,diodey(c*rows)-capoffset,diodex(c*rows)+padoffset,diodey(c*rows),widthpower);
+		   for(int r=0;r<rows-1;r++)
+		   {
+			   track(diodex(r+c*rows)-padoffset,diodey(r+c*rows),diodex(r+c*rows+1)-padoffset,diodey(r+c*rows+1),widthpower);
+			   track(diodex(r+c*rows)+padoffset,diodey(r+c*rows),diodex(r+c*rows+1)+padoffset,diodey(r+c*rows+1),widthpower);
+		   }
+			   track(diodex(c*rows+rows-1)-padoffset,diodey(c*rows+rows-1),diodex(c*rows+rows-1)-padoffset,diodey(c*rows+rows-1)+capoffset,widthpower);
+			   track(diodex(c*rows+rows-1)+padoffset,diodey(c*rows+rows-1),diodex(c*rows+rows-1)+padoffset,diodey(c*rows+rows-1)+capoffset,widthpower);
+		   }
+	   }
+   }
+   if(vias)
+   { // Add vias
    }
 
    pcb_write (pcbfile, pcb);
