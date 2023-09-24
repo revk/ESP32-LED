@@ -1,7 +1,7 @@
-all: stl grid
+all: grid stl
 
 grid: grid.c PCBCase/pcb.c PCBCase/pcb.h
-	cc -O -o $< $@ PCBCase/pcb.c -IPCBCase
+	gcc -I/opt/homebrew/include/ -I/usr/local/include -L/opt/homebrew/lib -L/usr/local/lib -IPCBCase -O -o $@ $< PCBCase/pcb.c -lpopt -lm -g
 
 stl:    LED/LED.stl LED2/LED.stl
 
