@@ -31,8 +31,8 @@ main (int argc, const char *argv[])
    double left = NAN;
    double top = NAN;
    int sides = 0;
-   int vias=0;
-   const char *layer=NULL;
+   int vias = 0;
+   const char *layer = NULL;
    poptContext optCon;
    {
       const struct poptOption optionsTable[] = {
@@ -128,14 +128,15 @@ main (int argc, const char *argv[])
             continue;
          left = t->values[0].num;
          top = t->values[1].num;
-	          t = pcb_find (footprint, "layer", NULL);
-		  if(!t||t->valuen<1||!t->values[0].istxt)continue;
-		  layer=t->values[0].txt;
+         t = pcb_find (footprint, "layer", NULL);
+         if (!t || t->valuen < 1 || !t->values[0].istxt)
+            continue;
+         layer = t->values[0].txt;
       }
    }
-   if (isnan (left) || isnan (top)||!layer)
+   if (isnan (left) || isnan (top) || !layer)
       warnx ("Cannot find start point (i.e. D%d)", diode);
-   int leds=0;
+   int leds = 0;
    while ((footprint = pcb_find (pcb, "footprint", footprint)))
    {
       pcb_t *t = pcb_find (footprint, "fp_text", NULL);
@@ -156,11 +157,11 @@ main (int argc, const char *argv[])
             t = pcb_append_obj (footprint, "at");
          else
             pcb_clear (t);
-	 d-=diode;
+         d -= diode;
          pcb_append_num (t, diodex (d));
          pcb_append_num (t, diodey (d));
          pcb_append_num (t, dioder (d));
-	 leds++;
+         leds++;
          continue;
       }
       if (*ref == 'C')
@@ -175,132 +176,150 @@ main (int argc, const char *argv[])
             t = pcb_append_obj (footprint, "at");
          else
             pcb_clear (t);
-	 c-=cap;
+         c -= cap;
          pcb_append_num (t, capx (c));
          pcb_append_num (t, capy (c));
          pcb_append_num (t, capr (c));
          continue;
       }
    }
-   if(sides)
-	   rows=leds/cols;
+   if (sides)
+      rows = leds / cols;
    else
-	   cols=leds/rows;
-   void track(double x1,double y1,double x2,double y2,double w)
-   { // Add a track
-    pcb_t *s=pcb_append_obj(pcb,"segment"),*o;
-    o=pcb_append_obj(s,"start");
-    pcb_append_num(o,x1);
-    pcb_append_num(o,y1);
-    o=pcb_append_obj(s,"end");
-    pcb_append_num(o,x2);
-    pcb_append_num(o,y2);
-    o=pcb_append_obj(s,"width");
-    pcb_append_num(o,w);
-    o=pcb_append_obj(s,"layer");
-    pcb_append_txt(o,layer);
+      cols = leds / rows;
+   void track (double x1, double y1, double x2, double y2, double w)
+   {                            // Add a track
+      pcb_t *s = pcb_append_obj (pcb, "segment"),
+         *o;
+      o = pcb_append_obj (s, "start");
+      pcb_append_num (o, x1);
+      pcb_append_num (o, y1);
+      o = pcb_append_obj (s, "end");
+      pcb_append_num (o, x2);
+      pcb_append_num (o, y2);
+      o = pcb_append_obj (s, "width");
+      pcb_append_num (o, w);
+      o = pcb_append_obj (s, "layer");
+      pcb_append_txt (o, layer);
    }
-   void via(double x,double y)
+   void via (double x, double y)
    {
-    pcb_t *s=pcb_append_obj(pcb,"via"),*o;
-    o=pcb_append_obj(s,"at");
-    pcb_append_num(o,x);
-    pcb_append_num(o,y);
-    o=pcb_append_obj(s,"size");
-    pcb_append_num(o,0.8);
-    o=pcb_append_obj(s,"drill");
-    pcb_append_num(o,0.4);
-    o=pcb_append_obj(s,"layers");
-        pcb_append_txt(o,"F.Cu");
-        pcb_append_txt(o,"B.Cu");
+      pcb_t *s = pcb_append_obj (pcb, "via"),
+         *o;
+      o = pcb_append_obj (s, "at");
+      pcb_append_num (o, x);
+      pcb_append_num (o, y);
+      o = pcb_append_obj (s, "size");
+      pcb_append_num (o, 0.8);
+      o = pcb_append_obj (s, "drill");
+      pcb_append_num (o, 0.4);
+      o = pcb_append_obj (s, "layers");
+      pcb_append_txt (o, "F.Cu");
+      pcb_append_txt (o, "B.Cu");
    }
    if (widthend)
    {                            // Data at ends
-				 if(sides)
-					  for(int r=0;r<rows;r++)
-					  {
-						  track(diodex(r*cols)-viaoffset,diodey(r*cols),diodex(r*cols)-padoffset,diodey(r*cols),widthend);
-						  track(diodex(r*cols+cols-1)+padoffset,diodey(r*cols+cols-1),diodex(r*cols+cols-1)+viaoffset,diodey(r*cols+cols-1),widthend);
-					  }
-				 else
-					  for(int c=0;c<cols;c++)
-					  {
-						  track(diodex(c*rows),diodey(c*rows)-viaoffset,diodex(c*rows),diodey(c*rows)-padoffset,widthend);
-						  track(diodex(c*rows+rows-1),diodey(c*rows+rows-1)+padoffset,diodex(c*rows+rows-1),diodey(c*rows+rows-1)+viaoffset,widthend);
-					  }
+      if (sides)
+         for (int r = 0; r < rows; r++)
+         {
+            track (diodex (r * cols) - viaoffset, diodey (r * cols), diodex (r * cols) - padoffset, diodey (r * cols), widthend);
+            track (diodex (r * cols + cols - 1) + padoffset, diodey (r * cols + cols - 1), diodex (r * cols + cols - 1) + viaoffset,
+                   diodey (r * cols + cols - 1), widthend);
+      } else
+         for (int c = 0; c < cols; c++)
+         {
+            track (diodex (c * rows), diodey (c * rows) - viaoffset, diodex (c * rows), diodey (c * rows) - padoffset, widthend);
+            track (diodex (c * rows + rows - 1), diodey (c * rows + rows - 1) + padoffset, diodex (c * rows + rows - 1),
+                   diodey (c * rows + rows - 1) + viaoffset, widthend);
+         }
    }
    if (widthjoin)
    {                            // Data joining adjacent LEDs
-	   if(sides)
-	   {
-		   for(int r=0;r<rows;r++)
-		   for(int c=0;c<cols-1;c++)
-			   track(diodex(c+r*cols)+padoffset,diodey(c+r*cols),diodex(c+r*cols+1)-padoffset,diodey(c+r*cols+1),widthjoin);
-	   }else{
-		   for(int c=0;c<cols;c++)
-		   for(int r=0;r<rows-1;r++)
-			   track(diodex(r+c*rows),diodey(r+c*rows)+padoffset,diodex(r+c*rows+1),diodey(r+c*rows+1)-padoffset,widthjoin);
-	   }
+      if (sides)
+      {
+         for (int r = 0; r < rows; r++)
+            for (int c = 0; c < cols - 1; c++)
+               track (diodex (c + r * cols) + padoffset, diodey (c + r * cols), diodex (c + r * cols + 1) - padoffset,
+                      diodey (c + r * cols + 1), widthjoin);
+      } else
+      {
+         for (int c = 0; c < cols; c++)
+            for (int r = 0; r < rows - 1; r++)
+               track (diodex (r + c * rows), diodey (r + c * rows) + padoffset, diodex (r + c * rows + 1),
+                      diodey (r + c * rows + 1) - padoffset, widthjoin);
+      }
    }
    if (widthpower)
    {                            // Joining power
-	   if(sides)
-	   {
-		   for(int r=0;r<rows;r++)
-		   {
-			   track(diodex(r*cols)-capoffset,diodey(r*cols)-padoffset,diodex(r*cols),diodey(r*cols)-padoffset,widthpower);
-			   track(diodex(r*cols)-capoffset,diodey(r*cols)+padoffset,diodex(r*cols),diodey(r*cols)+padoffset,widthpower);
-		   for(int c=0;c<cols-1;c++)
-		   {
-			   track(diodex(c+r*cols),diodey(c+r*cols)-padoffset,diodex(c+r*cols+1),diodey(c+r*cols+1)-padoffset,widthpower);
-			   track(diodex(c+r*cols),diodey(c+r*cols)+padoffset,diodex(c+r*cols+1),diodey(c+r*cols+1)+padoffset,widthpower);
-		   }
-			   track(diodex(r*cols+cols-1),diodey(r*cols+cols-1)-padoffset,diodex(r*cols+cols-1)+capoffset,diodey(r*cols+cols-1)-padoffset,widthpower);
-			   track(diodex(r*cols+cols-1),diodey(r*cols+cols-1)+padoffset,diodex(r*cols+cols-1)+capoffset,diodey(r*cols+cols-1)+padoffset,widthpower);
-		   }
-	   }else{
-		   for(int c=0;c<cols;c++)
-		   {
-			   track(diodex(c*rows)-padoffset,diodey(c*rows)-capoffset,diodex(c*rows)-padoffset,diodey(c*rows),widthpower);
-			   track(diodex(c*rows)+padoffset,diodey(c*rows)-capoffset,diodex(c*rows)+padoffset,diodey(c*rows),widthpower);
-		   for(int r=0;r<rows-1;r++)
-		   {
-			   track(diodex(r+c*rows)-padoffset,diodey(r+c*rows),diodex(r+c*rows+1)-padoffset,diodey(r+c*rows+1),widthpower);
-			   track(diodex(r+c*rows)+padoffset,diodey(r+c*rows),diodex(r+c*rows+1)+padoffset,diodey(r+c*rows+1),widthpower);
-		   }
-			   track(diodex(c*rows+rows-1)-padoffset,diodey(c*rows+rows-1),diodex(c*rows+rows-1)-padoffset,diodey(c*rows+rows-1)+capoffset,widthpower);
-			   track(diodex(c*rows+rows-1)+padoffset,diodey(c*rows+rows-1),diodex(c*rows+rows-1)+padoffset,diodey(c*rows+rows-1)+capoffset,widthpower);
-		   }
-	   }
+      if (sides)
+      {
+         for (int r = 0; r < rows; r++)
+         {
+            track (diodex (r * cols) - capoffset, diodey (r * cols) - padoffset, diodex (r * cols), diodey (r * cols) - padoffset,
+                   widthpower);
+            track (diodex (r * cols) - capoffset, diodey (r * cols) + padoffset, diodex (r * cols), diodey (r * cols) + padoffset,
+                   widthpower);
+            for (int c = 0; c < cols - 1; c++)
+            {
+               track (diodex (c + r * cols), diodey (c + r * cols) - padoffset, diodex (c + r * cols + 1),
+                      diodey (c + r * cols + 1) - padoffset, widthpower);
+               track (diodex (c + r * cols), diodey (c + r * cols) + padoffset, diodex (c + r * cols + 1),
+                      diodey (c + r * cols + 1) + padoffset, widthpower);
+            }
+            track (diodex (r * cols + cols - 1), diodey (r * cols + cols - 1) - padoffset, diodex (r * cols + cols - 1) + capoffset,
+                   diodey (r * cols + cols - 1) - padoffset, widthpower);
+            track (diodex (r * cols + cols - 1), diodey (r * cols + cols - 1) + padoffset, diodex (r * cols + cols - 1) + capoffset,
+                   diodey (r * cols + cols - 1) + padoffset, widthpower);
+         }
+      } else
+      {
+         for (int c = 0; c < cols; c++)
+         {
+            track (diodex (c * rows) - padoffset, diodey (c * rows) - capoffset, diodex (c * rows) - padoffset, diodey (c * rows),
+                   widthpower);
+            track (diodex (c * rows) + padoffset, diodey (c * rows) - capoffset, diodex (c * rows) + padoffset, diodey (c * rows),
+                   widthpower);
+            for (int r = 0; r < rows - 1; r++)
+            {
+               track (diodex (r + c * rows) - padoffset, diodey (r + c * rows), diodex (r + c * rows + 1) - padoffset,
+                      diodey (r + c * rows + 1), widthpower);
+               track (diodex (r + c * rows) + padoffset, diodey (r + c * rows), diodex (r + c * rows + 1) + padoffset,
+                      diodey (r + c * rows + 1), widthpower);
+            }
+            track (diodex (c * rows + rows - 1) - padoffset, diodey (c * rows + rows - 1), diodex (c * rows + rows - 1) - padoffset,
+                   diodey (c * rows + rows - 1) + capoffset, widthpower);
+            track (diodex (c * rows + rows - 1) + padoffset, diodey (c * rows + rows - 1), diodex (c * rows + rows - 1) + padoffset,
+                   diodey (c * rows + rows - 1) + capoffset, widthpower);
+         }
+      }
    }
-   if(vias)
-   { // Add vias
-     if(sides)
-                                          for(int r=0;r<rows;r++)
-                                          {
-						  via(diodex(r*cols)-viaoffset,diodey(r*cols));
-						  via(diodex(r*cols+cols-1)+viaoffset,diodey(r*cols+cols-1));
+   if (vias)
+   {                            // Add vias
+      if (sides)
+         for (int r = 0; r < rows; r++)
+         {
+            via (diodex (r * cols) - viaoffset, diodey (r * cols));
+            via (diodex (r * cols + cols - 1) + viaoffset, diodey (r * cols + cols - 1));
 #if 0
-						  if(r)
-						  {
-						  via(diodex(r*cols)-viaoffset,diodey(r*cols)-spacing/2);
-						  via(diodex(r*cols+cols-1)+viaoffset,diodey(r*cols+cols-1)-spacing/2);
-						  }
+            if (r)
+            {
+               via (diodex (r * cols) - viaoffset, diodey (r * cols) - spacing / 2);
+               via (diodex (r * cols + cols - 1) + viaoffset, diodey (r * cols + cols - 1) - spacing / 2);
+            }
 #endif
-                                          }
-                                 else
-                                          for(int c=0;c<cols;c++)
-                                          {
-						  via(diodex(c*rows),diodey(c*rows)-viaoffset);
-						  via(diodex(c*rows+rows-1),diodey(c*rows+rows-1)+viaoffset);
+      } else
+         for (int c = 0; c < cols; c++)
+         {
+            via (diodex (c * rows), diodey (c * rows) - viaoffset);
+            via (diodex (c * rows + rows - 1), diodey (c * rows + rows - 1) + viaoffset);
 #if 0
-						  if(c)
-						  {
-						  via(diodex(c*rows)-spacing/2,diodey(c*rows)-viaoffset);
-						  via(diodex(c*rows+rows-1)-spacing/2,diodey(c*rows+rows-1)+viaoffset);
-						  }
+            if (c)
+            {
+               via (diodex (c * rows) - spacing / 2, diodey (c * rows) - viaoffset);
+               via (diodex (c * rows + rows - 1) - spacing / 2, diodey (c * rows + rows - 1) + viaoffset);
+            }
 #endif
-                                          }
+         }
    }
 
    pcb_write (pcbfile, pcb);
