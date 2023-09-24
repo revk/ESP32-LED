@@ -1,6 +1,6 @@
-// Generated case design for LED2/LED.kicad_pcb
+// Generated case design for LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2023-08-15 11:42:54
+// Generated 2023-09-24 11:38:03
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -31,14 +31,14 @@ pcblength=16.000000;
 module board(pushed=false,hulled=false){
 translate([3.250000,6.900000,1.000000])rotate([-0.000000,-0.000000,-90.000000])m2(pushed,hulled); // RevK:L_4x4_ TYA4020 (back)
 translate([2.750000,2.800000,1.000000])m3(pushed,hulled); // RevK:SOT-23 SOT-23 (back)
-translate([0.750000,12.300000,1.000000])rotate([0,0,90.000000])m6(pushed,hulled); // RevK:R_0402_ R_0402_1005Metric (back)
+translate([1.450000,13.400000,1.000000])m6(pushed,hulled); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([7.750000,3.500000,1.000000])m6(pushed,hulled); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([3.250000,9.500000,1.000000])rotate([0,0,180.000000])m11(pushed,hulled); // RevK:C_0603_ C_0603_1608Metric (back)
 translate([7.750000,2.600000,1.000000])m6(pushed,hulled); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([30.000000,13.500000,1.000000])rotate([0,0,180.000000])m6(pushed,hulled); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([5.950000,2.600000,1.000000])rotate([0,0,-90.000000])translate([0.000000,-0.400000,0.000000])m15(pushed,hulled); // RevK:LED-RGB-1.6x1.6 LED_0603_1608Metric (back)
 translate([5.950000,2.600000,1.000000])rotate([0,0,-90.000000])translate([0.000000,0.400000,0.000000])m15(pushed,hulled); // RevK:LED-RGB-1.6x1.6 LED_0603_1608Metric (back)
-translate([5.750000,12.300000,1.000000])rotate([0,0,-90.000000])m6(pushed,hulled); // RevK:R_0402_ R_0402_1005Metric (back)
+translate([5.050000,13.400000,1.000000])m6(pushed,hulled); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([6.750000,14.750000,1.000000])rotate([0,0,90.000000])m18(pushed,hulled); // RevK:C_0402 C_0402_1005Metric (back)
 translate([3.250000,13.400000,1.000000])m6(pushed,hulled); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([28.000000,13.500000,1.000000])rotate([0,0,180.000000])m18(pushed,hulled); // RevK:C_0402 C_0402_1005Metric (back)
