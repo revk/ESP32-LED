@@ -163,7 +163,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 16aa7307-a5f6-4e65-8d9a-d445432e7b66) 
-  (at 107.250000  107.250000) 
+  (at 107.250000 105.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -492,7 +492,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 181c3f05-910d-43c1-a0d2-eb1aa58ee911) 
-  (at 107.250000  113.250000) 
+  (at 107.250000 117.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -821,7 +821,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 1debd108-d437-43b0-aa43-ee4a7298083d) 
-  (at 113.250000  109.250000) 
+  (at 113.250000 104.100000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -1095,7 +1095,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 2a1d34ed-6ff9-4fc4-ba38-5231abf90390) 
-  (at 109.250000  103.250000) 
+  (at 109.250000 111.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -1424,7 +1424,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 2c621da7-6075-459f-9056-0dbb1205e3a8) 
-  (at 103.250000  105.250000) 
+  (at 103.250000 109.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -1753,7 +1753,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 2ec3cfe7-2155-4de4-a992-50239d1bb5e2) 
-  (at 105.250000  105.250000) 
+  (at 105.250000 104.100000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -2027,7 +2027,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 2fb4a593-634f-4fb8-bf62-f88fe12c15e7) 
-  (at 105.250000  107.250000) 
+  (at 105.250000 109.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -2356,7 +2356,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 32eb1dad-7fb4-4b87-b459-4f4fe997a1c1) 
-  (at 107.250000  105.250000) 
+  (at 107.250000 111.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -2685,7 +2685,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 339d8faa-8df8-44b0-9369-d2fa472682d8) 
-  (at 105.250000  115.250000) 
+  (at 105.250000 113.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -3014,7 +3014,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 3a3ecfa4-8b16-4ed1-bd57-cee7dad50d21) 
-  (at 115.250000  109.250000) 
+  (at 115.250000 104.100000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -3288,7 +3288,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 484e3e02-8a71-4b38-8add-1e6a559e8428) 
-  (at 109.250000  111.250000) 
+  (at 109.250000 115.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -3617,7 +3617,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 495022b5-2ada-4950-92b4-23cc27691911) 
-  (at 111.250000  107.250000) 
+  (at 111.250000 118.400000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -3891,7 +3891,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 49d2f4e1-1794-4424-9bf7-b83d85b2eff4) 
-  (at 107.250000  107.250000) 
+  (at 107.250000 109.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -4220,7 +4220,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 4d869bfc-912a-4259-bee1-92d0a49e5ce2) 
-  (at 107.250000  105.250000) 
+  (at 107.250000 113.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -4549,7 +4549,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 541e07fe-5876-414b-99dc-2f846fc9c65a) 
-  (at 105.250000  109.250000) 
+  (at 105.250000 107.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -4878,7 +4878,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 593822f9-45ab-4d0c-83a2-8c5af7583e0a) 
-  (at 109.250000  105.250000) 
+  (at 109.250000 113.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -5207,7 +5207,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 594a104f-321f-4396-ba26-2fdc4c4974f1) 
-  (at 105.250000  103.250000) 
+  (at 105.250000 115.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -5536,7 +5536,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 59aa9877-dcba-4fc1-b105-ce08c0b8b6fa) 
-  (at 103.250000  105.250000) 
+  (at 103.250000 105.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -5865,7 +5865,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 5be8a287-7cd3-4e30-b94b-1e1282729873) 
-  (at 105.250000  103.250000) 
+  (at 105.250000 117.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -6194,7 +6194,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 608bded1-8fcb-4c02-a79c-cc530de6d7e3) 
-  (at 103.250000  103.250000) 
+  (at 103.250000 104.100000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -6468,7 +6468,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 624b6ca9-ef68-4a7f-8ba0-cbb5738c567a) 
-  (at 103.250000  113.250000) 
+  (at 103.250000 118.400000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -6742,7 +6742,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 66ecda76-b54e-4a66-ad50-e0311f3a2a4f) 
-  (at 113.250000  103.250000) 
+  (at 113.250000 118.400000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -7016,7 +7016,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 6ffafdee-cc49-4bf5-9096-f5a9ec2b4e64) 
-  (at 103.250000  109.250000) 
+  (at 103.250000 115.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -7345,7 +7345,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 72d2a04f-5f79-4455-9bfc-a417e5b9c259) 
-  (at 109.250000  107.250000) 
+  (at 109.250000 104.100000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -7619,7 +7619,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 7344a660-1c0f-4465-aa41-b248377cee4f) 
-  (at 107.250000  115.250000) 
+  (at 107.250000 115.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -7948,7 +7948,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 786188c5-7def-4c6b-a164-a2e7fd2ac9b5) 
-  (at 115.250000  109.250000) 
+  (at 115.250000 118.400000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -8222,7 +8222,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 79ee976e-d6ab-495c-8163-1fbbda0ae905) 
-  (at 109.250000  109.250000) 
+  (at 109.250000 105.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -8551,7 +8551,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 89b8f4ef-2df8-4cc2-a279-d4504694c693) 
-  (at 109.250000  111.250000) 
+  (at 109.250000 109.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -8880,7 +8880,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 8c42aefe-9b30-464f-927c-c9e84abbf690) 
-  (at 111.250000  111.250000) 
+  (at 111.250000 113.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -9209,7 +9209,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp 948d7c78-448d-4c2e-9d92-bcfe8f0be7c7) 
-  (at 111.250000  111.250000) 
+  (at 111.250000 105.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -9538,7 +9538,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp 987cc0f9-723e-41de-b6fe-6c3a48f85bb8) 
-  (at 111.250000  103.250000) 
+  (at 111.250000 104.100000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -9812,7 +9812,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp a3af72f3-3802-4217-8e0d-6e3719145405) 
-  (at 103.250000  105.250000) 
+  (at 103.250000 111.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -10141,7 +10141,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp a3ffeeb9-815d-4b38-b8b9-48861426c0f7) 
-  (at 105.250000  109.250000) 
+  (at 105.250000 118.400000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -10415,7 +10415,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp aa2bbfb8-53f0-4343-afad-b388d0152ee5) 
-  (at 109.250000  105.250000) 
+  (at 109.250000 107.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -10744,7 +10744,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp b85eef16-c7f7-4326-8330-943b48db1137) 
-  (at 105.250000  107.250000) 
+  (at 105.250000 111.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -11073,7 +11073,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp b8bf14fc-70d5-4fce-8efd-b80c513b6679) 
-  (at 107.250000  111.250000) 
+  (at 107.250000 118.400000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -11347,7 +11347,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp ba2fefc4-cbad-489a-8383-79f59dd87ad8) 
-  (at 111.250000  103.250000) 
+  (at 111.250000 107.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -11676,7 +11676,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp bdf8e447-d010-4d77-a23e-8de212459ac9) 
-  (at 103.250000  111.250000) 
+  (at 103.250000 113.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -12005,7 +12005,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp c0cf98a6-83aa-46dd-a533-61626789b7c2) 
-  (at 111.250000  111.250000) 
+  (at 111.250000 111.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -12334,7 +12334,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp c411e9c7-b4c9-4e47-a659-3021e7cf9ed9) 
-  (at 111.250000  103.250000) 
+  (at 111.250000 115.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -12663,7 +12663,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp c9ccfcb6-c390-49e0-86e0-f3e84be67bb6) 
-  (at 103.250000  109.250000) 
+  (at 103.250000 107.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -12992,7 +12992,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp caa44716-40f3-477b-80fe-f8c83729bbe0) 
-  (at 109.250000  107.250000) 
+  (at 109.250000 117.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -13321,7 +13321,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp ce323f6b-2d9d-43c3-8a59-57952409f0c2) 
-  (at 107.250000  111.250000) 
+  (at 107.250000 104.100000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -13595,7 +13595,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp ef7dcc1d-3c74-4526-b6b2-27a64417dc09) 
-  (at 111.250000  105.250000) 
+  (at 111.250000 117.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -13924,7 +13924,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp ef86ee35-e641-4875-b8d5-f0b96954b220) 
-  (at 105.250000  111.250000) 
+  (at 105.250000 105.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -14253,7 +14253,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp f38cdd86-d622-4f43-99b1-beabbdad1c22) 
-  (at 111.250000  103.250000) 
+  (at 111.250000 109.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -14582,7 +14582,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp f6eb3a5b-8e82-44c7-9abe-8680699906ff) 
-  (at 103.250000  109.250000) 
+  (at 103.250000 117.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
@@ -14911,7 +14911,7 @@
  (footprint "RevK:C_0402" 
   (layer "F.Cu") 
   (tstamp fbc6485c-6737-4195-a259-bb764359d151) 
-  (at 109.250000  107.250000) 
+  (at 109.250000 118.400000 0) 
   (property "Sheetfile" "5x7.kicad_sch") 
   (property "Sheetname" "") 
   (property "ki_description" "Unpolarized capacitor") 
@@ -15185,7 +15185,7 @@
  (footprint "RevK:SMD1010" 
   (layer "F.Cu") 
   (tstamp fe129be3-30cf-474b-bf5d-089615fc2021) 
-  (at 107.250000  ) 
+  (at 107.250000 107.250000 135) 
   (descr "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf") 
   (tags "LED RGB NeoPixel") 
   (property "LCSC Part #" "C5349953") 
