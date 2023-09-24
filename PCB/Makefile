@@ -1,3 +1,8 @@
+all: stl grid
+
+grid: grid.c PCBCase/pcb.c PCBCase/pcb.h
+	cc -O -o $< $@ PCBCase/pcb.c -IPCBCase
+
 stl:    LED/LED.stl LED2/LED.stl
 
 PCBCase/case: PCBCase/case.c
