@@ -165,7 +165,16 @@ if(d!=diode)continue;
 	      continue;
 	   }
    }
-
+   if(widthend)
+   { // Data at ends
+   }
+   if(widthjoin)
+   { // Data joining adjacent LEDs
+     
+   }
+   if(widthpower)
+   { // Joining power
+   }
 
    pcb_write(pcbfile, pcb);
    pcb = pcb_delete(pcb);
