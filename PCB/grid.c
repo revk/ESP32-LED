@@ -188,8 +188,8 @@ main (int argc, const char *argv[])
 	   cols=leds/rows;
    void track(double x1,double y1,double x2,double y2,double w)
    { // Add a track
-    pcb_t *s=pcb_append_obj(pcb,"segment");
-    pcb_t *o=pcb_append_obj(s,"start");
+    pcb_t *s=pcb_append_obj(pcb,"segment"),*o;
+    o=pcb_append_obj(s,"start");
     pcb_append_num(o,x1);
     pcb_append_num(o,y1);
     o=pcb_append_obj(s,"end");
@@ -199,6 +199,20 @@ main (int argc, const char *argv[])
     pcb_append_num(o,w);
     o=pcb_append_obj(s,"layer");
     pcb_append_txt(o,layer);
+   }
+   void via(double x,double y)
+   {
+    pcb_t *s=pcb_append_obj(pcb,"via"),*o;
+    o=pcb_append_obj(s,"at");
+    pcb_append_num(o,x);
+    pcb_append_num(o,y);
+    o=pcb_append_obj(s,"size");
+    pcb_append_num(o,0.8);
+    o=pcb_append_obj(s,"drill");
+    pcb_append_num(o,0.4);
+    o=pcb_append_obj(s,"layers");
+        pcb_append_txt(o,"F.Cu");
+        pcb_append_txt(o,"B.Cu");
    }
    if (widthend)
    {                            // Data at ends
@@ -261,6 +275,32 @@ main (int argc, const char *argv[])
    }
    if(vias)
    { // Add vias
+     if(sides)
+                                          for(int r=0;r<rows;r++)
+                                          {
+						  via(diodex(r*cols)-viaoffset,diodey(r*cols));
+						  via(diodex(r*cols+cols-1)+viaoffset,diodey(r*cols+cols-1));
+#if 0
+						  if(r)
+						  {
+						  via(diodex(r*cols)-viaoffset,diodey(r*cols)-spacing/2);
+						  via(diodex(r*cols+cols-1)+viaoffset,diodey(r*cols+cols-1)-spacing/2);
+						  }
+#endif
+                                          }
+                                 else
+                                          for(int c=0;c<cols;c++)
+                                          {
+						  via(diodex(c*rows),diodey(c*rows)-viaoffset);
+						  via(diodex(c*rows+rows-1),diodey(c*rows+rows-1)+viaoffset);
+#if 0
+						  if(c)
+						  {
+						  via(diodex(c*rows)-spacing/2,diodey(c*rows)-viaoffset);
+						  via(diodex(c*rows+rows-1)-spacing/2,diodey(c*rows+rows-1)+viaoffset);
+						  }
+#endif
+                                          }
    }
 
    pcb_write (pcbfile, pcb);
