@@ -136,15 +136,11 @@ if(d!=diode)continue;
 	    if(d<diode)continue; // Before start
 	    if(rows&&cols&&d>=diode+rows*cols)continue; // Off end
 	    t=pcb_find(footprint,"at",NULL); 
-	    if(!t||t->valuen<2||!t->values[0].isnum||!t->values[1].isnum){warnx("Cannot place %s",ref);continue;}
-	    t->values=realloc(t->values,(t->valuen=3)*sizeof(*t->values));
-	    memset(t->values,0,3*sizeof(*t->values));
-	    t->values[0].num=diodex(d);
-	    t->values[0].isnum=1;
-	    t->values[1].num=diodey(d);
-	    t->values[1].isnum=1;
-	    t->values[2].num=dioder(d);
-	    t->values[2].isnum=1;
+	    if(!t)t=pcb_append_obj(footprint,"at");
+	    else pcb_clear(t);
+	    pcb_append_num(t,diodex(d));
+	    pcb_append_num(t,diodey(d));
+	    pcb_append_num(t,dioder(d));
 	    continue;
 	   }
 	   if(*ref=='C')
@@ -153,15 +149,11 @@ if(d!=diode)continue;
 	    if(c<cap)continue; // Before start
 	    if((sides?rows:cols)&&c>=cap+(sides?rows:cols)*2)continue; // Off end
 	    t=pcb_find(footprint,"at",NULL); 
-	    if(!t||t->valuen<2||!t->values[0].isnum||!t->values[1].isnum){warnx("Cannot place %s",ref);continue;}
-	    t->values=realloc(t->values,(t->valuen=3)*sizeof(*t->values));
-	    memset(t->values,0,3*sizeof(*t->values));
-	    t->values[0].num=capx(c);
-	    t->values[0].isnum=1;
-	    t->values[1].num=capy(c);
-	    t->values[1].isnum=1;
-	    t->values[2].num=capr(c);
-	    t->values[2].isnum=1;
+	    if(!t)t=pcb_append_obj(footprint,"at");
+	    else pcb_clear(t);
+	    pcb_append_num(t,capx(c));
+	    pcb_append_num(t,capy(c));
+	    pcb_append_num(t,capr(c));
 	      continue;
 	   }
    }
@@ -177,7 +169,7 @@ if(d!=diode)continue;
    }
 
    pcb_write(pcbfile, pcb);
-   pcb = pcb_delete(pcb);
+   pcb = pcb_free(pcb);
 
    poptFreeContext(optCon);
    return 0;
