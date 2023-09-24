@@ -187,22 +187,24 @@ main (int argc, const char *argv[])
       rows = leds / cols;
    else
       cols = leds / rows;
+   int diff(double a,double b)
+   {
+	   if(round(a*10000)!=round(b*10000))return 1;
+	   return 0;
+   }
    void track (double x1, double y1, double x2, double y2, double w)
    {                            // Add a track
-      pcb_t *s = NULL,
+      pcb_t *s =NULL,*o;
+      while((s=pcb_find(pcb,"segment",s)))
+		      {
+			      o=pcb_find(s,"start",NULL);
+			      if(!o||o->valuen!=2||!o->values[0].isnum||!o->values[1].isnum||diff(o->values[0].num,x1)||diff(o->values[1].num,y1))continue;
+			      o=pcb_find(s,"end",NULL);
+			      if(!o||o->valuen!=2||!o->values[0].isnum||!o->values[1].isnum||diff(o->values[0].num,x2)||diff(o->values[1].num,y2))continue;
+			      s->tag=NULL; // Suppress as we are replacing
+		      }
+	      s=pcb_append_obj (pcb, "segment"),
          *o;
-      while ((s = pcb_find (pcb, "segment", s)))
-      {
-         o = pcb_find (s, "start", NULL);
-         if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum || o->values[0].num != x1 || o->values[1].num != y1)
-            continue;
-         o = pcb_find (s, "end", NULL);
-         if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum || o->values[0].num != x2 || o->values[1].num != y2)
-            continue;
-         s->tag = NULL;         // Suppress as we are replacing
-         break;
-      }
-      s = pcb_append_obj (pcb, "segment"), *o;
       o = pcb_append_obj (s, "start");
       pcb_append_num (o, x1);
       pcb_append_num (o, y1);
@@ -216,17 +218,15 @@ main (int argc, const char *argv[])
    }
    void via (double x, double y)
    {
-      pcb_t *s = NULL,
-         *o;
-      while ((s = pcb_find (pcb, "via", s)))
-      {
-         o = pcb_find (s, "at", NULL);
-         if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum || o->values[0].num != x || o->values[1].num != y)
-            continue;
-         s->tag = NULL;         // Suppress as we are replacing
-         break;
-      }
-      s = pcb_append_obj (pcb, "via"), o = pcb_append_obj (s, "at");
+      pcb_t *s =NULL,*o;
+      while((s=pcb_find(pcb,"via",s)))
+		      {
+			      o=pcb_find(s,"at",NULL);
+			      if(!o||o->valuen!=2||!o->values[0].isnum||!o->values[1].isnum||diff(o->values[0].num,x)||diff(o->values[1].num,y))continue;
+			        s->tag=NULL; // Suppress as we are replacing
+                      }
+	     s= pcb_append_obj (pcb, "via"),
+      o = pcb_append_obj (s, "at");
       pcb_append_num (o, x);
       pcb_append_num (o, y);
       o = pcb_append_obj (s, "size");
