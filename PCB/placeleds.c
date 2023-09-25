@@ -19,7 +19,7 @@ main (int argc, const char *argv[])
    const char *pcbfile = NULL;
    int diode = 1;
    int cap = 1;
-   int rows = 8;
+   int rows = 0;
    int cols = 0;
    int count=0;
    double spacing = 2;
