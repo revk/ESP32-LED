@@ -1,10 +1,10 @@
-all: grid stl
+all: placeleds stl
 
-grid: grid.c PCBCase/pcb.c PCBCase/pcb.h
+placeleds: placeleds.c PCBCase/pcb.c PCBCase/pcb.h
 	gcc -IPCBCase -O -o $@ $< PCBCase/pcb.c -lpopt -lm -g
 
-leds:	grid
-	./grid 5x7/5x7.kicad_pcb --cols=5 --rows=7 --width-join=0.5 --width-end=0.2 --width-power=0.3 --vias
+leds:	placeleds
+	./placeleds 5x7/5x7.kicad_pcb --cols=5 --rows=7 --width-join=0.5 --width-end=0.2 --width-power=0.3 --vias
 
 stl:    LED/LED.stl
 
