@@ -608,13 +608,16 @@ main (int argc, const char *argv[])
             track (diodex (c * rows + rows - 1) + padoffset, diodey (c * rows + rows - 1), NAN, NAN,
                    diodex (c * rows + rows - 1) + padoffset, diodey (c * rows + rows - 1) + capoffset, widthpower);
          }
-	 if(powervias)
-	 {
-         	for (int c = 0; c < cols-1; c++)
-			trackviamaybe(diodex(c*rows+rows-1)+padoffset,diodey(c*rows+rows-1)+capoffset,diodex(c*rows+rows-1)+spacing/2,diodey(c*rows+rows-1)+viaoffset,widthpower,powervias);
-         	for (int c = 1; c < cols; c++)
-			trackviamaybe(diodex(c*rows)-padoffset,diodey(c*rows)-capoffset,diodex(c*rows)-spacing/2,diodey(c*rows)-viaoffset,widthpower,powervias);
-	 }
+         if (powervias)
+         {
+            for (int c = 0; c < cols - 1; c++)
+               trackviamaybe (diodex (c * rows + rows - 1) + padoffset, diodey (c * rows + rows - 1) + capoffset,
+                              diodex (c * rows + rows - 1) + spacing / 2, diodey (c * rows + rows - 1) + viaoffset, widthpower,
+                              powervias);
+            for (int c = 1; c < cols; c++)
+               trackviamaybe (diodex (c * rows) - padoffset, diodey (c * rows) - capoffset, diodex (c * rows) - spacing / 2,
+                              diodey (c * rows) - viaoffset, widthpower, powervias);
+         }
       }
    }
    if (fill)
