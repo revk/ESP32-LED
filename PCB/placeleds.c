@@ -186,7 +186,7 @@ main (int argc, const char *argv[])
          return 90 - ad (0.5 + c) * 180 / M_PI;
       return sides ? 90 : 0;
    }
-int tooclose=((M_PI*2-ad(count-0.5))<pada*4); // Too close together for data pins together at end
+   int tooclose = ((M_PI * 2 - ad (count - 0.5)) < pada * 4);   // Too close together for data pins together at end
 
    pcb_t *footprint = NULL;
    if (isnan (left) || isnan (top))
@@ -348,7 +348,7 @@ int tooclose=((M_PI*2-ad(count-0.5))<pada*4); // Too close together for data pin
       pcb_append_txt (o, "F.Cu");
       pcb_append_txt (o, "B.Cu");
    }
-   pcb_t *zone (const char *net,const char *layer)
+   pcb_t *zone (const char *net, const char *layer)
    {
       pcb_t *s,
        *o,
@@ -381,7 +381,7 @@ int tooclose=((M_PI*2-ad(count-0.5))<pada*4); // Too close together for data pin
       o = pcb_append_obj (o, "pts");
       return o;
    }
-   void zapzone (double x, double y, const char *net,const char *layer)
+   void zapzone (double x, double y, const char *net, const char *layer)
    {
       pcb_t *s = NULL,
          *o;
@@ -403,10 +403,10 @@ int tooclose=((M_PI*2-ad(count-0.5))<pada*4); // Too close together for data pin
       }
    }
 
-   void ringzone (double a, double b, const char *net,const char *layer)
+   void ringzone (double a, double b, const char *net, const char *layer)
    {
-      zapzone (cx (0, 0, a), cy (0, 0, a), net,layer);
-      pcb_t *z = zone (net,layer);
+      zapzone (cx (0, 0, a), cy (0, 0, a), net, layer);
+      pcb_t *z = zone (net, layer);
       void xy (double d, double o)
       {
          pcb_t *xy = pcb_append_obj (z, "xy");
@@ -423,8 +423,8 @@ int tooclose=((M_PI*2-ad(count-0.5))<pada*4); // Too close together for data pin
 
    void boxzone (double x1, double y1, double x2, double y2, const char *net)
    {
-      zapzone (x1, y1, net,layer);
-      pcb_t *z = zone (net,layer);
+      zapzone (x1, y1, net, layer);
+      pcb_t *z = zone (net, layer);
       void xy (double x, double y)
       {
          pcb_t *xy = pcb_append_obj (z, "xy");
@@ -442,13 +442,16 @@ int tooclose=((M_PI*2-ad(count-0.5))<pada*4); // Too close together for data pin
       if (!isnan (diameter))
       {
          track (cx (0, -pada, 0), cy (0, -pada, 0), NAN, NAN, cx (0, -pada, viaoffset), cy (0, -pada, viaoffset), widthend);
-	 if(tooclose)
-		  track(cx(count-1,pada,0),cy(count-1,pada,0),NAN,NAN,cx(count-1,pada,-viaoffset),cy(count-1,pada,-viaoffset),widthend);
-	 else
-	 {
-	 track(cx(count-1,pada,0),cy(count-1,pada,0),cx(count-0.5,0,0),cy(count-0.5,0,0),cx(0,-pada*2,0),cy(0,-pada*2,0),widthend);
-         track (cx(0,-pada*2,0),cy(0,-pada*2,0),NAN,NAN,cx(0,-pada*2,-viaoffset),cy(0,-pada*2,-viaoffset),widthend);
-	 }
+         if (tooclose)
+            track (cx (count - 1, pada, 0), cy (count - 1, pada, 0), NAN, NAN, cx (count - 1, pada, -viaoffset),
+                   cy (count - 1, pada, -viaoffset), widthend);
+         else
+         {
+            track (cx (count - 1, pada, 0), cy (count - 1, pada, 0), cx (count - 0.5, 0, 0), cy (count - 0.5, 0, 0),
+                   cx (0, -pada * 2, 0), cy (0, -pada * 2, 0), widthend);
+            track (cx (0, -pada * 2, 0), cy (0, -pada * 2, 0), NAN, NAN, cx (0, -pada * 2, -viaoffset),
+                   cy (0, -pada * 2, -viaoffset), widthend);
+         }
       } else if (sides)
          for (int r = 0; r < rows; r++)
          {
@@ -497,33 +500,36 @@ int tooclose=((M_PI*2-ad(count-0.5))<pada*4); // Too close together for data pin
             track (cx (d, 0, -padoffset), cy (d, 0, -padoffset), cx (0.5 + d, 0, -padoffset), cy (0.5 + d, 0, -padoffset),
                    cx (1 + d, 0, -padoffset), cy (1 + d, 0, -padoffset), widthpower);
          }
-	 // Connect to caps at end
-	 if(tooclose)
-         track (cx (count-0.5, 0, -padoffset), cy (count-0.5, 0, -padoffset), cx (count-0.25, 0, -padoffset), cy (count-0.25, 0, -padoffset),
-                cx (0, 0, -padoffset), cy (0, 0, -padoffset), widthpower);
-	 else
-         track (cx (count-1, 0, -padoffset), cy (count-1, 0, -padoffset), cx (count-0.75, 0, -padoffset), cy (count-0.75, 0, -padoffset),
-                cx (count-0.5, 0, -padoffset), cy (count-0.5, 0, -padoffset), widthpower);
+         // Connect to caps at end
+         if (tooclose)
+            track (cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), cx (count - 0.25, 0, -padoffset),
+                   cy (count - 0.25, 0, -padoffset), cx (0, 0, -padoffset), cy (0, 0, -padoffset), widthpower);
+         else
+            track (cx (count - 1, 0, -padoffset), cy (count - 1, 0, -padoffset), cx (count - 0.75, 0, -padoffset),
+                   cy (count - 0.75, 0, -padoffset), cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), widthpower);
          track (cx (count - 1, 0, padoffset), cy (count - 1, 0, padoffset), cx (count - 0.75, 0, padoffset),
                 cy (count - 0.75, 0, padoffset), cx (count - 0.5, 0, padoffset), cy (count - 0.5, 0, padoffset), widthpower);
 
-	 if(powervias)
-	 {
-		 if(tooclose)
-		 {
-		 for(int d=1;d<count;d++)
-         track (cx (d, -pada, padoffset), cy (d, -pada, padoffset), NAN, NAN, cx (d, -pada, viaoffset), cy (d, -pada, viaoffset), widthpower);
-		 for(int d=0;d<count-1;d++)
-         track (cx (d, pada, -padoffset), cy (d, pada, -padoffset), NAN, NAN, cx (d, pada, -viaoffset), cy (d, pada, -viaoffset), widthpower);
-		 }
-		 else
-		 {
-	      for(int d=1;d<count;d++)
-         track (cx (d-0.25, 0, padoffset), cy (d-0.25, 0, padoffset),NAN,NAN,cx (d-0.25, 0, padoffset+clearance/2), cy (d-0.25, 0, padoffset+clearance/2),widthpower);
-	      for(int d=0;d<count-1;d++)
-         track (cx (d+0.25, 0, -padoffset), cy (d+0.25, 0, -padoffset),NAN,NAN,cx (d+0.25, 0, -padoffset-clearance/2), cy (d+0.25, 0, -padoffset-clearance/2),widthpower);
-		 }
-	 }
+         if (powervias)
+         {
+            if (tooclose)
+            {
+               for (int d = 1; d < count; d++)
+                  track (cx (d, -pada, padoffset), cy (d, -pada, padoffset), NAN, NAN, cx (d, -pada, viaoffset),
+                         cy (d, -pada, viaoffset), widthpower);
+               for (int d = 0; d < count - 1; d++)
+                  track (cx (d, pada, -padoffset), cy (d, pada, -padoffset), NAN, NAN, cx (d, pada, -viaoffset),
+                         cy (d, pada, -viaoffset), widthpower);
+            } else
+            {
+               for (int d = 1; d < count; d++)
+                  track (cx (d - 0.25, 0, padoffset), cy (d - 0.25, 0, padoffset), NAN, NAN,
+                         cx (d - 0.25, 0, padoffset + clearance / 2), cy (d - 0.25, 0, padoffset + clearance / 2), widthpower);
+               for (int d = 0; d < count - 1; d++)
+                  track (cx (d + 0.25, 0, -padoffset), cy (d + 0.25, 0, -padoffset), NAN, NAN,
+                         cx (d + 0.25, 0, -padoffset - clearance / 2), cy (d + 0.25, 0, -padoffset - clearance / 2), widthpower);
+            }
+         }
       } else if (sides)
       {
          for (int r = 0; r < rows; r++)
@@ -571,10 +577,10 @@ int tooclose=((M_PI*2-ad(count-0.5))<pada*4); // Too close together for data pin
       if (!isnan (diameter))
       {
          via (cx (0, -pada, viaoffset), cy (0, -pada, viaoffset));
-	 if(tooclose)
-         via (cx (count - 1, pada, -viaoffset), cy (count - 1, pada, -viaoffset));
-	 else
-		 via(cx(0,-pada*2,-viaoffset),cy(0,-pada*2,-viaoffset));
+         if (tooclose)
+            via (cx (count - 1, pada, -viaoffset), cy (count - 1, pada, -viaoffset));
+         else
+            via (cx (0, -pada * 2, -viaoffset), cy (0, -pada * 2, -viaoffset));
       } else if (sides)
          for (int r = 0; r < rows; r++)
          {
@@ -587,41 +593,40 @@ int tooclose=((M_PI*2-ad(count-0.5))<pada*4); // Too close together for data pin
             via (diodex (c * rows + rows - 1), diodey (c * rows + rows - 1) + viaoffset);
          }
    }
-   if(powervias)
+   if (powervias)
    {
-	         if (!isnan (diameter))
+      if (!isnan (diameter))
       {
-	      if(tooclose)
-	      {
-	      for(int d=1;d<count;d++)
-         via (cx (d, -pada, viaoffset), cy (d, -pada, viaoffset));
-	      for(int d=0;d<count-1;d++)
-         via (cx (d, pada, -viaoffset), cy (d, pada, -viaoffset));
-	      }else
-	      {
-	      for(int d=1;d<count;d++)
-         via (cx (d-0.25, 0, padoffset+clearance/2), cy (d-0.25, 0, padoffset+clearance/2));
-	      for(int d=0;d<count-1;d++)
-         via (cx (d+0.25, 0, -padoffset-clearance/2), cy (d+0.25, 0, -padoffset-clearance/2));
-	      }
+         if (tooclose)
+         {
+            for (int d = 1; d < count; d++)
+               via (cx (d, -pada, viaoffset), cy (d, -pada, viaoffset));
+            for (int d = 0; d < count - 1; d++)
+               via (cx (d, pada, -viaoffset), cy (d, pada, -viaoffset));
+         } else
+         {
+            for (int d = 1; d < count; d++)
+               via (cx (d - 0.25, 0, padoffset + clearance / 2), cy (d - 0.25, 0, padoffset + clearance / 2));
+            for (int d = 0; d < count - 1; d++)
+               via (cx (d + 0.25, 0, -padoffset - clearance / 2), cy (d + 0.25, 0, -padoffset - clearance / 2));
+         }
       } else if (sides)
-		 {
-		 }
-		 else
-		 {
-		 }
+      {
+      } else
+      {
+      }
    }
    if (fill)
    {
       if (!isnan (diameter))
       {
-         ringzone (0, padoffset * 2, "GND",layer);
-         ringzone (-padoffset * 2, 0, fill,layer);
-	 if(powervias)
-	 {
-         ringzone (0, padoffset * 2, "GND",*layer=='F'?"B.Cu":"F.Cu");
-         ringzone (-padoffset * 2, 0, fill,*layer=='F'?"B.Cu":"F.Cu");
-	 }
+         ringzone (0, padoffset * 2, "GND", layer);
+         ringzone (-padoffset * 2, 0, fill, layer);
+         if (powervias)
+         {
+            ringzone (0, padoffset * 2, "GND", *layer == 'F' ? "B.Cu" : "F.Cu");
+            ringzone (-padoffset * 2, 0, fill, *layer == 'F' ? "B.Cu" : "F.Cu");
+         }
       } else if (sides)
          for (int r = 0; r < rows; r++)
          {
