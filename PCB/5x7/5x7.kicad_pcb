@@ -24140,6 +24140,7 @@
   (layers "F.Cu" "B.Cu")
  ) 
  (zone 
+  (priority 2) 
   (net_name "GND") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
@@ -24162,6 +24163,7 @@
   )
  ) 
  (zone 
+  (priority 2) 
   (net_name "VCC") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
@@ -24184,6 +24186,7 @@
   )
  ) 
  (zone 
+  (priority 2) 
   (net_name "GND") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
@@ -24206,6 +24209,7 @@
   )
  ) 
  (zone 
+  (priority 2) 
   (net_name "VCC") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
@@ -24228,6 +24232,7 @@
   )
  ) 
  (zone 
+  (priority 2) 
   (net_name "GND") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
@@ -24250,6 +24255,7 @@
   )
  ) 
  (zone 
+  (priority 2) 
   (net_name "VCC") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
@@ -24272,6 +24278,7 @@
   )
  ) 
  (zone 
+  (priority 2) 
   (net_name "GND") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
@@ -24294,6 +24301,7 @@
   )
  ) 
  (zone 
+  (priority 2) 
   (net_name "VCC") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
@@ -24316,6 +24324,7 @@
   )
  ) 
  (zone 
+  (priority 2) 
   (net_name "GND") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
@@ -24338,6 +24347,7 @@
   )
  ) 
  (zone 
+  (priority 2) 
   (net_name "VCC") 
   (layer "F.Cu") 
   (hatch edge 0.500000) 
