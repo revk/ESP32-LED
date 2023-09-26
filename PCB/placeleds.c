@@ -13,7 +13,7 @@
 
 int debug = 0;
 
-#define	delta 0.01	// Matched position
+#define	delta 0.01              // Matched position
 
 int
 main (int argc, const char *argv[])
@@ -61,8 +61,8 @@ main (int argc, const char *argv[])
          {"pad-offset", 0, POPT_ARG_DOUBLE | POPT_ARGFLAG_SHOW_DEFAULT, &padoffset, 0, "Pad offset (square)", "mm"},
          {"cap-offset", 0, POPT_ARG_DOUBLE | POPT_ARGFLAG_SHOW_DEFAULT, &capoffset, 0, "Cap offset", "mm"},
          {"via-offset", 0, POPT_ARG_DOUBLE, &viaoffset, 0, "Via offset", "mm"},
-         {"vias", 0, POPT_ARG_DOUBLE, &vias, 0, "Add vias","mm"},
-         {"power-vias", 0, POPT_ARG_DOUBLE, &powervias, 0, "Add power vias","mm"},
+         {"vias", 0, POPT_ARG_DOUBLE, &vias, 0, "Add vias", "mm"},
+         {"power-vias", 0, POPT_ARG_DOUBLE, &powervias, 0, "Add power vias", "mm"},
          {"fill", 0, POPT_ARG_STRING, &fill, 0, "Fill GND/POWER", "Power net name"},
          {"left", 0, POPT_ARG_DOUBLE, &left, 0, "Left", "mm"},
          {"top", 0, POPT_ARG_DOUBLE, &top, 0, "Top", "mm"},
@@ -276,9 +276,9 @@ main (int argc, const char *argv[])
       rows = leds / cols;
    else
       cols = leds / rows;
-      void zaptrack(double x1,double y1,double x2,double y2)
-      {
-	           pcb_t *s = NULL,
+   void zaptrack (double x1, double y1, double x2, double y2)
+   {
+      pcb_t *s = NULL,
          *o;
       while ((s = pcb_find (pcb, isnan (x2) ? "segment" : "arc", s)))
       {
@@ -286,23 +286,26 @@ main (int argc, const char *argv[])
          if (!o || o->valuen != 1 || !o->values[0].istxt || strcmp (o->values[0].txt, layer))
             continue;
          o = pcb_find (s, "start", NULL);
-         if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum)continue;
-	 double d=(o->values[0].num-x1)*(o->values[0].num-x1)+(o->values[1].num-y1)*(o->values[1].num-y1);
-	 if(d>=delta*delta)continue;
-	 // No need to check min
+         if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum)
+            continue;
+         double d = (o->values[0].num - x1) * (o->values[0].num - x1) + (o->values[1].num - y1) * (o->values[1].num - y1);
+         if (d >= delta * delta)
+            continue;
+         // No need to check min
          o = pcb_find (s, "end", NULL);
          if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum)
             continue;
-	 d=(o->values[0].num-x2)*(o->values[0].num-x2)+(o->values[1].num-y2)*(o->values[1].num-y2);
-	 if(d>=delta*delta)continue;
+         d = (o->values[0].num - x2) * (o->values[0].num - x2) + (o->values[1].num - y2) * (o->values[1].num - y2);
+         if (d >= delta * delta)
+            continue;
          s->tag = NULL;         // Suppress as we are replacing
       }
-      }
+   }
    void track (double x1, double y1, double x2, double y2, double x3, double y3, double w)
    {                            // Add a track
       pcb_t *s = NULL,
          *o;
-      zaptrack(x1,y1,x3,y3);
+      zaptrack (x1, y1, x3, y3);
       s = pcb_append_obj (pcb, isnan (x2) ? "segment" : "arc"), *o;
       o = pcb_append_obj (s, "start");
       pcb_append_num (o, x1);
@@ -321,23 +324,26 @@ main (int argc, const char *argv[])
       o = pcb_append_obj (s, "layer");
       pcb_append_txt (o, layer);
    }
-   double zapvia(double x,double y)
-   { // Zap a matching via, return closest non match
-      double best=NAN;
+   double zapvia (double x, double y)
+   {                            // Zap a matching via, return closest non match
+      double best = NAN;
       pcb_t *s = NULL,
          *o;
       while ((s = pcb_find (pcb, "via", s)))
       {
          o = pcb_find (s, "at", NULL);
-         if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum)continue;
-	 double d=(o->values[0].num-x)*(o->values[0].num-x)+(o->values[1].num-y)*(o->values[1].num-y);
-	 if(d<delta*delta) s->tag = NULL;         // Suppress as we are replacing
-	 else if(isnan(best)||d<best)best=d;
+         if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum)
+            continue;
+         double d = (o->values[0].num - x) * (o->values[0].num - x) + (o->values[1].num - y) * (o->values[1].num - y);
+         if (d < delta * delta)
+            s->tag = NULL;      // Suppress as we are replacing
+         else if (isnan (best) || d < best)
+            best = d;
       }
-      return sqrt(best);
+      return sqrt (best);
    }
-   void addvia (double x, double y,double size)
-   { // add a via
+   void addvia (double x, double y, double size)
+   {                            // add a via
       pcb_t *s = NULL,
          *o;
       s = pcb_append_obj (pcb, "via");
@@ -347,34 +353,37 @@ main (int argc, const char *argv[])
       o = pcb_append_obj (s, "size");
       pcb_append_num (o, size);
       o = pcb_append_obj (s, "drill");
-      pcb_append_num (o, size/2);
+      pcb_append_num (o, size / 2);
       o = pcb_append_obj (s, "layers");
       pcb_append_txt (o, "F.Cu");
       pcb_append_txt (o, "B.Cu");
    }
-   void via (double x, double y,double size)
-   { // Add a via replacing existing
-	   if(!size) return; // Not doing via
-      zapvia(x,y);
-      addvia(x,y,size);
+   void via (double x, double y, double size)
+   {                            // Add a via replacing existing
+      if (!size)
+         return;                // Not doing via
+      zapvia (x, y);
+      addvia (x, y, size);
    }
-   void trackvia(double x1,double y1,double x2,double y2,double w,double v)
+   void trackvia (double x1, double y1, double x2, double y2, double w, double v)
    {
-	   if(!v)return;
-	   track(x1,y1,NAN,NAN,x2,y2,w);
-	   via(x2,y2,v);
+      if (!v)
+         return;
+      track (x1, y1, NAN, NAN, x2, y2, w);
+      via (x2, y2, v);
    }
-   void trackviamaybe(double x1,double y1,double x2,double y2,double w,double v)
+   void trackviamaybe (double x1, double y1, double x2, double y2, double w, double v)
    {
-	   if(!v)return;
-	   double d=zapvia(x2,y2);
-	   if(!isnan(d)&&d<(powervias?:vias)+clearance)
-	   {
-		   zaptrack(x1,y1,x2,y2);
-		   return; // Too close
-			    }
-	   track(x1,y1,NAN,NAN,x2,y2,w);
-	   addvia(x2,y2,v);
+      if (!v)
+         return;
+      double d = zapvia (x2, y2);
+      if (!isnan (d) && d < (powervias ? : vias) + clearance)
+      {
+         zaptrack (x1, y1, x2, y2);
+         return;                // Too close
+      }
+      track (x1, y1, NAN, NAN, x2, y2, w);
+      addvia (x2, y2, v);
    }
    pcb_t *zone (const char *net, const char *layer)
    {
@@ -424,9 +433,11 @@ main (int argc, const char *argv[])
          o = pcb_find (s, "polygon", NULL);
          o = pcb_find (o, "pts", NULL);
          o = pcb_find (o, "xy", NULL);
-         if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum)continue;
-	  double d=(o->values[0].num-x)*(o->values[0].num-x)+(o->values[1].num-y)*(o->values[1].num-y);
-         if(d<delta*delta) s->tag = NULL;
+         if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum)
+            continue;
+         double d = (o->values[0].num - x) * (o->values[0].num - x) + (o->values[1].num - y) * (o->values[1].num - y);
+         if (d < delta * delta)
+            s->tag = NULL;
       }
    }
    void ringzone (double a, double b, const char *net, const char *layer)
@@ -466,15 +477,16 @@ main (int argc, const char *argv[])
    {                            // Data at ends
       if (diameter)
       {
-         trackvia (cx (0, -pada, 0), cy (0, -pada, 0), cx (0, -pada, viaoffset), cy (0, -pada, viaoffset), widthend,vias);
+         trackvia (cx (0, -pada, 0), cy (0, -pada, 0), cx (0, -pada, viaoffset), cy (0, -pada, viaoffset), widthend, vias);
          if (tooclose)
             trackvia (cx (count - 1, pada, 0), cy (count - 1, pada, 0), cx (count - 1, pada, -viaoffset),
-                   cy (count - 1, pada, -viaoffset), widthend,vias);
+                      cy (count - 1, pada, -viaoffset), widthend, vias);
          else
          {
             track (cx (count - 1, pada, 0), cy (count - 1, pada, 0), cx (count - 0.5, 0, 0), cy (count - 0.5, 0, 0),
                    cx (0, -pada * 2, 0), cy (0, -pada * 2, 0), widthend);
-            trackvia (cx (0, -pada * 2, 0), cy (0, -pada * 2, 0), cx (0, -pada * 2, -viaoffset), cy (0, -pada * 2, -viaoffset), widthend,vias);
+            trackvia (cx (0, -pada * 2, 0), cy (0, -pada * 2, 0), cx (0, -pada * 2, -viaoffset), cy (0, -pada * 2, -viaoffset),
+                      widthend, vias);
          }
       } else if (sides)
          for (int r = 0; r < rows; r++)
@@ -482,14 +494,14 @@ main (int argc, const char *argv[])
             track (diodex (r * cols) - viaoffset, diodey (r * cols), NAN, NAN, diodex (r * cols) - padoffset, diodey (r * cols),
                    widthend);
             trackvia (diodex (r * cols + cols - 1) + padoffset, diodey (r * cols + cols - 1),
-                   diodex (r * cols + cols - 1) + viaoffset, diodey (r * cols + cols - 1), widthend,vias);
+                      diodex (r * cols + cols - 1) + viaoffset, diodey (r * cols + cols - 1), widthend, vias);
       } else
          for (int c = 0; c < cols; c++)
          {
             track (diodex (c * rows), diodey (c * rows) - viaoffset, NAN, NAN, diodex (c * rows), diodey (c * rows) - padoffset,
                    widthend);
             trackvia (diodex (c * rows + rows - 1), diodey (c * rows + rows - 1) + padoffset, diodex (c * rows + rows - 1),
-                   diodey (c * rows + rows - 1) + viaoffset, widthend,vias);
+                      diodey (c * rows + rows - 1) + viaoffset, widthend, vias);
          }
    }
    if (widthjoin)
@@ -540,18 +552,20 @@ main (int argc, const char *argv[])
             {
                for (int d = 1; d < count; d++)
                   trackviamaybe (cx (d, -pada, padoffset), cy (d, -pada, padoffset), cx (d, -pada, viaoffset),
-                         cy (d, -pada, viaoffset), widthpower,powervias);
+                                 cy (d, -pada, viaoffset), widthpower, powervias);
                for (int d = 0; d < count - 1; d++)
                   trackviamaybe (cx (d, pada, -padoffset), cy (d, pada, -padoffset), cx (d, pada, -viaoffset),
-                         cy (d, pada, -viaoffset), widthpower,powervias);
+                                 cy (d, pada, -viaoffset), widthpower, powervias);
             } else
             {
                for (int d = 1; d < count; d++)
                   trackviamaybe (cx (d - 0.25, 0, padoffset), cy (d - 0.25, 0, padoffset),
-                         cx (d - 0.25, 0, padoffset + clearance / 2), cy (d - 0.25, 0, padoffset + clearance / 2), widthpower,powervias);
+                                 cx (d - 0.25, 0, padoffset + clearance / 2), cy (d - 0.25, 0, padoffset + clearance / 2),
+                                 widthpower, powervias);
                for (int d = 0; d < count - 1; d++)
                   trackviamaybe (cx (d + 0.25, 0, -padoffset), cy (d + 0.25, 0, -padoffset),
-                         cx (d + 0.25, 0, -padoffset - clearance / 2), cy (d + 0.25, 0, -padoffset - clearance / 2), widthpower,powervias);
+                                 cx (d + 0.25, 0, -padoffset - clearance / 2), cy (d + 0.25, 0, -padoffset - clearance / 2),
+                                 widthpower, powervias);
             }
          }
       } else if (sides)
