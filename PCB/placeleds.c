@@ -24,6 +24,7 @@ main (int argc, const char *argv[])
    int count = 0;
    double clearance=0.15;
    double spacing = NAN;
+   double pair=NAN;
    double widthend = 0;
    double widthjoin = 0;
    double widthpower = 0;
@@ -49,6 +50,7 @@ main (int argc, const char *argv[])
          {"sides", 0, POPT_ARG_NONE, &sides, 0, "LED on sides rather than top/bottom (grid)"},
          {"count", 0, POPT_ARG_INT, &count, 0, "Number of leds", "N"},
          {"diameter", 0, POPT_ARG_DOUBLE, &diameter, 0, "LED ring diameter", "mm"},
+         {"pair", 0, POPT_ARG_DOUBLE, &pair, 0, "Paired LEDs (ring)", "mm"},
          {"width-end", 0, POPT_ARG_DOUBLE, &widthend, 0, "Track at ends (data)", "mm"},
          {"width-join", 0, POPT_ARG_DOUBLE, &widthjoin, 0, "Track joining LEDs (data)", "mm"},
          {"width-power", 0, POPT_ARG_DOUBLE, &widthpower, 0, "Track joining LEDs (power)", "mm"},
@@ -82,6 +84,7 @@ main (int argc, const char *argv[])
       errx (1, "Ring or grid, not both");
    if (!isnan (diameter))
    {                            // Sanity check ring
+				if(!isnan(pair))count*=2;
 				if(!isnan(spacing)&&!count)count=diameter*M_PI/spacing;
       if (count < 3)
          errx (1, "Specify LED count (more than 2)");
@@ -96,24 +99,42 @@ main (int argc, const char *argv[])
       count = rows * cols;
    if(isnan(spacing))spacing=2;
    }
-   if(isnan(viaoffset))viaoffset=isnan(diameter)?1.9:1.2;
+   if(isnan(viaoffset))viaoffset=isnan(diameter)?1.9:1.1;
+	      double pada=2*padoffset /diameter; // Angle for pad offset
+	      double paira=pair/diameter; // Angle for (half) pair offset
    pcb_t *pcb = pcb_load (pcbfile);
    double ad(double d)
    { // Angle for diode
-	   return 2.0*M_PI*d/count;
+     double a(int d)
+     {
+	     if(isnan(pair)) return 2.0*M_PI*d/count;
+	     double a=2.0*M_PI*(d/2)/(count/2);
+	     if(d&1)a+=paira;else a-=paira;
+	     return a;
+     }
+     double f=floor(d);
+     return a(f)*(f+1-d)+a(f+1)*(d-f);
    }
-   double cx(double d,double o)
-   { // X for diode
-	   return left+(diameter/2+o)*sin(ad(d));
+   double ax(double a,double o)
+   { // X for angle and offset
+	   return left+(diameter/2+o)*sin(a);
    }
-   double cy(double d,double o)
-   { // Y for diode
-	   return top-(diameter/2+o)*cos(ad(d));
+   double ay(double a,double o)
+   { // Y for angle and offset
+	   return top-(diameter/2+o)*cos(a);
+   }
+   double cx(double d,double a,double o)
+   { // X for diode and offset
+	   return ax(ad(d)+a,o);
+   }
+   double cy(double d,double a,double o)
+   { // Y for diode and offset
+	   return ay(ad(d)+a,o);
    }
    double diodex (int d)
    {
       if (!isnan (diameter))
-         return cx(d,0);
+         return cx(d,0,0);
       if (sides)
          return left + spacing * (d % cols);
       return left + spacing * (d / rows);
@@ -121,7 +142,7 @@ main (int argc, const char *argv[])
    double diodey (int d)
    {
       if (!isnan (diameter))
-         return cy(d,0);
+         return cy(d,0,0);
       if (sides)
          return top + spacing * (d / cols);
       return top + spacing * (d % rows);
@@ -129,13 +150,13 @@ main (int argc, const char *argv[])
    double dioder (int d)
    {
       if (!isnan (diameter))
-         return -135 - 360.0 * d / count;
+         return -135-ad(d)*180/M_PI;
       return sides ? -135 : 135;
    }
    double capx (int c)
    {
       if (!isnan (diameter))
-         return cx(0.5+c,0);
+         return cx(0.5+c,0,0);
       if (sides)
          return (c & 1) ? left + spacing * (cols - 1) + capoffset : left - capoffset;
       return left + spacing * (c / 2);
@@ -143,7 +164,7 @@ main (int argc, const char *argv[])
    double capy (int c)
    {
       if (!isnan (diameter))
-         return cy(0.5+c,0);
+         return cy(0.5+c,0,0);
       if (sides)
          return top + spacing * (c / 2);
       return (c & 1) ? top + spacing * (rows - 1) + capoffset : top - capoffset;
@@ -151,7 +172,7 @@ main (int argc, const char *argv[])
    double capr (int c)
    {
       if (!isnan (diameter))
-         return 90 - 360.0 * (0.5+c) / count;
+         return 90-ad(0.5+c)*180/M_PI;
       return sides ? 90 : 0;
    }
 
@@ -166,10 +187,10 @@ main (int argc, const char *argv[])
          if (!t || t->valuen < 2 || !t->values[0].islit || strcmp (t->values[0].txt, "reference") || !t->values[1].istxt)
             continue;
          const char *ref = t->values[1].txt;
-         if (*ref != 'D')
+         if (*ref != (isnan(pair)?'D':'C'))
             continue;
          int d = atoi (ref + 1);
-         if (d != diode)
+         if (d !=( isnan(pair)?diode:cap))
             continue;
          t = pcb_find (footprint, "at", NULL);
          if (!t || t->valuen < 2 || !t->values[0].isnum || !t->values[1].isnum)
@@ -185,7 +206,7 @@ main (int argc, const char *argv[])
    } else if (!isnan (diameter))
       left += diameter / 2;     // Start LED position
    if (isnan (left) || isnan (top) || !layer)
-      warnx ("Cannot find start point (i.e. D%d)", diode);
+      warnx ("Cannot find start point (i.e. %c%d)", isnan(pair)?'D':'C',isnan(pair)?diode:cap);
    if (!isnan (diameter))
       top += diameter / 2;      // Center of ring
    int leds = 0;
@@ -363,18 +384,20 @@ main (int argc, const char *argv[])
 
    void ringzone(double a,double b,const char *net)
    {
-  zapzone(cx(0,a),cy(0,a),net);
+  zapzone(cx(0,0,a),cy(0,0,a),net);
       pcb_t *z=zone(net);
       void xy(double d,double o)
       {
 	      pcb_t *xy=pcb_append_obj(z,"xy");
-	      pcb_append_num(xy,cx(d,o));
-	      pcb_append_num(xy,cy(d,o));
+	      pcb_append_num(xy,ax(d,o));
+	      pcb_append_num(xy,ay(d,o));
       }
+      int steps=M_PI*diameter/2;
       xy(0,a);
-      for(int d=0;d<count+1;d++)xy(d,b);
-      for(int d=count;d>0;d--)xy(d,a);
+      for(int d=0;d<=steps;d++)xy(M_PI*2*d/steps,b);
+      for(int d=steps;d>0;d--)xy(M_PI*2*d/steps,a);
 	}
+
    void boxzone(double x1,double y1,double x2,double y2,const char *net)
    {
 	   zapzone(x1,y1,net);
@@ -391,13 +414,12 @@ main (int argc, const char *argv[])
       xy(x2,y1);
    }
 
-	      double padr=padoffset*count/(diameter*M_PI);
    if (widthend)
    {                            // Data at ends
       if (!isnan (diameter))
       {
-	      track(cx(-padr,0),cy(-padr,0),NAN,NAN,cx(-padr,viaoffset),cy(-padr,viaoffset),widthend);
-	      track(cx(count-1+padr,0),cy(count-1+padr,0),NAN,NAN,cx(count-1+padr,-viaoffset),cy(count-1+padr,-viaoffset),widthend);
+	      track(cx(0,-pada,0),cy(0,-pada,0),NAN,NAN,cx(0,-pada,viaoffset),cy(0,-pada,viaoffset),widthend);
+	      track(cx(count-1,pada,0),cy(count-1,pada,0),NAN,NAN,cx(count-1,pada,-viaoffset),cy(count-1,pada,-viaoffset),widthend);
 
       } else if (sides)
          for (int r = 0; r < rows; r++)
@@ -420,7 +442,7 @@ main (int argc, const char *argv[])
       if (!isnan (diameter))
       {
          for (int d = 0; d < count-1; d++)
-               track (cx(d+padr,0),cy(d+padr,0),cx(0.5+d,0),cy(0.5+d,0),cx(1+d-padr,0),cy(1+d-padr,0),widthjoin);
+               track (cx(d,pada,0),cy(d,pada,0),cx(0.5+d,0,0),cy(0.5+d,0,0),cx(1+d,-pada,0),cy(1+d,-pada,0),widthjoin);
       }
        else if (sides)
       {
@@ -442,11 +464,11 @@ main (int argc, const char *argv[])
       {
  for (int d = 0; d < count-1; d++)
  {
-               track (cx(d,padoffset),cy(d,padoffset),cx(0.5+d,padoffset),cy(0.5+d,padoffset),cx(1+d,padoffset),cy(1+d,padoffset),widthjoin);
-               track (cx(d,-padoffset),cy(d,-padoffset),cx(0.5+d,-padoffset),cy(0.5+d,-padoffset),cx(1+d,-padoffset),cy(1+d,-padoffset),widthjoin);
+               track (cx(d,0,padoffset),cy(d,0,padoffset),cx(0.5+d,0,padoffset),cy(0.5+d,0,padoffset),cx(1+d,0,padoffset),cy(1+d,0,padoffset),widthjoin);
+               track (cx(d,0,-padoffset),cy(d,0,-padoffset),cx(0.5+d,0,-padoffset),cy(0.5+d,0,-padoffset),cx(1+d,0,-padoffset),cy(1+d,0,-padoffset),widthjoin);
  }
-               track (cx(count-1,padoffset),cy(count-1,padoffset),cx(count-0.75,padoffset),cy(count-0.75,padoffset),cx(count-0.5,padoffset),cy(count-0.5,padoffset),widthjoin);
-               track (cx(-0.5,-padoffset),cy(-0.5,-padoffset),cx(-0.25,-padoffset),cy(-0.25,-padoffset),cx(0,-padoffset),cy(0,-padoffset),widthjoin);
+               track (cx(count-1,0,padoffset),cy(count-1,0,padoffset),cx(count-0.75,0,padoffset),cy(count-0.75,0,padoffset),cx(count-0.5,0,padoffset),cy(count-0.5,0,padoffset),widthjoin);
+               track (cx(-0.5,0,-padoffset),cy(-0.5,0,-padoffset),cx(-0.25,0,-padoffset),cy(-0.25,0,-padoffset),cx(0,0,-padoffset),cy(0,0,-padoffset),widthjoin);
    }
        else if (sides)
       {
@@ -494,8 +516,8 @@ main (int argc, const char *argv[])
    {                            // Add vias
       if (!isnan (diameter))
       {
-	      via(cx(-padr,viaoffset),cy(-padr,viaoffset));
-	      via(cx(count-1+padr,-viaoffset),cy(count-1+padr,-viaoffset));
+	      via(cx(0,-pada,viaoffset),cy(0,-pada,viaoffset));
+	      via(cx(count-1,pada,-viaoffset),cy(count-1,pada,-viaoffset));
       } else if (sides)
          for (int r = 0; r < rows; r++)
          {
