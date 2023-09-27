@@ -122,7 +122,7 @@ main (int argc, const char *argv[])
          return 2.0 * M_PI * (d / group) / (count / group)+ spacinga*(-0.5*(group-1)+(d%group));
       }
       double f = floor (d);
-      return a (f) * (f + 1 - d) + a (f + 1) * (d - f) + angle*M_PI/180;;
+      return a (f) * (f + 1 - d) + a (f + 1) * (d - f) + angle*M_PI/180;
    }
    double ax (double a, double o)
    {                            // X for angle and offset
@@ -184,7 +184,7 @@ main (int argc, const char *argv[])
          return 90 - ad (0.5 + c) * 180 / M_PI;
       return sides ? 90 : 0;
    }
-   int tooclose = ((!group&&(M_PI * 2 - ad (count - 0.5)) < pada * 6) || (group&&spacing<padoffset*6));   // Too close together for data pins together at end
+   int tooclose = ((!group&&(M_PI * 2 - (ad (count - 0.5)-angle*M_PI/180)) < pada * 4) || (group&&spacing<padoffset*6));   // Too close together for data pins together at end
 
    pcb_t *footprint = NULL;
    if (isnan (startx) || isnan (starty))
