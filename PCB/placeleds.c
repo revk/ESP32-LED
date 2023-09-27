@@ -20,21 +20,22 @@ main (int argc, const char *argv[])
 {
    const char *pcbfile = NULL;
    int diode = 1;
-   int cap = 1;
+   int cap = 0;
    int rows = 0;
    int cols = 0;
    int count = 0;
    double clearance = 0.15;
    double spacing = 0;
-   double pair = 0;
    double widthend = 0;
    double widthjoin = 0;
    double widthpower = 0;
    double padoffset = 0.6010407;
    double capoffset = 1.15;
-   double left = NAN;
-   double top = NAN;
+   double startx = NAN;
+   double starty = NAN;
    double diameter = 0;
+   double angle=0;
+   int group=0;
    int sides = 0;
    double viaoffset = 0;
    double vias = 0;
@@ -51,10 +52,11 @@ main (int argc, const char *argv[])
          {"rows", 0, POPT_ARG_INT | POPT_ARGFLAG_SHOW_DEFAULT, &rows, 0, "Number of rows (grid)", "N"},
          {"cols", 0, POPT_ARG_INT, &cols, 0, "Number of cols (grid)", "N"},
          {"spacing", 0, POPT_ARG_DOUBLE | POPT_ARGFLAG_SHOW_DEFAULT, &spacing, 0, "LED spacing (grid)", "mm"},
-         {"sides", 0, POPT_ARG_NONE, &sides, 0, "LED on sides rather than top/bottom (grid)"},
+         {"sides", 0, POPT_ARG_NONE, &sides, 0, "LED on sides rather than starty/bottom (grid)"},
          {"count", 0, POPT_ARG_INT, &count, 0, "Number of leds", "N"},
-         {"diameter", 0, POPT_ARG_DOUBLE, &diameter, 0, "LED ring diameter", "mm"},
-         {"pair", 0, POPT_ARG_DOUBLE, &pair, 0, "Paired LEDs (ring)", "mm"},
+         {"diameter", 'd', POPT_ARG_DOUBLE, &diameter, 0, "LED ring diameter", "mm"},
+         {"angle", 'd', POPT_ARG_DOUBLE, &angle, 0, "Angle offset", "degrees"},
+         {"group", 0, POPT_ARG_INT, &group, 0, "Group LEDs (ring)", "N"},
          {"width-end", 0, POPT_ARG_DOUBLE, &widthend, 0, "Track at ends (data)", "mm"},
          {"width-join", 0, POPT_ARG_DOUBLE, &widthjoin, 0, "Track joining LEDs (data)", "mm"},
          {"width-power", 0, POPT_ARG_DOUBLE, &widthpower, 0, "Track joining LEDs (power)", "mm"},
@@ -64,8 +66,8 @@ main (int argc, const char *argv[])
          {"vias", 0, POPT_ARG_DOUBLE, &vias, 0, "Add vias", "mm"},
          {"power-vias", 0, POPT_ARG_DOUBLE, &powervias, 0, "Add power vias", "mm"},
          {"fill", 0, POPT_ARG_STRING, &fill, 0, "Fill GND/POWER", "Power net name"},
-         {"left", 0, POPT_ARG_DOUBLE, &left, 0, "Left", "mm"},
-         {"top", 0, POPT_ARG_DOUBLE, &top, 0, "Top", "mm"},
+         {"startx", 'x', POPT_ARG_DOUBLE, &startx, 0, "Left (grid) / Centre (ring)", "X"},
+         {"starty", 'y', POPT_ARG_DOUBLE, &starty, 0, "Top (grid) / Centre (ring)", "Y"},
          {"debug", 'v', POPT_ARG_NONE, &debug, 0, "Debug"},
          POPT_AUTOHELP {}
       };
@@ -89,9 +91,7 @@ main (int argc, const char *argv[])
       errx (1, "Ring or grid, not both");
    if (diameter)
    {                            // Sanity check ring
-      if (pair)
-         count *= 2;
-      if (spacing && !count)
+      if (spacing && !group && !count)
          count = diameter * M_PI / spacing;
       if (count < 3)
          errx (1, "Specify LED count (more than 2)");
@@ -107,34 +107,30 @@ main (int argc, const char *argv[])
       if (!spacing)
          spacing = 2;
    }
+   if(diode&&!cap)cap=diameter?diode:(diode-1)/(sides?rows:cols)+1;
    if (!viaoffset)
       viaoffset = !diameter ? 1.9 : 1.1;
    double pada = 2 * padoffset / diameter;      // Angle for pad offset
-   double paira = pair / diameter;      // Angle for (half) pair offset
+   double spacinga = 2 * spacing / diameter;      // Angle for spacing of groups
    pcb_t *pcb = pcb_load (pcbfile);
    double ad (double d)
    {                            // Angle for diode
       double a (int d)
       {
-         if (!pair)
+         if (!group)
             return 2.0 * M_PI * d / count;
-         double a = 2.0 * M_PI * (d / 2) / (count / 2);
-         if (d & 1)
-            a += paira;
-         else
-            a -= paira;
-         return a;
+         return 2.0 * M_PI * (d / group) / (count / group)+ spacinga*(-0.5*(group-1)+(d%group));
       }
       double f = floor (d);
-      return a (f) * (f + 1 - d) + a (f + 1) * (d - f);
+      return a (f) * (f + 1 - d) + a (f + 1) * (d - f) + angle*M_PI/180;;
    }
    double ax (double a, double o)
    {                            // X for angle and offset
-      return left + (diameter / 2 + o) * sin (a);
+      return startx + (diameter / 2 + o) * sin (a);
    }
    double ay (double a, double o)
    {                            // Y for angle and offset
-      return top - (diameter / 2 + o) * cos (a);
+      return starty - (diameter / 2 + o) * cos (a);
    }
    double cx (double d, double a, double o)
    {                            // X for diode and offset
@@ -149,16 +145,16 @@ main (int argc, const char *argv[])
       if (diameter)
          return cx (d, 0, 0);
       if (sides)
-         return left + spacing * (d % cols);
-      return left + spacing * (d / rows);
+         return startx + spacing * (d % cols);
+      return startx + spacing * (d / rows);
    }
    double diodey (int d)
    {
       if (diameter)
          return cy (d, 0, 0);
       if (sides)
-         return top + spacing * (d / cols);
-      return top + spacing * (d % rows);
+         return starty + spacing * (d / cols);
+      return starty + spacing * (d % rows);
    }
    double dioder (int d)
    {
@@ -171,16 +167,16 @@ main (int argc, const char *argv[])
       if (diameter)
          return cx (0.5 + c, 0, 0);
       if (sides)
-         return (c & 1) ? left + spacing * (cols - 1) + capoffset : left - capoffset;
-      return left + spacing * (c / 2);
+         return (c & 1) ? startx + spacing * (cols - 1) + capoffset : startx - capoffset;
+      return startx + spacing * (c / 2);
    }
    double capy (int c)
    {
       if (diameter)
          return cy (0.5 + c, 0, 0);
       if (sides)
-         return top + spacing * (c / 2);
-      return (c & 1) ? top + spacing * (rows - 1) + capoffset : top - capoffset;
+         return starty + spacing * (c / 2);
+      return (c & 1) ? starty + spacing * (rows - 1) + capoffset : starty - capoffset;
    }
    double capr (int c)
    {
@@ -188,10 +184,10 @@ main (int argc, const char *argv[])
          return 90 - ad (0.5 + c) * 180 / M_PI;
       return sides ? 90 : 0;
    }
-   int tooclose = ((M_PI * 2 - ad (count - 0.5)) < pada * 4);   // Too close together for data pins together at end
+   int tooclose = ((!group&&(M_PI * 2 - ad (count - 0.5)) < pada * 6) || (group&&spacing<padoffset*6));   // Too close together for data pins together at end
 
    pcb_t *footprint = NULL;
-   if (isnan (left) || isnan (top))
+   if (isnan (startx) || isnan (starty))
    {
       while ((footprint = pcb_find (pcb, "footprint", footprint)))
       {
@@ -201,28 +197,31 @@ main (int argc, const char *argv[])
          if (!t || t->valuen < 2 || !t->values[0].islit || strcmp (t->values[0].txt, "reference") || !t->values[1].istxt)
             continue;
          const char *ref = t->values[1].txt;
-         if (*ref != (!pair ? 'D' : 'C'))
+         if (*ref != (!group || (group&1) ? 'D' : 'C'))
             continue;
          int d = atoi (ref + 1);
-         if (d != (!pair ? diode : cap))
+         if (d != (!group || (group&1) ? diode : cap))
             continue;
          t = pcb_find (footprint, "at", NULL);
          if (!t || t->valuen < 2 || !t->values[0].isnum || !t->values[1].isnum)
             continue;
-         left = t->values[0].num;
-         top = t->values[1].num;
+         startx = t->values[0].num;
+         starty = t->values[1].num;
          t = pcb_find (footprint, "layer", NULL);
          if (!t || t->valuen < 1 || !t->values[0].istxt)
             continue;
          layer = t->values[0].txt;
          break;
       }
-   } else if (diameter)
-      left += diameter / 2;     // Start LED position
-   if (isnan (left) || isnan (top) || !layer)
-      warnx ("Cannot find start point (i.e. %c%d)", !pair ? 'D' : 'C', !pair ? diode : cap);
    if (diameter)
-      top += diameter / 2;      // Center of ring
+   { // Assuming start D/C is top
+      startx += diameter / 2; 
+      starty += diameter / 2;
+				  }
+   }
+   if(!layer)layer="F.Cu";
+   if (isnan (startx) || isnan (starty))
+      warnx ("Cannot find start point (i.e. %c%d)", !group || (group&1) ? 'D' : 'C', !group || (group&1) ? diode : cap);
    int leds = 0;
    int countcap = !diameter ? (sides ? rows : cols) * 2 : count;
    footprint = NULL;

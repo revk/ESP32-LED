@@ -4,12 +4,8 @@ placeleds: placeleds.c PCBCase/pcb.c PCBCase/pcb.h
 	gcc -IPCBCase -O -o $@ $< PCBCase/pcb.c -lpopt -lm -g
 
 leds:	placeleds
-	./placeleds 5x7/5x7.kicad_pcb --cols=5 --rows=7 --width-join=0.5 --width-end=0.2 --width-power=0.3 --fill=VCC --power-vias=0.8 --vias=0.8
-	./placeleds Gate/Gate.kicad_pcb --diameter=100 --count=117 --width-join=0.2 --width-end=0.2 --width-power=0.3 --fill=VCC --power-vias=0.8 --vias=0.8
-	./placeleds Gate/Gate.kicad_pcb --diameter=120 --diode=118 --cap=118 --count=39 --width-join=0.2 --width-end=0.2 --width-power=0.3 --fill=VCC --power-vias=0.8 --vias=0.8
-	./placeleds Gate/Gate.kicad_pcb --diameter=105 --diode=157 --cap=157 --count=9 --width-join=0.2 --width-end=0.2 --width-power=0.3 --fill=VCC --pair=8 --power-vias=0.8 --vias=0.8
-	./placeleds Gate/Gate.kicad_pcb --diameter=110 --diode=175 --cap=175 --count=9 --width-join=0.2 --width-end=0.2 --width-power=0.3 --fill=VCC --pair=10 --power-vias=0.8 --vias=0.8
-	./placeleds Gate/Gate.kicad_pcb --diameter=115 --diode=193 --cap=193 --count=9 --width-join=0.2 --width-end=0.2 --width-power=0.3 --fill=VCC --pair=12 --power-vias=0.8 --vias=0.8
+	#./placeleds 5x7/5x7.kicad_pcb --cols=5 --rows=7 --width-join=0.5 --width-end=0.2 --width-power=0.3 --fill=VCC --power-vias=0.8 --vias=0.8
+	./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d120 --diode=1 --count=27 --group=3 --spacing=3 --vias=0.8 --power-vias=0.8 --width-power=0.2 --width-end=0.2 --width-join=0.2 --angle=10
 
 stl:    LED/LED.stl
 
