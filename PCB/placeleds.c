@@ -24,13 +24,16 @@ main (int argc, const char *argv[])
    int rows = 0;
    int cols = 0;
    int count = 0;
-   double clearance = 0.15;
    double spacing = 0;
    double widthend = 0;
    double widthjoin = 0;
    double widthpower = 0;
    double padoffset = 0.6010407;
+   double padsize = 0.227386; // to diagonal on power
+   double clearance = 0.127;
    double capoffset = 1.15;
+   double zonei=NAN;
+   double zoneo=NAN;
    double startx = NAN;
    double starty = NAN;
    double diameter = 0;
@@ -55,6 +58,8 @@ main (int argc, const char *argv[])
          {"sides", 0, POPT_ARG_NONE, &sides, 0, "LED on sides rather than starty/bottom (grid)"},
          {"count", 0, POPT_ARG_INT, &count, 0, "Number of leds", "N"},
          {"diameter", 'd', POPT_ARG_DOUBLE, &diameter, 0, "LED ring diameter", "mm"},
+         {"zone-in", 0, POPT_ARG_DOUBLE, &zonei, 0, "Zone inside ", "mm"},
+         {"zone-out", 0, POPT_ARG_DOUBLE, &zoneo, 0, "Zone outside ", "mm"},
          {"angle", 'd', POPT_ARG_DOUBLE, &angle, 0, "Angle offset", "degrees"},
          {"group", 0, POPT_ARG_INT, &group, 0, "Group LEDs (ring)", "N"},
          {"width-end", 0, POPT_ARG_DOUBLE, &widthend, 0, "Track at ends (data)", "mm"},
@@ -110,6 +115,10 @@ main (int argc, const char *argv[])
    if(diode&&!cap)cap=diameter?diode:(diode-1)/(sides?rows:cols)+1;
    if (!viaoffset)
       viaoffset = !diameter ? 1.9 : 1.1;
+   if(isnan(zonei))zonei=padoffset+padsize+clearance;
+   else zonei-=clearance/2;
+   if(isnan(zoneo))zoneo=padoffset+padsize+clearance;
+   else zoneo-=clearance/2;
    double pada = 2 * padoffset / diameter;      // Angle for pad offset
    double spacinga = 2 * spacing / diameter;      // Angle for spacing of groups
    pcb_t *pcb = pcb_load (pcbfile);
@@ -559,11 +568,11 @@ main (int argc, const char *argv[])
             {
                for (int d = 1; d < count; d++)
                   trackviamaybe (cx (d - 0.25, 0, padoffset), cy (d - 0.25, 0, padoffset),
-                                 cx (d - 0.25, 0, padoffset + clearance / 2), cy (d - 0.25, 0, padoffset + clearance / 2),
+                                 cx (d - 0.25, 0, zoneo-powervias/2), cy (d - 0.25, 0, zoneo-powervias/2),
                                  widthpower, powervias);
                for (int d = 0; d < count - 1; d++)
                   trackviamaybe (cx (d + 0.25, 0, -padoffset), cy (d + 0.25, 0, -padoffset),
-                                 cx (d + 0.25, 0, -padoffset - clearance / 2), cy (d + 0.25, 0, -padoffset - clearance / 2),
+                                 cx (d + 0.25, 0, -zonei+powervias/ 2), cy (d + 0.25, 0, -zonei+powervias / 2),
                                  widthpower, powervias);
             }
          }
@@ -623,12 +632,12 @@ main (int argc, const char *argv[])
    {
       if (diameter)
       {
-         ringzone (0, padoffset * 2, "GND", layer);
-         ringzone (-padoffset * 2, 0, fill, layer);
+         ringzone (0, zoneo, "GND", layer);
+         ringzone (-zonei, 0, fill, layer);
          if (powervias)
          {
-            ringzone (0, padoffset * 2, "GND", *layer == 'F' ? "B.Cu" : "F.Cu");
-            ringzone (-padoffset * 2, 0, fill, *layer == 'F' ? "B.Cu" : "F.Cu");
+            ringzone (0, zoneo, "GND", *layer == 'F' ? "B.Cu" : "F.Cu");
+            ringzone (-zonei, 0, fill, *layer == 'F' ? "B.Cu" : "F.Cu");
          }
       } else if (sides)
          for (int r = 0; r < rows; r++)
