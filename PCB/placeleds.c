@@ -13,7 +13,7 @@
 
 int debug = 0;
 
-#define	delta 0.1              // Matched position
+#define	delta 0.1               // Matched position
 
 int
 main (int argc, const char *argv[])
@@ -27,18 +27,18 @@ main (int argc, const char *argv[])
    double spacing = 0;
    double trackwidth = 0.2;
    double padoffset = 0.6010407;
-   double padsize = 0.227386; // to diagonal on power
+   double padsize = 0.227386;   // to diagonal on power
    double clearance = 0.127;
    double capoffset = 1.15;
-   double zonei=NAN;
-   double zoneo=NAN;
+   double zonei = NAN;
+   double zoneo = NAN;
    double startx = NAN;
    double starty = NAN;
    double diameter = 0;
-   double angle=0;
-   int group=0;
+   double angle = 0;
+   int group = 0;
    int sides = 0;
-   int tracks=0;
+   int tracks = 0;
    double viaoffset = 0;
    double vias = 0;
    double powervias = 0;
@@ -65,7 +65,7 @@ main (int argc, const char *argv[])
          {"cap-offset", 0, POPT_ARG_DOUBLE | POPT_ARGFLAG_SHOW_DEFAULT, &capoffset, 0, "Cap offset", "mm"},
          {"via-offset", 0, POPT_ARG_DOUBLE, &viaoffset, 0, "Via offset", "mm"},
          {"tracks", 0, POPT_ARG_NONE, &tracks, 0, "Add tracks"},
-         {"vias", 0, POPT_ARG_DOUBLE, &vias, 0, "Add vias","mm"},
+         {"vias", 0, POPT_ARG_DOUBLE, &vias, 0, "Add vias", "mm"},
          {"power-vias", 0, POPT_ARG_DOUBLE, &powervias, 0, "Add power vias", "mm"},
          {"fill", 0, POPT_ARG_STRING, &fill, 0, "Fill GND/POWER", "Power net name"},
          {"startx", 'x', POPT_ARG_DOUBLE, &startx, 0, "Left (grid) / Centre (ring)", "X"},
@@ -109,15 +109,20 @@ main (int argc, const char *argv[])
       if (!spacing)
          spacing = 2;
    }
-   if(diode&&!cap)cap=diameter?diode:(diode-1)/(sides?rows:cols)+1;
+   if (diode && !cap)
+      cap = diameter ? diode : (diode - 1) / (sides ? rows : cols) + 1;
    if (!viaoffset)
       viaoffset = !diameter ? 1.9 : 1.1;
-   if(isnan(zonei))zonei=padoffset+padsize+clearance;
-   else zonei-=clearance/2;
-   if(isnan(zoneo))zoneo=padoffset+padsize+clearance;
-   else zoneo-=clearance/2;
+   if (isnan (zonei))
+      zonei = padoffset + padsize + clearance;
+   else
+      zonei -= clearance / 2;
+   if (isnan (zoneo))
+      zoneo = padoffset + padsize + clearance;
+   else
+      zoneo -= clearance / 2;
    double pada = 2 * padoffset / diameter;      // Angle for pad offset
-   double spacinga = 2 * spacing / diameter;      // Angle for spacing of groups
+   double spacinga = 2 * spacing / diameter;    // Angle for spacing of groups
    pcb_t *pcb = pcb_load (pcbfile);
    double ad (double d)
    {                            // Angle for diode
@@ -125,10 +130,10 @@ main (int argc, const char *argv[])
       {
          if (!group)
             return 2.0 * M_PI * d / count;
-         return 2.0 * M_PI * (d / group) / (count / group)+ spacinga*(-0.5*(group-1)+(d%group));
+         return 2.0 * M_PI * (d / group) / (count / group) + spacinga * (-0.5 * (group - 1) + (d % group));
       }
       double f = floor (d);
-      return a (f) * (f + 1 - d) + a (f + 1) * (d - f) + angle*M_PI/180;
+      return a (f) * (f + 1 - d) + a (f + 1) * (d - f) + angle * M_PI / 180;
    }
    double ax (double a, double o)
    {                            // X for angle and offset
@@ -190,7 +195,7 @@ main (int argc, const char *argv[])
          return 90 - ad (0.5 + c) * 180 / M_PI;
       return sides ? 90 : 0;
    }
-   int tooclose = ((!group&&(M_PI * 2 - (ad (count - 0.5)-angle*M_PI/180)) < pada * 4) || (group&&spacing<padoffset*6));   // Too close together for data pins together at end
+   int tooclose = ((!group && (M_PI * 2 - (ad (count - 0.5) - angle * M_PI / 180)) < pada * 4) || (group && spacing < padoffset * 6));  // Too close together for data pins together at end
 
    pcb_t *footprint = NULL;
    if (isnan (startx) || isnan (starty))
@@ -203,10 +208,10 @@ main (int argc, const char *argv[])
          if (!t || t->valuen < 2 || !t->values[0].islit || strcmp (t->values[0].txt, "reference") || !t->values[1].istxt)
             continue;
          const char *ref = t->values[1].txt;
-         if (*ref != (!group || (group&1) ? 'D' : 'C'))
+         if (*ref != (!group || (group & 1) ? 'D' : 'C'))
             continue;
          int d = atoi (ref + 1);
-         if (d != (!group || (group&1) ? diode : cap))
+         if (d != (!group || (group & 1) ? diode : cap))
             continue;
          t = pcb_find (footprint, "at", NULL);
          if (!t || t->valuen < 2 || !t->values[0].isnum || !t->values[1].isnum)
@@ -219,15 +224,16 @@ main (int argc, const char *argv[])
          layer = t->values[0].txt;
          break;
       }
-   if (diameter)
-   { // Assuming start D/C is top
-      startx += diameter / 2; 
-      starty += diameter / 2;
-				  }
+      if (diameter)
+      {                         // Assuming start D/C is top
+         startx += diameter / 2;
+         starty += diameter / 2;
+      }
    }
-   if(!layer)layer="F.Cu";
+   if (!layer)
+      layer = "F.Cu";
    if (isnan (startx) || isnan (starty))
-      warnx ("Cannot find start point (i.e. %c%d)", !group || (group&1) ? 'D' : 'C', !group || (group&1) ? diode : cap);
+      warnx ("Cannot find start point (i.e. %c%d)", !group || (group & 1) ? 'D' : 'C', !group || (group & 1) ? diode : cap);
    int leds = 0;
    int countcap = !diameter ? (sides ? rows : cols) * 2 : count;
    footprint = NULL;
@@ -447,7 +453,8 @@ main (int argc, const char *argv[])
    }
    void ringzone (double a, double b, const char *net, const char *layer)
    {
-	   if(a==b)return;
+      if (a == b)
+         return;
       zapzone (ax (0, a), ay (0, a), net, layer);
       pcb_t *z = zone (net, layer);
       void xy (double d, double o)
@@ -465,7 +472,8 @@ main (int argc, const char *argv[])
    }
    void boxzone (double x1, double y1, double x2, double y2, const char *net)
    {
-	   if(x1==x2||y1==y2)return;
+      if (x1 == x2 || y1 == y2)
+         return;
       zapzone (x1, y1, net, layer);
       pcb_t *z = zone (net, layer);
       void xy (double x, double y)
@@ -480,35 +488,39 @@ main (int argc, const char *argv[])
       xy (x2, y1);
    }
 
-   if (tracks&&trackwidth)
-   {     
+   if (tracks && trackwidth)
+   {
       if (diameter)
-      { // Ring
-	 double m=trackwidth/2+clearance+powervias/2;
-	 double zi=zonei-powervias/2;
-	 if(zi<m)zi=m; else zi=(m+zi)/2;
-	 double zo=zoneo-powervias/2;
-	 if(zo<m)zo=m; else zo=(m+zo)/2;
-	 // Data
+      {                         // Ring
+         double m = trackwidth / 2 + clearance + powervias / 2;
+         double zi = zonei - powervias / 2;
+         if (zi < m)
+            zi = m;
+         else
+            zi = (m + zi) / 2;
+         double zo = zoneo - powervias / 2;
+         if (zo < m)
+            zo = m;
+         else
+            zo = (m + zo) / 2;
+         // Data
          for (int d = 0; d < count - 1; d++)
             track (cx (d, pada, 0), cy (d, pada, 0), cx (0.5 + d, 0, 0), cy (0.5 + d, 0, 0), cx (1 + d, -pada, 0),
                    cy (1 + d, -pada, 0), trackwidth);
-	 // Data end
+         // Data end
          if (tooclose)
-	 {
+         {
             trackvia (cx (0, -pada, 0), cy (0, -pada, 0), cx (0, -pada, -viaoffset), cy (0, -pada, -viaoffset), trackwidth, vias);
             trackvia (cx (count - 1, pada, 0), cy (count - 1, pada, 0), cx (count - 1, pada, viaoffset),
                       cy (count - 1, pada, viaoffset), trackwidth, vias);
-	 }
-         else
+         } else
          {
-            trackvia (cx (0, -pada, 0), cy (0, -pada, 0), cx (0, -pada*2, -zi), cy (0, -pada*2, -zi), trackwidth, vias);
+            trackvia (cx (0, -pada, 0), cy (0, -pada, 0), cx (0, -pada * 2, -zi), cy (0, -pada * 2, -zi), trackwidth, vias);
             track (cx (count - 1, pada, 0), cy (count - 1, pada, 0), cx (count - 0.5, 0, 0), cy (count - 0.5, 0, 0),
                    cx (0, -pada * 2, 0), cy (0, -pada * 2, 0), trackwidth);
-            trackvia (cx (0, -pada * 2, 0), cy (0, -pada * 2, 0), cx (0, -pada * 2, zo), cy (0, -pada * 2, zo),
-                      trackwidth, vias);
+            trackvia (cx (0, -pada * 2, 0), cy (0, -pada * 2, 0), cx (0, -pada * 2, zo), cy (0, -pada * 2, zo), trackwidth, vias);
          }
-	 // Power
+         // Power
          for (int d = 0; d < count - 1; d++)
          {
             track (cx (d, 0, padoffset), cy (d, 0, padoffset), cx (0.5 + d, 0, padoffset), cy (0.5 + d, 0, padoffset),
@@ -516,21 +528,20 @@ main (int argc, const char *argv[])
             track (cx (d, 0, -padoffset), cy (d, 0, -padoffset), cx (0.5 + d, 0, -padoffset), cy (0.5 + d, 0, -padoffset),
                    cx (1 + d, 0, -padoffset), cy (1 + d, 0, -padoffset), trackwidth);
          }
-	 // Power end
+         // Power end
          if (tooclose)
-	 {
+         {
             track (cx (count - 0.5, 0, padoffset), cy (count - 0.5, 0, padoffset), cx (count - 0.25, 0, padoffset),
                    cy (count - 0.25, 0, padoffset), cx (0, 0, padoffset), cy (0, 0, padoffset), trackwidth);
             track (cx (count - 1, 0, -padoffset), cy (count - 1, 0, -padoffset), cx (count - 0.75, 0, -padoffset),
-                cy (count - 0.75, 0, -padoffset), cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), trackwidth);
-	 }
-         else
-	 {
+                   cy (count - 0.75, 0, -padoffset), cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), trackwidth);
+         } else
+         {
             track (cx (count - 1, 0, padoffset), cy (count - 1, 0, padoffset), cx (count - 0.75, 0, padoffset),
                    cy (count - 0.75, 0, padoffset), cx (count - 0.5, 0, padoffset), cy (count - 0.5, 0, padoffset), trackwidth);
             track (cx (count - 1, 0, -padoffset), cy (count - 1, 0, -padoffset), cx (count - 0.75, 0, -padoffset),
-                cy (count - 0.75, 0, -padoffset), cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), trackwidth);
-	 }
+                   cy (count - 0.75, 0, -padoffset), cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), trackwidth);
+         }
 
          if (powervias)
          {
@@ -545,31 +556,29 @@ main (int argc, const char *argv[])
             } else
             {
                for (int d = 0; d < count; d++)
-	       {
+               {
                   trackviamaybe (cx (d + 0.25, 0, padoffset), cy (d + 0.25, 0, padoffset),
-                                 cx (d + 0.25, 0, zo), cy (d + 0.25, 0, zo),
-                                 trackwidth, powervias);
+                                 cx (d + 0.25, 0, zo), cy (d + 0.25, 0, zo), trackwidth, powervias);
                   trackviamaybe (cx (d + 0.25, 0, -padoffset), cy (d + 0.25, 0, -padoffset),
-                                 cx (d + 0.25, 0, -zi), cy (d + 0.25, 0, -zi),
-                                 trackwidth, powervias);
-	       }
+                                 cx (d + 0.25, 0, -zi), cy (d + 0.25, 0, -zi), trackwidth, powervias);
+               }
                for (int d = 1; d <= count; d++)
-	       {
+               {
                   trackviamaybe (cx (d - 0.25, 0, padoffset), cy (d - 0.25, 0, padoffset),
-                                 cx (d - 0.25, 0, zo), cy (d - 0.25, 0, zo),
-                                 trackwidth, powervias);
+                                 cx (d - 0.25, 0, zo), cy (d - 0.25, 0, zo), trackwidth, powervias);
                   trackviamaybe (cx (d - 0.25, 0, -padoffset), cy (d - 0.25, 0, -padoffset),
-                                 cx (d - 0.25, 0, -zi), cy (d - 0.25, 0, -zi),
-                                 trackwidth, powervias);
-	       }
-         track (cx (count - 0.5, 0, padoffset), cy (count - 0.5, 0, padoffset), cx (count - 0.375, 0, padoffset),
-                cy (count - 0.375, 0, padoffset), cx (count - 0.25, 0, padoffset), cy (count - 0.25, 0, padoffset), trackwidth);
-         track (cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), cx (count - 0.375, 0, -padoffset),
-                cy (count - 0.375, 0, -padoffset), cx (count - 0.25, 0, -padoffset), cy (count - 0.25, 0, -padoffset), trackwidth);
+                                 cx (d - 0.25, 0, -zi), cy (d - 0.25, 0, -zi), trackwidth, powervias);
+               }
+               track (cx (count - 0.5, 0, padoffset), cy (count - 0.5, 0, padoffset), cx (count - 0.375, 0, padoffset),
+                      cy (count - 0.375, 0, padoffset), cx (count - 0.25, 0, padoffset), cy (count - 0.25, 0, padoffset),
+                      trackwidth);
+               track (cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), cx (count - 0.375, 0, -padoffset),
+                      cy (count - 0.375, 0, -padoffset), cx (count - 0.25, 0, -padoffset), cy (count - 0.25, 0, -padoffset),
+                      trackwidth);
             }
          }
       } else if (sides)
-      { // Grid with caps on sides
+      {                         // Grid with caps on sides
          for (int r = 0; r < rows; r++)
          {
             track (diodex (r * cols) - viaoffset, diodey (r * cols), NAN, NAN, diodex (r * cols) - padoffset, diodey (r * cols),
@@ -599,9 +608,8 @@ main (int argc, const char *argv[])
             track (diodex (r * cols + cols - 1), diodey (r * cols + cols - 1) + padoffset, NAN, NAN,
                    diodex (r * cols + cols - 1) + capoffset, diodey (r * cols + cols - 1) + padoffset, trackwidth);
          }
-      }
-      else
-      { // Grid with caps at top/bottom
+      } else
+      {                         // Grid with caps at top/bottom
          for (int c = 0; c < cols; c++)
          {
             track (diodex (c * rows), diodey (c * rows) - viaoffset, NAN, NAN, diodex (c * rows), diodey (c * rows) - padoffset,
@@ -647,12 +655,12 @@ main (int argc, const char *argv[])
    {
       if (diameter)
       {
-         ringzone (clearance/2, zoneo, "GND", layer);
-         ringzone (-clearance/2, -zonei, fill, layer);
+         ringzone (clearance / 2, zoneo, "GND", layer);
+         ringzone (-clearance / 2, -zonei, fill, layer);
          if (powervias)
          {
-            ringzone (clearance/2, zoneo, "GND", *layer == 'F' ? "B.Cu" : "F.Cu");
-            ringzone (-clearance/2, -zonei, fill, *layer == 'F' ? "B.Cu" : "F.Cu");
+            ringzone (clearance / 2, zoneo, "GND", *layer == 'F' ? "B.Cu" : "F.Cu");
+            ringzone (-clearance / 2, -zonei, fill, *layer == 'F' ? "B.Cu" : "F.Cu");
          }
       } else if (sides)
          for (int r = 0; r < rows; r++)
