@@ -612,8 +612,8 @@ main (int argc, const char *argv[])
       {                         // Grid with caps at top/bottom
          for (int c = 0; c < cols; c++)
          {
-            track (diodex (c * rows), diodey (c * rows) - viaoffset, NAN, NAN, diodex (c * rows), diodey (c * rows) - padoffset,
-                   trackwidth);
+            trackvia (diodex (c * rows), diodey (c * rows)-padoffset, diodex (c * rows), diodey (c * rows) - viaoffset,
+                   trackwidth,vias);
             trackvia (diodex (c * rows + rows - 1), diodey (c * rows + rows - 1) + padoffset, diodex (c * rows + rows - 1),
                       diodey (c * rows + rows - 1) + viaoffset, trackwidth, vias);
          }
