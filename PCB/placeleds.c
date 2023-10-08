@@ -702,17 +702,13 @@ main (int argc, const char *argv[])
       } else if (sides)
          for (int r = 0; r < rows; r++)
          {
-            boxzone (diodex (r * cols) - spacing / 2, diodey (r * cols) - spacing / 2 + clearance / 2,
-                     diodex (r * cols + cols - 1) + spacing / 2, diodey (r * cols + cols - 1), "GND");
-            boxzone (diodex (r * cols) - spacing / 2, diodey (r * cols), diodex (r * cols + cols - 1) + spacing / 2,
-                     diodey (r * cols + cols - 1) + spacing / 2 - clearance / 2, fill);
+            boxzone (diodex (r * cols) - spacing / 2, diodey (r * cols) - spacing / 2 + clearance / 2, diodex (r * cols + cols - 1) + spacing / 2, diodey (r * cols + cols - 1), "GND");
+            boxzone (diodex (r * cols) - spacing / 2, diodey (r * cols), diodex (r * cols + cols - 1) + spacing / 2, diodey (r * cols + cols - 1) + spacing / 2 - clearance / 2, fill);
       } else
          for (int c = 0; c < cols; c++)
          {
-            boxzone (diodex (c * rows), diodey (c * rows) - spacing / 2, diodex (c * rows + rows - 1) + spacing / 2 - clearance / 2,
-                     diodey (c * rows + rows - 1) + spacing / 2, "GND");
-            boxzone (diodex (c * rows) - spacing / 2 + clearance / 2, diodey (c * rows) - spacing / 2, diodex (c * rows + rows - 1),
-                     diodey (c * rows + rows - 1) + spacing / 2, fill);
+            boxzone (diodex (c * rows) + clearance / 2, diodey (c * rows) - spacing / 2, diodex (c * rows + rows - 1) + spacing / 2 - clearance / 2, diodey (c * rows + rows - 1) + spacing / 2, "GND");
+            boxzone (diodex (c * rows) - clearance / 2, diodey (c * rows) - spacing / 2, diodex (c * rows + rows - 1)- spacing / 2 + clearance / 2, diodey (c * rows + rows - 1) + spacing / 2, fill);
          }
    }
 

@@ -4,7 +4,7 @@ placeleds: placeleds.c PCBCase/pcb.c PCBCase/pcb.h
 	gcc -IPCBCase -O -o $@ $< PCBCase/pcb.c -lpopt -lm -g
 
 leds:	placeleds
-	./placeleds 5x7/5x7.kicad_pcb --cols=5 --rows=7 --fill=VCC --power-vias=0.8 --vias=0.8
+	./placeleds 5x7/5x7.kicad_pcb --cols=5 --rows=7 --fill=VCC --power-vias=0.8 --vias=0.8 --tracks
 	./placeleds 5x9/5x9.kicad_pcb --cols=5 --rows=9 --fill=VCC --power-vias=0.8 --vias=0.8 --tracks
 	./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d103.5 --zone-in=1.75 --zone-out=1.5 --diode=1 --count=117 --vias=0.8 --power-vias=0.8 --angle=181.5384615 --fill=VCC --tracks
 	./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d109.5 --zone-in=1.5 --zone-out=1.25 --diode=118 --count=39 --vias=0.8 --power-vias=0.8 --angle=184.6153846 --fill=VCC --tracks

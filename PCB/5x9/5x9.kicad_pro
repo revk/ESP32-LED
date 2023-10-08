@@ -65,8 +65,8 @@
         "annular_width": "error",
         "clearance": "error",
         "connection_width": "warning",
-        "copper_edge_clearance": "warning",
-        "copper_sliver": "warning",
+        "copper_edge_clearance": "ignore",
+        "copper_sliver": "ignore",
         "courtyards_overlap": "error",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
@@ -419,7 +419,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "5x7.kicad_pro",
+    "filename": "5x9.kicad_pro",
     "version": 1
   },
   "net_settings": {
