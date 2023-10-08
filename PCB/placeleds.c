@@ -27,7 +27,7 @@ main (int argc, const char *argv[])
    double spacing = 0;
    double trackwidth = 0.2;
    double padoffset = 0.6010407;
-   double padsize = 0.227386;   // to diagonal on power
+   double padsize = 0.3181981;   // extra to diagonal on power
    double clearance = 0.127;
    double capoffset = 1.15;
    double zonei = NAN;
@@ -302,7 +302,7 @@ main (int argc, const char *argv[])
          double d = (o->values[0].num - x1) * (o->values[0].num - x1) + (o->values[1].num - y1) * (o->values[1].num - y1);
          if (d >= delta * delta)
             continue;
-         // No need to check min
+         // No need to check mid
          o = pcb_find (s, "end", NULL);
          if (!o || o->valuen != 2 || !o->values[0].isnum || !o->values[1].isnum)
             continue;
@@ -334,6 +334,37 @@ main (int argc, const char *argv[])
       pcb_append_num (o, w);
       o = pcb_append_obj (s, "layer");
       pcb_append_txt (o, layer);
+   }
+   double checkpad(double x,double y,const char *net)
+   {
+      double best = NAN;
+      pcb_t *f = NULL,
+         *o;
+      while ((f = pcb_find (pcb, "footprint", f)))
+      {
+         o = pcb_find (f, "at", NULL);
+         if (!o || o->valuen < 2 || !o->values[0].isnum || !o->values[1].isnum)
+            continue;
+	 double fx=o->values[0].num,fy=o->values[1].num;
+	 double fa=0;
+	 if(o->valuen >2&&o->values[2].isnum)
+		 fa=-o->values[2].num*M_PI*2/360;
+	      pcb_t *p=NULL;
+      	while ((p = pcb_find (f, "pad", p)))
+      	{
+         o = pcb_find (p, "net", NULL);
+	 if(o&&o->valuen>=2&&o->values[1].istxt&&!strcmp(o->values[1].txt,net))continue;
+         o = pcb_find (p, "at", NULL);
+         if (!o || o->valuen < 2 || !o->values[0].isnum || !o->values[1].isnum)
+            continue;
+	 double ax=o->values[0].num,ay=o->values[1].num;
+	 double px=fx+ax*cos(fa)-ay*sin(fa),py=fy+ax*sin(fa)+ay*cos(fa);
+         double d = (px - x) * (px - x) + (py - y) * (py - y);
+         if (isnan (best) || d < best)
+            best = d;
+	}
+      }
+      return sqrt (best);
    }
    double zapvia (double x, double y)
    {                            // Zap a matching via, return closest non match
@@ -383,7 +414,7 @@ main (int argc, const char *argv[])
       track (x1, y1, NAN, NAN, x2, y2, w);
       via (x2, y2, v);
    }
-   void trackviamaybe (double x1, double y1, double x2, double y2, double w, double v)
+   void trackviamaybe (double x1, double y1, double x2, double y2, double w, double v,const char *net)
    {
       if (!v)
          return;
@@ -391,7 +422,13 @@ main (int argc, const char *argv[])
       if (!isnan (d) && d < (powervias ? : vias) + clearance)
       {
          zaptrack (x1, y1, x2, y2);
-         return;                // Too close
+         return;                // Too close to another via
+      }
+      d = checkpad (x2, y2,net);
+      if (!isnan (d) && d < (powervias ? : vias)/2 + clearance+padsize)
+      {
+         zaptrack (x1, y1, x2, y2);
+         return;                // Too close to another pad (different net)
       }
       track (x1, y1, NAN, NAN, x2, y2, w);
       addvia (x2, y2, v);
@@ -549,25 +586,25 @@ main (int argc, const char *argv[])
             {
                for (int d = 1; d < count; d++)
                   trackviamaybe (cx (d, -pada, padoffset), cy (d, -pada, padoffset), cx (d, -pada, viaoffset),
-                                 cy (d, -pada, viaoffset), trackwidth, powervias);
+                                 cy (d, -pada, viaoffset), trackwidth, powervias,"GND");
                for (int d = 0; d < count - 1; d++)
                   trackviamaybe (cx (d, pada, -padoffset), cy (d, pada, -padoffset), cx (d, pada, -viaoffset),
-                                 cy (d, pada, -viaoffset), trackwidth, powervias);
+                                 cy (d, pada, -viaoffset), trackwidth, powervias,fill?:"VCC");
             } else
             {
                for (int d = 0; d < count; d++)
                {
                   trackviamaybe (cx (d + 0.25, 0, padoffset), cy (d + 0.25, 0, padoffset),
-                                 cx (d + 0.25, 0, zo), cy (d + 0.25, 0, zo), trackwidth, powervias);
+                                 cx (d + 0.25, 0, zo), cy (d + 0.25, 0, zo), trackwidth, powervias,"GND");
                   trackviamaybe (cx (d + 0.25, 0, -padoffset), cy (d + 0.25, 0, -padoffset),
-                                 cx (d + 0.25, 0, -zi), cy (d + 0.25, 0, -zi), trackwidth, powervias);
+                                 cx (d + 0.25, 0, -zi), cy (d + 0.25, 0, -zi), trackwidth, powervias,fill?:"VCC");
                }
                for (int d = 1; d <= count; d++)
                {
                   trackviamaybe (cx (d - 0.25, 0, padoffset), cy (d - 0.25, 0, padoffset),
-                                 cx (d - 0.25, 0, zo), cy (d - 0.25, 0, zo), trackwidth, powervias);
+                                 cx (d - 0.25, 0, zo), cy (d - 0.25, 0, zo), trackwidth, powervias,"GND");
                   trackviamaybe (cx (d - 0.25, 0, -padoffset), cy (d - 0.25, 0, -padoffset),
-                                 cx (d - 0.25, 0, -zi), cy (d - 0.25, 0, -zi), trackwidth, powervias);
+                                 cx (d - 0.25, 0, -zi), cy (d - 0.25, 0, -zi), trackwidth, powervias,fill?:"VCC");
                }
                track (cx (count - 0.5, 0, padoffset), cy (count - 0.5, 0, padoffset), cx (count - 0.375, 0, padoffset),
                       cy (count - 0.375, 0, padoffset), cx (count - 0.25, 0, padoffset), cy (count - 0.25, 0, padoffset),
@@ -644,10 +681,10 @@ main (int argc, const char *argv[])
             for (int c = 0; c < cols - 1; c++)
                trackviamaybe (diodex (c * rows + rows - 1) + padoffset, diodey (c * rows + rows - 1) + capoffset,
                               diodex (c * rows + rows - 1) + spacing / 2, diodey (c * rows + rows - 1) + viaoffset, trackwidth,
-                              powervias);
+                              powervias,"GND");
             for (int c = 1; c < cols; c++)
                trackviamaybe (diodex (c * rows) - padoffset, diodey (c * rows) - capoffset, diodex (c * rows) - spacing / 2,
-                              diodey (c * rows) - viaoffset, trackwidth, powervias);
+                              diodey (c * rows) - viaoffset, trackwidth, powervias,fill?:"VCC");
          }
       }
    }
