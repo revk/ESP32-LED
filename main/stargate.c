@@ -3,9 +3,158 @@
 #include "app.h"
 #define SPEED 2                 // Seconds per spin?
 
+typedef struct ring_s ring_t;
+struct ring_s
+{                               // Definition of a ring
+   uint16_t len;
+   uint16_t start;
+   uint16_t offset;
+};
+
+typedef struct stargate_s stargate_t;
+struct stargate_s
+{
+   uint8_t dial[10];            // Dial sequence 1-39 terminated with 0
+   uint8_t spins;               // The spinning rings
+   const ring_t *spin;
+   uint8_t chevs;               // The chevrons
+   const ring_t *chev;
+   uint8_t gates;               // The gate symbols
+   const ring_t *gate;
+};
+
+const ring_t spinsmall[] = { {117, 1, 58} };
+const ring_t spinbig[] = { {117, 1, 58} };      // TODO
+const ring_t chevsmall[] = { {117, 1, 58}, {18, 118, 9}, {18, 136, 9}, {18, 154, 9} };
+const ring_t chevbig[] = { {117, 1, 58}, {18, 118, 9}, {18, 136, 9}, {18, 154, 9} };    // TODO
+const ring_t gatesmall[] = { {39, 172, 19} };
+const ring_t gatebig[] = { {39, 172, 19} };     // TODO
+
+const char *
+biggate (app_t * a)
+{                               // Special large LED rings
+   uint8_t *old = a->data,
+      *new = old + a->len;
+   stargate_t *g = (void *) (new + a->len);
+   if (!a->cycle)
+   {                            // Startup
+      old = malloc (a->len * 2 + sizeof (stargate_t));
+      new = old + a->len;
+      g = (void *) (new + a->len);
+      memset (g, 0, sizeof (*g));
+      if (a->len == 210)
+      {
+         g->spin = spinsmall;
+         g->spins = sizeof (spinsmall) / sizeof (*spinsmall);
+         g->chev = chevsmall;
+         g->chevs = sizeof (chevsmall) / sizeof (*chevsmall);
+         g->gate = gatesmall;
+         g->gates = sizeof (gatesmall) / sizeof (*gatesmall);
+      } else
+      {
+         g->spin = spinbig;
+         g->spins = sizeof (spinbig) / sizeof (*spinbig);
+         g->chev = chevbig;
+         g->chevs = sizeof (chevbig) / sizeof (*chevbig);
+         g->gate = gatebig;
+         g->gates = sizeof (gatebig) / sizeof (*gatebig);
+      }
+      if (a->data)
+      {                         // Dial sequence specified
+         // TODO
+         free (a->data);
+      } else
+      {                         // Random dial sequence
+         // TODO
+      }
+      a->data = old;
+   }
+   uint8_t q = 255;
+   if (a->stop)
+      q = 255 * a->stop / a->fade;      // Main fader for end
+
+
+   if (a->stage < 10)
+      switch (a->stage)
+      {
+      case 0:                  // Fade up spins
+         for (int s = 0; s < g->spins; s++)
+            for (int n = 0; n < g->spin[s].len; n++)
+               setrgbl (a->start + g->spin[s].start + n, 0, 0, 255, a->step*q/255);
+         if ((a->step += 255 / a->speed) > 255)
+         {
+            a->step = 0;
+            a->stage++;
+         }
+         break;
+      case 1:                  // Fade down spins leaving 1/3 to dial
+         // TODO
+         if ((a->step += 255 / a->speed) > 255)
+         {
+            a->step = 0;
+            a->stage = 10;
+         }
+         break;
+   } else if (a->stage < 100)
+      switch (a->stage % 10)
+      {                         // 10 to 90 for chevrons 1 to 9
+      case 0:                  // Spin spins to position
+         // TODO
+         if ((a->step += 255 / a->speed) > 255)
+         {
+            a->step = 0;
+            a->stage++;
+         }
+         break;
+      case 1:                  // Engage top chevron
+         // TODO
+         if ((a->step += 255 / a->speed) > 255)
+         {
+            a->step = 0;
+            a->stage++;
+         }
+         break;
+      case 2:                  // Disengage top chevron
+         // TODO
+         if ((a->step += 255 / a->speed) > 255)
+         {
+            a->step = 0;
+            a->stage++;
+         }
+         break;
+      case 3:                  // Light up selected chevron and gate symbol
+         // TODO
+         if ((a->step += 255 / a->speed) > 255)
+         {
+            a->step = 0;
+            a->stage += 7;
+            if (!g->dial[a->stage / 10])
+               a->stage = 100;
+         }
+         break;
+   } else
+      switch (a->stage)
+      {
+      case 100:                // Fade up inner spin and down the chevrons
+         // TODO
+         if ((a->step += 255 / a->speed) > 255)
+         {
+            a->step = 0;
+            a->stage++;
+         }
+         break;
+      case 101:                // Twinkle inner spin
+         // TODO
+         break;
+      }
+   return NULL;
+}
+
 const char *
 appstargate (app_t * a)
 {
+   if (a->len == 210 || a->len == 372)
+      return biggate (a);
    if (!a->cycle)
    {
       free (a->data);           // Not used supplied
