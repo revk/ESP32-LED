@@ -29,7 +29,7 @@ const ring_t spinbig[] = { {117, 1, 58}, {117, 175, 58} };
 const ring_t chevsmall[] = { {117, 1, 0}, {18, 157, 0}, {18, 175, 0}, {18, 193, 0} };
 const ring_t chevbig[] = { {18, 157, 8}, {117, 175, 58}, {18, 292, 8}, {18, 310, 8}, {45, 328, 20} };
 const ring_t gatesmall[] = { {39, 118, 0} };
-const ring_t gatebig[] = { {39, 118, 18} };
+const ring_t gatebig[] = { {39, 118, 19} };
 
 const char *
 biggate (app_t * a)
@@ -117,11 +117,10 @@ biggate (app_t * a)
    }
    void chev (uint8_t c, uint8_t f, uint8_t t, uint8_t l)
    {
-      const uint8_t map[] = { 1, 8, 2, 7, 3, 6, 4, 5, 0 };
-      if (c < 8 && !g->dial[c + 1])
-         c = 0;
-      else
-         c = map[c];
+      if (c >= 8 || !g->dial[c + 1])
+         c = 0;                 // Last chevron (top)
+      else if (++c > 3)
+         c += (g->dial[8] ? 0 : 1) + (g->dial[7] ? 0 : 1);      // Skip bottom ones as needed
       for (int n = f; n <= t; n++)
       {
          const ring_t *C = &g->chev[n];
@@ -144,7 +143,7 @@ biggate (app_t * a)
          for (int z = 0; z < g->gates; z++)
          {
             if (g->gate[z].len == 39)
-               setrgbl (a->start - 1 + g->gate[z].start + (g->dial[c] - 1) % g->gate[z].len, max, 0, 0, l);
+               setrgbl (a->start - 1 + g->gate[z].start + (g->gate[z].offset + g->dial[c] - 1) % g->gate[z].len, max, 0, 0, l);
          }
    }
    void chevs (void)
