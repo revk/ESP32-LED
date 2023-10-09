@@ -192,6 +192,7 @@ biggate (app_t * a)
                spinner (a->step);       // Yes direction is opposite as we are moving symbol to top
             else
                spinner (3 - a->step);
+            chevs ();
             a->step++;
             if (a->step == 3)
             {
@@ -204,18 +205,40 @@ biggate (app_t * a)
                if (target == g->pos)
                   a->stage++;
             }
-            chevs ();
             break;
          }
-      case 1:                  // Engage top chevron and gate symbol
+      case 1:                  // Engage top chevron
          spinner (0);
          chev (8, g->chevs * (255 - a->step) / 256, g->chevs - 1, q);
-         gates (a->stage / 10 - 1, a->step * q / 255);
+         chevs ();
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
             a->stage++;
-            if (!g->dial[a->stage / 10])
+         }
+         break;
+      case 2:                  // Disengage top chevron and glyph
+         spinner (0);
+         chev (8, g->chevs * a->step / 256, g->chevs - 1, q);
+         gates (a->stage / 10 - 1, a->step * q / 255);
+         chevs ();
+         if ((a->step += 255 / a->speed) > 255)
+         {
+            a->step = 0;
+            a->stage++;
+         }
+         break;
+      case 3:                  // Light up selected chevron
+         spinner (0);
+         if (g->dial[a->stage / 10])
+            chev (a->stage / 10 - 1, 0, g->chevs - 1, a->step * q / 255);
+         gates (a->stage / 10 - 1, q);
+         chevs ();
+         if ((a->step += 255 / a->speed) > 255)
+         {
+            a->step = 0;
+            a->stage += 7;
+            if (!g->dial[a->stage / 10 - 1])
             {
                a->stage = 100;  // Last one
                a->step = a->fade;
@@ -223,29 +246,6 @@ biggate (app_t * a)
                twinkle ();
             }
          }
-         chevs ();
-         break;
-      case 2:                  // Disengage top chevron
-         spinner (0);
-         chev (8, g->chevs * a->step / 256, g->chevs - 1, q);
-         gates (a->stage / 10 - 1, q);
-         if ((a->step += 255 / a->speed) > 255)
-         {
-            a->step = 0;
-            a->stage++;
-         }
-         chevs ();
-         break;
-      case 3:                  // Light up selected chevron
-         spinner (0);
-         chev (a->stage / 10 - 1, 0, g->chevs - 1, a->step * q / 255);
-         gates (a->stage / 10 - 1, q);
-         if ((a->step += 255 / a->speed) > 255)
-         {
-            a->step = 0;
-            a->stage += 7;
-         }
-         chevs ();
          break;
    } else
    {
