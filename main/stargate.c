@@ -151,8 +151,8 @@ biggate (app_t * a)
    {
       for (int c = 0; c < a->stage / 10 - 1; c++)
       {
-         chev (c, 0, g->chevs - 1, 255);
-         gates (c, 255);
+         chev (c, 0, g->chevs - 1, q);
+         gates (c, q);
       }
    }
 
@@ -210,7 +210,7 @@ biggate (app_t * a)
          }
       case 1:                  // Engage top chevron and gate symbol
          spinner (0);
-         chev (8, (g->chevs - 1) * (255 - a->step) / 255, g->chevs - 1, 255);
+         chev (8, (g->chevs - 1) * (255 - a->step) / 255, g->chevs - 1, q);
          gates (a->stage / 10 - 1, a->step * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
@@ -228,8 +228,8 @@ biggate (app_t * a)
          break;
       case 2:                  // Disengage top chevron
          spinner (0);
-         chev (8, (g->chevs - 1) * a->step / 255, g->chevs - 1, 255);
-         gates (a->stage / 10 - 1, 255);
+         chev (8, (g->chevs - 1) * a->step / 255, g->chevs - 1, q);
+         gates (a->stage / 10 - 1, q);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
@@ -240,7 +240,7 @@ biggate (app_t * a)
       case 3:                  // Light up selected chevron
          spinner (0);
          chev (a->stage / 10 - 1, 0, g->chevs - 1, a->step * q / 255);
-         gates (a->stage / 10 - 1, 255);
+         gates (a->stage / 10 - 1, q);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
@@ -360,7 +360,7 @@ appstargate (app_t * a)
    {                            // Dialling
       ring (255);
       for (int i = 1; i < a->stage / 10; i++)
-         chevron (i, 255);
+         chevron (i, q);
       if (!(a->stage % 10))
       {                         // Dial
          if ((a->stage / 20) % 2)
@@ -382,7 +382,7 @@ appstargate (app_t * a)
          }
       } else if (a->stage == 72)
       {                         // Open gate
-         chevron (0, 255);
+         chevron (0, q);
          uint8_t l = 255 * (a->fade - a->step) / a->fade;
          for (int i = 0; i < a->len; i++)
          {
