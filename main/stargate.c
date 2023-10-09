@@ -15,6 +15,7 @@ typedef struct stargate_s stargate_t;
 struct stargate_s
 {
    uint8_t dial[10];            // Dial sequence 1-39 terminated with 0
+   uint8_t pos;                 // Symbol at the top
    uint8_t spins;               // The spinning rings
    const ring_t *spin;
    uint8_t chevs;               // The chevrons
@@ -59,6 +60,7 @@ biggate (app_t * a)
          g->gate = gatebig;
          g->gates = sizeof (gatebig) / sizeof (*gatebig);
       }
+      g->pos = 1;               // Home symbol
       if (a->data)
       {                         // Dial sequence specified
          // TODO
@@ -73,6 +75,13 @@ biggate (app_t * a)
    if (a->stop)
       q = 255 * a->stop / a->fade;      // Main fader for end
 
+   void spinner (uint8_t o)
+   {
+      for (int s = 0; s < g->spins; s++)
+         for (int n = 0; n < g->spin[s].len; n++)
+            setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, 255,
+                     (n % 3 ? 0 : 255) * q / 255);
+   }
 
    if (a->stage < 10)
       switch (a->stage)
@@ -90,7 +99,8 @@ biggate (app_t * a)
       case 1:                  // Fade down spins leaving 1/3 to dial
          for (int s = 0; s < g->spins; s++)
             for (int n = 0; n < g->spin[s].len; n++)
-               setrgbl (a->start - 1 + g->spin[s].start + n, 0, 0, 255, (n % 3 ? 255 - a->step : 255) * q / 255);
+               setrgbl (a->start - 1 + g->spin[s].start + (n + g->spin[s].offset) % g->spin[s].len, 0, 0, 255,
+                        (n % 3 ? 255 - a->step : 255) * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
@@ -101,14 +111,32 @@ biggate (app_t * a)
       switch (a->stage % 10)
       {                         // 10 to 90 for chevrons 1 to 9
       case 0:                  // Spin spins to position
-         // TODO
-         if ((a->step += 255 / a->speed) > 255)
          {
-            a->step = 0;
-            a->stage++;
+            uint8_t target = g->dial[a->stage / 10];
+            int8_t dir = 1;
+            if (g->pos + 18 < target || target + 18 < g->pos)
+               dir = -1;
+	    if(!a->step)ESP_LOGE("stargate","target=%d pos=%d dir=%d",target,g->pos,dir);
+            if (dir == 1)
+               spinner (a->step);
+            else
+               spinner (3 - a->step);
+            a->step++;
+            if (a->step == 3)
+            {
+               g->pos += dir;
+               if (!g->pos)
+                  g->pos = 39;
+               else if (g->pos == 40)
+                  g->pos = 1;
+               a->step = 0;
+               if (target == g->pos)
+                  a->stage++;
+            }
+            break;
          }
-         break;
       case 1:                  // Engage top chevron
+         spinner (0);
          // TODO
          if ((a->step += 255 / a->speed) > 255)
          {
@@ -117,6 +145,7 @@ biggate (app_t * a)
          }
          break;
       case 2:                  // Disengage top chevron
+         spinner (0);
          // TODO
          if ((a->step += 255 / a->speed) > 255)
          {
@@ -125,6 +154,7 @@ biggate (app_t * a)
          }
          break;
       case 3:                  // Light up selected chevron and gate symbol
+         spinner (0);
          // TODO
          if ((a->step += 255 / a->speed) > 255)
          {
@@ -138,6 +168,7 @@ biggate (app_t * a)
       switch (a->stage)
       {
       case 100:                // Fade up inner spin and down the chevrons
+         spinner (0);
          // TODO
          if ((a->step += 255 / a->speed) > 255)
          {
