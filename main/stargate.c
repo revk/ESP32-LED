@@ -144,7 +144,7 @@ biggate (app_t * a)
          for (int z = 0; z < g->gates; z++)
          {
             if (g->gate[z].len == 39)
-               setrgbl (a->start - 1 + g->gate[z].start + (g->dial[c] - 1) % g->gate[z].len, 0, max, 0, l);
+               setrgbl (a->start - 1 + g->gate[z].start + (g->dial[c] - 1) % g->gate[z].len, max, 0, 0, l);
          }
    }
    void chevs (void)
