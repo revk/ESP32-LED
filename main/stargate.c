@@ -86,12 +86,12 @@ biggate (app_t * a)
          uint64_t f = 0;
          for (int q = 0; q < n; q++)
          {
-            int r = esp_random () % (38 - q) + 2,
+            int r = esp_random () % (38 - q) + 1,
                p = 1;
-            while (r)
-               if ((f & 1 << p) || r--)
+            while (r || (f & (1LL << p)))
+               if ((f & (1LL << p)) || r--)
                   p++;
-            f |= 1 << p;
+            f |= (1LL << p);
             g->dial[q] = p;
          }
          g->dial[n] = 1;        // Final
@@ -255,7 +255,7 @@ biggate (app_t * a)
       for (int i = 0; i < spinlen; i++)
       {
          uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
-         setrgbl (a->start - 1 + i, l, l, l, q);
+         setrgbl (a->start - 1 + g->spin[0].start + i, l, l, l, q);
       }
       if (!--a->step)
       {                         // Next
