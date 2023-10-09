@@ -80,7 +80,7 @@ biggate (app_t * a)
       case 0:                  // Fade up spins
          for (int s = 0; s < g->spins; s++)
             for (int n = 0; n < g->spin[s].len; n++)
-               setrgbl (a->start + g->spin[s].start + n, 0, 0, 255, a->step*q/255);
+               setrgbl (a->start - 1 + g->spin[s].start + n, 0, 0, 255, a->step * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
@@ -88,7 +88,9 @@ biggate (app_t * a)
          }
          break;
       case 1:                  // Fade down spins leaving 1/3 to dial
-         // TODO
+         for (int s = 0; s < g->spins; s++)
+            for (int n = 0; n < g->spin[s].len; n++)
+               setrgbl (a->start - 1 + g->spin[s].start + n, 0, 0, 255, (n % 3 ? 255 - a->step : 255) * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
