@@ -25,11 +25,11 @@ struct stargate_s
 };
 
 const ring_t spinsmall[] = { {117, 1, 0} };
-const ring_t spinbig[] = { {117, 1, 58} };      // TODO
+const ring_t spinbig[] = { {117, 1, 58}, {117, 175, 58} };
 const ring_t chevsmall[] = { {117, 1, 0}, {18, 157, 0}, {18, 175, 0}, {18, 193, 0} };
-const ring_t chevbig[] = { {117, 1, 58}, {18, 118, 9}, {18, 136, 9}, {18, 154, 9} };    // TODO
+const ring_t chevbig[] = { {18, 157, 8}, {117, 175, 58}, {18, 292, 8}, {18, 310, 8}, {45, 328, 20} };
 const ring_t gatesmall[] = { {39, 118, 0} };
-const ring_t gatebig[] = { {39, 118, 19} };     // TODO
+const ring_t gatebig[] = { {39, 118, 18} };
 
 const char *
 biggate (app_t * a)
@@ -144,7 +144,7 @@ biggate (app_t * a)
          for (int z = 0; z < g->gates; z++)
          {
             if (g->gate[z].len == 39)
-               setrgbl (a->start - 1 + g->gate[z].start + (g->dial[c] - 1) % g->gate[z].len, max, 0, 0, l);
+               setrgbl (a->start - 1 + g->gate[z].start + (g->dial[c] - 1) % g->gate[z].len, 0, max, 0, l);
          }
    }
    void chevs (void)
