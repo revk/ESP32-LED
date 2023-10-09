@@ -189,8 +189,6 @@ biggate (app_t * a)
             int8_t dir = -1;
             if ((g->pos < target && g->pos + 18 >= target) || (g->pos > target && target + 18 < g->pos))
                dir = 1;
-            if (!a->step)
-               ESP_LOGE ("stargate", "target=%d pos=%d dir=%d", target, g->pos, dir);
             if (dir == -1)
                spinner (a->step);       // Yes direction is opposite as we are moving symbol to top
             else
