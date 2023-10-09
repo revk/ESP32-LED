@@ -210,7 +210,7 @@ biggate (app_t * a)
          }
       case 1:                  // Engage top chevron and gate symbol
          spinner (0);
-         chev (8, (g->chevs - 1) * (255 - a->step) / 255, g->chevs - 1, q);
+         chev (8, g->chevs * (255 - a->step) / 256, g->chevs - 1, q);
          gates (a->stage / 10 - 1, a->step * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
@@ -228,7 +228,7 @@ biggate (app_t * a)
          break;
       case 2:                  // Disengage top chevron
          spinner (0);
-         chev (8, (g->chevs - 1) * a->step / 255, g->chevs - 1, q);
+         chev (8, g->chevs * a->step / 256, g->chevs - 1, q);
          gates (a->stage / 10 - 1, q);
          if ((a->step += 255 / a->speed) > 255)
          {
