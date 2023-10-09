@@ -34,14 +34,18 @@ const ring_t gatebig[] = { {39, 118, 19} };     // TODO
 const char *
 biggate (app_t * a)
 {                               // Special large LED rings
-   uint8_t *old = a->data,
-      *new = old + a->len;
-   stargate_t *g = (void *) (new + a->len);
+	uint8_t max=127; // Base brightmess
+   uint8_t spinlen = (a->len == 210 ? spinsmall[0].len : spinbig[0].len),
+      *old = a->data,
+      *new = old + spinlen;
+   stargate_t *g = (void *) (new + spinlen);
    if (!a->cycle)
    {                            // Startup
-      old = malloc (a->len * 2 + sizeof (stargate_t));
-      new = old + a->len;
-      g = (void *) (new + a->len);
+      if (!a->limit)
+         a->limit = 90 * cps;
+      old = malloc (spinlen * 2 + sizeof (stargate_t));
+      new = old + spinlen;
+      g = (void *) (new + spinlen);
       memset (g, 0, sizeof (*g));
       if (a->len == 210)
       {
@@ -63,18 +67,34 @@ biggate (app_t * a)
       g->pos = 1;               // Home symbol
       if (a->data)
       {                         // Dial sequence specified
-         // TODO
+         const char glyphs[] = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ&-0123456789";
+         for (int q = 0; q < 9 && ((char *) a->data)[q]; q++)
+         {
+            const char *z = strchr (glyphs, ((char *) a->data)[q]);
+            if (!z)
+               return "Bad dial string";
+            g->dial[q] = 1 + (z - glyphs);
+         }
          free (a->data);
       } else
       {                         // Random dial sequence
-         g->dial[0] = 10;
-         g->dial[1] = 20;
-         g->dial[2] = 2;
-         g->dial[3] = 30;
-         g->dial[4] = 5;
-         g->dial[5] = 15;
-         g->dial[6] = 1;
-         // TODO
+         int n = 6;
+         if (esp_random () >= 0xF0000000)
+            n = 8;
+         else if (esp_random () >= 0xE0000000)
+            n = 7;
+         uint64_t f = 0;
+         for (int q = 0; q < n; q++)
+         {
+            int r = esp_random () % (38 - q) + 2,
+               p = 1;
+            while (r)
+               if ((f & 1 << p) || r--)
+                  p++;
+            f |= 1 << p;
+            g->dial[q] = p;
+         }
+         g->dial[n] = 1;        // Final
       }
       a->data = old;
    }
@@ -84,16 +104,16 @@ biggate (app_t * a)
 
    void twinkle (void)
    {
-      memcpy (old, new, a->len);
-      esp_fill_random (new, a->len);
-      for (int i = 0; i < a->len; i++)
-         new[i] = new[i] / 4 + 32;
+      memcpy (old, new, spinlen);
+      esp_fill_random (new, spinlen);
+      for (int i = 0; i < spinlen; i++)
+         new[i] = new[i] / 2 + 32;
    }
    void spinner (uint8_t o)
    {                            // Show 1 in 3 on spin rings
       for (int s = 0; s < g->spins; s++)
          for (int n = 0; n < g->spin[s].len; n++)
-            setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, n % 3 ? 0 : 255, q);
+            setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, n % 3 ? 0 : max, q);
    }
    void chev (uint8_t c, uint8_t f, uint8_t t, uint8_t l)
    {
@@ -107,14 +127,14 @@ biggate (app_t * a)
          const ring_t *C = &g->chev[n];
          if (C->len == 117)
          {                      // Chevs part of full ring
-            setrgbl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, 255, 255, 0, l);
-            setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, 255, 255, 0, l);
+            setrgbl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, max, max, 0, l);
+            setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max, 0, l);
          } else
          {                      // Chevs only
             uint8_t t = C->len / 9;
             uint16_t b = c * t;
             for (int q = 0; q < t; q++)
-               setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, 255, 255, 0, l);
+               setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max, 0, l);
          }
       }
    }
@@ -124,7 +144,7 @@ biggate (app_t * a)
          for (int z = 0; z < g->gates; z++)
          {
             if (g->gate[z].len == 39)
-               setrgbl (a->start - 1 + g->gate[z].start + (g->dial[c] - 1) % g->gate[z].len, 255, 0, 0, l);
+               setrgbl (a->start - 1 + g->gate[z].start + (g->dial[c] - 1) % g->gate[z].len, max, 0, 0, l);
          }
    }
    void chevs (void)
@@ -142,7 +162,7 @@ biggate (app_t * a)
       case 0:                  // Fade up spins
          for (int s = 0; s < g->spins; s++)
             for (int n = 0; n < g->spin[s].len; n++)
-               setrgbl (a->start - 1 + g->spin[s].start + n, 0, 0, 255, a->step * q / 255);
+               setrgbl (a->start - 1 + g->spin[s].start + n, 0, 0, max, a->step * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
@@ -152,7 +172,7 @@ biggate (app_t * a)
       case 1:                  // Fade down spins leaving 1/3 to dial
          for (int s = 0; s < g->spins; s++)
             for (int n = 0; n < g->spin[s].len; n++)
-               setrgbl (a->start - 1 + g->spin[s].start + (n + g->spin[s].offset) % g->spin[s].len, 0, 0, 255,
+               setrgbl (a->start - 1 + g->spin[s].start + (n + g->spin[s].offset) % g->spin[s].len, 0, 0, max,
                         (n % 3 ? 255 - a->step : 255) * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
@@ -171,8 +191,8 @@ biggate (app_t * a)
                dir = 1;
             if (!a->step)
                ESP_LOGE ("stargate", "target=%d pos=%d dir=%d", target, g->pos, dir);
-            if (dir == 1)
-               spinner (a->step);
+            if (dir == -1)
+               spinner (a->step); // Yes direction is opposite as we are moving symbol to top
             else
                spinner (3 - a->step);
             a->step++;
@@ -190,21 +210,28 @@ biggate (app_t * a)
             chevs ();
             break;
          }
-      case 1:                  // Engage top chevron
+      case 1:                  // Engage top chevron and gate symbol
          spinner (0);
          chev (8, (g->chevs - 1) * (255 - a->step) / 255, g->chevs - 1, 255);
+         gates (a->stage / 10 - 1, a->step * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
             a->stage++;
             if (!g->dial[a->stage / 10])
+            {
                a->stage = 100;  // Last one
+               a->step = a->fade;
+               memset (new, 255, spinlen);
+               twinkle ();
+            }
          }
          chevs ();
          break;
       case 2:                  // Disengage top chevron
          spinner (0);
          chev (8, (g->chevs - 1) * a->step / 255, g->chevs - 1, 255);
+         gates (a->stage / 10 - 1, 255);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
@@ -212,10 +239,10 @@ biggate (app_t * a)
          }
          chevs ();
          break;
-      case 3:                  // Light up selected chevron and gate symbol
+      case 3:                  // Light up selected chevron
          spinner (0);
          chev (a->stage / 10 - 1, 0, g->chevs - 1, a->step * q / 255);
-         gates (a->stage / 10 - 1, a->step * q / 255);
+         gates (a->stage / 10 - 1, 255);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
@@ -224,21 +251,18 @@ biggate (app_t * a)
          chevs ();
          break;
    } else
-      switch (a->stage)
+   {
+      for (int i = 0; i < spinlen; i++)
       {
-      case 100:                // Fade up inner spin and down the chevrons
-         spinner (0);
-         // TODO
-         if ((a->step += 255 / a->speed) > 255)
-         {
-            a->step = 0;
-            a->stage++;
-         }
-         break;
-      case 101:                // Twinkle inner spin
-         // TODO
-         break;
+         uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
+         setrgbl (a->start - 1 + i, l, l, l, q);
       }
+      if (!--a->step)
+      {                         // Next
+         a->step = a->fade;
+         twinkle ();
+      }
+   }
    return NULL;
 }
 
