@@ -94,6 +94,8 @@ Each app can have arguments.
 |`stargate`|This dials a stargate, setting each chevron, and then opens the gate. Gate closes after a period even if `limit` is not set|
 |`lava`|Fade up and down each of red/green/blue at random positions on the ring and random speeds.|
 
+Note, `stargate` has special handling for special rings of 210 or 372 LEDs.
+
 ### Text apps
 
 |App|Meaning|
