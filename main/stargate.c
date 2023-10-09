@@ -67,6 +67,10 @@ biggate (app_t * a)
          free (a->data);
       } else
       {                         // Random dial sequence
+         g->dial[0] = 10;
+         g->dial[1] = 20;
+         g->dial[2] = 2;
+         g->dial[3] = 30;
          // TODO
       }
       a->data = old;
@@ -79,8 +83,7 @@ biggate (app_t * a)
    {
       for (int s = 0; s < g->spins; s++)
          for (int n = 0; n < g->spin[s].len; n++)
-            setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, 255,
-                     (n % 3 ? 0 : 255) * q / 255);
+            setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, n % 3 ? 0 : 255, q);
    }
 
    if (a->stage < 10)
@@ -112,11 +115,12 @@ biggate (app_t * a)
       {                         // 10 to 90 for chevrons 1 to 9
       case 0:                  // Spin spins to position
          {
-            uint8_t target = g->dial[a->stage / 10];
-            int8_t dir = 1;
-            if (g->pos + 18 < target || target + 18 < g->pos)
-               dir = -1;
-	    if(!a->step)ESP_LOGE("stargate","target=%d pos=%d dir=%d",target,g->pos,dir);
+            uint8_t target = g->dial[a->stage / 10 - 1];
+            int8_t dir = -1;
+            if ((g->pos < target && g->pos + 18 >= target) || (g->pos > target && target + 18 < g->pos))
+               dir = 1;
+            if (!a->step)
+               ESP_LOGE ("stargate", "target=%d pos=%d dir=%d", target, g->pos, dir);
             if (dir == 1)
                spinner (a->step);
             else
@@ -160,7 +164,7 @@ biggate (app_t * a)
          {
             a->step = 0;
             a->stage += 7;
-            if (!g->dial[a->stage / 10])
+            if (!g->dial[a->stage / 10 - 1])
                a->stage = 100;
          }
          break;
