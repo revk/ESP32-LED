@@ -34,7 +34,7 @@ const ring_t gatebig[] = { {39, 118, 19} };     // TODO
 const char *
 biggate (app_t * a)
 {                               // Special large LED rings
-	uint8_t max=127; // Base brightmess
+   uint8_t max = 127;           // Base brightmess
    uint8_t spinlen = (a->len == 210 ? spinsmall[0].len : spinbig[0].len),
       *old = a->data,
       *new = old + spinlen;
@@ -107,7 +107,7 @@ biggate (app_t * a)
       memcpy (old, new, spinlen);
       esp_fill_random (new, spinlen);
       for (int i = 0; i < spinlen; i++)
-         new[i] = new[i] / 2 + 32;
+         new[i] = new[i] / 3 + 32;
    }
    void spinner (uint8_t o)
    {                            // Show 1 in 3 on spin rings
@@ -192,7 +192,7 @@ biggate (app_t * a)
             if (!a->step)
                ESP_LOGE ("stargate", "target=%d pos=%d dir=%d", target, g->pos, dir);
             if (dir == -1)
-               spinner (a->step); // Yes direction is opposite as we are moving symbol to top
+               spinner (a->step);       // Yes direction is opposite as we are moving symbol to top
             else
                spinner (3 - a->step);
             a->step++;
