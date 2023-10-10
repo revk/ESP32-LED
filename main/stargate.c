@@ -314,22 +314,22 @@ appstargate (app_t * a)
          n = top;
          break;
       case 1:
-         n = (top + a->len - dir * 4 * a->len / 39) % a->len;
-         break;
-      case 2:
          n = (top + a->len + dir * 4 * a->len / 39) % a->len;
          break;
-      case 3:
-         n = (top + a->len - dir * 8 * a->len / 39) % a->len;
-         break;
-      case 4:
+      case 2:
          n = (top + a->len + dir * 8 * a->len / 39) % a->len;
          break;
-      case 5:
+      case 3:
+         n = (top + a->len + dir * 12 * a->len / 39) % a->len;
+         break;
+      case 4:
          n = (top + a->len - dir * 12 * a->len / 39) % a->len;
          break;
+      case 5:
+         n = (top + a->len - dir * 8 * a->len / 39) % a->len;
+         break;
       case 6:
-         n = (top + a->len + dir * 12 * a->len / 39) % a->len;
+         n = (top + a->len - dir * 4 * a->len / 39) % a->len;
          break;
       case 7:
          n = top;
