@@ -24,24 +24,28 @@ struct stargate_s
    const ring_t *gate;
 };
 
-const ring_t spinsmall[] = { {117, 1, 58} };
-const ring_t spinbig[] = { {117, 1, 58} };      // TODO
-const ring_t chevsmall[] = { {117, 1, 58}, {18, 118, 9}, {18, 136, 9}, {18, 154, 9} };
-const ring_t chevbig[] = { {117, 1, 58}, {18, 118, 9}, {18, 136, 9}, {18, 154, 9} };    // TODO
-const ring_t gatesmall[] = { {39, 172, 19} };
-const ring_t gatebig[] = { {39, 172, 19} };     // TODO
+const ring_t spinsmall[] = { {117, 1, 0} };
+const ring_t spinbig[] = { {117, 1, 58}, {117, 175, 58} };
+const ring_t chevsmall[] = { {117, 1, 0}, {18, 157, 0}, {18, 175, 0}, {18, 193, 0} };
+const ring_t chevbig[] = { {18, 157, 8}, {117, 175, 58}, {18, 292, 8}, {18, 310, 8}, {45, 328, 20} };
+const ring_t gatesmall[] = { {39, 118, 0} };
+const ring_t gatebig[] = { {39, 118, 19} };
 
 const char *
 biggate (app_t * a)
 {                               // Special large LED rings
-   uint8_t *old = a->data,
-      *new = old + a->len;
-   stargate_t *g = (void *) (new + a->len);
+   uint8_t max = 127;           // Base brightmess
+   uint8_t spinlen = (a->len == 210 ? spinsmall[0].len : spinbig[0].len),
+      *old = a->data,
+      *new = old + spinlen;
+   stargate_t *g = (void *) (new + spinlen);
    if (!a->cycle)
    {                            // Startup
-      old = malloc (a->len * 2 + sizeof (stargate_t));
-      new = old + a->len;
-      g = (void *) (new + a->len);
+      if (!a->limit)
+         a->limit = 90 * cps;
+      old = malloc (spinlen * 2 + sizeof (stargate_t));
+      new = old + spinlen;
+      g = (void *) (new + spinlen);
       memset (g, 0, sizeof (*g));
       if (a->len == 210)
       {
@@ -63,11 +67,34 @@ biggate (app_t * a)
       g->pos = 1;               // Home symbol
       if (a->data)
       {                         // Dial sequence specified
-         // TODO
+         const char glyphs[] = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ&-0123456789";
+         for (int q = 0; q < 9 && ((char *) a->data)[q]; q++)
+         {
+            const char *z = strchr (glyphs, ((char *) a->data)[q]);
+            if (!z)
+               return "Bad dial string";
+            g->dial[q] = 1 + (z - glyphs);
+         }
          free (a->data);
       } else
       {                         // Random dial sequence
-         // TODO
+         int n = 6;
+         if (esp_random () >= 0xF0000000)
+            n = 8;
+         else if (esp_random () >= 0xE0000000)
+            n = 7;
+         uint64_t f = 0;
+         for (int q = 0; q < n; q++)
+         {
+            int r = esp_random () % (38 - q) + 1,
+               p = 1;
+            while (r || (f & (1LL << p)))
+               if ((f & (1LL << p)) || r--)
+                  p++;
+            f |= (1LL << p);
+            g->dial[q] = p;
+         }
+         g->dial[n] = 1;        // Final
       }
       a->data = old;
    }
@@ -75,12 +102,57 @@ biggate (app_t * a)
    if (a->stop)
       q = 255 * a->stop / a->fade;      // Main fader for end
 
-   void spinner (uint8_t o)
+   void twinkle (void)
    {
+      memcpy (old, new, spinlen);
+      esp_fill_random (new, spinlen);
+      for (int i = 0; i < spinlen; i++)
+         new[i] = new[i] / 3 + 32;
+   }
+   void spinner (uint8_t o)
+   {                            // Show 1 in 3 on spin rings
       for (int s = 0; s < g->spins; s++)
          for (int n = 0; n < g->spin[s].len; n++)
-            setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, 255,
-                     (n % 3 ? 0 : 255) * q / 255);
+            setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, n % 3 ? 0 : max, q);
+   }
+   void chev (uint8_t c, uint8_t f, uint8_t t, uint8_t l)
+   {
+      if (c >= 8 || !g->dial[c + 1])
+         c = 0;                 // Last chevron (top)
+      else if (++c > 3)
+         c += (g->dial[8] ? 0 : 1) + (g->dial[7] ? 0 : 1);      // Skip bottom ones as needed
+      for (int n = f; n <= t; n++)
+      {
+         const ring_t *C = &g->chev[n];
+         if (C->len == 117)
+         {                      // Chevs part of full ring
+            setrgbl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, max, max, 0, l);
+            setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max, 0, l);
+         } else
+         {                      // Chevs only
+            uint8_t t = C->len / 9;
+            uint16_t b = c * t;
+            for (int q = 0; q < t; q++)
+               setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max, 0, l);
+         }
+      }
+   }
+   void gates (uint8_t c, uint8_t l)
+   {
+      if (g->dial[c])
+         for (int z = 0; z < g->gates; z++)
+         {
+            if (g->gate[z].len == 39)
+               setrgbl (a->start - 1 + g->gate[z].start + (g->gate[z].offset + g->dial[c] - 1) % g->gate[z].len, max, 0, 0, l);
+         }
+   }
+   void chevs (void)
+   {
+      for (int c = 0; c < a->stage / 10 - 1; c++)
+      {
+         chev (c, 0, g->chevs - 1, q);
+         gates (c, q);
+      }
    }
 
    if (a->stage < 10)
@@ -89,7 +161,7 @@ biggate (app_t * a)
       case 0:                  // Fade up spins
          for (int s = 0; s < g->spins; s++)
             for (int n = 0; n < g->spin[s].len; n++)
-               setrgbl (a->start - 1 + g->spin[s].start + n, 0, 0, 255, a->step * q / 255);
+               setrgbl (a->start - 1 + g->spin[s].start + n, 0, 0, max, a->step * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
@@ -99,7 +171,7 @@ biggate (app_t * a)
       case 1:                  // Fade down spins leaving 1/3 to dial
          for (int s = 0; s < g->spins; s++)
             for (int n = 0; n < g->spin[s].len; n++)
-               setrgbl (a->start - 1 + g->spin[s].start + (n + g->spin[s].offset) % g->spin[s].len, 0, 0, 255,
+               setrgbl (a->start - 1 + g->spin[s].start + (n + g->spin[s].offset) % g->spin[s].len, 0, 0, max,
                         (n % 3 ? 255 - a->step : 255) * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
@@ -112,15 +184,15 @@ biggate (app_t * a)
       {                         // 10 to 90 for chevrons 1 to 9
       case 0:                  // Spin spins to position
          {
-            uint8_t target = g->dial[a->stage / 10];
-            int8_t dir = 1;
-            if (g->pos + 18 < target || target + 18 < g->pos)
-               dir = -1;
-	    if(!a->step)ESP_LOGE("stargate","target=%d pos=%d dir=%d",target,g->pos,dir);
-            if (dir == 1)
-               spinner (a->step);
+            uint8_t target = g->dial[a->stage / 10 - 1];
+            int8_t dir = -1;
+            if ((g->pos < target && g->pos + 18 >= target) || (g->pos > target && target + 18 < g->pos))
+               dir = 1;
+            if (dir == -1)
+               spinner (a->step);       // Yes direction is opposite as we are moving symbol to top
             else
                spinner (3 - a->step);
+            chevs ();
             a->step++;
             if (a->step == 3)
             {
@@ -137,49 +209,57 @@ biggate (app_t * a)
          }
       case 1:                  // Engage top chevron
          spinner (0);
-         // TODO
+         chev (8, g->chevs * (255 - a->step) / 256, g->chevs - 1, q);
+         chevs ();
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
             a->stage++;
          }
          break;
-      case 2:                  // Disengage top chevron
+      case 2:                  // Disengage top chevron and glyph
          spinner (0);
-         // TODO
+         chev (8, g->chevs * a->step / 256, g->chevs - 1, q);
+         gates (a->stage / 10 - 1, a->step * q / 255);
+         chevs ();
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
             a->stage++;
          }
          break;
-      case 3:                  // Light up selected chevron and gate symbol
+      case 3:                  // Light up selected chevron
          spinner (0);
-         // TODO
+         if (g->dial[a->stage / 10])
+            chev (a->stage / 10 - 1, 0, g->chevs - 1, a->step * q / 255);
+         gates (a->stage / 10 - 1, q);
+         chevs ();
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
             a->stage += 7;
-            if (!g->dial[a->stage / 10])
-               a->stage = 100;
+            if (!g->dial[a->stage / 10 - 1])
+            {
+               a->stage = 100;  // Last one
+               a->step = a->fade;
+               memset (new, 255, spinlen);
+               twinkle ();
+            }
          }
          break;
    } else
-      switch (a->stage)
+   {
+      for (int i = 0; i < spinlen; i++)
       {
-      case 100:                // Fade up inner spin and down the chevrons
-         spinner (0);
-         // TODO
-         if ((a->step += 255 / a->speed) > 255)
-         {
-            a->step = 0;
-            a->stage++;
-         }
-         break;
-      case 101:                // Twinkle inner spin
-         // TODO
-         break;
+         uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
+         setrgbl (a->start - 1 + g->spin[0].start + i, l, l, l, q);
       }
+      if (!--a->step)
+      {                         // Next
+         a->step = a->fade;
+         twinkle ();
+      }
+   }
    return NULL;
 }
 
@@ -234,22 +314,22 @@ appstargate (app_t * a)
          n = top;
          break;
       case 1:
-         n = (top + a->len - dir * 4 * a->len / 39) % a->len;
-         break;
-      case 2:
          n = (top + a->len + dir * 4 * a->len / 39) % a->len;
          break;
-      case 3:
-         n = (top + a->len - dir * 8 * a->len / 39) % a->len;
-         break;
-      case 4:
+      case 2:
          n = (top + a->len + dir * 8 * a->len / 39) % a->len;
          break;
-      case 5:
+      case 3:
+         n = (top + a->len + dir * 12 * a->len / 39) % a->len;
+         break;
+      case 4:
          n = (top + a->len - dir * 12 * a->len / 39) % a->len;
          break;
+      case 5:
+         n = (top + a->len - dir * 8 * a->len / 39) % a->len;
+         break;
       case 6:
-         n = (top + a->len + dir * 12 * a->len / 39) % a->len;
+         n = (top + a->len - dir * 4 * a->len / 39) % a->len;
          break;
       case 7:
          n = top;
@@ -279,7 +359,7 @@ appstargate (app_t * a)
    {                            // Dialling
       ring (255);
       for (int i = 1; i < a->stage / 10; i++)
-         chevron (i, 255);
+         chevron (i, q);
       if (!(a->stage % 10))
       {                         // Dial
          if ((a->stage / 20) % 2)
@@ -301,7 +381,7 @@ appstargate (app_t * a)
          }
       } else if (a->stage == 72)
       {                         // Open gate
-         chevron (0, 255);
+         chevron (0, q);
          uint8_t l = 255 * (a->fade - a->step) / a->fade;
          for (int i = 0; i < a->len; i++)
          {
