@@ -4,9 +4,8 @@
 
 doglyphs=true;          // Include glyphs
 doramp=true;            // Include ramp
-dopcb=true;             // Include cut out for PCB
-top=false;              // Top only
-bottom=false;           // Bottom only
+top=false;              // Top only for PCB
+bottom=false;           // Bottom only for PCB
 
 radiusi=50;             // Inner radius (i.e. hole in gate)
 radiusr=radiusi*62/50;  // Edge of glyphys
@@ -20,12 +19,8 @@ thickness=0.5;          // line thickness
 
 radiuspcbo=70.5;        // PCB radius (outer)
 radiuspcbi=49.5;        // PCB radius (inner)
-thicknesspcb=1;         // PCB thickness
-radiuspartso=69.0;      // PCB parts radius (outer)
-radiuspartsi=50.5;      // PCB parts radius (inner)
-thicknessparts=1.5;     // PCB thickness with parts
+thicknesspcb=1.5;       // PCB and parts thickness
 frontpcb=1;             // Gate thickness in front of PCB
-lip=2;                  // Top/Bottom overlap lip
 
 $fn=39*3;
 
@@ -62,17 +57,9 @@ module ramp(t=0)
 
 module pcb()
 {
-    difference()
-    { // PCB
-        h=bottom?thicknesspcb:depth*2;
-        translate([0,0,-frontpcb-h])
-        {
-            cylinder(r=radiuspcbo,h=h);
-            translate([0,0,thicknesspcb-thicknessparts])
-            washer(ri=radiuspartsi,ro=radiuspartso,h=thicknessparts);
-        }
-        cylinder(r=radiuspcbi,h=depth*5,center=true);
-    }
+    // PCB
+    translate([0,0,-frontpcb-thicknesspcb])
+    washer(ri=radiuspcbi,ro=radiuspcbo,h=thicknesspcb,center=false);
     // Hole in base
     if(doramp)ramp(5);
 }
@@ -223,21 +210,17 @@ module cut()
 { // Cut line for top/bottom
     translate([0,0,-frontpcb])
     union()
+    difference()
     {
-        difference()
-        {
-            cylinder(r1=radiuspcbo,r2=radiuso+edge*2,h=lip);
-            cylinder(r1=radiuspcbi,r2=radiuspcbi-edge*2,h=lip);
-        }
-        translate([0,0,lip])
-        cylinder(r=radiuso*2,h=depth*10);
+        cylinder(r1=radiuspcbo,r2=radiuso*2,h=radiuso);
+        cylinder(r1=radiuspcbi,r2=0,h=radiuspcbi);
     }
 }
 
 difference()
 {
     gate();
-    if(dopcb)pcb();
+    if(top||bottom)pcb();
     if(top)difference(){translate([0,0,-depth*2])cylinder(r=radiuso*3,h=depth*4);cut();}
-    if(bottom)translate([0,0,-frontpcb])cut();
+    else if(bottom)translate([0,0,-frontpcb])cut();
  }
