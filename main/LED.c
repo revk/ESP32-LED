@@ -166,7 +166,7 @@ addapp (int index, const char *name, jo_t j)
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
       {
-         void setcolour (jo_t j)
+         uint8_t setcolour (jo_t j)
          {
             char temp[20];
             jo_strncpy (j, temp, sizeof (temp));
@@ -178,19 +178,22 @@ addapp (int index, const char *name, jo_t j)
             colours
 #undef c
 #define x(n)((temp[n] & 0xF) + (isalpha ((uint8_t)temp[n]) ? 9 : 0))
-               if (strlen (temp) == 3)
+               else if (strlen (temp) == 3 && isxdigit ((int) temp[0]) && isxdigit ((int) temp[1]) && isxdigit ((int) temp[2]))
             {
                a->colourset = 1;
                a->r = x (0) * 17;
                a->g = x (1) * 17;
                a->b = x (2) * 17;
-            } else if (strlen (temp) == 6)
+            } else if (strlen (temp) == 6 && isxdigit ((int) temp[0]) && isxdigit ((int) temp[1]) && isxdigit ((int) temp[2])
+                       && isxdigit ((int) temp[3]) && isxdigit ((int) temp[4]) && isxdigit ((int) temp[5]))
             {
                a->colourset = 1;
                a->r = x (0) * 16 + x (1);
                a->g = x (2) * 16 + x (3);
                a->b = x (4) * 16 + x (5);
-            }
+            } else
+               return 0;
+            return 1;
 #undef x
          }
          if (!a->app || a->name != applist[i].name || a->stop)
@@ -254,8 +257,14 @@ addapp (int index, const char *name, jo_t j)
                jo_next (j);     // Skip
             }
          } else if (j && jo_here (j) == JO_STRING)
-            setcolour (j);
-         else if (j && jo_here (j) == JO_NUMBER)
+         {
+            if (!setcolour (j))
+            {                   // data
+               free (a->data);
+               a->data = malloc (jo_strlen (j) + 1);
+               jo_strncpy (j, a->data, jo_strlen (j) + 1);
+            }
+         } else if (j && jo_here (j) == JO_NUMBER)
             a->limit = jo_read_int (j);
          if (!a->start)
             a->start = 1;
