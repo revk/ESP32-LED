@@ -2,8 +2,8 @@
 // Origin is centre of ring at face, i.e. base of glyphs
 // Ring faces up
 
-doramp=true;            // Include ramp
 doglyphs=true;          // Include glyphs
+doramp=true;            // Include ramp
 dopcb=true;             // Include cut out for PCB
 top=false;              // Top only
 bottom=false;           // Bottom only
@@ -13,7 +13,7 @@ radiusr=radiusi*62/50;  // Edge of glyphys
 radiuso=radiusi*70/50;  // Outer radius (before adding chevrons
 depth=radiusi*15/50;    // Gate thickness (before chevrons/glyphs
 rampw=radiuso*0.8;      // Ramp width
-rampw2=radiuso;          // Ramp width at bottom
+rampw2=radiuso;         // Ramp width at bottom
 raised=1;               // Raised glyphs, etc
 thickness=0.5;          // line thickness
 
@@ -48,8 +48,8 @@ module ramp(t=0)
     b=raised*3;
     hull()
     {
-        translate([-rampw/2+t,-radiuso-b-t,-depth-t])
-        cube([rampw-t*2,h+b,depth]);
+        translate([-rampw/2+t,-radiuso-b-t,-depth-t-raised*4])
+        cube([rampw-t*2,h+b,depth+raised*4]);
         translate([-rampw2/2+t,-radiuso-b-t,h*2-t/10])
         cube([rampw2-t*2,raised,1]);
     }
