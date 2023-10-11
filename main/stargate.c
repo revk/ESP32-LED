@@ -22,47 +22,50 @@ struct stargate_s
    const ring_t *chev;
    uint8_t gates;               // The gate symbols
    const ring_t *gate;
+   const ring_t *kwoosh;
 };
 
-const ring_t spinsmall[] = { {117, 1, 0} };
-const ring_t spinbig[] = { {117, 1, 58}, {117, 175, 58} };
-const ring_t chevsmall[] = { {117, 1, 0}, {18, 157, 0}, {18, 175, 0}, {18, 193, 0} };
-const ring_t chevbig[] = { {18, 157, 8}, {117, 175, 58}, {18, 292, 8}, {18, 310, 8}, {45, 328, 20} };
-const ring_t gatesmall[] = { {39, 118, 0} };
-const ring_t gatebig[] = { {39, 118, 19} };
+const ring_t spin210[] = { {117, 1, 0} };
+const ring_t spin372[] = { {117, 1, 58}, {117, 175, 58} };
+const ring_t chev210[] = { {117, 1, 0}, {18, 157, 0}, {18, 175, 0}, {18, 193, 0} };
+const ring_t chev372[] = { {18, 157, 8}, {117, 175, 58}, {18, 292, 8}, {18, 310, 8}, {45, 328, 20} };
+const ring_t gate210[] = { {39, 118, 0} };
+const ring_t gate372[] = { {39, 118, 19} };
+const ring_t kwoosh210 = {117, 1, 0};
+const ring_t kwoosh372 = {117, 1, 19};
 
 const char *
 biggate (app_t * a)
 {                               // Special large LED rings
    uint8_t max = 127;           // Base brightmess
-   uint8_t spinlen = (a->len == 210 ? spinsmall[0].len : spinbig[0].len),
+   uint8_t kwooshlen = (a->len == 210 ? kwoosh210.len : kwoosh372.len),
       *old = a->data,
-      *new = old + spinlen;
-   stargate_t *g = (void *) (new + spinlen);
+      *new = old + kwooshlen;
+   stargate_t *g = (void *) (new + kwooshlen);
    if (!a->cycle)
    {                            // Startup
       if (!a->limit)
          a->limit = 90 * cps;
-      old = malloc (spinlen * 2 + sizeof (stargate_t));
-      new = old + spinlen;
-      g = (void *) (new + spinlen);
+      old = malloc (kwooshlen * 2 + sizeof (stargate_t));
+      new = old + kwooshlen;
+      g = (void *) (new + kwooshlen);
       memset (g, 0, sizeof (*g));
       if (a->len == 210)
       {
-         g->spin = spinsmall;
-         g->spins = sizeof (spinsmall) / sizeof (*spinsmall);
-         g->chev = chevsmall;
-         g->chevs = sizeof (chevsmall) / sizeof (*chevsmall);
-         g->gate = gatesmall;
-         g->gates = sizeof (gatesmall) / sizeof (*gatesmall);
+         g->spin = spin210;
+         g->spins = sizeof (spin210) / sizeof (*spin210);
+         g->chev = chev210;
+         g->chevs = sizeof (chev210) / sizeof (*chev210);
+         g->gate = gate210;
+         g->gates = sizeof (gate210) / sizeof (*gate210);
       } else
       {
-         g->spin = spinbig;
-         g->spins = sizeof (spinbig) / sizeof (*spinbig);
-         g->chev = chevbig;
-         g->chevs = sizeof (chevbig) / sizeof (*chevbig);
-         g->gate = gatebig;
-         g->gates = sizeof (gatebig) / sizeof (*gatebig);
+         g->spin = spin372;
+         g->spins = sizeof (spin372) / sizeof (*spin372);
+         g->chev = chev372;
+         g->chevs = sizeof (chev372) / sizeof (*chev372);
+         g->gate = gate372;
+         g->gates = sizeof (gate372) / sizeof (*gate372);
       }
       g->pos = 1;               // Home symbol
       if (a->data)
@@ -83,10 +86,10 @@ biggate (app_t * a)
             n = 8;
          else if (esp_random () >= 0xE0000000)
             n = 7;
-         uint64_t f = 0;
+         uint64_t f = 0x1FE0000; // Avoid lower 8 glyphs
          for (int q = 0; q < n; q++)
          {
-            int r = esp_random () % (38 - q) + 1,
+            int r = esp_random () % (38 - 8 - q) + 1, // -8 for avoided glyphs
                p = 1;
             while (r || (f & (1LL << p)))
                if ((f & (1LL << p)) || r--)
@@ -104,9 +107,9 @@ biggate (app_t * a)
 
    void twinkle (void)
    {
-      memcpy (old, new, spinlen);
-      esp_fill_random (new, spinlen);
-      for (int i = 0; i < spinlen; i++)
+      memcpy (old, new, kwooshlen);
+      esp_fill_random (new, kwooshlen);
+      for (int i = 0; i < kwooshlen; i++)
          new[i] = new[i] / 3 + 32;
    }
    void spinner (uint8_t o)
@@ -242,14 +245,14 @@ biggate (app_t * a)
             {
                a->stage = 100;  // Last one
                a->step = a->fade;
-               memset (new, 255, spinlen);
+               memset (new, 255, kwooshlen);
                twinkle ();
             }
          }
          break;
    } else
    {
-      for (int i = 0; i < spinlen; i++)
+      for (int i = 0; i < kwooshlen; i++)
       {
          uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
          setrgbl (a->start - 1 + g->spin[0].start + i, l, l, l, q);
