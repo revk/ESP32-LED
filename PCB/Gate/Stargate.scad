@@ -5,18 +5,22 @@
 doramp=true;            // Include ramp
 doglyphs=true;          // Include glyphs
 dopcb=true;             // Include cut out for PCB
+top=false;              // Top only
+bottom=false;           // Bottom only
 
-radiusi=52;             // Inner radius (i.e. hole in gate)
+radiusi=50;             // Inner radius (i.e. hole in gate)
 radiusr=radiusi*62/50;  // Edge of glyphys
 radiuso=radiusi*70/50;  // Outer radius (before adding chevrons
 depth=radiusi*15/50;    // Gate thickness (before chevrons/glyphs
 rampw=radiuso*0.8;      // Ramp width
+rampw2=radiuso;          // Ramp width at bottom
 raised=1;               // Raised glyphs, etc
 thickness=0.5;          // line thickness
 
-radiuspcbo=70.5;        // PCB radius (outer)
+radiuspcbo=71;          // PCB radius (outer)
 radiuspcbi=49.5;        // PCB radius (inner)
-thicknesspcb=2;         // Gate in front of PCB
+frontpcb=2;             // Gate in front of PCB
+thicknesspcb=3;         // PCB thickness
 
 $fn=39*3;
 
@@ -46,8 +50,8 @@ module ramp(t=0)
     {
         translate([-rampw/2+t,-radiuso-b-t,-depth-t])
         cube([rampw-t*2,h+b,depth]);
-        translate([-rampw/2+t,-radiuso-b-t,radiuso/2-t])
-        cube([rampw-t*2,raised,depth]);
+        translate([-rampw2/2+t,-radiuso-b-t,h*2-t/10])
+        cube([rampw2-t*2,raised,1]);
     }
 }
 
@@ -55,12 +59,13 @@ module pcb()
 {
     difference()
     { // PCB
-        translate([0,0,-depth*2-thicknesspcb])
-        cylinder(r=radiuspcbo,h=depth*2);
+        h=bottom?thicknesspcb:depth*2;
+        translate([0,0,-frontpcb-h])
+        cylinder(r=radiuspcbo,h=h);
         cylinder(r=radiuspcbi,h=depth*5,center=true);
     }
     // Hole in base
-    if(doramp)ramp(thicknesspcb);
+    if(doramp)ramp(5);
 }
 
 module ringouter(h=0)
@@ -209,4 +214,6 @@ difference()
 {
     gate();
     if(dopcb)pcb();
-}
+    if(top)translate([0,0,-depth*2-frontpcb])cylinder(r=radiuso*2,h=depth*2);
+    if(bottom)translate([0,0,-frontpcb])cylinder(r=radiuso*2,h=depth*10);
+ }
