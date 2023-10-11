@@ -15,12 +15,17 @@ depth=radiusi*15/50;    // Gate thickness (before chevrons/glyphs
 rampw=radiuso*0.8;      // Ramp width
 rampw2=radiuso;         // Ramp width at bottom
 raised=1;               // Raised glyphs, etc
+edge=1;                 // Glyph edge
 thickness=0.5;          // line thickness
 
-radiuspcbo=71;          // PCB radius (outer)
+radiuspcbo=70.5;        // PCB radius (outer)
 radiuspcbi=49.5;        // PCB radius (inner)
-frontpcb=2;             // Gate in front of PCB
-thicknesspcb=3;         // PCB thickness
+thicknesspcb=1;         // PCB thickness
+radiuspartso=69.0;      // PCB parts radius (outer)
+radiuspartsi=50.5;      // PCB parts radius (inner)
+thicknessparts=1.5;     // PCB thickness with parts
+frontpcb=1;             // Gate thickness in front of PCB
+lip=2;                  // Top/Bottom overlap lip
 
 $fn=39*3;
 
@@ -61,7 +66,11 @@ module pcb()
     { // PCB
         h=bottom?thicknesspcb:depth*2;
         translate([0,0,-frontpcb-h])
-        cylinder(r=radiuspcbo,h=h);
+        {
+            cylinder(r=radiuspcbo,h=h);
+            translate([0,0,thicknesspcb-thicknessparts])
+            washer(ri=radiuspartsi,ro=radiuspartso,h=thicknessparts);
+        }
         cylinder(r=radiuspcbi,h=depth*5,center=true);
     }
     // Hole in base
@@ -72,8 +81,8 @@ module ringouter(h=0)
 {
     hull()
     {
-        cylinder(r=radiuso+raised*2,h=depth+raised*2,center=true);
-        cylinder(r=radiuso+raised,h=depth+raised*4+h,center=true);
+        cylinder(r=radiuso+edge*2,h=depth+raised*2,center=true);
+        cylinder(r=radiuso+edge,h=depth+raised*4+h,center=true);
     }
 }
 
@@ -92,13 +101,13 @@ module ringouterstripe()
     }
 }
 
-module washer(ro,ri,h)
+module washer(ro,ri,h,center=true)
 {
     render()
     difference()
     {
-        cylinder(r=ro,h=h,center=true);
-        cylinder(r=ri,h=h+1,center=true);
+        cylinder(r=ro,h=h,center=center);
+        cylinder(r=ri,h=h+1,center=center);
     }
 }
 
@@ -123,7 +132,7 @@ module chevron()
                     hull()
                     {
                         cylinder(d=1,h=depth*2,center=true);
-                        translate([-cl/2,radiuso+raised+1,-depth])
+                        translate([-cl/2,radiuso+edge+1,-depth])
                         cube([cl,1,depth*2]);
                     }
                 }
@@ -134,7 +143,7 @@ module chevron()
                     {
                         translate([-ci/2,radiusr*.95,-depth])
                         cube([ci,1,depth*2]);
-                        translate([-ci*1.5,radiuso+raised+1,-depth])
+                        translate([-ci*1.5,radiuso+edge+1,-depth])
                         cube([ci*3,1,depth*2]);
                     }
                 }
@@ -146,7 +155,7 @@ module chevron()
                 {
                     translate([-ci/2+raised,radiusr*.95+raised,-depth])
                     cube([ci-raised*2,1,depth*2]);
-                    translate([-ci+raised,radiuso+raised+1,-depth])
+                    translate([-ci+raised,radiuso+edge+1,-depth])
                     cube([ci*2-raised*2,1,depth*2]);
                 }
             }
@@ -158,7 +167,7 @@ module chevron()
             {
                 translate([-ci/2+raised*2,radiusr*.95+raised*2,-depth/2-raised*2])
                 cube([ci-raised*4,1,depth+raised*4]);
-                translate([-ci+raised*2,radiuso+raised+1,-depth])
+                translate([-ci+raised*2,radiuso+edge+1,-depth])
                 cube([ci*2-raised*4,1,depth*2]);
             }
         }
@@ -210,10 +219,25 @@ module gate()
     chevrons();
 }
 
+module cut()
+{ // Cut line for top/bottom
+    translate([0,0,-frontpcb])
+    union()
+    {
+        difference()
+        {
+            cylinder(r1=radiuspcbo,r2=radiuso+edge*2,h=lip);
+            cylinder(r1=radiuspcbi,r2=radiuspcbi-edge*2,h=lip);
+        }
+        translate([0,0,lip])
+        cylinder(r=radiuso*2,h=depth*10);
+    }
+}
+
 difference()
 {
     gate();
     if(dopcb)pcb();
-    if(top)translate([0,0,-depth*2-frontpcb])cylinder(r=radiuso*2,h=depth*2);
-    if(bottom)translate([0,0,-frontpcb])cylinder(r=radiuso*2,h=depth*10);
+    if(top)difference(){translate([0,0,-depth*2])cylinder(r=radiuso*3,h=depth*4);cut();}
+    if(bottom)translate([0,0,-frontpcb])cut();
  }
