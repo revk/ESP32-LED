@@ -22,7 +22,7 @@ struct stargate_s
    const ring_t *chev;
    uint8_t gates;               // The gate symbols
    const ring_t *gate;
-   const ring_t *kwoosh;
+   const ring_t *kawoosh;
 };
 
 const ring_t spin210[] = { {117, 1, 0} };
@@ -31,24 +31,24 @@ const ring_t chev210[] = { {117, 1, 0}, {18, 157, 0}, {18, 175, 0}, {18, 193, 0}
 const ring_t chev372[] = { {18, 157, 8}, {117, 175, 58}, {18, 292, 8}, {18, 310, 8}, {45, 328, 20} };
 const ring_t gate210[] = { {39, 118, 0} };
 const ring_t gate372[] = { {39, 118, 19} };
-const ring_t kwoosh210 = { 117, 1, 0 };
-const ring_t kwoosh372 = { 117, 1, 19 };
+const ring_t kawoosh210 = { 117, 1, 0 };
+const ring_t kawoosh372 = { 117, 1, 19 };
 
 const char *
 biggate (app_t * a)
 {                               // Special large LED rings
    uint8_t max = 127;           // Base brightmess
-   uint8_t kwooshlen = (a->len == 210 ? kwoosh210.len : kwoosh372.len),
+   uint8_t kawooshlen = (a->len == 210 ? kawoosh210.len : kawoosh372.len),
       *old = a->data,
-      *new = old + kwooshlen;
-   stargate_t *g = (void *) (new + kwooshlen);
+      *new = old + kawooshlen;
+   stargate_t *g = (void *) (new + kawooshlen);
    if (!a->cycle)
    {                            // Startup
       if (!a->limit)
          a->limit = 90 * cps;
-      old = malloc (kwooshlen * 2 + sizeof (stargate_t));
-      new = old + kwooshlen;
-      g = (void *) (new + kwooshlen);
+      old = malloc (kawooshlen * 2 + sizeof (stargate_t));
+      new = old + kawooshlen;
+      g = (void *) (new + kawooshlen);
       memset (g, 0, sizeof (*g));
       if (a->len == 210)
       {
@@ -107,9 +107,9 @@ biggate (app_t * a)
 
    void twinkle (void)
    {
-      memcpy (old, new, kwooshlen);
-      esp_fill_random (new, kwooshlen);
-      for (int i = 0; i < kwooshlen; i++)
+      memcpy (old, new, kawooshlen);
+      esp_fill_random (new, kawooshlen);
+      for (int i = 0; i < kawooshlen; i++)
          new[i] = new[i] / 3 + 32;
    }
    void spinner (uint8_t o)
@@ -227,14 +227,17 @@ biggate (app_t * a)
          }
          break;
       case 2:                  // Disengage top chevron and glyph
-         spinner (0);
-         chev (8, g->chevs * a->step / 256, g->chevs - 1, q);
-         gates (a->stage / 10 - 1, a->step * q / 255);
-         chevs ();
-         if ((a->step += 255 / a->speed) > 255)
          {
-            a->step = 0;
-            a->stage++;
+            int o = (g->dial[a->stage / 10 - 1] ? 3 : 0);
+            spinner (0);
+            chev (8, g->chevs * a->step / 256, g->chevs - 1, q);
+            gates (a->stage / 10 - 1, o + (a->step - o) * q / 255);
+            chevs ();
+            if ((a->step += 255 / a->speed) > 255)
+            {
+               a->step = 0;
+               a->stage++;
+            }
          }
          break;
       case 3:                  // Light up selected chevron
@@ -251,14 +254,14 @@ biggate (app_t * a)
             {
                a->stage = 100;  // Last one
                a->step = a->fade;
-               memset (new, 255, kwooshlen);
+               memset (new, 255, kawooshlen);
                twinkle ();
             }
          }
          break;
    } else
    {
-      for (int i = 0; i < kwooshlen; i++)
+      for (int i = 0; i < kawooshlen; i++)
       {
          uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
          setrgbl (a->start - 1 + g->spin[0].start + i, l, l, l, q);
@@ -267,6 +270,7 @@ biggate (app_t * a)
       {                         // Next
          a->step = a->fade;
          twinkle ();
+         chevs ();
       }
    }
    return NULL;
