@@ -139,9 +139,9 @@ biggate (app_t * a)
             setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max, 0, l);
          } else
          {                      // Chevs only
-            uint8_t t = C->len / 9;
-            uint16_t b = c * t;
-            for (int q = 0; q < t; q += (n == f || n == t ? 1 : t - 1))
+            uint8_t z = C->len / 9;
+            uint16_t b = c * z;
+            for (int q = 0; q < z; q += (n == f || n == t ? 1 : z - 1))
                setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max, 0, l);
          }
       }
@@ -228,9 +228,9 @@ biggate (app_t * a)
          break;
       case 2:                  // Disengage top chevron and glyph
          {
-            int o = (g->dial[a->stage / 10 - 1] ? 0 : 2);
+            int o = (g->dial[a->stage / 10 - 1] ? g->chevs : g->chevs-3);
             spinner (0);
-            chev (8, o+(g->chevs-o) * a->step / 256, g->chevs - 1, q);
+            chev (8, o * a->step / 256, g->chevs - 1, q);
             gates (a->stage / 10 - 1, a->step * q / 255);
             chevs ();
             if ((a->step += 255 / a->speed) > 255)
@@ -243,7 +243,7 @@ biggate (app_t * a)
       case 3:                  // Light up selected chevron
          spinner (0);
          if (g->dial[a->stage / 10])
-            chev (a->stage / 10 - 1, 0, g->chevs - 3, a->step * q / 255);
+            chev (a->stage / 10 - 1, g->chevs-3, g->chevs - 1, a->step * q / 255);
          gates (a->stage / 10 - 1, q);
          chevs ();
          if ((a->step += 255 / a->speed) > 255)
@@ -270,8 +270,8 @@ biggate (app_t * a)
       {                         // Next
          a->step = a->fade;
          twinkle ();
-         chevs ();
       }
+      chevs ();
    }
    return NULL;
 }
