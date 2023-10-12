@@ -44,6 +44,8 @@ biggate (app_t * a)
    stargate_t *g = (void *) (new + kawooshlen);
    if (!a->cycle)
    {                            // Startup
+      if (!a->colourset)
+         a->g = 255; // Default glyph colour
       if (!a->limit)
          a->limit = 90 * cps;
       old = malloc (kawooshlen * 2 + sizeof (stargate_t));
@@ -133,16 +135,16 @@ biggate (app_t * a)
          const ring_t *C = &g->chev[n];
          if (C->len == 117)
          {                      // Chevs part of full ring
-            setrgbl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, max, max, 0, l);
+            setrgbl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, max, max / 2, 0, l);
             if (n == f || n == t)
-               setrgbl (a->start - 1 + C->start + (c * 13 + C->offset) % C->len, max, max, 0, l);
-            setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max, 0, l);
+               setrgbl (a->start - 1 + C->start + (c * 13 + C->offset) % C->len, max, max / 2, 0, l);
+            setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max / 2, 0, l);
          } else
          {                      // Chevs only
             uint8_t z = C->len / 9;
             uint16_t b = c * z;
             for (int q = 0; q < z; q += (n == f || n == t ? 1 : z - 1))
-               setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max, 0, l);
+               setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max / 2, 0, l);
          }
       }
    }
@@ -152,7 +154,8 @@ biggate (app_t * a)
          for (int z = 0; z < g->gates; z++)
          {
             if (g->gate[z].len == 39)
-               setrgbl (a->start - 1 + g->gate[z].start + (g->gate[z].offset + g->dial[c] - 1) % g->gate[z].len, max, 0, 0, l);
+               setrgbl (a->start - 1 + g->gate[z].start + (g->gate[z].offset + g->dial[c] - 1) % g->gate[z].len, a->r * max / 255,
+                        a->g * max / 255, a->b * max / 255, l);
          }
    }
    void chevs (void)
@@ -237,13 +240,13 @@ biggate (app_t * a)
             {
                a->step = 0;
                a->stage++;
-            if (!g->dial[a->stage / 10])
-            {
-               a->stage = 100;  // Last one
-               a->step = a->fade;
-               memset (new, 255, kawooshlen);
-               twinkle ();
-            }
+               if (!g->dial[a->stage / 10])
+               {
+                  a->stage = 100;       // Last one
+                  a->step = a->fade;
+                  memset (new, 255, kawooshlen);
+                  twinkle ();
+               }
             }
          }
          break;
@@ -350,7 +353,7 @@ appstargate (app_t * a)
       default:
          return;
       }
-      setrgbl (a->start + n, 255, 255, 0, l);
+      setrgbl (a->start + n, 255, 127, 0, l);
    }
    void twinkle (void)
    {
