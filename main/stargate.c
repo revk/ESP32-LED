@@ -31,8 +31,8 @@ const ring_t chev210[] = { {117, 1, 0}, {18, 157, 0}, {18, 175, 0}, {18, 193, 0}
 const ring_t chev372[] = { {18, 157, 8}, {117, 175, 58}, {18, 292, 8}, {18, 310, 8}, {45, 328, 20} };
 const ring_t gate210[] = { {39, 118, 0} };
 const ring_t gate372[] = { {39, 118, 19} };
-const ring_t kwoosh210 = {117, 1, 0};
-const ring_t kwoosh372 = {117, 1, 19};
+const ring_t kwoosh210 = { 117, 1, 0 };
+const ring_t kwoosh372 = { 117, 1, 19 };
 
 const char *
 biggate (app_t * a)
@@ -86,10 +86,10 @@ biggate (app_t * a)
             n = 8;
          else if (esp_random () >= 0xE0000000)
             n = 7;
-         uint64_t f = 0x1FE0000; // Avoid lower 8 glyphs
+         uint64_t f = 0x1FE0000;        // Avoid lower 8 glyphs
          for (int q = 0; q < n; q++)
          {
-            int r = esp_random () % (38 - 8 - q) + 1, // -8 for avoided glyphs
+            int r = esp_random () % (38 - 8 - q) + 1,   // -8 for avoided glyphs
                p = 1;
             while (r || (f & (1LL << p)))
                if ((f & (1LL << p)) || r--)
@@ -118,8 +118,12 @@ biggate (app_t * a)
          for (int n = 0; n < g->spin[s].len; n++)
             setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, n % 3 ? 0 : max, q);
    }
-   void chev (uint8_t c, uint8_t f, uint8_t t, uint8_t l)
+   void chev (uint8_t c, int8_t f, int8_t t, uint8_t l)
    {
+      if (f < 0)
+         f = 0;
+      if (t >= g->chevs - 1)
+         t = g->chevs - 1;
       if (c >= 8 || !g->dial[c + 1])
          c = 0;                 // Last chevron (top)
       else if (++c > 3)
@@ -130,12 +134,14 @@ biggate (app_t * a)
          if (C->len == 117)
          {                      // Chevs part of full ring
             setrgbl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, max, max, 0, l);
+            if (n == f || n == t)
+               setrgbl (a->start - 1 + C->start + (c * 13 + C->offset) % C->len, max, max, 0, l);
             setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max, 0, l);
          } else
          {                      // Chevs only
             uint8_t t = C->len / 9;
             uint16_t b = c * t;
-            for (int q = 0; q < t; q++)
+            for (int q = 0; q < t; q += (n == f || n == t ? 1 : t - 1))
                setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max, 0, l);
          }
       }
@@ -153,7 +159,7 @@ biggate (app_t * a)
    {
       for (int c = 0; c < a->stage / 10 - 1; c++)
       {
-         chev (c, 0, g->chevs - 1, q);
+         chev (c, g->chevs - 3, g->chevs - 1, q);       // Top of chevron
          gates (c, q);
       }
    }
