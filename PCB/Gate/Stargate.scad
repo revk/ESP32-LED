@@ -4,8 +4,8 @@
 
 doglyphs=true;          // Include glyphs
 doramp=true;            // Include ramp
-top=false;              // Top only for PCB
-bottom=false;           // Bottom only for PCB
+top=true;              // Top only for PCB
+bottom=false;            // Bottom only for PCB
 
 radiusi=50;             // Inner radius (i.e. hole in gate)
 radiusr=radiusi*62/50;  // Edge of glyphys
