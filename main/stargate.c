@@ -228,7 +228,7 @@ biggate (app_t * a)
          break;
       case 2:                  // Disengage top chevron and glyph
          {
-            int o = (g->dial[a->stage / 10 - 1] ? g->chevs : g->chevs - 3);
+            int o = (g->dial[a->stage / 10] ? g->chevs : 3);
             spinner (0);
             chev (8, o * a->step / 256, g->chevs - 1, q);
             gates (a->stage / 10 - 1, a->step * q / 255);
@@ -237,6 +237,13 @@ biggate (app_t * a)
             {
                a->step = 0;
                a->stage++;
+            if (!g->dial[a->stage / 10])
+            {
+               a->stage = 100;  // Last one
+               a->step = a->fade;
+               memset (new, 255, kawooshlen);
+               twinkle ();
+            }
             }
          }
          break;
@@ -250,13 +257,6 @@ biggate (app_t * a)
          {
             a->step = 0;
             a->stage += 7;
-            if (!g->dial[a->stage / 10 - 1])
-            {
-               a->stage = 100;  // Last one
-               a->step = a->fade;
-               memset (new, 255, kawooshlen);
-               twinkle ();
-            }
          }
          break;
    } else
