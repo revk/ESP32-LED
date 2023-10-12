@@ -602,7 +602,7 @@ web_root (httpd_req_t * req)
    }
    xSemaphoreGive (app_mutex);
    httpd_resp_sendstr_chunk (req,
-                             "</ul><fieldset><legend>Effect</legend><form method=get><p><input name='colour' type='color' placeholder='RGB' value='#0F0'></p><p><input name='data' placeholder='Data'></p><p>");
+                             "</ul><fieldset><legend>Effect</legend><form method=get><p><input name='colour' placeholder='RGB' size=6></p><p><input name='data' placeholder='Data'></p><p>");
    void button (const char *tag)
    {
       httpd_resp_sendstr_chunk (req, "<input type=submit name='app' value='");
