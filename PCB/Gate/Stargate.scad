@@ -4,13 +4,13 @@
 
 doglyphs=true;          // Include glyphs
 doramp=true;            // Include ramp
-top=true;              // Top only for PCB
+top=false;              // Top only for PCB
 bottom=false;            // Bottom only for PCB
 
 radiusi=50;             // Inner radius (i.e. hole in gate)
 radiusr=radiusi*62/50;  // Edge of glyphys
 radiuso=radiusi*70/50;  // Outer radius (before adding chevrons
-depth=radiusi*15/50;    // Gate thickness (before chevrons/glyphs
+depth=radiusi*10/50;    // Gate thickness (before chevrons/glyphs
 rampw=radiuso*0.8;      // Ramp width
 rampw2=radiuso;         // Ramp width at bottom
 raised=1;               // Raised glyphs, etc
@@ -19,7 +19,7 @@ thickness=0.5;          // line thickness
 
 radiuspcbo=70.5;        // PCB radius (outer)
 radiuspcbi=49.5;        // PCB radius (inner)
-thicknesspcb=1.5;       // PCB and parts thickness
+thicknesspcb=2.5;       // PCB and parts thickness
 frontpcb=1;             // Gate thickness in front of PCB
 
 $fn=39*3;
@@ -222,5 +222,5 @@ difference()
     gate();
     if(top||bottom)pcb();
     if(top)difference(){translate([0,0,-depth*2])cylinder(r=radiuso*3,h=depth*4);cut();}
-    else if(bottom)translate([0,0,-frontpcb])cut();
+    else if(bottom)cut();
  }
