@@ -177,15 +177,19 @@ addapp (int index, const char *name, jo_t j)
 #define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
             colours
 #undef c
-#define x(n)((temp[n] & 0xF) + (isalpha ((uint8_t)temp[n]) ? 9 : 0))
-               else if (strlen (temp) == 3 && isxdigit ((int) temp[0]) && isxdigit ((int) temp[1]) && isxdigit ((int) temp[2]))
+            char *c = temp;
+            if (*c == '#')
+               c++;
+#define x(n)((c[n] & 0xF) + (isalpha ((uint8_t)c[n]) ? 9 : 0))
+            if (strlen (c) == 3 && isxdigit ((int) c[0]) && isxdigit ((int) c[1]) && isxdigit ((int) c[2]))
             {
                a->colourset = 1;
                a->r = x (0) * 17;
                a->g = x (1) * 17;
                a->b = x (2) * 17;
-            } else if (strlen (temp) == 6 && isxdigit ((int) temp[0]) && isxdigit ((int) temp[1]) && isxdigit ((int) temp[2])
-                       && isxdigit ((int) temp[3]) && isxdigit ((int) temp[4]) && isxdigit ((int) temp[5]))
+            } else
+               if (strlen (c) == 6 && isxdigit ((int) c[0]) && isxdigit ((int) c[1]) && isxdigit ((int) c[2])
+                   && isxdigit ((int) c[3]) && isxdigit ((int) c[4]) && isxdigit ((int) c[5]))
             {
                a->colourset = 1;
                a->r = x (0) * 16 + x (1);
@@ -249,8 +253,9 @@ addapp (int index, const char *name, jo_t j)
                   if (jo_next (j) == JO_STRING)
                   {
                      free (a->data);
-                     a->data = malloc (jo_strlen (j) + 1);
-                     jo_strncpy (j, a->data, jo_strlen (j) + 1);
+                     int l = jo_strlen (j);
+                     if (l)
+                        jo_strncpy (j, a->data = malloc (l + 1), l + 1);
                   }
                   continue;
                }
@@ -261,8 +266,9 @@ addapp (int index, const char *name, jo_t j)
             if (!setcolour (j))
             {                   // data
                free (a->data);
-               a->data = malloc (jo_strlen (j) + 1);
-               jo_strncpy (j, a->data, jo_strlen (j) + 1);
+               int l = jo_strlen (j);
+               if (l)
+                  jo_strncpy (j, a->data = malloc (l + 1), l + 1);
             }
          } else if (j && jo_here (j) == JO_NUMBER)
             a->limit = jo_read_int (j);
@@ -554,7 +560,6 @@ register_get_uri (const char *uri, esp_err_t (*handler) (httpd_req_t * r))
       .method = HTTP_GET,
       .handler = handler,
    };
-
    register_uri (&uri_struct);
 }
 
@@ -564,13 +569,21 @@ web_root (httpd_req_t * req)
    if (revk_link_down () && webcontrol >= 2)
       return revk_web_settings (req);   // Direct to web set up
    revk_web_head (req, "LED");
-
    size_t l = httpd_req_get_url_query_len (req);
-   if (l > 0 && l < 20)
+   char query[200];
+   if (l > 0 && l < sizeof (query))
    {
-      char query[21];
       if (!httpd_req_get_url_query_str (req, query, sizeof (query)))
-         app_callback (0, prefixcommand, NULL, query, NULL);
+      {
+         jo_t j = jo_parse_query (query);
+         if (jo_find (j, "app") == JO_STRING)
+         {
+            char app[30];
+            jo_strncpy (j, app, sizeof (app));
+            jo_rewind (j);
+            app_callback (0, prefixcommand, NULL, app, j);
+         }
+      }
    }
 
    httpd_resp_sendstr_chunk (req, "<h1>LED controller: ");
@@ -588,20 +601,18 @@ web_root (httpd_req_t * req)
       }
    }
    xSemaphoreGive (app_mutex);
-   httpd_resp_sendstr_chunk (req, "</ul><fieldset><legend>Select command</legend>");
-   void button (const char *tag, const char *value)
+   httpd_resp_sendstr_chunk (req,
+                             "</ul><fieldset><legend>Effect</legend><form method=get><p><input name='colour' type='color' placeholder='RGB' value='#0F0'></p><p><input name='data' placeholder='Data'></p><p>");
+   void button (const char *tag)
    {
-      httpd_resp_sendstr_chunk (req, "<a href='?");
+      httpd_resp_sendstr_chunk (req, "<input type=submit name='app' value='");
       httpd_resp_sendstr_chunk (req, tag);
-      httpd_resp_sendstr_chunk (req, "'><button>");
-      httpd_resp_sendstr_chunk (req, value);
-      httpd_resp_sendstr_chunk (req, "</button></a> ");
+      httpd_resp_sendstr_chunk (req, "'/>");
    }
-   button ("stop", "Stop");
-#define a(x,d) if(strcmp(#x,"idle"))button(#x,#d);
+#define a(x,d) if(strcmp(#x,"idle"))button(#x);
 #define t(x,d)
 #include "apps.h"
-   httpd_resp_sendstr_chunk (req, "</fieldset>");
+   httpd_resp_sendstr_chunk (req, "</p></form></fieldset>");
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0);
 }
 

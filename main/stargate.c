@@ -228,7 +228,7 @@ biggate (app_t * a)
          break;
       case 2:                  // Disengage top chevron and glyph
          {
-            int o = (g->dial[a->stage / 10 - 1] ? g->chevs : g->chevs-3);
+            int o = (g->dial[a->stage / 10 - 1] ? g->chevs : g->chevs - 3);
             spinner (0);
             chev (8, o * a->step / 256, g->chevs - 1, q);
             gates (a->stage / 10 - 1, a->step * q / 255);
@@ -243,7 +243,7 @@ biggate (app_t * a)
       case 3:                  // Light up selected chevron
          spinner (0);
          if (g->dial[a->stage / 10])
-            chev (a->stage / 10 - 1, g->chevs-3, g->chevs - 1, a->step * q / 255);
+            chev (a->stage / 10 - 1, g->chevs - 3, g->chevs - 1, a->step * q / 255);
          gates (a->stage / 10 - 1, q);
          chevs ();
          if ((a->step += 255 / a->speed) > 255)
