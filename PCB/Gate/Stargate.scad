@@ -14,6 +14,7 @@ depth=radiusi*10/50;    // Gate thickness (before chevrons/glyphs
 rampw=radiuso*0.8;      // Ramp width
 rampw2=radiuso;         // Ramp width at bottom
 raised=1;               // Raised glyphs, etc
+raisedr=raised/3;       // Radius of raised base
 edge=1;                 // Glyph edge
 thickness=0.5;          // line thickness
 
@@ -36,7 +37,7 @@ module glyphs()
     translate([-130/2,-130/2,-1])
     minkowski()
     {
-        cone(r=raised/2,h=raised);
+        cone(r=raisedr,h=raised);
             linear_extrude(height=1)
             import("Glyphs.dxf");
     }
@@ -57,9 +58,12 @@ module ramp(t=0)
 
 module pcb()
 {
+w=10;
     // PCB
     translate([0,0,-frontpcb-thicknesspcb])
     washer(ri=radiuspcbi,ro=radiuspcbo,h=thicknesspcb,center=false);
+    translate([-w,-radiuso*2,-frontpcb-thicknesspcb-5])
+    cube([w,radiuso*2-(radiuspcbo+radiuspcbi)/2,6]);
     // Hole in base
     if(doramp)ramp(5);
 }
@@ -171,7 +175,7 @@ module chevrons()
 module ring()
 {    
     translate([0,0,-depth/2])
-    washer(ri=radiusi,ro=radiuso,h=depth);
+    washer(ri=radiusi,ro=radiuso+0.01,h=depth);
 }
 
 module gate()
@@ -183,24 +187,24 @@ module gate()
         ramp();
     minkowski()
     {
-        cone(r=raised/2,h=raised);
-        translate([0,0,0-1])
+        cone(r=raisedr,h=raised);
+        translate([0,0,-1])
         union()
         {
             // raised rings
-            washer(ri=radiusi-thickness/2+raised/2,ro=radiusi+thickness/2+raised/2,h=2);
+            washer(ri=radiusi+raisedr,ro=radiusi+thickness+raisedr,h=2);
             washer(ri=radiusr-thickness/2,ro=radiusr+thickness/2,h=2);
-            washer(ri=radiuso-thickness/2-raised/2,ro=radiuso+thickness/2-raised/2,h=2);
+            washer(ri=radiuso-thickness-raisedr,ro=radiuso-raisedr,h=2);
             // dividers
             for(a=[0:1:38])
                 rotate([0,0,360*(a+0.5)/39])
-                    translate([-thickness/2,radiusi+raised/2,0])
-                    cube([thickness,radiusr-radiusi-raised/2,1]);
+                    translate([-thickness/2,radiusi+raisedr+thickness/2,0])
+                    cube([thickness,radiusr-radiusi-thickness,1]);
             // Edge bands
             for(a=[0:1:233])
                 rotate([0,0,360*a/234])
                     translate([-thickness/2,radiusr,0])
-                    cube([thickness,radiuso-radiusr-raised/2,1]);
+                    cube([thickness,radiuso-radiusr-thickness,1]);
         }
     }
     chevrons();
@@ -209,12 +213,7 @@ module gate()
 module cut()
 { // Cut line for top/bottom
     translate([0,0,-frontpcb])
-    union()
-    difference()
-    {
         cylinder(r1=radiuspcbo,r2=radiuso*2,h=radiuso);
-        cylinder(r1=radiuspcbi,r2=0,h=radiuspcbi);
-    }
 }
 
 difference()
