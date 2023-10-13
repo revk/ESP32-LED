@@ -46,7 +46,7 @@ module glyphs()
 module ramp(t=0)
 {
     h=radiuso-sqrt(radiusi*radiusi-rampw*rampw/4);
-    b=raised*3;
+    b=edge*3;
     hull()
     {
         translate([-rampw/2+t,-radiuso-b-t,-depth-t-raised*4])
@@ -58,14 +58,24 @@ module ramp(t=0)
 
 module pcb()
 {
-w=10;
+    w=10;
     // PCB
     translate([0,0,-frontpcb-thicknesspcb])
     washer(ri=radiuspcbi,ro=radiuspcbo,h=thicknesspcb,center=false);
     translate([-w,-radiuso*2,-frontpcb-thicknesspcb-5])
     cube([w,radiuso*2-(radiuspcbo+radiuspcbi)/2,6]);
     // Hole in base
-    if(doramp)ramp(5);
+    if(doramp)
+    {
+        ramp(5);
+        translate([-radiuso,-radiuso-edge*3-1,0])
+            hull()
+            {
+                cube([radiuso*2,1,radiusi]);
+                translate([0,2,2])
+                    cube([radiuso*2,1,radiusi-4]);
+            }
+    }
 }
 
 module ringouter(h=0)
@@ -213,6 +223,7 @@ module gate()
     for(a=[0:1:233])
         rotate([0,0,360*a/234])
             translate([-thickness/2,radiusr,0])
+            hull()
             {
                 translate([-raisedr,0,-1])
                 cube([thickness+raisedr*2,radiuso-radiusr-thickness,1]);
@@ -238,3 +249,4 @@ difference()
     if(top)difference(){translate([0,0,-depth*2])cylinder(r=radiuso*3,h=depth*4);cut();}
     else if(bottom)cut();
  }
+ 
