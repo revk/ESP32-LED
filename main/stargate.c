@@ -45,7 +45,7 @@ biggate (app_t * a)
    if (!a->cycle)
    {                            // Startup
       if (!a->colourset)
-         a->g = 255; // Default glyph colour
+         a->g = 255;            // Default glyph colour
       if (!a->limit)
          a->limit = 90 * cps;
       old = malloc (kawooshlen * 2 + sizeof (stargate_t));
@@ -106,7 +106,6 @@ biggate (app_t * a)
    uint8_t q = 255;
    if (a->stop)
       q = 255 * a->stop / a->fade;      // Main fader for end
-
    void twinkle (void)
    {
       memcpy (old, new, kawooshlen);
@@ -120,35 +119,50 @@ biggate (app_t * a)
          for (int n = 0; n < g->spin[s].len; n++)
             setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, n % 3 ? 0 : max, q);
    }
+   uint8_t map (uint8_t c)
+   {                            // Chev map
+      if (c >= 8 || !g->dial[c + 1])
+         c = 0;                 // Last chevron (top)
+      else if (++c > 3)
+         c += (g->dial[8] ? 0 : 1) + (g->dial[7] ? 0 : 1);      // Skip bottom ones as needed
+      return c;
+   }
+   void lock (uint8_t c, uint8_t l)
+   {
+      c = map (c);
+      for (int n = g->chevs - 2; n < g->chevs; n++)
+      {
+         uint8_t z = g->chev[n].len / 9;
+         if (z & 1)
+            setrgbl (a->start - 1 + g->chev[n].start + (g->chev[n].offset + c * z + z / 2) % g->chev[n].len, max, max / 2, 0, l);
+      }
+   }
    void chev (uint8_t c, int8_t f, int8_t t, uint8_t l)
    {
       if (f < 0)
          f = 0;
       if (t >= g->chevs - 1)
          t = g->chevs - 1;
-      if (c >= 8 || !g->dial[c + 1])
-         c = 0;                 // Last chevron (top)
-      else if (++c > 3)
-         c += (g->dial[8] ? 0 : 1) + (g->dial[7] ? 0 : 1);      // Skip bottom ones as needed
+      c = map (c);
       for (int n = f; n <= t; n++)
       {
          const ring_t *C = &g->chev[n];
          if (C->len == 117)
          {                      // Chevs part of full ring
-            setrgbl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, max, max / 2, 0, l);
+            setrgbl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, max, max, 0, l);
             if (n == f || n == t)
-               setrgbl (a->start - 1 + C->start + (c * 13 + C->offset) % C->len, max, max / 2, 0, l);
-            setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max / 2, 0, l);
+               setrgbl (a->start - 1 + C->start + (c * 13 + C->offset) % C->len, max, max, 0, l);
+            setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max, 0, l);
          } else
          {                      // Chevs only
             uint8_t z = C->len / 9;
             uint16_t b = c * z;
             for (int q = 0; q < z; q += (n == f || n == t ? 1 : z - 1))
-               setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max / 2, 0, l);
+               setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max, 0, l);
          }
       }
    }
-   void gates (uint8_t c, uint8_t l)
+   void gate (uint8_t c, uint8_t l)
    {
       if (g->dial[c])
          for (int z = 0; z < g->gates; z++)
@@ -160,11 +174,13 @@ biggate (app_t * a)
    }
    void chevs (void)
    {
-      for (int c = 0; c < a->stage / 10 - 1; c++)
-      {
-         chev (c, g->chevs - 3, g->chevs - 1, q);       // Top of chevron
-         gates (c, q);
-      }
+      for (int c = 0; c < a->stage / 10 - 1 && c < 9; c++)
+         if (g->dial[c])
+         {
+            chev (c, g->chevs - 3, g->chevs - 1, q / 2);        // Top of chevron
+            gate (c, q);
+            lock (c, q);
+         }
    }
 
    if (a->stage < 10)
@@ -231,35 +247,34 @@ biggate (app_t * a)
          break;
       case 2:                  // Disengage top chevron and glyph
          {
-            int o = (g->dial[a->stage / 10] ? g->chevs : 3);
             spinner (0);
-            chev (8, o * a->step / 256, g->chevs - 1, q);
-            gates (a->stage / 10 - 1, a->step * q / 255);
+            chev (8, g->chevs * a->step / 256, g->chevs - 1, q);
+            gate (a->stage / 10 - 1, a->step * q / 255);
             chevs ();
             if ((a->step += 255 / a->speed) > 255)
             {
                a->step = 0;
                a->stage++;
-               if (!g->dial[a->stage / 10])
-               {
-                  a->stage = 100;       // Last one
-                  a->step = a->fade;
-                  memset (new, 255, kawooshlen);
-                  twinkle ();
-               }
             }
          }
          break;
       case 3:                  // Light up selected chevron
          spinner (0);
-         if (g->dial[a->stage / 10])
-            chev (a->stage / 10 - 1, g->chevs - 3, g->chevs - 1, a->step * q / 255);
-         gates (a->stage / 10 - 1, q);
+         chev (a->stage / 10 - 1, g->chevs - 3, g->chevs - 1, a->step * q / 255 / 2);
+         lock (a->stage / 10 - 1, a->step * q / 255);
+         gate (a->stage / 10 - 1, q);
          chevs ();
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
             a->stage += 7;
+            if (!g->dial[a->stage / 10 - 1])
+            {
+               a->stage = 100;  // Last one
+               a->step = a->fade;
+               memset (new, 255, kawooshlen);
+               twinkle ();
+            }
          }
          break;
    } else
@@ -301,7 +316,6 @@ appstargate (app_t * a)
       dir = -1;
    } else
       top = a->top - a->start;
-
    if (!a->cycle)
    {                            // Sanity checks, etc
       if (!a->limit)
@@ -314,7 +328,6 @@ appstargate (app_t * a)
    uint8_t q = 255;
    if (a->stop)
       q = 255 * a->stop / a->fade;
-
    void ring (uint8_t l)
    {
       for (unsigned int i = 0; i < a->len; i++)
