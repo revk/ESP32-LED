@@ -18,10 +18,13 @@ raisedr=raised/3;       // Radius of raised base
 edge=1;                 // Glyph edge
 thickness=0.5;          // line thickness
 
-radiuspcbo=70.25;        // PCB radius (outer)
-radiuspcbi=49.75;        // PCB radius (inner)
+radiuspcbo=69;          // PCB radius (outer)
+radiuspcbi=47;          // PCB radius (inner)
 thicknesspcb=2.5;       // PCB and parts thickness
 frontpcb=1;             // Gate thickness in front of PCB
+
+radiusmirror=50;             // Mirror radius
+thicknessmirror=2;      // Mirror thickness (front and back of PCB)
 
 $fn=39*3;
 
@@ -76,6 +79,9 @@ module pcb()
                     cube([radiuso*2,1,radiusi-4]);
             }
     }
+    if(radiusmirror)
+        translate([0,0,-frontpcb-thicknesspcb-thicknessmirror])
+        cylinder(r=radiusmirror,h=thicknesspcb+thicknessmirror*2);
 }
 
 module ringouter(h=0)
