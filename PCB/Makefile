@@ -12,8 +12,8 @@ leds:	placeleds
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d113.5 --zone-in=1.25 --zone-out=1.25 --diode=274 --count=18 --group=2 --spacing=4.485 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d118.5 --zone-in=1.25 --zone-out=1.25 --diode=292 --count=117 --vias=0.8 --power-vias=0.8 --angle=181.5384615 --fill=VCC --tracks
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d123.5 --zone-in=1.25 --zone-out=1.25 --diode=409 --count=27 --group=3 --spacing=4.12125 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
-	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d128.5 --zone-in=1.25 --zone-out=1.25 --diode=436 --count=18 --group=2 --spacing=10.12125 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
-	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d133.5 --zone-in=1.25 --zone-out=1.25 --diode=454 --count=45 --group=5 --spacing=6 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
+	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d128.5 --zone-in=1.25 --zone-out=1.25 --diode=436 --count=27 --group=3 --spacing=5.060625 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
+	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d133.5 --zone-in=1.25 --zone-out=1.25 --diode=463 --count=45 --group=5 --spacing=6 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
 
 stl:    LED/LED.stl
 
