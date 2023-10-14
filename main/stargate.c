@@ -22,7 +22,8 @@ struct stargate_s
    const ring_t *chev;
    uint8_t gates;               // The gate symbols
    const ring_t *gate;
-   const ring_t *kawoosh;
+   const ring_t *kawoosh;       // The final kawoosh ring
+   uint8_t incoming:1;          // This is incoming
 };
 
 const ring_t spin210[] = { {117, 1, 0} };
@@ -38,8 +39,8 @@ const char *
 biggate (app_t * a)
 {                               // Special large LED rings
    uint8_t max = 127;           // Base brightmess
-   uint8_t kawooshlen = (a->len == 210 ? kawoosh210.len : kawoosh372.len),
-      *old = a->data,
+   uint8_t kawooshlen = 117;    // Always 117?
+   uint8_t *old = a->data,
       *new = old + kawooshlen;
    stargate_t *g = (void *) (new + kawooshlen);
    if (!a->cycle)
@@ -52,24 +53,29 @@ biggate (app_t * a)
       new = old + kawooshlen;
       g = (void *) (new + kawooshlen);
       memset (g, 0, sizeof (*g));
-      if (a->len == 210)
-      {
-         g->spin = spin210;
-         g->spins = sizeof (spin210) / sizeof (*spin210);
-         g->chev = chev210;
-         g->chevs = sizeof (chev210) / sizeof (*chev210);
-         g->gate = gate210;
-         g->gates = sizeof (gate210) / sizeof (*gate210);
-      } else
-      {
-         g->spin = spin372;
-         g->spins = sizeof (spin372) / sizeof (*spin372);
-         g->chev = chev372;
-         g->chevs = sizeof (chev372) / sizeof (*chev372);
-         g->gate = gate372;
-         g->gates = sizeof (gate372) / sizeof (*gate372);
-      }
+#define load(x)  if (a->len == x)						\
+        {									\
+           g->spin = spin##x;							\
+           g->spins = sizeof (spin##x) / sizeof (*spin##x);			\
+           g->chev = chev##x;							\
+           g->chevs = sizeof (chev##x) / sizeof (*chev##x);			\
+           g->gate = gate##x;							\
+           g->gates = sizeof (gate##x) / sizeof (*gate##x);			\
+	   g->kawoosh = &kawoosh##x;						\
+	}
+      load (210);
+      load (372);
+#undef	load
+      if (!g->chevs)
+         return "Bad gate";
       g->pos = 1;               // Home symbol
+      if (a->data && ((char *) a->data)[0] == '*')
+      {
+         g->incoming = 1;
+         a->stage = 13;
+         free (a->data);
+         a->data = NULL;
+      }
       if (a->data)
       {                         // Dial sequence specified
          const char glyphs[] = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ&-0123456789";
@@ -164,7 +170,7 @@ biggate (app_t * a)
    }
    void gate (uint8_t c, uint8_t l)
    {
-      if (g->dial[c])
+      if (!g->incoming && g->dial[c])
          for (int z = 0; z < g->gates; z++)
          {
             if (g->gate[z].len == 39)
@@ -259,15 +265,20 @@ biggate (app_t * a)
          }
          break;
       case 3:                  // Light up selected chevron
-         spinner (0);
-         chev (a->stage / 10 - 1, g->chevs - 3, g->chevs - 1, a->step * q / 255 / 2);
-         lock (a->stage / 10 - 1, a->step * q / 255);
-         gate (a->stage / 10 - 1, q);
+         if (!g->incoming)
+         {
+            spinner (0);
+            chev (a->stage / 10 - 1, g->chevs - 3, g->chevs - 1, a->step * q / 255 / 2);
+            lock (a->stage / 10 - 1, a->step * q / 255);
+            gate (a->stage / 10 - 1, q);
+         }
          chevs ();
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
             a->stage += 7;
+            if (g->incoming)
+               a->stage += 3;
             if (!g->dial[a->stage / 10 - 1])
             {
                a->stage = 100;  // Last one
@@ -282,7 +293,7 @@ biggate (app_t * a)
       for (int i = 0; i < kawooshlen; i++)
       {
          uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
-         setrgbl (a->start - 1 + g->spin[0].start + i, l, l, l, q);
+         setrgbl (a->start - 1 + g->kawoosh->start + i, l, l, l, q);
       }
       if (!--a->step)
       {                         // Next
