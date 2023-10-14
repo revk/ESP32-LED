@@ -6,7 +6,7 @@ This software, designed to run on any PCb, but particularly the defined PCB with
 
 Sending `command/LED/id` with an argument can set the specific output pattern required.
 
-- The argument can be simply the name of one app, e.g. `rainbow`.
+- The argument can be simply the name of one app, e.g. `spin`.
 - The argument can be an array of strings, naming a stacked list of apps. 
 - The argument can be an object with each field in order being an app, named for the app, which is an object with the app arguments
 
@@ -23,6 +23,8 @@ You can also use an app name as a command where the payload is the parameters. T
 Whilst app parameters are normally an object with one or more parameters, if it is just a string, that sets `colour`, and if a number, that sets `limit`. E.g. `command/LED/whatever/spin red`.
 
 The `stop` command forces all active apps to end gracefully (usually a fade out).
+
+You can also pass the parameters for a simple single app as a form `GET` list, including `app=` for the name of the application.
 
 ## Power and wiring
 
@@ -91,10 +93,8 @@ Each app can have arguments.
 |---|-------|
 |`spin`|This is intended for a ring but can work on a strip quite well - it rotates the specified colour (default `cycle`) around the ring|
 |`clock`|This operates a clock on the ring, red for hour, green for minute, blue for second, obviously a ring with 60 LEDs is best|
-|`stargate`|This dials a stargate, setting each chevron, and then opens the gate. Gate closes after a period even if `limit` is not set|
+|`stargate`|This dials a stargate, setting each chevron, and then opens the gate. Gate closes after a period even if `limit` is not set. See [Stargate app](Stargate.md) for more details and special Stargate LED rings|
 |`lava`|Fade up and down each of red/green/blue at random positions on the ring and random speeds.|
-
-Note, `stargate` has special handling for special rings of 210 or 372 LEDs.
 
 ### Text apps
 
