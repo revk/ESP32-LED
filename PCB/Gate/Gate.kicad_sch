@@ -20510,7 +20510,7 @@
     (property "Value" "Fiducial" (at 282.194 179.6471 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (property "Footprint" "RevK:Hole-Tooling" (at 280.035 178.435 0)
+    (property "Footprint" "Fiducial:Fiducial_1mm_Mask2mm" (at 280.035 178.435 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 280.035 178.435 0)
