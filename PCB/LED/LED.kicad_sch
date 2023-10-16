@@ -1608,6 +1608,12 @@
     (uuid ef943a76-af0c-46ce-8e6e-ca013ff94a3d)
   )
 
+  (text "This would be better either as\nWS2812B as first in chain,\nor as single GPIO0 LED"
+    (at 100.965 142.875 0)
+    (effects (font (size 5 5)) (justify left bottom))
+    (uuid 9560e0ae-fe95-4b7c-ba0c-9768427af92b)
+  )
+
   (global_label "B" (shape output) (at 35.56 76.2 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 28d7fb17-7c05-44a4-b45e-15b10892a0d6)
