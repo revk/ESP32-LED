@@ -1031,7 +1031,7 @@
     (property "Sheetname" "")
     (property "exclude_from_bom" "")
     (path "/d7fb2ae4-6c8d-4ed9-aab0-ec7b1898cdd1")
-    (attr exclude_from_bom)
+    (attr exclude_from_pos_files exclude_from_bom)
     (fp_text reference "PCB1" (at 0 -0.5 unlocked) (layer "F.SilkS") hide
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 402a3c92-39f4-4f7f-9bb8-dcf0cae7615e)
