@@ -35,6 +35,7 @@ main (int argc, const char *argv[])
    double startx = NAN;
    double starty = NAN;
    double diameter = 0;
+   double radius = 0;
    double angle = 0;
    int group = 0;
    int sides = 0;
@@ -57,6 +58,7 @@ main (int argc, const char *argv[])
          {"sides", 0, POPT_ARG_NONE, &sides, 0, "LED on sides rather than starty/bottom (grid)"},
          {"count", 0, POPT_ARG_INT, &count, 0, "Number of leds", "N"},
          {"diameter", 'd', POPT_ARG_DOUBLE, &diameter, 0, "LED ring diameter", "mm"},
+         {"radius", 'r', POPT_ARG_DOUBLE, &radius, 0, "LED ring radius", "mm"},
          {"zone-in", 0, POPT_ARG_DOUBLE, &zonei, 0, "Zone inside ", "mm"},
          {"zone-out", 0, POPT_ARG_DOUBLE, &zoneo, 0, "Zone outside ", "mm"},
          {"angle", 'd', POPT_ARG_DOUBLE, &angle, 0, "Angle offset", "degrees"},
@@ -89,6 +91,8 @@ main (int argc, const char *argv[])
          return -1;
       }
    }
+   if(radius&&!diameter)diameter=radius*2;
+   if(radius&&diameter&&diameter!=radius*2)errx(1,"Pick --radius or --diameter");
    if ((rows || cols || sides) && diameter)
       errx (1, "Ring or grid, not both");
    if (diameter)
