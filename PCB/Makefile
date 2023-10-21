@@ -14,8 +14,8 @@ leds:	placeleds
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d61.75 --zone-in=1.25 --zone-out=1.25 --diode=409 --count=27 --group=3 --spacing=4.12125 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d62.25 --zone-in=1.25 --zone-out=1.25 --diode=436 --count=27 --group=3 --spacing=5.060625 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d66.75 --zone-in=1.25 --zone-out=1.25 --diode=463 --count=45 --group=5 --spacing=6 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
-	#./placeleds Roulette/Roulette.kicad_pcb -x100 -y100 -r50 --zone-in=1.25 --zone-out=1.25 --diode=1 --count=37 --vias=0.8 --power-vias=0.8 --angle=0 --fill=VCC --tracks
-	#./placeleds Roulette/Roulette.kicad_pcb -x90 -y69 --rows=7 --cols=11 --diode=38 --cap=38 --vias=0.8 --power-vias=0.8 --angle=0 --fill=VCC --tracks
+	./placeleds Roulette/Roulette.kicad_pcb -x100 -y100 -r50 --zone-in=1.25 --zone-out=1.25 --diode=1 --count=74 --vias=0.8 --power-vias=0.8 --angle=0 --fill=VLED --tracks
+	./placeleds Roulette/Roulette.kicad_pcb -x90 -y69 --rows=7 --cols=11 --diode=75 --cap=75 --vias=0.8 --power-vias=0.8 --angle=0 --fill=VLED --tracks
 
 stl:    LED/LED.stl
 
