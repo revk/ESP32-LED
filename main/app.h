@@ -12,7 +12,7 @@
 #ifdef	CONFIG_IDF_TARGET_ESP32S3
 #define	gpio	\
 	io(ledgpio,8)	\
-	led(blink,3,-10 -9 -11)\
+	led(blink,3,8 8 8)\
 
 #endif
 
