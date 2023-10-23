@@ -527,7 +527,7 @@ led_task (void *x)
       if (idle < 2)
       {
          idle++;
-#ifndef	CONFIG_REVK_BLINK
+#ifndef	CONFIG_REVK_BLINK_LIB
          if (led_status)
             revk_blinker (strip);
          else
