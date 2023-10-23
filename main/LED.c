@@ -403,12 +403,12 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 void
 led_task (void *x)
 {
-	uint8_t led_status=(blink[0]=ledgpio?1:0);
+   uint8_t led_status = (blink[0] == ledgpio ? 1 : 0);
    ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & IO_MASK, ledgpio & IO_INV ? " (inverted)" : "");
    led_strip_handle_t strip = NULL;
    led_strip_config_t strip_config = {
       .strip_gpio_num = (ledgpio & IO_MASK),
-      .max_leds = leds+led_status,         // The number of LEDs in the strip,
+      .max_leds = leds + led_status,    // The number of LEDs in the strip,
       .led_pixel_format = LED_PIXEL_FORMAT_GRB, // Pixel format of your LED strip
       .led_model = LED_MODEL_WS2812,    // LED strip model
       .flags.invert_out = ((ledgpio & IO_INV) ? 1 : 0), // whether to invert the output signal (useful when your hardware has a level inverter)
@@ -520,7 +520,7 @@ led_task (void *x)
       xSemaphoreGive (app_mutex);
       for (unsigned int i = 0; i < leds; i++)
       {
-         led_strip_set_pixel (strip, i+led_status,
+         led_strip_set_pixel (strip, i + led_status,
                               gamma8[(unsigned int) maxr * ledr[i] / 255],
                               gamma8[(unsigned int) maxg * ledg[i] / 255], gamma8[(unsigned int) maxb * ledb[i] / 255]);
       }
@@ -528,11 +528,11 @@ led_task (void *x)
       {
          idle++;
 #ifndef	CONFIG_REVK_BLINK
-	 if(led_status)
-         revk_blinker (strip);
-	 else
+         if (led_status)
+            revk_blinker (strip);
+         else
 #endif
-         REVK_ERR_CHECK (led_strip_refresh (strip));
+            REVK_ERR_CHECK (led_strip_refresh (strip));
       }
    }
 }

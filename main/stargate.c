@@ -27,13 +27,19 @@ struct stargate_s
 };
 
 const ring_t spin210[] = { {117, 1, 0} };
-const ring_t spin372[] = { {117, 1, 58}, {117, 175, 58} };
 const ring_t chev210[] = { {117, 1, 0}, {18, 157, 0}, {18, 175, 0}, {18, 193, 0} };
-const ring_t chev372[] = { {18, 157, 8}, {117, 175, 58}, {18, 292, 8}, {18, 310, 8}, {45, 328, 20} };
 const ring_t gate210[] = { {39, 118, 0} };
-const ring_t gate372[] = { {39, 118, 19} };
 const ring_t kawoosh210 = { 117, 1, 0 };
+
+const ring_t spin372[] = { {117, 1, 58}, {117, 175, 58} };
+const ring_t chev372[] = { {18, 157, 8}, {117, 175, 58}, {18, 292, 8}, {18, 310, 8}, {45, 328, 20} };
+const ring_t gate372[] = { {39, 118, 19} };
 const ring_t kawoosh372 = { 117, 1, 19 };
+
+const ring_t spin507[] = { {117, 118, 58}, {117, 292, 58} };
+const ring_t chev507[] = { {18, 274, 8}, {117, 292, 58}, {27, 409, 12}, {27, 436, 12}, {45, 463, 20} };
+const ring_t gate507[] = { {39, 235, 19} };
+const ring_t kawoosh507 = { 117, 1, 19 };
 
 const char *
 biggate (app_t * a)
@@ -65,6 +71,7 @@ biggate (app_t * a)
 	}
       load (210);
       load (372);
+      load (507);
 #undef	load
       if (!g->chevs)
          return "Bad gate";
@@ -308,7 +315,7 @@ biggate (app_t * a)
 const char *
 appstargate (app_t * a)
 {
-   if (a->len == 210 || a->len == 372)
+   if (a->len == 210 || a->len == 372 || a->len == 507)
       return biggate (a);
    if (!a->cycle)
    {
