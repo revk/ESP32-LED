@@ -4,6 +4,7 @@
 
 doglyphs=true;          // Include glyphs
 doramp=true;            // Include ramp
+domirror=false;         // Include space for mirror
 top=false;              // Top only for PCB
 bottom=false;            // Bottom only for PCB
 
@@ -79,7 +80,7 @@ module pcb()
                     cube([radiuso*2,1,radiusi-4]);
             }
     }
-    if(radiusmirror)
+    if(domirror)
         translate([0,0,-frontpcb-thicknesspcb-thicknessmirror])
         cylinder(r=radiusmirror,h=thicknesspcb+thicknessmirror*2);
 }
