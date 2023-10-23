@@ -20,7 +20,7 @@ thickness=0.5;          // line thickness
 
 radiuspcbo=69;          // PCB radius (outer)
 radiuspcbi=47;          // PCB radius (inner)
-thicknesspcb=2.5;       // PCB and parts thickness
+thicknesspcb=2;       // PCB and parts thickness
 frontpcb=1;             // Gate thickness in front of PCB
 
 radiusmirror=50;             // Mirror radius
