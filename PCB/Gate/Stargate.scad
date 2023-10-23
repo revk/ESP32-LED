@@ -7,10 +7,10 @@ doramp=true;            // Include ramp
 top=false;              // Top only for PCB
 bottom=false;            // Bottom only for PCB
 
-radiusi=50;             // Inner radius (i.e. hole in gate)
+radiusi=50.8;           // Inner radius (i.e. hole in gate)
 radiusr=radiusi*62/50;  // Edge of glyphys
 radiuso=radiusi*70/50;  // Outer radius (before adding chevrons
-depth=radiusi*8/50;    // Gate thickness (before chevrons/glyphs
+depth=radiusi*8/50;     // Gate thickness (before chevrons/glyphs
 rampw=radiuso*0.8;      // Ramp width
 rampw2=radiuso;         // Ramp width at bottom
 raised=1;               // Raised glyphs, etc
@@ -20,10 +20,10 @@ thickness=0.5;          // line thickness
 
 radiuspcbo=69;          // PCB radius (outer)
 radiuspcbi=47;          // PCB radius (inner)
-thicknesspcb=2;       // PCB and parts thickness
+thicknesspcb=2;         // PCB and parts thickness
 frontpcb=1;             // Gate thickness in front of PCB
 
-radiusmirror=50;             // Mirror radius
+radiusmirror=50.8;        // Mirror radius
 thicknessmirror=2;      // Mirror thickness (front and back of PCB)
 
 $fn=39*3;
@@ -245,7 +245,7 @@ module gate()
 module cut()
 { // Cut line for top/bottom
     translate([0,0,-frontpcb])
-        cylinder(r1=radiuspcbo,r2=radiuso*2,h=radiuso);
+        cylinder(r1=radiuspcbo*3,r2=radiuso*3,h=radiuso);
 }
 
 difference()
