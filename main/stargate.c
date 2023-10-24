@@ -190,7 +190,7 @@ biggate (app_t * a)
       for (int c = 0; c < a->stage / 10 - 1 && c < 9; c++)
          if (g->dial[c])
          {
-            chev (c, g->chevs - 3, g->chevs - 1, q / 2);        // Top of chevron
+            chev (c, g->chevs - 3, g->chevs - 1, q / 3);        // Top of chevron
             gate (c, q);
             lock (c, q);
          }
@@ -275,7 +275,7 @@ biggate (app_t * a)
          if (!g->incoming)
          {
             spinner (0);
-            chev (a->stage / 10 - 1, g->chevs - 3, g->chevs - 1, a->step * q / 255 / 2);
+            chev (a->stage / 10 - 1, g->chevs - 3, g->chevs - 1, a->step * q / 255 / 3);
             lock (a->stage / 10 - 1, a->step * q / 255);
             gate (a->stage / 10 - 1, q);
          }
