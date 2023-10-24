@@ -19,12 +19,12 @@ raisedr=raised/3;       // Radius of raised base
 edge=1;                 // Glyph edge
 thickness=0.5;          // line thickness
 
-radiuspcbo=69;          // PCB radius (outer)
-radiuspcbi=47;          // PCB radius (inner)
+radiuspcbo=68.75;       // PCB radius (outer)
+radiuspcbi=47.25;       // PCB radius (inner)
 thicknesspcb=2;         // PCB and parts thickness
 frontpcb=1;             // Gate thickness in front of PCB
 
-radiusmirror=50.25;        // Mirror radius
+radiusmirror=50.25;     // Mirror radius
 thicknessmirror=2;      // Mirror thickness (front and back of PCB)
 
 $fn=39*3;
