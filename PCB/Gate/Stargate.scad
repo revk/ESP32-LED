@@ -62,12 +62,12 @@ module ramp(t=0)
 
 module pcb()
 {
-    w=10;
+    w=7;
     // PCB
     translate([0,0,-frontpcb-thicknesspcb])
     washer(ri=radiuspcbi,ro=radiuspcbo,h=thicknesspcb,center=false);
-    translate([-w,-radiuso*2,-frontpcb-thicknesspcb-5])
-    cube([w,radiuso*2-(radiuspcbo+radiuspcbi)/2,6]);
+    translate([-w,-radiuso*2,-frontpcb-thicknesspcb-2])
+    cube([w,radiuso*2-(radiuspcbo+radiuspcbi)/2,thicknesspcb+2]);
     // Hole in base
     if(doramp)
     {
