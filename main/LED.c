@@ -403,6 +403,12 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 void
 led_task (void *x)
 {
+   if (!(gpio_ok (ledgpio & IO_MASK) & 1))
+   {
+      ESP_LOGE (TAG, "Bad GPIO %d", ledgpio & IO_MASK);
+      vTaskDelete (NULL);
+      return;
+   }
    uint8_t led_status = (blink[0] == ledgpio ? 1 : 0);
    ESP_LOGI (TAG, "Started using GPIO %d%s", ledgpio & IO_MASK, ledgpio & IO_INV ? " (inverted)" : "");
    led_strip_handle_t strip = NULL;
