@@ -8,7 +8,7 @@ domirror=false;         // Include space for mirror
 top=false;              // Top only for PCB
 bottom=false;            // Bottom only for PCB
 
-radiusi=50.8;           // Inner radius (i.e. hole in gate)
+radiusi=50;             // Inner radius (i.e. hole in gate)
 radiusr=radiusi*62/50;  // Edge of glyphys
 radiuso=radiusi*70/50;  // Outer radius (before adding chevrons
 depth=radiusi*8/50;     // Gate thickness (before chevrons/glyphs
@@ -24,7 +24,7 @@ radiuspcbi=47;          // PCB radius (inner)
 thicknesspcb=2;         // PCB and parts thickness
 frontpcb=1;             // Gate thickness in front of PCB
 
-radiusmirror=50.8;        // Mirror radius
+radiusmirror=50.25;        // Mirror radius
 thicknessmirror=2;      // Mirror thickness (front and back of PCB)
 
 $fn=39*3;
@@ -62,12 +62,12 @@ module ramp(t=0)
 
 module pcb()
 {
-    w=10;
+    w=7;
     // PCB
     translate([0,0,-frontpcb-thicknesspcb])
     washer(ri=radiuspcbi,ro=radiuspcbo,h=thicknesspcb,center=false);
-    translate([-w,-radiuso*2,-frontpcb-thicknesspcb-5])
-    cube([w,radiuso*2-(radiuspcbo+radiuspcbi)/2,6]);
+    translate([-w,-radiuso*2,-frontpcb-thicknesspcb-2])
+    cube([w,radiuso*2-(radiuspcbo+radiuspcbi)/2,thicknesspcb+2]);
     // Hole in base
     if(doramp)
     {
