@@ -3,7 +3,7 @@
 // Ring faces up
 
 doglyphs=true;          // Include glyphs
-doramp=true;            // Include ramp
+doramp=false;           // Include ramp
 domirror=false;         // Include space for mirror
 top=false;              // Top only for PCB
 bottom=false;            // Bottom only for PCB
@@ -62,12 +62,11 @@ module ramp(t=0)
 
 module pcb()
 {
-    w=7;
     // PCB
     translate([0,0,-frontpcb-thicknesspcb])
     washer(ri=radiuspcbi,ro=radiuspcbo,h=thicknesspcb,center=false);
-    translate([-w,-radiuso*2,-frontpcb-thicknesspcb-2])
-    cube([w,radiuso*2-(radiuspcbo+radiuspcbi)/2,thicknesspcb+2]);
+    translate([0,-radiuso*2,-frontpcb-thicknesspcb-2])
+    cube([7,radiuso*2-(radiuspcbo+radiuspcbi)/2,thicknesspcb+2]);
     // Hole in base
     if(doramp)
     {
@@ -111,7 +110,6 @@ module ringouterstripe()
 
 module washer(ro,ri,h,center=true)
 {
-    render()
     difference()
     {
         cylinder(r=ro,h=h,center=center);
@@ -121,7 +119,6 @@ module washer(ro,ri,h,center=true)
 
 module washer2(a,b,c,d,h,center=false)
 {
-    render()
     difference()
     {
         cylinder(r1=a,r2=b,h=h,center=center);
@@ -133,7 +130,6 @@ module chevron()
 {
     ci=radiusr/10;
     cl=radiuso/2;
-    render()
     translate([0,0,-depth/2])   // centre on middle of ring
     {
         difference()
@@ -145,13 +141,15 @@ module chevron()
                     difference()
                     {
                         ringouter();
-                        cylinder(r=radiuso,h=depth+raised*4+2,center=true);
+                        cylinder(r=radiuso-0.1,h=depth+raised*4+2,center=true);
                     }
                     hull()
                     {
                         cylinder(d=1,h=depth*2,center=true);
-                        translate([-cl/2,radiuso+edge+1,-depth])
-                        cube([cl,1,depth*2]);
+                        translate([-cl/2,radiuso+edge+1,-depth/2])
+                        cube([cl,1,depth]);
+                        translate([-ci/4,radiuso+edge+1,-depth])
+                        cube([ci/2,1,depth*2]);
                     }
                 }
                 intersection()
