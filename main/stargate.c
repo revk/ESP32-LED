@@ -273,12 +273,10 @@ biggate (app_t * a)
          break;
       case 3:                  // Light up selected chevron
          if (!g->incoming)
-         {
             spinner (0);
-            chev (a->stage / 10 - 1, g->chevs - 3, g->chevs - 1, a->step * q / 255 / 3);
-            lock (a->stage / 10 - 1, a->step * q / 255);
-            gate (a->stage / 10 - 1, q);
-         }
+         chev (a->stage / 10 - 1, g->chevs - 3, g->chevs - 1, a->step * q / 255 / 3);
+         lock (a->stage / 10 - 1, a->step * q / 255);
+         gate (a->stage / 10 - 1, q);
          chevs ();
          if ((a->step += 255 / a->speed) > 255)
          {
