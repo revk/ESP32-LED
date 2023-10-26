@@ -533,10 +533,12 @@ led_task (void *x)
       if (idle < 2)
       {
          idle++;
-#ifndef	CONFIG_REVK_BLINK_LIB
+#ifndef	CONFIG_REVK_BLINK_LIB   // We have to call blinker
          if (led_status)
-            revk_blinker (strip);
+            revk_blinker (strip);       // LEDs part of strip (first LED)
          else
+            revk_blinker (NULL);        // direct LED
+         if (!led_status)
 #endif
             REVK_ERR_CHECK (led_strip_refresh (strip));
       }
