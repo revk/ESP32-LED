@@ -11,6 +11,7 @@ all:
 	@echo Make: build/$(PROJECT_NAME)$(SUFFIX).bin
 	@idf.py build
 	@cp build/$(PROJECT_NAME).bin $(PROJECT_NAME)$(SUFFIX).bin
+	@cp build/bootloader/bootloader.bin $(PROJECT_NAME)$(SUFFIX)-bootloader.bin
 	@echo Done: build/$(PROJECT_NAME)$(SUFFIX).bin
 
 issue:  
