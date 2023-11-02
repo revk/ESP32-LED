@@ -25,6 +25,10 @@
         u8(webcontrol,2)\
 	s(app,pulse)	\
 	b(dark)		\
+	u8(i2c,0)	\
+	io(scl,)	\
+	io(sda,)	\
+	u8(als,0x10)	\
 	gpio		\
 
 #define	params		\

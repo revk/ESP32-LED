@@ -8,6 +8,7 @@ static const char TAG[] = "LED";
 #include "esp_task_wdt.h"
 #include <driver/gpio.h>
 #include <driver/uart.h>
+#include <driver/i2c.h>
 #include "led_strip.h"
 #include "app.h"
 #include <esp_http_server.h>
@@ -397,7 +398,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    }
    appzapall (index);
    xSemaphoreGive (app_mutex);
-   return "";
+   return NULL;
 }
 
 void
@@ -631,6 +632,115 @@ web_root (httpd_req_t * req)
 }
 
 void
+i2c_task (void *arg)
+{
+   jo_t e (uint8_t a, uint8_t cmd, const char *tag, esp_err_t err)
+   {                            // Error
+      jo_t j = jo_object_alloc ();
+      if (tag)
+         jo_string (j, "error", tag);
+      if (err)
+         jo_string (j, "description", esp_err_to_name (err));
+      if (cmd)
+         jo_int (j, "cmd", cmd);
+      if (sda)
+         jo_int (j, "sda", sda & IO_MASK);
+      if (scl)
+         jo_int (j, "scl", scl & IO_MASK);
+      if (a)
+         jo_int (j, "address", a);
+      return j;
+   }
+   esp_err_t err;
+   err = i2c_driver_install (i2c, I2C_MODE_MASTER, 0, 0, 0);
+   if (!err)
+   {
+      i2c_config_t config = {
+         .mode = I2C_MODE_MASTER,
+         .sda_io_num = sda & IO_MASK,
+         .scl_io_num = scl & IO_MASK,
+         .sda_pullup_en = true,
+         .scl_pullup_en = true,
+         .master.clk_speed = 400000,
+      };
+      err = i2c_param_config (i2c, &config);
+      if (err)
+         i2c_driver_delete (i2c);
+   }
+   if (err)
+   {
+      jo_t j = e (0, 0, "Failed to start I2C", err);
+      revk_error ("i2c", &j);
+      vTaskDelete (NULL);
+      return;
+   }
+   uint16_t r (uint8_t a, uint8_t cmd)
+   {                            // Read
+      uint8_t l,
+        h;
+      i2c_cmd_handle_t t = i2c_cmd_link_create ();
+      i2c_master_start (t);
+      i2c_master_write_byte (t, (a << 1) | I2C_MASTER_WRITE, true);
+      i2c_master_write_byte (t, cmd, true);
+      i2c_master_start (t);
+      i2c_master_write_byte (t, (a << 1) | I2C_MASTER_READ, true);
+      i2c_master_read_byte (t, &l, I2C_MASTER_ACK);
+      i2c_master_read_byte (t, &h, I2C_MASTER_LAST_NACK);
+      i2c_master_stop (t);
+      err = i2c_master_cmd_begin (i2c, t, 10 / portTICK_PERIOD_MS);
+      i2c_cmd_link_delete (t);
+      if (err)
+      {
+         jo_t j = e (a, cmd, "Failed to ALS read", err);
+         revk_error ("i2c", &j);
+         return 0;
+      }
+      return (h << 8) + l;
+   }
+   void w (uint8_t a, uint8_t cmd, uint16_t val)
+   {                            // Write
+      i2c_cmd_handle_t t = i2c_cmd_link_create ();
+      i2c_master_start (t);
+      i2c_master_write_byte (t, (a << 1) | I2C_MASTER_WRITE, true);
+      i2c_master_write_byte (t, cmd, true);
+      i2c_master_write_byte (t, val & 0xFF, true);
+      i2c_master_write_byte (t, val >> 8, true);
+      i2c_master_stop (t);
+      err = i2c_master_cmd_begin (i2c, t, 10 / portTICK_PERIOD_MS);
+      i2c_cmd_link_delete (t);
+      if (err)
+      {
+         jo_t j = e (a, cmd, "Failed to ALS read", err);
+         revk_error ("i2c", &j);
+         return;
+      }
+   }
+   if (!als)
+   {                            // No I2C work
+      vTaskDelete (NULL);
+      return;
+   }
+   if (als)
+   {
+      w (als, 0x00, 0x0040);
+      ESP_LOGI (TAG, "ALS mode=%04X ", r (als, 0x00));
+   }
+   while (1)
+   {
+      if (als)
+      {
+         jo_t j = jo_object_alloc ();
+         jo_litf (j, "w", "%.0f", (float) r (als, 0x0B) * 1031 / 65535);
+         jo_litf (j, "r", "%.0f", (float) r (als, 0x08) * 1031 / 65535);
+         jo_litf (j, "g", "%.0f", (float) r (als, 0x09) * 1031 / 65535);
+         jo_litf (j, "b", "%.0f", (float) r (als, 0x0A) * 1031 / 65535);
+         revk_info ("als", &j);
+      }
+      sleep (1);
+   }
+}
+
+void
 app_main ()
 {
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
@@ -687,6 +797,9 @@ app_main ()
    revk_start ();
    if (dark)
       revk_blink (0, 0, "K");
+   if (sda && scl)
+      revk_task ("i2c", i2c_task, NULL, 4);
+
    if (webcontrol)
    {
       // Web interface
