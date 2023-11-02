@@ -353,7 +353,7 @@ led_add (const char *tag, jo_t j)
          xSemaphoreGive (app_mutex);
          return "";
       }
-   return "Unknown";
+   return NULL;
 }
 
 const char *
