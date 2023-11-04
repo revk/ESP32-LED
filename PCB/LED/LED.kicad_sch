@@ -2365,7 +2365,7 @@
     (property "Reference" "J5" (at 158.115 19.9857 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "USB-C-Socket-V" (at 158.115 22.4099 0)
+    (property "Value" "USB-C-Socket-H" (at 158.115 22.4099 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "RevK:USB-C-Socket-H" (at 158.115 21.59 0)
