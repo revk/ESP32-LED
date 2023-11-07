@@ -624,7 +624,7 @@ web_root (httpd_req_t * req)
       httpd_resp_sendstr_chunk (req, tag);
       httpd_resp_sendstr_chunk (req, "'/>");
    }
-#define a(x,d) if(strcmp(#x,"idle"))button(#x);
+#define a(x,d) button(#x);
 #include "apps.h"
    button ("stop");
    httpd_resp_sendstr_chunk (req, "</p></form></fieldset>");
