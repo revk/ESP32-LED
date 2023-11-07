@@ -16,6 +16,7 @@ a (idle, Idle)                  //
    a (countdown, Countdown)     //
    a (random, Random)           //
    a (twinkle, Twinkle)         //
+   a (neenaw, Nee Naw)		//
    r (clock, Clock face)        //
    r (stargate, Stargate dialling)
    //
