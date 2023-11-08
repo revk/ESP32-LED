@@ -10,8 +10,10 @@
 #define	t(n,d) a(n,d)
 #endif
 
-a (idle, Idle)                  //
+//
+   a (idle, Idle)               //
    a (pulse, Pulse)             //
+   a (rainbow, Rainbow)		//
    a (cylon, Cylon)             //
    a (countdown, Countdown)     //
    a (random, Random)           //

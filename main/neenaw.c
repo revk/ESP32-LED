@@ -11,10 +11,11 @@ appneenaw (app_t * a)
          a->cycling = 1;
    }
 
-   uint8_t l = 255,
-      q;
-   if (a->stop && (q = 255 * a->stop / a->fade) < l)
-      l = q;
+   uint8_t l = 255;
+   if (a->stop)
+      l = 255 * a->stop / a->fade;
+   else if (a->fade && a->cycle < a->fade)
+      l = 255 * a->cycle / a->fade;
    if (++a->step >= a->speed*2)
       a->step = 0;
    for (unsigned int i = 0; i < a->len; i++)

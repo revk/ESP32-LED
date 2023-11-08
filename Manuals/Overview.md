@@ -83,6 +83,8 @@ Each app can have arguments.
 |`idle`|This simply displays all LEDs with defined colour, which by default is black (off). If a colour set `fade` can be set to fade up at start and down at `limit`|
 |`cylon`|This runs an LED of colour specified (default is red) backwards and forwards, Cylon/Knightrider style|
 |`pulse`|This fades up and down the specified colour (default `cycle`) on all LEDs constantly.|
+|`neenaw`|Self explanatory.|
+|`rainbow`|Fixed rainbow.|
 |`countdown`|Count LEDs until limit (default 60 seconds)|
 |`random`|Fading between random colours|
 |`twinkle`|All lights constantly fading different random levels of selected colour|
