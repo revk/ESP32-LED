@@ -737,15 +737,6 @@ i2c_task (void *arg)
 void
 app_main ()
 {
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-   {                            // All unused input pins pull down
-      gpio_config_t c = {.pull_down_en = 1,.mode = GPIO_MODE_DISABLE };
-      for (uint8_t p = 0; p <= 48; p++)
-         if ((gpio_ok (p) & 2) && p != 43)      // 43 is serial
-            c.pin_bit_mask |= (1LL << p);
-      gpio_config (&c);
-   }
-#endif
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    revk_boot (&app_callback);
