@@ -392,7 +392,8 @@ led_task (void *x)
       return;
    }
    uint8_t led_status = (blink[0] == ledgpio ? 1 : 0);
-   ESP_LOGE (TAG, "Started using GPIO %d%s%s", ledgpio & IO_MASK, ledgpio & IO_INV ? " (inverted)" : "",led_status?" (plus status)":"");
+   ESP_LOGE (TAG, "Started using GPIO %d%s%s", ledgpio & IO_MASK, ledgpio & IO_INV ? " (inverted)" : "",
+             led_status ? " (plus status)" : "");
    led_strip_handle_t strip = NULL;
    led_strip_config_t strip_config = {
       .strip_gpio_num = (ledgpio & IO_MASK),
@@ -603,7 +604,7 @@ web_root (httpd_req_t * req)
 #include "apps.h"
    button ("stop");
    httpd_resp_sendstr_chunk (req, "</p></form></fieldset>");
-   return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0);
+   return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
 }
 
 void
