@@ -511,14 +511,8 @@ led_task (void *x)
                               gamma8[(unsigned int) maxr * ledr[i] / 255],
                               gamma8[(unsigned int) maxg * ledg[i] / 255], gamma8[(unsigned int) maxb * ledb[i] / 255]);
       }
-#ifndef	CONFIG_REVK_BLINK_LIB   // We have to call blinker
-      if (led_status)
-         revk_blinker (strip);  // LEDs part of strip (first LED)
-      else
-         revk_blinker (NULL);   // direct LED
-      if (!led_status)
-#endif
-         REVK_ERR_CHECK (led_strip_refresh (strip));
+      if(led_status)revk_led(strip,0,255,revk_blinker());
+      REVK_ERR_CHECK (led_strip_refresh (strip));
    }
 }
 

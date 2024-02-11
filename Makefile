@@ -14,13 +14,23 @@ all:
 	@cp build/bootloader/bootloader.bin $(PROJECT_NAME)$(SUFFIX)-bootloader.bin
 	@echo Done: build/$(PROJECT_NAME)$(SUFFIX).bin
 
+beta:  
+	-git pull
+	-git submodule update --recursive
+	-git commit -a -m checkpoint
+	@make set
+	cp LED*.bin betarelease
+	git commit -a -m betarelease
+	git push
+
 issue:  
 	-git pull
 	-git submodule update --recursive
 	-git commit -a -m checkpoint
 	@make set
 	cp LED*.bin release
-	git commit -a -m release
+	cp LED*.bin betarelease
+	git commit -a -m betarelease release
 	git push
 
 set:	solo wroom pico s3 s3mt
