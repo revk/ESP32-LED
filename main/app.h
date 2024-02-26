@@ -2,35 +2,6 @@
 
 #include "revk.h"
 
-#ifdef	CONFIG_IDF_TARGET_ESP32
-#define	gpio	\
-	io(ledgpio,22)	\
-	led(blink,3,-20 -8 -21)\
-
-#endif
-
-#ifdef	CONFIG_IDF_TARGET_ESP32S3
-#define	gpio	\
-	io(ledgpio,8)	\
-	led(blink,3,8 8 8)\
-
-#endif
-
-#define settings	\
-	u8(cps,10)	\
-        u8(maxr,255)	\
-        u8(maxg,255)	\
-        u8(maxb,255)	\
-        u16(leds,12)	\
-        u8(webcontrol,2)\
-	s(app,pulse)	\
-	b(dark)		\
-	u8(i2c,0)	\
-	io(scl,)	\
-	io(sda,)	\
-	u8(als,0x10)	\
-	gpio		\
-
 #define	params		\
 	u16r(start,)	\
 	u16r(len,)	\
@@ -55,38 +26,6 @@
 
 #define	MAXAPPS	10
 
-#define u32(n,d)	extern uint32_t n;
-#define u32l(n,d)	extern uint32_t n;
-#define s8(n,d)		extern int8_t n;
-#define s8n(n,d)	extern int8_t n[d];
-#define u8(n,d)		extern uint8_t n;
-#define u8r(n,d)	extern uint8_t n,ring##n;
-#define u16(n,d)	extern uint16_t n;
-#define u16r(n,d)	extern uint16_t n,ring##n;
-#define s16r(n,d)	extern int16_t n,ring##n;
-#define s8r(n,d)	extern int8_t n,ring##n;
-#define u8l(n,d)	extern uint8_t n;
-#define b(n)		extern uint8_t n;
-#define s(n,d)		extern char * n;
-#define io(n,d)         extern uint8_t n;
-#define led(n,a,d)      extern uint8_t n[a];
-settings                        //
-   params                       //
-#undef led
-#undef io
-#undef u32
-#undef u32l
-#undef s8
-#undef s8n
-#undef u8
-#undef u8r
-#undef u16
-#undef u16r
-#undef s8r
-#undef s16r
-#undef u8l
-#undef b
-#undef s
 typedef struct app_s app_t;
 typedef const char *app_f (app_t *);    // Return NULL normally, "" for normal end, other string for error
 

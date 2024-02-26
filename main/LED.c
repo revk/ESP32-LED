@@ -33,45 +33,6 @@ uint8_t *ledr = NULL;
 uint8_t *ledg = NULL;
 uint8_t *ledb = NULL;
 
-#define	IO_MASK	0x3F
-#define	IO_INV	0x40
-
-#define u32(n,d)        uint32_t n;
-#define u32l(n,d)        uint32_t n;
-#define s8(n,d) int8_t n;
-#define s8n(n,d) int8_t n[d];
-#define u8(n,d) uint8_t n;
-#define u8r(n,d) uint8_t n,ring##n;
-#define u16(n,d) uint16_t n;
-#define u16r(n,d) uint16_t n,ring##n;
-#define s8r(n,d) int8_t n,ring##n;
-#define s16r(n,d) int16_t n,ring##n;
-#define u8l(n,d) uint8_t n;
-#define b(n) uint8_t n;
-#define s(n,d) char * n;
-#define io(n,d)           uint8_t n;
-#ifdef  CONFIG_REVK_BLINK
-#define led(n,a,d)      extern uint8_t n[a];
-#else
-#define led(n,a,d)      uint8_t n[a];
-#endif
-settings                        //
-   params                       //
-#undef led
-#undef io
-#undef u32
-#undef u32l
-#undef s8
-#undef s8n
-#undef u8
-#undef u8r
-#undef u16
-#undef u16r
-#undef s8r
-#undef s16r
-#undef u8l
-#undef b
-#undef s
    uint8_t gatedial = 0;
 
 const uint8_t cos8[256] =
@@ -716,41 +677,6 @@ app_main ()
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    revk_boot (&app_callback);
-#ifndef CONFIG_REVK_BLINK
-#define led(n,a,d)      revk_register(#n,a,sizeof(*n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD|SETTING_FIX);
-#else
-#define led(n,a,d)
-#endif
-#define io(n,d)           revk_register(#n,0,sizeof(n),&n,"- "#d,SETTING_SET|SETTING_BITFIELD|SETTING_FIX);
-#define b(n) revk_register(#n,0,sizeof(n),&n,NULL,SETTING_BOOLEAN);
-#define u32(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
-#define u32l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
-#define s8(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_SIGNED);
-#define s8n(n,d) revk_register(#n,d,sizeof(*n),&n,NULL,SETTING_SIGNED);
-#define u8(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
-#define u8r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,0);
-#define u16(n,d) revk_register(#n,0,sizeof(n),&n,#d,0);
-#define u16r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,0);
-#define s8r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,SETTING_SIGNED);
-#define s16r(n,d) revk_register(#n,0,sizeof(n),&n,#d,0); revk_register("ring"#n,0,sizeof(ring##n),&ring##n,#d,SETTING_SIGNED);
-#define u8l(n,d) revk_register(#n,0,sizeof(n),&n,#d,SETTING_LIVE);
-#define s(n,d) revk_register(#n,0,0,&n,#d,0);
-   settings                     //
-      params                    //
-#undef io
-#undef u32
-#undef u32l
-#undef s8
-#undef s8n
-#undef u8
-#undef u8r
-#undef u16
-#undef u16r
-#undef s8r
-#undef s16r
-#undef u8l
-#undef b
-#undef s
 #ifdef	CONFIG_REVK_MATTER
    extern void matter_main (void);
    matter_main ();

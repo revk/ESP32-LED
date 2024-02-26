@@ -1,0 +1,32 @@
+#ifdef  CONFIG_IDF_TARGET_ESP32
+gpio	ledgpio		22
+gpio	blink		-20 -8 -21	.array=3
+#endif
+
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+gpio	ledgpio		8
+gpio	blink		-8 -8 -8	.array=3
+#endif
+
+#define settings        \
+u8	cps		10
+u8	max.r		255
+u8	max.g		255
+u8	max.b		255
+u8	leds		12
+u8	webcontrol	2
+s	app		pulse
+bit	dark
+u8	i2c	0
+gpio	scl
+gpio	sda
+u8	als	10	.hex=1
+
+u16	start
+u16	len
+s16	top
+u8	speed
+u8	fade
+s8	height
+u32	delay
+u32	limit
