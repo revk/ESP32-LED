@@ -1,32 +1,35 @@
 #ifdef  CONFIG_IDF_TARGET_ESP32
-gpio	ledgpio		22
-gpio	blink		-20 -8 -21	.array=3
+gpio	rgb		22				// GPIO for LED chain
+gpio	blink		"-20 -8 -21"	.array=3	// Status LED
 #endif
 
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
-gpio	ledgpio		8
-gpio	blink		-8 -8 -8	.array=3
+gpio	rgb		8				// GPIO for LED chain
+gpio	blink		"-8 -8 -8"	.array=3	// Status LED
 #endif
 
-u8	cps		10
-u8	max.r		255
-u8	max.g		255
-u8	max.b		255
-u8	leds		12
-u8	webcontrol	2
-s	app		pulse
-bit	dark
-u8	i2c	0
-gpio	scl
-gpio	sda
-u8	als	10	.hex=1
+bit	dark						// Dark mode (no status LED)
 
-u16	start
-u16	ring.start
-u16	len
-s16	top
-u8	speed
-u8	fade
-s8	height
-u32	delay
-u32	limit
+u8	cps		10				// Change per second
+u8	max.r		255				// Max RGB Red
+u8	max.g		255				// Max RGB Green
+u8	max.b		255				// Max RGB Blue
+u16	leds		12				// How many LEDs
+u8	webcontrol	2				// Web controls
+s	app		pulse				// Default app
+u8	i2c	0					// I2C channel
+gpio	scl						// Colour sensor SCL
+gpio	sda						// Colour sensor SDA
+u8	als	10	.hex=1				// Colour sensor ID
+
+u16	start						// Start LED
+u16	ring.start					// Start LED (ring)
+u16	len						// Number of LEDs
+u16	ring.len					// Number of LEDs (ring)
+s16	top						// Top LED
+s16	ring.top					// To LED (ring)
+u8	speed						// Speed (cps)
+u8	fade						// Fade time
+s8	height						// Text height
+u32	delay						// Start delay
+u32	limit						// Start time

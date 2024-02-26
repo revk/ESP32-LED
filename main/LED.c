@@ -33,7 +33,7 @@ uint8_t *ledr = NULL;
 uint8_t *ledg = NULL;
 uint8_t *ledb = NULL;
 
-   uint8_t gatedial = 0;
+uint8_t gatedial = 0;
 
 const uint8_t cos8[256] =
    { 255, 255, 255, 255, 255, 255, 254, 254, 253, 252, 252, 251, 250, 249, 248, 247, 246, 245, 243, 242, 240, 239, 237, 236, 234,
@@ -346,22 +346,21 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 void
 led_task (void *x)
 {
-   if (!(gpio_ok (ledgpio & IO_MASK) & 1))
+   if (!rgb.set || !(gpio_ok (rgb.num) & 1))
    {
-      ESP_LOGE (TAG, "Bad GPIO %d", ledgpio & IO_MASK);
+      ESP_LOGE (TAG, "Bad GPIO %d", rgb.num);
       vTaskDelete (NULL);
       return;
    }
-   uint8_t led_status = (blink[0] == ledgpio ? 1 : 0);
-   ESP_LOGE (TAG, "Started using GPIO %d%s%s", ledgpio & IO_MASK, ledgpio & IO_INV ? " (inverted)" : "",
-             led_status ? " (plus status)" : "");
+   uint8_t led_status = (blink[0].num == rgb.num ? 1 : 0);
+   ESP_LOGE (TAG, "Started using GPIO %d%s%s", rgb.num, rgb.invert ? " (inverted)" : "", led_status ? " (plus status)" : "");
    led_strip_handle_t strip = NULL;
    led_strip_config_t strip_config = {
-      .strip_gpio_num = (ledgpio & IO_MASK),
+      .strip_gpio_num = rgb.num,
       .max_leds = leds + led_status,    // The number of LEDs in the strip,
       .led_pixel_format = LED_PIXEL_FORMAT_GRB, // Pixel format of your LED strip
       .led_model = LED_MODEL_WS2812,    // LED strip model
-      .flags.invert_out = ((ledgpio & IO_INV) ? 1 : 0), // whether to invert the output signal (useful when your hardware has a level inverter)
+      .flags.invert_out = rgb.invert,   // whether to invert the output signal (useful when your hardware has a level inverter)
    };
    led_strip_rmt_config_t rmt_config = {
       .clk_src = RMT_CLK_SRC_DEFAULT,   // different clock source can lead to different power consumption
@@ -472,7 +471,8 @@ led_task (void *x)
                               gamma8[(unsigned int) maxr * ledr[i] / 255],
                               gamma8[(unsigned int) maxg * ledg[i] / 255], gamma8[(unsigned int) maxb * ledb[i] / 255]);
       }
-      if(led_status)revk_led(strip,0,255,revk_blinker());
+      if (led_status)
+         revk_led (strip, 0, 255, revk_blinker ());
       REVK_ERR_CHECK (led_strip_refresh (strip));
    }
 }
@@ -574,10 +574,10 @@ i2c_task (void *arg)
          jo_string (j, "description", esp_err_to_name (err));
       if (cmd)
          jo_int (j, "cmd", cmd);
-      if (sda)
-         jo_int (j, "sda", sda & IO_MASK);
-      if (scl)
-         jo_int (j, "scl", scl & IO_MASK);
+      if (sda.set)
+         jo_int (j, "sda", sda.num);
+      if (scl.set)
+         jo_int (j, "scl", scl.num);
       if (a)
          jo_int (j, "address", a);
       return j;
@@ -588,8 +588,8 @@ i2c_task (void *arg)
    {
       i2c_config_t config = {
          .mode = I2C_MODE_MASTER,
-         .sda_io_num = sda & IO_MASK,
-         .scl_io_num = scl & IO_MASK,
+         .sda_io_num = sda.num,
+         .scl_io_num = scl.num,
          .sda_pullup_en = true,
          .scl_pullup_en = true,
          .master.clk_speed = 400000,
@@ -684,7 +684,7 @@ app_main ()
    revk_start ();
    if (dark)
       revk_blink (0, 0, "K");
-   if (sda && scl)
+   if (sda.set && scl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
 
    if (webcontrol)
