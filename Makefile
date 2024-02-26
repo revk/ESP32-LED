@@ -7,7 +7,7 @@ PROJECT_NAME := LED
 SUFFIX := $(shell components/ESP32-RevK/buildsuffix)
 export SUFFIX
 
-all:
+all:	settings.h
 	@echo Make: build/$(PROJECT_NAME)$(SUFFIX).bin
 	@idf.py build
 	@cp build/$(PROJECT_NAME).bin $(PROJECT_NAME)$(SUFFIX).bin
@@ -35,6 +35,11 @@ issue:
 
 set:	solo wroom pico s3 s3mt
 
+settings.h:     components/ESP32-RevK/revk_settings settings.def components/ESP32-RevK/settings.def
+	components/ESP32-RevK/revk_settings $^
+
+components/ESP32-RevK/revk_settings: components/ESP32-RevK/revk_settings.c
+	make -C components/ESP32-RevK
 s3mt:
 	components/ESP32-RevK/setbuildsuffix -S3-MINI-N4-R2-MT
 	@make

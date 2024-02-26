@@ -8,7 +8,6 @@ gpio	ledgpio		8
 gpio	blink		-8 -8 -8	.array=3
 #endif
 
-#define settings        \
 u8	cps		10
 u8	max.r		255
 u8	max.g		255
@@ -23,6 +22,7 @@ gpio	sda
 u8	als	10	.hex=1
 
 u16	start
+u16	ring.start
 u16	len
 s16	top
 u8	speed
