@@ -30,7 +30,7 @@ issue:
 	@make set
 	cp LED*.bin release
 	cp LED*.bin betarelease
-	git commit -a -m betarelease release
+	git commit -a -m release
 	git push
 
 set:	solo wroom pico s3 s3mt
