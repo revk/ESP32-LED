@@ -147,14 +147,14 @@ addapp (int index, const char *name, jo_t j)
             appzap (a);
          a->name = applist[i].name;
          // Defaults
-#define u8(n,d)         a->n=n;
-#define u8r(n,d)        if(applist[i].ring)a->n=(ring##n?:n); else u8(n,d)
-#define u16(n,d)         u8(n,d)
-#define u16r(n,d)        u8r(n,d)
-#define s8(n,d)        u8(n,d)
-#define s8r(n,d)        u8r(n,d)
-#define s16r(n,d)        u16r(n,d)
-#define u32(n,d)        u8(n,d)
+#define u8(s,n,d)         a->n=n;
+#define u8r(s,n,d)        if(applist[i].ring)a->n=(ring##n?:n); else u8(s,n,d)
+#define u16(s,n,d)         u8(s,n,d)
+#define u16r(s,n,d)        u8r(s,n,d)
+#define s8(s,n,d)        u8(s,n,d)
+#define s8r(s,n,d)        u8r(s,n,d)
+#define s16r(s,n,d)        u16r(s,n,d)
+#define u32(s,n,d)        u8(s,n,d)
          params
 #undef  u8
 #undef  u8r
@@ -168,14 +168,14 @@ addapp (int index, const char *name, jo_t j)
          {                      // Expects to be at start of object
             while (jo_next (j) == JO_TAG)
             {
-#define u8(n,d)         if(!jo_strcmp(j,#n)){if(jo_next(j)==JO_NUMBER)a->n=jo_read_int(j);continue;}
-#define u8r(n,d)        u8(n,d)
-#define u16(n,d)        u8(n,d)
-#define u16r(n,d)        u8(n,d)
-#define s8(n,d)        u8(n,d)
-#define s8r(n,d)        u8(n,d)
-#define s16r(n,d)        u8(n,d)
-#define u32(n,d)        u8(n,d)
+#define u8(s,n,d)         if(!jo_strcmp(j,#n)||!jo_strcmp(j,#s)){if(jo_next(j)==JO_NUMBER)a->n=jo_read_int(j);continue;}
+#define u8r(s,n,d)        u8(s,n,d)
+#define u16(s,n,d)        u8(s,n,d)
+#define u16r(s,n,d)        u8(s,n,d)
+#define s8(s,n,d)        u8(s,n,d)
+#define s8r(s,n,d)        u8(s,n,d)
+#define s16r(s,n,d)        u8(s,n,d)
+#define u32(s,n,d)        u8(s,n,d)
                params
 #undef  u8
 #undef  u8r
@@ -185,7 +185,7 @@ addapp (int index, const char *name, jo_t j)
 #undef  s8r
 #undef  s16r
 #undef  u32
-                  if (!jo_strcmp (j, "colour"))
+                  if (!jo_strcmp (j, "colour") || !jo_strcmp (j, "#"))
                {
                   if (jo_next (j) == JO_STRING)
                      setcolour (j);
@@ -375,7 +375,13 @@ led_task (void *x)
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
    if (*app)
-      addapp (0, app, NULL);
+   {
+      jo_t j = jo_parse_str (app);
+      if (j)
+         app_callback (0, prefixcommand, NULL, NULL, j);
+      else
+         addapp (0, app, NULL);
+   }
    if (!cps)
       cps = 10;
    uint32_t tick = 1000000LL / cps;
@@ -413,14 +419,14 @@ led_task (void *x)
                jo_t j = jo_object_alloc ();
                jo_int (j, "level", i);
                jo_string (j, "app", a->name);
-#define u8(n,d)         if(a->n)jo_int(j,#n,a->n);
-#define u8r(n,d)        u8(n,d)
-#define u16(n,d)         u8(n,d)
-#define u16r(n,d)        u8(n,d)
-#define s8(n,d)        u8(n,d)
-#define s8r(n,d)        u8(n,d)
-#define s16r(n,d)        u8(n,d)
-#define u32(n,d)        u8(n,d)
+#define u8(s,n,d)         if(a->n)jo_int(j,#n,a->n);
+#define u8r(s,n,d)        u8(s,n,d)
+#define u16(s,n,d)         u8(s,n,d)
+#define u16r(s,n,d)        u8(s,n,d)
+#define s8(s,n,d)        u8(s,n,d)
+#define s8r(s,n,d)        u8(s,n,d)
+#define s16r(s,n,d)        u8(s,n,d)
+#define u32(s,n,d)        u8(s,n,d)
                params
 #undef  u8
 #undef  u8r
@@ -688,8 +694,7 @@ app_main ()
       revk_task ("i2c", i2c_task, NULL, 4);
 
    if (webcontrol)
-   {
-      // Web interface
+   {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();
       // When updating the code below, make sure this is enough
       // Note that we're also 4 adding revk's web config handlers

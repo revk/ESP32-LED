@@ -69,12 +69,13 @@ Each app can have arguments.
 
 ### Common arguments
 
-|Argument|Meaning|
+|Short|Argument|Meaning|
 |--------|-------|
-|`time`|How long to run the app for. Some apps go forever if not set to a limited time.|
-|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. Also allowed is `randbow` and `cycle`|
-|`start`|The first LED|
-|`len`|The number of LEDs|
+|`d`|`delay`|Delay before starting app.|
+|`T`|`limit`|How long to run the app for. Some apps go forever if not set to a limited time.|
+|`#`|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. Also allowed is `randbow` and `cycle`|
+|`s`|`start`|The first LED|
+|`l`|`len`|The number of LEDs|
 
 ### Simple apps
 

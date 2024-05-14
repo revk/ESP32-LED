@@ -3,14 +3,14 @@
 #include "revk.h"
 
 #define	params		\
-	u16r(start,)	\
-	u16r(len,)	\
-	s16r(top,)	\
-	u8(speed,)	\
-	u8(fade,)	\
-	s8(height,)	\
-	u32(delay,)	\
-	u32(limit,)	\
+	u16r(s,start,)	\
+	u16r(l,len,)	\
+	s16r(t,top,)	\
+	u8(S,speed,)	\
+	u8(f,fade,)	\
+	s8(h,height,)	\
+	u32(d,delay,)	\
+	u32(T,limit,)	\
 
 #define	colours		\
 	c(000,black)	\
@@ -121,14 +121,14 @@ struct app_s
 {                               // Note LED number start from 1 with 0 meaning not set, stage 0 means app should sanity check parameters
    const char *name;
    app_f *app;
-#define u8(n,d)		uint8_t n;
-#define u8r(n,d)	uint8_t n;
-#define u16(n,d)	uint16_t n;
-#define u16r(n,d)	uint16_t n;
-#define s8(n,d)		int8_t n;
-#define s8r(n,d)	int8_t n;
-#define s16r(n,d)	int16_t n;
-#define u32(n,d)	uint32_t n;
+#define u8(s,n,d)		uint8_t n;
+#define u8r(s,n,d)	uint8_t n;
+#define u16(s,n,d)	uint16_t n;
+#define u16r(s,n,d)	uint16_t n;
+#define s8(s,n,d)		int8_t n;
+#define s8r(s,n,d)	int8_t n;
+#define s16r(s,n,d)	int16_t n;
+#define u32(s,n,d)	uint32_t n;
      params
 #undef	u8
 #undef	u8r
