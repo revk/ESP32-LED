@@ -232,7 +232,7 @@ addapp (int index, const char *name, jo_t j)
          return a;
       }
    appzap (a);
-   ESP_LOGI (TAG, "App not found %s", name);
+   ESP_LOGE (TAG, "App not found %s", name);
    jo_t e = jo_object_alloc ();
    jo_int (j, "level", index);
    jo_string (e, "app", name);
@@ -353,7 +353,8 @@ led_task (void *x)
       return;
    }
    uint8_t led_status = (blink[0].num == rgb.num ? 1 : 0);
-   ESP_LOGE (TAG, "Started using GPIO %d%s%s", rgb.num, rgb.invert ? " (inverted)" : "", led_status ? " (plus status)" : "");
+   ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb.num, rgb.invert ? " (inverted)" : "", leds,
+             led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
    led_strip_handle_t strip = NULL;
    led_strip_config_t strip_config = {
       .strip_gpio_num = rgb.num,
@@ -377,10 +378,19 @@ led_task (void *x)
    if (*app)
    {
       jo_t j = jo_parse_str (app);
-      if (j)
+      jo_skip (j);
+      int pos;
+      const char *er = jo_error (j, &pos);
+      if (er)
+      {
+         if(!addapp (0, app, NULL))
+         ESP_LOGE (TAG, "App Init was not JSON, %s (%s at %s)", app, er, app+pos);
+      } else
+      {
+         ESP_LOGI (TAG, "App Init JSON %s", app);
+	 jo_rewind(j);
          app_callback (0, prefixcommand, NULL, NULL, j);
-      else
-         addapp (0, app, NULL);
+      }
    }
    if (!cps)
       cps = 10;
