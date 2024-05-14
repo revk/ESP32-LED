@@ -375,19 +375,19 @@ led_task (void *x)
    ledr = calloc (leds, sizeof (*ledr));
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
-   if (*app)
+   if (*init)
    {
-      jo_t j = jo_parse_str (app);
+      jo_t j = jo_parse_str (init);
       jo_skip (j);
       int pos;
       const char *er = jo_error (j, &pos);
       if (er)
       {
-         if(!addapp (0, app, NULL))
-         ESP_LOGE (TAG, "App Init was not JSON, %s (%s at %s)", app, er, app+pos);
+         if(!addapp (0, init, NULL))
+         ESP_LOGE (TAG, "App Init was not JSON, %s (%s at %s)", init, er, init+pos);
       } else
       {
-         ESP_LOGI (TAG, "App Init JSON %s", app);
+         ESP_LOGI (TAG, "App Init JSON %s", init);
 	 jo_rewind(j);
          app_callback (0, prefixcommand, NULL, NULL, j);
       }
