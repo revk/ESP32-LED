@@ -24,7 +24,7 @@
 	c(F80,orange)	\
 	c(F88,pink)	\
 
-#define	MAXAPPS	20
+#define	MAXAPPS	50
 
 typedef struct app_s app_t;
 typedef const char *app_f (app_t *);    // Return NULL normally, "" for normal end, other string for error
