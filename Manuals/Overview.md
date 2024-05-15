@@ -45,7 +45,7 @@ The main settings are :-
 |`ledgpio`|The GPIO for output, prefix `-` for inverted.|
 |`leds`|This is how many LEDs in the chain. This defaults to `1` so if only the first LED does something, you have failed to set this.|
 |`maxr` `maxg` `maxb`|This is the top value for brightness (before applying gamma). Output is scaled to this.|
-|`app`|The default app name, using default arguments|
+|`init`|The default initial application setting (JSON)|
 
 Important, the settings and commands that take an LED position all start from LED `1` as the first LED. This is not as one would internally address an array, and is done deliberately to make `0` mean *unset* rather than the *first LED*.
 

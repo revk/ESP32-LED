@@ -16,7 +16,7 @@ u8	max.g		255				// Max RGB Green
 u8	max.b		255				// Max RGB Blue
 u16	leds		12				// How many LEDs
 u8	webcontrol	2				// Web controls
-json	init		"pulse"	.live=1			// Default app, or full JSON set of apps
+json	init		"pulse"	.live=1			// Default initial app (JSON)
 u8	i2c	0					// I2C channel
 gpio	scl						// Colour sensor SCL
 gpio	sda						// Colour sensor SDA
