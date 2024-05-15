@@ -22,7 +22,8 @@ You can also use an app name as a command where the payload is the parameters. T
 
 Whilst app parameters are normally an object with one or more parameters, if it is just a string, that sets `colour`, and if a number, that sets `limit`. E.g. `command/LED/whatever/spin red`.
 
-The `stop` command forces all active apps to end gracefully (usually a fade out).
+- The `stop` command forces all active apps to end gracefully (usually a fade out).
+- The `init` command forces all active apps to the `init` settings.
 
 You can also pass the parameters for a simple single app as a form `GET` list, including `app=` for the name of the application.
 

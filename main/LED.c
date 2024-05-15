@@ -305,6 +305,11 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       return NULL;              // Not for us or not a command from main MQTT
    if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
       return led_stop ();
+   if (suffix && !strcmp (suffix, "init"))
+   {
+      j = jo_parse_str (init);
+      suffix = NULL;
+   }
    if (suffix && strcmp (suffix, "add"))
       return led_add (suffix, j);
    // Process command to set apps
@@ -575,6 +580,8 @@ web_root (httpd_req_t * req)
    {
       revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);
    }
+   if (*init)
+      button ("init");
 #define a(x,d) button(#x);
 #include "apps.h"
    button ("stop");
