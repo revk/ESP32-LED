@@ -554,7 +554,7 @@ web_root (httpd_req_t * req)
       app_t *a = &active[i];
       if (a->app && *a->name && !a->stop)
       {
-         revk_web_send (req, "<li>%s", a->name);
+         revk_web_send (req, "<li><b>%s</b>", a->name);
          if (a->start)
             revk_web_send (req, " start=%d", a->start);
          if (a->len)
