@@ -225,6 +225,8 @@ addapp (int index, const char *name, jo_t j)
             a->speed = cps;
          if (!a->fade)
             a->fade = cps;
+         if (!a->bright)
+            a->bright = 255;
          if (!a->height)
             a->height = 8;
          a->app = applist[i].app;
@@ -322,7 +324,10 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    {                            // Simple add app
       char temp[20];
       jo_strncpy (j, temp, sizeof (temp));
-      addapp (index++, temp, NULL);
+      if (!strcasecmp (temp, "stop"))
+         led_stop ();
+      else
+         addapp (index++, temp, NULL);
    } else if (t == JO_ARRAY)
    {
       while ((t = jo_next (j)) == JO_STRING)
@@ -560,10 +565,12 @@ web_root (httpd_req_t * req)
       if (a->app && *a->name && !a->stop)
       {
          revk_web_send (req, "<li><b>%s</b>", a->name);
-         if (a->start)
+         if (a->start && a->start != 1)
             revk_web_send (req, " start=%d", a->start);
-         if (a->len)
+         if (a->len && a->len != leds)
             revk_web_send (req, " len=%d", a->len);
+         if (a->bright < 255)
+            revk_web_send (req, " bright=%d", a->bright);
          if (a->colourset)
             revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
          if (a->rainbow)

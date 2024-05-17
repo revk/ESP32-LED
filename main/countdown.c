@@ -14,11 +14,11 @@ appcountdown (app_t * a)
    }
    if (a->cycle >= a->limit)
       return "";                // done straight away
-   uint8_t l = 255;
+   uint8_t l = a->bright;
    if (a->stop)
-      l = 255 * a->stop / a->fade;
+      l = a->bright * a->stop / a->fade;
    else if (a->fade && a->cycle < a->fade)
-      l = 255 * a->cycle / a->fade;
+      l = a->bright * a->cycle / a->fade;
 
    int t = a->top;
    if (t < 0)

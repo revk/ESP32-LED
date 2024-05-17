@@ -44,7 +44,7 @@ const ring_t kawoosh507 = { 117, 1, 19 };
 const char *
 biggate (app_t * a)
 {                               // Special large LED rings
-   uint8_t max = 127;           // Base brightmess
+   uint8_t max = a->bright / 2; // Base brightness
    uint8_t kawooshlen = 117;    // Always 117?
    uint8_t *old = a->data,
       *new = old + kawooshlen;

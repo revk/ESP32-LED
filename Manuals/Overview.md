@@ -77,6 +77,7 @@ Each app can have arguments.
 |`#`|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. Also allowed is `randbow` and `cycle`|
 |`s`|`start`|The first LED|
 |`l`|`len`|The number of LEDs|
+|`b`|`bright`|Main app brightness|
 
 ### Simple apps
 

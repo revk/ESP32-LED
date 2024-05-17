@@ -45,7 +45,7 @@ appclock (app_t * a)
 
    if (a->stop)
    {
-      uint8_t l = 255 * a->stop / a->fade;
+      uint8_t l = a->bright * a->stop / a->fade;
       setr (c->h1, l);
       setg (c->m1, l);
       setb (c->s1, l);
@@ -53,9 +53,9 @@ appclock (app_t * a)
    }
    if (a->step)
    {                            // Second fade from one to another
-      uint8_t l = 255 * a->step / a->fade;
+      uint8_t l = a->bright * a->step / a->fade;
       if (a->step > a->fade)
-         l = 255;
+         l = a->bright;
 
       if (c->h0 == c->h1)
          setr (c->h0, 255);

@@ -5,11 +5,11 @@
 const char *
 appidle (app_t * a)
 {
-   uint8_t l = 255;
+   uint8_t l = a->bright;
    if (a->stop)
-      l = 255 * a->stop / a->fade;
+      l = a->bright * a->stop / a->fade;
    else if (a->fade && a->cycle < a->fade)
-      l = 255 * a->cycle / a->fade;
+      l = a->bright * a->cycle / a->fade;
    for (int i = 0; i < a->len; i++)
       setl (a->start + i, a, l);
    return NULL;

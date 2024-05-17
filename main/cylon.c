@@ -31,9 +31,9 @@ appcylon (app_t * a)
       } else
          a->step--;
    }
-   uint8_t l = 255;
+   uint8_t l = a->bright;
    if (a->stop)
-      l = 255 * a->stop / a->fade;
+      l = a->bright * a->stop / a->fade;
    clear (a->start, a->len);
    if (a->step > 0)
       setl (a->start + a->step - 1, a, l / 2);

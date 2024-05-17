@@ -29,11 +29,11 @@ apprandom (app_t * a)
       else
          esp_fill_random (r1, a->len * 3);
    }
-   uint8_t q = 255;
+   uint8_t q = a->bright;
    if (a->stop)
-      q = 255 * a->stop / a->fade;
+      q = a->bright * a->stop / a->fade;
    else if (a->fade && a->cycle < a->fade)
-      q = 255 * a->cycle / a->fade;
+      q = a->bright * a->cycle / a->fade;
    uint8_t l = 255 * a->stage / a->fade;
    for (int i = 0; i < a->len; i++)
       setrgbl (a->start + i, (l * r0[i] + (255 - l) * r1[i]) / 255, (l * g0[i] + (255 - l) * g1[i]) / 255,

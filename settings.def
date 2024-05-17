@@ -30,6 +30,7 @@ s16	top						// Top LED
 s16	ring.top					// To LED (ring)
 u8	speed						// Speed (cps)
 u8	fade						// Fade time
+u8	bright						// Per app brightness
 s8	height						// Text height
 u32	delay						// Start delay
 u32	limit						// Start time

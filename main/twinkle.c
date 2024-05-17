@@ -17,9 +17,9 @@ apptwinkle (app_t * a)
    }
    uint8_t *old = a->data,
       *new = old + a->len;
-   uint8_t q = 255;
+   uint8_t q = a->bright;
    if (a->stop)
-      q = 255 * a->stop / a->fade;
+      q = a->bright * a->stop / a->fade;
 
    if (!--a->step)
    {                            // Next
