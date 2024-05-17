@@ -305,6 +305,11 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       return NULL;              // Not for us or not a command from main MQTT
    if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
       return led_stop ();
+   if (suffix && !strcmp (suffix, "init"))
+   {
+      j = jo_parse_str (init);
+      suffix = NULL;
+   }
    if (suffix && strcmp (suffix, "add"))
       return led_add (suffix, j);
    // Process command to set apps
@@ -383,12 +388,12 @@ led_task (void *x)
       const char *er = jo_error (j, &pos);
       if (er)
       {
-         if(!addapp (0, init, NULL))
-         ESP_LOGE (TAG, "App Init was not JSON, %s (%s at %s)", init, er, init+pos);
+         if (!addapp (0, init, NULL))
+            ESP_LOGE (TAG, "App Init was not JSON, %s (%s at %s)", init, er, init + pos);
       } else
       {
          ESP_LOGI (TAG, "App Init JSON %s", init);
-	 jo_rewind(j);
+         jo_rewind (j);
          app_callback (0, prefixcommand, NULL, NULL, j);
       }
    }
@@ -547,34 +552,40 @@ web_root (httpd_req_t * req)
          }
       }
    }
-
-   httpd_resp_sendstr_chunk (req, "<h1>LED controller: ");
-   httpd_resp_sendstr_chunk (req, hostname);
-   httpd_resp_sendstr_chunk (req, "</h1><ul>");
+   revk_web_send (req, "<h1>LED controller: %s</h1><ul>", hostname);
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    for (unsigned int i = 0; i < MAXAPPS; i++)
    {
       app_t *a = &active[i];
       if (a->app && *a->name && !a->stop)
       {
-         httpd_resp_sendstr_chunk (req, "<li>");
-         httpd_resp_sendstr_chunk (req, a->name);
-         httpd_resp_sendstr_chunk (req, "</li>");
+         revk_web_send (req, "<li><b>%s</b>", a->name);
+         if (a->start)
+            revk_web_send (req, " start=%d", a->start);
+         if (a->len)
+            revk_web_send (req, " len=%d", a->len);
+         if (a->colourset)
+            revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
+         if (a->rainbow)
+            revk_web_send (req, "(rainbow)");
+         if (a->cycling)
+            revk_web_send (req, "(cycling)");
+         revk_web_send (req, "</li>");
       }
    }
    xSemaphoreGive (app_mutex);
-   httpd_resp_sendstr_chunk (req,
-                             "</ul><fieldset><legend>Effect</legend><form method=get><p><input name='colour' placeholder='RGB' size=6></p><p><input name='data' placeholder='Data'></p><p>");
+   revk_web_send (req,
+                  "</ul><fieldset><legend>Effect</legend><form method=get><p><input name='colour' placeholder='RGB' size=6></p><p><input name='data' placeholder='Data'></p><p>");
    void button (const char *tag)
    {
-      httpd_resp_sendstr_chunk (req, "<input type=submit name='app' value='");
-      httpd_resp_sendstr_chunk (req, tag);
-      httpd_resp_sendstr_chunk (req, "'/>");
+      revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);
    }
+   if (*init)
+      button ("init");
 #define a(x,d) button(#x);
 #include "apps.h"
    button ("stop");
-   httpd_resp_sendstr_chunk (req, "</p></form></fieldset>");
+   revk_web_send (req, "</p></form></fieldset>");
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
 }
 
