@@ -8,6 +8,7 @@
 	s16r(t,top,)	\
 	u8(S,speed,)	\
 	u8(f,fade,)	\
+	u8(b,bright,)	\
 	s8(h,height,)	\
 	u32(d,delay,)	\
 	u32(T,limit,)	\
