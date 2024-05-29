@@ -33,7 +33,7 @@ issue:
 	git commit -a -m release
 	git push
 
-set:	solo wroom pico s3 s3mt
+set:	solo wroom pico s3mt s3
 
 settings.h:     components/ESP32-RevK/revk_settings settings.def components/ESP32-RevK/settings.def
 	components/ESP32-RevK/revk_settings $^
