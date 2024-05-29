@@ -303,7 +303,7 @@ led_add (const char *tag, jo_t j)
 const char *
 app_callback (int client, const char *prefix, const char *target, const char *suffix, jo_t j)
 {
-   if (client || !prefix || target || strcmp (prefix, prefixcommand))
+   if (client || !prefix || target || strcmp (prefix, topiccommand))
       return NULL;              // Not for us or not a command from main MQTT
    if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
       return led_stop ();
@@ -399,7 +399,7 @@ led_task (void *x)
       {
          ESP_LOGI (TAG, "App Init JSON %s", init);
          jo_rewind (j);
-         app_callback (0, prefixcommand, NULL, NULL, j);
+         app_callback (0, topiccommand, NULL, NULL, j);
       }
    }
    if (!cps)
@@ -553,7 +553,7 @@ web_root (httpd_req_t * req)
             char app[30];
             jo_strncpy (j, app, sizeof (app));
             jo_rewind (j);
-            app_callback (0, prefixcommand, NULL, app, j);
+            app_callback (0, topiccommand, NULL, app, j);
          }
       }
    }
