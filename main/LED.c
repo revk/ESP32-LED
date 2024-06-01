@@ -307,6 +307,15 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       return NULL;              // Not for us or not a command from main MQTT
    if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
       return led_stop ();
+   if (suffix && !strcasecmp (suffix, "power"))
+   {                            // Like tasmota!
+      if(!jo_read_int(j))
+      {
+         led_stop ();
+	 return NULL;
+      }
+      suffix="init";
+   }
    if (suffix && !strcmp (suffix, "init"))
    {
       j = jo_parse_str (init);
