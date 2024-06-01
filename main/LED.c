@@ -309,12 +309,12 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       return led_stop ();
    if (suffix && !strcasecmp (suffix, "power"))
    {                            // Like tasmota!
-      if(!jo_read_int(j))
+      if (jo_here (j) == JO_NUMBER && !jo_read_int (j))
       {
          led_stop ();
-	 return NULL;
+         return NULL;
       }
-      suffix="init";
+      suffix = "init";
    }
    if (suffix && !strcmp (suffix, "init"))
    {
