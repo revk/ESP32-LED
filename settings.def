@@ -10,7 +10,11 @@ gpio	blink		"8 8 8"		.array=3	// Status LED
 
 bit	dark						// Dark mode (no status LED)
 
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
 u8	cps		25				// Change per second
+#else
+u8	cps		10				// Change per second
+#endif
 u8	max.r		255				// Max RGB Red
 u8	max.g		255				// Max RGB Green
 u8	max.b		255				// Max RGB Blue
