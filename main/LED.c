@@ -447,14 +447,14 @@ led_task (void *x)
             }
             if (a->rainbow)
             {                   // Cycle the colour
-               a->r = wheel[(a->cycle) & 255];
-               a->g = wheel[(a->cycle + 85) & 255];
-               a->b = wheel[(a->cycle + 170) & 255];
+               a->r = wheel[(255 - a->cycle) & 255];
+               a->g = wheel[(255 - a->cycle + 85) & 255];
+               a->b = wheel[(255 - a->cycle + 170) & 255];
             } else if (a->cycling)
             {                   // Cycle the colour
-               a->r = cos8[(a->cycle) & 255];
-               a->g = cos8[(a->cycle + 85) & 255];
-               a->b = cos8[(a->cycle + 170) & 255];
+               a->r = cos8[(255 - a->cycle) & 255];
+               a->g = cos8[(255 - a->cycle + 85) & 255];
+               a->b = cos8[(255 - a->cycle + 170) & 255];
             }
             if (!a->cycle)
             {                   // Starting
@@ -462,9 +462,7 @@ led_task (void *x)
                jo_int (j, "level", i);
                jo_string (j, "app", a->name);
 #define u8(s,n,d)         if(a->n)jo_int(j,#n,a->n);
-#if	speed_scale == 10
-#define u8d(s,n,d)         if(a->n)jo_litf(j,#n,"%d.%d",a->n/10,a->n%10);
-#endif
+#define u8d(s,n,d)         if(a->n)jo_litf(j,#n,"%.1f",1.0*a->n/cps);
 #define u8r(s,n,d)        u8(s,n,d)
 #define u16(s,n,d)         u8(s,n,d)
 #define u16r(s,n,d)        u8(s,n,d)
@@ -599,6 +597,14 @@ web_root (httpd_req_t * req)
             revk_web_send (req, " len=%d", a->len);
          if (a->bright < 255)
             revk_web_send (req, " bright=%d", a->bright);
+         if (a->delay)
+            revk_web_send (req, " delay=%.1f", 1.0 * a->delay / cps);
+         if (a->limit)
+            revk_web_send (req, " limit=%.1f", 1.0 * a->limit / cps);
+         if (a->speed != cps)
+            revk_web_send (req, " speed=%.1f", 1.0 * a->speed / cps);
+         if (a->fade != cps)
+            revk_web_send (req, " fade=%.1f", 1.0 * a->fade / cps);
          if (a->colourset)
             revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
          if (a->rainbow)
