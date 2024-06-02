@@ -6,12 +6,12 @@
 	u16r(s,start,)	\
 	u16r(l,len,)	\
 	s16r(t,top,)	\
-	u8(S,speed,)	\
-	u8(f,fade,)	\
 	u8(b,bright,)	\
 	s8(h,height,)	\
-	u32(d,delay,)	\
-	u32(T,limit,)	\
+	u8d(S,speed,)	\
+	u8d(f,fade,)	\
+	u32d(d,delay,)	\
+	u32d(T,limit,)	\
 
 #define	colours		\
 	c(000,black)	\
@@ -123,6 +123,7 @@ struct app_s
    const char *name;
    app_f *app;
 #define u8(s,n,d)		uint8_t n;
+#define u8d(s,n,d)		uint8_t n;
 #define u8r(s,n,d)	uint8_t n;
 #define u16(s,n,d)	uint16_t n;
 #define u16r(s,n,d)	uint16_t n;
@@ -130,8 +131,10 @@ struct app_s
 #define s8r(s,n,d)	int8_t n;
 #define s16r(s,n,d)	int16_t n;
 #define u32(s,n,d)	uint32_t n;
+#define u32d(s,n,d)	uint32_t n;
      params
 #undef	u8
+#undef	u8d
 #undef	u8r
 #undef	u16
 #undef	u16r
@@ -139,6 +142,7 @@ struct app_s
 #undef	s8r
 #undef	s16r
 #undef	u32
+#undef	u32d
       // Common settings
      uint8_t r, g, b;           // Colour
    uint8_t stop;                // If set this is a count down to stopping, typically to fade out

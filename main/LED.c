@@ -148,6 +148,7 @@ addapp (int index, const char *name, jo_t j)
          a->name = applist[i].name;
          // Defaults
 #define u8(s,n,d)         a->n=n;
+#define u8d(s,n,d)        u8(s,n,d)
 #define u8r(s,n,d)        if(applist[i].ring)a->n=(ring##n?:n); else u8(s,n,d)
 #define u16(s,n,d)         u8(s,n,d)
 #define u16r(s,n,d)        u8r(s,n,d)
@@ -155,8 +156,10 @@ addapp (int index, const char *name, jo_t j)
 #define s8r(s,n,d)        u8r(s,n,d)
 #define s16r(s,n,d)        u16r(s,n,d)
 #define u32(s,n,d)        u8(s,n,d)
+#define u32d(s,n,d)        u8(s,n,d)
          params
 #undef  u8
+#undef  u8d
 #undef  u8r
 #undef  u16
 #undef  u16r
@@ -164,11 +167,13 @@ addapp (int index, const char *name, jo_t j)
 #undef  s8r
 #undef  s16r
 #undef  u32
+#undef  u32d
             if (j && jo_here (j) == JO_OBJECT)
          {                      // Expects to be at start of object
             while (jo_next (j) == JO_TAG)
             {
 #define u8(s,n,d)         if(!jo_strcmp(j,#n)||!jo_strcmp(j,#s)){if(jo_next(j)==JO_NUMBER)a->n=jo_read_int(j);continue;}
+#define u8d(s,n,d)         if(!jo_strcmp(j,#n)||!jo_strcmp(j,#s)){if(jo_next(j)==JO_NUMBER)a->n=0.5+speed_scale*jo_read_float(j);continue;}
 #define u8r(s,n,d)        u8(s,n,d)
 #define u16(s,n,d)        u8(s,n,d)
 #define u16r(s,n,d)        u8(s,n,d)
@@ -176,8 +181,10 @@ addapp (int index, const char *name, jo_t j)
 #define s8r(s,n,d)        u8(s,n,d)
 #define s16r(s,n,d)        u8(s,n,d)
 #define u32(s,n,d)        u8(s,n,d)
+#define u32d(s,n,d)        u8d(s,n,d)
                params
 #undef  u8
+#undef  u8d
 #undef  u8r
 #undef  u16
 #undef  u16r
@@ -185,6 +192,7 @@ addapp (int index, const char *name, jo_t j)
 #undef  s8r
 #undef  s16r
 #undef  u32
+#undef  u32d
                   if (!jo_strcmp (j, "colour") || !jo_strcmp (j, "#"))
                {
                   if (jo_next (j) == JO_STRING)
@@ -214,7 +222,7 @@ addapp (int index, const char *name, jo_t j)
                   jo_strncpy (j, a->data = malloc (l + 1), l + 1);
             }
          } else if (j && jo_here (j) == JO_NUMBER)
-            a->limit = jo_read_int (j);
+            a->limit = limit_scale * jo_read_float (j);
          if (!a->start)
             a->start = 1;
          if (!a->top)
@@ -222,13 +230,18 @@ addapp (int index, const char *name, jo_t j)
          if (!a->len)
             a->len = leds + 1 - a->start;
          if (!a->speed)
-            a->speed = cps;
+            a->speed = speed_scale;     // 1.0s
          if (!a->fade)
-            a->fade = cps;
+            a->fade = fade_scale;       // 1.0s
          if (!a->bright)
             a->bright = 255;
          if (!a->height)
             a->height = 8;
+         // Adjust for scale and cps
+         a->delay = cps * a->delay / delay_scale;
+         a->limit = cps * a->limit / limit_scale;
+         a->speed = cps * a->speed / speed_scale;
+         a->fade = cps * a->fade / fade_scale;
          a->app = applist[i].app;
          ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, a->cycle);
          return a;
@@ -449,6 +462,9 @@ led_task (void *x)
                jo_int (j, "level", i);
                jo_string (j, "app", a->name);
 #define u8(s,n,d)         if(a->n)jo_int(j,#n,a->n);
+#if	speed_scale == 10
+#define u8d(s,n,d)         if(a->n)jo_litf(j,#n,"%d.%d",a->n/10,a->n%10);
+#endif
 #define u8r(s,n,d)        u8(s,n,d)
 #define u16(s,n,d)         u8(s,n,d)
 #define u16r(s,n,d)        u8(s,n,d)
@@ -456,8 +472,10 @@ led_task (void *x)
 #define s8r(s,n,d)        u8(s,n,d)
 #define s16r(s,n,d)        u8(s,n,d)
 #define u32(s,n,d)        u8(s,n,d)
+#define u32d(s,n,d)        u8d(s,n,d)
                params
 #undef  u8
+#undef  u8d
 #undef  u8r
 #undef  u16
 #undef  u16r
@@ -465,6 +483,7 @@ led_task (void *x)
 #undef  s8r
 #undef  s16r
 #undef  u32
+#undef  u32d
                   if (a->rainbow)
                   jo_string (j, "colour", "rainbow");
                else if (a->cycling)
@@ -743,5 +762,7 @@ app_main ()
          register_get_uri ("/", web_root);
       }
    }
+   if (cps < 10)
+      cps = 10;                 // Safety for division
    revk_task ("LED", led_task, NULL, 4);
 }

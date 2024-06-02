@@ -5,7 +5,7 @@ gpio	blink		"-20 -8 -21"	.array=3	// Status LED
 
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 gpio	rgb		8				// GPIO for LED chain
-gpio	blink		"-8 -8 -8"	.array=3	// Status LED
+gpio	blink		"8 8 8"		.array=3	// Status LED
 #endif
 
 bit	dark						// Dark mode (no status LED)
@@ -28,9 +28,9 @@ u16	len						// Number of LEDs
 u16	ring.len					// Number of LEDs (ring)
 s16	top						// Top LED
 s16	ring.top					// Top LED (ring)
-u8	speed						// Speed (/cps)
-u8	fade						// Default Fade time
 u8	bright						// Per app brightness
 s8	height						// Default Text height
-u32	delay						// Default delay time
-u32	limit						// Default time limit
+u32	delay		.decimal=1			// Default delay time (s)
+u32	limit		.decimal=1			// Default time limit (s)
+u8	speed		.decimal=1			// Default cycle time (s)
+u8	fade		.decimal=1			// Default Fade time (s)
