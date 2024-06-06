@@ -5685,15 +5685,14 @@
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
 		(at 151.13 90.17 0)
-		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "217af3e0-d8cd-4180-962d-f2e984d950ed")
 		(property "Reference" "J2"
-			(at 151.13 85.09 0)
+			(at 151.13 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5701,7 +5700,7 @@
 			)
 		)
 		(property "Value" "Conn_01x03"
-			(at 153.67 95.25 0)
+			(at 153.67 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5727,6 +5726,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 151.13 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C2683167"
 			(at 151.13 90.17 0)
 			(effects
 				(font
