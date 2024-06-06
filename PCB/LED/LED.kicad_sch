@@ -4170,6 +4170,12 @@
 		)
 	)
 	(junction
+		(at 133.35 92.71)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "10c9a0dc-ea1a-4c18-81cf-319ccc59b638")
+	)
+	(junction
 		(at 66.04 60.96)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4198,6 +4204,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ee259e2a-5da0-463f-9717-a1d77fb531c8")
+	)
+	(junction
+		(at 133.35 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f6b8df7c-66dc-48ee-a9bb-0a062b340117")
 	)
 	(junction
 		(at 80.01 105.41)
@@ -4367,6 +4379,16 @@
 	)
 	(wire
 		(pts
+			(xy 133.35 92.71) (xy 146.05 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e8958cf-d34e-4a14-b0fd-54ed11345c5f")
+	)
+	(wire
+		(pts
 			(xy 188.595 33.02) (xy 183.515 33.02)
 		)
 		(stroke
@@ -4424,6 +4446,26 @@
 			(type default)
 		)
 		(uuid "c82a2eee-3656-406a-a5cb-6b727ac05b34")
+	)
+	(wire
+		(pts
+			(xy 133.35 87.63) (xy 146.05 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8f47b57-088f-4036-9342-02ccdaaafef8")
+	)
+	(wire
+		(pts
+			(xy 133.35 90.17) (xy 146.05 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df6f4db6-94c8-4a2e-979e-967951416d7e")
 	)
 	(wire
 		(pts
@@ -5635,6 +5677,77 @@
 			(project "Generic"
 				(path "/babeabf2-f3b0-4ed5-8d9e-0215947e6cf3"
 					(reference "R8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 151.13 90.17 0)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "217af3e0-d8cd-4180-962d-f2e984d950ed")
+		(property "Reference" "J2"
+			(at 151.13 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x03"
+			(at 153.67 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:MP011985"
+			(at 151.13 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 151.13 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 151.13 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "963fa9fb-52f6-4520-aba2-8b83f93c77ef")
+		)
+		(pin "2"
+			(uuid "d2261e97-56bf-41fd-8369-d51e5aaf51cb")
+		)
+		(pin "3"
+			(uuid "3682b554-1601-4cff-af1f-6c836c987a58")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "J2")
 					(unit 1)
 				)
 			)
