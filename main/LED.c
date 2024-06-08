@@ -587,7 +587,7 @@ revk_web_extra (httpd_req_t * req)
       char name[20],
         prompt[20];
       sprintf (prompt, "Preset name %d", i + 1);
-      sprintf (name, "presetinane%d", i + 1);
+      sprintf (name, "presetname%d", i + 1);
       revk_web_setting (req, prompt, name);
       sprintf (name, "presetinit%d", i + 1);
       revk_web_setting (req, "Config", name);
