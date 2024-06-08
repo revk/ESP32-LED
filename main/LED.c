@@ -323,7 +323,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 {
    if (client || !prefix || target || strcmp (prefix, topiccommand))
       return NULL;              // Not for us or not a command from main MQTT
-   if (!strcmp (suffix, "connect") || !strcmp (suffix, "status"))
+   if (suffix && (!strcmp (suffix, "connect") || !strcmp (suffix, "status")))
       b.hasend = 1;
    if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
       return led_stop ();
