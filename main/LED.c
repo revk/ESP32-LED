@@ -27,6 +27,11 @@ struct applist_s
 #include "apps.h"
 };
 
+struct
+{
+   uint8_t hasend:1;
+} b;
+
 static httpd_handle_t webserver = NULL;
 
 uint8_t *ledr = NULL;
@@ -318,6 +323,8 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 {
    if (client || !prefix || target || strcmp (prefix, topiccommand))
       return NULL;              // Not for us or not a command from main MQTT
+   if (!strcmp (suffix, "connect") || !strcmp (suffix, "status"))
+      b.hasend = 1;
    if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
       return led_stop ();
    if (suffix && !strcasecmp (suffix, "power"))
@@ -373,6 +380,46 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    appzapall (index);
    xSemaphoreGive (app_mutex);
    return NULL;
+}
+
+static void
+send_ha_config (void)
+{
+   b.hasend = 0;
+   char *hastatus = revk_topic (topicstate, NULL, "ha");
+   char *cmd = revk_topic (topiccommand, NULL, NULL);
+   char *topic;
+   jo_t make (int i, const char *icon)
+   {
+      jo_t j = jo_object_alloc ();
+      jo_stringf (j, "unique_id", "%s-%d", revk_id, i);
+      jo_object (j, "dev");
+      jo_array (j, "ids");
+      jo_string (j, NULL, revk_id);
+      jo_close (j);
+      jo_string (j, "name", hostname);
+      jo_string (j, "sw", revk_version);
+      jo_string (j, "mf", "RevK");
+      jo_stringf (j, "cu", "http://%s.local/", hostname);
+      jo_close (j);
+      if (icon)
+         jo_string (j, "icon", icon);
+      return j;
+   }
+   for (int i = 0; i < PRESETS; i++)
+      if (asprintf (&topic, "homeassistant/light/%s-%d/config", revk_id, i) >= 0)
+      {
+         if (!ha || !*presetname[i])
+            revk_mqtt_send_str (topic);
+         else
+         {
+            jo_t j = make (i, "light");
+            jo_string (j, "name", presetname[i]);
+
+            revk_mqtt_send (NULL, 1, topic, &j);
+         }
+         free (topic);
+      }
 }
 
 void
@@ -431,6 +478,8 @@ led_task (void *x)
       leds = 1;
    while (1)
    {                            // Main loop
+      if (b.hasend)
+         send_ha_config ();
       usleep (tick - (esp_timer_get_time () % tick));
       clear (1, leds);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
@@ -537,9 +586,11 @@ revk_web_extra (httpd_req_t * req)
    {
       char name[20],
         prompt[20];
-      sprintf (prompt, "Preset %d", i + 1);
-      sprintf (name, "presetinit%d", i + 1);
+      sprintf (prompt, "Preset name %d", i + 1);
+      sprintf (name, "presetinane%d", i + 1);
       revk_web_setting (req, prompt, name);
+      sprintf (name, "presetinit%d", i + 1);
+      revk_web_setting (req, "Config", name);
       sprintf (name, "presetbright%d", i + 1);
       revk_web_setting (req, "Brightness", name);
       sprintf (name, "presetcolour%d", i + 1);

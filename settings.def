@@ -42,6 +42,7 @@ u8	fade		.decimal=1			// Default Fade time (s)
 
 bit	ha						// Home Assistant
 
+s	preset.name		.array=PRESETS .live=1
 json	preset.init		.array=PRESETS .live=1
 u8	preset.bright		.array=PRESETS .live=1
 s	preset.colour		.array=PRESETS .live=1
