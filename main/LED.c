@@ -532,13 +532,20 @@ led_task (void *x)
 void
 revk_web_extra (httpd_req_t * req)
 {
-   httpd_resp_sendstr_chunk (req, "<tr><td>LEDs</td><td><input size=3 name=leds value='");
-   char temp[20];
-   sprintf (temp, "%d", leds);
-   httpd_resp_sendstr_chunk (req, temp);
-   httpd_resp_sendstr_chunk (req, "'></td></tr>");
+   revk_web_setting (req, "Home Assistant", "ha");
+   for (int i = 0; i < PRESETS; i++)
+   {
+      char name[20],
+        prompt[20];
+      sprintf (prompt, "Preset %d", i + 1);
+      sprintf (name, "presetinit%d", i + 1);
+      revk_web_setting (req, prompt, name);
+      sprintf (name, "presetbright%d", i + 1);
+      revk_web_setting (req, "Brightness", name);
+      sprintf (name, "presetcolour%d", i + 1);
+      revk_web_setting (req, "Colour", name);
+   }
 }
-
 
 static void
 register_uri (const httpd_uri_t * uri_struct)
