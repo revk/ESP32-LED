@@ -323,7 +323,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 {
    if (client || !prefix || target || strcmp (prefix, topiccommand))
       return NULL;              // Not for us or not a command from main MQTT
-   if (suffix && ((ha && (!strcmp (suffix, "connect") || !strcmp (suffix, "status"))) || !strcmp (suffix, "setting")))
+   if (suffix && ((haenable && (!strcmp (suffix, "connect") || !strcmp (suffix, "status"))) || !strcmp (suffix, "setting")))
       b.hasend = 1;
    if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
       return led_stop ();
@@ -406,15 +406,15 @@ send_ha_config (void)
          jo_string (j, "icon", icon);
       return j;
    }
-   for (int i = 0; i < PRESETS; i++)
+   for (int i = 0; i < LIGHTS; i++)
       if (asprintf (&topic, "homeassistant/light/%s-%d/config", revk_id, i) >= 0)
       {
-         if (!ha || !*presetname[i])
+         if (!haenable || !*haname[i])
             revk_mqtt_send_str (topic);
          else
          {
             jo_t j = make (i, "light");
-            jo_string (j, "name", presetname[i]);
+            jo_string (j, "name", haname[i]);
 
             revk_mqtt_send (NULL, 1, topic, &j);
          }
@@ -582,19 +582,19 @@ void
 revk_web_extra (httpd_req_t * req)
 {
    revk_web_setting (req, "Home Assistant", "ha");
-   for (int i = 0; i < PRESETS; i++)
+   for (int i = 0; i < LIGHTS; i++)
    {
       revk_web_send (req, "<tr><td colspan=3><hr></td></tr>");
       char name[20],
         prompt[20];
       sprintf (prompt, "Preset name %d", i + 1);
-      sprintf (name, "presetname%d", i + 1);
+      sprintf (name, "haname%d", i + 1);
       revk_web_setting (req, prompt, name);
-      sprintf (name, "presetinit%d", i + 1);
+      sprintf (name, "hainit%d", i + 1);
       revk_web_setting (req, "Config", name);
-      sprintf (name, "presetbright%d", i + 1);
+      sprintf (name, "habright%d", i + 1);
       revk_web_setting (req, "Brightness", name);
-      sprintf (name, "presetcolour%d", i + 1);
+      sprintf (name, "hacolour%d", i + 1);
       revk_web_setting (req, "Colour", name);
    }
 }
