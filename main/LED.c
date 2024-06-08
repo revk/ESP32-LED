@@ -323,7 +323,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 {
    if (client || !prefix || target || strcmp (prefix, topiccommand))
       return NULL;              // Not for us or not a command from main MQTT
-   if (suffix && (!strcmp (suffix, "connect") || !strcmp (suffix, "status")))
+   if (suffix && ((ha && (!strcmp (suffix, "connect") || !strcmp (suffix, "status"))) || !strcmp (suffix, "setting")))
       b.hasend = 1;
    if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
       return led_stop ();
@@ -584,6 +584,7 @@ revk_web_extra (httpd_req_t * req)
    revk_web_setting (req, "Home Assistant", "ha");
    for (int i = 0; i < PRESETS; i++)
    {
+      revk_web_send (req, "<tr><td colspan=3><hr></td></tr>");
       char name[20],
         prompt[20];
       sprintf (prompt, "Preset name %d", i + 1);
