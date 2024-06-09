@@ -1,4 +1,4 @@
-#define	LIGHTS	2
+#define	PRESETS	2
 #ifdef  CONFIG_IDF_TARGET_ESP32
 gpio	rgb		22				// GPIO for LED chain
 gpio	blink		"-20 -8 -21"	.array=3	// Status LED
@@ -41,5 +41,5 @@ u8	speed		.decimal=1			// Default cycle time (s)
 u8	fade		.decimal=1			// Default Fade time (s)
 
 bit	ha.enable	.hide=1				// Enable Home Assistant
-s	ha.name		.array=LIGHTS .live=1 .hide=1	// Name of HA preset
-json	ha.init		.array=LIGHTS .live=1 .hide=1	// Config of HA preset
+s	ha.name		.array=PRESETS .live=1 .hide=1	// Name of HA preset
+json	ha.config	.array=PRESETS .live=1 .hide=1	// Config of HA preset

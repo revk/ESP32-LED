@@ -29,7 +29,9 @@ struct applist_s
 
 struct
 {
-   uint8_t hasend:1;
+   uint8_t haconfig:1;          // Send config
+   uint8_t hastatus:1;          // Send hastatus
+   uint8_t hacheck:1;           // Check presets
 } b;
 
 static httpd_handle_t webserver = NULL;
@@ -94,6 +96,13 @@ const uint8_t zig[256] =
 
 app_t active[MAXAPPS] = { 0 };
 
+uint64_t haon = 0;
+uint64_t hachanged = 0;
+uint8_t har[PRESETS] = { 0 };
+uint8_t hag[PRESETS] = { 0 };
+uint8_t hab[PRESETS] = { 0 };
+uint8_t habright[PRESETS] = { 0 };
+
 static SemaphoreHandle_t app_mutex = NULL;
 
 void
@@ -104,7 +113,7 @@ appzap (app_t * a)
 }
 
 app_t *
-addapp (int index, const char *name, jo_t j)
+addapp (int index, int preset, const char *name, jo_t j)
 {                               // Assumes mutex, store an app
    if (index >= MAXAPPS)
       return NULL;
@@ -228,6 +237,20 @@ addapp (int index, const char *name, jo_t j)
             }
          } else if (j && jo_here (j) == JO_NUMBER)
             a->limit = limit_scale * jo_read_float (j);
+         // Defaults
+         if (preset && preset <= PRESETS)
+         {                      // preset based settings
+            if (!a->colourset)
+            {
+               a->r = har[preset - 1];
+               a->g = hag[preset - 1];
+               a->b = hab[preset - 1];
+               if (a->r || a->g || a->b)
+                  a->colourset = 1;
+            }
+            if (a->bright)
+               a->bright = habright[preset - 1];
+         }
          if (!a->start)
             a->start = 1;
          if (!a->top)
@@ -248,6 +271,7 @@ addapp (int index, const char *name, jo_t j)
          a->speed = cps * a->speed / speed_scale;
          a->fade = cps * a->fade / fade_scale;
          a->app = applist[i].app;
+         a->preset = preset;
          ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, a->cycle);
          return a;
       }
@@ -262,14 +286,18 @@ addapp (int index, const char *name, jo_t j)
 
 void
 appzapall (int index)
-{                               // Assumes mutex, clears all apps at index to end
+{                               // Assumes mutex, clears all apps at index to end (except preset)
    while (index < MAXAPPS)
-      appzap (&active[index++]);
+   {
+      if (!active[index].preset)
+         appzap (&active[index]);
+      index++;
+   }
 }
 
 int
 apptidy (uint8_t stop)
-{                               // Assumes mutex, packs all apps to start, if stop set then stops active apps, returns first unused app (must be checked against MAXAPPS)
+{                               // Assumes mutex, packs all apps to start, if stop set then stops active (non preset) apps, returns first unused app (must be checked against MAXAPPS)
    int i = 0,
       o = 0;
    while (i < MAXAPPS)
@@ -277,7 +305,7 @@ apptidy (uint8_t stop)
       app_t *a = &active[i];
       if (stop && a->delay)
          appzap (a);            // Not started, so simply zap
-      if (stop && a->app && !a->stop)
+      if (stop && a->app && !a->stop && !a->preset)
          a->stop = a->fade;     // Running, so controlled stop
       if (a->app)
       {                         // Copy down running apps
@@ -311,11 +339,92 @@ led_add (const char *tag, jo_t j)
       {                         // Direct command
          xSemaphoreTake (app_mutex, portMAX_DELAY);
          int index = apptidy (1);
-         addapp (index++, tag, j);
+         addapp (index++, 0, tag, j);
          xSemaphoreGive (app_mutex);
          return "";
       }
    return NULL;
+}
+
+int
+app_json (int index, int preset, jo_t j)
+{                               // Add apps from JSON
+   jo_type_t t = jo_here (j);
+   if (t == JO_STRING)
+   {                            // Simple add app
+      char temp[20];
+      jo_strncpy (j, temp, sizeof (temp));
+      if (!strcasecmp (temp, "stop"))
+         led_stop ();
+      else
+         addapp (index++, preset, temp, NULL);
+   } else if (t == JO_ARRAY)
+   {
+      while ((t = jo_next (j)) == JO_STRING)
+      {
+         char temp[20];
+         jo_strncpy (j, temp, sizeof (temp));
+         addapp (index++, preset, temp, NULL);
+      }
+   } else if (t == JO_OBJECT)
+   {
+      while ((t = jo_next (j)) == JO_TAG)
+      {
+         char temp[20];
+         jo_strncpy (j, temp, sizeof (temp));
+         t = jo_next (j);
+         if (t != JO_OBJECT)
+            break;
+         addapp (index++, preset, temp, j);
+      }
+   }
+   appzapall (index);
+   return index;
+}
+
+void
+presetcheck (void)
+{                               // Check presets are off
+   xSemaphoreTake (app_mutex, portMAX_DELAY);
+   b.hacheck = 0;
+   uint64_t found = 0;
+   uint64_t changed = hachanged;
+   hachanged = 0;
+   for (int index = 0; index < MAXAPPS; index++)
+   {
+      app_t *a = &active[index];
+      if (!a->preset || a->stop)
+         continue;
+      if (haon & (1ULL << (a->preset - 1)))
+      {
+         found |= (1ULL << (a->preset - 1));
+         if (changed & (1ULL << (a->preset - 1)))
+         {
+            a->r = har[a->preset - 1];
+            a->g = hag[a->preset - 1];
+            a->b = hab[a->preset - 1];
+            a->bright = habright[a->preset - 1];
+         }
+         continue;
+      }
+      a->stop = a->fade;
+      b.hastatus = 1;
+   }
+   found = (haon & ~found);     // Which should be on and not
+   if (!found)
+      return;
+   // add missing
+   int index = apptidy (0);
+   for (int preset = 0; preset < PRESETS; preset++)
+      if ((found & (1ULL << preset)) && *haconfig[preset])
+      {
+         jo_t j = jo_parse_str (haconfig[preset]);
+         if (j)
+            index = app_json (index, preset + 1, j);
+         jo_free (&j);
+         b.hastatus = 1;
+      }
+   xSemaphoreGive (app_mutex);
 }
 
 const char *
@@ -324,7 +433,27 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    if (client || !prefix || target || strcmp (prefix, topiccommand))
       return NULL;              // Not for us or not a command from main MQTT
    if (suffix && ((haenable && (!strcmp (suffix, "connect") || !strcmp (suffix, "status"))) || !strcmp (suffix, "setting")))
-      b.hasend = 1;
+   {
+      b.haconfig = 1;
+      b.hacheck = 1;
+   }
+   if (suffix && !strncmp (suffix, "ha", 2) && isdigit ((int) (uint8_t) suffix[2]))
+   {                            // HA command
+      int preset = atoi (suffix + 1);
+      if (!preset || preset > PRESETS)
+         return "Unknown preset number";
+      if (jo_find (j, "state"))
+      {                         // ON/OFF
+      }
+      if (jo_find (j, "brightness"))
+         habright[preset - 1] = jo_read_int (j);
+      if (jo_find (j, "color"))
+      {                         // r/g/b
+      }
+      hachanged |= (1ULL << (preset - 1));
+      b.hacheck = 1;
+      return NULL;
+   }
    if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
       return led_stop ();
    if (suffix && !strcasecmp (suffix, "power"))
@@ -336,11 +465,6 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       }
       suffix = "init";
    }
-   if (suffix && !strcmp (suffix, "init"))
-   {
-      j = jo_parse_str (init);
-      suffix = NULL;
-   }
    if (suffix && strcmp (suffix, "add"))
       return led_add (suffix, j);
    // Process command to set apps
@@ -348,36 +472,13 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    int index = apptidy (suffix ? 0 : 1);
    if (!suffix)
       index = 0;                // Overwrite existing
-   jo_type_t t = jo_here (j);
-   if (t == JO_STRING)
-   {                            // Simple add app
-      char temp[20];
-      jo_strncpy (j, temp, sizeof (temp));
-      if (!strcasecmp (temp, "stop"))
-         led_stop ();
-      else
-         addapp (index++, temp, NULL);
-   } else if (t == JO_ARRAY)
+   if (suffix && !strcmp (suffix, "init"))
    {
-      while ((t = jo_next (j)) == JO_STRING)
-      {
-         char temp[20];
-         jo_strncpy (j, temp, sizeof (temp));
-         addapp (index++, temp, NULL);
-      }
-   } else if (t == JO_OBJECT)
-   {
-      while ((t = jo_next (j)) == JO_TAG)
-      {
-         char temp[20];
-         jo_strncpy (j, temp, sizeof (temp));
-         t = jo_next (j);
-         if (t != JO_OBJECT)
-            break;
-         addapp (index++, temp, j);
-      }
-   }
-   appzapall (index);
+      jo_t j = jo_parse_str (init);
+      index = app_json (index, 0, j);
+      jo_free (&j);
+   } else
+      index = app_json (index, 0, j);
    xSemaphoreGive (app_mutex);
    return NULL;
 }
@@ -385,14 +486,14 @@ app_callback (int client, const char *prefix, const char *target, const char *su
 static void
 send_ha_config (void)
 {
-   b.hasend = 0;
+   b.haconfig = 0;
    char *hastatus = revk_topic (topicstate, NULL, "ha");
    char *cmd = revk_topic (topiccommand, NULL, "ha");
    char *topic;
    jo_t make (int i, const char *icon)
    {
       jo_t j = jo_object_alloc ();
-      jo_stringf (j, "unique_id", "%s-%d", revk_id, i);
+      jo_stringf (j, "unique_id", "%s-%d", revk_id, i + 1);
       jo_object (j, "dev");
       jo_array (j, "ids");
       jo_string (j, NULL, revk_id);
@@ -406,8 +507,8 @@ send_ha_config (void)
          jo_string (j, "icon", icon);
       return j;
    }
-   for (int i = 0; i < LIGHTS; i++)
-      if (asprintf (&topic, "homeassistant/light/%s-%d/config", revk_id, i) >= 0)
+   for (int i = 0; i < PRESETS; i++)
+      if (asprintf (&topic, "homeassistant/light/%s-%d/config", revk_id, i + 1) >= 0)
       {
          if (!haenable || !*haname[i])
             revk_mqtt_send_str (topic);
@@ -415,9 +516,11 @@ send_ha_config (void)
          {
             jo_t j = make (i, "mdi:led-strip");
             jo_string (j, "name", haname[i]);
-            jo_string (j, "cmd_t", cmd);
-            jo_string (j, "stat_t", hastatus);
+            jo_stringf (j, "cmd_t", "%s%d", cmd, i + 1);
+            jo_stringf (j, "stat_t", "%s%d", hastatus, i + 1);
             jo_string (j, "schema", "json");
+            jo_array (j, "supported_color_modes");
+            jo_string (j, NULL, "rgb");
             revk_mqtt_send (NULL, 1, topic, &j);
          }
          free (topic);
@@ -464,7 +567,7 @@ led_task (void *x)
       const char *er = jo_error (j, &pos);
       if (er)
       {
-         if (!addapp (0, init, NULL))
+         if (!addapp (0, 0, init, NULL))
             ESP_LOGE (TAG, "App Init was not JSON, %s (%s at %s)", init, er, init + pos);
       } else
       {
@@ -480,8 +583,10 @@ led_task (void *x)
       leds = 1;
    while (1)
    {                            // Main loop
-      if (b.hasend)
+      if (b.haconfig)
          send_ha_config ();
+      if (b.hacheck)
+         presetcheck ();
       usleep (tick - (esp_timer_get_time () % tick));
       clear (1, leds);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
@@ -581,10 +686,10 @@ led_task (void *x)
 }
 
 void
-revk_web_extra (httpd_req_t * req,int page)
+revk_web_extra (httpd_req_t * req, int page)
 {
    revk_web_setting (req, "Home Assistant", "haenable");
-   for (int i = 0; i < LIGHTS; i++)
+   for (int i = 0; i < PRESETS; i++)
    {
       revk_web_send (req, "<tr><td colspan=3><hr></td></tr>");
       char name[20],
@@ -592,12 +697,8 @@ revk_web_extra (httpd_req_t * req,int page)
       sprintf (prompt, "Preset name %d", i + 1);
       sprintf (name, "haname%d", i + 1);
       revk_web_setting (req, prompt, name);
-      sprintf (name, "hainit%d", i + 1);
+      sprintf (name, "haconfig%d", i + 1);
       revk_web_setting (req, "Config", name);
-      sprintf (name, "habright%d", i + 1);
-      revk_web_setting (req, "Brightness", name);
-      sprintf (name, "hacolour%d", i + 1);
-      revk_web_setting (req, "Colour", name);
    }
 }
 
@@ -815,7 +916,6 @@ app_main ()
       revk_blink (0, 0, "K");
    if (sda.set && scl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
-
    if (webcontrol)
    {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();

@@ -144,6 +144,7 @@ struct app_s
 #undef	u32
 #undef	u32d
       // Common settings
+	     uint8_t preset;	// If this is a preset
      uint8_t r, g, b;           // Colour
    uint8_t stop;                // If set this is a count down to stopping, typically to fade out
    uint8_t colourset:1;         // Colour is set
