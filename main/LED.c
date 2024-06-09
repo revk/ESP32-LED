@@ -30,7 +30,6 @@ struct applist_s
 struct
 {
    uint8_t haconfig:1;          // Send config
-   uint8_t hastatus:1;          // Send hastatus
    uint8_t hacheck:1;           // Check presets
 } b;
 
@@ -96,8 +95,9 @@ const uint8_t zig[256] =
 
 app_t active[MAXAPPS] = { 0 };
 
-uint64_t haon = 0;
-uint64_t hachanged = 0;
+uint64_t haon = 0;              // Bits, which are on
+uint64_t hachanged = 0;         // Bits, which are changed and need updating to active[]
+uint64_t hastatus = 0;          // Bits, which need status report
 uint8_t har[PRESETS] = { 0 };
 uint8_t hag[PRESETS] = { 0 };
 uint8_t hab[PRESETS] = { 0 };
@@ -108,6 +108,8 @@ static SemaphoreHandle_t app_mutex = NULL;
 void
 appzap (app_t * a)
 {                               // Assumes mutex, Delete an app
+   if (a->preset)
+      hastatus |= (1ULL << (a->preset - 1));
    free (a->data);
    memset (a, 0, sizeof (*a));
 }
@@ -404,25 +406,26 @@ presetcheck (void)
             a->g = hag[a->preset - 1];
             a->b = hab[a->preset - 1];
             a->bright = habright[a->preset - 1];
+            hastatus |= (1ULL << (a->preset - 1));
          }
          continue;
       }
       a->stop = a->fade;
-      b.hastatus = 1;
+      hastatus |= (1ULL << (a->preset - 1));
    }
    found = (haon & ~found);     // Which should be on and not
    if (found)
-   { // add missing
-   int index = apptidy (0);
-   for (int preset = 0; preset < PRESETS; preset++)
-      if ((found & (1ULL << preset)) && *haconfig[preset])
-      {
-         jo_t j = jo_parse_str (haconfig[preset]);
-         if (j)
-            index = app_json (index, preset + 1, j);
-         jo_free (&j);
-         b.hastatus = 1;
-      }
+   {                            // add missing
+      int index = apptidy (0);
+      for (int preset = 0; preset < PRESETS; preset++)
+         if ((found & (1ULL << preset)) && *haconfig[preset])
+         {
+            jo_t j = jo_parse_str (haconfig[preset]);
+            if (j)
+               index = app_json (index, preset + 1, j);
+            jo_free (&j);
+            hastatus |= (1ULL << preset);
+         }
    }
    xSemaphoreGive (app_mutex);
 }
@@ -436,19 +439,39 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    {
       b.haconfig = 1;
       b.hacheck = 1;
+      hastatus = -1;
    }
    if (suffix && !strncmp (suffix, "ha", 2) && isdigit ((int) (uint8_t) suffix[2]))
    {                            // HA command
-      int preset = atoi (suffix + 1);
+      char val[10];
+      int preset = atoi (suffix + 2);
       if (!preset || preset > PRESETS)
          return "Unknown preset number";
       if (jo_find (j, "state"))
       {                         // ON/OFF
+         jo_strncpy (j, val, sizeof (val));
+         if (!strcmp (val, "ON"))
+            haon |= (1ULL << (preset - 1));
+         else
+            haon &= ~(1ULL << (preset - 1));
       }
       if (jo_find (j, "brightness"))
          habright[preset - 1] = jo_read_int (j);
       if (jo_find (j, "color"))
       {                         // r/g/b
+         while (jo_next (j) == JO_TAG)
+         {
+            jo_strncpy (j, val, sizeof (val));
+            if (jo_next (j) != JO_NUMBER)
+               break;
+            int v = jo_read_int (j);
+            if (!strcmp (val, "r"))
+               har[preset - 1] = v;
+            else if (!strcmp (val, "g"))
+               hag[preset - 1] = v;
+            else if (!strcmp (val, "b"))
+               hab[preset - 1] = v;
+         }
       }
       hachanged |= (1ULL << (preset - 1));
       b.hacheck = 1;
@@ -481,6 +504,28 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       index = app_json (index, 0, j);
    xSemaphoreGive (app_mutex);
    return NULL;
+}
+
+static void
+send_ha_status (void)
+{
+   uint64_t send = hastatus;
+   hastatus = 0;
+   for (int preset = 0; preset < PRESETS; preset++)
+      if ((send & (1ULL << preset)) && *haname[preset])
+      {
+         jo_t j = jo_object_alloc ();
+         jo_string (j, "state", (haon & (1ULL << preset)) ? "ON" : "OFF");
+         jo_int (j, "brightness", habright[preset]);
+         jo_string (j, "color_mode", "rgb");
+         jo_object (j, "color");
+         jo_int (j, "r", har[preset]);
+         jo_int (j, "g", hab[preset]);
+         jo_int (j, "b", hab[preset]);
+         char topic[10];
+         snprintf (topic, sizeof (topic), "ha%d", preset + 1);
+         revk_state (topic, &j);
+      }
 }
 
 static void
@@ -519,6 +564,7 @@ send_ha_config (void)
             jo_stringf (j, "cmd_t", "%s%d", cmd, i + 1);
             jo_stringf (j, "stat_t", "%s%d", hastatus, i + 1);
             jo_string (j, "schema", "json");
+            jo_bool (j, "optimistic", 1);
             jo_array (j, "supported_color_modes");
             jo_string (j, NULL, "rgb");
             revk_mqtt_send (NULL, 1, topic, &j);
@@ -583,10 +629,12 @@ led_task (void *x)
       leds = 1;
    while (1)
    {                            // Main loop
-      if (b.haconfig)
-         send_ha_config ();
       if (b.hacheck)
          presetcheck ();
+      if (b.haconfig)
+         send_ha_config ();
+      if (hastatus)
+         send_ha_status ();
       usleep (tick - (esp_timer_get_time () % tick));
       clear (1, leds);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
@@ -931,5 +979,9 @@ app_main ()
    }
    if (cps < 10)
       cps = 10;                 // Safety for division
+   memset (habright, 255, sizeof (habright));
+   memset (har, 255, sizeof (har));
+   memset (hag, 255, sizeof (hag));
+   memset (hab, 255, sizeof (hab));
    revk_task ("LED", led_task, NULL, 4);
 }

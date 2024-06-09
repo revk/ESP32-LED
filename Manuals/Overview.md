@@ -111,3 +111,5 @@ Each app can have arguments.
 |`text`|Show text|
 |`kern`|Show text with kernin|
 |`time`|Show time as text|
+
+## Home Assistant
