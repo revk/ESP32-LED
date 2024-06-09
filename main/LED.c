@@ -413,7 +413,7 @@ send_ha_config (void)
             revk_mqtt_send_str (topic);
          else
          {
-            jo_t j = make (i, "light");
+            jo_t j = make (i, "mdi:led-strip");
             jo_string (j, "name", haname[i]);
             jo_string (j, "cmd_t", cmd);
             jo_string (j, "stat_t", hastatus);
