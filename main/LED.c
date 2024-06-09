@@ -411,9 +411,8 @@ presetcheck (void)
       b.hastatus = 1;
    }
    found = (haon & ~found);     // Which should be on and not
-   if (!found)
-      return;
-   // add missing
+   if (found)
+   { // add missing
    int index = apptidy (0);
    for (int preset = 0; preset < PRESETS; preset++)
       if ((found & (1ULL << preset)) && *haconfig[preset])
@@ -424,6 +423,7 @@ presetcheck (void)
          jo_free (&j);
          b.hastatus = 1;
       }
+   }
    xSemaphoreGive (app_mutex);
 }
 
