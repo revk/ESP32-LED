@@ -387,7 +387,7 @@ send_ha_config (void)
 {
    b.hasend = 0;
    char *hastatus = revk_topic (topicstate, NULL, "ha");
-   char *cmd = revk_topic (topiccommand, NULL, NULL);
+   char *cmd = revk_topic (topiccommand, NULL, "ha");
    char *topic;
    jo_t make (int i, const char *icon)
    {
@@ -415,7 +415,9 @@ send_ha_config (void)
          {
             jo_t j = make (i, "light");
             jo_string (j, "name", haname[i]);
-
+            jo_string (j, "cmd_t", cmd);
+            jo_string (j, "stat_t", hastatus);
+            jo_string (j, "schema", "json");
             revk_mqtt_send (NULL, 1, topic, &j);
          }
          free (topic);
