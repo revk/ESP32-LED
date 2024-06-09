@@ -40,8 +40,6 @@ u32	limit		.decimal=1			// Default time limit (s)
 u8	speed		.decimal=1			// Default cycle time (s)
 u8	fade		.decimal=1			// Default Fade time (s)
 
-bit	ha.enable
-s	ha.name		.array=LIGHTS .live=1
-json	ha.init		.array=LIGHTS .live=1
-u8	ha.bright	.array=LIGHTS .live=1
-s	ha.colour	.array=LIGHTS .live=1
+bit	ha.enable					// Enable Home Assistant
+s	ha.name		.array=LIGHTS .live=1		// Name of HA preset
+json	ha.init		.array=LIGHTS .live=1		// Config of HA preset
