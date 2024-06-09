@@ -581,7 +581,7 @@ led_task (void *x)
 }
 
 void
-revk_web_extra (httpd_req_t * req)
+revk_web_extra (httpd_req_t * req,int page)
 {
    revk_web_setting (req, "Home Assistant", "haenable");
    for (int i = 0; i < LIGHTS; i++)
