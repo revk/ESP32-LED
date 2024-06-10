@@ -108,8 +108,6 @@ static SemaphoreHandle_t app_mutex = NULL;
 void
 appzap (app_t * a)
 {                               // Assumes mutex, Delete an app
-   if (a->preset)
-      hastatus |= (1ULL << (a->preset - 1));
    free (a->data);
    memset (a, 0, sizeof (*a));
 }
@@ -545,6 +543,7 @@ send_ha_config (void)
       jo_close (j);
       jo_string (j, "name", hostname);
       jo_string (j, "sw", revk_version);
+      jo_string (j, "mdl", appname);
       jo_string (j, "mf", "RevK");
       jo_stringf (j, "cu", "http://%s.local/", hostname);
       jo_close (j);
@@ -706,8 +705,22 @@ led_task (void *x)
                appzap (a);
             a->cycle++;
             if (a->stop && !--a->stop)
+            {
+               uint8_t preset = a->preset;
                appzap (a);
-            else if (!a->stop && a->limit && a->cycle >= a->limit)
+               if (preset)
+               {                // Last one?
+                  int i;
+                  for (i = 0; i < MAXAPPS; i++)
+                     if (active[i].preset == preset)
+                        break;
+                  if (i == MAXAPPS)
+                  {             // Has turned off preset
+                     haon &= ~(1ULL << (preset - 1));
+                     hastatus |= (1ULL << (preset - 1));
+                  }
+               }
+            } else if (!a->stop && a->limit && a->cycle >= a->limit)
                a->stop = a->fade;       // Tell app to stop
             if (!a->app)
             {                   // Done
