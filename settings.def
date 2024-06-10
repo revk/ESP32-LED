@@ -1,4 +1,4 @@
-#define	PRESETS	2
+#define	PRESETS	4
 #ifdef  CONFIG_IDF_TARGET_ESP32
 gpio	rgb		22				// GPIO for LED chain
 gpio	blink		"-20 -8 -21"	.array=3	// Status LED
