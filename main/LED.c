@@ -589,7 +589,6 @@ send_ha_config (void)
             jo_stringf (j, "cmd_t", "%s%d", cmd, i + 1);
             jo_stringf (j, "stat_t", "%s%d", hastatus, i + 1);
             jo_string (j, "schema", "json");
-            jo_bool (j, "optimistic", 1);
             {                   // Effect?
                jo_t j = jo_parse_str (haconfig[i]);
                if (j && !jo_error (j, NULL) && jo_here (j) != JO_END
@@ -750,7 +749,7 @@ led_task (void *x)
             }
             const char *e = a->app (a);
             if (e)
-               appzap (a);
+               a->stop = 1;
             a->cycle++;
             if (a->stop && !--a->stop)
             {
@@ -1042,9 +1041,9 @@ app_main ()
    }
    if (cps < 10)
       cps = 10;                 // Safety for division
-   memset (habright, 255, sizeof (habright));
+   memset (habright, 128, sizeof (habright));
    memset (har, 255, sizeof (har));
-   memset (hag, 255, sizeof (hag));
-   memset (hab, 255, sizeof (hab));
+   memset (hag, 0, sizeof (hag));
+   memset (hab, 0, sizeof (hab));
    revk_task ("LED", led_task, NULL, 4);
 }
