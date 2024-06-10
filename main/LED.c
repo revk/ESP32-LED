@@ -581,7 +581,7 @@ send_ha_config (void)
       if (asprintf (&topic, "homeassistant/light/%s-%d/config", revk_id, i + 1) >= 0)
       {
          if (!haenable || !*haname[i])
-            revk_mqtt_send_str (topic);
+            revk_mqtt_send (NULL, 1, topic, NULL);
          else
          {
             jo_t j = make (i, "mdi:led-strip");
