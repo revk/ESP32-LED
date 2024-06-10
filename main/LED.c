@@ -21,9 +21,11 @@ struct applist_s
    const char *name;
    app_f *app;
    uint8_t ring:1;              // Is a ring based app
+   uint8_t text:1;              // Is a text based app
 } applist[] = {
-#define a(a,d)	{#a,&app##a,0},
-#define r(a,d)	{#a,&app##a,1},
+#define a(a,d)	{#a,&app##a,0,0},
+#define r(a,d)	{#a,&app##a,1,0},
+#define t(a,d)	{#a,&app##a,0,1},
 #include "apps.h"
 };
 
@@ -98,10 +100,11 @@ app_t active[MAXAPPS] = { 0 };
 uint64_t haon = 0;              // Bits, which are on
 uint64_t hachanged = 0;         // Bits, which are changed and need updating to active[]
 uint64_t hastatus = 0;          // Bits, which need status report
-uint8_t har[PRESETS] = { 0 };
+uint8_t har[PRESETS] = { 0 };   // Colour
 uint8_t hag[PRESETS] = { 0 };
 uint8_t hab[PRESETS] = { 0 };
-uint8_t habright[PRESETS] = { 0 };
+uint8_t habright[PRESETS] = { 0 };      // Brightness
+const char *haeffect[PRESETS] = { 0 };  // Selected effect
 
 static SemaphoreHandle_t app_mutex = NULL;
 
@@ -332,14 +335,14 @@ led_stop (void)
 }
 
 const char *
-led_add (const char *tag, jo_t j)
+led_add (const char *tag, int preset, jo_t j)
 {
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (tag, applist[i].name))
       {                         // Direct command
          xSemaphoreTake (app_mutex, portMAX_DELAY);
          int index = apptidy (1);
-         addapp (index++, 0, tag, j);
+         addapp (index++, preset, tag, j);
          xSemaphoreGive (app_mutex);
          return "";
       }
@@ -396,10 +399,10 @@ presetcheck (void)
       if (!a->preset || a->stop)
          continue;
       if (haon & (1ULL << (a->preset - 1)))
-      {
+      {                         // Update in situe
          found |= (1ULL << (a->preset - 1));
          if (changed & (1ULL << (a->preset - 1)))
-         {
+         {                      // Update settings
             a->r = har[a->preset - 1];
             a->g = hag[a->preset - 1];
             a->b = hab[a->preset - 1];
@@ -416,10 +419,12 @@ presetcheck (void)
    {                            // add missing
       int index = apptidy (0);
       for (int preset = 0; preset < PRESETS; preset++)
-         if ((found & (1ULL << preset)) && *haconfig[preset])
+         if (found & (1ULL << preset))
          {
             jo_t j = jo_parse_str (haconfig[preset]);
-            if (j)
+            if (haeffect[preset])
+               addapp (index++, preset + 1, haeffect[preset], j);       // Effect based
+            else
                index = app_json (index, preset + 1, j);
             jo_free (&j);
             hastatus |= (1ULL << preset);
@@ -441,7 +446,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    }
    if (suffix && !strncmp (suffix, "ha", 2) && isdigit ((int) (uint8_t) suffix[2]))
    {                            // HA command
-      char val[10];
+      char val[20];
       int preset = atoi (suffix + 2);
       if (!preset || preset > PRESETS)
          return "Unknown preset number";
@@ -471,6 +476,25 @@ app_callback (int client, const char *prefix, const char *target, const char *su
                hab[preset - 1] = v;
          }
       }
+      if (jo_find (j, "effect"))
+      {                         // effect
+         if (!haeffect[preset - 1])
+            return "Effect not expected";
+         jo_strncpy (j, val, sizeof (val));
+         int i;
+         for (i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+            if (!strcasecmp (val, applist[i].name))
+               break;
+         if (i == sizeof (applist) / sizeof (*applist))
+            return "Unknown effect";
+         if (haeffect[preset - 1] != applist[i].name)
+         {
+            for (int index = 0; index < MAXAPPS; index++)
+               if (active[index].preset == preset && !active[index].stop)
+                  active[index].stop = active[index].fade;      // Old effect stops
+            haeffect[preset - 1] = applist[i].name;
+         }
+      }
       hachanged |= (1ULL << (preset - 1));
       b.hacheck = 1;
       return NULL;
@@ -487,7 +511,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       suffix = "init";
    }
    if (suffix && strcmp (suffix, "add"))
-      return led_add (suffix, j);
+      return led_add (suffix, 0, j);
    // Process command to set apps
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    int index = apptidy (suffix ? 0 : 1);
@@ -516,6 +540,8 @@ send_ha_status (void)
          jo_string (j, "state", (haon & (1ULL << preset)) ? "ON" : "OFF");
          jo_int (j, "brightness", habright[preset]);
          jo_string (j, "color_mode", "rgb");
+         if (haeffect[preset])
+            jo_string (j, "effect", haeffect[preset]);
          jo_object (j, "color");
          jo_int (j, "r", har[preset]);
          jo_int (j, "g", hab[preset]);
@@ -564,8 +590,30 @@ send_ha_config (void)
             jo_stringf (j, "stat_t", "%s%d", hastatus, i + 1);
             jo_string (j, "schema", "json");
             jo_bool (j, "optimistic", 1);
+            {                   // Effect?
+               jo_t j = jo_parse_str (haconfig[i]);
+               if (j && !jo_error (j, NULL) && jo_here (j) != JO_END
+                   && (jo_here (j) != JO_OBJECT || (jo_next (j) == JO_TAG && jo_next (j) == JO_OBJECT)))
+               {                // Full config
+                  haeffect[i] = NULL;
+               } else
+               {
+                  if (!haeffect[i])
+                     haeffect[i] = "idle";
+               }
+               jo_free (&j);
+            }
             jo_array (j, "supported_color_modes");
             jo_string (j, NULL, "rgb");
+            jo_close (j);
+            if (haeffect[i])
+            {
+               jo_bool (j, "effect", 1);
+               jo_array (j, "effect_list");
+               for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+                  if (!applist[i].text)
+                     jo_string (j, NULL, applist[i].name);
+            }
             revk_mqtt_send (NULL, 1, topic, &j);
          }
          free (topic);
@@ -814,6 +862,8 @@ web_root (httpd_req_t * req)
       if (a->app && *a->name && !a->stop)
       {
          revk_web_send (req, "<li><b>%s</b>", a->name);
+         if (a->preset)
+            revk_web_send (req, " preset=%s", haname[a->preset - 1]);
          if (a->start && a->start != 1)
             revk_web_send (req, " start=%d", a->start);
          if (a->len && a->len != leds)
