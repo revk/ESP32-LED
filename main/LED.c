@@ -684,33 +684,35 @@ led_task (void *x)
       usleep (tick - (esp_timer_get_time () % tick));
       clear (1, leds);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
-      for (unsigned int i = 0; i < MAXAPPS; i++)
-      {
-         app_t *a = &active[i];
-         if (a->app)
-         {
-            const char *name = a->name;
-            if (a->delay)
-            {                   // Delayed start
-               a->delay--;
-               continue;
-            }
-            if (a->rainbow)
-            {                   // Cycle the colour
-               a->r = wheel[(255 - a->cycle) & 255];
-               a->g = wheel[(255 - a->cycle + 85) & 255];
-               a->b = wheel[(255 - a->cycle + 170) & 255];
-            } else if (a->cycling)
-            {                   // Cycle the colour
-               a->r = cos8[(255 - a->cycle) & 255];
-               a->g = cos8[(255 - a->cycle + 85) & 255];
-               a->b = cos8[(255 - a->cycle + 170) & 255];
-            }
-            if (!a->cycle)
-            {                   // Starting
-               jo_t j = jo_object_alloc ();
-               jo_int (j, "level", i);
-               jo_string (j, "app", a->name);
+      for (int preset = 0; preset <= PRESETS; preset++)
+         if (!preset || *haname[preset - 1])
+            for (unsigned int i = 0; i < MAXAPPS; i++)
+            {
+               app_t *a = &active[i];
+               if (a->preset == preset && a->app)
+               {
+                  const char *name = a->name;
+                  if (a->delay)
+                  {             // Delayed start
+                     a->delay--;
+                     continue;
+                  }
+                  if (a->rainbow)
+                  {             // Cycle the colour
+                     a->r = wheel[(255 - a->cycle) & 255];
+                     a->g = wheel[(255 - a->cycle + 85) & 255];
+                     a->b = wheel[(255 - a->cycle + 170) & 255];
+                  } else if (a->cycling)
+                  {             // Cycle the colour
+                     a->r = cos8[(255 - a->cycle) & 255];
+                     a->g = cos8[(255 - a->cycle + 85) & 255];
+                     a->b = cos8[(255 - a->cycle + 170) & 255];
+                  }
+                  if (!a->cycle)
+                  {             // Starting
+                     jo_t j = jo_object_alloc ();
+                     jo_int (j, "level", i);
+                     jo_string (j, "app", a->name);
 #define u8(s,n,d)         if(a->n)jo_int(j,#n,a->n);
 #define u8d(s,n,d)         if(a->n)jo_litf(j,#n,"%.1f",1.0*a->n/cps);
 #define u8r(s,n,d)        u8(s,n,d)
@@ -721,7 +723,7 @@ led_task (void *x)
 #define s16r(s,n,d)        u8(s,n,d)
 #define u32(s,n,d)        u8(s,n,d)
 #define u32d(s,n,d)        u8d(s,n,d)
-               params
+                     params
 #undef  u8
 #undef  u8d
 #undef  u8r
@@ -732,54 +734,54 @@ led_task (void *x)
 #undef  s16r
 #undef  u32
 #undef  u32d
-                  if (a->rainbow)
-                  jo_string (j, "colour", "rainbow");
-               else if (a->cycling)
-                  jo_string (j, "colour", "cycling");
-               else if (a->colourset)
-               {
-                  if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
-                     jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
-                  else
-                     jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
-               }
-               if (a->data)
-                  jo_string (j, "data", (char *) a->data);
-               revk_info ("start", &j);
-            }
-            const char *e = a->app (a);
-            if (e)
-               a->stop = 1;
-            a->cycle++;
-            if (a->stop && !--a->stop)
-            {
-               uint8_t preset = a->preset;
-               appzap (a);
-               if (preset)
-               {                // Last one?
-                  int i;
-                  for (i = 0; i < MAXAPPS; i++)
-                     if (active[i].preset == preset)
-                        break;
-                  if (i == MAXAPPS)
-                  {             // Has turned off preset
-                     haon &= ~(1ULL << (preset - 1));
-                     hastatus |= (1ULL << (preset - 1));
+                        if (a->rainbow)
+                        jo_string (j, "colour", "rainbow");
+                     else if (a->cycling)
+                        jo_string (j, "colour", "cycling");
+                     else if (a->colourset)
+                     {
+                        if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
+                           jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
+                        else
+                           jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
+                     }
+                     if (a->data)
+                        jo_string (j, "data", (char *) a->data);
+                     revk_info ("start", &j);
+                  }
+                  const char *e = a->app (a);
+                  if (e)
+                     a->stop = 1;
+                  a->cycle++;
+                  if (a->stop && !--a->stop)
+                  {
+                     uint8_t preset = a->preset;
+                     appzap (a);
+                     if (preset)
+                     {          // Last one?
+                        int i;
+                        for (i = 0; i < MAXAPPS; i++)
+                           if (active[i].preset == preset)
+                              break;
+                        if (i == MAXAPPS)
+                        {       // Has turned off preset
+                           haon &= ~(1ULL << (preset - 1));
+                           hastatus |= (1ULL << (preset - 1));
+                        }
+                     }
+                  } else if (!a->stop && a->limit && a->cycle >= a->limit)
+                     a->stop = a->fade; // Tell app to stop
+                  if (!a->app)
+                  {             // Done
+                     jo_t j = jo_object_alloc ();
+                     jo_int (j, "level", i);
+                     jo_string (j, "app", name);
+                     if (e && *e)
+                        jo_string (j, "error", e);
+                     revk_info ("done", &j);
                   }
                }
-            } else if (!a->stop && a->limit && a->cycle >= a->limit)
-               a->stop = a->fade;       // Tell app to stop
-            if (!a->app)
-            {                   // Done
-               jo_t j = jo_object_alloc ();
-               jo_int (j, "level", i);
-               jo_string (j, "app", name);
-               if (e && *e)
-                  jo_string (j, "error", e);
-               revk_info ("done", &j);
             }
-         }
-      }
       xSemaphoreGive (app_mutex);
       for (unsigned int i = 0; i < leds; i++)
       {
@@ -855,37 +857,39 @@ web_root (httpd_req_t * req)
    }
    revk_web_send (req, "<h1>LED controller: %s</h1><ul>", hostname);
    xSemaphoreTake (app_mutex, portMAX_DELAY);
-   for (unsigned int i = 0; i < MAXAPPS; i++)
-   {
-      app_t *a = &active[i];
-      if (a->app && *a->name && !a->stop)
-      {
-         revk_web_send (req, "<li><b>%s</b>", a->name);
-         if (a->preset)
-            revk_web_send (req, " preset=%s", haname[a->preset - 1]);
-         if (a->start && a->start != 1)
-            revk_web_send (req, " start=%d", a->start);
-         if (a->len && a->len != leds)
-            revk_web_send (req, " len=%d", a->len);
-         if (a->bright < 255)
-            revk_web_send (req, " bright=%d", a->bright);
-         if (a->delay)
-            revk_web_send (req, " delay=%.1f", 1.0 * a->delay / cps);
-         if (a->limit)
-            revk_web_send (req, " limit=%.1f", 1.0 * a->limit / cps);
-         if (a->speed != cps)
-            revk_web_send (req, " speed=%.1f", 1.0 * a->speed / cps);
-         if (a->fade != cps)
-            revk_web_send (req, " fade=%.1f", 1.0 * a->fade / cps);
-         if (a->colourset)
-            revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
-         if (a->rainbow)
-            revk_web_send (req, "(rainbow)");
-         if (a->cycling)
-            revk_web_send (req, "(cycling)");
-         revk_web_send (req, "</li>");
-      }
-   }
+   for (int preset = 0; preset <= PRESETS; preset++)
+      if (!preset || *haname[preset - 1])
+         for (unsigned int i = 0; i < MAXAPPS; i++)
+         {
+            app_t *a = &active[i];
+            if (a->preset == preset && a->app && *a->name && !a->stop)
+            {
+               revk_web_send (req, "<li><b>%s</b>", a->name);
+               if (a->preset)
+                  revk_web_send (req, " preset=%s", haname[a->preset - 1]);
+               if (a->start && a->start != 1)
+                  revk_web_send (req, " start=%d", a->start);
+               if (a->len && a->len != leds)
+                  revk_web_send (req, " len=%d", a->len);
+               if (a->bright < 255)
+                  revk_web_send (req, " bright=%d", a->bright);
+               if (a->delay)
+                  revk_web_send (req, " delay=%.1f", 1.0 * a->delay / cps);
+               if (a->limit)
+                  revk_web_send (req, " limit=%.1f", 1.0 * a->limit / cps);
+               if (a->speed != cps)
+                  revk_web_send (req, " speed=%.1f", 1.0 * a->speed / cps);
+               if (a->fade != cps)
+                  revk_web_send (req, " fade=%.1f", 1.0 * a->fade / cps);
+               if (a->colourset)
+                  revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
+               if (a->rainbow)
+                  revk_web_send (req, "(rainbow)");
+               if (a->cycling)
+                  revk_web_send (req, "(cycling)");
+               revk_web_send (req, "</li>");
+            }
+         }
    xSemaphoreGive (app_mutex);
    revk_web_send (req,
                   "</ul><fieldset><legend>Effect</legend><form method=get><p><input name='colour' placeholder='RGB' size=6></p><p><input name='data' placeholder='Data'></p><p>");
