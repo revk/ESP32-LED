@@ -11,7 +11,7 @@ apppulse (app_t * a)
          a->cycling = 1;
    }
 
-   uint8_t l = a->bright - cos8[a->step & 255],
+   uint8_t l = a->bright*(255 - cos8[a->step & 255])/255,
       q;
    if (a->stop && (q = a->bright * a->stop / a->fade) < l)
       l = q;
