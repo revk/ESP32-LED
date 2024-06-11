@@ -118,4 +118,4 @@ You can configure Home Assistant use. For this you enable `haenable` and set one
 
 The preset configuration `haconfig[]` can be a complete set of multiple effects, in which case the *light* in HA has colour and brightness. Or it can be just the attributes for an effect (e.g. `len`, `start`, etc) in which case HA sees the *light* as having an *effect* as well, allowing any effect to be selected dynamically.
 
-The HA *lights* are layered as well as any lighting set by the web interface or MQTT, independently, based on HA turning the *lights* on or not.
+The HA *lights* are layered as well as any lighting set by the web interface or MQTT, independently, based on HA turning the *lights* on or not. The MQTT/web effects first, then each *on* preset, in order.
