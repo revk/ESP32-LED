@@ -12,7 +12,10 @@ Various stuff in one app that handles WS2812 LED strips, including
 - Block text: Scrolling text
 - Block text: Time
 - Laval lamp random effect
+- Blue/Red flashing
 - Other stuff in due course
+
+And now Home Assistant logic.
 
 See [Overview](Manuals/Overview.md)
 
