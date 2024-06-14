@@ -22,4 +22,4 @@ Available on [Amazon](https://www.amazon.co.uk/dp/B0C1W1XJS8)
 
 Includes PCB design (note, output in inverted).
 
-![311667](https://github.com/revk/ESP32-LED/assets/996983/41db1fb6-7f60-49eb-a38d-4297c6e6d450)
+![324010](https://github.com/revk/ESP32-LED/assets/996983/f45931ec-be1b-414d-9db5-1ff293da8e92)
