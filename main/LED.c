@@ -251,7 +251,7 @@ addapp (int index, int preset, const char *name, jo_t j)
                if (a->r || a->g || a->b)
                   a->colourset = 1;
             }
-            if (a->bright)
+            if (!a->bright)
                a->bright = habright[preset - 1];
          }
          if (!a->start)
