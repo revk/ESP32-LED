@@ -557,6 +557,7 @@ send_ha_config (void)
 {
    b.haconfig = 0;
    char *hastatus = revk_topic (topicstate, NULL, "ha");
+   char *lwt = revk_topic (topicstate, NULL, NULL);
    char *cmd = revk_topic (topiccommand, NULL, "ha");
    char *topic;
    jo_t make (int i, const char *icon)
@@ -575,6 +576,10 @@ send_ha_config (void)
       jo_close (j);
       if (icon)
          jo_string (j, "icon", icon);
+      jo_string (j, "avty_t", lwt);
+      jo_string (j, "avty_tpl", "{{value_json.up}}");
+      //jo_bool (j, "pl_avail", 1);
+      //jo_bool (j, "pl_not_avail", 0);
       return j;
    }
    for (int i = 0; i < PRESETS; i++)
@@ -617,6 +622,9 @@ send_ha_config (void)
          }
          free (topic);
       }
+   free (hastatus);
+   free (lwt);
+   free (cmd);
 }
 
 void
