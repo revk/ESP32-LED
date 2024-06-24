@@ -510,7 +510,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       }
       suffix = "init";
    }
-   if (suffix && strcmp (suffix, "add"))
+   if (suffix && strcmp (suffix, "add") && strcmp (suffix, "init"))
       return led_add (suffix, 0, j);
    // Process command to set apps
    xSemaphoreTake (app_mutex, portMAX_DELAY);
