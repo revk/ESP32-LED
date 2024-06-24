@@ -2446,7 +2446,7 @@
 				)
 			)
 		)
-		(symbol "RevK:TC2030-USB-NL-DS"
+		(symbol "RevK:TC2030-USB-NL"
 			(pin_names
 				(offset 1.016)
 			)
@@ -2461,7 +2461,7 @@
 					)
 				)
 			)
-			(property "Value" "TC2030-USB-NL-DS"
+			(property "Value" "TC2030-USB-NL"
 				(at 0 8.89 0)
 				(effects
 					(font
@@ -2469,7 +2469,7 @@
 					)
 				)
 			)
-			(property "Footprint" "RevK:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical_DoubleSided"
+			(property "Footprint" "RevK:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical"
 				(at -0.254 -9.144 0)
 				(effects
 					(font
@@ -2487,7 +2487,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "TC2030-USB-NL-DS"
+			(property "Description" "TC2030-USB-NL"
 				(at 0 12.7 0)
 				(effects
 					(font
@@ -2514,7 +2514,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "TC2030-USB-NL-DS_0_1"
+			(symbol "TC2030-USB-NL_0_1"
 				(rectangle
 					(start -5.08 7.62)
 					(end 5.08 -7.62)
@@ -2662,7 +2662,7 @@
 					)
 				)
 			)
-			(symbol "TC2030-USB-NL-DS_1_1"
+			(symbol "TC2030-USB-NL_1_1"
 				(circle
 					(center -3.81 0.635)
 					(radius 0.381)
@@ -2718,7 +2718,7 @@
 							)
 						)
 					)
-					(number "1A"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2736,43 +2736,7 @@
 							)
 						)
 					)
-					(number "1B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 5.08 180)
-					(length 2.54) hide
-					(name "VBUS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 5.08 180)
-					(length 2.54) hide
-					(name "VBUS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2B"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2790,25 +2754,7 @@
 							)
 						)
 					)
-					(number "3A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at 7.62 1.27 180)
-					(length 2.54) hide
-					(name "D-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3B"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2826,25 +2772,7 @@
 							)
 						)
 					)
-					(number "4A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at 7.62 -1.27 180)
-					(length 2.54) hide
-					(name "D+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4B"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2862,7 +2790,7 @@
 							)
 						)
 					)
-					(number "5A"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2880,43 +2808,7 @@
 							)
 						)
 					)
-					(number "5B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 -5.08 180)
-					(length 2.54) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 -5.08 180)
-					(length 2.54) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6B"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6607,7 +6499,7 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:TC2030-USB-NL-DS")
+		(lib_id "RevK:TC2030-USB-NL")
 		(at 216.535 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6632,7 +6524,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical_DoubleSided"
+		(property "Footprint" "RevK:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical"
 			(at 216.281 75.184 0)
 			(effects
 				(font
@@ -6650,7 +6542,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "TC2030-USB-NL-DS"
+		(property "Description" "TC2030-USB-NL"
 			(at 216.535 53.34 0)
 			(effects
 				(font
@@ -6659,41 +6551,23 @@
 				(hide yes)
 			)
 		)
-		(pin "1A"
+		(pin "1"
 			(uuid "5c8d007a-6249-4371-a3bc-da4cd6eb16bc")
 		)
-		(pin "1B"
+		(pin "2"
 			(uuid "576ca65e-6c41-4e5e-a477-4e421cb31dd2")
 		)
-		(pin "2A"
+		(pin "3"
 			(uuid "935051e9-7553-4240-82d0-1c98192532a9")
 		)
-		(pin "2B"
+		(pin "4"
 			(uuid "fc59e390-46a7-40be-b01b-3d8a81c9344e")
 		)
-		(pin "3A"
+		(pin "5"
 			(uuid "6c24205c-0825-42af-b8fd-09de287a757e")
 		)
-		(pin "3B"
+		(pin "6"
 			(uuid "0765c753-29d9-4195-aa9c-8f44ccdac61c")
-		)
-		(pin "4A"
-			(uuid "b6a4bedd-63c8-4033-b056-26358f669413")
-		)
-		(pin "4B"
-			(uuid "9a8b20ab-37c7-4d46-8bf4-e55e293b5fab")
-		)
-		(pin "5A"
-			(uuid "8f7e3fae-c157-4113-a20c-a7296e04ed73")
-		)
-		(pin "5B"
-			(uuid "622c469d-06e5-4c62-9e25-0cbb407e3804")
-		)
-		(pin "6A"
-			(uuid "417cf309-7e1c-47ba-b8f3-6fc46cca1692")
-		)
-		(pin "6B"
-			(uuid "2a7cae5a-75a8-490c-babb-ee71b2eec54c")
 		)
 		(instances
 			(project ""
