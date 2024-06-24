@@ -637,6 +637,8 @@ led_task (void *x)
       return;
    }
    uint8_t led_status = (blink[0].num == rgb.num ? 1 : 0);
+   if (!led_status)
+      revk_blink_init ();       // Library blink
    ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb.num, rgb.invert ? " (inverted)" : "", leds,
              led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
    led_strip_handle_t strip = NULL;
@@ -799,6 +801,8 @@ led_task (void *x)
       }
       if (led_status)
          revk_led (strip, 0, 255, revk_blinker ());
+      else
+         revk_blink_do ();      // Library blink
       REVK_ERR_CHECK (led_strip_refresh (strip));
    }
 }
