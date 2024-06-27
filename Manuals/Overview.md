@@ -108,6 +108,6 @@ You can configure settings for a number of virtual strips. This allows the vario
 
 You can configure Home Assistant use. For this you enable `haenable`. Each virtual strip can be a *light* if you set the HA name on the virtual strip.
 
-If you leave `effect` not set, then HA can send an effect setting as well.
+If you leave `effect` not set, then HA can send an effect setting as well. If HA sets an effect, but the `config` is defined as multiple effects, `"*"` can be used as the selected effect.
 
 The HA *lights* are layered as well as any lighting set by the web interface or MQTT, independently, based on HA turning the *lights* on or not. The MQTT/web effects first, then each *on* preset, in order.

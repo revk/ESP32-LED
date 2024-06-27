@@ -121,6 +121,8 @@ addapp (int index, int preset, const char *name, jo_t j)
 {                               // Assumes mutex, store an app
    if (index >= MAXAPPS)
       return NULL;
+   if (!strcmp (name, "*") && preset && haeffect[preset - 1] && *haeffect[preset - 1])
+      name = haeffect[preset - 1];
    app_t *a = &active[index];
    if (!name || !*name)
       appzap (a);
@@ -348,6 +350,8 @@ led_stop (void)
 const char *
 led_add (const char *tag, int preset, jo_t j)
 {
+   if (!strcmp (tag, "*") && preset && haeffect[preset - 1] && *haeffect[preset - 1])
+      tag = haeffect[preset - 1];
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (tag, applist[i].name))
       {                         // Direct command
