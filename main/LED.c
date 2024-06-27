@@ -433,7 +433,7 @@ presetcheck (void)
             if (haeffect[preset])
                addapp (index++, preset + 1, haeffect[preset], j);       // Effect based
             else if (effect[preset])
-               addapp (index++, preset + 1, effect[preset], j);       // Effect based
+               addapp (index++, preset + 1, effect[preset], j); // Effect based
             else
                index = app_json (index, preset + 1, j);
             jo_free (&j);
@@ -518,20 +518,27 @@ app_callback (int client, const char *prefix, const char *target, const char *su
          led_stop ();
          return NULL;
       }
-      suffix = "init";
+      suffix = "1";
    }
-   if (suffix && strcmp (suffix, "add") && strcmp (suffix, "init"))
+   if (suffix && strcmp (suffix, "add") && strcmp (suffix, "init") && !isdigit ((int) (unsigned char) *suffix))
       return led_add (suffix, 0, j);
    // Process command to set apps
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    int index = apptidy (suffix ? 0 : 1);
    if (!suffix)
       index = 0;                // Overwrite existing
-   if (suffix && !strcmp (suffix, "init"))
-   {
-      jo_t j = jo_parse_str (config[0]);
-      index = app_json (index, 1, j);
-      jo_free (&j);
+   if (poweron && suffix && !strcmp (suffix, "init"))
+   {                            // Power on init
+      haon |= 1;
+      hachanged |= 1;
+   } else if (suffix && isdigit ((int) (unsigned char) *suffix))
+   {                            // Toggle light
+      int p = atoi (suffix);
+      if (p && p <= CONFIG_REVK_WEB_EXTRA_PAGES)
+      {
+         haon ^= (1ULL << (p - 1));
+         hachanged |= (1ULL << (p - 1));
+      }
    } else
       index = app_json (index, 0, j);
    xSemaphoreGive (app_mutex);
@@ -835,7 +842,7 @@ revk_web_extra (httpd_req_t * req, int page)
       add ("speed");
       add ("fade");
       revk_web_send (req,
-                     "<tr><td colspan=3>You can also set a JSON config, either for this effect, or multiple effects covering any parts of the strip (the above are defaults).</td></tr>");
+                     "<tr><td colspan=3>You can also set a JSON config, either for this named effect (above), or if not a named effect, multiple effects can be set. This can cover any parts of the strip (the above are defaults).</td></tr>");
       add ("config");
    }
 }
@@ -930,6 +937,15 @@ web_root (httpd_req_t * req)
 #define a(x,d) button(#x);
 #include "apps.h"
    button ("stop");
+   revk_web_send (req, "</p><p>");
+   for (int p = 1; p <= CONFIG_REVK_WEB_EXTRA_PAGES; p++)
+   {
+      if (!*config[p - 1] && !*effect[p - 1])
+         continue;
+      char temp[10];
+      sprintf (temp, "%d", p);
+      button (temp);
+   }
    revk_web_send (req, "</p></form></fieldset>");
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
 }
