@@ -30,6 +30,48 @@
 typedef struct app_s app_t;
 typedef const char *app_f (app_t *);    // Return NULL normally, "" for normal end, other string for error
 
+struct app_s
+{                               // Note LED number start from 1 with 0 meaning not set, stage 0 means app should sanity check parameters
+   const char *name;
+   app_f *app;
+#define u8(s,n,d)		uint8_t n;
+#define u8d(s,n,d)		uint8_t n;
+#define u8r(s,n,d)	uint8_t n;
+#define u16(s,n,d)	uint16_t n;
+#define u16r(s,n,d)	uint16_t n;
+#define s8(s,n,d)		int8_t n;
+#define s8r(s,n,d)	int8_t n;
+#define s16r(s,n,d)	int16_t n;
+#define u32(s,n,d)	uint32_t n;
+#define u32d(s,n,d)	uint32_t n;
+     params
+#undef	u8
+#undef	u8d
+#undef	u8r
+#undef	u16
+#undef	u16r
+#undef	s8
+#undef	s8r
+#undef	s16r
+#undef	u32
+#undef	u32d
+      // Common settings
+     uint8_t preset;            // If this is a preset
+   uint8_t r,
+     g,
+     b;                         // Colour
+   uint8_t stop;                // If set this is a count down to stopping, typically to fade out
+   uint8_t colourset:1;         // Colour is set
+   uint8_t rainbow:1;           // Colour should be rainbow along strip
+   uint8_t wheel:1;             // Colour should be cycled over time
+   uint8_t cycling:1;           // Colour should be cycled over time (more overlap)
+   // Scratchpad for apps
+   uint32_t cycle;              // This is set by caller - counts the cycle since started
+   uint32_t stage;              // The stage of a sequential display
+   uint32_t step;               // Steps in the stage
+   void *data;                  // Malloc'd data area
+};
+
 extern uint8_t *ledr;           // The current LED, set by the apps
 extern uint8_t *ledg;           // The current LED, set by the apps
 extern uint8_t *ledb;           // The current LED, set by the apps
@@ -116,43 +158,13 @@ setrgbl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t l)
    ledb[index - 1] = ((int) l * b + (int) (255 - l) * ledb[index - 1]) / 255;
 }
 
-#define	setl(i,a,l)		setrgbl(i,a->r,a->g,a->b,l)
-
-struct app_s
-{                               // Note LED number start from 1 with 0 meaning not set, stage 0 means app should sanity check parameters
-   const char *name;
-   app_f *app;
-#define u8(s,n,d)		uint8_t n;
-#define u8d(s,n,d)		uint8_t n;
-#define u8r(s,n,d)	uint8_t n;
-#define u16(s,n,d)	uint16_t n;
-#define u16r(s,n,d)	uint16_t n;
-#define s8(s,n,d)		int8_t n;
-#define s8r(s,n,d)	int8_t n;
-#define s16r(s,n,d)	int16_t n;
-#define u32(s,n,d)	uint32_t n;
-#define u32d(s,n,d)	uint32_t n;
-     params
-#undef	u8
-#undef	u8d
-#undef	u8r
-#undef	u16
-#undef	u16r
-#undef	s8
-#undef	s8r
-#undef	s16r
-#undef	u32
-#undef	u32d
-      // Common settings
-	     uint8_t preset;	// If this is a preset
-     uint8_t r, g, b;           // Colour
-   uint8_t stop;                // If set this is a count down to stopping, typically to fade out
-   uint8_t colourset:1;         // Colour is set
-   uint8_t rainbow:1;           // Colour should be cycled
-   uint8_t cycling:1;           // Colour should be cycled - more overlap than rainbow
-   // Scratchpad for apps
-   uint32_t cycle;              // This is set by caller - counts the cycle since started
-   uint32_t stage;              // The stage of a sequential display
-   uint32_t step;               // Steps in the stage
-   void *data;                  // Malloc'd data area
-};
+static inline void
+setl (uint16_t i, app_t * a, uint8_t l)
+{
+   if (a->rainbow)
+   {
+      uint8_t p = 255 - 255 * ((a->len + i - a->start) % a->len) / a->len;
+      setrgbl (i, wheel[p], wheel[(p + 85) & 255], wheel[(p + 170) & 255], l);
+   } else
+      setrgbl (i, a->r, a->g, a->b, l);
+}

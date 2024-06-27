@@ -132,6 +132,8 @@ addapp (int index, int preset, const char *name, jo_t j)
                a->colourset = a->rainbow = 1;
             else if (!strcasecmp (temp, "cycling"))
                a->colourset = a->cycling = 1;
+            else if (!strcasecmp (temp, "wheel"))
+               a->colourset = a->wheel = 1;
 #define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
             colours
 #undef c
@@ -706,7 +708,7 @@ led_task (void *x)
                      a->delay--;
                      continue;
                   }
-                  if (a->rainbow)
+                  if (a->wheel)
                   {             // Cycle the colour
                      a->r = wheel[(255 - a->cycle) & 255];
                      a->g = wheel[(255 - a->cycle + 85) & 255];
@@ -745,6 +747,8 @@ led_task (void *x)
 #undef  u32d
                         if (a->rainbow)
                         jo_string (j, "colour", "rainbow");
+                     else if (a->wheel)
+                        jo_string (j, "colour", "wheel");
                      else if (a->cycling)
                         jo_string (j, "colour", "cycling");
                      else if (a->colourset)
@@ -915,18 +919,20 @@ web_root (httpd_req_t * req)
                   revk_web_send (req, " speed=%.1f", 1.0 * a->speed / cps);
                if (a->fade != cps)
                   revk_web_send (req, " fade=%.1f", 1.0 * a->fade / cps);
-               if (a->colourset)
-                  revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
                if (a->rainbow)
-                  revk_web_send (req, "(rainbow)");
+                  revk_web_send (req, "colour=rainbow");
+	       else if (a->colourset)
+                  revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
                if (a->cycling)
                   revk_web_send (req, "(cycling)");
+               if (a->wheel)
+                  revk_web_send (req, "(wheel)");
                revk_web_send (req, "</li>");
             }
          }
    xSemaphoreGive (app_mutex);
    revk_web_send (req,
-                  "</ul><p><a href=/>Reload</a></p><form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#RGB' size=6> or <tt>rainbow</tt> or <tt>cycling</tt>.</p><p>");
+                  "</ul><p><a href=/>Reload</a></p><form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#RGB' size=6> or <tt>rainbow</tt> or <tt>wheel</tt> or <tt>cycling</tt>.</p><p>");
    void button (const char *tag)
    {
       revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);

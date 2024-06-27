@@ -13,7 +13,7 @@
 //
    a (idle, Idle)               //
    a (pulse, Pulse)             //
-   a (rainbow, Rainbow)		//
+   a (bargraph, Bargraph)	//
    a (cylon, Cylon)             //
    a (countdown, Countdown)     //
    a (random, Random)           //
@@ -21,7 +21,7 @@
    a (neenaw, Nee Naw)		//
    r (clock, Clock face)        //
    r (stargate, Stargate dialling)
-   // Ring
+   // Ring/loop
    r (spin, Spin)               //
    r (lava, Lava Lamp)          //
    t (text, Text)               //
