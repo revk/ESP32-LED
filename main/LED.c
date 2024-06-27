@@ -100,11 +100,11 @@ app_t active[MAXAPPS] = { 0 };
 uint64_t haon = 0;              // Bits, which are on
 uint64_t hachanged = 0;         // Bits, which are changed and need updating to active[]
 uint64_t hastatus = 0;          // Bits, which need status report
-uint8_t har[PRESETS] = { 0 };   // Colour
-uint8_t hag[PRESETS] = { 0 };
-uint8_t hab[PRESETS] = { 0 };
-uint8_t habright[PRESETS] = { 0 };      // Brightness
-const char *haeffect[PRESETS] = { 0 };  // Selected effect
+uint8_t har[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };   // Colour
+uint8_t hag[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
+uint8_t hab[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
+uint8_t habright[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };      // Brightness
+const char *haeffect[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };  // Selected effect
 
 static SemaphoreHandle_t app_mutex = NULL;
 
@@ -241,7 +241,7 @@ addapp (int index, int preset, const char *name, jo_t j)
          } else if (j && jo_here (j) == JO_NUMBER)
             a->limit = limit_scale * jo_read_float (j);
          // Defaults
-         if (preset && preset <= PRESETS)
+         if (preset && preset <= CONFIG_REVK_WEB_EXTRA_PAGES)
          {                      // preset based settings
             if (!a->colourset)
             {
@@ -418,7 +418,7 @@ presetcheck (void)
    if (found)
    {                            // add missing
       int index = apptidy (0);
-      for (int preset = 0; preset < PRESETS; preset++)
+      for (int preset = 0; preset < CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
          if (found & (1ULL << preset))
          {
             jo_t j = jo_parse_str (haconfig[preset]);
@@ -448,7 +448,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    {                            // HA command
       char val[20];
       int preset = atoi (suffix + 2);
-      if (!preset || preset > PRESETS)
+      if (!preset || preset > CONFIG_REVK_WEB_EXTRA_PAGES)
          return "Unknown preset number";
       if (jo_find (j, "state"))
       {                         // ON/OFF
@@ -533,7 +533,7 @@ send_ha_status (void)
 {
    uint64_t send = hastatus;
    hastatus = 0;
-   for (int preset = 0; preset < PRESETS; preset++)
+   for (int preset = 0; preset < CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
       if ((send & (1ULL << preset)) && *haname[preset])
       {
          jo_t j = jo_object_alloc ();
@@ -582,7 +582,7 @@ send_ha_config (void)
       jo_bool (j, "pl_not_avail", 0);
       return j;
    }
-   for (int i = 0; i < PRESETS; i++)
+   for (int i = 0; i < CONFIG_REVK_WEB_EXTRA_PAGES; i++)
       if (asprintf (&topic, "homeassistant/light/%s-%d/config", revk_id, i + 1) >= 0)
       {
          if (!haenable || !*haname[i])
@@ -694,7 +694,7 @@ led_task (void *x)
       usleep (tick - (esp_timer_get_time () % tick));
       clear (1, leds);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
-      for (int preset = 0; preset <= PRESETS; preset++)
+      for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
          if (!preset || *haname[preset - 1])
             for (unsigned int i = 0; i < MAXAPPS; i++)
             {
@@ -811,7 +811,7 @@ void
 revk_web_extra (httpd_req_t * req, int page)
 {
    revk_web_setting (req, "Home Assistant", "haenable");
-   for (int i = 0; i < PRESETS; i++)
+   for (int i = 0; i < CONFIG_REVK_WEB_EXTRA_PAGES; i++)
    {
       revk_web_send (req, "<tr><td colspan=3><hr></td></tr>");
       char name[20],
@@ -869,7 +869,7 @@ web_root (httpd_req_t * req)
    }
    revk_web_send (req, "<h1>LED controller: %s</h1><ul>", hostname);
    xSemaphoreTake (app_mutex, portMAX_DELAY);
-   for (int preset = 0; preset <= PRESETS; preset++)
+   for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
       if (!preset || *haname[preset - 1])
          for (unsigned int i = 0; i < MAXAPPS; i++)
          {
