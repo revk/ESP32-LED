@@ -21,7 +21,7 @@
    a (neenaw, Nee Naw)		//
    r (clock, Clock face)        //
    r (stargate, Stargate dialling)
-   //
+   // Ring
    r (spin, Spin)               //
    r (lava, Lava Lamp)          //
    t (text, Text)               //

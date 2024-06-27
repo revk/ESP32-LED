@@ -100,11 +100,11 @@ app_t active[MAXAPPS] = { 0 };
 uint64_t haon = 0;              // Bits, which are on
 uint64_t hachanged = 0;         // Bits, which are changed and need updating to active[]
 uint64_t hastatus = 0;          // Bits, which need status report
-uint8_t har[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };   // Colour
+uint8_t har[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };       // Colour
 uint8_t hag[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
 uint8_t hab[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
-uint8_t habright[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };      // Brightness
-const char *haeffect[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };  // Selected effect
+uint8_t habright[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };  // Brightness
+const char *haeffect[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };      // Selected effect
 
 static SemaphoreHandle_t app_mutex = NULL;
 
@@ -126,10 +126,8 @@ addapp (int index, int preset, const char *name, jo_t j)
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
       {
-         uint8_t setcolour (jo_t j)
+         uint8_t setcolourstr (char *temp)
          {
-            char temp[20];
-            jo_strncpy (j, temp, sizeof (temp));
             if (!strcasecmp (temp, "rainbow"))
                a->colourset = a->rainbow = 1;
             else if (!strcasecmp (temp, "cycling"))
@@ -160,13 +158,22 @@ addapp (int index, int preset, const char *name, jo_t j)
             return 1;
 #undef x
          }
+         uint8_t setcolour (jo_t j)
+         {
+            char temp[20];
+            jo_strncpy (j, temp, sizeof (temp));
+            return setcolourstr (temp);
+         }
          if (!a->app || a->name != applist[i].name || a->stop)
             appzap (a);
          a->name = applist[i].name;
-         // Defaults
-#define u8(s,n,d)         a->n=n;
+         if (preset)
+         {                      // Defaults from preset
+            if (*colour[preset - 1])
+               setcolourstr (colour[preset - 1]);
+#define u8(s,n,d)         a->n=n[preset-1];
 #define u8d(s,n,d)        u8(s,n,d)
-#define u8r(s,n,d)        if(applist[i].ring)a->n=(ring##n?:n); else u8(s,n,d)
+#define u8r(s,n,d)        u8(s,n,d)
 #define u16(s,n,d)         u8(s,n,d)
 #define u16r(s,n,d)        u8r(s,n,d)
 #define s8(s,n,d)        u8(s,n,d)
@@ -174,7 +181,7 @@ addapp (int index, int preset, const char *name, jo_t j)
 #define s16r(s,n,d)        u16r(s,n,d)
 #define u32(s,n,d)        u8(s,n,d)
 #define u32d(s,n,d)        u8(s,n,d)
-         params
+            params
 #undef  u8
 #undef  u8d
 #undef  u8r
@@ -185,7 +192,8 @@ addapp (int index, int preset, const char *name, jo_t j)
 #undef  s16r
 #undef  u32
 #undef  u32d
-            if (j && jo_here (j) == JO_OBJECT)
+         }
+         if (j && jo_here (j) == JO_OBJECT)
          {                      // Expects to be at start of object
             while (jo_next (j) == JO_TAG)
             {
@@ -421,9 +429,11 @@ presetcheck (void)
       for (int preset = 0; preset < CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
          if (found & (1ULL << preset))
          {
-            jo_t j = jo_parse_str (haconfig[preset]);
+            jo_t j = jo_parse_str (config[preset]);
             if (haeffect[preset])
                addapp (index++, preset + 1, haeffect[preset], j);       // Effect based
+            else if (effect[preset])
+               addapp (index++, preset + 1, effect[preset], j);       // Effect based
             else
                index = app_json (index, preset + 1, j);
             jo_free (&j);
@@ -519,8 +529,8 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       index = 0;                // Overwrite existing
    if (suffix && !strcmp (suffix, "init"))
    {
-      jo_t j = jo_parse_str (init);
-      index = app_json (index, 0, j);
+      jo_t j = jo_parse_str (config[0]);
+      index = app_json (index, 1, j);
       jo_free (&j);
    } else
       index = app_json (index, 0, j);
@@ -534,7 +544,7 @@ send_ha_status (void)
    uint64_t send = hastatus;
    hastatus = 0;
    for (int preset = 0; preset < CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
-      if ((send & (1ULL << preset)) && *haname[preset])
+      if ((send & (1ULL << preset)) && *name[preset])
       {
          jo_t j = jo_object_alloc ();
          jo_string (j, "state", (haon & (1ULL << preset)) ? "ON" : "OFF");
@@ -585,17 +595,17 @@ send_ha_config (void)
    for (int i = 0; i < CONFIG_REVK_WEB_EXTRA_PAGES; i++)
       if (asprintf (&topic, "homeassistant/light/%s-%d/config", revk_id, i + 1) >= 0)
       {
-         if (!haenable || !*haname[i])
+         if (!haenable || !*name[i])
             revk_mqtt_send (NULL, 1, topic, NULL);
          else
          {
             jo_t j = make (i, "mdi:led-strip");
-            jo_string (j, "name", haname[i]);
+            jo_string (j, "name", name[i]);
             jo_stringf (j, "cmd_t", "%s%d", cmd, i + 1);
             jo_stringf (j, "stat_t", "%s%d", hastatus, i + 1);
             jo_string (j, "schema", "json");
             {                   // Effect?
-               jo_t j = jo_parse_str (haconfig[i]);
+               jo_t j = jo_parse_str (config[i]);
                if (j && !jo_error (j, NULL) && jo_here (j) != JO_END
                    && (jo_here (j) != JO_OBJECT || (jo_next (j) == JO_TAG && jo_next (j) == JO_OBJECT)))
                {                // Full config
@@ -661,28 +671,12 @@ led_task (void *x)
    ledr = calloc (leds, sizeof (*ledr));
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
-   if (*init)
-   {
-      jo_t j = jo_parse_str (init);
-      jo_skip (j);
-      int pos;
-      const char *er = jo_error (j, &pos);
-      if (er)
-      {
-         if (!addapp (0, 0, init, NULL))
-            ESP_LOGE (TAG, "App Init was not JSON, %s (%s at %s)", init, er, init + pos);
-      } else
-      {
-         ESP_LOGI (TAG, "App Init JSON %s", init);
-         jo_rewind (j);
-         app_callback (0, topiccommand, NULL, NULL, j);
-      }
+   if (poweron)
+   {                            // Light 1 is default
+      haon = 1;
+      hachanged = 1;
    }
-   if (!cps)
-      cps = 10;
    uint32_t tick = 1000000LL / cps;
-   if (!leds)
-      leds = 1;
    while (1)
    {                            // Main loop
       if (b.hacheck)
@@ -695,7 +689,7 @@ led_task (void *x)
       clear (1, leds);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
       for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
-         if (!preset || *haname[preset - 1])
+         if (!preset || *name[preset - 1])
             for (unsigned int i = 0; i < MAXAPPS; i++)
             {
                app_t *a = &active[i];
@@ -810,17 +804,39 @@ led_task (void *x)
 void
 revk_web_extra (httpd_req_t * req, int page)
 {
-   revk_web_setting (req, "Home Assistant", "haenable");
-   for (int i = 0; i < CONFIG_REVK_WEB_EXTRA_PAGES; i++)
+   if (!page)
    {
-      revk_web_send (req, "<tr><td colspan=3><hr></td></tr>");
-      char name[20],
-        prompt[20];
-      sprintf (prompt, "Preset name %d", i + 1);
-      sprintf (name, "haname%d", i + 1);
-      revk_web_setting (req, prompt, name);
-      sprintf (name, "haconfig%d", i + 1);
-      revk_web_setting (req, "Config", name);
+      revk_web_setting (req, NULL, "dark");
+      revk_web_setting (req, NULL, "leds");
+      revk_web_setting (req, NULL, "poweron");
+      revk_web_setting (req, NULL, "haenable");
+   } else
+   {
+      revk_web_send (req,
+                     "<tr><td colspan=3>Virtual strips are <i>lights</i> in Home Assistant. These can overlap if required.</td></tr>");
+      if (!page)
+         revk_web_send (req, "<tr><td colspan=3>This is the setting applied at power on.</td></tr>");
+      void add (const char *tag)
+      {
+         char name[20];
+         sprintf (name, "%s%d", tag, page);
+         revk_web_setting (req, NULL, name);
+      }
+      if (haenable)
+         add ("name");
+      add ("effect");
+      add ("start");
+      add ("colour");
+      add ("len");
+      add ("top");
+      add ("bright");
+      add ("delay");
+      add ("limit");
+      add ("speed");
+      add ("fade");
+      revk_web_send (req,
+                     "<tr><td colspan=3>You can also set a JSON config, either for this effect, or multiple effects covering any parts of the strip (the above are defaults).</td></tr>");
+      add ("config");
    }
 }
 
@@ -870,7 +886,7 @@ web_root (httpd_req_t * req)
    revk_web_send (req, "<h1>LED controller: %s</h1><ul>", hostname);
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
-      if (!preset || *haname[preset - 1])
+      if (!preset || *name[preset - 1])
          for (unsigned int i = 0; i < MAXAPPS; i++)
          {
             app_t *a = &active[i];
@@ -878,7 +894,7 @@ web_root (httpd_req_t * req)
             {
                revk_web_send (req, "<li><b>%s</b>", a->name);
                if (a->preset)
-                  revk_web_send (req, " preset=%s", haname[a->preset - 1]);
+                  revk_web_send (req, " preset=%s", name[a->preset - 1]);
                if (a->start && a->start != 1)
                   revk_web_send (req, " start=%d", a->start);
                if (a->len && a->len != leds)
@@ -909,7 +925,7 @@ web_root (httpd_req_t * req)
    {
       revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);
    }
-   if (*init)
+   if (*config[0])
       button ("init");
 #define a(x,d) button(#x);
 #include "apps.h"
@@ -1038,6 +1054,8 @@ app_main ()
    matter_main ();
 #endif
    revk_start ();
+   if (!cps)
+      cps = 10;
    if (dark)
       revk_blink (0, 0, "K");
    if (sda.set && scl.set)
@@ -1057,6 +1075,8 @@ app_main ()
    }
    if (cps < 10)
       cps = 10;                 // Safety for division
+   if (!leds)
+      leds = 1;
    memset (habright, 128, sizeof (habright));
    memset (har, 255, sizeof (har));
    memset (hag, 0, sizeof (hag));
