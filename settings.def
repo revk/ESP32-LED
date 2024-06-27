@@ -40,5 +40,5 @@ u32	delay		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1	// Dela
 u32	limit		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1	// Time limit (s), default none
 u8	speed		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1	// Cycle time (s), default 1s
 u8	fade		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1	// Fade time (s), default 1s
-json	config		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Full config
+json	config		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .old="init"	// Full config
 
