@@ -28,7 +28,7 @@ u8	als	10	.hex=1				// Colour sensor ID
 bit	ha.enable	.hide=1				// Enable Home Assistant
 bit	poweron		1	.hide=1			// Start virtual strip 1 on power on
 
-s	name		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Name of HA preset (must be set to appear in HA)
+s	name		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Name (must be set to appear in HA)
 s	colour		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Colour (default depends on effect)
 u16	start		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// First LED (default 1)
 u16	top		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Top LED (default to first)

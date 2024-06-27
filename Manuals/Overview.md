@@ -102,13 +102,12 @@ Each app can have arguments.
 
 ## Virtual strips
 
-You can configure settings for a number of virtual strips. This allows the various settings.
-
+You can configure settings for a number of virtual strips. This allows the various settings, and a config JSON. If `effect` is set, the JSON is the various parameters for the effect. If not, then the config can be a JSON set of multiple effects. The config can cover all the strip, just using the settings as a default.
 
 ## Home Assistant
 
-You can configure Home Assistant use. For this you enable `haenable` and set one or more preset names `haname[]`. These then appear in HA as separate lights.
+You can configure Home Assistant use. For this you enable `haenable`. Each virtual strip can be a *light* if you set the HA name on the virtual strip.
 
-The preset configuration `haconfig[]` can be a complete set of multiple effects, in which case the *light* in HA has colour and brightness. Or it can be just the attributes for an effect (e.g. `len`, `start`, etc) in which case HA sees the *light* as having an *effect* as well, allowing any effect to be selected dynamically.
+If you leave `effect` not set, then HA can send an effect setting as well.
 
 The HA *lights* are layered as well as any lighting set by the web interface or MQTT, independently, based on HA turning the *lights* on or not. The MQTT/web effects first, then each *on* preset, in order.

@@ -100,11 +100,12 @@ app_t active[MAXAPPS] = { 0 };
 uint64_t haon = 0;              // Bits, which are on
 uint64_t hachanged = 0;         // Bits, which are changed and need updating to active[]
 uint64_t hastatus = 0;          // Bits, which need status report
+uint64_t hargb = 0;             // Bits, HA sent a colour
 uint8_t har[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };       // Colour
 uint8_t hag[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
 uint8_t hab[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
 uint8_t habright[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };  // Brightness
-const char *haeffect[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };      // Selected effect
+const char *haeffect[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };      // Selected effect from HA
 
 static SemaphoreHandle_t app_mutex = NULL;
 
@@ -253,7 +254,7 @@ addapp (int index, int preset, const char *name, jo_t j)
          // Defaults
          if (preset && preset <= CONFIG_REVK_WEB_EXTRA_PAGES)
          {                      // preset based settings
-            if (!a->colourset)
+            if (!a->colourset && (hargb & (1ULL << (preset - 1))))
             {
                a->r = har[preset - 1];
                a->g = hag[preset - 1];
@@ -497,10 +498,11 @@ app_callback (int client, const char *prefix, const char *target, const char *su
                else if (!strcmp (val, "b"))
                   hab[preset - 1] = v;
             }
+            hargb |= (1ULL << (preset - 1));
          }
          if (jo_find (j, "effect"))
          {                      // effect
-            if (!haeffect[preset - 1])
+            if (*effect[preset - 1])
                return "Effect not expected";
             jo_strncpy (j, val, sizeof (val));
             int i;
@@ -557,12 +559,15 @@ send_ha_status (void)
          jo_string (j, "state", (haon & (1ULL << preset)) ? "ON" : "OFF");
          jo_int (j, "brightness", habright[preset]);
          jo_string (j, "color_mode", "rgb");
-         if (haeffect[preset])
+         if (!*effect[preset] && haeffect[preset])
             jo_string (j, "effect", haeffect[preset]);
-         jo_object (j, "color");
-         jo_int (j, "r", har[preset]);
-         jo_int (j, "g", hab[preset]);
-         jo_int (j, "b", hab[preset]);
+         if (hargb & (1ULL << preset))
+         {
+            jo_object (j, "color");
+            jo_int (j, "r", har[preset]);
+            jo_int (j, "g", hab[preset]);
+            jo_int (j, "b", hab[preset]);
+         }
          char topic[10];
          snprintf (topic, sizeof (topic), "ha%d", preset + 1);
          revk_state (topic, &j);
@@ -611,23 +616,10 @@ send_ha_config (void)
             jo_stringf (j, "cmd_t", "%s%d", cmd, i + 1);
             jo_stringf (j, "stat_t", "%s%d", hastatus, i + 1);
             jo_string (j, "schema", "json");
-            {                   // Effect?
-               jo_t j = jo_parse_str (config[i]);
-               if (j && !jo_error (j, NULL) && jo_here (j) != JO_END
-                   && (jo_here (j) != JO_OBJECT || (jo_next (j) == JO_TAG && jo_next (j) == JO_OBJECT)))
-               {                // Full config
-                  haeffect[i] = NULL;
-               } else
-               {
-                  if (!haeffect[i])
-                     haeffect[i] = *effect[i] ? effect[i] : "idle";
-               }
-               jo_free (&j);
-            }
             jo_array (j, "supported_color_modes");
             jo_string (j, NULL, "rgb");
             jo_close (j);
-            if (haeffect[i])
+            if (!*effect[i])
             {
                jo_bool (j, "effect", 1);
                jo_array (j, "effect_list");
@@ -682,6 +674,7 @@ led_task (void *x)
    {                            // Light 1 is default
       haon = 1;
       hachanged = 1;
+      b.hacheck = 1;
    }
    uint32_t tick = 1000000LL / cps;
    while (1)
@@ -696,34 +689,33 @@ led_task (void *x)
       clear (1, leds);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
       for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
-         if (!preset || *name[preset - 1])
-            for (unsigned int i = 0; i < MAXAPPS; i++)
+         for (unsigned int i = 0; i < MAXAPPS; i++)
+         {
+            app_t *a = &active[i];
+            if (a->preset == preset && a->app)
             {
-               app_t *a = &active[i];
-               if (a->preset == preset && a->app)
-               {
-                  const char *name = a->name;
-                  if (a->delay)
-                  {             // Delayed start
-                     a->delay--;
-                     continue;
-                  }
-                  if (a->wheel)
-                  {             // Cycle the colour
-                     a->r = wheel[(255 - a->cycle) & 255];
-                     a->g = wheel[(255 - a->cycle + 85) & 255];
-                     a->b = wheel[(255 - a->cycle + 170) & 255];
-                  } else if (a->cycling)
-                  {             // Cycle the colour
-                     a->r = cos8[(255 - a->cycle) & 255];
-                     a->g = cos8[(255 - a->cycle + 85) & 255];
-                     a->b = cos8[(255 - a->cycle + 170) & 255];
-                  }
-                  if (!a->cycle)
-                  {             // Starting
-                     jo_t j = jo_object_alloc ();
-                     jo_int (j, "level", i);
-                     jo_string (j, "app", a->name);
+               const char *name = a->name;
+               if (a->delay)
+               {                // Delayed start
+                  a->delay--;
+                  continue;
+               }
+               if (a->wheel)
+               {                // Cycle the colour
+                  a->r = wheel[(255 - a->cycle) & 255];
+                  a->g = wheel[(255 - a->cycle + 85) & 255];
+                  a->b = wheel[(255 - a->cycle + 170) & 255];
+               } else if (a->cycling)
+               {                // Cycle the colour
+                  a->r = cos8[(255 - a->cycle) & 255];
+                  a->g = cos8[(255 - a->cycle + 85) & 255];
+                  a->b = cos8[(255 - a->cycle + 170) & 255];
+               }
+               if (!a->cycle)
+               {                // Starting
+                  jo_t j = jo_object_alloc ();
+                  jo_int (j, "level", i);
+                  jo_string (j, "app", a->name);
 #define u8(s,n,d)         if(a->n)jo_int(j,#n,a->n);
 #define u8d(s,n,d)         if(a->n)jo_litf(j,#n,"%.1f",1.0*a->n/cps);
 #define u8r(s,n,d)        u8(s,n,d)
@@ -734,7 +726,7 @@ led_task (void *x)
 #define s16r(s,n,d)        u8(s,n,d)
 #define u32(s,n,d)        u8(s,n,d)
 #define u32d(s,n,d)        u8d(s,n,d)
-                     params
+                  params
 #undef  u8
 #undef  u8d
 #undef  u8r
@@ -745,56 +737,56 @@ led_task (void *x)
 #undef  s16r
 #undef  u32
 #undef  u32d
-                        if (a->rainbow)
-                        jo_string (j, "colour", "rainbow");
-                     else if (a->wheel)
-                        jo_string (j, "colour", "wheel");
-                     else if (a->cycling)
-                        jo_string (j, "colour", "cycling");
-                     else if (a->colourset)
-                     {
-                        if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
-                           jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
-                        else
-                           jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
-                     }
-                     if (a->data)
-                        jo_string (j, "data", (char *) a->data);
-                     revk_info ("start", &j);
-                  }
-                  const char *e = a->app (a);
-                  if (e)
-                     a->stop = 1;
-                  a->cycle++;
-                  if (a->stop && !--a->stop)
+                     if (a->rainbow)
+                     jo_string (j, "colour", "rainbow");
+                  else if (a->wheel)
+                     jo_string (j, "colour", "wheel");
+                  else if (a->cycling)
+                     jo_string (j, "colour", "cycling");
+                  else if (a->colourset)
                   {
-                     uint8_t preset = a->preset;
-                     appzap (a);
-                     if (preset)
-                     {          // Last one?
-                        int i;
-                        for (i = 0; i < MAXAPPS; i++)
-                           if (active[i].preset == preset)
-                              break;
-                        if (i == MAXAPPS)
-                        {       // Has turned off preset
-                           haon &= ~(1ULL << (preset - 1));
-                           hastatus |= (1ULL << (preset - 1));
-                        }
-                     }
-                  } else if (!a->stop && a->limit && a->cycle >= a->limit)
-                     a->stop = a->fade; // Tell app to stop
-                  if (!a->app)
-                  {             // Done
-                     jo_t j = jo_object_alloc ();
-                     jo_int (j, "level", i);
-                     jo_string (j, "app", name);
-                     if (e && *e)
-                        jo_string (j, "error", e);
-                     revk_info ("done", &j);
+                     if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
+                        jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
+                     else
+                        jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
                   }
+                  if (a->data)
+                     jo_string (j, "data", (char *) a->data);
+                  revk_info ("start", &j);
+               }
+               const char *e = a->app (a);
+               if (e)
+                  a->stop = 1;
+               a->cycle++;
+               if (a->stop && !--a->stop)
+               {
+                  uint8_t preset = a->preset;
+                  appzap (a);
+                  if (preset)
+                  {             // Last one?
+                     int i;
+                     for (i = 0; i < MAXAPPS; i++)
+                        if (active[i].preset == preset)
+                           break;
+                     if (i == MAXAPPS)
+                     {          // Has turned off preset
+                        haon &= ~(1ULL << (preset - 1));
+                        hastatus |= (1ULL << (preset - 1));
+                     }
+                  }
+               } else if (!a->stop && a->limit && a->cycle >= a->limit)
+                  a->stop = a->fade;    // Tell app to stop
+               if (!a->app)
+               {                // Done
+                  jo_t j = jo_object_alloc ();
+                  jo_int (j, "level", i);
+                  jo_string (j, "app", name);
+                  if (e && *e)
+                     jo_string (j, "error", e);
+                  revk_info ("done", &j);
                }
             }
+         }
       xSemaphoreGive (app_mutex);
       for (unsigned int i = 0; i < leds; i++)
       {
@@ -831,8 +823,7 @@ revk_web_extra (httpd_req_t * req, int page)
          sprintf (name, "%s%d", tag, page);
          revk_web_setting (req, NULL, name);
       }
-      if (haenable)
-         add ("name");
+      add ("name");
       add ("effect");
       add ("start");
       add ("colour");
@@ -920,8 +911,8 @@ web_root (httpd_req_t * req)
                if (a->fade != cps)
                   revk_web_send (req, " fade=%.1f", 1.0 * a->fade / cps);
                if (a->rainbow)
-                  revk_web_send (req, "colour=rainbow");
-	       else if (a->colourset)
+                  revk_web_send (req, " colour=rainbow");
+               else if (a->colourset)
                   revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
                if (a->cycling)
                   revk_web_send (req, "(cycling)");
