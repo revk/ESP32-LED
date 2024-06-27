@@ -51,21 +51,9 @@ The main settings are :-
 
 Important, the settings and commands that take an LED position all start from LED `1` as the first LED. This is not as one would internally address an array, and is done deliberately to make `0` mean *unset* rather than the *first LED*.
 
-### Default arguments
-
-Apps take arguments of various sorts, but you can also set defaults which apply.
-
-For example, some apps are designed to work on an LED ring - this may be the whole LED strip, in which case you may not need any special settings, but it could also be part of a chain of LEDs with other things. To constrain the working of a ring based app to the ring, these settings are useful. If not set it is assumed the entire chain is one ring.
-
-|Setting|Meaning|
-|-------|-------|
-|`ringstart`|Number of first LED in the ring, electrically, numbered as 1st LED in chain as LED `1`.|
-|`ringlen`|How many LEDs in the ring, starting at `ringstart` (or 1st LED if not set).|
-|`ringtop`|For ring apps that need to know the orientation (e.g. `clock` and `stargate`) this is the LED number of the LED at the top of the ring. If not set then `ringstart` is assumed to be at the top. This can be set negative meaning reverse the ring.|
-
 ## "Apps"
 
-You can command one or more apps in order. There operation is stacked, e.g. `rainbow`,`clock` would do a `clock` on a defined `ring` but all LEDs not in that are `rainbow`. Some apps stop after a time, e.g. `stargate` and revert to whatever app is before them.
+You can command one or more apps in order. There operation is stacked, e.g. `idle`,`clock` would do a `clock` on a defined `ring` but all LEDs not in that are `idle` colour. Some apps stop after a time, e.g. `stargate` and revert to whatever app is before them.
 
 Each app can have arguments.
 
@@ -75,7 +63,7 @@ Each app can have arguments.
 |--------|-------|
 |`d`|`delay`|Delay before starting app. (seconds)|
 |`T`|`limit`|How long to run the app for. Some apps go forever if not set to a limited time. (seconds)|
-|`#`|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. Also allowed is `randbow` and `cycle`|
+|`#`|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. Also allowed is `rainbow` and `cycle` and `wheel`|
 |`s`|`start`|The first LED|
 |`l`|`len`|The number of LEDs|
 |`b`|`bright`|Main app brightness|
@@ -90,12 +78,12 @@ Each app can have arguments.
 |`cylon`|This runs an LED of colour specified (default is red) backwards and forwards, Cylon/Knightrider style|
 |`pulse`|This fades up and down the specified colour (default `cycle`) on all LEDs constantly.|
 |`neenaw`|Self explanatory.|
-|`rainbow`|Fixed rainbow.|
+|`bargraph`|Bargraph (based on brightness setting).|
 |`countdown`|Count LEDs until limit (default 60 seconds)|
 |`random`|Fading between random colours|
 |`twinkle`|All lights constantly fading different random levels of selected colour|
 
-### Ring apps
+### Ring/loop apps
 
 |App|Meaning|
 |---|-------|
@@ -111,6 +99,11 @@ Each app can have arguments.
 |`text`|Show text|
 |`kern`|Show text with kernin|
 |`time`|Show time as text|
+
+## Virtual strips
+
+You can configure settings for a number of virtual strips. This allows the various settings.
+
 
 ## Home Assistant
 
