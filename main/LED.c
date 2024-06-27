@@ -454,55 +454,66 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       hastatus = -1;
    }
-   if (suffix && !strncmp (suffix, "ha", 2) && isdigit ((int) (uint8_t) suffix[2]))
-   {                            // HA command
+   if (poweron && suffix && !strcmp (suffix, "init"))
+   {                            // Power on init
+      haon |= 1;
+      hachanged |= 1;
+      return NULL;
+   }
+   if (suffix && isdigit ((int) (uint8_t) * suffix))
+   {                            // HA command or web button
       char val[20];
-      int preset = atoi (suffix + 2);
+      int preset = atoi (suffix);
       if (!preset || preset > CONFIG_REVK_WEB_EXTRA_PAGES)
          return "Unknown preset number";
-      if (jo_find (j, "state"))
-      {                         // ON/OFF
-         jo_strncpy (j, val, sizeof (val));
-         if (!strcmp (val, "ON"))
-            haon |= (1ULL << (preset - 1));
-         else
-            haon &= ~(1ULL << (preset - 1));
-      }
-      if (jo_find (j, "brightness"))
-         habright[preset - 1] = jo_read_int (j);
-      if (jo_find (j, "color"))
-      {                         // r/g/b
-         while (jo_next (j) == JO_TAG)
-         {
+      if (!j || jo_find (j, "app"))
+         haon ^= (1ULL << (preset - 1));        // Just toggle
+      else
+      {
+         if (jo_find (j, "state"))
+         {                      // ON/OFF
             jo_strncpy (j, val, sizeof (val));
-            if (jo_next (j) != JO_NUMBER)
-               break;
-            int v = jo_read_int (j);
-            if (!strcmp (val, "r"))
-               har[preset - 1] = v;
-            else if (!strcmp (val, "g"))
-               hag[preset - 1] = v;
-            else if (!strcmp (val, "b"))
-               hab[preset - 1] = v;
+            if (!strcmp (val, "ON"))
+               haon |= (1ULL << (preset - 1));
+            else
+               haon &= ~(1ULL << (preset - 1));
          }
-      }
-      if (jo_find (j, "effect"))
-      {                         // effect
-         if (!haeffect[preset - 1])
-            return "Effect not expected";
-         jo_strncpy (j, val, sizeof (val));
-         int i;
-         for (i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-            if (!strcasecmp (val, applist[i].name))
-               break;
-         if (i == sizeof (applist) / sizeof (*applist))
-            return "Unknown effect";
-         if (haeffect[preset - 1] != applist[i].name)
-         {
-            for (int index = 0; index < MAXAPPS; index++)
-               if (active[index].preset == preset && !active[index].stop)
-                  active[index].stop = active[index].fade;      // Old effect stops
-            haeffect[preset - 1] = applist[i].name;
+         if (jo_find (j, "brightness"))
+            habright[preset - 1] = jo_read_int (j);
+         if (jo_find (j, "color"))
+         {                      // r/g/b
+            while (jo_next (j) == JO_TAG)
+            {
+               jo_strncpy (j, val, sizeof (val));
+               if (jo_next (j) != JO_NUMBER)
+                  break;
+               int v = jo_read_int (j);
+               if (!strcmp (val, "r"))
+                  har[preset - 1] = v;
+               else if (!strcmp (val, "g"))
+                  hag[preset - 1] = v;
+               else if (!strcmp (val, "b"))
+                  hab[preset - 1] = v;
+            }
+         }
+         if (jo_find (j, "effect"))
+         {                      // effect
+            if (!haeffect[preset - 1])
+               return "Effect not expected";
+            jo_strncpy (j, val, sizeof (val));
+            int i;
+            for (i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+               if (!strcasecmp (val, applist[i].name))
+                  break;
+            if (i == sizeof (applist) / sizeof (*applist))
+               return "Unknown effect";
+            if (haeffect[preset - 1] != applist[i].name)
+            {
+               for (int index = 0; index < MAXAPPS; index++)
+                  if (active[index].preset == preset && !active[index].stop)
+                     active[index].stop = active[index].fade;   // Old effect stops
+               haeffect[preset - 1] = applist[i].name;
+            }
          }
       }
       hachanged |= (1ULL << (preset - 1));
@@ -520,27 +531,14 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       }
       suffix = "1";
    }
-   if (suffix && strcmp (suffix, "add") && strcmp (suffix, "init") && !isdigit ((int) (unsigned char) *suffix))
+   if (suffix && strcmp (suffix, "add"))
       return led_add (suffix, 0, j);
    // Process command to set apps
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    int index = apptidy (suffix ? 0 : 1);
    if (!suffix)
       index = 0;                // Overwrite existing
-   if (poweron && suffix && !strcmp (suffix, "init"))
-   {                            // Power on init
-      haon |= 1;
-      hachanged |= 1;
-   } else if (suffix && isdigit ((int) (unsigned char) *suffix))
-   {                            // Toggle light
-      int p = atoi (suffix);
-      if (p && p <= CONFIG_REVK_WEB_EXTRA_PAGES)
-      {
-         haon ^= (1ULL << (p - 1));
-         hachanged |= (1ULL << (p - 1));
-      }
-   } else
-      index = app_json (index, 0, j);
+   index = app_json (index, 0, j);
    xSemaphoreGive (app_mutex);
    return NULL;
 }
@@ -575,7 +573,7 @@ send_ha_config (void)
    b.haconfig = 0;
    char *hastatus = revk_topic (topicstate, NULL, "ha");
    char *lwt = revk_topic (topicstate, NULL, NULL);
-   char *cmd = revk_topic (topiccommand, NULL, "ha");
+   char *cmd = revk_topic (topiccommand, NULL, "");
    char *topic;
    jo_t make (int i, const char *icon)
    {
@@ -620,7 +618,7 @@ send_ha_config (void)
                } else
                {
                   if (!haeffect[i])
-                     haeffect[i] = "idle";
+                     haeffect[i] = *effect[i] ? effect[i] : "idle";
                }
                jo_free (&j);
             }
@@ -887,6 +885,7 @@ web_root (httpd_req_t * req)
             jo_strncpy (j, app, sizeof (app));
             jo_rewind (j);
             app_callback (0, topiccommand, NULL, app, j);
+            sleep (1);
          }
       }
    }
@@ -927,7 +926,7 @@ web_root (httpd_req_t * req)
          }
    xSemaphoreGive (app_mutex);
    revk_web_send (req,
-                  "</ul><fieldset><legend>Effect</legend><form method=get><p><input name='colour' placeholder='RGB' size=6></p><p><input name='data' placeholder='Data'></p><p>");
+                  "</ul><p><a href=/>Reload</a></p><form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#RGB' size=6> or <tt>rainbow</tt> or <tt>cycling</tt>.</p><p>");
    void button (const char *tag)
    {
       revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);
@@ -937,16 +936,20 @@ web_root (httpd_req_t * req)
 #define a(x,d) button(#x);
 #include "apps.h"
    button ("stop");
-   revk_web_send (req, "</p><p>");
+   revk_web_send (req, "</p></fieldset><fieldset><legend>Preset</legend><p>");
    for (int p = 1; p <= CONFIG_REVK_WEB_EXTRA_PAGES; p++)
    {
       if (!*config[p - 1] && !*effect[p - 1])
          continue;
       char temp[10];
       sprintf (temp, "%d", p);
+      revk_web_send (req, "<div style='display:inline-block;text-align:center;'>");
       button (temp);
+      if (*name[p - 1])
+         revk_web_send (req, "<br>%s", name[p - 1]);
+      revk_web_send (req, "</div>");
    }
-   revk_web_send (req, "</p></form></fieldset>");
+   revk_web_send (req, "</p></fieldset></form>");
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
 }
 
