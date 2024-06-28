@@ -172,10 +172,8 @@ addapp (int index, int preset, const char *name, jo_t j)
          if (!a->app || a->name != applist[i].name || a->stop)
             appzap (a);
          a->name = applist[i].name;
-         if (preset)
-         {                      // Defaults from preset
-            if (*colour[preset - 1])
-               setcolourstr (colour[preset - 1]);
+         if (*colour[preset ? preset - 1 : 0])
+            setcolourstr (colour[preset ? preset - 1 : 0]);
 #define u8(s,n,d)         a->n=n[preset-1];
 #define u8d(s,n,d)        u8(s,n,d)
 #define u8r(s,n,d)        u8(s,n,d)
@@ -186,7 +184,7 @@ addapp (int index, int preset, const char *name, jo_t j)
 #define s16r(s,n,d)        u16r(s,n,d)
 #define u32(s,n,d)        u8(s,n,d)
 #define u32d(s,n,d)        u8(s,n,d)
-            params
+         params
 #undef  u8
 #undef  u8d
 #undef  u8r
@@ -197,8 +195,7 @@ addapp (int index, int preset, const char *name, jo_t j)
 #undef  s16r
 #undef  u32
 #undef  u32d
-         }
-         if (j && jo_here (j) == JO_OBJECT)
+            if (j && jo_here (j) == JO_OBJECT)
          {                      // Expects to be at start of object
             while (jo_next (j) == JO_TAG)
             {
@@ -819,8 +816,10 @@ revk_web_extra (httpd_req_t * req, int page)
    {
       revk_web_send (req,
                      "<tr><td colspan=3>Virtual strips are <i>lights</i> in Home Assistant. These can overlap if required.</td></tr>");
-      if (!page)
+      if (!page && poweron)
          revk_web_send (req, "<tr><td colspan=3>This is the setting applied at power on.</td></tr>");
+      if (!page)
+         revk_web_send (req, "<tr><td colspan=3>These also define defaults for general MQTT control.</td></tr>");
       void add (const char *tag)
       {
          char name[20];
