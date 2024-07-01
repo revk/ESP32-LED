@@ -125,7 +125,10 @@ addapp (int index, int preset, const char *name, jo_t j)
       name = haeffect[preset - 1];
    app_t *a = &active[index];
    if (!name || !*name)
+   {
       appzap (a);
+      return NULL;
+   }
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
       {
