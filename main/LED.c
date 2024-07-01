@@ -174,7 +174,7 @@ addapp (int index, int preset, const char *name, jo_t j)
          a->name = applist[i].name;
          if (*colour[preset ? preset - 1 : 0])
             setcolourstr (colour[preset ? preset - 1 : 0]);
-#define u8(s,n,d)         a->n=n[preset-1];
+#define u8(s,n,d)         a->n=n[preset?preset-1:0];
 #define u8d(s,n,d)        u8(s,n,d)
 #define u8r(s,n,d)        u8(s,n,d)
 #define u16(s,n,d)         u8(s,n,d)
