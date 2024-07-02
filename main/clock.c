@@ -45,17 +45,14 @@ appclock (app_t * a)
 
    if (a->stop)
    {
-      uint8_t l = a->bright * a->stop / a->fade;
-      setr (c->h1, l);
-      setg (c->m1, l);
-      setb (c->s1, l);
+      setr (c->h1, a->fader);
+      setg (c->m1, a->fader);
+      setb (c->s1, a->fader);
       return NULL;
    }
    if (a->step)
    {                            // Second fade from one to another
-      uint8_t l = a->bright * a->step / a->fade;
-      if (a->step > a->fade)
-         l = a->bright;
+      uint8_t l = a->bright * a->step / a->speed;
 
       if (c->h0 == c->h1)
          setr (c->h0, 255);
@@ -104,6 +101,6 @@ appclock (app_t * a)
    setb (c->s1, 255);
 
    if (c->h0 != c->h1 || c->m0 != c->m1 || c->s0 != c->s1)
-      a->step = (a->fade - 1) ? : 1;    // -1 because a fade default of cps means we can be out of step
+      a->step = (a->speed - 1) ? : 1;    // -1 because a speed default of cps means we can be out of step
    return NULL;
 }

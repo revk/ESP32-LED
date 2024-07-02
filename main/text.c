@@ -26,11 +26,7 @@ showtext (app_t * a, const char *data, uint8_t dokern)
             data++;             // Unicode
       }
    }
-   uint8_t l = a->bright;
-   if (a->stop)
-      l = a->bright * a->stop / a->fade;
-   else if (a->fade && a->cycle < a->fade)
-      l = a->bright * a->cycle / a->fade;
+   uint8_t l = a->fader;
    unsigned char k[8];
    memset (k, 0xFE, 8);         // Previous character - stretched
    int c = -(int) a->step;      // Column, starts off left

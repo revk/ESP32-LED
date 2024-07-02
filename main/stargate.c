@@ -44,7 +44,7 @@ const ring_t kawoosh507 = { 117, 1, 19 };
 const char *
 biggate (app_t * a)
 {                               // Special large LED rings
-   uint8_t max = a->bright / 2; // Base brightness
+   uint8_t max = a->fader / 2;  // Base brightness
    uint8_t kawooshlen = 117;    // Always 117?
    uint8_t *old = a->data,
       *new = old + kawooshlen;
@@ -118,7 +118,7 @@ biggate (app_t * a)
    }
    uint8_t q = 255;
    if (a->stop)
-      q = 255 * a->stop / a->fade;      // Main fader for end
+      q = 255 * a->stop / a->speed;    // Main fader for end
    void twinkle (void)
    {
       memcpy (old, new, kawooshlen);
@@ -287,7 +287,7 @@ biggate (app_t * a)
             if (!g->dial[a->stage / 10 - 1])
             {
                a->stage = 100;  // Last one
-               a->step = a->fade;
+               a->step = a->speed;
                memset (new, 255, kawooshlen);
                twinkle ();
             }
@@ -297,12 +297,12 @@ biggate (app_t * a)
    {
       for (int i = 0; i < kawooshlen; i++)
       {
-         uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
+         uint8_t l = (int) (a->speed - a->step) * new[i] / a->speed + (int) a->step * old[i] / a->speed;
          setrgbl (a->start - 1 + g->kawoosh->start + i, l, l, l, q);
       }
       if (!--a->step)
       {                         // Next
-         a->step = a->fade;
+         a->step = a->speed;
          twinkle ();
       }
       chevs ();
@@ -336,14 +336,14 @@ appstargate (app_t * a)
    {                            // Sanity checks, etc
       if (!a->limit)
          a->limit = 60 * cps;
-      a->step = a->fade;
+      a->step = a->speed;
       pos = esp_random ();
       if (!a->colourset)
          a->b = 63;             // Default ring blue
    }
    uint8_t q = 255;
    if (a->stop)
-      q = 255 * a->stop / a->fade;
+      q = 255 * a->stop / a->speed;
    void ring (uint8_t l)
    {
       for (unsigned int i = 0; i < a->len; i++)
@@ -394,7 +394,7 @@ appstargate (app_t * a)
 
    if (!a->stage)
    {                            // Fade up
-      ring (255 * (a->fade - a->step) / a->fade);
+      ring (255 * (a->speed - a->step) / a->speed);
       if (!--a->step)
       {
          a->stage = 10;
@@ -414,20 +414,20 @@ appstargate (app_t * a)
          if (!--a->step)
          {
             a->stage++;
-            a->step = a->fade;
+            a->step = a->speed;
          }
       } else if ((a->stage % 10) == 1)
       {                         // Lock top
-         chevron (0, 255 * (a->fade - a->step) / a->fade);
+         chevron (0, 255 * (a->speed - a->step) / a->speed);
          if (!--a->step)
          {
             a->stage++;
-            a->step = a->fade;
+            a->step = a->speed;
          }
       } else if (a->stage == 72)
       {                         // Open gate
          chevron (0, q);
-         uint8_t l = 255 * (a->fade - a->step) / a->fade;
+         uint8_t l = 255 * (a->speed - a->step) / a->speed;
          for (int i = 0; i < a->len; i++)
          {
             if (getr (a->start + i) < l)
@@ -440,14 +440,14 @@ appstargate (app_t * a)
          if (!--a->step)
          {                      // Next chevron
             a->stage = 100;
-            a->step = a->fade;
+            a->step = a->speed;
             memset (new, 255, a->len);
             twinkle ();
          }
       } else if ((a->stage % 10) == 2)
       {                         // Chevron
-         chevron (0, 255 * a->step / a->fade);
-         chevron (a->stage / 10, 255 * (a->fade - a->step) / a->fade);
+         chevron (0, 255 * a->step / a->speed);
+         chevron (a->stage / 10, 255 * (a->speed - a->step) / a->speed);
          if (!--a->step)
          {                      // Next chevron
             a->stage += 8;
@@ -458,12 +458,12 @@ appstargate (app_t * a)
    {                            // Twinkling
       for (int i = 0; i < a->len; i++)
       {
-         uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
+         uint8_t l = (int) (a->speed - a->step) * new[i] / a->speed + (int) a->step * old[i] / a->speed;
          setrgbl (a->start + i, l, l, l, q);
       }
       if (!--a->step)
       {                         // Next
-         a->step = a->fade;
+         a->step = a->speed;
          twinkle ();
       }
    }

@@ -8,7 +8,8 @@
 	s16r(t,top,)	\
 	u8(b,bright,)	\
 	s8(h,height,)	\
-	u8d(f,fade,)	\
+	u8d(f,fadein,)	\
+	u8d(f,fadeout,)	\
 	u32d(S,speed,)	\
 	u32d(d,delay,)	\
 	u32d(T,limit,)	\
@@ -60,7 +61,8 @@ struct app_s
    uint8_t r,
      g,
      b;                         // Colour
-   uint8_t stop;                // If set this is a count down to stopping, typically to fade out
+   uint8_t stop;                // If set this is a count down to stopping
+   uint8_t fader;		// Effective brightness (set to bright unless fading in or out)
    uint8_t colourset:1;         // Colour is set
    uint8_t rainbow:1;           // Colour should be rainbow along strip
    uint8_t wheel:1;             // Colour should be cycled over time

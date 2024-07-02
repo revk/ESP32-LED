@@ -31,9 +31,7 @@ appcylon (app_t * a)
       } else
          a->step--;
    }
-   uint8_t l = a->bright;
-   if (a->stop)
-      l = a->bright * a->stop / a->fade;
+   uint8_t l = a->fader;
    clear (a->start, a->len);
    if (a->step > 0)
       setl (a->start + a->step - 1, a, l / 2);

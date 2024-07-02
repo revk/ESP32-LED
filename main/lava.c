@@ -20,19 +20,14 @@ const char *
 applava (app_t * a)
 {
    if (!a->cycle)
-   {
-      //Sanity check / defaults
+   { // Sanity check / defaults
       free (a->data);
       a->data = calloc (1, sizeof (lava_t));
-      if (!a->colourset)
+      if (!a->colourset||(!a->r&&!a->g&&!a->b))
          a->r = a->g = a->b = 255;
    }
    lava_t *lava = a->data;
-   uint8_t l = a->bright;
-   if (a->stop)
-      l = a->bright * a->stop / a->fade;
-   else if (a->fade && a->cycle < a->fade)
-      l = a->bright * a->cycle / a->fade;
+   uint8_t l = a->fader;
 
    void next (c_t * c)
    {

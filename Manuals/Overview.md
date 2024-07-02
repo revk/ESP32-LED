@@ -22,7 +22,7 @@ You can also use an app name as a command where the payload is the parameters. T
 
 Whilst app parameters are normally an object with one or more parameters, if it is just a string, that sets `colour`, and if a number, that sets `limit`. E.g. `command/LED/whatever/spin red`.
 
-- The `stop` command forces all active apps to end gracefully (usually a fade out).
+- The `stop` command forces all active apps to end gracefully,
 - The `init` command forces all active apps to the `init` settings.
 - The `power` works like tasmota, default `power1` but works on a preset, handing *on* (`on`, `1`,` blink`), *off* (`off`, `0`), *toggle* (`2`).
 
@@ -68,13 +68,14 @@ Each app can have arguments.
 |`l`|`len`|The number of LEDs|
 |`b`|`bright`|Main app brightness|
 ||`speed`|Cycle time (seconds)|
-||`fade`|fade time (seconds)|
+||`fadein`|fade in time (seconds)|
+||`fadeout`|fade out time (seconds)|
 
 ### Simple apps
 
 |App|Meaning|
 |---|-------|
-|`idle`|This simply displays all LEDs with defined colour, which by default is black (off). If a colour set `fade` can be set to fade up at start and down at `limit`|
+|`idle`|This simply displays all LEDs with defined colour, which by default is black (off).|
 |`cylon`|This runs an LED of colour specified (default is red) backwards and forwards, Cylon/Knightrider style|
 |`pulse`|This fades up and down the specified colour (default `cycle`) on all LEDs constantly.|
 |`neenaw`|Self explanatory.|

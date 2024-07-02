@@ -13,17 +13,15 @@ apptwinkle (app_t * a)
       memset (a->data, 0, a->len * 2);
       if (!a->colourset)
          a->r = a->g = a->b = 255;      // default white
-      a->step = a->fade;
+      a->step = a->speed;
    }
    uint8_t *old = a->data,
       *new = old + a->len;
-   uint8_t q = a->bright;
-   if (a->stop)
-      q = a->bright * a->stop / a->fade;
+   uint8_t q = a->fader;
 
    if (!--a->step)
    {                            // Next
-      a->step = a->fade;
+      a->step = a->speed;
       memcpy (old, new, a->len);
       esp_fill_random (new, a->len);
       for (int i = 0; i < a->len; i++)
@@ -32,7 +30,7 @@ apptwinkle (app_t * a)
 
    for (int i = 0; i < a->len; i++)
    {
-      uint8_t l = (int) (a->fade - a->step) * new[i] / a->fade + (int) a->step * old[i] / a->fade;
+      uint8_t l = (int) (a->speed - a->step) * new[i] / a->speed + (int) a->step * old[i] / a->speed;
       setl (a->start + i, a, l * q / 255);
    }
 

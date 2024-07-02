@@ -14,11 +14,7 @@ appspin (app_t * a)
       a->step -= 256 / a->speed;
    else
       a->step += 256 / a->speed;
-   uint8_t l = a->bright;
-   if (a->stop)
-      l = a->bright * a->stop / a->fade;
-   else if (a->fade && a->cycle < a->fade)
-      l = a->bright * a->cycle / a->fade;
+   uint8_t l = a->fader;
    for (unsigned int i = 0; i < a->len; i++)
       setl (a->start + i, a, l * cos8[(256 * i / a->len + a->step) & 255] / 255);
    return NULL;
