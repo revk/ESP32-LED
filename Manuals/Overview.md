@@ -24,7 +24,7 @@ Whilst app parameters are normally an object with one or more parameters, if it 
 
 - The `stop` command forces all active apps to end gracefully (usually a fade out).
 - The `init` command forces all active apps to the `init` settings.
-- The `power` command takes `0` or `1` to do a `stop` or `init` command, this is to mimic tasmota commands
+- The `power` works like tasmota, default `power1` but works on a preset, handing *on* (`on`, `1`,` blink`), *off* (`off`, `0`), *toggle* (`2`).
 
 You can also pass the parameters for a simple single app as a form `GET` list, including `app=` for the name of the application.
 
