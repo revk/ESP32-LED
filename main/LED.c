@@ -442,8 +442,10 @@ presetcheck (void)
                addapp (index++, preset + 1, haeffect[preset], j);       // Effect based
             else if (effect[preset])
                addapp (index++, preset + 1, effect[preset], j); // Effect based
-            else
+            else if (*config[preset])
                index = app_json (index, preset + 1, j);
+            else
+               addapp (index++, preset + 1, "idle", j);
             jo_free (&j);
             hastatus |= (1ULL << preset);
          }
@@ -959,7 +961,7 @@ web_root (httpd_req_t * req)
    revk_web_send (req, "</p></fieldset><fieldset><legend>Preset</legend><p>");
    for (int p = 1; p <= CONFIG_REVK_WEB_EXTRA_PAGES; p++)
    {
-      if (!*config[p - 1] && !*effect[p - 1])
+      if (!*config[p - 1] && !*effect[p - 1] && !*name[p - 1])
          continue;
       char temp[10];
       sprintf (temp, "%d", p);
