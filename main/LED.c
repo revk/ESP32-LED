@@ -439,13 +439,13 @@ presetcheck (void)
          {
             jo_t j = jo_parse_str (config[preset]);
             if (haeffect[preset])
-               addapp (index++, preset + 1, haeffect[preset], j);       // Effect based
+               addapp (index++, preset + 1, haeffect[preset], j);       // Effect based, set via HA
             else if (effect[preset])
-               addapp (index++, preset + 1, effect[preset], j); // Effect based
+               addapp (index++, preset + 1, effect[preset], j); // Effect based based, preset
             else if (*config[preset])
-               index = app_json (index, preset + 1, j);
+               index = app_json (index, preset + 1, j); // Config based
             else
-               addapp (index++, preset + 1, "idle", j);
+               addapp (index++, preset + 1, "idle", j); // Effect based, default idle as not set
             jo_free (&j);
             hastatus |= (1ULL << preset);
          }
