@@ -2,6 +2,7 @@
 
 Various stuff in one app that handles WS2812 LED strips, including
 
+- Solid colour
 - Fading/pulsing lights
 - Spinning rings
 - Stargate LED strip
@@ -12,10 +13,10 @@ Various stuff in one app that handles WS2812 LED strips, including
 - Block text: Scrolling text
 - Block text: Time
 - Laval lamp random effect
-- Blue/Red flashing
+- Blue/Red flashing (police)
 - Other stuff in due course
 
-And now Home Assistant logic.
+And now Home Assistant logic with virtual strips as "lights".
 
 See [Overview](Manuals/Overview.md)
 
