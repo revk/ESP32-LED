@@ -733,6 +733,140 @@
 				)
 			)
 		)
+		(symbol "RevK:ES05D1MC10"
+			(pin_numbers hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "RevK:DFN1006-2L"
+				(at 0.635 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "LCSC Part #" "C5137770"
+				(at 0 -3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "ES05D1MC10_0_1"
+				(polyline
+					(pts
+						(xy -2.54 1.27) (xy -2.54 -1.27) (xy 0 0) (xy -2.54 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -1.27) (xy 2.54 1.27) (xy 0 0) (xy 2.54 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "ES05D1MC10_1_1"
+				(polyline
+					(pts
+						(xy 0.635 1.27) (xy 0 1.27) (xy 0 -1.27) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -3.81 0 0)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "RevK:ESP32-S3-MINI-1-N4R2"
 			(pin_names
 				(offset 1.016)
@@ -4503,7 +4637,7 @@
 	)
 	(global_label "DC"
 		(shape output)
-		(at 129.54 79.375 180)
+		(at 165.735 27.94 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4513,7 +4647,7 @@
 		)
 		(uuid "7f3a2813-8a9a-430f-bf5f-bbe58583a6ca")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 124.669 79.375 0)
+			(at 160.864 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4607,6 +4741,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "LED"
+		(shape input)
+		(at 116.205 90.805 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f239579c-556d-465c-8794-964738744a15")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 116.205 85.0269 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -4877,7 +5033,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 129.54 79.375 270)
+		(at 165.735 27.94 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4886,7 +5042,7 @@
 		(fields_autoplaced yes)
 		(uuid "0006f7b0-4150-46c4-84ed-748e0d46c1cf")
 		(property "Reference" "#FLG01"
-			(at 131.445 79.375 0)
+			(at 167.64 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4895,7 +5051,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 132.715 79.375 90)
+			(at 168.91 27.94 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4904,7 +5060,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 129.54 79.375 0)
+			(at 165.735 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4913,7 +5069,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 129.54 79.375 0)
+			(at 165.735 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4922,7 +5078,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 129.54 79.375 0)
+			(at 165.735 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4944,7 +5100,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 129.54 83.82 270)
+		(at 165.735 32.385 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4953,7 +5109,7 @@
 		(fields_autoplaced yes)
 		(uuid "0146b046-6f3d-4fde-9270-59b43706ec1d")
 		(property "Reference" "#FLG02"
-			(at 131.445 83.82 0)
+			(at 167.64 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4962,7 +5118,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 132.715 83.82 90)
+			(at 168.91 32.385 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4971,7 +5127,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 129.54 83.82 0)
+			(at 165.735 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4980,7 +5136,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 129.54 83.82 0)
+			(at 165.735 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4989,7 +5145,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 129.54 83.82 0)
+			(at 165.735 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8142,7 +8298,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 129.54 83.82 270)
+		(at 165.735 32.385 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8150,7 +8306,7 @@
 		(dnp no)
 		(uuid "be216727-5d83-465e-8c27-b42d44812769")
 		(property "Reference" "#PWR013"
-			(at 123.19 83.82 0)
+			(at 159.385 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8159,7 +8315,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 124.968 83.82 90)
+			(at 161.163 32.385 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8167,7 +8323,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 129.54 83.82 0)
+			(at 165.735 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8176,7 +8332,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 129.54 83.82 0)
+			(at 165.735 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8185,7 +8341,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 129.54 83.82 0)
+			(at 165.735 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8747,6 +8903,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 116.205 98.425 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d6d6fefb-9495-48ab-a1be-5fea919370de")
+		(property "Reference" "#PWR037"
+			(at 116.205 104.775 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 116.078 102.235 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 116.205 98.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 116.205 98.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 116.205 98.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d3be2832-06b1-4ba7-a559-01f32ea053f2")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#PWR037")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RevK:PCB")
 		(at 259.715 173.355 0)
 		(unit 1)
@@ -9260,6 +9482,84 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "V1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "RevK:ES05D1MC10")
+		(at 116.205 94.615 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e608b6d8-bc3a-4f34-ab77-9117065b333c")
+		(property "Reference" "D2"
+			(at 118.237 94.615 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 116.205 94.615 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:DFN1006-2L"
+			(at 119.38 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 116.205 94.615 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 116.205 94.615 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C5137770"
+			(at 113.03 94.615 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1b7d76b6-b013-4656-8894-695e3d93f3e3")
+		)
+		(pin "1"
+			(uuid "3d34649f-87db-4e96-bc61-7003c47c156b")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D2")
 					(unit 1)
 				)
 			)
