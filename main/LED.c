@@ -40,6 +40,7 @@ static httpd_handle_t webserver = NULL;
 uint8_t *ledr = NULL;
 uint8_t *ledg = NULL;
 uint8_t *ledb = NULL;
+uint8_t *ledw = NULL;
 
 uint8_t gatedial = 0;
 
@@ -671,7 +672,7 @@ led_task (void *x)
    led_strip_config_t strip_config = {
       .strip_gpio_num = rgb.num,
       .max_leds = leds + led_status,    // The number of LEDs in the strip,
-      .led_pixel_format = LED_PIXEL_FORMAT_GRB, // Pixel format of your LED strip
+      .led_pixel_format = rgbw ? LED_PIXEL_FORMAT_GRBW : LED_PIXEL_FORMAT_GRB,  // Pixel format of your LED strip
       .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,        // LED strip model
       .flags.invert_out = rgb.invert,   // whether to invert the output signal(useful when your hardware has a level inverter)
    };
@@ -687,6 +688,8 @@ led_task (void *x)
    ledr = calloc (leds, sizeof (*ledr));
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
+   if (rgbw)
+      ledw = calloc (leds, sizeof (*ledw));
    if (poweron)
    {                            // Light 1 is default
       haon = 1;
@@ -811,11 +814,36 @@ led_task (void *x)
             }
          }
       xSemaphoreGive (app_mutex);
-      for (unsigned int i = 0; i < leds; i++)
+      if (rgbw)
       {
-         led_strip_set_pixel (strip, i + led_status,
-                              gamma8[(unsigned int) maxr * ledr[i] / 255],
-                              gamma8[(unsigned int) maxg * ledg[i] / 255], gamma8[(unsigned int) maxb * ledb[i] / 255]);
+         if (rgswap)
+            for (unsigned int i = 0; i < leds; i++)
+               led_strip_set_pixel_rgbw (strip, i + led_status, //
+                                         gamma8[(unsigned int) maxg * ledg[i] / 255],   //
+                                         gamma8[(unsigned int) maxr * ledr[i] / 255],   //
+                                         gamma8[(unsigned int) maxb * ledb[i] / 255],   //
+                                         gamma8[(unsigned int) maxw * ledw[i] / 255]);
+         else
+            for (unsigned int i = 0; i < leds; i++)
+               led_strip_set_pixel_rgbw (strip, i + led_status, //
+                                         gamma8[(unsigned int) maxr * ledr[i] / 255],   //
+                                         gamma8[(unsigned int) maxg * ledg[i] / 255],   //
+                                         gamma8[(unsigned int) maxb * ledb[i] / 255],   //
+                                         gamma8[(unsigned int) maxw * ledw[i] / 255]);
+      } else
+      {
+         if (rgswap)
+            for (unsigned int i = 0; i < leds; i++)
+               led_strip_set_pixel (strip, i + led_status,      //
+                                    gamma8[(unsigned int) maxg * ledg[i] / 255],        //
+                                    gamma8[(unsigned int) maxr * ledr[i] / 255],        //
+                                    gamma8[(unsigned int) maxb * ledb[i] / 255]);
+         else
+            for (unsigned int i = 0; i < leds; i++)
+               led_strip_set_pixel (strip, i + led_status,      //
+                                    gamma8[(unsigned int) maxr * ledr[i] / 255],        //
+                                    gamma8[(unsigned int) maxg * ledg[i] / 255],        //
+                                    gamma8[(unsigned int) maxb * ledb[i] / 255]);
       }
       if (led_status)
          revk_led (strip, 0, 255, revk_blinker ());
@@ -833,6 +861,8 @@ revk_web_extra (httpd_req_t * req, int page)
       revk_web_setting (req, NULL, "dark");
       revk_web_setting (req, NULL, "leds");
       revk_web_setting (req, NULL, "sk6812");
+      revk_web_setting (req, NULL, "rgbw");
+      revk_web_setting (req, NULL, "rgswap");
       revk_web_setting (req, NULL, "poweron");
       revk_web_setting (req, NULL, "haenable");
    } else

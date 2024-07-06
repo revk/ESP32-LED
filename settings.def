@@ -18,7 +18,10 @@ u8	cps		10				// Change per second
 u8	max.r		255				// Max RGB Red
 u8	max.g		255				// Max RGB Green
 u8	max.b		255				// Max RGB Blue
+u8	max.w		255				// Max RGBW White
 bit	sk6812			.hide=1			// SK6812 (instead of WS2812)
+bit 	rgbw			.hide=1			// RGBW (no effects coded for this yet)
+bit	rgswap			.hide=1			// Red/green swap
 u16	leds		12	.hide=1			// How many LEDs
 u8	webcontrol	2				// Web controls
 u8	i2c	0					// I2C channel
