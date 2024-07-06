@@ -100,7 +100,8 @@ app_t active[MAXAPPS] = { 0 };
 uint64_t haon = 0;              // Bits, which are on
 uint64_t hachanged = 0;         // Bits, which are changed and need updating to active[]
 uint64_t hastatus = 0;          // Bits, which need status report
-uint64_t hargb = 0;
+uint64_t hargb = 0;             // Bits, if rgb set from HA
+uint64_t habrightset = 0;       // Bits, if bright set from HA
 // Bits, HA sent a colour
 uint8_t har[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };       // Colour
 uint8_t hag[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
@@ -263,7 +264,7 @@ addapp (int index, int preset, const char *name, jo_t j)
                if (a->r || a->g || a->b)
                   a->colourset = 1;
             }
-            if (!a->bright)
+            if (!a->bright && (habrightset & (1ULL << (preset - 1))))
                a->bright = habright[preset - 1];
          }
          if (!a->start)
@@ -440,7 +441,7 @@ presetcheck (void)
             jo_t j = jo_parse_str (config[preset]);
             if (haeffect[preset])
                addapp (index++, preset + 1, haeffect[preset], j);       // Effect based, set via HA
-            else if (effect[preset])
+            else if (*effect[preset])
                addapp (index++, preset + 1, effect[preset], j); // Effect based based, preset
             else if (*config[preset])
                index = app_json (index, preset + 1, j); // Config based
@@ -489,7 +490,10 @@ app_callback (int client, const char *prefix, const char *target, const char *su
                haon &= ~(1ULL << (preset - 1));
          }
          if (jo_find (j, "brightness"))
+         {
             habright[preset - 1] = jo_read_int (j);
+            habrightset |= (1ULL << (preset - 1));
+         }
          if (jo_find (j, "color"))
          {                      // r / g / b
             while (jo_next (j) == JO_TAG)
@@ -1117,7 +1121,7 @@ app_main ()
       cps = 10;                 // Safety for division
    if (!leds)
       leds = 1;
-   memset (habright, 128, sizeof (habright));
+   memset (habright, 255, sizeof (habright));
    memset (har, 255, sizeof (har));
    memset (hag, 0, sizeof (hag));
    memset (hab, 0, sizeof (hab));
