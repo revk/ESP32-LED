@@ -4310,6 +4310,10 @@
 		(uuid "d2fc5b2d-da79-448d-8d5b-3f5586e7a252")
 	)
 	(no_connect
+		(at 66.04 93.98)
+		(uuid "d34eb50a-223a-44aa-88cc-2616cdedfadc")
+	)
+	(no_connect
 		(at 66.04 99.06)
 		(uuid "e19d8f39-3465-4295-9e39-de9ed0ec9840")
 	)
@@ -9626,73 +9630,6 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "#PWR016")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 66.04 93.98 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f237b159-7de3-4fa1-8bb5-1ee94af7f182")
-		(property "Reference" "#PWR027"
-			(at 62.23 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 69.215 93.98 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 66.04 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 66.04 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 66.04 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "203c5806-2742-4ad3-92a5-32e97169505c")
-		)
-		(instances
-			(project "LED"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR027")
 					(unit 1)
 				)
 			)
