@@ -1,6 +1,6 @@
 // Generated case design for LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2024-07-04 13:10:34
+// Generated 2024-07-13 08:43:27
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -28,22 +28,24 @@ pcbwidth=37.500000;
 pcblength=16.000000;
 // Parts to go on PCB (top)
 module parts_top(part=false,hole=false,block=false){
-translate([26.250000,13.700000,1.600000])rotate([0,0,180.000000])rotate([-0.000000,-0.000000,-90.000000])m0(part,hole,block,casetop); // RevK:L_4x4_ TYA4020 (back)
-translate([28.050000,7.200000,1.600000])rotate([0,0,180.000000])m1(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
+translate([6.000000,1.300000,1.600000])rotate([0,0,-17.900000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
+translate([26.250000,13.700000,1.600000])rotate([0,0,180.000000])rotate([-0.000000,-0.000000,-90.000000])m1(part,hole,block,casetop); // RevK:L_4x4_ TYA4020 (back)
+translate([28.050000,7.200000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 translate([26.250000,11.100000,1.600000])rotate([0,0,180.000000])m2(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
-translate([32.950000,14.600000,1.600000])rotate([0,0,180.000000])m1(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
+// Missing model REF**.1 140x140
+translate([32.950000,14.600000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 // Missing model C1.1 CP_EIA-3528-21_Kemet-B
-translate([24.449999,7.200000,1.600000])rotate([0,0,180.000000])m1(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
+translate([24.449999,7.200000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 translate([31.610000,8.000000,1.600000])rotate([0,0,90.000000])translate([0.000000,-2.400000,0.000000])rotate([90.000000,-0.000000,-0.000000])m3(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
-translate([26.250000,7.200000,1.600000])rotate([0,0,180.000000])m1(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
+translate([26.250000,7.200000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 translate([35.297638,1.600000,1.600000])rotate([0,0,-135.000000])m4(part,hole,block,casetop); // D1 (back)
 translate([33.000000,13.500000,1.600000])rotate([0,0,180.000000])m5(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
 translate([26.250000,9.100000,1.600000])rotate([0,0,180.000000])m6(part,hole,block,casetop); // RevK:SOT-23-6-MD8942 SOT-23-6 (back)
 translate([24.650000,6.100000,1.600000])rotate([0,0,180.000000])m2(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
-translate([31.000000,2.500000,1.600000])m1(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
+translate([31.000000,2.500000,1.600000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 translate([28.750000,10.400000,1.600000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
 translate([26.896745,6.020564,1.600000])m5(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
-translate([31.000000,13.500000,1.600000])rotate([0,0,180.000000])m1(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
+translate([31.000000,13.500000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 translate([23.750000,10.400000,1.600000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
 translate([15.450000,8.000000,1.600000])m7(part,hole,block,casetop); // U6 (back)
 // Missing model J2.1 MP011985
@@ -57,21 +59,21 @@ module parts_bottom(part=false,hole=false,block=false){
 parts_bottom=0;
 module b(cx,cy,z,w,l,h){translate([cx-w/2,cy-l/2,z])cube([w,l,h]);}
 module m0(part=false,hole=false,block=false,height)
-{ // RevK:L_4x4_ TYA4020
-// 4x4 Inductor
-if(part)
-{
-	b(0,0,0,4,4,3);
-}
-}
-
-module m1(part=false,hole=false,block=false,height)
-{ // RevK:R_0402_ R_0402_1005Metric
+{ // RevK:DFN1006-2L R_0402_1005Metric
 // 0402 Resistor
 if(part)
 {
 	b(0,0,0,1.5,0.65,0.2); // Pad size
 	b(0,0,0,1.0,0.5,0.5); // Chip
+}
+}
+
+module m1(part=false,hole=false,block=false,height)
+{ // RevK:L_4x4_ TYA4020
+// 4x4 Inductor
+if(part)
+{
+	b(0,0,0,4,4,3);
 }
 }
 
