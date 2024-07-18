@@ -10,7 +10,7 @@ if($#d == 0) then
 	exit 0
 endif
 again:
-idf.py flash --port $d[1]
+esptool.py --chip esp32s3 -p $d[1] -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size keep 0x0 release/LED-S3-MINI-N4-R2-bootloader.bin 0x10000 release/LED-S3-MINI-N4-R2.bin 0x8000 release/LED-S3-MINI-N4-R2-partition-table.bin 0xd000 release/LED-S3-MINI-N4-R2-ota_data_initial.bin
 if($status) goto again
 
 components/ESP32-RevK/idfmon $d[1]
