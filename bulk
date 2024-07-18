@@ -2,7 +2,7 @@
 if("$1" != "") then
 	set d=($1)
 else
-	set d=(/dev/cu.usbmodem*)
+	set d=(/dev/cu.usbmodem* /dev/ttyACM*)
 endif
 
 if($#d == 0) then
