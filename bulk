@@ -10,7 +10,7 @@ if($#d == 0) then
 	exit 0
 endif
 
-git pull
+#git pull
 make -C components/ESP32-RevK idfmon
 
 again:
