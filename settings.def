@@ -8,7 +8,7 @@ gpio	blink		"-20 -8 -21"	.array=3	// Status LED
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 gpio	rgb		8				// GPIO for LED chain
 #ifndef  CONFIG_REVK_BLINK_DEF
-gpio	blink		"8 8 8"		.array=3	// Status LED
+gpio	blink		"35 35 35"		.array=3	// Status LED
 #endif
 #endif
 
