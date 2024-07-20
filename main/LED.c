@@ -666,25 +666,30 @@ led_task (void *x)
    uint8_t led_status = (blink[0].num == rgb.num ? 1 : 0);
    if (!led_status)
       revk_blink_init ();       // Library blink
-   ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb.num, rgb.invert ? " (inverted)" : "", leds,
-             led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
    led_strip_handle_t strip = NULL;
-   led_strip_config_t strip_config = {
-      .strip_gpio_num = rgb.num,
-      .max_leds = leds + led_status,    // The number of LEDs in the strip,
-      .led_pixel_format = rgbw ? LED_PIXEL_FORMAT_GRBW : LED_PIXEL_FORMAT_GRB,  // Pixel format of your LED strip
-      .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,        // LED strip model
-      .flags.invert_out = rgb.invert,   // whether to invert the output signal(useful when your hardware has a level inverter)
-   };
-   led_strip_rmt_config_t rmt_config = {
-      .clk_src = RMT_CLK_SRC_DEFAULT,   // different clock source can lead to different power consumption
-      .resolution_hz = 10 * 1000 * 1000,        // 10 MHz
+   if (revk_gpio_output_safe (rgb, 0))
+      ESP_LOGE (TAG, "Failed RGB GPIO init %d", rgb.num);
+   else
+   {
+      ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb.num, rgb.invert ? " (inverted)" : "", leds,
+                led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
+      led_strip_config_t strip_config = {
+         .strip_gpio_num = rgb.num,
+         .max_leds = leds + led_status, // The number of LEDs in the strip,
+         .led_pixel_format = rgbw ? LED_PIXEL_FORMAT_GRBW : LED_PIXEL_FORMAT_GRB,       // Pixel format of your LED strip
+         .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,     // LED strip model
+         .flags.invert_out = rgb.invert,        // whether to invert the output signal(useful when your hardware has a level inverter)
+      };
+      led_strip_rmt_config_t rmt_config = {
+         .clk_src = RMT_CLK_SRC_DEFAULT,        // different clock source can lead to different power consumption
+         .resolution_hz = 10 * 1000 * 1000,     // 10 MHz
 #ifdef	CONFIG_IDF_TARGET_ESP32S3
-      .flags.with_dma = true,
+         .flags.with_dma = true,
 #endif
-   };
-   REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip));
-   REVK_ERR_CHECK (led_strip_clear (strip));
+      };
+      REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip));
+      REVK_ERR_CHECK (led_strip_clear (strip));
+   }
    ledr = calloc (leds, sizeof (*ledr));
    ledg = calloc (leds, sizeof (*ledg));
    ledb = calloc (leds, sizeof (*ledb));
@@ -814,6 +819,8 @@ led_task (void *x)
             }
          }
       xSemaphoreGive (app_mutex);
+      if (!strip)
+         continue;
       if (rgbw)
       {
          if (rgswap)
