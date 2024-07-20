@@ -665,26 +665,7 @@ led_task (void *x)
    }
    uint8_t led_status = (blink[0].num == rgb.num ? 1 : 0);
    if (!led_status)
-   {
-      char bad = 0;
-      for (int n = 0; !bad && n < 3; n++)
-      {
-         if (blink[n].set)
-         {
-            gpio_reset_pin (blink[n].num);
-            gpio_set_direction (blink[n].num, GPIO_MODE_INPUT);
-            gpio_pullup_en (blink[n].num);
-            if (!gpio_get_level (blink[n].num))
-               bad = 1;
-            gpio_pullup_dis (blink[n].num);
-            gpio_pulldown_en (blink[n].num);
-            if (gpio_get_level (blink[n].num))
-               bad = 1;
-         }
-      }
-      if (!bad)
-         revk_blink_init ();    // Library blink
-   }
+      revk_blink_init ();       // Library blink
    ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb.num, rgb.invert ? " (inverted)" : "", leds,
              led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
    led_strip_handle_t strip = NULL;
