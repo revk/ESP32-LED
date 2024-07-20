@@ -667,9 +667,6 @@ led_task (void *x)
    if (!led_status)
       revk_blink_init ();       // Library blink
    led_strip_handle_t strip = NULL;
-   if (revk_gpio_output_safe (rgb, 0))
-      ESP_LOGE (TAG, "Failed RGB GPIO init %d", rgb.num);
-   else
    {
       ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb.num, rgb.invert ? " (inverted)" : "", leds,
                 led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
