@@ -608,7 +608,7 @@ send_ha_status (void)
          jo_t j = jo_object_alloc ();
          jo_string (j, "state", (haon & (1ULL << preset)) ? "ON" : "OFF");
          jo_int (j, "brightness", habright[preset]);
-         jo_string (j, "color_mode", "rgb");
+         jo_string (j, "color_mode", rgbw ? "rgbw" : "rgb");
          if (!*effect[preset] && haeffect[preset])
             jo_string (j, "effect", haeffect[preset]);
          if (hargb & (1ULL << preset))
