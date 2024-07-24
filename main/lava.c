@@ -13,17 +13,18 @@ typedef struct lava_s
 {
    c_t r,
      g,
-     b;
+     b,
+     w;
 } lava_t;
 
 const char *
 applava (app_t * a)
 {
    if (!a->cycle)
-   { // Sanity check / defaults
+   {                            // Sanity check / defaults
       free (a->data);
       a->data = calloc (1, sizeof (lava_t));
-      if (!a->colourset||(!a->r&&!a->g&&!a->b))
+      if (!a->colourset || (!a->r && !a->g && !a->b))
          a->r = a->g = a->b = 255;
    }
    lava_t *lava = a->data;
@@ -42,11 +43,13 @@ applava (app_t * a)
    next (&lava->r);
    next (&lava->g);
    next (&lava->b);
+   next (&lava->w);
 
    for (unsigned int i = 0; i < a->len; i++)
-      setrgbl (a->start + i, (long) a->r * wheel[(256 * i / a->len + lava->r.pos) & 255] * (255 - cos8[lava->r.cycle]) / 255 / 255,     //
-               (long) a->g * wheel[(256 * i / a->len + lava->g.pos) & 255] * (255 - cos8[lava->g.cycle]) / 255 / 255,   //
-               (long) a->b * wheel[(256 * i / a->len + lava->b.pos) & 255] * (255 - cos8[lava->b.cycle]) / 255 / 255,   //
-               l);
+      setRGBWl (a->start + i, (long) a->r * wheel[(256 * i / a->len + lava->r.pos) & 255] * (255 - cos8[lava->r.cycle]) / 255 / 255,    //
+                (long) a->g * wheel[(256 * i / a->len + lava->g.pos) & 255] * (255 - cos8[lava->g.cycle]) / 255 / 255,  //
+                (long) a->b * wheel[(256 * i / a->len + lava->b.pos) & 255] * (255 - cos8[lava->b.cycle]) / 255 / 255,  //
+                (long) a->w * wheel[(256 * i / a->len + lava->w.pos) & 255] * (255 - cos8[lava->w.cycle]) / 255 / 255,  //
+                l);
    return NULL;
 }

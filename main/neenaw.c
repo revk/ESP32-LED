@@ -19,6 +19,6 @@ appneenaw (app_t * a)
    uint8_t r = ((a->step / d) & 1) && a->step < a->speed ? 255 : 0;
    uint8_t b = ((a->step / d) & 1) && a->step >= a->speed ? 255 : 0;
    for (unsigned int i = 0; i < a->len; i++)
-      setrgbl (a->start + i, r, 0, b, l);
+      setRGBl (a->start + i, r, 0, b, l);
    return NULL;
 }

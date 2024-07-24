@@ -107,6 +107,7 @@ uint64_t habrightset = 0;       // Bits, if bright set from HA
 uint8_t har[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };       // Colour
 uint8_t hag[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
 uint8_t hab[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
+uint8_t haw[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };
 uint8_t habright[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };  // Brightness
 const char *haeffect[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };      // Selected effect from HA
 
@@ -143,6 +144,8 @@ addapp (int index, int preset, const char *name, jo_t j)
                a->colourset = a->cycling = 1;
             else if (!strcasecmp (temp, "wheel"))
                a->colourset = a->wheel = 1;
+            else if (rgbw && !strcasecmp (temp, "white"))
+               strcpy (temp, "#000F");
 #define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
             colours
 #undef c
@@ -150,19 +153,46 @@ addapp (int index, int preset, const char *name, jo_t j)
             if (*c == '#')
                c++;
 #define x(n)((c[n] & 0xF) + (isalpha ((uint8_t)c[n]) ? 9 : 0))
-            if (strlen (c) == 3 && isxdigit ((int) c[0]) && isxdigit ((int) c[1]) && isxdigit ((int) c[2]))
+            if (isxdigit ((int) c[0]) && isxdigit ((int) c[1]) && isxdigit ((int) c[2]))
             {
-               a->colourset = 1;
-               a->r = x (0) * 17;
-               a->g = x (1) * 17;
-               a->b = x (2) * 17;
-            } else if (strlen (c) == 6 && isxdigit ((int) c[0]) && isxdigit ((int) c[1]) && isxdigit ((int) c[2])
-                       && isxdigit ((int) c[3]) && isxdigit ((int) c[4]) && isxdigit ((int) c[5]))
-            {
-               a->colourset = 1;
-               a->r = x (0) * 16 + x (1);
-               a->g = x (2) * 16 + x (3);
-               a->b = x (4) * 16 + x (5);
+               if (!c[3])
+               {                // RGB
+                  a->colourset = 1;
+                  a->r = x (0) * 17;
+                  a->g = x (1) * 17;
+                  a->b = x (2) * 17;
+               } else if (isxdigit ((int) c[3]))
+               {
+                  if (!c[4])
+                  {             // # RGBW
+                     a->colourset = 1;
+                     a->r = x (0) * 17;
+                     a->g = x (1) * 17;
+                     a->b = x (2) * 17;
+                     a->w = x (3) * 17;
+                  } else if (isxdigit ((int) c[4]) && isxdigit ((int) c[5]))
+                  {
+                     if (!c[6])
+                     {          // # RRGGBB
+                        a->colourset = 1;
+                        a->r = x (0) * 16 + x (1);
+                        a->g = x (2) * 16 + x (3);
+                        a->b = x (4) * 16 + x (5);
+                     } else if (isxdigit ((int) c[6]) && isxdigit ((int) c[7]))
+                     {          // # RRGGBBWW
+                        if (!c[8])
+                        {
+                           a->colourset = 1;
+                           a->r = x (0) * 16 + x (1);
+                           a->g = x (2) * 16 + x (3);
+                           a->b = x (4) * 16 + x (5);
+                           a->w = x (6) * 16 + x (7);
+                        } else
+                           return 0;
+                     }
+                  }
+
+               }
             } else
                return 0;
             return 1;
@@ -509,6 +539,8 @@ app_callback (int client, const char *prefix, const char *target, const char *su
                   hag[preset - 1] = v;
                else if (!strcmp (val, "b"))
                   hab[preset - 1] = v;
+               else if (!strcmp (val, "w"))
+                  haw[preset - 1] = v;
             }
             hargb |= (1ULL << (preset - 1));
          }
@@ -585,6 +617,8 @@ send_ha_status (void)
             jo_int (j, "r", har[preset]);
             jo_int (j, "g", hab[preset]);
             jo_int (j, "b", hab[preset]);
+            if (rgbw)
+               jo_int (j, "w", haw[preset]);
          }
          char topic[10];
          snprintf (topic, sizeof (topic), "ha%d", preset + 1);
@@ -767,10 +801,19 @@ led_task (void *x)
                      jo_string (j, "colour", "cycling");
                   else if (a->colourset)
                   {
-                     if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
-                        jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
-                     else
-                        jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
+                     if (rgbw)
+                     {
+                        if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17) && !(a->w % 17))
+                           jo_stringf (j, "colour", "%X%X%X%X", a->r / 17, a->g / 17, a->b / 17, a->w / 17);
+                        else
+                           jo_stringf (j, "colour", "%02X%02X%02X%02X", a->r, a->g, a->b, a->w);
+                     } else
+                     {
+                        if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
+                           jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
+                        else
+                           jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
+                     }
                   }
                   if (a->data)
                      jo_string (j, "data", (char *) a->data);
@@ -948,45 +991,52 @@ web_root (httpd_req_t * req)
    revk_web_send (req, "<h1>LED controller: %s</h1><ul>", hostname);
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
-      if (!preset || *name[preset - 1])
-         for (unsigned int i = 0; i < MAXAPPS; i++)
+      for (unsigned int i = 0; i < MAXAPPS; i++)
+      {
+         app_t *a = &active[i];
+         if (a->preset == preset && a->app && !a->stop)
          {
-            app_t *a = &active[i];
-            if (a->preset == preset && a->app && !a->stop)
+            revk_web_send (req, "<li>");
+            if (*a->name)
+               revk_web_send (req, "<b>%s</b>", a->name);
+            if (a->preset)
+               revk_web_send (req, " preset=%d", a->preset);
+            if (a->start && a->start != 1)
+               revk_web_send (req, " start=%d", a->start);
+            if (a->len && a->len != leds)
+               revk_web_send (req, " len=%d", a->len);
+            if (a->bright < 255)
+               revk_web_send (req, " bright=%d", a->bright);
+            if (a->delay)
+               revk_web_send (req, " delay=%.1f", 1.0 * a->delay / cps);
+            if (a->limit)
+               revk_web_send (req, " limit=%.1f", 1.0 * a->limit / cps);
+            if (a->speed != cps)
+               revk_web_send (req, " speed=%.1f", 1.0 * a->speed / cps);
+            if (a->fadein != cps)
+               revk_web_send (req, " fadein=%.1f", 1.0 * a->fadein / cps);
+            if (a->fadeout != cps)
+               revk_web_send (req, " fadeout=%.1f", 1.0 * a->fadeout / cps);
+            if (a->rainbow)
+               revk_web_send (req, " colour=rainbow");
+            else if (a->colourset)
             {
-               revk_web_send (req, "<li><b>%s</b>", a->name);
-               if (a->preset)
-                  revk_web_send (req, " preset=%d", a->preset);
-               if (a->start && a->start != 1)
-                  revk_web_send (req, " start=%d", a->start);
-               if (a->len && a->len != leds)
-                  revk_web_send (req, " len=%d", a->len);
-               if (a->bright < 255)
-                  revk_web_send (req, " bright=%d", a->bright);
-               if (a->delay)
-                  revk_web_send (req, " delay=%.1f", 1.0 * a->delay / cps);
-               if (a->limit)
-                  revk_web_send (req, " limit=%.1f", 1.0 * a->limit / cps);
-               if (a->speed != cps)
-                  revk_web_send (req, " speed=%.1f", 1.0 * a->speed / cps);
-               if (a->fadein != cps)
-                  revk_web_send (req, " fadein=%.1f", 1.0 * a->fadein / cps);
-               if (a->fadeout != cps)
-                  revk_web_send (req, " fadeout=%.1f", 1.0 * a->fadeout / cps);
-               if (a->rainbow)
-                  revk_web_send (req, " colour=rainbow");
-               else if (a->colourset)
+               if (rgbw)
+                  revk_web_send (req, " colour=#%02X%02X%02X%02X", a->r, a->g, a->b, a->w);
+               else
                   revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
-               if (a->cycling)
-                  revk_web_send (req, "(cycling)");
-               if (a->wheel)
-                  revk_web_send (req, "(wheel)");
-               revk_web_send (req, "</li>");
             }
+            if (a->cycling)
+               revk_web_send (req, "(cycling)");
+            if (a->wheel)
+               revk_web_send (req, "(wheel)");
+            revk_web_send (req, "</li>");
          }
+      }
    xSemaphoreGive (app_mutex);
    revk_web_send (req,
-                  "</ul><p><a href=/>Reload</a></p><form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#RGB' size=6> or <tt>rainbow</tt> or <tt>wheel</tt> or <tt>cycling</tt>.</p><p>");
+                  "</ul><p><a href=/>Reload</a></p><form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#%s' size=6> or <tt>rainbow</tt> or <tt>wheel</tt> or <tt>cycling</tt>.</p><p>",
+                  rgbw ? "RGBW" : "RGB");
    void button (const char *tag)
    {
       revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);
@@ -1112,10 +1162,10 @@ i2c_task (void *arg)
       if (als)
       {
          jo_t j = jo_object_alloc ();
-         jo_litf (j, "w", "%.0f", (float) r (als, 0x0B) * 1031 / 65535);
          jo_litf (j, "r", "%.0f", (float) r (als, 0x08) * 1031 / 65535);
          jo_litf (j, "g", "%.0f", (float) r (als, 0x09) * 1031 / 65535);
          jo_litf (j, "b", "%.0f", (float) r (als, 0x0A) * 1031 / 65535);
+         jo_litf (j, "w", "%.0f", (float) r (als, 0x0B) * 1031 / 65535);
          revk_info ("als", &j);
       }
       sleep (1);

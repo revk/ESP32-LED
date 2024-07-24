@@ -45,9 +45,9 @@ appclock (app_t * a)
 
    if (a->stop)
    {
-      setr (c->h1, a->fader);
-      setg (c->m1, a->fader);
-      setb (c->s1, a->fader);
+      setR (c->h1, a->fader);
+      setG (c->m1, a->fader);
+      setB (c->s1, a->fader);
       return NULL;
    }
    if (a->step)
@@ -55,25 +55,25 @@ appclock (app_t * a)
       uint8_t l = a->bright * a->step / a->speed;
 
       if (c->h0 == c->h1)
-         setr (c->h0, 255);
+         setR (c->h0, 255);
       else
       {
-         setr (c->h0, 255 - l);
-         setr (c->h1, l);
+         setR (c->h0, 255 - l);
+         setR (c->h1, l);
       }
       if (c->m0 == c->m1)
-         setg (c->m0, 255);
+         setG (c->m0, 255);
       else
       {
-         setg (c->m0, 255 - l);
-         setg (c->m1, l);
+         setG (c->m0, 255 - l);
+         setG (c->m1, l);
       }
       if (c->s0 == c->s1)
-         setb (c->s0, 255);
+         setB (c->s0, 255);
       else
       {
-         setb (c->s0, 255 - l);
-         setb (c->s1, l);
+         setB (c->s0, 255 - l);
+         setB (c->s1, l);
       }
 
       if (!--a->step)
@@ -96,11 +96,11 @@ appclock (app_t * a)
    c->m0 = a->start + (a->len + top + dir * (a->len * (s % 3600000) / 3600000)) % a->len;
    c->s0 = a->start + (a->len + top + dir * (a->len * (s % 60000) / 60000)) % a->len;
 
-   setr (c->h1, 255);
-   setg (c->m1, 255);
-   setb (c->s1, 255);
+   setR (c->h1, 255);
+   setG (c->m1, 255);
+   setB (c->s1, 255);
 
    if (c->h0 != c->h1 || c->m0 != c->m1 || c->s0 != c->s1)
-      a->step = (a->speed - 1) ? : 1;    // -1 because a speed default of cps means we can be out of step
+      a->step = (a->speed - 1) ? : 1;   // -1 because a speed default of cps means we can be out of step
    return NULL;
 }

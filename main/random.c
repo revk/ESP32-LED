@@ -32,7 +32,7 @@ apprandom (app_t * a)
    uint8_t q = a->fader;
    uint8_t l = 255 * a->stage / a->speed;
    for (int i = 0; i < a->len; i++)
-      setrgbl (a->start + i, (l * r0[i] + (255 - l) * r1[i]) / 255, (l * g0[i] + (255 - l) * g1[i]) / 255,
+      setRGBl (a->start + i, (l * r0[i] + (255 - l) * r1[i]) / 255, (l * g0[i] + (255 - l) * g1[i]) / 255,
                (l * b0[i] + (255 - l) * b1[i]) / 255, q);
    return NULL;
 }

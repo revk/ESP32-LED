@@ -118,7 +118,7 @@ biggate (app_t * a)
    }
    uint8_t q = 255;
    if (a->stop)
-      q = 255 * a->stop / a->speed;    // Main fader for end
+      q = 255 * a->stop / a->speed;     // Main fader for end
    void twinkle (void)
    {
       memcpy (old, new, kawooshlen);
@@ -130,7 +130,7 @@ biggate (app_t * a)
    {                            // Show 1 in 3 on spin rings
       for (int s = 0; s < g->spins; s++)
          for (int n = 0; n < g->spin[s].len; n++)
-            setrgbl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, n % 3 ? 0 : max, q);
+            setRGBl (a->start - 1 + g->spin[s].start + (n + o + g->spin[s].offset) % g->spin[s].len, 0, 0, n % 3 ? 0 : max, q);
    }
    uint8_t map (uint8_t c)
    {                            // Chev map
@@ -147,7 +147,7 @@ biggate (app_t * a)
       {
          uint8_t z = g->chev[n].len / 9;
          if (z & 1)
-            setrgbl (a->start - 1 + g->chev[n].start + (g->chev[n].offset + c * z + z / 2) % g->chev[n].len, max, max / 2, 0, l);
+            setRGBl (a->start - 1 + g->chev[n].start + (g->chev[n].offset + c * z + z / 2) % g->chev[n].len, max, max / 2, 0, l);
       }
    }
    void chev (uint8_t c, int8_t f, int8_t t, uint8_t l)
@@ -162,16 +162,16 @@ biggate (app_t * a)
          const ring_t *C = &g->chev[n];
          if (C->len == 117)
          {                      // Chevs part of full ring
-            setrgbl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, max, max, 0, l);
+            setRGBl (a->start - 1 + C->start + (c * 13 + 116 + C->offset) % C->len, max, max, 0, l);
             if (n == f || n == t)
-               setrgbl (a->start - 1 + C->start + (c * 13 + C->offset) % C->len, max, max, 0, l);
-            setrgbl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max, 0, l);
+               setRGBl (a->start - 1 + C->start + (c * 13 + C->offset) % C->len, max, max, 0, l);
+            setRGBl (a->start - 1 + C->start + (c * 13 + 1 + C->offset) % C->len, max, max, 0, l);
          } else
          {                      // Chevs only
             uint8_t z = C->len / 9;
             uint16_t b = c * z;
             for (int q = 0; q < z; q += (n == f || n == t ? 1 : z - 1))
-               setrgbl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max, 0, l);
+               setRGBl (a->start - 1 + C->start + (b + q + C->offset) % C->len, max, max, 0, l);
          }
       }
    }
@@ -181,7 +181,7 @@ biggate (app_t * a)
          for (int z = 0; z < g->gates; z++)
          {
             if (g->gate[z].len == 39)
-               setrgbl (a->start - 1 + g->gate[z].start + (g->gate[z].offset + g->dial[c] - 1) % g->gate[z].len, a->r * max / 255,
+               setRGBl (a->start - 1 + g->gate[z].start + (g->gate[z].offset + g->dial[c] - 1) % g->gate[z].len, a->r * max / 255,
                         a->g * max / 255, a->b * max / 255, l);
          }
    }
@@ -202,7 +202,7 @@ biggate (app_t * a)
       case 0:                  // Fade up spins
          for (int s = 0; s < g->spins; s++)
             for (int n = 0; n < g->spin[s].len; n++)
-               setrgbl (a->start - 1 + g->spin[s].start + n, 0, 0, max, a->step * q / 255);
+               setRGBl (a->start - 1 + g->spin[s].start + n, 0, 0, max, a->step * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
             a->step = 0;
@@ -212,7 +212,7 @@ biggate (app_t * a)
       case 1:                  // Fade down spins leaving 1/3 to dial
          for (int s = 0; s < g->spins; s++)
             for (int n = 0; n < g->spin[s].len; n++)
-               setrgbl (a->start - 1 + g->spin[s].start + (n + g->spin[s].offset) % g->spin[s].len, 0, 0, max,
+               setRGBl (a->start - 1 + g->spin[s].start + (n + g->spin[s].offset) % g->spin[s].len, 0, 0, max,
                         (n % 3 ? 255 - a->step : 255) * q / 255);
          if ((a->step += 255 / a->speed) > 255)
          {
@@ -298,7 +298,7 @@ biggate (app_t * a)
       for (int i = 0; i < kawooshlen; i++)
       {
          uint8_t l = (int) (a->speed - a->step) * new[i] / a->speed + (int) a->step * old[i] / a->speed;
-         setrgbl (a->start - 1 + g->kawoosh->start + i, l, l, l, q);
+         setRGBl (a->start - 1 + g->kawoosh->start + i, l, l, l, q);
       }
       if (!--a->step)
       {                         // Next
@@ -382,7 +382,7 @@ appstargate (app_t * a)
       default:
          return;
       }
-      setrgbl (a->start + n, 255, 127, 0, l);
+      setRGBl (a->start + n, 255, 127, 0, l);
    }
    void twinkle (void)
    {
@@ -430,12 +430,14 @@ appstargate (app_t * a)
          uint8_t l = 255 * (a->speed - a->step) / a->speed;
          for (int i = 0; i < a->len; i++)
          {
-            if (getr (a->start + i) < l)
-               setr (a->start + i, l);
-            if (getg (a->start + i) < l)
-               setg (a->start + i, l);
-            if (getb (a->start + i) < l)
-               setb (a->start + i, l);
+            if (getR (a->start + i) < l)
+               setR (a->start + i, l);
+            if (getG (a->start + i) < l)
+               setG (a->start + i, l);
+            if (getB (a->start + i) < l)
+               setB (a->start + i, l);
+            if (getW (a->start + i) < l)
+               setW (a->start + i, l);
          }
          if (!--a->step)
          {                      // Next chevron
@@ -459,7 +461,10 @@ appstargate (app_t * a)
       for (int i = 0; i < a->len; i++)
       {
          uint8_t l = (int) (a->speed - a->step) * new[i] / a->speed + (int) a->step * old[i] / a->speed;
-         setrgbl (a->start + i, l, l, l, q);
+         if (rgbw)
+            setRGBWl (a->start + i, 0, 0, 0, l, q);
+         else
+            setRGBl (a->start + i, l, l, l, q);
       }
       if (!--a->step)
       {                         // Next

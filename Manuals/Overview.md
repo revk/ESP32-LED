@@ -1,6 +1,6 @@
 # LED Strip controller
 
-This software, designed to run on any PCB, but particularly the defined PCB with one output data pin, is intended to work with common RGB LED strips. These allow a series of individual LEDs, each capable of full colour, to be individually addressed and controlled.
+This software, designed to run on any PCB, but particularly the defined PCB with one output data pin, is intended to work with common RGB/RGBW LED strips. These allow a series of individual LEDs, each capable of full colour, to be individually addressed and controlled.
 
 ## Output command
 

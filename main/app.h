@@ -60,9 +60,10 @@ struct app_s
      uint8_t preset;            // If this is a preset
    uint8_t r,
      g,
-     b;                         // Colour
+     b,
+     w;                         // Colour
    uint8_t stop;                // If set this is a count down to stopping
-   uint8_t fader;		// Effective brightness (set to bright unless fading in or out)
+   uint8_t fader;               // Effective brightness (set to bright unless fading in or out)
    uint8_t colourset:1;         // Colour is set
    uint8_t rainbow:1;           // Colour should be rainbow along strip
    uint8_t wheel:1;             // Colour should be cycled over time
@@ -77,6 +78,7 @@ struct app_s
 extern uint8_t *ledr;           // The current LED, set by the apps
 extern uint8_t *ledg;           // The current LED, set by the apps
 extern uint8_t *ledb;           // The current LED, set by the apps
+extern uint8_t *ledw;           // The current LED, set by the apps
 
 extern const uint8_t cos8[256];
 extern const uint8_t wheel[256];
@@ -90,10 +92,11 @@ clear (uint16_t start, uint16_t len)
    memset (ledr + start - 1, 0, len);
    memset (ledg + start - 1, 0, len);
    memset (ledb + start - 1, 0, len);
+   memset (ledw + start - 1, 0, len);
 }
 
 static inline uint8_t
-getr (uint16_t index)
+getR (uint16_t index)
 {
    if (!index || index > leds)
       return 0;
@@ -101,7 +104,7 @@ getr (uint16_t index)
 }
 
 static inline uint8_t
-getg (uint16_t index)
+getG (uint16_t index)
 {
    if (!index || index > leds)
       return 0;
@@ -109,15 +112,23 @@ getg (uint16_t index)
 }
 
 static inline uint8_t
-getb (uint16_t index)
+getB (uint16_t index)
 {
    if (!index || index > leds)
       return 0;
    return ledb[index - 1];
 }
 
+static inline uint8_t
+getW (uint16_t index)
+{
+   if (!index || index > leds)
+      return 0;
+   return ledw[index - 1];
+}
+
 static inline void
-setr (uint16_t index, uint8_t v)
+setR (uint16_t index, uint8_t v)
 {
    if (!index || index > leds)
       return;
@@ -125,7 +136,7 @@ setr (uint16_t index, uint8_t v)
 }
 
 static inline void
-setg (uint16_t index, uint8_t v)
+setG (uint16_t index, uint8_t v)
 {
    if (!index || index > leds)
       return;
@@ -133,7 +144,7 @@ setg (uint16_t index, uint8_t v)
 }
 
 static inline void
-setb (uint16_t index, uint8_t v)
+setB (uint16_t index, uint8_t v)
 {
    if (!index || index > leds)
       return;
@@ -141,7 +152,15 @@ setb (uint16_t index, uint8_t v)
 }
 
 static inline void
-setrgb (uint16_t index, uint8_t r, uint8_t g, uint8_t b)
+setW (uint16_t index, uint8_t v)
+{
+   if (!index || index > leds)
+      return;
+   ledw[index - 1] = v;
+}
+
+static inline void
+setRGB (uint16_t index, uint8_t r, uint8_t g, uint8_t b)
 {
    if (!index || index > leds)
       return;
@@ -151,7 +170,18 @@ setrgb (uint16_t index, uint8_t r, uint8_t g, uint8_t b)
 }
 
 static inline void
-setrgbl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t l)
+setRGBW (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t w)
+{
+   if (!index || index > leds)
+      return;
+   ledr[index - 1] = r;
+   ledg[index - 1] = g;
+   ledb[index - 1] = b;
+   ledw[index - 1] = w;
+}
+
+static inline void
+setRGBl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t l)
 {
    if (!index || index > leds)
       return;
@@ -161,12 +191,23 @@ setrgbl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t l)
 }
 
 static inline void
+setRGBWl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t l)
+{
+   if (!index || index > leds)
+      return;
+   ledr[index - 1] = ((int) l * r + (int) (255 - l) * ledr[index - 1]) / 255;
+   ledg[index - 1] = ((int) l * g + (int) (255 - l) * ledg[index - 1]) / 255;
+   ledb[index - 1] = ((int) l * b + (int) (255 - l) * ledb[index - 1]) / 255;
+   ledw[index - 1] = ((int) l * w + (int) (255 - l) * ledw[index - 1]) / 255;
+}
+
+static inline void
 setl (uint16_t i, app_t * a, uint8_t l)
 {
    if (a->rainbow)
    {
       uint8_t p = 255 - 255 * ((a->len + i - a->start) % a->len) / a->len;
-      setrgbl (i, wheel[p], wheel[(p + 85) & 255], wheel[(p + 170) & 255], l);
+      setRGBl (i, wheel[p], wheel[(p + 85) & 255], wheel[(p + 170) & 255], l);
    } else
-      setrgbl (i, a->r, a->g, a->b, l);
+      setRGBWl (i, a->r, a->g, a->b, a->w, l);
 }
