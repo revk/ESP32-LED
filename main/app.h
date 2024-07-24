@@ -92,7 +92,8 @@ clear (uint16_t start, uint16_t len)
    memset (ledr + start - 1, 0, len);
    memset (ledg + start - 1, 0, len);
    memset (ledb + start - 1, 0, len);
-   memset (ledw + start - 1, 0, len);
+   if (ledw)
+      memset (ledw + start - 1, 0, len);
 }
 
 static inline uint8_t
@@ -122,7 +123,7 @@ getB (uint16_t index)
 static inline uint8_t
 getW (uint16_t index)
 {
-   if (!index || index > leds)
+   if (!ledw || !index || index > leds)
       return 0;
    return ledw[index - 1];
 }
@@ -154,7 +155,7 @@ setB (uint16_t index, uint8_t v)
 static inline void
 setW (uint16_t index, uint8_t v)
 {
-   if (!index || index > leds)
+   if (!ledw || !index || index > leds)
       return;
    ledw[index - 1] = v;
 }
@@ -177,7 +178,8 @@ setRGBW (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t w)
    ledr[index - 1] = r;
    ledg[index - 1] = g;
    ledb[index - 1] = b;
-   ledw[index - 1] = w;
+   if (ledw)
+      ledw[index - 1] = w;
 }
 
 static inline void
@@ -198,7 +200,8 @@ setRGBWl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t l)
    ledr[index - 1] = ((int) l * r + (int) (255 - l) * ledr[index - 1]) / 255;
    ledg[index - 1] = ((int) l * g + (int) (255 - l) * ledg[index - 1]) / 255;
    ledb[index - 1] = ((int) l * b + (int) (255 - l) * ledb[index - 1]) / 255;
-   ledw[index - 1] = ((int) l * w + (int) (255 - l) * ledw[index - 1]) / 255;
+   if (ledw)
+      ledw[index - 1] = ((int) l * w + (int) (255 - l) * ledw[index - 1]) / 255;
 }
 
 static inline void
