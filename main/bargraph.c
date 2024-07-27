@@ -9,8 +9,6 @@ appbargraph (app_t * a)
    {                            // Sanity check / defaults
       if (!a->colourset)
          a->cycling = 1;
-      if (!a->limit)
-         a->limit = 60 * cps;
    }
    if (a->cycle >= a->limit)
       return "";                // done straight away

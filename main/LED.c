@@ -161,6 +161,7 @@ addapp (int index, int preset, const char *name, jo_t j)
                   a->r = x (0) * 17;
                   a->g = x (1) * 17;
                   a->b = x (2) * 17;
+                  a->w = 0;
                } else if (isxdigit ((int) c[3]))
                {
                   if (!c[4])
@@ -178,6 +179,7 @@ addapp (int index, int preset, const char *name, jo_t j)
                         a->r = x (0) * 16 + x (1);
                         a->g = x (2) * 16 + x (3);
                         a->b = x (4) * 16 + x (5);
+                        a->w = 0;
                      } else if (isxdigit ((int) c[6]) && isxdigit ((int) c[7]))
                      {          // # RRGGBBWW
                         if (!c[8])
@@ -292,7 +294,8 @@ addapp (int index, int preset, const char *name, jo_t j)
                a->r = har[preset - 1];
                a->g = hag[preset - 1];
                a->b = hab[preset - 1];
-               if (a->r || a->g || a->b)
+               a->w = haw[preset - 1];
+               if (a->r || a->g || a->b || a->w)
                   a->colourset = 1;
             }
             if (!a->bright && (habrightset & (1ULL << (preset - 1))))
@@ -454,6 +457,7 @@ presetcheck (void)
             a->r = har[a->preset - 1];
             a->g = hag[a->preset - 1];
             a->b = hab[a->preset - 1];
+            a->w = haw[a->preset - 1];
             a->bright = habright[a->preset - 1];
             hastatus |= (1ULL << (a->preset - 1));
          }
@@ -496,7 +500,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       hastatus = -1;
    }
-   if (poweron && suffix && !strcmp (suffix, "init"))
+   if (poweron && suffix && !strcmp (suffix, "init") && *effect[0])
    {                            // Power on init
       haon |= 1;
       hachanged |= 1;
@@ -726,7 +730,7 @@ led_task (void *x)
    ledb = calloc (leds, sizeof (*ledb));
    if (rgbw)
       ledw = calloc (leds, sizeof (*ledw));
-   if (poweron)
+   if (poweron && *effect[0])
    {                            // Light 1 is default
       haon = 1;
       hachanged = 1;
@@ -761,11 +765,13 @@ led_task (void *x)
                   a->r = wheel[(255 - a->cycle) & 255];
                   a->g = wheel[(255 - a->cycle + 85) & 255];
                   a->b = wheel[(255 - a->cycle + 170) & 255];
+                  a->w = 0;
                } else if (a->cycling)
                {                // Cycle the colour
                   a->r = cos8[(255 - a->cycle) & 255];
                   a->g = cos8[(255 - a->cycle + 85) & 255];
                   a->b = cos8[(255 - a->cycle + 170) & 255];
+                  a->w = 0;
                }
                if (!a->cycle)
                {                // Starting
