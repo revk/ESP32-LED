@@ -1,6 +1,6 @@
 // Generated case design for LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2024-07-28 07:27:11
+// Generated 2024-07-28 09:40:43
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -9,8 +9,8 @@
 // Globals
 margin=0.200000;
 lip=2.000000;
-casebottom=5.000000;
-casetop=4.000000;
+casebottom=3.000000;
+casetop=5.000000;
 casewall=3.000000;
 fit=0.000000;
 edge=2.000000;
@@ -32,26 +32,26 @@ translate([6.000000,1.300000,1.600000])rotate([0,0,-17.900000])m0(part,hole,bloc
 translate([26.250000,13.700000,1.600000])rotate([0,0,180.000000])rotate([-0.000000,-0.000000,-90.000000])m1(part,hole,block,casetop); // RevK:L_4x4_ TYA4020 (back)
 translate([28.050000,7.200000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 translate([26.250000,11.100000,1.600000])rotate([0,0,180.000000])m2(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
-// Missing model REF**.1 Shadow
+translate([17.000000,10.000000,1.600000])m3(part,hole,block,casetop); // REF** (back)
 translate([32.950000,14.600000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
-// Missing model C1.1 CP_EIA-3528-21_Kemet-B
+translate([26.350000,3.000000,1.600000])rotate([0,0,-90.000000])m4(part,hole,block,casetop); // C1 (back)
 translate([24.449999,7.200000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
-translate([31.610000,8.000000,1.600000])rotate([0,0,90.000000])translate([0.000000,-2.400000,0.000000])rotate([90.000000,-0.000000,-0.000000])m3(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
+translate([31.610000,8.000000,1.600000])rotate([0,0,90.000000])translate([0.000000,-2.400000,0.000000])rotate([90.000000,-0.000000,-0.000000])m5(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
 translate([26.250000,7.200000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
-translate([35.297638,1.600000,1.600000])rotate([0,0,-135.000000])m4(part,hole,block,casetop); // D1 (back)
-translate([33.000000,13.500000,1.600000])rotate([0,0,180.000000])m5(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
-translate([26.250000,9.100000,1.600000])rotate([0,0,180.000000])m6(part,hole,block,casetop); // RevK:SOT-23-6-MD8942 SOT-23-6 (back)
+translate([35.297638,1.600000,1.600000])rotate([0,0,-135.000000])m6(part,hole,block,casetop); // D1 (back)
+translate([33.000000,13.500000,1.600000])rotate([0,0,180.000000])m7(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
+translate([26.250000,9.100000,1.600000])rotate([0,0,180.000000])m8(part,hole,block,casetop); // RevK:SOT-23-6-MD8942 SOT-23-6 (back)
 translate([24.650000,6.100000,1.600000])rotate([0,0,180.000000])m2(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
 translate([31.000000,2.500000,1.600000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 translate([28.750000,10.400000,1.600000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
-translate([26.896745,6.020564,1.600000])m5(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
+translate([26.896745,6.020564,1.600000])m7(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
 translate([31.000000,13.500000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 translate([23.750000,10.400000,1.600000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
-translate([15.450000,8.000000,1.600000])m7(part,hole,block,casetop); // U6 (back)
-// Missing model J2.1 MP011985
+translate([15.450000,8.000000,1.600000])m9(part,hole,block,casetop); // U6 (back)
+translate([3.450000,8.000000,1.600000])rotate([0,0,-90.000000])m10(part,hole,block,casetop); // J2 (back)
 }
 
-parts_top=2;
+parts_top=5;
 // Parts to go on PCB (bottom)
 module parts_bottom(part=false,hole=false,block=false){
 }
@@ -88,6 +88,19 @@ if(part)
 }
 
 module m3(part=false,hole=false,block=false,height)
+{ // REF**
+// Nothing
+}
+
+module m4(part=false,hole=false,block=false,height)
+{ // C1
+if(part)
+{
+	b(0,0,0,3.5,2.8,1.9);
+}
+}
+
+module m5(part=false,hole=false,block=false,height)
 { // RevK:USB-C-Socket-H CSP-USC16-TR
 // USB connector
 rotate([-90,0,0])translate([-4.47,-3.84,0])
@@ -129,7 +142,7 @@ rotate([-90,0,0])translate([-4.47,-3.84,0])
 }
 }
 
-module m4(part=false,hole=false,block=false,height)
+module m6(part=false,hole=false,block=false,height)
 { // D1
 // 1x1mm LED
 if(part)
@@ -154,7 +167,7 @@ if(block)
 }
 }
 
-module m5(part=false,hole=false,block=false,height)
+module m7(part=false,hole=false,block=false,height)
 { // RevK:C_0402 C_0402_1005Metric
 // 0402 Capacitor
 if(part)
@@ -164,7 +177,7 @@ if(part)
 }
 }
 
-module m6(part=false,hole=false,block=false,height)
+module m8(part=false,hole=false,block=false,height)
 { // RevK:SOT-23-6-MD8942 SOT-23-6
 // SOT-23-6
 if(part)
@@ -174,7 +187,7 @@ if(part)
 }
 }
 
-module m7(part=false,hole=false,block=false,height)
+module m9(part=false,hole=false,block=false,height)
 { // U6
 // ESP32-S3-MINI-1
 translate([-15.4/2,-15.45/2,0])
@@ -188,6 +201,26 @@ translate([-15.4/2,-15.45/2,0])
 	{
 		cube([15.4,20.5,0.8]);
 	}
+}
+}
+
+module m10(part=false,hole=false,block=false,height)
+{ // J2
+N=3;
+if(part)
+{
+		b(0,0,0,N*3.5,7.4,3);
+}
+if(hole)
+{
+	hull()
+	{
+		b(0,0,0,N*3.5,7.4,6);
+		b(0,0,0,N*3.5,4,8.5);
+	}
+	for(p=[0:N-1])translate([-3.5*(N-1)/2+p*3.5,0,-3.7])cylinder(r1=0.3,r2=1,h=3.7);
+	for(p=[0:N-1])translate([-3.5*(N-1)/2+p*3.5,0,8])cylinder(d=2.5,h=height);
+	for(p=[0:N-1])translate([-3.5*(N-1)/2+p*3.5,0,2.5])rotate([90,0,0])cylinder(d=4,h=10);
 }
 }
 
