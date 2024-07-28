@@ -1,6 +1,6 @@
 // Generated case design for LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2024-07-13 08:43:27
+// Generated 2024-07-28 07:27:11
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -32,7 +32,7 @@ translate([6.000000,1.300000,1.600000])rotate([0,0,-17.900000])m0(part,hole,bloc
 translate([26.250000,13.700000,1.600000])rotate([0,0,180.000000])rotate([-0.000000,-0.000000,-90.000000])m1(part,hole,block,casetop); // RevK:L_4x4_ TYA4020 (back)
 translate([28.050000,7.200000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 translate([26.250000,11.100000,1.600000])rotate([0,0,180.000000])m2(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
-// Missing model REF**.1 140x140
+// Missing model REF**.1 Shadow
 translate([32.950000,14.600000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
 // Missing model C1.1 CP_EIA-3528-21_Kemet-B
 translate([24.449999,7.200000,1.600000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // RevK:DFN1006-2L R_0402_1005Metric (back)
