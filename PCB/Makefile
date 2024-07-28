@@ -26,4 +26,4 @@ PCBCase/case: PCBCase/case.c
 	echo "Made $@"
 
 LED/LED.scad: LED/LED.kicad_pcb PCBCase/case Makefile
-	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=5 --pcb=2
+	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=6 --pcb=2

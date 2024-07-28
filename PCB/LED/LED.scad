@@ -1,6 +1,6 @@
 // Generated case design for LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2024-07-28 12:32:40
+// Generated 2024-07-28 12:43:06
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -10,7 +10,7 @@
 margin=0.200000;
 lip=2.000000;
 casebottom=2.000000;
-casetop=5.000000;
+casetop=6.000000;
 casewall=3.000000;
 fit=0.000000;
 edge=2.000000;
@@ -220,7 +220,7 @@ if(hole)
 	}
 	for(p=[0:N-1])translate([-3.5*(N-1)/2+p*3.5,0,-3.7])cylinder(r1=0.3,r2=1,h=3.7);
 	for(p=[0:N-1])translate([-3.5*(N-1)/2+p*3.5,0,8])cylinder(d=2.5,h=height);
-	for(p=[0:N-1])translate([-3.5*(N-1)/2+p*3.5,0,2.5])rotate([90,0,0])cylinder(d=3,h=10);
+	for(p=[0:N-1])translate([-3.5*(N-1)/2+p*3.5,0,2.5])rotate([90,0,0])cylinder(d=2.5,h=10);
 }
 }
 
