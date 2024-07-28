@@ -10,8 +10,6 @@ appbargraph (app_t * a)
       if (!a->colourset)
          a->cycling = 1;
    }
-   if (a->cycle >= a->limit)
-      return "";                // done straight away
    uint8_t l = 255;
 
    int t = a->top;
