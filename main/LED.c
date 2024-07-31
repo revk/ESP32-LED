@@ -673,7 +673,7 @@ send_ha_config (void)
             jo_stringf (j, "stat_t", "%s%d", hastatus, i + 1);
             jo_string (j, "schema", "json");
             jo_array (j, "supported_color_modes");
-            jo_string (j, NULL, "rgb");
+            jo_string (j, NULL, rgbw ? "rgbw" : "rgb");
             jo_close (j);
             if (!*effect[i])
             {
