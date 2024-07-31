@@ -4236,10 +4236,22 @@
 		)
 	)
 	(junction
+		(at 105.41 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2452c2bd-1ff8-4f98-9fa7-e546a631adcd")
+	)
+	(junction
 		(at 165.1 97.79)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9c659bea-53fe-4ba3-9d8f-230b5b588746")
+	)
+	(junction
+		(at 105.41 77.47)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d53dd099-fa6e-40a5-8524-46e3801cf6c4")
 	)
 	(junction
 		(at 194.31 66.04)
@@ -4341,6 +4353,16 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 69.85) (xy 113.665 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "391ae412-bfb9-4d81-8ff5-aa84b27d79b2")
+	)
+	(wire
+		(pts
 			(xy 161.29 97.79) (xy 165.1 97.79)
 		)
 		(stroke
@@ -4358,6 +4380,16 @@
 			(type default)
 		)
 		(uuid "8bb0a05e-e024-4c96-8062-b72bb8f6b3b6")
+	)
+	(wire
+		(pts
+			(xy 105.41 77.47) (xy 113.665 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8dfaf457-2508-4642-969c-f7993e5c9e99")
 	)
 	(wire
 		(pts
@@ -7649,6 +7681,77 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 113.665 73.66 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9a8994c7-8e0d-4e60-ab10-5e76f77174df")
+		(property "Reference" "C4"
+			(at 116.586 72.4478 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "100nF"
+			(at 116.586 74.8721 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "RevK:C_0603"
+			(at 112.6998 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 113.665 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 113.665 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dbddc6db-8642-4742-84f2-522a74c01d43")
+		)
+		(pin "2"
+			(uuid "8a784eeb-83f1-4e73-a453-fad9109a8042")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C4")
 					(unit 1)
 				)
 			)
