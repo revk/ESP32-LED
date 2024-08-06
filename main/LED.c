@@ -546,7 +546,10 @@ app_callback (int client, const char *prefix, const char *target, const char *su
                else if (!strcmp (val, "w"))
                   haw[preset - 1] = v;
             }
-            hargb |= (1ULL << (preset - 1));
+            if (har[preset - 1] || hag[preset - 1] || hab[preset - 1] || (rgbw && haw[preset - 1]))
+               hargb |= (1ULL << (preset - 1));
+            else
+               hargb &= ~(1ULL << (preset - 1));        // Black considered unset
          }
          if (jo_find (j, "effect"))
          {                      // effect
