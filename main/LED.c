@@ -870,36 +870,39 @@ led_task (void *x)
       xSemaphoreGive (app_mutex);
       if (!strip)
          continue;
-      if (rgbw)
       {
+         uint8_t *r = ledr;
+         uint8_t *g = ledg;
+         uint8_t *b = ledb;
+         uint8_t *w = ledw;
          if (rgswap)
+         {
+            uint8_t *s = r;
+            r = g;
+            g = s;
+         }
+         if (bgswap)
+         {
+            uint8_t *s = r;
+            r = b;
+            b = s;
+         }
+         if (rgbw)
+         {
             for (unsigned int i = 0; i < leds; i++)
                led_strip_set_pixel_rgbw (strip, i + led_status, //
-                                         gamma8[(unsigned int) maxg * ledg[i] / 255],   //
-                                         gamma8[(unsigned int) maxr * ledr[i] / 255],   //
-                                         gamma8[(unsigned int) maxb * ledb[i] / 255],   //
-                                         gamma8[(unsigned int) maxw * ledw[i] / 255]);
-         else
-            for (unsigned int i = 0; i < leds; i++)
-               led_strip_set_pixel_rgbw (strip, i + led_status, //
-                                         gamma8[(unsigned int) maxr * ledr[i] / 255],   //
-                                         gamma8[(unsigned int) maxg * ledg[i] / 255],   //
-                                         gamma8[(unsigned int) maxb * ledb[i] / 255],   //
-                                         gamma8[(unsigned int) maxw * ledw[i] / 255]);
-      } else
-      {
-         if (rgswap)
+                                         gamma8[(unsigned int) maxr * r[i] / 255],      //
+                                         gamma8[(unsigned int) maxg * g[i] / 255],      //
+                                         gamma8[(unsigned int) maxb * b[i] / 255],      //
+                                         gamma8[(unsigned int) maxw * w[i] / 255]);
+         } else
+         {
             for (unsigned int i = 0; i < leds; i++)
                led_strip_set_pixel (strip, i + led_status,      //
-                                    gamma8[(unsigned int) maxg * ledg[i] / 255],        //
-                                    gamma8[(unsigned int) maxr * ledr[i] / 255],        //
-                                    gamma8[(unsigned int) maxb * ledb[i] / 255]);
-         else
-            for (unsigned int i = 0; i < leds; i++)
-               led_strip_set_pixel (strip, i + led_status,      //
-                                    gamma8[(unsigned int) maxr * ledr[i] / 255],        //
-                                    gamma8[(unsigned int) maxg * ledg[i] / 255],        //
-                                    gamma8[(unsigned int) maxb * ledb[i] / 255]);
+                                    gamma8[(unsigned int) maxr * r[i] / 255],   //
+                                    gamma8[(unsigned int) maxg * g[i] / 255],   //
+                                    gamma8[(unsigned int) maxb * b[i] / 255]);
+         }
       }
       if (led_status)
          revk_led (strip, 0, 255, revk_blinker ());
