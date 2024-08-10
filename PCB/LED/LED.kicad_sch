@@ -4310,10 +4310,6 @@
 		(uuid "af4999b4-fd72-4fe4-8df7-d8ee06d48dc1")
 	)
 	(no_connect
-		(at 35.56 76.2)
-		(uuid "b1f0b98d-d49f-4ea2-a503-84571b326cab")
-	)
-	(no_connect
 		(at 66.04 66.04)
 		(uuid "c053934f-d73a-4026-8bbb-3f21a0847732")
 	)
@@ -5826,6 +5822,7 @@
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
 		(at 105.41 94.615 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5833,7 +5830,7 @@
 		(dnp no)
 		(uuid "217af3e0-d8cd-4180-962d-f2e984d950ed")
 		(property "Reference" "J2"
-			(at 105.41 99.695 0)
+			(at 105.41 89.535 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5841,7 +5838,7 @@
 			)
 		)
 		(property "Value" "Wago"
-			(at 105.41 89.027 0)
+			(at 105.41 100.203 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6935,6 +6932,72 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 35.56 76.2 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5b7a72fb-331c-457f-804d-46bfca907dd7")
+		(property "Reference" "#PWR030"
+			(at 29.21 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 31.75 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 35.56 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 35.56 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 35.56 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "743577a8-d0fb-488f-873c-e4460a8b04e2")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
