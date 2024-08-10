@@ -546,7 +546,10 @@ app_callback (int client, const char *prefix, const char *target, const char *su
                else if (!strcmp (val, "w"))
                   haw[preset - 1] = v;
             }
-            hargb |= (1ULL << (preset - 1));
+            if (har[preset - 1] || hag[preset - 1] || hab[preset - 1] || (rgbw && haw[preset - 1]))
+               hargb |= (1ULL << (preset - 1));
+            else
+               hargb &= ~(1ULL << (preset - 1));        // Black considered unset
          }
          if (jo_find (j, "effect"))
          {                      // effect
@@ -867,36 +870,39 @@ led_task (void *x)
       xSemaphoreGive (app_mutex);
       if (!strip)
          continue;
-      if (rgbw)
       {
+         uint8_t *r = ledr;
+         uint8_t *g = ledg;
+         uint8_t *b = ledb;
+         uint8_t *w = ledw;
          if (rgswap)
+         {
+            uint8_t *s = r;
+            r = g;
+            g = s;
+         }
+         if (bgswap)
+         {
+            uint8_t *s = r;
+            r = b;
+            b = s;
+         }
+         if (rgbw)
+         {
             for (unsigned int i = 0; i < leds; i++)
                led_strip_set_pixel_rgbw (strip, i + led_status, //
-                                         gamma8[(unsigned int) maxg * ledg[i] / 255],   //
-                                         gamma8[(unsigned int) maxr * ledr[i] / 255],   //
-                                         gamma8[(unsigned int) maxb * ledb[i] / 255],   //
-                                         gamma8[(unsigned int) maxw * ledw[i] / 255]);
-         else
-            for (unsigned int i = 0; i < leds; i++)
-               led_strip_set_pixel_rgbw (strip, i + led_status, //
-                                         gamma8[(unsigned int) maxr * ledr[i] / 255],   //
-                                         gamma8[(unsigned int) maxg * ledg[i] / 255],   //
-                                         gamma8[(unsigned int) maxb * ledb[i] / 255],   //
-                                         gamma8[(unsigned int) maxw * ledw[i] / 255]);
-      } else
-      {
-         if (rgswap)
+                                         gamma8[(unsigned int) maxr * r[i] / 255],      //
+                                         gamma8[(unsigned int) maxg * g[i] / 255],      //
+                                         gamma8[(unsigned int) maxb * b[i] / 255],      //
+                                         gamma8[(unsigned int) maxw * w[i] / 255]);
+         } else
+         {
             for (unsigned int i = 0; i < leds; i++)
                led_strip_set_pixel (strip, i + led_status,      //
-                                    gamma8[(unsigned int) maxg * ledg[i] / 255],        //
-                                    gamma8[(unsigned int) maxr * ledr[i] / 255],        //
-                                    gamma8[(unsigned int) maxb * ledb[i] / 255]);
-         else
-            for (unsigned int i = 0; i < leds; i++)
-               led_strip_set_pixel (strip, i + led_status,      //
-                                    gamma8[(unsigned int) maxr * ledr[i] / 255],        //
-                                    gamma8[(unsigned int) maxg * ledg[i] / 255],        //
-                                    gamma8[(unsigned int) maxb * ledb[i] / 255]);
+                                    gamma8[(unsigned int) maxr * r[i] / 255],   //
+                                    gamma8[(unsigned int) maxg * g[i] / 255],   //
+                                    gamma8[(unsigned int) maxb * b[i] / 255]);
+         }
       }
       if (led_status)
          revk_led (strip, 0, 255, revk_blinker ());
