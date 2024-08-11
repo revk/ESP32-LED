@@ -1,6 +1,6 @@
 // Generated case design for LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2024-08-11 09:36:04
+// Generated 2024-08-11 09:36:59
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -49,10 +49,10 @@ translate([33.896745,6.020564,1.600000])m8(part,hole,block,casetop); // RevK:C_0
 translate([38.000000,13.500000,1.600000])rotate([0,0,180.000000])m2(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([30.750000,10.400000,1.600000])rotate([0,0,-90.000000])m3(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
 translate([22.450000,8.000000,1.600000])m10(part,hole,block,casetop); // U6 (back)
-// Missing model J2.1 2060-453_998-404
+translate([8.200000,8.000000,1.600000])m11(part,hole,block,casetop); // J2 (back)
 }
 
-parts_top=5;
+parts_top=6;
 // Parts to go on PCB (bottom)
 module parts_bottom(part=false,hole=false,block=false){
 }
@@ -210,6 +210,20 @@ translate([-15.4/2,-15.45/2,0])
 	if(hole)
 	{
 		cube([15.4,20.5,0.8]);
+	}
+}
+}
+
+module m11(part=false,hole=false,block=false,height)
+{ // J2
+// WAGO-2060-453-998-404
+N=3
+if(part)
+{
+	hull()
+	{
+		b(0,0,0,12.7,N*4-0.1,1);
+		translate([0.8,0,0])b(0,0,0,11.1,N*4-0.1,4.5);
 	}
 }
 }
