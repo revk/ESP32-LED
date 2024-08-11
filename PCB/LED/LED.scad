@@ -1,6 +1,6 @@
 // Generated case design for LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2024-08-11 09:36:59
+// Generated 2024-08-11 09:37:54
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -217,7 +217,7 @@ translate([-15.4/2,-15.45/2,0])
 module m11(part=false,hole=false,block=false,height)
 { // J2
 // WAGO-2060-453-998-404
-N=3
+N=3;
 if(part)
 {
 	hull()
