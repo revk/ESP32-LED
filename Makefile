@@ -80,6 +80,7 @@ pull:
 
 update:
 	git submodule update --init --recursive --remote
+	git submodule update --init --remote
 	-git commit -a -m "Library update"
 
 # Set GPIO low (whichever CBUS is set to mode 8/GPIO)
