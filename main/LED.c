@@ -493,7 +493,7 @@ const char *
 app_callback (int client, const char *prefix, const char *target, const char *suffix, jo_t j)
 {
    if (client || !prefix || target || strcmp (prefix, topiccommand))
-      return NULL;              // Not for us or not a command from main MQTT
+      return NULL;              // Not for us or not a command from main MQTTS
    if (suffix && ((haenable && (!strcmp (suffix, "connect") || !strcmp (suffix, "status"))) || !strcmp (suffix, "setting")))
    {
       b.haconfig = 1;
@@ -582,7 +582,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       int preset = atoi (suffix + 5) ? : 1;
       if (!preset || preset > CONFIG_REVK_WEB_EXTRA_PAGES)
          return "Unknown preset number";
-      char val[10];
+      char val[10]="";
       jo_strncpy (j, val, sizeof (val));
       if (!strcasecmp (val, "off") || !strcmp (val, "0"))
          haon &= ~(1ULL << (preset - 1));       // Off
@@ -591,6 +591,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       else if (!strcasecmp (val, "2"))
          haon ^= (1ULL << (preset - 1));        // Toggle
       hachanged |= (1ULL << (preset - 1));
+      b.hacheck = 1;
       return NULL;
    }
    if (suffix && strcmp (suffix, "add"))
