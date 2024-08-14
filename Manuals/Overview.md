@@ -60,7 +60,7 @@ Each app can have arguments.
 ### Common arguments
 
 |Short|Argument|Meaning|
-|--------|-------|
+|-----|--------|-------|
 |`d`|`delay`|Delay before starting app. (seconds)|
 |`T`|`limit`|How long to run the app for. Some apps go forever if not set to a limited time. (seconds)|
 |`#`|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. Also allowed is `rainbow` and `cycle` and `wheel`|
