@@ -6,7 +6,7 @@ gpio	blink		"-20 -8 -21"	.array=3	// Status LED
 #endif
 
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
-gpio	rgb		4				// GPIO for LED chain
+gpio	rgb		4	.array=2		// GPIO for LED chain
 #ifndef  CONFIG_REVK_BLINK_DEF
 gpio	blink		"35 35 35"		.array=3	// Status LED
 #endif
@@ -27,7 +27,7 @@ bit	sk6812			.hide=1			// SK6812 (instead of WS2812)
 bit 	rgbw			.hide=1			// RGBW (no effects coded for this yet)
 bit	rgswap			.hide=1			// Red/green swap
 bit	bgswap			.hide=1			// Blue/green swap
-u16	leds		12	.hide=1			// How many LEDs
+u16	leds		12	.hide=1	.array=2	// How many LEDs
 u8	webcontrol	2				// Web controls
 u8	i2c	0					// I2C channel
 gpio	scl						// Colour sensor SCL

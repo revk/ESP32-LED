@@ -37,6 +37,9 @@ struct
 
 static httpd_handle_t webserver = NULL;
 
+int ledmax = 0;                 // Total LEDs
+#define	STRIPS	(sizeof(leds)/sizeof(leds[0]))
+
 uint8_t *ledr = NULL;
 uint8_t *ledg = NULL;
 uint8_t *ledb = NULL;
@@ -306,7 +309,7 @@ addapp (int index, int preset, const char *name, jo_t j)
          if (!a->top)
             a->top = a->start;
          if (!a->len)
-            a->len = leds + 1 - a->start;
+            a->len = ledmax + 1 - a->start;
          if (!a->speed)
             a->speed = speed_scale;     //  1.0 s
          if (!a->fadein)
@@ -582,7 +585,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       int preset = atoi (suffix + 5) ? : 1;
       if (!preset || preset > CONFIG_REVK_WEB_EXTRA_PAGES)
          return "Unknown preset number";
-      char val[10]="";
+      char val[10] = "";
       jo_strncpy (j, val, sizeof (val));
       if (!strcasecmp (val, "off") || !strcmp (val, "0"))
          haon &= ~(1ULL << (preset - 1));       // Off
@@ -699,41 +702,44 @@ send_ha_config (void)
 void
 led_task (void *x)
 {
-   if (!rgb.set || !(gpio_ok (rgb.num) & 1))
+   if (!rgb[0].set || !(gpio_ok (rgb[0].num) & 1))
    {
-      ESP_LOGE (TAG, "Bad GPIO %d", rgb.num);
+      ESP_LOGE (TAG, "Bad GPIO %d", rgb[0].num);
       vTaskDelete (NULL);
       return;
    }
-   uint8_t led_status = (blink[0].num == rgb.num ? 1 : 0);
+   uint8_t led_status = (blink[0].num == rgb[0].num ? 1 : 0);
    if (!led_status)
       revk_blink_init ();       // Library blink
-   led_strip_handle_t strip = NULL;
-   {
-      ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb.num, rgb.invert ? " (inverted)" : "", leds,
-                led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
-      led_strip_config_t strip_config = {
-         .strip_gpio_num = rgb.num,
-         .max_leds = leds + led_status, // The number of LEDs in the strip,
-         .led_pixel_format = rgbw ? LED_PIXEL_FORMAT_GRBW : LED_PIXEL_FORMAT_GRB,       // Pixel format of your LED strip
-         .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,     // LED strip model
-         .flags.invert_out = rgb.invert,        // whether to invert the output signal(useful when your hardware has a level inverter)
-      };
-      led_strip_rmt_config_t rmt_config = {
-         .clk_src = RMT_CLK_SRC_DEFAULT,        // different clock source can lead to different power consumption
-         .resolution_hz = 10 * 1000 * 1000,     // 10 MHz
+   led_strip_handle_t strip[STRIPS] = { 0 };
+   for (int s = 0; s < STRIPS; s++)
+      if (leds[s])
+      {
+         ledmax += leds[s];
+         ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb[s].num, rgb[s].invert ? " (inverted)" : "", leds[s],
+                   led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
+         led_strip_config_t strip_config = {
+            .strip_gpio_num = rgb[s].num,
+            .max_leds = leds[s] + (s ? led_status : 0), // The number of LEDs in the strip,
+            .led_pixel_format = rgbw ? LED_PIXEL_FORMAT_GRBW : LED_PIXEL_FORMAT_GRB,    // Pixel format of your LED strip
+            .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,  // LED strip model
+            .flags.invert_out = rgb[s].invert,  // whether to invert the output signal(useful when your hardware has a level inverter)
+         };
+         led_strip_rmt_config_t rmt_config = {
+            .clk_src = RMT_CLK_SRC_DEFAULT,     // different clock source can lead to different power consumption
+            .resolution_hz = 10 * 1000 * 1000,  // 10 MHz
 #ifdef	CONFIG_IDF_TARGET_ESP32S3
-         .flags.with_dma = true,
+            .flags.with_dma = true,
 #endif
-      };
-      REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip));
-      REVK_ERR_CHECK (led_strip_clear (strip));
-   }
-   ledr = calloc (leds, sizeof (*ledr));
-   ledg = calloc (leds, sizeof (*ledg));
-   ledb = calloc (leds, sizeof (*ledb));
+         };
+         REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip[s]));
+         REVK_ERR_CHECK (led_strip_clear (strip[s]));
+      }
+   ledr = calloc (ledmax, sizeof (*ledr));
+   ledg = calloc (ledmax, sizeof (*ledg));
+   ledb = calloc (ledmax, sizeof (*ledb));
    if (rgbw)
-      ledw = calloc (leds, sizeof (*ledw));
+      ledw = calloc (ledmax, sizeof (*ledw));
    if (poweron && *effect[0])
    {                            // Light 1 is default
       haon = 1;
@@ -750,7 +756,7 @@ led_task (void *x)
       if (hastatus)
          send_ha_status ();
       usleep (tick - (esp_timer_get_time () % tick));
-      clear (1, leds);
+      clear (1, ledmax);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
       for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
          for (unsigned int i = 0; i < MAXAPPS; i++)
@@ -869,8 +875,6 @@ led_task (void *x)
             }
          }
       xSemaphoreGive (app_mutex);
-      if (!strip)
-         continue;
       {
          uint8_t *r = ledr;
          uint8_t *g = ledg;
@@ -888,28 +892,42 @@ led_task (void *x)
             r = b;
             b = s;
          }
-         if (rgbw)
-         {
-            for (unsigned int i = 0; i < leds; i++)
-               led_strip_set_pixel_rgbw (strip, i + led_status, //
-                                         gamma8[(unsigned int) maxr * r[i] / 255],      //
-                                         gamma8[(unsigned int) maxg * g[i] / 255],      //
-                                         gamma8[(unsigned int) maxb * b[i] / 255],      //
-                                         gamma8[(unsigned int) maxw * w[i] / 255]);
-         } else
-         {
-            for (unsigned int i = 0; i < leds; i++)
-               led_strip_set_pixel (strip, i + led_status,      //
-                                    gamma8[(unsigned int) maxr * r[i] / 255],   //
-                                    gamma8[(unsigned int) maxg * g[i] / 255],   //
-                                    gamma8[(unsigned int) maxb * b[i] / 255]);
-         }
+         for (int s = 0; s < STRIPS; s++)
+            if (strip[s])
+            {
+               if (rgbw)
+               {
+                  for (unsigned int i = 0; i < leds[s]; i++)
+                     led_strip_set_pixel_rgbw (strip[s], i + (s ? led_status : 0),      //
+                                               gamma8[(unsigned int) maxr * r[i] / 255],        //
+                                               gamma8[(unsigned int) maxg * g[i] / 255],        //
+                                               gamma8[(unsigned int) maxb * b[i] / 255],        //
+                                               gamma8[(unsigned int) maxw * w[i] / 255]);
+               } else
+               {
+                  for (unsigned int i = 0; i < leds[s]; i++)
+                     led_strip_set_pixel (strip[s], i + (s ? led_status : 0),   //
+                                          gamma8[(unsigned int) maxr * r[i] / 255],     //
+                                          gamma8[(unsigned int) maxg * g[i] / 255],     //
+                                          gamma8[(unsigned int) maxb * b[i] / 255]);
+               }
+               r += leds[s];
+               g += leds[s];
+               b += leds[s];
+               if (w)
+                  w += leds[s];
+               if (!s)
+               {
+                  if (led_status)
+                     revk_led (strip[s], 0, 255, revk_blinker ());
+                  else
+                     revk_blink_do ();  // Library blink
+               }
+            }
+         for (int s = 0; s < STRIPS; s++)
+            if (strip[s])
+               REVK_ERR_CHECK (led_strip_refresh (strip[s]));
       }
-      if (led_status)
-         revk_led (strip, 0, 255, revk_blinker ());
-      else
-         revk_blink_do ();      // Library blink
-      REVK_ERR_CHECK (led_strip_refresh (strip));
    }
 }
 
@@ -919,7 +937,8 @@ revk_web_extra (httpd_req_t * req, int page)
    if (!page)
    {
       revk_web_setting (req, NULL, "dark");
-      revk_web_setting (req, NULL, "leds");
+      revk_web_setting (req, NULL, "leds1");
+      revk_web_setting (req, NULL, "leds2");
       revk_web_setting (req, NULL, "sk6812");
       revk_web_setting (req, NULL, "rgbw");
       revk_web_setting (req, NULL, "rgswap");
@@ -1016,7 +1035,7 @@ web_root (httpd_req_t * req)
                revk_web_send (req, " preset=%d", a->preset);
             if (a->start && a->start != 1)
                revk_web_send (req, " start=%d", a->start);
-            if (a->len && a->len != leds)
+            if (a->len && a->len != ledmax)
                revk_web_send (req, " len=%d", a->len);
             if (a->bright < 255)
                revk_web_send (req, " bright=%d", a->bright);
@@ -1216,8 +1235,8 @@ app_main ()
    }
    if (cps < 10)
       cps = 10;                 // Safety for division
-   if (!leds)
-      leds = 1;
+   if (!ledmax)
+      ledmax = 1;
    memset (habright, 255, sizeof (habright));
    memset (har, 255, sizeof (har));
    memset (hag, 0, sizeof (hag));

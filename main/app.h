@@ -75,6 +75,8 @@ struct app_s
    void *data;                  // Malloc'd data area
 };
 
+extern int ledmax;		// Total LEDs
+
 extern uint8_t *ledr;           // The current LED, set by the apps
 extern uint8_t *ledg;           // The current LED, set by the apps
 extern uint8_t *ledb;           // The current LED, set by the apps
@@ -87,7 +89,7 @@ extern const uint8_t zig[256];
 static inline void
 clear (uint16_t start, uint16_t len)
 {
-   if (!start || start > leds || start + len - 1 > leds)
+   if (!start || start > ledmax || start + len - 1 > ledmax)
       return;
    memset (ledr + start - 1, 0, len);
    memset (ledg + start - 1, 0, len);
@@ -99,7 +101,7 @@ clear (uint16_t start, uint16_t len)
 static inline uint8_t
 getR (uint16_t index)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return 0;
    return ledr[index - 1];
 }
@@ -107,7 +109,7 @@ getR (uint16_t index)
 static inline uint8_t
 getG (uint16_t index)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return 0;
    return ledg[index - 1];
 }
@@ -115,7 +117,7 @@ getG (uint16_t index)
 static inline uint8_t
 getB (uint16_t index)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return 0;
    return ledb[index - 1];
 }
@@ -123,7 +125,7 @@ getB (uint16_t index)
 static inline uint8_t
 getW (uint16_t index)
 {
-   if (!ledw || !index || index > leds)
+   if (!ledw || !index || index > ledmax)
       return 0;
    return ledw[index - 1];
 }
@@ -131,7 +133,7 @@ getW (uint16_t index)
 static inline void
 setR (uint16_t index, uint8_t v)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return;
    ledr[index - 1] = v;
 }
@@ -139,7 +141,7 @@ setR (uint16_t index, uint8_t v)
 static inline void
 setG (uint16_t index, uint8_t v)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return;
    ledg[index - 1] = v;
 }
@@ -147,7 +149,7 @@ setG (uint16_t index, uint8_t v)
 static inline void
 setB (uint16_t index, uint8_t v)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return;
    ledb[index - 1] = v;
 }
@@ -155,7 +157,7 @@ setB (uint16_t index, uint8_t v)
 static inline void
 setW (uint16_t index, uint8_t v)
 {
-   if (!ledw || !index || index > leds)
+   if (!ledw || !index || index > ledmax)
       return;
    ledw[index - 1] = v;
 }
@@ -163,7 +165,7 @@ setW (uint16_t index, uint8_t v)
 static inline void
 setRGB (uint16_t index, uint8_t r, uint8_t g, uint8_t b)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return;
    ledr[index - 1] = r;
    ledg[index - 1] = g;
@@ -173,7 +175,7 @@ setRGB (uint16_t index, uint8_t r, uint8_t g, uint8_t b)
 static inline void
 setRGBW (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t w)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return;
    ledr[index - 1] = r;
    ledg[index - 1] = g;
@@ -185,7 +187,7 @@ setRGBW (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t w)
 static inline void
 setRGBl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t l)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return;
    ledr[index - 1] = ((int) l * r + (int) (255 - l) * ledr[index - 1]) / 255;
    ledg[index - 1] = ((int) l * g + (int) (255 - l) * ledg[index - 1]) / 255;
@@ -195,7 +197,7 @@ setRGBl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t l)
 static inline void
 setRGBWl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t l)
 {
-   if (!index || index > leds)
+   if (!index || index > ledmax)
       return;
    ledr[index - 1] = ((int) l * r + (int) (255 - l) * ledr[index - 1]) / 255;
    ledg[index - 1] = ((int) l * g + (int) (255 - l) * ledg[index - 1]) / 255;
