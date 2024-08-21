@@ -1238,8 +1238,14 @@ app_main ()
    if (!ledmax)
       ledmax = 1;
    memset (habright, 255, sizeof (habright));
-   memset (har, 255, sizeof (har));
-   memset (hag, 0, sizeof (hag));
-   memset (hab, 0, sizeof (hab));
+   if (rgbw)
+      memset (haw, 255, sizeof (hab));
+   else
+   {
+      memset (har, 255, sizeof (har));
+      memset (hag, 255, sizeof (hag));
+      memset (hab, 255, sizeof (hab));
+   }
+   hargb = -1;
    revk_task ("LED", led_task, NULL, 4);
 }
