@@ -1,5 +1,5 @@
 #ifdef  CONFIG_IDF_TARGET_ESP32
-gpio	rgb		22				// GPIO for LED chain
+gpio	rgb		22	.array=2		// GPIO for LED chain
 #ifndef  CONFIG_REVK_BLINK_DEF
 gpio	blink		"-20 -8 -21"	.array=3	// Status LED
 #endif
