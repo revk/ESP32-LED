@@ -19,7 +19,7 @@ all:	settings.h
 beta:  
 	-git pull
 	-git submodule update --recursive
-	-git commit -a -m checkpoint
+	-git commit -a
 	@make set
 	cp LED*.bin betarelease
 	git commit -a -m betarelease
@@ -28,7 +28,7 @@ beta:
 issue:  
 	-git pull
 	-git submodule update --recursive
-	-git commit -a -m checkpoint
+	-git commit -a
 	@make set
 	cp LED*.bin release
 	cp LED*.bin betarelease
@@ -79,8 +79,10 @@ pull:
 	git submodule update --recursive
 
 update:
-	git submodule update --init --recursive --remote
+	-git pull
+	-git commit -a
 	git submodule update --init --remote
+	git submodule update --recursive
 	-git commit -a -m "Library update"
 
 # Set GPIO low (whichever CBUS is set to mode 8/GPIO)

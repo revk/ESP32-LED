@@ -623,7 +623,7 @@ send_ha_status (void)
          {
             jo_object (j, "color");
             jo_int (j, "r", har[preset]);
-            jo_int (j, "g", hab[preset]);
+            jo_int (j, "g", hag[preset]);
             jo_int (j, "b", hab[preset]);
             if (rgbw)
                jo_int (j, "w", haw[preset]);
