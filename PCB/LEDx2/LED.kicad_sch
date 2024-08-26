@@ -5495,7 +5495,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10uF 50V"
+		(property "Value" "10uF 35V"
 			(at 194.945 114.935 0)
 			(effects
 				(font
@@ -5531,7 +5531,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C1591"
+		(property "LCSC Part #" "C194427"
 			(at 188.595 114.935 0)
 			(effects
 				(font
