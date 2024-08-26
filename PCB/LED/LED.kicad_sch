@@ -7933,7 +7933,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "RevK:C_0603"
+		(property "Footprint" "RevK:C_0402"
 			(at 112.6998 77.47 0)
 			(effects
 				(font
