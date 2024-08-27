@@ -735,6 +735,8 @@ led_task (void *x)
          REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip[s]));
          REVK_ERR_CHECK (led_strip_clear (strip[s]));
       }
+   if (!ledmax)
+      ledmax = 1;
    ledr = calloc (ledmax, sizeof (*ledr));
    ledg = calloc (ledmax, sizeof (*ledg));
    ledb = calloc (ledmax, sizeof (*ledb));
@@ -1235,8 +1237,6 @@ app_main ()
    }
    if (cps < 10)
       cps = 10;                 // Safety for division
-   if (!ledmax)
-      ledmax = 1;
    memset (habright, 255, sizeof (habright));
    if (rgbw)
       memset (haw, 255, sizeof (hab));
