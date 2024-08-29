@@ -720,7 +720,7 @@ led_task (void *x)
                    led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
          led_strip_config_t strip_config = {
             .strip_gpio_num = rgb[s].num,
-            .max_leds = leds[s] + (s ? led_status : 0), // The number of LEDs in the strip,
+            .max_leds = leds[s] + (s ? 0 : led_status), // The number of LEDs in the strip,
             .led_pixel_format = rgbw ? LED_PIXEL_FORMAT_GRBW : LED_PIXEL_FORMAT_GRB,    // Pixel format of your LED strip
             .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,  // LED strip model
             .flags.invert_out = rgb[s].invert,  // whether to invert the output signal(useful when your hardware has a level inverter)
@@ -900,7 +900,7 @@ led_task (void *x)
                if (rgbw)
                {
                   for (unsigned int i = 0; i < leds[s]; i++)
-                     led_strip_set_pixel_rgbw (strip[s], i + (s ? led_status : 0),      //
+                     led_strip_set_pixel_rgbw (strip[s], i + (s ? 0 : led_status),      //
                                                gamma8[(unsigned int) maxr * r[i] / 255],        //
                                                gamma8[(unsigned int) maxg * g[i] / 255],        //
                                                gamma8[(unsigned int) maxb * b[i] / 255],        //
@@ -908,7 +908,7 @@ led_task (void *x)
                } else
                {
                   for (unsigned int i = 0; i < leds[s]; i++)
-                     led_strip_set_pixel (strip[s], i + (s ? led_status : 0),   //
+                     led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),   //
                                           gamma8[(unsigned int) maxr * r[i] / 255],     //
                                           gamma8[(unsigned int) maxg * g[i] / 255],     //
                                           gamma8[(unsigned int) maxb * b[i] / 255]);
