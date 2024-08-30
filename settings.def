@@ -12,8 +12,6 @@ gpio	blink		"35 35 35"		.array=3	// Status LED
 #endif
 #endif
 
-gpio 	testing		4	.array=2		// TESTING
-
 bit	dark			.hide=1			// Dark mode (no status LED)
 
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
