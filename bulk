@@ -1,4 +1,4 @@
-#!/bin/csh
+#!/bin/csh -f
 if("$1" != "") then
 	set d=($1)
 else
@@ -15,5 +15,5 @@ make -C components/ESP32-RevK idfmon
 
 again:
 components/ESP32-RevK/idfmon $d[1]
-esptool.py --chip esp32s3 -p $d[1] -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size keep 0x0 release/LED-S3-MINI-N4-R2-bootloader.bin 0x10000 release/LED-S3-MINI-N4-R2.bin 0x8000 release/LED-S3-MINI-N4-R2-partition-table.bin 0xd000 release/LED-S3-MINI-N4-R2-ota_data_initial.bin
+esptool.py --chip esp32s3 -p $d[1] -b 460800 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size 4MB 0x0 s3.bin
 goto again

@@ -35,6 +35,11 @@ issue:
 	git commit -a -m release
 	git push
 
+image:
+	make s3
+	make flash
+	esptool.py -b 460800 read_flash --flash_size 4MB 0 0x400000 s3.bin
+
 set:	solo wroom pico s3mt s3
 
 settings.h:     components/ESP32-RevK/revk_settings settings.def components/ESP32-RevK/settings.def
