@@ -4567,7 +4567,7 @@
 		(uuid "c0a4d1a9-5dfd-4144-8e85-4c2394147f49")
 	)
 	(no_connect
-		(at 66.04 78.74)
+		(at 66.04 86.36)
 		(uuid "cdcf62c0-808c-4c37-82aa-4a52cfa03103")
 	)
 	(no_connect
@@ -5066,7 +5066,7 @@
 	)
 	(global_label "DATA"
 		(shape input)
-		(at 66.04 86.36 0)
+		(at 66.04 78.74 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5076,7 +5076,7 @@
 		)
 		(uuid "9ad4dbb7-a527-4ac3-b5a1-c115355da77e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 72.7858 86.36 0)
+			(at 72.7858 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
