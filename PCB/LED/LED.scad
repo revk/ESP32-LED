@@ -1,6 +1,6 @@
 // Generated case design for LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2024-09-16 08:53:40
+// Generated 2024-09-16 08:54:23
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -40,11 +40,11 @@ translate([40.100089,1.100000,1.600000])rotate([0,0,-90.000000])m6(part,hole,blo
 translate([34.700090,15.415000,1.600000])m2(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([12.725089,1.250000,1.600000])m3(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
 translate([39.110089,8.000000,1.600000])rotate([0,0,90.000000])translate([0.000000,-2.400000,0.000000])rotate([90.000000,-0.000000,-0.000000])m7(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
-// Missing model T1.1 Knowles_SPH0645LM4H-6_3.5x2.65mm
+translate([40.874089,14.287500,1.600000])rotate([0,0,90.000000])m8(part,hole,block,casetop); // T1 (back)
 translate([32.900089,15.415000,1.600000])m2(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
-translate([41.797727,1.600000,1.600000])rotate([0,0,-135.000000])m8(part,hole,block,casetop); // D1 (back)
+translate([41.797727,1.600000,1.600000])rotate([0,0,-135.000000])m9(part,hole,block,casetop); // D1 (back)
 translate([9.100089,14.700000,1.600000])rotate([0,0,180.000000])m6(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
-translate([32.900089,13.515000,1.600000])m9(part,hole,block,casetop); // RevK:SOT-23-6-MD8942 SOT-23-6 (back)
+translate([32.900089,13.515000,1.600000])m10(part,hole,block,casetop); // RevK:SOT-23-6-MD8942 SOT-23-6 (back)
 translate([31.150089,6.100000,1.600000])rotate([0,0,180.000000])m3(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
 translate([38.800089,1.100000,1.600000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([30.400089,12.215000,1.600000])rotate([0,0,90.000000])m3(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
@@ -52,11 +52,11 @@ translate([33.396834,6.020564,1.600000])m6(part,hole,block,casetop); // RevK:C_0
 translate([37.900089,1.100000,1.600000])rotate([0,0,90.000000])m2(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
 translate([13.000089,15.000000,1.600000])m3(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
 translate([35.400089,12.215000,1.600000])rotate([0,0,90.000000])m3(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
-translate([21.950089,8.000000,1.600000])m10(part,hole,block,casetop); // U6 (back)
-translate([7.000089,8.000000,1.600000])m11(part,hole,block,casetop); // J2 (back)
+translate([21.950089,8.000000,1.600000])m11(part,hole,block,casetop); // U6 (back)
+translate([7.000089,8.000000,1.600000])m12(part,hole,block,casetop); // J2 (back)
 }
 
-parts_top=6;
+parts_top=7;
 // Parts to go on PCB (bottom)
 module parts_bottom(part=false,hole=false,block=false){
 }
@@ -167,6 +167,14 @@ rotate([-90,0,0])translate([-4.47,-3.84,0])
 }
 
 module m8(part=false,hole=false,block=false,height)
+{ // T1
+if(part)
+{
+	b(0,0,0,3.5,2.65,0.98);
+}
+}
+
+module m9(part=false,hole=false,block=false,height)
 { // D1
 // 1x1mm LED
 if(part)
@@ -191,7 +199,7 @@ if(block)
 }
 }
 
-module m9(part=false,hole=false,block=false,height)
+module m10(part=false,hole=false,block=false,height)
 { // RevK:SOT-23-6-MD8942 SOT-23-6
 // SOT-23-6
 if(part)
@@ -201,7 +209,7 @@ if(part)
 }
 }
 
-module m10(part=false,hole=false,block=false,height)
+module m11(part=false,hole=false,block=false,height)
 { // U6
 // ESP32-S3-MINI-1
 translate([-15.4/2,-15.45/2,0])
@@ -218,7 +226,7 @@ translate([-15.4/2,-15.45/2,0])
 }
 }
 
-module m11(part=false,hole=false,block=false,height)
+module m12(part=false,hole=false,block=false,height)
 { // J2
 // WAGO-2060-453-998-404
 N=3;
