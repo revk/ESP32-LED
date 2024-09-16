@@ -1,6 +1,6 @@
 // Generated case design for LED/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2024-09-16 08:54:23
+// Generated 2024-09-16 08:55:05
 // title:	PCB-LED
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -170,7 +170,7 @@ module m8(part=false,hole=false,block=false,height)
 { // T1
 if(part)
 {
-	b(0,0,0,3.5,2.65,0.98);
+	b(0,0,0,2.65,3.5,0.98);
 }
 }
 
