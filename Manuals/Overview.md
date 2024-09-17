@@ -112,3 +112,5 @@ You can configure Home Assistant use. For this you enable `haenable`. Each virtu
 If you leave `effect` not set, then HA can send an effect setting as well. If HA sets an effect, but the `config` is defined as multiple effects, `"*"` can be used as the selected effect.
 
 The HA *lights* are layered as well as any lighting set by the web interface or MQTT, independently, based on HA turning the *lights* on or not. The MQTT/web effects first, then each *on* preset, in order.
+
+[This YouTube video](https://www.youtube.com/watch?v=_URugM_1cDo) by [Home Is Where The Smart Is](https://www.hiwtsi.uk/) may be useful to help you getting started with integrating the LEDs with Home Assistant/MQTT.
