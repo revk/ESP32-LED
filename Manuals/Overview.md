@@ -83,6 +83,7 @@ Each app can have arguments.
 |`countdown`|Count LEDs until limit (default 60 seconds)|
 |`random`|Fading between random colours|
 |`twinkle`|All lights constantly fading different random levels of selected colour|
+|`endtest`|White light each end, and at `top` if set, and R/G/B next to ends, allow testing `start` and `len`||
 
 ### Ring/loop apps
 

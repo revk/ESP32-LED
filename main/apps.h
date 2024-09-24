@@ -19,11 +19,13 @@
    a (random, Random)           //
    a (twinkle, Twinkle)         //
    a (neenaw, Nee Naw)		//
-   r (clock, Clock face)        //
-   r (stargate, Stargate dialling)
    // Ring/loop
+   r (clock, Clock face)        //
+   r (stargate, Stargate dialling)	//
+   r (endtest,End Test)		//
    r (spin, Spin)               //
    r (lava, Lava Lamp)          //
+   // Text
    t (text, Text)               //
    t (kern, Text (kerned))      //
    t (time, Text time)          //
