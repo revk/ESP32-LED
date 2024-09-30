@@ -66,7 +66,7 @@ Each app can have arguments.
 |`#`|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. Also allowed is `rainbow` and `cycle` and `wheel`|
 |`s`|`start`|The first LED|
 |`l`|`len`|The number of LEDs|
-|`b`|`bright`|Main app brightness|
+|`b`|`bright`|Main app brightness (0-255)|
 ||`speed`|Cycle time (seconds)|
 ||`fadein`|fade in time (seconds)|
 ||`fadeout`|fade out time (seconds)|
@@ -79,7 +79,7 @@ Each app can have arguments.
 |`cylon`|This runs an LED of colour specified (default is red) backwards and forwards, Cylon/Knightrider style|
 |`pulse`|This fades up and down the specified colour (default `cycle`) on all LEDs constantly.|
 |`neenaw`|Self explanatory.|
-|`bargraph`|Bargraph (based on brightness setting).|
+|`bargraph`|Bargraph (based on brightness setting)|
 |`countdown`|Count LEDs until limit (default 60 seconds)|
 |`random`|Fading between random colours|
 |`twinkle`|All lights constantly fading different random levels of selected colour|
