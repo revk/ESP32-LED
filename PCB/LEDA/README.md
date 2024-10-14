@@ -13,6 +13,6 @@ Serial via USB direct to ESP32-S3.
 
 Can be directly programmed using esptool, i.e. `idf.py flash` via the USB headers, or using the 5 pin serial pads on the back of the board.
 
-![317987](https://github.com/revk/ESP32-Generic/assets/996983/87e3286f-a79a-4632-a0d6-cc8ecdf14d2d)
-![317985](https://github.com/revk/ESP32-Generic/assets/996983/e571ba73-9d8b-4ee3-bcae-dedce687a51c)
-![317984](https://github.com/revk/ESP32-Generic/assets/996983/533ea0d0-54af-4beb-bae1-260d014b598b)
+![71YQ5EX1xfL _AC_SL1500_](https://github.com/user-attachments/assets/e8f8349a-c1e0-4348-9f93-789066179d63)
+![7112U13JhJL _AC_SL1500_](https://github.com/user-attachments/assets/6e56eec7-89da-435e-9698-2cb40c20b435)
+![71b1RwPVc6L _AC_SL1500_](https://github.com/user-attachments/assets/4f063e91-0a65-4cb9-8de3-d6cc757793d8)
