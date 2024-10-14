@@ -7,7 +7,7 @@ Serial via USB direct to ESP32-S3.
 - Includes I2S microphone.
 - Includes 3 pin WAGO connector for WS2812 LED or similar.
 
-[Buy](https://www.amazon.co.uk/dp/B0CG3S8JX3) Note some older boards may be simpler RGB LED and env sensor I2C and no button pads.
+[Buy](https://www.amazon.co.uk/dp/B0DGD5XPLT) Note some older boards may be simpler RGB LED and env sensor I2C and no button pads.
 
 ## Programming
 
