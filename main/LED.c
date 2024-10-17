@@ -1285,8 +1285,7 @@ i2s_task (void *arg)
             max = val;
          mag += val / AUDIOBANDS;
       }
-      ESP_LOGE (TAG, "FFT mag=%7.2f gain=%5.2f: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", mag,
-                audiogain, band[0], band[1], band[2], band[3], band[4], band[5], band[6], band[7], band[8]);
+      //ESP_LOGE (TAG, "FFT mag=%7.2f gain=%5.2f: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", mag, audiogain, band[0], band[1], band[2], band[3], band[4], band[5], band[6], band[7], band[8]);
       audiomag = mag;
       for (int i = 0; i < AUDIOBANDS; i++)
          audioband[i] = band[i];

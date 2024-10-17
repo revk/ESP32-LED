@@ -30,12 +30,12 @@
 
 #define	AUDIOSAMPLES	1024
 #define	AUDIORATE	48000L	// Hz
-#define	AUDIOMIN	500L	// Hz
-#define	AUDIOMAX	5000L	// Hz
-#define	AUDIOSTEP	500L	// Hz steps
+#define	AUDIOMIN	700L	// Hz
+#define	AUDIOMAX	4900L	// Hz
+#define	AUDIOSTEP	200L	// Hz steps
 #define	AUDIOBANDS	((AUDIOMAX-AUDIOMIN+AUDIOSTEP-1)/AUDIOSTEP)
 #define	AUDIOGAINMIN	1
-#define	AUDIOGAINMAX	50
+#define	AUDIOGAINMAX	10
 extern float audioband[AUDIOBANDS];
 extern float audiomag;
 

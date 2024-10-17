@@ -19,6 +19,7 @@
    a (random, Random)           //
    a (twinkle, Twinkle)         //
    a (neenaw, Nee Naw)		//
+   a (audio, Audio experimental) //
    // Ring/loop
    r (clock, Clock face)        //
    r (stargate, Stargate dialling)	//
