@@ -9,6 +9,7 @@ static const char TAG[] = "LED";
 #include <driver/gpio.h>
 #include <driver/uart.h>
 #include <driver/i2c.h>
+#include <driver/i2s_pdm.h>
 #include "led_strip.h"
 #include "app.h"
 #include <esp_http_server.h>
@@ -1207,6 +1208,67 @@ i2c_task (void *arg)
    }
 }
 
+static IRAM_ATTR bool
+i2s_rx (i2s_chan_handle_t handle, i2s_event_data_t * event, void *user_ctx)
+{
+   ESP_LOGE (TAG, "Rx %d", event->size);
+   return false;
+}
+
+void
+i2s_task (void *arg)
+{
+   ESP_LOGE (TAG, "I2S init CLK %d DAT %d", i2sclock.num, i2sdata.num);
+   jo_t e (esp_err_t err, const char *msg)
+   {                            // Error
+      jo_t j = jo_object_alloc ();
+      if (msg)
+         jo_string (j, "message", msg);
+      if (err)
+         jo_string (j, "error", esp_err_to_name (err));
+      if (sda.set)
+         jo_int (j, "data", i2sdata.num);
+      if (scl.set)
+         jo_int (j, "clock", i2sclock.num);
+      return j;
+   }
+   esp_err_t err;
+   i2s_chan_handle_t i = { 0 };
+   i2s_chan_config_t chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG (I2S_NUM_0, I2S_ROLE_MASTER);
+   err = i2s_new_channel (&chan_cfg, NULL, &i);
+   i2s_pdm_rx_config_t cfg = {
+      .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (48000),
+      .slot_cfg = I2S_PDM_RX_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),
+      .gpio_cfg = {
+                   .clk = i2sclock.num,
+                   .din = i2sdata.num,
+                   .invert_flags = {
+                                    .clk_inv = i2sclock.invert}
+                   }
+   };
+   cfg.slot_cfg.slot_mask = (i2sright ? I2S_PDM_SLOT_RIGHT : I2S_PDM_SLOT_LEFT);
+   if (!err)
+      err = i2s_channel_init_pdm_rx_mode (i, &cfg);
+   i2s_event_callbacks_t cbs = {
+      .on_recv = i2s_rx,
+      .on_recv_q_ovf = NULL,
+      .on_sent = NULL,
+      .on_send_q_ovf = NULL,
+   };
+   if (!err)
+      err = i2s_channel_register_event_callback (i, &cbs, NULL);
+   if (!err)
+      err = i2s_channel_enable (i);
+   if (err)
+   {
+      ESP_LOGE (TAG, "I2S failed");
+      jo_t j = e (err, "Failed init I2S");
+      revk_error ("i2s", &j);
+      return;
+   }
+   vTaskDelete (NULL);
+}
+
 void
 app_main ()
 {
@@ -1224,6 +1286,8 @@ app_main ()
       revk_blink (0, 0, "K");
    if (sda.set && scl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
+   if (i2sdata.set && i2sclock.set)
+      revk_task ("i2s", i2s_task, NULL, 4);
    if (webcontrol)
    {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();  // When updating the code below, make sure this is enough
