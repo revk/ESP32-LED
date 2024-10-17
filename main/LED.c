@@ -1277,7 +1277,11 @@ i2s_task (void *arg)
          max = 0;
       float band[AUDIOBANDS] = { 0 };   // Should get main audio in first 16 or so slots
       for (int i = AUDIOMIN * AUDIOSAMPLES / AUDIORATE; i < AUDIOMAX * AUDIOSAMPLES / AUDIORATE && i < AUDIOSAMPLES / 2; i++)
-         band[(i * AUDIORATE / AUDIOSAMPLES - AUDIOMIN) / AUDIOSTEP] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
+      {
+         int b = (i * AUDIORATE / AUDIOSAMPLES - AUDIOMIN) / AUDIOSTEP;
+         if (b < AUDIOBANDS)    // Safe side with rounding
+            band[b] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
+      }
       for (int i = 0; i < AUDIOBANDS; i++)
       {
          float val = (band[i] *= audiogain / (AUDIORATE / (AUDIOMAX - AUDIOMIN)));
@@ -1291,10 +1295,10 @@ i2s_task (void *arg)
          audioband[i] = band[i];
       if (max)
       {
-         if (max > 1)
-            audiogain = (audiogain * 9 + audiogain / max) / 10; // Drop gain fast
+         if (max > 2)
+            audiogain = (audiogain * 9 + audiogain / max) / 10; // Drop gain faster if overloading
          else
-            audiogain = (audiogain * 99 + audiogain / max) / 100;
+            audiogain = (audiogain * 99 + audiogain / max) / 100;       // Bring back gain slowly
          if (audiogain > AUDIOGAINMAX)
             audiogain = AUDIOGAINMAX;
          else if (audiogain < AUDIOGAINMIN)
