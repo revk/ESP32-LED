@@ -1208,13 +1208,6 @@ i2c_task (void *arg)
    }
 }
 
-static IRAM_ATTR bool
-i2s_rx (i2s_chan_handle_t handle, i2s_event_data_t * event, void *user_ctx)
-{
-   ESP_LOGE (TAG, "Rx %d", event->size);
-   return false;
-}
-
 void
 i2s_task (void *arg)
 {
@@ -1249,14 +1242,6 @@ i2s_task (void *arg)
    cfg.slot_cfg.slot_mask = (i2sright ? I2S_PDM_SLOT_RIGHT : I2S_PDM_SLOT_LEFT);
    if (!err)
       err = i2s_channel_init_pdm_rx_mode (i, &cfg);
-   i2s_event_callbacks_t cbs = {
-      .on_recv = i2s_rx,
-      .on_recv_q_ovf = NULL,
-      .on_sent = NULL,
-      .on_send_q_ovf = NULL,
-   };
-   if (!err)
-      err = i2s_channel_register_event_callback (i, &cbs, NULL);
    if (!err)
       err = i2s_channel_enable (i);
    if (err)
@@ -1265,6 +1250,13 @@ i2s_task (void *arg)
       jo_t j = e (err, "Failed init I2S");
       revk_error ("i2s", &j);
       return;
+   }
+   while(1)
+   {
+	   uint16_t buf[1000];
+	   size_t n=0;
+	   i2s_channel_read(i, buf, sizeof(buf), &n, 100);
+	   ESP_LOGE(TAG,"Bytes %d",n);
    }
    vTaskDelete (NULL);
 }
@@ -1287,7 +1279,7 @@ app_main ()
    if (sda.set && scl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
    if (i2sdata.set && i2sclock.set)
-      revk_task ("i2s", i2s_task, NULL, 4);
+      revk_task ("i2s", i2s_task, NULL, 16);
    if (webcontrol)
    {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();  // When updating the code below, make sure this is enough
