@@ -1291,7 +1291,10 @@ i2s_task (void *arg)
          audioband[i] = band[i];
       if (max)
       {
-         audiogain = (audiogain * 99 + audiogain / max) / 100;
+         if (max > 1)
+            audiogain = (audiogain * 9 + audiogain / max) / 10; // Drop gain fast
+         else
+            audiogain = (audiogain * 99 + audiogain / max) / 100;
          if (audiogain > AUDIOGAINMAX)
             audiogain = AUDIOGAINMAX;
          else if (audiogain < AUDIOGAINMIN)
