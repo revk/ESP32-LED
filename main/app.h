@@ -28,14 +28,14 @@
 
 #define	MAXAPPS	50
 
-#define	AUDIOSAMPLES	1024
+#define	AUDIOSAMPLES	2048
 #define	AUDIORATE	48000L	// Hz
 #define	AUDIOMIN	300L	// Hz
 #define	AUDIOMAX	4000L	// Hz
 #define	AUDIOBANDS	24
 #define	AUDIOSTEP	((AUDIOMAX-AUDIOMIN)/AUDIOBANDS)	// Hz steps
 #define	AUDIOGAINMIN	1
-#define	AUDIOGAINMAX	10
+#define	AUDIOGAINMAX	5
 extern float audioband[AUDIOBANDS];
 extern float audiomag;
 

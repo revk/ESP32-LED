@@ -1276,23 +1276,38 @@ i2s_task (void *arg)
       float mag = 0,
          max = 0;
       float band[AUDIOBANDS] = { 0 };   // Should get main audio in first 16 or so slots
+      int count[AUDIOBANDS] = { 0 };
+      float low = log (AUDIOMIN),
+         high = log (AUDIOMAX),
+         step = (high - low) / AUDIOBANDS;;
       for (int i = AUDIOMIN * AUDIOSAMPLES / AUDIORATE; i < AUDIOMAX * AUDIOSAMPLES / AUDIORATE && i < AUDIOSAMPLES / 2; i++)
       {
-         int b = (i * AUDIORATE / AUDIOSAMPLES - AUDIOMIN) / AUDIOSTEP;
-         if (b < AUDIOBANDS)    // Safe side with rounding
+         float l = log (i * AUDIORATE / AUDIOSAMPLES);
+         int b = (l - low) / step;
+         if (b < AUDIOBANDS)    // In case of rounding going too far!
+         {
             band[b] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
+            count[b]++;
+         }
       }
       for (int i = 0; i < AUDIOBANDS; i++)
-      {
-         float val = (band[i] *= audiogain / (AUDIORATE / (AUDIOMAX - AUDIOMIN)));
-         if (val > max)
-            max = val;
-         mag += val / AUDIOBANDS;
-      }
+         if (count[i])          // Should never be 0
+         {
+            band[i] *= audiogain / count[i];
+            if (band[i] > max)
+               max = band[i];
+            mag += band[i];
+         }
+      mag /= AUDIOBANDS;
       //ESP_LOGE (TAG, "FFT mag=%7.2f gain=%5.2f: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", mag, audiogain, band[0], band[1], band[2], band[3], band[4], band[5], band[6], band[7], band[8]);
       audiomag = mag;
       for (int i = 0; i < AUDIOBANDS; i++)
-         audioband[i] = band[i];
+      {
+         if (band[i] > audioband[i])
+            audioband[i] = band[i];
+         else
+            audioband[i] = (audioband[i] * 3 + band[i]) / 4;
+      }
       if (max)
       {
          if (max > 2)
@@ -1328,7 +1343,7 @@ app_main ()
    if (sda.set && scl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
    if (i2sdata.set && i2sclock.set)
-      revk_task ("i2s", i2s_task, NULL, 4);
+      revk_task ("i2s", i2s_task, NULL, 8);
    if (webcontrol)
    {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();  // When updating the code below, make sure this is enough
