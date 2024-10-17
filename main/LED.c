@@ -13,6 +13,8 @@ static const char TAG[] = "LED";
 #include "led_strip.h"
 #include "app.h"
 #include <esp_http_server.h>
+#include "fft.h"
+#include "math.h"
 
 #define a(a,d)	extern const char* app##a(app_t*);
 #include "apps.h"
@@ -1208,6 +1210,13 @@ i2c_task (void *arg)
    }
 }
 
+float audiomag = 0;
+float audioband[AUDIOBANDS] = { 0 };
+
+static float audiogain = 1.0;
+static int16_t audioraw[AUDIOSAMPLES];
+static float fftre[AUDIOSAMPLES];
+static float fftim[AUDIOSAMPLES];
 void
 i2s_task (void *arg)
 {
@@ -1230,7 +1239,7 @@ i2s_task (void *arg)
    i2s_chan_config_t chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG (I2S_NUM_0, I2S_ROLE_MASTER);
    err = i2s_new_channel (&chan_cfg, NULL, &i);
    i2s_pdm_rx_config_t cfg = {
-      .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (48000),
+      .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (AUDIORATE),
       .slot_cfg = I2S_PDM_RX_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),
       .gpio_cfg = {
                    .clk = i2sclock.num,
@@ -1251,15 +1260,49 @@ i2s_task (void *arg)
       revk_error ("i2s", &j);
       return;
    }
-   while(1)
+   while (1)
    {
-	   uint16_t buf[1000];
-	   size_t n=0;
-	   i2s_channel_read(i, buf, sizeof(buf), &n, 100);
-	   ESP_LOGE(TAG,"Bytes %d",n);
+      size_t n = 0;
+      i2s_channel_read (i, audioraw, sizeof (audioraw), &n, 100);
+      // ESP_LOGE (TAG, "Bytes %d/%d %6d %6d %6d %6d", n / sizeof (*audioraw), AUDIOSAMPLES, audioraw[0], audioraw[1], audioraw[2], audioraw[3]);
+      if (n < sizeof (audioraw))
+         continue;
+      for (int i = 0; i < AUDIOSAMPLES; i++)
+      {
+         fftre[i] = (float) audioraw[i] / 32768;
+         fftim[i] = 0;
+      }
+      fft (fftre, fftim, AUDIOSAMPLES);
+      float mag = 0,
+         max = 0;
+      float band[AUDIOBANDS] = { 0 };   // Should get main audio in first 16 or so slots
+      for (int i = AUDIOMIN * AUDIOSAMPLES / AUDIORATE; i < AUDIOMAX * AUDIOSAMPLES / AUDIORATE && i < AUDIOSAMPLES / 2; i++)
+         band[(i * AUDIORATE / AUDIOSAMPLES - AUDIOMIN) / AUDIOSTEP] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
+      for (int i = 0; i < AUDIOBANDS; i++)
+      {
+         float val = (band[i] *= audiogain / (AUDIORATE / (AUDIOMAX - AUDIOMIN)));
+         if (val > max)
+            max = val;
+         mag += val / AUDIOBANDS;
+      }
+      ESP_LOGE (TAG, "FFT mag=%7.2f gain=%5.2f: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", mag,
+                audiogain, band[0], band[1], band[2], band[3], band[4], band[5], band[6], band[7], band[8]);
+      audiomag = mag;
+      for (int i = 0; i < AUDIOBANDS; i++)
+         audioband[i] = band[i];
+      if (max)
+      {
+         audiogain = (audiogain * 99 + audiogain / max) / 100;
+         if (audiogain > AUDIOGAINMAX)
+            audiogain = AUDIOGAINMAX;
+         else if (audiogain < AUDIOGAINMIN)
+            audiogain = AUDIOGAINMIN;
+      }
    }
    vTaskDelete (NULL);
 }
+
+#undef	N
 
 void
 app_main ()
@@ -1279,7 +1322,7 @@ app_main ()
    if (sda.set && scl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
    if (i2sdata.set && i2sclock.set)
-      revk_task ("i2s", i2s_task, NULL, 16);
+      revk_task ("i2s", i2s_task, NULL, 4);
    if (webcontrol)
    {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();  // When updating the code below, make sure this is enough

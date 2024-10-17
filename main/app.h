@@ -28,6 +28,17 @@
 
 #define	MAXAPPS	50
 
+#define	AUDIOSAMPLES	1024
+#define	AUDIORATE	48000L	// Hz
+#define	AUDIOMIN	500L	// Hz
+#define	AUDIOMAX	5000L	// Hz
+#define	AUDIOSTEP	500L	// Hz steps
+#define	AUDIOBANDS	((AUDIOMAX-AUDIOMIN+AUDIOSTEP-1)/AUDIOSTEP)
+#define	AUDIOGAINMIN	1
+#define	AUDIOGAINMAX	50
+extern float audioband[AUDIOBANDS];
+extern float audiomag;
+
 typedef struct app_s app_t;
 typedef const char *app_f (app_t *);    // Return NULL normally, "" for normal end, other string for error
 
