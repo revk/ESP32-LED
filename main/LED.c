@@ -1214,7 +1214,7 @@ static float fftim[AUDIOSAMPLES];
 void
 i2s_task (void *arg)
 {
-   ESP_LOGE (TAG, "I2S init CLK %d DAT %d", i2sclock.num, i2sdata.num);
+   ESP_LOGE (TAG, "I2S init CLK %d DAT %d", audioclock.num, audiodata.num);
    jo_t e (esp_err_t err, const char *msg)
    {                            // Error
       jo_t j = jo_object_alloc ();
@@ -1222,10 +1222,10 @@ i2s_task (void *arg)
          jo_string (j, "message", msg);
       if (err)
          jo_string (j, "error", esp_err_to_name (err));
-      if (i2sdata.set)
-         jo_int (j, "data", i2sdata.num);
-      if (i2sclock.set)
-         jo_int (j, "clock", i2sclock.num);
+      if (audiodata.set)
+         jo_int (j, "data", audiodata.num);
+      if (audioclock.set)
+         jo_int (j, "clock", audioclock.num);
       return j;
    }
    esp_err_t err;
@@ -1236,13 +1236,13 @@ i2s_task (void *arg)
       .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (AUDIORATE),
       .slot_cfg = I2S_PDM_RX_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),
       .gpio_cfg = {
-                   .clk = i2sclock.num,
-                   .din = i2sdata.num,
+                   .clk = audioclock.num,
+                   .din = audiodata.num,
                    .invert_flags = {
-                                    .clk_inv = i2sclock.invert}
+                                    .clk_inv = audioclock.invert}
                    }
    };
-   cfg.slot_cfg.slot_mask = (i2sright ? I2S_PDM_SLOT_RIGHT : I2S_PDM_SLOT_LEFT);
+   cfg.slot_cfg.slot_mask = (audioright ? I2S_PDM_SLOT_RIGHT : I2S_PDM_SLOT_LEFT);
    if (!err)
       err = i2s_channel_init_pdm_rx_mode (i, &cfg);
    if (!err)
@@ -1297,10 +1297,10 @@ i2s_task (void *arg)
       audiomag = mag;
       for (int i = 0; i < AUDIOBANDS; i++)
       {
-         if (band[i] > audioband[i] || !i2sdamp)
+         if (band[i] > audioband[i] || !audiodamp)
             audioband[i] = band[i];
          else
-            audioband[i] = (audioband[i] * i2sdamp + band[i]) / (i2sdamp + 1);
+            audioband[i] = (audioband[i] * audiodamp + band[i]) / (audiodamp + 1);
       }
       if (max)
       {
@@ -1336,7 +1336,7 @@ app_main ()
       revk_blink (0, 0, "K");
    if (lssda.set && lsscl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
-   if (i2sdata.set && i2sclock.set)
+   if (audiodata.set && audioclock.set)
       revk_task ("i2s", i2s_task, NULL, 8);
    if (webcontrol)
    {                            // Web interface
