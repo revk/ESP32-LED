@@ -29,14 +29,13 @@ bit	rgswap			.hide=1			// Red/green swap
 bit	bgswap			.hide=1			// Blue/green swap
 u16	leds		12	.hide=1	.array=2	// How many LEDs
 u8	webcontrol	2				// Web controls
-u8	i2c	0					// I2C channel
-gpio	scl						// Colour sensor SCL
-gpio	sda						// Colour sensor SDA
-u8	als	10	.hex=1				// Colour sensor ID
+gpio	ls.scl						// Colour sensor SCL
+gpio	ls.sda						// Colour sensor SDA
+u8	ls.als	10	.hex=1				// Colour sensor ID
 gpio	i2s.data					// I2S PDM Data
 gpio	i2s.clock					// I2S PDM Clock
 bit	i2s.right					// I2S PDM use right channel
-u8	i2s.damp	7				// Damping from peak (higher is slower)
+u8	i2s.damp	7	.live=1			// Damping from peak (higher is slower)
 
 bit	ha.enable	.hide=1				// Enable Home Assistant
 bit	poweron		1	.hide=1			// Start virtual strip 1 on power on

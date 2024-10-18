@@ -1113,29 +1113,29 @@ i2c_task (void *arg)
          jo_string (j, "description", esp_err_to_name (err));
       if (cmd)
          jo_int (j, "cmd", cmd);
-      if (sda.set)
-         jo_int (j, "sda", sda.num);
-      if (scl.set)
-         jo_int (j, "scl", scl.num);
+      if (lssda.set)
+         jo_int (j, "sda", lssda.num);
+      if (lsscl.set)
+         jo_int (j, "scl", lsscl.num);
       if (a)
          jo_int (j, "address", a);
       return j;
    }
    esp_err_t err;
-   err = i2c_driver_install (i2c, I2C_MODE_MASTER, 0, 0, 0);
+   err = i2c_driver_install (0, I2C_MODE_MASTER, 0, 0, 0);
    if (!err)
    {
       i2c_config_t config = {
          .mode = I2C_MODE_MASTER,
-         .sda_io_num = sda.num,
-         .scl_io_num = scl.num,
+         .sda_io_num = lssda.num,
+         .scl_io_num = lsscl.num,
          .sda_pullup_en = true,
          .scl_pullup_en = true,
          .master.clk_speed = 400000,
       };
-      err = i2c_param_config (i2c, &config);
+      err = i2c_param_config (0, &config);
       if (err)
-         i2c_driver_delete (i2c);
+         i2c_driver_delete (0);
    }
    if (err)
    {
@@ -1157,7 +1157,7 @@ i2c_task (void *arg)
       i2c_master_read_byte (t, &l, I2C_MASTER_ACK);
       i2c_master_read_byte (t, &h, I2C_MASTER_LAST_NACK);
       i2c_master_stop (t);
-      err = i2c_master_cmd_begin (i2c, t, 10 / portTICK_PERIOD_MS);
+      err = i2c_master_cmd_begin (0, t, 10 / portTICK_PERIOD_MS);
       i2c_cmd_link_delete (t);
       if (err)
       {
@@ -1176,7 +1176,7 @@ i2c_task (void *arg)
       i2c_master_write_byte (t, val & 0xFF, true);
       i2c_master_write_byte (t, val >> 8, true);
       i2c_master_stop (t);
-      err = i2c_master_cmd_begin (i2c, t, 10 / portTICK_PERIOD_MS);
+      err = i2c_master_cmd_begin (0, t, 10 / portTICK_PERIOD_MS);
       i2c_cmd_link_delete (t);
       if (err)
       {
@@ -1185,27 +1185,21 @@ i2c_task (void *arg)
          return;
       }
    }
-   if (!als)
+   if (!lsals)
    {                            // No I2C work
       vTaskDelete (NULL);
       return;
    }
-   if (als)
-   {
-      w (als, 0x00, 0x0040);
-      ESP_LOGI (TAG, "ALS mode=%04X ", r (als, 0x00));
-   }
+   w (lsals, 0x00, 0x0040);
+   ESP_LOGI (TAG, "ALS mode=%04X ", r (lsals, 0x00));
    while (1)
    {
-      if (als)
-      {
-         jo_t j = jo_object_alloc ();
-         jo_litf (j, "r", "%.0f", (float) r (als, 0x08) * 1031 / 65535);
-         jo_litf (j, "g", "%.0f", (float) r (als, 0x09) * 1031 / 65535);
-         jo_litf (j, "b", "%.0f", (float) r (als, 0x0A) * 1031 / 65535);
-         jo_litf (j, "w", "%.0f", (float) r (als, 0x0B) * 1031 / 65535);
-         revk_info ("als", &j);
-      }
+      jo_t j = jo_object_alloc ();
+      jo_litf (j, "r", "%.0f", (float) r (lsals, 0x08) * 1031 / 65535);
+      jo_litf (j, "g", "%.0f", (float) r (lsals, 0x09) * 1031 / 65535);
+      jo_litf (j, "b", "%.0f", (float) r (lsals, 0x0A) * 1031 / 65535);
+      jo_litf (j, "w", "%.0f", (float) r (lsals, 0x0B) * 1031 / 65535);
+      revk_info ("als", &j);
       sleep (1);
    }
 }
@@ -1228,9 +1222,9 @@ i2s_task (void *arg)
          jo_string (j, "message", msg);
       if (err)
          jo_string (j, "error", esp_err_to_name (err));
-      if (sda.set)
+      if (i2sdata.set)
          jo_int (j, "data", i2sdata.num);
-      if (scl.set)
+      if (i2sclock.set)
          jo_int (j, "clock", i2sclock.num);
       return j;
    }
@@ -1340,7 +1334,7 @@ app_main ()
       cps = 10;
    if (dark)
       revk_blink (0, 0, "K");
-   if (sda.set && scl.set)
+   if (lssda.set && lsscl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
    if (i2sdata.set && i2sclock.set)
       revk_task ("i2s", i2s_task, NULL, 8);
