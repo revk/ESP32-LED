@@ -38,6 +38,10 @@ If, however, you need more LEDs that your USB port can supply, then use a separa
 
 The LEDs are all connected to power (GND and 5V), usually daisy chained, also a DATA line is connected, in to DIN and from DOUT to the next DIN, in a chain. The physical layout may be mroe complex.
 
+## Audio
+
+If a microphone is fitted (TDM PDM I2S) set `audio.data` and `audio.clock` for audio effects.
+
 ## Key settings
 
 The main settings are :-
@@ -84,6 +88,13 @@ Each app can have arguments.
 |`random`|Fading between random colours|
 |`twinkle`|All lights constantly fading different random levels of selected colour|
 |`endtest`|White light each end, and at `top` if set, and R/G/B next to ends, allow testing `start` and `len`||
+
+### Audio apps
+
+|App|Meaning|
+|---|-------|
+|`audio`|Spectrum based display.|
+|`volume`|Volume bar graph.|
 
 ### Ring/loop apps
 
