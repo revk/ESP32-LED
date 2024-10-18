@@ -24,11 +24,12 @@ a (idle, Idle)                  //
    a (neenaw, Nee Naw)          //
    // Sound
    s (audio, Audio experimental)//
-   s (volume, Volume bar graph)//
+   s (volume, Volume bar graph) //
+   s (volumergb, Volume RGB bar graph)  //
    // Ring/loop
    r (clock, Clock face)        //
    r (stargate, Stargate dialling)
-                                //
+   //
    r (endtest, End Test)        //
    r (spin, Spin)               //
    r (lava, Lava Lamp)          //

@@ -95,6 +95,7 @@ Each app can have arguments.
 |---|-------|
 |`audio`|Spectrum based display.|
 |`volume`|Volume bar graph.|
+|`volumergb`|Volume RGB bar graph.|
 
 ### Ring/loop apps
 

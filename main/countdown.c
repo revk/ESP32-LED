@@ -2,9 +2,10 @@
 
 #include "app.h"
 
-static void pixel(app_t *a,int pos,uint8_t l)
+static void
+pixel (app_t * a, int pos, uint8_t l)
 {
-        setl(pos,a,l);
+   setl (pos, a, l);
 }
 
 const char *
@@ -19,6 +20,6 @@ appcountdown (app_t * a)
    }
    if (a->limit <= a->cycle)
       return "";
-   bargraph(a,pixel,255*(a->limit - a->cycle) / a->limit,a->fader);
+   bargraph (a, pixel, 255 * (a->limit - a->cycle) / a->limit, a->fader);
    return NULL;
 }
