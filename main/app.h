@@ -224,7 +224,7 @@ setl (uint16_t i, app_t * a, uint8_t l)
 {
    if (a->rainbow)
    {
-      uint8_t p = 85 - 255 * ((a->len + i - a->start) % a->len) / a->len;
+      uint8_t p = 110 - 255 * ((a->len + i - a->start) % a->len) / a->len;
       setRGBl (i, wheel[p], wheel[(p + 85) & 255], wheel[(p + 170) & 255], l);
    } else
       setRGBWl (i, a->r, a->g, a->b, a->w, l);
