@@ -24,6 +24,7 @@ a (idle, Idle)                  //
    a (neenaw, Nee Naw)          //
    // Sound
    s (audio, Audio experimental)//
+   s (volume, Volume bar graph)//
    // Ring/loop
    r (clock, Clock face)        //
    r (stargate, Stargate dialling)

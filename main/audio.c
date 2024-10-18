@@ -9,8 +9,10 @@ appaudio (app_t * a)
    {                            // Sanity check / defaults
       if (!a->colourset)
          a->colourset = a->rainbow = 1;
+      if (!a->data)
+         a->data = malloc (AUDIOBANDS);
    }
-   uint8_t c[AUDIOBANDS];
+   uint8_t *c = a->data;
    for (int i = 0; i < AUDIOBANDS; i++)
    {
       int v = a->fader * audioband[i];
