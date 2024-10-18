@@ -232,3 +232,6 @@ setl (uint16_t i, app_t * a, uint8_t l)
    } else
       setRGBWl (i, a->r, a->g, a->b, a->w, l);
 }
+
+typedef void pixel_t (app_t * a, int pos, uint8_t l);
+void bargraph (app_t * a, pixel_t *, uint8_t v,uint8_t fade);

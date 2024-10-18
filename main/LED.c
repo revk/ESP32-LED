@@ -1377,3 +1377,49 @@ app_main ()
    //hargb = -1;
    revk_task ("LED", led_task, NULL, 4);
 }
+
+// Libraries
+
+void
+bargraph (app_t * a, pixel_t * pixel, uint8_t v, uint8_t fade)
+{
+   int t = a->top;
+   uint8_t inv = 0;
+   if (t < 0)
+   {
+      t = -t;
+      inv = 0xFF;
+   }
+   if (t > a->start)
+   {
+      int N = t - a->start;
+      uint32_t n = (uint32_t) 256 * N * v / 255;
+      if (inv)
+         n = (uint32_t) 256 *N - n;
+      uint8_t f = n & 255;
+      n /= 256;
+      int p = t;
+      for (unsigned int i = 0; i < n; i++)
+         pixel (a, p--, fade ^ inv);
+      if (f)
+         pixel (a, p--, ((int) f * fade / 255) ^ inv);
+      while (p > a->start)
+         pixel (a, p--, inv);
+   }
+   if (t < a->start + a->len - 1)
+   {
+      int N = a->start + a->len - 1 - t;
+      uint32_t n = (uint32_t) 256 * N * v / 255;
+      if (inv)
+         n = (uint32_t) 256 *N - n;
+      uint8_t f = n & 255;
+      n /= 256;
+      int p = t;
+      for (unsigned int i = 0; i < n; i++)
+         pixel (a, p++, fade ^ inv);
+      if (f)
+         pixel (a, p++, ((int) f * fade / 255) ^ inv);
+      while (p < a->start + a->len)
+         pixel (a, p++, inv);
+   }
+}
