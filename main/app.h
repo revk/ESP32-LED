@@ -28,14 +28,14 @@
 
 #define	MAXAPPS	50
 
-//#define	AUDIOSAMPLES	2048
-//#define	AUDIORATE	48000L	// Hz (full rate
+//#define       AUDIOSAMPLES    2048
+//#define       AUDIORATE       48000L  // Hz (full rate
 #define	AUDIOSAMPLES	1024
-#define	AUDIORATE	31250L	// Hz (TDK 12.5-25ks/s low power, 31.25-102.125ks/s standard, 128.125-150ks/s high performance)
-#define	AUDIOMIN	300L	// Hz
-#define	AUDIOMAX	4000L	// Hz
+#define	AUDIORATE	31250L  // Hz (TDK 12.5-25ks/s low power, 31.25-102.125ks/s standard, 128.125-150ks/s high performance)
+#define	AUDIOMIN	300L    // Hz
+#define	AUDIOMAX	4000L   // Hz
 #define	AUDIOBANDS	24
-#define	AUDIOSTEP	((AUDIOMAX-AUDIOMIN)/AUDIOBANDS)	// Hz steps
+#define	AUDIOSTEP	((AUDIOMAX-AUDIOMIN)/AUDIOBANDS)        // Hz steps
 #define	AUDIOGAINMIN	1
 #define	AUDIOGAINMAX	5
 extern float audioband[AUDIOBANDS];
@@ -81,6 +81,9 @@ struct app_s
    uint8_t rainbow:1;           // Colour should be rainbow along strip
    uint8_t wheel:1;             // Colour should be cycled over time
    uint8_t cycling:1;           // Colour should be cycled over time (more overlap)
+   uint8_t sound:1;             // Audio app
+   uint8_t ring:1;              // Ring app
+   uint8_t text:1;              // Text app
    // Scratchpad for apps
    uint32_t cycle;              // This is set by caller - counts the cycle since started
    uint32_t stage;              // The stage of a sequential display
@@ -88,7 +91,7 @@ struct app_s
    void *data;                  // Malloc'd data area
 };
 
-extern int ledmax;		// Total LEDs
+extern int ledmax;              // Total LEDs
 
 extern uint8_t *ledr;           // The current LED, set by the apps
 extern uint8_t *ledg;           // The current LED, set by the apps

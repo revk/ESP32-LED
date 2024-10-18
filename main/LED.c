@@ -25,10 +25,12 @@ struct applist_s
    app_f *app;
    uint8_t ring:1;              // Is a ring based app
    uint8_t text:1;              // Is a text based app
+   uint8_t sound:1;             // Is a sound based app
 } applist[] = {
-#define a(a,d)	{#a,&app##a,0,0},
-#define r(a,d)	{#a,&app##a,1,0},
-#define t(a,d)	{#a,&app##a,0,1},
+#define a(a,d)	{#a,&app##a,0,0,0},
+#define s(a,d)	{#a,&app##a,0,0,1},
+#define r(a,d)	{#a,&app##a,1,0,0},
+#define t(a,d)	{#a,&app##a,0,1,0},
 #include "apps.h"
 };
 
@@ -36,6 +38,8 @@ struct
 {
    uint8_t haconfig:1;          // Send config
    uint8_t hacheck:1;           // Check presets
+   uint8_t sound:1;             // An audio based effect is in use
+   uint8_t checksound:1;        // Temp
 } b;
 
 static httpd_handle_t webserver = NULL;
@@ -329,6 +333,9 @@ addapp (int index, int preset, const char *name, jo_t j)
          a->fadein = cps * a->fadein / fadein_scale ? : 1;
          a->fadeout = cps * a->fadeout / fadeout_scale ? : 1;
          a->app = applist[i].app;
+         a->sound = applist[i].sound;
+         a->ring = applist[i].ring;
+         a->text = applist[i].text;
          a->preset = preset;
          ESP_LOGI (TAG, "Adding app %d: %s (%lu)", index, name, a->cycle);
          return a;
@@ -691,7 +698,7 @@ send_ha_config (void)
                jo_bool (j, "effect", 1);
                jo_array (j, "effect_list");
                for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-                  if (!applist[i].text)
+                  if (!applist[i].text && ((audiodata.set && audioclock.set) || !applist[i].sound))
                      jo_string (j, NULL, applist[i].name);
             }
             revk_mqtt_send (NULL, 1, topic, &j);
@@ -764,10 +771,13 @@ led_task (void *x)
       usleep (tick - (esp_timer_get_time () % tick));
       clear (1, ledmax);
       xSemaphoreTake (app_mutex, portMAX_DELAY);
+      b.checksound = 0;
       for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
          for (unsigned int i = 0; i < MAXAPPS; i++)
          {
             app_t *a = &active[i];
+            if (a->sound)
+               b.checksound = 1;
             if (a->preset == preset && a->app)
             {
                const char *name = a->name;
@@ -880,6 +890,7 @@ led_task (void *x)
                }
             }
          }
+      b.sound = b.checksound;
       xSemaphoreGive (app_mutex);
       {
          uint8_t *r = ledr;
@@ -1258,6 +1269,8 @@ i2s_task (void *arg)
    {
       size_t n = 0;
       i2s_channel_read (i, audioraw, sizeof (audioraw), &n, 100);
+      if (!b.sound)
+         continue;              // Not needed
       // ESP_LOGE (TAG, "Bytes %d/%d %6d %6d %6d %6d", n / sizeof (*audioraw), AUDIOSAMPLES, audioraw[0], audioraw[1], audioraw[2], audioraw[3]);
       if (n < sizeof (audioraw))
          continue;
