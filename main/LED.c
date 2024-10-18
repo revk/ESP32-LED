@@ -1284,7 +1284,7 @@ i2s_task (void *arg)
       {
          float l = log (i * AUDIORATE / AUDIOSAMPLES);
          int b = (l - low) / step;
-         if (b < AUDIOBANDS)    // In case of rounding going too far!
+         if (b >= 0 && b < AUDIOBANDS)  // In case of rounding going too far!
          {
             band[b] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
             count[b]++;

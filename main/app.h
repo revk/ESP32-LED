@@ -28,8 +28,10 @@
 
 #define	MAXAPPS	50
 
-#define	AUDIOSAMPLES	2048
-#define	AUDIORATE	48000L	// Hz
+//#define	AUDIOSAMPLES	2048
+//#define	AUDIORATE	48000L	// Hz (full rate
+#define	AUDIOSAMPLES	1024
+#define	AUDIORATE	36000L	// Hz (TDK is OK with this)
 #define	AUDIOMIN	300L	// Hz
 #define	AUDIOMAX	4000L	// Hz
 #define	AUDIOBANDS	24
@@ -222,7 +224,7 @@ setl (uint16_t i, app_t * a, uint8_t l)
 {
    if (a->rainbow)
    {
-      uint8_t p = 255 - 255 * ((a->len + i - a->start) % a->len) / a->len;
+      uint8_t p = 85 - 255 * ((a->len + i - a->start) % a->len) / a->len;
       setRGBl (i, wheel[p], wheel[(p + 85) & 255], wheel[(p + 170) & 255], l);
    } else
       setRGBWl (i, a->r, a->g, a->b, a->w, l);
