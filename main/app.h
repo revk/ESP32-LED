@@ -31,7 +31,7 @@
 //#define	AUDIOSAMPLES	2048
 //#define	AUDIORATE	48000L	// Hz (full rate
 #define	AUDIOSAMPLES	1024
-#define	AUDIORATE	36000L	// Hz (TDK is OK with this)
+#define	AUDIORATE	31250L	// Hz (TDK 12.5-25ks/s low power, 31.25-102.125ks/s standard, 128.125-150ks/s high performance)
 #define	AUDIOMIN	300L	// Hz
 #define	AUDIOMAX	4000L	// Hz
 #define	AUDIOBANDS	24
