@@ -26,8 +26,8 @@ appvolume (app_t * a)
       if (l > c[pos])
          c[pos] = l;
       else
-         l = c[pos] = (c[pos] * 15 + l) / 16;
-      setl (pos + a->start, a, l);
+         c[pos] = ((uint16_t) c[pos] * 15 + l) / 16;
+      setl (pos + a->start, a, c[pos]);
    }
    int v = audiomag * 255;
    if (v > 255)
@@ -38,12 +38,13 @@ appvolume (app_t * a)
       uint32_t n = (uint32_t) 256 * N * v / 255;
       uint8_t f = n & 255;
       n /= 256;
+      int p = t;
       for (unsigned int i = 0; i < n; i++)
-         pixel (t--, l);
+         pixel (p--, l);
       if (!a->stop)
-         pixel (t--, (int) l * f / 255);
-      while (t > a->start)
-         pixel (t--, 0);
+         pixel (p--, (int) l * f / 255);
+      while (p > a->start)
+         pixel (p--, 0);
    }
    if (t < a->start + a->len - 1)
    {
@@ -51,12 +52,13 @@ appvolume (app_t * a)
       uint32_t n = (uint32_t) 256 * N * v / 255;
       uint8_t f = n & 255;
       n /= 256;
+      int p = t;
       for (unsigned int i = 0; i < n; i++)
-         pixel (t++, l);
+         pixel (p++, l);
       if (!a->stop)
-         pixel (t++, (int) l * f / 255);
-      while (t < N)
-         pixel (t++, 0);
+         pixel (p++, (int) l * f / 255);
+      while (p < a->start + a->len)
+         pixel (p++, 0);
    }
    return NULL;
 }
