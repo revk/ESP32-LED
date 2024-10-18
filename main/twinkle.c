@@ -12,7 +12,10 @@ apptwinkle (app_t * a)
       a->data = malloc (a->len * 2);
       memset (a->data, 0, a->len * 2);
       if (!a->colourset)
+      {
          a->r = a->g = a->b = 255;      // default white
+         a->colourset = 1;
+      }
       a->step = a->speed;
    }
    uint8_t *old = a->data,

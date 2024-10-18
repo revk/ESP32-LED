@@ -52,7 +52,10 @@ biggate (app_t * a)
    if (!a->cycle)
    {                            // Startup
       if (!a->colourset)
+      {
          a->g = 255;            // Default glyph colour
+         a->colourset = 1;
+      }
       if (!a->limit)
          a->limit = 90 * cps;
       old = malloc (kawooshlen * 2 + sizeof (stargate_t));

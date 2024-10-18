@@ -121,7 +121,7 @@ apptime (app_t * a)
    if (!a->cycle)
    {
       if (!a->colourset)
-         a->cycling = 1;
+         a->colourset = a->cycling = 1;
    }
    char temp[6];
    time_t now = time (0);

@@ -8,7 +8,7 @@ appspin (app_t * a)
    if (!a->cycle)
    {                            // Sanity check / defaults
       if (!a->colourset)
-         a->cycling = 1;
+         a->colourset = a->cycling = 1;
    }
    if (a->top > 0)
       a->step -= 256 / a->speed;

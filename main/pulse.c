@@ -8,7 +8,7 @@ apppulse (app_t * a)
    if (!a->cycle)
    {                            // Sanity check / defaults
       if (!a->colourset)
-         a->cycling = 1;
+         a->colourset = a->cycling = 1;
    }
 
    uint8_t l = a->fader * (255 - cos8[a->step & 255]) / 255;

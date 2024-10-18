@@ -25,7 +25,10 @@ applava (app_t * a)
       free (a->data);
       a->data = calloc (1, sizeof (lava_t));
       if (!a->colourset || (!a->r && !a->g && !a->b))
+      {
          a->r = a->g = a->b = 255;
+         a->colourset = 1;
+      }
    }
    lava_t *lava = a->data;
    uint8_t l = a->fader;

@@ -8,7 +8,10 @@ appcylon (app_t * a)
    if (!a->cycle)
    {                            // Sanity check / defaults
       if (!a->colourset)
+      {
          a->r = 255;
+         a->colourset = 1;
+      }
       if (a->len < 3)
          return "Len min 3";
    }

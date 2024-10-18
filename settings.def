@@ -36,6 +36,7 @@ u8	als	10	.hex=1				// Colour sensor ID
 gpio	i2s.data					// I2S PDM Data
 gpio	i2s.clock					// I2S PDM Clock
 bit	i2s.right					// I2S PDM use right channel
+u8	i2s.damp	3				// Damping from peak (higher is slower)
 
 bit	ha.enable	.hide=1				// Enable Home Assistant
 bit	poweron		1	.hide=1			// Start virtual strip 1 on power on

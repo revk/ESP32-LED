@@ -1303,10 +1303,10 @@ i2s_task (void *arg)
       audiomag = mag;
       for (int i = 0; i < AUDIOBANDS; i++)
       {
-         if (band[i] > audioband[i])
+         if (band[i] > audioband[i] || !i2sdamp)
             audioband[i] = band[i];
          else
-            audioband[i] = (audioband[i] * 3 + band[i]) / 4;
+            audioband[i] = (audioband[i] * i2sdamp + band[i]) / (i2sdamp + 1);
       }
       if (max)
       {
@@ -1367,6 +1367,6 @@ app_main ()
       memset (hag, 255, sizeof (hag));
       memset (hab, 255, sizeof (hab));
    }
-   hargb = -1;
+   //hargb = -1;
    revk_task ("LED", led_task, NULL, 4);
 }
