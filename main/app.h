@@ -1,6 +1,7 @@
 // Application structure
 
 #include "revk.h"
+#include "palette.h"
 
 #define	params		\
 	u16r(s,start,)	\
@@ -36,7 +37,7 @@
 #define	AUDIOMAX	3900L   // Hz
 #define	AUDIOBANDS	24
 #define	AUDIOSTEP	((AUDIOMAX-AUDIOMIN)/AUDIOBANDS)        // Hz steps
-#define	AUDIOGAINMIN	1
+#define	AUDIOGAINMIN	0.01
 #define	AUDIOGAINMAX	5
 extern float audioband[AUDIOBANDS];
 extern float audiomag;

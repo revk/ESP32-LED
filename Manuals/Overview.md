@@ -93,9 +93,9 @@ Each app can have arguments.
 
 |App|Meaning|
 |---|-------|
-|`audio`|Spectrum based display.|
+|`audio`|Spectrum based display. Note, on RGBW, if W is not set, it is overridden with an over peak output white|
 |`volume`|Volume bar graph.|
-|`volumergb`|Volume RGB bar graph.|
+|`volumergb`|Volume RGB bar graph. Note, setting a colour causes colours to be restricted to colour set, e.g. |
 
 ### Ring/loop apps
 

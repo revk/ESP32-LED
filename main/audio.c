@@ -10,23 +10,37 @@ appaudio (app_t * a)
       if (!a->colourset)
          a->colourset = a->rainbow = 1;
       if (!a->data)
-         a->data = malloc (AUDIOBANDS);
+         a->data = malloc (AUDIOBANDS * 2);
    }
    uint8_t *c = a->data;
+   uint8_t *w = c + AUDIOBANDS;
    for (int i = 0; i < AUDIOBANDS; i++)
    {
       int v = a->fader * audioband[i];
       if (v >= 255)
-         v = 255;
-      c[i] = v;
+      {
+         v -= 255;
+         v /= 4;
+         if (v > 255)
+            v = 255;
+         w[i] = v;
+         c[i] = 255;
+      } else
+      {
+         w[i] = 0;
+         c[i] = v;
+      }
    }
    for (int i = 0; i < a->len; i++)
    {
       float p = (float) i * AUDIOBANDS / a->len;
       int x = p;
       p -= x;
-      int v = c[x] * (1.0 - p) + c[x + 1] * p;
-      setl (a->start + i, a, v);
+      int vc = c[x] * (1.0 - p) + c[x + 1] * p;
+      int vw = w[x] * (1.0 - p) + w[x + 1] * p;
+      setl (a->start + i, a, vc);
+      if (rgbw && !a->w)
+         setW (a->start + i, vw);
    }
    return NULL;
 }

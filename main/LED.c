@@ -148,12 +148,20 @@ addapp (int index, int preset, const char *name, jo_t j)
       {
          uint8_t setcolourstr (char *temp)
          {
+            uint8_t colourset = 0;
+            uint8_t rainbow = 0;
+            uint8_t cycling = 0;
+            uint8_t wheel = 0;
+            uint8_t r = 0;
+            uint8_t g = 0;
+            uint8_t b = 0;
+            uint8_t w = 0;
             if (!strcasecmp (temp, "rainbow"))
-               a->colourset = a->rainbow = 1;
+               colourset = rainbow = 1;
             else if (!strcasecmp (temp, "cycling"))
-               a->colourset = a->cycling = 1;
+               colourset = cycling = 1;
             else if (!strcasecmp (temp, "wheel"))
-               a->colourset = a->wheel = 1;
+               colourset = wheel = 1;
             else if (rgbw && !strcasecmp (temp, "white"))
                strcpy (temp, "#000F");
 #define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
@@ -167,38 +175,38 @@ addapp (int index, int preset, const char *name, jo_t j)
             {
                if (!c[3])
                {                // RGB
-                  a->colourset = 1;
-                  a->r = x (0) * 17;
-                  a->g = x (1) * 17;
-                  a->b = x (2) * 17;
-                  a->w = 0;
+                  colourset = 1;
+                  r = x (0) * 17;
+                  g = x (1) * 17;
+                  b = x (2) * 17;
+                  w = 0;
                } else if (isxdigit ((int) c[3]))
                {
                   if (!c[4])
                   {             // # RGBW
-                     a->colourset = 1;
-                     a->r = x (0) * 17;
-                     a->g = x (1) * 17;
-                     a->b = x (2) * 17;
-                     a->w = x (3) * 17;
+                     colourset = 1;
+                     r = x (0) * 17;
+                     g = x (1) * 17;
+                     b = x (2) * 17;
+                     w = x (3) * 17;
                   } else if (isxdigit ((int) c[4]) && isxdigit ((int) c[5]))
                   {
                      if (!c[6])
                      {          // # RRGGBB
-                        a->colourset = 1;
-                        a->r = x (0) * 16 + x (1);
-                        a->g = x (2) * 16 + x (3);
-                        a->b = x (4) * 16 + x (5);
-                        a->w = 0;
+                        colourset = 1;
+                        r = x (0) * 16 + x (1);
+                        g = x (2) * 16 + x (3);
+                        b = x (4) * 16 + x (5);
+                        w = 0;
                      } else if (isxdigit ((int) c[6]) && isxdigit ((int) c[7]))
                      {          // # RRGGBBWW
                         if (!c[8])
                         {
-                           a->colourset = 1;
-                           a->r = x (0) * 16 + x (1);
-                           a->g = x (2) * 16 + x (3);
-                           a->b = x (4) * 16 + x (5);
-                           a->w = x (6) * 16 + x (7);
+                           colourset = 1;
+                           r = x (0) * 16 + x (1);
+                           g = x (2) * 16 + x (3);
+                           b = x (4) * 16 + x (5);
+                           w = x (6) * 16 + x (7);
                         } else
                            return 0;
                      }
@@ -207,6 +215,14 @@ addapp (int index, int preset, const char *name, jo_t j)
                }
             } else
                return 0;
+            a->r = r;
+            a->g = g;
+            a->b = b;
+            a->w = w;
+            a->rainbow = rainbow;
+            a->cycling = cycling;
+            a->wheel = wheel;
+            a->colourset = colourset;
             return 1;
 #undef x
          }
@@ -220,7 +236,7 @@ addapp (int index, int preset, const char *name, jo_t j)
             appzap (a);
          a->name = applist[i].name;
          if (*colour[preset ? preset - 1 : 0])
-            setcolourstr (colour[preset ? preset - 1 : 0]);
+            setcolourstr (colour[preset ? preset - 1 : 0]);     // Default colour from preset
 #define u8(s,n,d)         a->n=n[preset?preset-1:0];
 #define u8d(s,n,d)        u8(s,n,d)
 #define u8r(s,n,d)        u8(s,n,d)
@@ -298,18 +314,20 @@ addapp (int index, int preset, const char *name, jo_t j)
          } else if (j && jo_here (j) == JO_NUMBER)
             a->limit = limit_scale * jo_read_float (j); // Defaults
          if (preset && preset <= CONFIG_REVK_WEB_EXTRA_PAGES)
-         {                      // preset based settings
-            if (!a->colourset && (hargb & (1ULL << (preset - 1))))
-            {
+         {                      // Stored HA based settings
+            if ((hargb & (1ULL << (preset - 1))) && (har[preset - 1] || hag[preset - 1] || hab[preset - 1] || haw[preset - 1]))
+            {                   // If set black, we don't set as means use default, only applies at turn on
+               if (habrightset & (1ULL << (preset - 1)))
+                  a->bright = habright[preset - 1];
+               else
+                  a->bright = 255;
                a->r = har[preset - 1];
                a->g = hag[preset - 1];
                a->b = hab[preset - 1];
                a->w = haw[preset - 1];
-               if (a->r || a->g || a->b || a->w)
-                  a->colourset = 1;
+               a->rainbow = a->cycling = a->wheel = 0;
+               a->colourset = 1;
             }
-            if (!a->bright && (habrightset & (1ULL << (preset - 1))))
-               a->bright = habright[preset - 1];
          }
          if (!a->start)
             a->start = 1;
@@ -462,22 +480,30 @@ presetcheck (void)
       app_t *a = &active[index];
       if (!a->preset || a->stop)
          continue;
-      if (haon & (1ULL << (a->preset - 1)))
+      int p = a->preset = 1;
+      if (haon & (1ULL << p))
       {                         // Update in situe
-         found |= (1ULL << (a->preset - 1));
-         if (changed & (1ULL << (a->preset - 1)))
+         found |= (1ULL << p);
+         if (changed & (1ULL << p))
          {                      // Update settings
-            a->r = har[a->preset - 1];
-            a->g = hag[a->preset - 1];
-            a->b = hab[a->preset - 1];
-            a->w = haw[a->preset - 1];
-            a->bright = habright[a->preset - 1];
-            hastatus |= (1ULL << (a->preset - 1));
+            // TODO black or 0 brightness needs to set default?
+            if (hargb & (1ULL << p))
+            {
+               a->r = har[p];
+               a->g = hag[p];
+               a->b = hab[p];
+               a->w = haw[p];
+               a->rainbow = a->cycling = a->wheel = 0;
+               a->colourset = 1;
+            }
+            if (habrightset & (1ULL << p))
+               a->bright = habright[p];
+            hastatus |= (1ULL << p);
          }
          continue;
       }
       a->stop = a->fadeout;
-      hastatus |= (1ULL << (a->preset - 1));
+      hastatus |= (1ULL << p);
    }
    found = (haon & ~found);     // Which should be on and not
    if (found)
@@ -559,10 +585,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
                else if (!strcmp (val, "w"))
                   haw[preset - 1] = v;
             }
-            if (har[preset - 1] || hag[preset - 1] || hab[preset - 1] || (rgbw && haw[preset - 1]))
-               hargb |= (1ULL << (preset - 1));
-            else
-               hargb &= ~(1ULL << (preset - 1));        // Black considered unset
+            hargb |= (1ULL << (preset - 1));
          }
          if (jo_find (j, "effect"))
          {                      // effect
@@ -1317,7 +1340,7 @@ i2s_task (void *arg)
       }
       if (max)
       {
-         if (max > 2)
+         if (max > 1)
             audiogain = (audiogain * 9 + audiogain / max) / 10; // Drop gain faster if overloading
          else
             audiogain = (audiogain * 99 + audiogain / max) / 100;       // Bring back gain slowly

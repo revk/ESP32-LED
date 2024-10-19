@@ -13,7 +13,7 @@ pixelr (app_t * a, int pos, uint8_t l)
       c[pos] = l;
    else
       c[pos] = ((uint16_t) c[pos] * 15 + l) / 16;
-   setR (pos + a->start, c[pos]);
+   setR (pos + a->start, (int) a->r * c[pos] / 255);
 }
 
 void
@@ -28,7 +28,7 @@ pixelg (app_t * a, int pos, uint8_t l)
       c[pos] = l;
    else
       c[pos] = ((uint16_t) c[pos] * 15 + l) / 16;
-   setG (pos + a->start, c[pos]);
+   setG (pos + a->start, (int) a->g * c[pos] / 255);
 }
 
 void
@@ -43,7 +43,7 @@ pixelb (app_t * a, int pos, uint8_t l)
       c[pos] = l;
    else
       c[pos] = ((uint16_t) c[pos] * 15 + l) / 16;
-   setB (pos + a->start, c[pos]);
+   setB (pos + a->start, (int) a->b * c[pos] / 255);
 }
 
 const char *
@@ -53,6 +53,12 @@ appvolumergb (app_t * a)
    {                            // Sanity check / defaults
       if (!a->data)
          memset (a->data = malloc (a->len * 3), 0, a->len * 3);
+      if (a->colourset)
+      {
+         a->r = a->g = a->b = 255;
+         a->w = 0;
+         a->colourset = 1;
+      }
    }
 
    {                            // Low
