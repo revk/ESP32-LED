@@ -36,15 +36,15 @@ dofire (uint8_t n, uint8_t l, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w
 {
    *r = (int) n *l / 255;
    if (n > 128)
-      *g = (int) (n / 2) * l / 255;
+      *g = (int) ((n - 128) * 2) * l / 255;
    else
       *g = 0;
    if (n > 192)
-      *b = (int) (n / 4) * l / 255;
+      *b = (int) ((n - 192) * 4) * l / 255;
    else
       *b = 0;
    if (n > 224)
-      *w = (int) (n / 8) * l / 255;
+      *w = (int) ((n - 224) * 8) * l / 255;
    else
       *w = 0;
 }

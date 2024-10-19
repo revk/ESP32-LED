@@ -3,7 +3,7 @@
 #include "app.h"
 
 void
-pixel (app_t * a, int pos, uint8_t p,uint8_t l)
+pixel (app_t * a, int pos, uint8_t p, uint8_t l)
 {
    uint8_t *c = a->data;
    pos -= a->start;
@@ -27,7 +27,7 @@ appvolume (app_t * a)
          memset (a->data = malloc (a->len), 0, a->len);
    }
 
-   int v = audiomag * 255;
+   int v = audiomag * 255 * 2;  // this is average, and we auto gain on peak, so this may make sense...
    if (v > 255)
       v = 255;
    bargraph (a, pixel, v, a->fader);
