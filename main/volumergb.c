@@ -68,7 +68,7 @@ appvolumergb (app_t * a)
       int v = m * 255 / (AUDIOBANDS / 3);
       if (v > 255)
          v = 255;
-      bargraph (a, pixelg, v, a->fader);
+      bargraph (a, pixelb, v, a->fader);
    }
    {                            // Mid
       float m = 0;
@@ -77,7 +77,7 @@ appvolumergb (app_t * a)
       int v = m * 255 / (AUDIOBANDS / 3);
       if (v > 255)
          v = 255;
-      bargraph (a, pixelb, v, a->fader);
+      bargraph (a, pixelg, v, a->fader);
    }
    {                            // High
       float m = 0;
