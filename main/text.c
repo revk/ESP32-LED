@@ -94,12 +94,12 @@ showtext (app_t * a, const char *data, uint8_t dokern)
                for (int y = 0; y < h; y++)
                {
                   if (y < 8 && chars[i].b[y] & (0x80 >> x))
-                     setl (a->start + c * h + y, a, l);
+                     setl (a->start + c * h + y, a, (int) 255 * (c * h + y) / a->len, l);
             } else
             {
                for (int y = 0; y < h; y++)
                   if (y < 8 && chars[i].b[y] & (0x80 >> x))
-                     setl (a->start + c * h + h - 1 - y, a, l);
+                     setl (a->start + c * h + h - 1 - y, a, (int) 255 * (c * h + y) / a->len, l);
             }
          }
          c++;
@@ -121,7 +121,7 @@ apptime (app_t * a)
    if (!a->cycle)
    {
       if (!a->colourset)
-         a->colourset = a->cycling = 1;
+         setcolour (a, "cycling");
    }
    char temp[6];
    time_t now = time (0);
@@ -139,7 +139,7 @@ apptext (app_t * a)
       if (!a->data)
          return "No data";
       if (!a->colourset)
-         a->cycling = 1;
+         setcolour (a, "cycling");
    }
    return showtext (a, (const char *) a->data, 0);
 }
@@ -152,7 +152,7 @@ appkern (app_t * a)
       if (!a->data)
          return "No data";
       if (!a->colourset)
-         a->cycling = 1;
+         setcolour (a, "cycling");
    }
    return showtext (a, (const char *) a->data, 1);
 }

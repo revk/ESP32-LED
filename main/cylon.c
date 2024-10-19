@@ -37,9 +37,9 @@ appcylon (app_t * a)
    uint8_t l = a->fader;
    clear (a->start, a->len);
    if (a->step > 0)
-      setl (a->start + a->step - 1, a, l / 2);
-   setl (a->start + a->step, a, l);
+      setl (a->start + a->step - 1, a, (int) 255 * (a->step - 1) / a->len, l / 2);
+   setl (a->start + a->step, a, (int) 255 * a->step / a->len, l);
    if (a->step + 1 < a->len)
-      setl (a->start + a->step + 1, a, l / 2);
+      setl (a->start + a->step + 1, a, (int) 255 * (a->step + 1) / a->len, l / 2);
    return NULL;
 }

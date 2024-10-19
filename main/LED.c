@@ -123,6 +123,85 @@ const char *haeffect[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };      // Selected effe
 
 static SemaphoreHandle_t app_mutex = NULL;
 
+uint8_t
+setcolour (app_t * a, const char *colour)
+{
+   uint8_t colourset = 0;
+   uint8_t r = 0;
+   uint8_t g = 0;
+   uint8_t b = 0;
+   uint8_t w = 0;
+   int p = 0;
+   for (p = 0; palettes[p].name && strcmp (palettes[p].name, colour); p++);
+   if (palettes[p].name)
+   {                            // Palette (overwrites rgbw as it goes)
+      a->palette = p + 1;
+      a->colourset = 1;
+      return 1;
+   }
+   // Fixed colour
+   if (rgbw && !strcasecmp (colour, "white"))
+      colour = "#000F";
+#define	c(h,c)	else if(!strcasecmp(colour,#c))colour=#h;
+   colours
+#undef c
+   const char *c = colour;
+   if (*c == '#')
+      c++;
+#define x(n)((c[n] & 0xF) + (isalpha ((uint8_t)c[n]) ? 9 : 0))
+   if (isxdigit ((int) c[0]) && isxdigit ((int) c[1]) && isxdigit ((int) c[2]))
+   {
+      if (!c[3])
+      {                         // RGB
+         colourset = 1;
+         r = x (0) * 17;
+         g = x (1) * 17;
+         b = x (2) * 17;
+         w = 0;
+      } else if (isxdigit ((int) c[3]))
+      {
+         if (!c[4])
+         {                      // # RGBW
+            colourset = 1;
+            r = x (0) * 17;
+            g = x (1) * 17;
+            b = x (2) * 17;
+            w = x (3) * 17;
+         } else if (isxdigit ((int) c[4]) && isxdigit ((int) c[5]))
+         {
+            if (!c[6])
+            {                   // # RRGGBB
+               colourset = 1;
+               r = x (0) * 16 + x (1);
+               g = x (2) * 16 + x (3);
+               b = x (4) * 16 + x (5);
+               w = 0;
+            } else if (isxdigit ((int) c[6]) && isxdigit ((int) c[7]))
+            {                   // # RRGGBBWW
+               if (!c[8])
+               {
+                  colourset = 1;
+                  r = x (0) * 16 + x (1);
+                  g = x (2) * 16 + x (3);
+                  b = x (4) * 16 + x (5);
+                  w = x (6) * 16 + x (7);
+               } else
+                  return 0;
+            }
+         }
+
+      }
+   } else
+      return 0;
+   a->r = r;
+   a->g = g;
+   a->b = b;
+   a->w = w;
+   a->colourset = colourset;
+   return 1;
+#undef x
+}
+
 void
 appzap (app_t * a)
 {                               // Assumes mutex, Delete an app
@@ -146,97 +225,17 @@ addapp (int index, int preset, const char *name, jo_t j)
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!strcasecmp (name, applist[i].name))
       {
-         uint8_t setcolourstr (char *temp)
-         {
-            uint8_t colourset = 0;
-            uint8_t rainbow = 0;
-            uint8_t cycling = 0;
-            uint8_t wheel = 0;
-            uint8_t r = 0;
-            uint8_t g = 0;
-            uint8_t b = 0;
-            uint8_t w = 0;
-            if (!strcasecmp (temp, "rainbow"))
-               colourset = rainbow = 1;
-            else if (!strcasecmp (temp, "cycling"))
-               colourset = cycling = 1;
-            else if (!strcasecmp (temp, "wheel"))
-               colourset = wheel = 1;
-            else if (rgbw && !strcasecmp (temp, "white"))
-               strcpy (temp, "#000F");
-#define	c(h,c)	else if(!strcasecmp(temp,#c))strcpy(temp,#h);
-            colours
-#undef c
-            char *c = temp;
-            if (*c == '#')
-               c++;
-#define x(n)((c[n] & 0xF) + (isalpha ((uint8_t)c[n]) ? 9 : 0))
-            if (isxdigit ((int) c[0]) && isxdigit ((int) c[1]) && isxdigit ((int) c[2]))
-            {
-               if (!c[3])
-               {                // RGB
-                  colourset = 1;
-                  r = x (0) * 17;
-                  g = x (1) * 17;
-                  b = x (2) * 17;
-                  w = 0;
-               } else if (isxdigit ((int) c[3]))
-               {
-                  if (!c[4])
-                  {             // # RGBW
-                     colourset = 1;
-                     r = x (0) * 17;
-                     g = x (1) * 17;
-                     b = x (2) * 17;
-                     w = x (3) * 17;
-                  } else if (isxdigit ((int) c[4]) && isxdigit ((int) c[5]))
-                  {
-                     if (!c[6])
-                     {          // # RRGGBB
-                        colourset = 1;
-                        r = x (0) * 16 + x (1);
-                        g = x (2) * 16 + x (3);
-                        b = x (4) * 16 + x (5);
-                        w = 0;
-                     } else if (isxdigit ((int) c[6]) && isxdigit ((int) c[7]))
-                     {          // # RRGGBBWW
-                        if (!c[8])
-                        {
-                           colourset = 1;
-                           r = x (0) * 16 + x (1);
-                           g = x (2) * 16 + x (3);
-                           b = x (4) * 16 + x (5);
-                           w = x (6) * 16 + x (7);
-                        } else
-                           return 0;
-                     }
-                  }
-
-               }
-            } else
-               return 0;
-            a->r = r;
-            a->g = g;
-            a->b = b;
-            a->w = w;
-            a->rainbow = rainbow;
-            a->cycling = cycling;
-            a->wheel = wheel;
-            a->colourset = colourset;
-            return 1;
-#undef x
-         }
-         uint8_t setcolour (jo_t j)
+         uint8_t setcolourj (jo_t j)
          {
             char temp[20];
             jo_strncpy (j, temp, sizeof (temp));
-            return setcolourstr (temp);
+            return setcolour (a, temp);
          }
          if (!a->app || a->name != applist[i].name || a->stop)
             appzap (a);
          a->name = applist[i].name;
          if (*colour[preset ? preset - 1 : 0])
-            setcolourstr (colour[preset ? preset - 1 : 0]);     // Default colour from preset
+            setcolour (a, colour[preset ? preset - 1 : 0]);     // Default colour from preset
 #define u8(s,n,d)         a->n=n[preset?preset-1:0];
 #define u8d(s,n,d)        u8(s,n,d)
 #define u8r(s,n,d)        u8(s,n,d)
@@ -286,7 +285,7 @@ addapp (int index, int preset, const char *name, jo_t j)
                   if (!jo_strcmp (j, "colour") || !jo_strcmp (j, "#"))
                {
                   if (jo_next (j) == JO_STRING)
-                     setcolour (j);
+                     setcolourj (j);
                   continue;
                }
                if (!jo_strcmp (j, "data"))
@@ -304,7 +303,7 @@ addapp (int index, int preset, const char *name, jo_t j)
             }
          } else if (j && jo_here (j) == JO_STRING)
          {
-            if (!setcolour (j))
+            if (!setcolourj (j))
             {                   // data
                free (a->data);
                int l = jo_strlen (j);
@@ -319,13 +318,11 @@ addapp (int index, int preset, const char *name, jo_t j)
             {                   // If set black, we don't set as means use default, only applies at turn on
                if (habrightset & (1ULL << (preset - 1)))
                   a->bright = habright[preset - 1];
-               else
-                  a->bright = 255;
                a->r = har[preset - 1];
                a->g = hag[preset - 1];
                a->b = hab[preset - 1];
                a->w = haw[preset - 1];
-               a->rainbow = a->cycling = a->wheel = 0;
+               a->palette = 0;
                a->colourset = 1;
             }
          }
@@ -493,7 +490,7 @@ presetcheck (void)
                a->g = hag[p];
                a->b = hab[p];
                a->w = haw[p];
-               a->rainbow = a->cycling = a->wheel = 0;
+               a->palette = 0;
                a->colourset = 1;
             }
             if (habrightset & (1ULL << p))
@@ -809,19 +806,6 @@ led_task (void *x)
                   a->delay--;
                   continue;
                }
-               if (a->wheel)
-               {                // Cycle the colour
-                  a->r = wheel[(255 - a->cycle) & 255];
-                  a->g = wheel[(255 - a->cycle + 85) & 255];
-                  a->b = wheel[(255 - a->cycle + 170) & 255];
-                  a->w = 0;
-               } else if (a->cycling)
-               {                // Cycle the colour
-                  a->r = cos8[(255 - a->cycle) & 255];
-                  a->g = cos8[(255 - a->cycle + 85) & 255];
-                  a->b = cos8[(255 - a->cycle + 170) & 255];
-                  a->w = 0;
-               }
                if (!a->cycle)
                {                // Starting
                   jo_t j = jo_object_alloc ();
@@ -848,12 +832,8 @@ led_task (void *x)
 #undef  s16r
 #undef  u32
 #undef  u32d
-                     if (a->rainbow)
-                     jo_string (j, "colour", "rainbow");
-                  else if (a->wheel)
-                     jo_string (j, "colour", "wheel");
-                  else if (a->cycling)
-                     jo_string (j, "colour", "cycling");
+                     if (a->palette)
+                     jo_string (j, "colour", palettes[a->palette - 1].name);
                   else if (a->colourset)
                   {
                      if (rgbw)
@@ -1089,8 +1069,8 @@ web_root (httpd_req_t * req)
                revk_web_send (req, " fadein=%.1f", 1.0 * a->fadein / cps);
             if (a->fadeout != cps)
                revk_web_send (req, " fadeout=%.1f", 1.0 * a->fadeout / cps);
-            if (a->rainbow)
-               revk_web_send (req, " colour=rainbow");
+            if (a->palette)
+               revk_web_send (req, " colour=%s", palettes[a->palette - 1].name);
             else if (a->colourset)
             {
                if (rgbw)
@@ -1098,10 +1078,6 @@ web_root (httpd_req_t * req)
                else
                   revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
             }
-            if (a->cycling)
-               revk_web_send (req, "(cycling)");
-            if (a->wheel)
-               revk_web_send (req, "(wheel)");
             revk_web_send (req, "</li>");
          }
       }
@@ -1422,12 +1398,13 @@ bargraph (app_t * a, pixel_t * pixel, uint8_t v, uint8_t fade)
       uint8_t f = n & 255;
       n /= 256;
       int p = t;
-      for (unsigned int i = 0; i < n; i++)
-         pixel (a, p--, fade ^ inv);
+      unsigned int i = 0;
+      while (i < n)
+         pixel (a, p--, (255 * i++ / N) ^ inv, fade ^ inv);
       if (f)
-         pixel (a, p--, ((int) f * fade / 255) ^ inv);
-      while (p > a->start)
-         pixel (a, p--, inv);
+         pixel (a, p--, (255 * i++ / N) ^ inv, ((int) f * fade / 255) ^ inv);
+      while (i < N)
+         pixel (a, p--, (255 * i++ / N) ^ inv, inv);
    }
    if (t < a->start + a->len - 1)
    {
@@ -1438,11 +1415,12 @@ bargraph (app_t * a, pixel_t * pixel, uint8_t v, uint8_t fade)
       uint8_t f = n & 255;
       n /= 256;
       int p = t;
-      for (unsigned int i = 0; i < n; i++)
-         pixel (a, p++, fade ^ inv);
+      unsigned int i = 0;
+      while (i < n)
+         pixel (a, p++, (255 * i++ / N) ^ inv, fade ^ inv);
       if (f)
-         pixel (a, p++, ((int) f * fade / 255) ^ inv);
-      while (p < a->start + a->len)
-         pixel (a, p++, inv);
+         pixel (a, p++, (255 * i++ / N) ^ inv, ((int) f * fade / 255) ^ inv);
+      while (i < N)
+         pixel (a, p++, (255 * i++ / N) ^ inv, inv);
    }
 }

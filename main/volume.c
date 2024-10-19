@@ -3,7 +3,7 @@
 #include "app.h"
 
 void
-pixel (app_t * a, int pos, uint8_t l)
+pixel (app_t * a, int pos, uint8_t p,uint8_t l)
 {
    uint8_t *c = a->data;
    pos -= a->start;
@@ -13,7 +13,7 @@ pixel (app_t * a, int pos, uint8_t l)
       c[pos] = l;
    else
       c[pos] = ((uint16_t) c[pos] * 15 + l) / 16;
-   setl (pos + a->start, a, c[pos]);
+   setl (pos + a->start, a, p, c[pos]);
 }
 
 const char *
@@ -22,7 +22,7 @@ appvolume (app_t * a)
    if (!a->cycle)
    {                            // Sanity check / defaults
       if (!a->colourset)
-         a->colourset = a->cycling = 1;
+         setcolour (a, "cycling");
       if (!a->data)
          memset (a->data = malloc (a->len), 0, a->len);
    }

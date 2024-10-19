@@ -67,13 +67,24 @@ Each app can have arguments.
 |-----|--------|-------|
 |`d`|`delay`|Delay before starting app. (seconds)|
 |`T`|`limit`|How long to run the app for. Some apps go forever if not set to a limited time. (seconds)|
-|`#`|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. Also allowed is `rainbow` and `cycle` and `wheel`|
+|`#`|`colour`|The main colour argument for the app - this is specified as a string of single digit hex, e.g. `f00` is full red. It can instead be the name of a palette|
 |`s`|`start`|The first LED|
 |`l`|`len`|The number of LEDs|
 |`b`|`bright`|Main app brightness (0-255)|
 ||`speed`|Cycle time (seconds)|
 ||`fadein`|fade in time (seconds)|
 ||`fadeout`|fade out time (seconds)|
+
+### Palettes
+
+A palette is simply a way colours change, they can be based on time, or position, or value.
+
+|Name|Meaning|
+|----|-------|
+|rainbow|Rainbow based on position|
+|cycling|Rainbow based on time|
+|wheel|Alternative cycling colours based on time|
+|fire|red to white based on value|
 
 ### Simple apps
 

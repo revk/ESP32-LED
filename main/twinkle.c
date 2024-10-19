@@ -12,10 +12,7 @@ apptwinkle (app_t * a)
       a->data = malloc (a->len * 2);
       memset (a->data, 0, a->len * 2);
       if (!a->colourset)
-      {
-         a->r = a->g = a->b = 255;      // default white
-         a->colourset = 1;
-      }
+         setcolour (a, "white");
       a->step = a->speed;
    }
    uint8_t *old = a->data,
@@ -34,7 +31,7 @@ apptwinkle (app_t * a)
    for (int i = 0; i < a->len; i++)
    {
       uint8_t l = (int) (a->speed - a->step) * new[i] / a->speed + (int) a->step * old[i] / a->speed;
-      setl (a->start + i, a, l * q / 255);
+      setl (a->start + i, a, (int) 255 * i / a->len, l * q / 255);
    }
 
    return NULL;

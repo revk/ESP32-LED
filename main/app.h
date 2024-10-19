@@ -72,6 +72,7 @@ struct app_s
 #undef	u32d
       // Common settings
      uint8_t preset;            // If this is a preset
+   uint8_t palette;             // Which palette (+1)
    uint8_t r,
      g,
      b,
@@ -79,9 +80,6 @@ struct app_s
    uint8_t stop;                // If set this is a count down to stopping
    uint8_t fader;               // Effective brightness (set to bright unless fading in or out)
    uint8_t colourset:1;         // Colour is set
-   uint8_t rainbow:1;           // Colour should be rainbow along strip
-   uint8_t wheel:1;             // Colour should be cycled over time
-   uint8_t cycling:1;           // Colour should be cycled over time (more overlap)
    uint8_t sound:1;             // Audio app
    uint8_t ring:1;              // Ring app
    uint8_t text:1;              // Text app
@@ -224,15 +222,17 @@ setRGBWl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t l)
 }
 
 static inline void
-setl (uint16_t i, app_t * a, uint8_t l)
+setl (uint16_t i, app_t * a, uint8_t p, uint8_t l)
 {
-   if (a->rainbow)
+   if (a->palette)
    {
-      uint8_t p = 110 - 255 * ((a->len + i - a->start) % a->len) / a->len;
-      setRGBl (i, wheel[p], wheel[(p + 85) & 255], wheel[(p + 170) & 255], l);
+      palettes[a->palette - 1].run (a->cycle, p, l, &a->r, &a->g, &a->b, &a->w);
+      setRGBW (i, a->r, a->g, a->b, a->w);
    } else
       setRGBWl (i, a->r, a->g, a->b, a->w, l);
 }
 
-typedef void pixel_t (app_t * a, int pos, uint8_t l);
+uint8_t setcolour (app_t * a, const char *colour);
+
+typedef void pixel_t (app_t * a, int pos, uint8_t p, uint8_t l);
 void bargraph (app_t * a, pixel_t *, uint8_t v, uint8_t fade);

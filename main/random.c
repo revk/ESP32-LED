@@ -10,8 +10,6 @@ apprandom (app_t * a)
       free (a->data);
       a->data = malloc (8 * a->len);
       memset (a->data, 0, 8 * a->len);
-      if (!a->colourset)
-         a->colourset = a->cycling = 1;
       a->stage = 1;
    }
    uint8_t *r0 = a->data,

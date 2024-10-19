@@ -3,7 +3,7 @@
 #include "app.h"
 
 void
-pixelr (app_t * a, int pos, uint8_t l)
+pixelr (app_t * a, int pos, uint8_t p, uint8_t l)
 {
    uint8_t *c = a->data;
    pos -= a->start;
@@ -17,7 +17,7 @@ pixelr (app_t * a, int pos, uint8_t l)
 }
 
 void
-pixelg (app_t * a, int pos, uint8_t l)
+pixelg (app_t * a, int pos, uint8_t p, uint8_t l)
 {
    uint8_t *c = a->data;
    c += a->len;
@@ -32,7 +32,7 @@ pixelg (app_t * a, int pos, uint8_t l)
 }
 
 void
-pixelb (app_t * a, int pos, uint8_t l)
+pixelb (app_t * a, int pos, uint8_t p, uint8_t l)
 {
    uint8_t *c = a->data;
    c += a->len * 2;
@@ -54,11 +54,7 @@ appvolumergb (app_t * a)
       if (!a->data)
          memset (a->data = malloc (a->len * 3), 0, a->len * 3);
       if (!a->colourset)
-      {
-         a->r = a->g = a->b = 255;
-         a->w = 0;
-         a->colourset = 1;
-      }
+         setcolour (a, "white");
    }
 
    {                            // Low
