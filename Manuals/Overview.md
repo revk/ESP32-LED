@@ -82,6 +82,7 @@ A palette is simply a way colours change, they can be based on time, or position
 |Name|Meaning|
 |----|-------|
 |rainbow|Rainbow based on position|
+|revbow|Rainbow based on position (reversed)|
 |cycling|Rainbow based on time|
 |wheel|Alternative cycling colours based on time|
 |fire|red to white based on value|

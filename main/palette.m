@@ -5,6 +5,7 @@
 #endif
 
 p(rainbow)
+p(revbow)
 p(wheel)
 p(cycling)
 p(fire)

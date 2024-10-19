@@ -51,8 +51,14 @@ dofire (uint8_t n, uint8_t l, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w
 
 void
 palette_rainbow (uint8_t t, uint8_t p, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
-{                               // Position based rainbow
+{                               // Position based rainbow (starts in the red)
    dorainbow (p, v, r, g, b, w);
+}
+
+void
+palette_revbow (uint8_t t, uint8_t p, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+{                               // Position based rainbow (reversed, starts in the blue)
+   dorainbow (230 - p, v, r, g, b, w);
 }
 
 void
