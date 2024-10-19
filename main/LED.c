@@ -480,7 +480,7 @@ presetcheck (void)
       app_t *a = &active[index];
       if (!a->preset || a->stop)
          continue;
-      int p = a->preset = 1;
+      int p = a->preset - 1;
       if (haon & (1ULL << p))
       {                         // Update in situe
          found |= (1ULL << p);

@@ -53,7 +53,7 @@ appvolumergb (app_t * a)
    {                            // Sanity check / defaults
       if (!a->data)
          memset (a->data = malloc (a->len * 3), 0, a->len * 3);
-      if (a->colourset)
+      if (!a->colourset)
       {
          a->r = a->g = a->b = 255;
          a->w = 0;
