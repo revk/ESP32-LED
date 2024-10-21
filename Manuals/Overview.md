@@ -96,7 +96,6 @@ A palette is simply a way colours change, they can be based on time, or position
 |`idle`|This simply displays all LEDs with defined colour, which by default is black (off).|
 |`cylon`|This runs an LED of colour specified (default is red) backwards and forwards, Cylon/Knightrider style|
 |`pulse`|This fades up and down the specified colour (default `cycle`) on all LEDs constantly.|
-|`neenaw`|Self explanatory.|
 |`bargraph`|Bargraph (based on brightness setting)|
 |`countdown`|Count LEDs until limit (default 60 seconds)|
 |`random`|Fading between random colours|
