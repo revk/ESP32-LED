@@ -37,4 +37,4 @@ Available on [Amazon](https://www.amazon.co.uk/dp/B0C1W1XJS8)
 
 Includes PCB design.
 
-![PCB](https://github.com/revk/ESP32-LED/assets/996983/b7605739-2088-4e12-b94f-9c3133414b67)
+![718wCWg9xWL _AC_SL1500_](https://github.com/user-attachments/assets/d64999ef-f879-43d2-91f1-a8fe22fd3e5d)
