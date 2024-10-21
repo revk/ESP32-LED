@@ -1083,7 +1083,7 @@ web_root (httpd_req_t * req)
       }
    xSemaphoreGive (app_mutex);
    revk_web_send (req,
-                  "</ul><p><a href=/>Reload</a></p><form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#%s' size=6> or <tt>rainbow</tt> or <tt>wheel</tt> or <tt>cycling</tt>.</p><p>",
+                  "</ul><p><a href=/>Reload</a></p><form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#%s' size=20> #RGB,or name of palette.</p><p>",
                   rgbw ? "RGBW" : "RGB");
    void button (const char *tag)
    {
