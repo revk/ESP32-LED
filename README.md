@@ -3,6 +3,8 @@
 Various stuff in one app that handles WS2812 LED strips, including
 
 - Solid colour
+- Audio reactive spectograph
+- Audio reactive volume and RGB split band volume
 - Fading/pulsing lights
 - Spinning rings
 - Bargraph
@@ -13,11 +15,19 @@ Various stuff in one app that handles WS2812 LED strips, including
 - Twinkle
 - Block text: Scrolling text
 - Block text: Time
-- Laval lamp random effect
-- Blue/Red flashing (police)
-- Other stuff in due course
+- Lava lamp random effect
+- ...
 
-And now Home Assistant logic with virtual strips as "lights".
+Include special colour palettes
+
+- Rainbow (position based)
+- Cycling colours (time based)
+- Neenaw (time based flashing red/blue)
+- Fire (value based black/red/yellow/white)
+- Xmas (position alternate red/green)
+- ...
+
+And now Home Assistant logic with virtual strips as "lights", allowing a number segments of a strip/chain to be defined, including overlapping, with preset effects and colours, but allowing HA to override colour, brightness, effect, etc.
 
 See [Overview](Manuals/Overview.md)
 
