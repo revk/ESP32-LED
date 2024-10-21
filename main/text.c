@@ -94,12 +94,12 @@ showtext (app_t * a, const char *data, uint8_t dokern)
                for (int y = 0; y < h; y++)
                {
                   if (y < 8 && chars[i].b[y] & (0x80 >> x))
-                     setl (a->start + c * h + y, a, (int) 255 * (c * h + y) / a->len, l);
+                     setl (a->start + c * h + y, a, c * h + y, a->len, l);
             } else
             {
                for (int y = 0; y < h; y++)
                   if (y < 8 && chars[i].b[y] & (0x80 >> x))
-                     setl (a->start + c * h + h - 1 - y, a, (int) 255 * (c * h + y) / a->len, l);
+                     setl (a->start + c * h + h - 1 - y, a, c * h + y, a->len, l);
             }
          }
          c++;

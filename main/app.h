@@ -222,11 +222,11 @@ setRGBWl (uint16_t index, uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t l)
 }
 
 static inline void
-setl (uint16_t i, app_t * a, uint8_t p, uint8_t l)
-{
+setl (uint16_t i, app_t * a, int p, int n, uint8_t l)
+{                               // i is the LED, a is app, p/n is position, l is level
    if (a->palette)
    {
-      palettes[a->palette - 1].run (a->cycle, p, l, &a->r, &a->g, &a->b, &a->w);
+      palettes[a->palette - 1].run (a->cycle, p, n, l, &a->r, &a->g, &a->b, &a->w);
       setRGBW (i, a->r, a->g, a->b, a->w);
    } else
       setRGBWl (i, a->r, a->g, a->b, a->w, l);
@@ -234,5 +234,5 @@ setl (uint16_t i, app_t * a, uint8_t p, uint8_t l)
 
 uint8_t setcolour (app_t * a, const char *colour);
 
-typedef void pixel_t (app_t * a, int pos, uint8_t p, uint8_t l);
+typedef void pixel_t (app_t * a, int pos, int p, int n, uint8_t l);
 void bargraph (app_t * a, pixel_t *, uint8_t v, uint8_t fade);

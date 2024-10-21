@@ -9,5 +9,7 @@ p(revbow)
 p(wheel)
 p(cycling)
 p(fire)
+p(xmas)
+p(neenaw)
 
 #undef p

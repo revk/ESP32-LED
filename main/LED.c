@@ -1383,44 +1383,36 @@ void
 bargraph (app_t * a, pixel_t * pixel, uint8_t v, uint8_t fade)
 {
    int t = a->top;
-   uint8_t inv = 0;
    if (t < 0)
-   {
-      t = -t;
-      inv = 0xFF;
-   }
+      t = -t;                   // TODO
    if (t > a->start)
    {
       int N = t - a->start;
       uint32_t n = (uint32_t) 256 * N * v / 255;
-      if (inv)
-         n = (uint32_t) 256 *N - n;
       uint8_t f = n & 255;
       n /= 256;
       int p = t;
       unsigned int i = 0;
       while (i < n)
-         pixel (a, p--, (255 * i++ / N) ^ inv, fade ^ inv);
+         pixel (a, p--, i++, N, fade);
       if (f)
-         pixel (a, p--, (255 * i++ / N) ^ inv, ((int) f * fade / 255) ^ inv);
+         pixel (a, p--, i++, N, ((int) f * fade / 255));
       while (i < N)
-         pixel (a, p--, (255 * i++ / N) ^ inv, inv);
+         pixel (a, p--, i++, N, 0);
    }
    if (t < a->start + a->len - 1)
    {
       int N = a->start + a->len - 1 - t;
       uint32_t n = (uint32_t) 256 * N * v / 255;
-      if (inv)
-         n = (uint32_t) 256 *N - n;
       uint8_t f = n & 255;
       n /= 256;
       int p = t;
       unsigned int i = 0;
       while (i < n)
-         pixel (a, p++, (255 * i++ / N) ^ inv, fade ^ inv);
+         pixel (a, p++, i++, N, fade);
       if (f)
-         pixel (a, p++, (255 * i++ / N) ^ inv, ((int) f * fade / 255) ^ inv);
+         pixel (a, p++, i++, N, ((int) f * fade / 255));
       while (i < N)
-         pixel (a, p++, (255 * i++ / N) ^ inv, inv);
+         pixel (a, p++, i++, N, 0);
    }
 }

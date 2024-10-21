@@ -3,7 +3,7 @@
 #include "app.h"
 
 void
-pixel (app_t * a, int pos, uint8_t p, uint8_t l)
+pixel (app_t * a, int pos, int p, int n, uint8_t l)
 {
    uint8_t *c = a->data;
    pos -= a->start;
@@ -13,7 +13,7 @@ pixel (app_t * a, int pos, uint8_t p, uint8_t l)
       c[pos] = l;
    else
       c[pos] = ((uint16_t) c[pos] * 15 + l) / 16;
-   setl (pos + a->start, a, p, c[pos]);
+   setl (pos + a->start, a, p, n, c[pos]);
 }
 
 const char *
@@ -23,8 +23,8 @@ appvolume (app_t * a)
    {                            // Sanity check / defaults
       if (!a->colourset)
          setcolour (a, "cycling");
-      if (!a->data)
-         memset (a->data = malloc (a->len), 0, a->len);
+      free (a->data);
+      memset (a->data = malloc (a->len), 0, a->len);
    }
 
    int v = audiomag * 255 * 2;  // this is average, and we auto gain on peak, so this may make sense...

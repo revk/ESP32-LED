@@ -3,9 +3,9 @@
 #include "app.h"
 
 static void
-pixel (app_t * a, int pos, uint8_t p, uint8_t l)
+pixel (app_t * a, int pos, int p, int n, uint8_t l)
 {
-   setl (pos, a, p, l);
+   setl (pos, a, p, n, l);
 }
 
 const char *

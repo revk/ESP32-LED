@@ -13,7 +13,7 @@ apppulse (app_t * a)
 
    uint8_t l = a->fader * (255 - cos8[a->step & 255]) / 255;
    for (unsigned int i = 0; i < a->len; i++)
-      setl (a->start + i, a, (int) 255 * i / a->len, l);
+      setl (a->start + i, a, i, a->len, l);
    a->step += 256 / a->speed;
    return NULL;
 }

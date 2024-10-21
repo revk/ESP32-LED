@@ -12,6 +12,6 @@ appidle (app_t * a)
    }
    uint8_t l = a->fader;
    for (int i = 0; i < a->len; i++)
-      setl (a->start + i, a, (int) 25 * i / a->len, l);
+      setl (a->start + i, a, i, a->len, l);
    return NULL;
 }

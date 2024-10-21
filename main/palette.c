@@ -50,31 +50,65 @@ dofire (uint8_t n, uint8_t l, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w
 }
 
 void
-palette_rainbow (uint8_t t, uint8_t p, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+palette_rainbow (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
 {                               // Position based rainbow (starts in the red)
-   dorainbow (p, v, r, g, b, w);
+   dorainbow (255 * p / n, v, r, g, b, w);
 }
 
 void
-palette_revbow (uint8_t t, uint8_t p, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+palette_revbow (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
 {                               // Position based rainbow (reversed, starts in the blue)
-   dorainbow (230 - p, v, r, g, b, w);
+   dorainbow (230 - (255 * p / n), v, r, g, b, w);
 }
 
 void
-palette_wheel (uint8_t t, uint8_t p, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+palette_wheel (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
 {                               // Time based wheel
    dowheel (t, v, r, g, b, w);
 }
 
 void
-palette_cycling (uint8_t t, uint8_t p, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+palette_cycling (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
 {                               // Time based rainbow
    dorainbow (t, v, r, g, b, w);
 }
 
 void
-palette_fire (uint8_t t, uint8_t p, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
-{                               // test position based
+palette_fire (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+{                               // Value based fire black/red/yellow/white
    dofire (v, 255, r, g, b, w);
+}
+
+void
+palette_xmas (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+{                               // Position based red/green
+   *r = (int) v *((p & 1) ? 255 : 0) / 255;
+   *g = (int) v *((p & 1) ? 0 : 255) / 255;
+   *b = 0;
+   *w = 0;
+}
+
+void
+palette_neenaw (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+{                               // Time based red/blue
+   if (cps > 10)
+      t /= 2;
+   if (cps > 20)
+      t /= 2;
+   int q = t % 16;
+   if (q == 1 || q == 3 || q == 5)
+   {
+      *r = v;
+      *b = 0;
+   } else if (q == 9 || q == 11 || q == 13)
+   {
+      *r = 0;
+      *b = v;
+   } else
+   {
+      *r = 0;
+      *b = 0;
+   }
+   *g = 0;
+   *w = 0;
 }

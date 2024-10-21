@@ -79,13 +79,15 @@ Each app can have arguments.
 
 A palette is simply a way colours change, they can be based on time, or position, or value.
 
-|Name|Meaning|
-|----|-------|
-|rainbow|Rainbow based on position|
-|revbow|Rainbow based on position (reversed)|
-|cycling|Rainbow based on time|
-|wheel|Alternative cycling colours based on time|
-|fire|red to white based on value|
+|Name|Type|Meaning|
+|----|----|-------|
+|rainbow|Position|Rainbow|
+|revbow|Position|Rainbow (reversed)|
+|cycling|Time|Rainbow|
+|wheel|Time|Alternative colour bands like rainbow|
+|fire|Value|red to white based on value|
+|xmas|Position|Alternate red/green|
+|neenaw|Time|Red/blue flashing sequence|
 
 ### Simple apps
 

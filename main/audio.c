@@ -9,8 +9,8 @@ appaudio (app_t * a)
    {                            // Sanity check / defaults
       if (!a->colourset)
          setcolour (a, "revbow");
-      if (!a->data)
-         a->data = malloc (AUDIOBANDS * 2);
+      free (a->data);
+      a->data = malloc (AUDIOBANDS * 2);
    }
    uint8_t *c = a->data;
    uint8_t *w = c + AUDIOBANDS;
@@ -38,7 +38,7 @@ appaudio (app_t * a)
       p -= x;
       int vc = c[x] * (1.0 - p) + c[x + 1] * p;
       int vw = w[x] * (1.0 - p) + w[x + 1] * p;
-      setl (a->start + i, a, (int) 255 * i / a->len, vc);
+      setl (a->start + i, a, i, a->len, vc);
       if (rgbw && !a->w)
          setW (a->start + i, vw);
    }
