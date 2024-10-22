@@ -35,6 +35,13 @@ Available on [Amazon](https://www.amazon.co.uk/dp/B0C1W1XJS8)
 
 ## PCB
 
-Includes PCB design.
+Includes two PCB designs. Botth include a TDK PDM I2S microphone for souns reactive effects.
 
-![718wCWg9xWL _AC_SL1500_](https://github.com/user-attachments/assets/d64999ef-f879-43d2-91f1-a8fe22fd3e5d)
+In-line USB-C, flat base.
+
+![a](https://github.com/user-attachments/assets/df84609d-0053-4ea4-b007-da7056fa4cdb)
+
+Small, USB-A direct in to socket.
+
+![c](https://github.com/user-attachments/assets/da3ecf5f-784d-42d9-b00e-fe6b836a2f12)
+![b](https://github.com/user-attachments/assets/51ddd9c5-ed7f-4674-8a20-23ff647d96a7)
