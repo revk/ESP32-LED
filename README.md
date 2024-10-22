@@ -35,7 +35,7 @@ Available on [Amazon](https://www.amazon.co.uk/dp/B0C1W1XJS8)
 
 ## PCB
 
-Includes two PCB designs. Both include a TDK PDM I2S microphone for sound reactive effects.
+Includes two PCB designs. Both include a 3 pin WAGO, and a TDK PDM I2S microphone for sound reactive effects.
 
 In-line USB-C, flat base.
 
