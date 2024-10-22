@@ -35,7 +35,7 @@ Available on [Amazon](https://www.amazon.co.uk/dp/B0C1W1XJS8)
 
 ## PCB
 
-Includes two PCB designs. Botth include a TDK PDM I2S microphone for souns reactive effects.
+Includes two PCB designs. Both include a TDK PDM I2S microphone for sound reactive effects.
 
 In-line USB-C, flat base.
 
