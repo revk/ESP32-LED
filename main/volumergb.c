@@ -61,28 +61,28 @@ appvolumergb (app_t * a)
       float m = 0;
       for (int i = 0 * AUDIOBANDS / 3; i < 1 * AUDIOBANDS / 3; i++)
          m += audioband[i];
-      int v = m * 255 / (AUDIOBANDS / 3);
-      if (v > 255)
-         v = 255;
-      bargraph (a, pixelb, v, 255, a->fader);
+      int v = m * 65536 / (AUDIOBANDS / 3);
+      if (v > 65535)
+         v = 65535;
+      bargraph (a, pixelb, v, 65535, a->fader);
    }
    {                            // Mid
       float m = 0;
       for (int i = 1 * AUDIOBANDS / 3; i < 2 * AUDIOBANDS / 3; i++)
          m += audioband[i];
-      int v = m * 255 / (AUDIOBANDS / 3);
-      if (v > 255)
-         v = 255;
-      bargraph (a, pixelg, v, 255, a->fader);
+      int v = m * 65535 / (AUDIOBANDS / 3);
+      if (v > 65535)
+         v = 65535;
+      bargraph (a, pixelg, v, 65535, a->fader);
    }
    {                            // High
       float m = 0;
       for (int i = 2 * AUDIOBANDS / 3; i < 3 * AUDIOBANDS / 3; i++)
          m += audioband[i];
-      int v = m * 255 / (AUDIOBANDS / 3);
-      if (v > 255)
-         v = 255;
-      bargraph (a, pixelr, v, 255, a->fader);
+      int v = m * 65535 / (AUDIOBANDS / 3);
+      if (v > 65535)
+         v = 65535;
+      bargraph (a, pixelr, v, 65535, a->fader);
    }
    return NULL;
 }
