@@ -16,6 +16,6 @@ appbargraph (app_t * a)
       if (!a->colourset)
          setcolour (a, "cycling");
    }
-   bargraph (a, pixel, a->fader, 255);
+   bargraph (a, pixel, a->fader, 255, 255);
    return NULL;
 }

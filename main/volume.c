@@ -30,6 +30,6 @@ appvolume (app_t * a)
    int v = audiomag * 255 * 2;  // this is average, and we auto gain on peak, so this may make sense...
    if (v > 255)
       v = 255;
-   bargraph (a, pixel, v, a->fader);
+   bargraph (a, pixel, v, 255, a->fader);
    return NULL;
 }

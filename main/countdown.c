@@ -20,6 +20,6 @@ appcountdown (app_t * a)
    }
    if (a->limit <= a->cycle)
       return "";
-   bargraph (a, pixel, 255 * (a->limit - a->cycle) / a->limit, a->fader);
+   bargraph (a, pixel, a->limit - a->cycle, a->limit, a->fader);
    return NULL;
 }

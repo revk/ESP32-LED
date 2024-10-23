@@ -235,4 +235,4 @@ setl (uint16_t i, app_t * a, int p, int n, uint8_t l)
 uint8_t setcolour (app_t * a, const char *colour);
 
 typedef void pixel_t (app_t * a, int pos, int p, int n, uint8_t l);
-void bargraph (app_t * a, pixel_t *, uint8_t v, uint8_t fade);
+void bargraph (app_t * a, pixel_t *, int v, int total, uint8_t fade);
