@@ -1285,7 +1285,7 @@ i2s_task (void *arg)
       int count[AUDIOBANDS] = { 0 };
       float low = log (AUDIOMIN),
          high = log (AUDIOMAX),
-         step = (high - low) / AUDIOBANDS;;
+         step = (high - low) / AUDIOBANDS;
       for (int i = AUDIOMIN * AUDIOSAMPLES / AUDIORATE; i < AUDIOMAX * AUDIOSAMPLES / AUDIORATE && i < AUDIOSAMPLES / 2; i++)
       {
          float l = log (i * AUDIORATE / AUDIOSAMPLES);

@@ -33,8 +33,8 @@
 //#define       AUDIORATE       48000L  // Hz (full rate
 #define	AUDIOSAMPLES	1024
 #define	AUDIORATE	30720L  // Hz (TDK 25-300ks/s in theory but 25k seemed not to work)
-#define	AUDIOMIN	300L    // Hz
-#define	AUDIOMAX	3900L   // Hz
+#define	AUDIOMIN	120L     // Hz
+#define	AUDIOMAX	6000L   // Hz
 #define	AUDIOBANDS	24
 #define	AUDIOSTEP	((AUDIOMAX-AUDIOMIN)/AUDIOBANDS)        // Hz steps
 #define	AUDIOGAINMIN	0.01
