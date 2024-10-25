@@ -1292,7 +1292,7 @@ i2s_task (void *arg)
       float band[AUDIOBANDS] = { 0 };   // Should get main audio in first 16 or so slots
       int count[AUDIOBANDS] = { 0 };
       if (audiolog)
-      {
+      {                         // log frequency
          float low = log (AUDIOMIN),
             high = log (AUDIOMAX),
             step = (high - low) / AUDIOBANDS;
@@ -1307,7 +1307,7 @@ i2s_task (void *arg)
             }
          }
       } else
-      {
+      {                         // linear frequency
          float low = AUDIOMIN,
             high = AUDIOMAX,
             step = (high - low) / AUDIOBANDS;
@@ -1323,7 +1323,7 @@ i2s_task (void *arg)
          }
       }
       for (int i = 0; i < AUDIOBANDS; i++)
-         if (count[i])          // Should never be 0
+         if (count[i])
          {
             band[i] *= audiogain / count[i];
             if (band[i] > max)

@@ -57,7 +57,7 @@ appvolumergb (app_t * a)
          setcolour (a, "white");
    }
 
-   {                            // Low
+   {                            // Low 1/4
       float m = 0;
       for (int i = 0 * AUDIOBANDS / 4; i < 1 * AUDIOBANDS / 4; i++)
          m += audioband[i];
@@ -66,7 +66,7 @@ appvolumergb (app_t * a)
          v = 65535;
       bargraph (a, pixelb, v, 65535, a->fader);
    }
-   {                            // Mid
+   {                            // Mid 1/4
       float m = 0;
       for (int i = 1 * AUDIOBANDS / 4; i < 2 * AUDIOBANDS / 4; i++)
          m += audioband[i];
@@ -75,7 +75,7 @@ appvolumergb (app_t * a)
          v = 65535;
       bargraph (a, pixelg, v, 65535, a->fader);
    }
-   {                            // High
+   {                            // High 1/2
       float m = 0;
       for (int i = 2 * AUDIOBANDS / 4; i < 4 * AUDIOBANDS / 4; i++)
          m += audioband[i];
