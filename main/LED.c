@@ -1278,7 +1278,7 @@ i2s_task (void *arg)
          int r = 0;
          for (int i = 0; i < AUDIOSAMPLES; i++)
          {
-            fftre[i] = (float) audioraw[r++] / 32768;
+            fftre[i] = (float) audioraw[r++] / 32768 / AUDIOOVERSAMPLE;
             for (int q = 0; q < AUDIOOVERSAMPLE - 1; q++)
                fftre[i] += (float) audioraw[r++] / 32768;
             fftim[i] = 0;
