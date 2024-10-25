@@ -1290,17 +1290,35 @@ i2s_task (void *arg)
          max = 0;
       float band[AUDIOBANDS] = { 0 };   // Should get main audio in first 16 or so slots
       int count[AUDIOBANDS] = { 0 };
-      float low = log (AUDIOMIN),
-         high = log (AUDIOMAX),
-         step = (high - low) / AUDIOBANDS;
-      for (int i = AUDIOMIN * AUDIOSAMPLES / AUDIORATE; i < AUDIOMAX * AUDIOSAMPLES / AUDIORATE && i < AUDIOSAMPLES / 2; i++)
+      if (audiolog)
       {
-         float l = log (i * AUDIORATE / AUDIOSAMPLES);
-         int b = (l - low) / step;
-         if (b >= 0 && b < AUDIOBANDS)  // In case of rounding going too far!
+         float low = log (AUDIOMIN),
+            high = log (AUDIOMAX),
+            step = (high - low) / AUDIOBANDS;
+         for (int i = AUDIOMIN * AUDIOSAMPLES / AUDIORATE; i < AUDIOMAX * AUDIOSAMPLES / AUDIORATE && i < AUDIOSAMPLES / 2; i++)
          {
-            band[b] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
-            count[b]++;
+            float l = log (i * AUDIORATE / AUDIOSAMPLES);
+            int b = (l - low) / step;
+            if (b >= 0 && b < AUDIOBANDS)       // In case of rounding going too far!
+            {
+               band[b] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
+               count[b]++;
+            }
+         }
+      } else
+      {
+         float low = AUDIOMIN,
+            high = AUDIOMAX,
+            step = (high - low) / AUDIOBANDS;
+         for (int i = AUDIOMIN * AUDIOSAMPLES / AUDIORATE; i < AUDIOMAX * AUDIOSAMPLES / AUDIORATE && i < AUDIOSAMPLES / 2; i++)
+         {
+            float l = (float) i * AUDIORATE / AUDIOSAMPLES;
+            int b = (l - low) / step;
+            if (b >= 0 && b < AUDIOBANDS)       // In case of rounding going too far!
+            {
+               band[b] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
+               count[b]++;
+            }
          }
       }
       for (int i = 0; i < AUDIOBANDS; i++)
