@@ -31,9 +31,9 @@
 
 //#define       AUDIOSAMPLES    2048
 //#define       AUDIORATE       48000L  // Hz (full rate
-#define	AUDIOOVERSAMPLE	4	// From raw to FFT
+#define	AUDIOOVERSAMPLE	4       // From raw to FFT
 #define	AUDIOHZ		25L     // Hz step
-#define	AUDIOSAMPLES	512    // Power of 2 (this is multiplied by oversample)
+#define	AUDIOSAMPLES	512     // Power of 2 (this is multiplied by oversample)
 #define	AUDIORATE	(AUDIOSAMPLES*AUDIOHZ)  // Hz which is multiplied by oversample (TDK 25-300ks/s in theory but 25k seemed not to work)
 #define	AUDIOMIN	100L    // Hz
 #define	AUDIOMAX	4000L   // Hz

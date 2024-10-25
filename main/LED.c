@@ -1216,6 +1216,7 @@ i2c_task (void *arg)
 
 float audiomag = 0;
 float audioband[AUDIOBANDS] = { 0 };
+
 SemaphoreHandle_t audio_mutex = NULL;
 
 static float audiogain = 1.0;
