@@ -1216,9 +1216,10 @@ i2c_task (void *arg)
 
 float audiomag = 0;
 float audioband[AUDIOBANDS] = { 0 };
+SemaphoreHandle_t audio_mutex = NULL;
 
 static float audiogain = 1.0;
-static int16_t audioraw[AUDIOSAMPLES];
+static int16_t audioraw[AUDIOSAMPLES * AUDIOOVERSAMPLE];
 static float fftre[AUDIOSAMPLES];
 static float fftim[AUDIOSAMPLES];
 void
@@ -1243,7 +1244,7 @@ i2s_task (void *arg)
    i2s_chan_config_t chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG (I2S_NUM_0, I2S_ROLE_MASTER);
    err = i2s_new_channel (&chan_cfg, NULL, &i);
    i2s_pdm_rx_config_t cfg = {
-      .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (AUDIORATE),
+      .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (AUDIORATE * AUDIOOVERSAMPLE),
       .slot_cfg = I2S_PDM_RX_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),
       .gpio_cfg = {
                    .clk = audioclock.num,
@@ -1273,10 +1274,15 @@ i2s_task (void *arg)
       // ESP_LOGE (TAG, "Bytes %d/%d %6d %6d %6d %6d", n / sizeof (*audioraw), AUDIOSAMPLES, audioraw[0], audioraw[1], audioraw[2], audioraw[3]);
       if (n < sizeof (audioraw))
          continue;
-      for (int i = 0; i < AUDIOSAMPLES; i++)
       {
-         fftre[i] = (float) audioraw[i] / 32768;
-         fftim[i] = 0;
+         int r = 0;
+         for (int i = 0; i < AUDIOSAMPLES; i++)
+         {
+            fftre[i] = (float) audioraw[r++] / 32768;
+            for (int q = 0; q < AUDIOOVERSAMPLE - 1; q++)
+               fftre[i] += (float) audioraw[r++] / 32768;
+            fftim[i] = 0;
+         }
       }
       fft (fftre, fftim, AUDIOSAMPLES);
       float mag = 0,
@@ -1306,6 +1312,7 @@ i2s_task (void *arg)
          }
       mag /= AUDIOBANDS;
       //ESP_LOGE (TAG, "FFT mag=%7.2f gain=%5.2f: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", mag, audiogain, band[0], band[1], band[2], band[3], band[4], band[5], band[6], band[7], band[8]);
+      xSemaphoreTake (audio_mutex, portMAX_DELAY);
       audiomag = mag;
       for (int i = 0; i < AUDIOBANDS; i++)
       {
@@ -1314,6 +1321,7 @@ i2s_task (void *arg)
          else
             audioband[i] = (audioband[i] * audiodamp + band[i]) / (audiodamp + 1);
       }
+      xSemaphoreGive (audio_mutex);
       if (max)
       {
          if (max > 1)
@@ -1336,6 +1344,8 @@ app_main ()
 {
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
+   audio_mutex = xSemaphoreCreateBinary ();
+   xSemaphoreGive (audio_mutex);
    revk_boot (&app_callback);
 #ifdef	CONFIG_REVK_MATTER
    extern void matter_main (void);

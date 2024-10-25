@@ -27,7 +27,7 @@ appvolume (app_t * a)
       memset (a->data = malloc (a->len), 0, a->len);
    }
 
-   int v = audiomag * 65535 * 2;  // this is average, and we auto gain on peak, so this may make sense...
+   int v = audiomag * 65535 * 2;        // this is average, and we auto gain on peak, so this may make sense...
    if (v > 65535)
       v = 65535;
    bargraph (a, pixel, v, 65535, a->fader);

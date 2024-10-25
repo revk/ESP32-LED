@@ -14,6 +14,7 @@ appaudio (app_t * a)
    }
    uint8_t *c = a->data;
    uint8_t *w = c + AUDIOBANDS;
+   xSemaphoreTake (audio_mutex, portMAX_DELAY);
    for (int i = 0; i < AUDIOBANDS; i++)
    {
       int v = a->fader * audioband[i];
@@ -31,6 +32,7 @@ appaudio (app_t * a)
          c[i] = v;
       }
    }
+   xSemaphoreGive (audio_mutex);
    for (int i = 0; i < a->len; i++)
    {
       float p = (float) i * AUDIOBANDS / a->len;
