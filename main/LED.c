@@ -193,6 +193,7 @@ setcolour (app_t * a, const char *colour)
       }
    } else
       return 0;
+   a->palette = 0;
    a->r = r;
    a->g = g;
    a->b = b;

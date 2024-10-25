@@ -53,33 +53,33 @@ appvolumergb (app_t * a)
    {                            // Sanity check / defaults
       free (a->data);
       memset (a->data = malloc (a->len * 3), 0, a->len * 3);
-      if (!a->colourset)
+      if (!a->colourset || a->palette)
          setcolour (a, "white");
    }
 
    {                            // Low
       float m = 0;
-      for (int i = 0 * AUDIOBANDS / 3; i < 1 * AUDIOBANDS / 3; i++)
+      for (int i = 0 * AUDIOBANDS / 4; i < 1 * AUDIOBANDS / 4; i++)
          m += audioband[i];
-      int v = m * 65536 / (AUDIOBANDS / 3);
+      int v = m * 65536 / (AUDIOBANDS / 4);
       if (v > 65535)
          v = 65535;
       bargraph (a, pixelb, v, 65535, a->fader);
    }
    {                            // Mid
       float m = 0;
-      for (int i = 1 * AUDIOBANDS / 3; i < 2 * AUDIOBANDS / 3; i++)
+      for (int i = 1 * AUDIOBANDS / 4; i < 2 * AUDIOBANDS / 4; i++)
          m += audioband[i];
-      int v = m * 65535 / (AUDIOBANDS / 3);
+      int v = m * 65535 / (AUDIOBANDS / 4);
       if (v > 65535)
          v = 65535;
       bargraph (a, pixelg, v, 65535, a->fader);
    }
    {                            // High
       float m = 0;
-      for (int i = 2 * AUDIOBANDS / 3; i < 3 * AUDIOBANDS / 3; i++)
+      for (int i = 2 * AUDIOBANDS / 4; i < 4 * AUDIOBANDS / 4; i++)
          m += audioband[i];
-      int v = m * 65535 / (AUDIOBANDS / 3);
+      int v = m * 65535 / (AUDIOBANDS / 2);
       if (v > 65535)
          v = 65535;
       bargraph (a, pixelr, v, 65535, a->fader);

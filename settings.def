@@ -37,7 +37,7 @@ gpio	audio.clock	40				// I2S PDM Clock
 bit	audio.right	1				// I2S PDM use right channel
 u8	audio.damp	7	.live=1			// Damping from peak (higher is slower)
 u16	audio.min	100	.live=1			// Audio min freq (recommended 100Hz)
-u16	audio.max	3000	.live=1			// Audio max freq (recommended 3000Hz))Z
+u16	audio.max	4000	.live=1			// Audio max freq (recommended 4000Hz)
 bit	audio.log	1	.live=1			// Audio bands are log of frequency
 
 bit	ha.enable		.hide=1			// Enable Home Assistant
