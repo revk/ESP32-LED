@@ -100,7 +100,7 @@ appvolumergb (app_t * a)
                      b->len = AUDIOBANDS / 3;
                }
                while (jo_here (j) && jo_here (j) != JO_CLOSE)
-                  jo_next (j);
+                  jo_skip (j);
             }
          }
          jo_free (&j);
