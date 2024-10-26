@@ -38,7 +38,7 @@ appdrop (app_t * a)
       // Defaults
       c->height = 1;
       c->drag = 0.01;
-      c->gravity = 9.8;
+      c->gravity = 1; // 9.8;
       c->bounce = 0.3;
       c->balls = 3;
       if (a->preset && *config[a->preset - 1])
