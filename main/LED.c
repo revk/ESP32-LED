@@ -998,8 +998,6 @@ revk_web_extra (httpd_req_t * req, int page)
       add ("speed");
       add ("fadein");
       add ("fadeout");
-      revk_web_send (req,
-                     "<tr><td colspan=3>You can also set a JSON config, either for this named effect (above), or if not a named effect, multiple effects can be set. This can cover any parts of the strip (the above are defaults).</td></tr>");
       add ("config");
    }
 }
@@ -1056,8 +1054,6 @@ web_root (httpd_req_t * req)
    {
       revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);
    }
-   if (*config[0])
-      button ("init");
 #define a(x,d) button(#x);
 #include "apps.h"
    button ("stop");
