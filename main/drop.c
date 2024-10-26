@@ -86,7 +86,7 @@ appdrop (app_t * a)
          continue;
       if (esp_random () % cps)
          continue;
-      b->pos = esp_random ();
+      b->pos = a->cycle;
       b->position = c->height + c->size / 2;
       b->speed = -c->gravity * (esp_random () & 255) / 256 / cps;
       b->burried = 0;
