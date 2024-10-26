@@ -21,6 +21,7 @@ a (idle, Idle)                  //
    a (countdown, Countdown)     //
    a (random, Random)           //
    a (twinkle, Twinkle)         //
+   a (drop, Drop)		//
    // Sound
    s (audio, Audio experimental)//
    s (volume, Volume bar graph) //

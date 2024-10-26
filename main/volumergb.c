@@ -77,31 +77,27 @@ appvolumergb (app_t * a)
          jo_t j = jo_parse_str (config[a->preset - 1]);
          if (jo_here (j) == JO_OBJECT)
          {
-            while (jo_next (j) == JO_TAG)
+            void set (band_t * b, const char *tag)
             {
-               band_t *b = NULL;
-               if (!jo_strcmp (j, "r"))
-                  b = &c->r;
-               else if (!jo_strcmp (j, "g"))
-                  b = &c->g;
-               else if (!jo_strcmp (j, "b"))
-                  b = &c->b;
-               if (jo_next (j) != JO_ARRAY || !b)
-               {
-                  jo_skip (j);
-                  continue;
-               }
-               if (jo_next (j) == JO_NUMBER)
-               {
+               jo_type_t t = jo_find (j, tag);
+               if (!t)
+                  return;
+               b->len = AUDIOBANDS / 3;
+               if (t == JO_NUMBER)
                   b->start = jo_read_int (j);
-                  if (jo_next (j) == JO_NUMBER)
-                     b->len = jo_read_int (j);
-                  else
-                     b->len = AUDIOBANDS / 3;
+               else if (t == JO_ARRAY)
+               {
+                  if (jo_next (j) != JO_NUMBER)
+                     return;
+                  b->start = jo_read_int (j);
+                  if (jo_next (j) != JO_NUMBER)
+                     return;
+                  b->len = jo_read_int (j);
                }
-               while (jo_here (j) && jo_here (j) != JO_CLOSE)
-                  jo_skip (j);
             }
+            set (&c->r, "r");
+            set (&c->g, "g");
+            set (&c->b, "b");
          }
          jo_free (&j);
       } else
