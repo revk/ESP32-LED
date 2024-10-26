@@ -20,12 +20,6 @@ The command `add` can be used to add new apps on existing ones without replacing
 
 You can also use an app name as a command where the payload is the parameters. This replaces the list of apps with this one app.
 
-Whilst app parameters are normally an object with one or more parameters, if it is just a string, that sets `colour`, and if a number, that sets `limit`. E.g. `command/LED/whatever/spin red`.
-
-- The `stop` command forces all active apps to end gracefully,
-- The `init` command forces all active apps to the `init` settings.
-- The `power` works like tasmota, default `power1` but works on a preset, handing *on* (`on`, `1`,` blink`), *off* (`off`, `0`), *toggle* (`2`).
-
 You can also pass the parameters for a simple single app as a form `GET` list, including `app=` for the name of the application.
 
 ## Power and wiring
@@ -54,6 +48,16 @@ The main settings are :-
 |`init`|The default initial application setting (JSON)|
 
 Important, the settings and commands that take an LED position all start from LED `1` as the first LED. This is not as one would internally address an array, and is done deliberately to make `0` mean *unset* rather than the *first LED*.
+
+## Common commands
+
+There are commands as part of the library, but also basic commands for this LED application as well.
+
+|Command|Args|Meaning|
+|-------|----|-------|
+|`stop`||Stop all directly set LED effects (not the presets)|
+|`dark`||Stop all LED effects and turn off all presets|
+|`power`*N*|`on`/`off`/`toggle`|Turn a preset *N* on or off or toggle, not `blink` also turns on|
 
 ## "Apps"
 
