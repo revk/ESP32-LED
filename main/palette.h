@@ -1,7 +1,8 @@
 // Palette logic
 
 // Takes time/position/value and sets R/G/B/W, time and value are 0-255, position is p/n
-typedef void palette_t (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w);
+// Returns mix level to apply (usually v for non value based palettes)
+typedef uint8_t palette_t (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w);
 
 typedef struct
 {

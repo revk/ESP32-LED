@@ -1048,19 +1048,46 @@ web_root (httpd_req_t * req)
          }
       }
    }
-   revk_web_send (req, "<h1>LED controller: %s</h1><ul>", hostname);
+   revk_web_send (req, "<h1>LED controller: %s</h1>", hostname);
+   revk_web_send (req,
+                  "<form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#%s' size=20> #RGB,or name of palette.</p><p>",
+                  rgbw ? "RGBW" : "RGB");
+   void button (const char *tag)
+   {
+      revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);
+   }
+   if (*config[0])
+      button ("init");
+#define a(x,d) button(#x);
+#include "apps.h"
+   button ("stop");
+   revk_web_send (req, "</p></fieldset><fieldset><legend>Preset</legend><p>");
+   for (int p = 1; p <= CONFIG_REVK_WEB_EXTRA_PAGES; p++)
+   {
+      if (!*config[p - 1] && !*effect[p - 1] && !*name[p - 1])
+         continue;
+      char temp[10];
+      sprintf (temp, "%d", p);
+      revk_web_send (req, "<div style='display:inline-block;text-align:center;'>");
+      button (temp);
+      if (*name[p - 1])
+         revk_web_send (req, "<br>%s", name[p - 1]);
+      revk_web_send (req, "</div>");
+   }
+   revk_web_send (req, "</p></fieldset></form>");
    xSemaphoreTake (app_mutex, portMAX_DELAY);
+   uint8_t found = 0;
    for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
       for (unsigned int i = 0; i < MAXAPPS; i++)
       {
          app_t *a = &active[i];
          if (a->preset == preset && a->app && !a->stop)
          {
+            if (!found++)
+               revk_web_send (req, "<fieldset><legend>Active</legend><ul>");
             revk_web_send (req, "<li>");
             if (*a->name)
                revk_web_send (req, "<b>%s</b>", a->name);
-            if (a->preset)
-               revk_web_send (req, " preset=%d", a->preset);
             if (a->start && a->start != 1)
                revk_web_send (req, " start=%d", a->start);
             if (a->len && a->len != ledmax)
@@ -1086,36 +1113,19 @@ web_root (httpd_req_t * req)
                else
                   revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
             }
+            if (a->preset)
+            {
+               revk_web_send (req, " preset=%d", a->preset);
+               if (*config[a->preset - 1])
+                  revk_web_send (req, " config=%d", config[a->preset - 1]);
+            }
             revk_web_send (req, "</li>");
          }
       }
+   if (found)
+      revk_web_send (req, "</ul></fieldset>");
    xSemaphoreGive (app_mutex);
-   revk_web_send (req,
-                  "</ul><p><a href=/>Reload</a></p><form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#%s' size=20> #RGB,or name of palette.</p><p>",
-                  rgbw ? "RGBW" : "RGB");
-   void button (const char *tag)
-   {
-      revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);
-   }
-   if (*config[0])
-      button ("init");
-#define a(x,d) button(#x);
-#include "apps.h"
-   button ("stop");
-   revk_web_send (req, "</p></fieldset><fieldset><legend>Preset</legend><p>");
-   for (int p = 1; p <= CONFIG_REVK_WEB_EXTRA_PAGES; p++)
-   {
-      if (!*config[p - 1] && !*effect[p - 1] && !*name[p - 1])
-         continue;
-      char temp[10];
-      sprintf (temp, "%d", p);
-      revk_web_send (req, "<div style='display:inline-block;text-align:center;'>");
-      button (temp);
-      if (*name[p - 1])
-         revk_web_send (req, "<br>%s", name[p - 1]);
-      revk_web_send (req, "</div>");
-   }
-   revk_web_send (req, "</p></fieldset></form>");
+   revk_web_send (req, "<p><a href=/>Reload</a></p>");
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
 }
 

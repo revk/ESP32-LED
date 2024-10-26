@@ -38,7 +38,7 @@ appdrop (app_t * a)
       // Defaults
       c->height = 1;
       c->drag = 0.01;
-      c->gravity = 1; // 9.8;
+      c->gravity = 1;           // 9.8;
       c->bounce = 0.3;
       c->balls = 3;
       if (a->preset && *config[a->preset - 1])
@@ -73,7 +73,7 @@ appdrop (app_t * a)
          c->backwards = 1;
       }
       if (!c->size)
-         c->size = c->height * 5 / a->len;
+         c->size = c->height * 7 / a->len;
       c = a->data = realloc (c, sizeof (config_t) + c->balls * sizeof (ball_t));
       memset (c->ball, 0, c->balls * sizeof (ball_t));
    }

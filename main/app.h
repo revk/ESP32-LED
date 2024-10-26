@@ -228,11 +228,8 @@ static inline void
 setl (uint16_t i, app_t * a, int p, int n, uint8_t l)
 {                               // i is the LED, a is app, p/n is position, l is level
    if (a->palette)
-   {
-      palettes[a->palette - 1].run (a->cycle, p, n, l, &a->r, &a->g, &a->b, &a->w);
-      setRGBW (i, a->r, a->g, a->b, a->w);
-   } else
-      setRGBWl (i, a->r, a->g, a->b, a->w, l);
+      l = palettes[a->palette - 1].run (a->cycle, p, n, l, &a->r, &a->g, &a->b, &a->w);
+   setRGBWl (i, a->r, a->g, a->b, a->w, l);
 }
 
 uint8_t setcolour (app_t * a, const char *colour);
