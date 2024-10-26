@@ -8,6 +8,7 @@ typedef struct
    float speed;                 // m/s
    uint8_t pos;                 // used for colour pick, random
    uint8_t running:1;           // Ball running
+   uint8_t burried:1;           // Ball stopped bouncing
 } ball_t;
 
 typedef struct
@@ -86,9 +87,9 @@ appdrop (app_t * a)
       if (esp_random () % cps)
          continue;
       b->pos = esp_random ();
-      if ((b->position = c->height) < 0)
-         b->position = -c->height;
+      b->position = c->height + c->size / 2;
       b->speed = -c->gravity * (esp_random () & 255) / 256 / cps;
+      b->burried = 0;
       b->running = 1;
       break;
    }
@@ -116,13 +117,15 @@ appdrop (app_t * a)
       b->position += b->speed / cps;
       b->speed -= c->gravity / cps;
       b->speed *= (1 - c->drag / cps);
-      if (b->position <= 0)
-      {
+      if (b->position <= 0 && !b->burried)
+      {                         // Bounce
          b->position = (-b->position * c->bounce);
          b->speed = (-b->speed * c->bounce);
       }
-      if (b->position > c->height || (b->speed >= 0 && b->speed < c->gravity / cps && b->position < c->size))
-         b->running = 0;
+      if ((b->burried && b->position < -c->size / 2) || (b->position > c->height + c->size / 2))
+         b->running = 0;        // Fallen off the ends
+      else if ((b->speed >= 0 && b->speed <= c->gravity / cps && b->position < c->size / 2))
+         b->burried = 1;        // peak of bounce, and it is low, so stop bouncing and let fall off end
    }
    return NULL;
 }

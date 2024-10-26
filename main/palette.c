@@ -81,7 +81,7 @@ uint8_t
 palette_fire (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
 {                               // Value based fire black/red/yellow/white
    dofire (v, r, g, b, w);
-   return 255; // Does not blend, which is a shame
+   return 255;                  // Does not blend, which is a shame
 }
 
 uint8_t

@@ -1117,7 +1117,7 @@ web_root (httpd_req_t * req)
             {
                revk_web_send (req, " preset=%d", a->preset);
                if (*config[a->preset - 1])
-                  revk_web_send (req, " config=%d", config[a->preset - 1]);
+                  revk_web_send (req, " config=%s", config[a->preset - 1]);
             }
             revk_web_send (req, "</li>");
          }
