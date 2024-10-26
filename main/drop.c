@@ -74,7 +74,7 @@ appdrop (app_t * a)
          c->backwards = 1;
       }
       if (!c->size)
-         c->size = c->height * 7 / a->len;
+         c->size = c->height * 9 / a->len;
       c = a->data = realloc (c, sizeof (config_t) + c->balls * sizeof (ball_t));
       memset (c->ball, 0, c->balls * sizeof (ball_t));
    }
