@@ -628,14 +628,15 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       return NULL;
    }
-   if (suffix && strcmp (suffix, "add"))
-      return led_add (suffix, 0, j);    // Process command to set apps
-   if (suffix && strcmp (suffix, "dark"))
+   if (suffix && !strcmp (suffix, "dark"))
    {
       haon = 0;                 // All off
       hachanged = 1;
+      b.hacheck = 1;
       return led_stop ();
    }
+   if (suffix && strcmp (suffix, "add"))
+      return led_add (suffix, 0, j);    // Process command to set apps
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    int index = apptidy (suffix ? 0 : 1);
    if (!suffix)
