@@ -113,7 +113,7 @@ appdrop (app_t * a)
          n = 1;
       for (int i = 0; i < n; i++)
       {
-         uint8_t l = cos8[128 * i / n];
+         uint8_t l = (int) a->fader * cos8[128 * i / n] / 255;
          if (p - i >= 0)
             setl (a->start + p - i, a, b->pos, 255, l);
          if (i && p + i < a->len)
