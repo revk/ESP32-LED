@@ -229,8 +229,10 @@ addapp (int index, int preset, const char *name, jo_t j)
       {
          uint8_t setcolourj (jo_t j)
          {
-            char temp[20];
+            char temp[30];
             jo_strncpy (j, temp, sizeof (temp));
+            if (!*temp)
+               return 0;
             return setcolour (a, temp);
          }
          if (!a->app || a->name != applist[i].name || a->stop)
@@ -284,7 +286,7 @@ addapp (int index, int preset, const char *name, jo_t j)
 #undef  s16r
 #undef  u32
 #undef  u32d
-                  if (!jo_strcmp (j, "colour") || !jo_strcmp (j, "#"))
+                  if (!jo_strcmp (j, "colour") || !jo_strcmp (j, "#") || !jo_strcmp (j, "palette"))
                {
                   if (jo_next (j) == JO_STRING)
                      setcolourj (j);
@@ -1049,8 +1051,11 @@ web_root (httpd_req_t * req)
    }
    revk_web_send (req, "<h1>LED controller: %s</h1>", hostname);
    revk_web_send (req,
-                  "<form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#%s' size=20> #RGB,or name of palette.</p><p>",
+                  "<form method=get><fieldset><legend>Effect</legend><p>Colour:<input name=colour placeholder='#%s or colour name' size=30> or <select name=palette><option value=''>Palette</option>",
                   rgbw ? "RGBW" : "RGB");
+   for (int p = 0; palettes[p].name; p++)
+      revk_web_send (req, "<option value='%s'>%s</option>", palettes[p].name, palettes[p].description);
+   revk_web_send (req, "</select></p><p>");
    void button (const char *tag, const char *title)
    {
       revk_web_send (req,

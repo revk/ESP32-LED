@@ -7,9 +7,10 @@ typedef uint8_t palette_t (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint
 typedef struct
 {
    const char *name;
+   const char *description;
    palette_t *run;
 } palettes_t;
 extern palettes_t palettes[];
 
-#define p(x) extern palette_t palette_##x;
+#define p(x,d) extern palette_t palette_##x;
 #include "palette.m"

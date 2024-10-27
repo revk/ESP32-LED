@@ -4,7 +4,7 @@
 #include "app.h"
 
 palettes_t palettes[] = {
-#define	p(x)	{#x,&palette_##x},
+#define	p(x,d)	{#x,#d,&palette_##x},
 #include "palette.m"
    {0}
 };
