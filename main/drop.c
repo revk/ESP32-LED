@@ -62,6 +62,12 @@ appdrop (app_t * a)
          }
          jo_free (&j);
       }
+      if (c->bounce < 0)
+         c->bounce = 0;
+      if (c->drag < 0)
+         c->drag = 0;
+      if (c->drag > 1)
+         c->drag = 1;
       if (c->balls < 1)
          c->balls = 1;
       if (c->balls > 10)
@@ -73,7 +79,7 @@ appdrop (app_t * a)
          c->height = 0 - c->height;
          c->backwards = 1;
       }
-      if (!c->size)
+      if (c->size <= 0)
          c->size = c->height * 9 / a->len;
       c = a->data = realloc (c, sizeof (config_t) + c->balls * sizeof (ball_t));
       memset (c->ball, 0, c->balls * sizeof (ball_t));
@@ -117,7 +123,7 @@ appdrop (app_t * a)
       b->position += b->speed / cps;
       b->speed -= c->gravity / cps;
       b->speed *= (1 - c->drag / cps);
-      if (b->position <= 0 && !b->burried)
+      if (b->position <= 0 && !b->burried && c->bounce > 0)
       {                         // Bounce
          b->position = (-b->position * c->bounce);
          b->speed = (-b->speed * c->bounce);
