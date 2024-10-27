@@ -1,6 +1,7 @@
 // Simple drop color
 
 #include "app.h"
+#include <math.h>
 
 typedef struct
 {
@@ -68,6 +69,7 @@ appdrop (app_t * a)
          c->drag = 0;
       if (c->drag > 1)
          c->drag = 1;
+      c->drag = pow (1.0 - c->drag, 1.0 / cps);
       if (c->balls < 1)
          c->balls = 1;
       if (c->balls > 10)
@@ -122,7 +124,7 @@ appdrop (app_t * a)
       // Move
       b->position += b->speed / cps;
       b->speed -= c->gravity / cps;
-      b->speed *= (1 - c->drag / cps);
+      b->speed *= c->drag;
       if (b->position <= 0 && !b->burried && c->bounce > 0)
       {                         // Bounce
          b->position = (-b->position * c->bounce);

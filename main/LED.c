@@ -1451,8 +1451,8 @@ bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
       uint32_t n = (uint32_t) 256 * N * v / total;
       uint8_t f = n & 255;
       n /= 256;
-      int p = t;
-      unsigned int i = 0;
+      int p = t + 1;
+      unsigned int i = 1;
       while (i < n)
          pixel (a, p++, i++, N, fade);
       if (f)
