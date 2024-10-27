@@ -22,15 +22,16 @@ static const char TAG[] = "LED";
 struct applist_s
 {
    const char *name;
+   const char *description;
    app_f *app;
    uint8_t ring:1;              // Is a ring based app
    uint8_t text:1;              // Is a text based app
    uint8_t sound:1;             // Is a sound based app
 } applist[] = {
-#define a(a,d)	{#a,&app##a,0,0,0},
-#define s(a,d)	{#a,&app##a,0,0,1},
-#define r(a,d)	{#a,&app##a,1,0,0},
-#define t(a,d)	{#a,&app##a,0,1,0},
+#define a(a,d)	{#a,#d,&app##a,0,0,0},
+#define s(a,d)	{#a,#d,&app##a,0,0,1},
+#define r(a,d)	{#a,#d,&app##a,1,0,0},
+#define t(a,d)	{#a,#d,&app##a,0,1,0},
 #include "apps.h"
 };
 
@@ -1050,13 +1051,28 @@ web_root (httpd_req_t * req)
    revk_web_send (req,
                   "<form method=get><fieldset><legend>Effect</legend><p>Colour:<input name='colour' placeholder='#%s' size=20> #RGB,or name of palette.</p><p>",
                   rgbw ? "RGBW" : "RGB");
-   void button (const char *tag)
+   void button (const char *tag, const char *title)
    {
-      revk_web_send (req, "<input type=submit name='app' value='%s'/>", tag);
+      revk_web_send (req, "<input type=submit name='app' value='%s' title='%s'/>", tag, title);
    }
-#define a(x,d) button(#x);
-#include "apps.h"
-   button ("stop");
+   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+      if (!applist[i].ring && !applist[i].text && !applist[i].sound)
+         button (applist[i].name, applist[i].description);
+   revk_web_send (req, "<br>");
+   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+      if (applist[i].ring)
+         button (applist[i].name, applist[i].description);
+   revk_web_send (req, "<br>");
+   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+      if (applist[i].text)
+         button (applist[i].name, applist[i].description);
+   if (audiodata.set && audioclock.set)
+      revk_web_send (req, "<br>");
+   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+      if (applist[i].sound)
+         button (applist[i].name, applist[i].description);
+   revk_web_send (req, "<br>");
+   button ("stop", "Stop");
    revk_web_send (req, "</p></fieldset><fieldset><legend>Preset</legend><p>");
    for (int p = 1; p <= CONFIG_REVK_WEB_EXTRA_PAGES; p++)
    {
@@ -1065,7 +1081,7 @@ web_root (httpd_req_t * req)
       char temp[10];
       sprintf (temp, "%d", p);
       revk_web_send (req, "<div style='display:inline-block;text-align:center;'>");
-      button (temp);
+      button (temp, temp);
       if (*name[p - 1])
          revk_web_send (req, "<br>%s", name[p - 1]);
       revk_web_send (req, "</div>");
