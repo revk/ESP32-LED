@@ -14,28 +14,28 @@
 #endif
 
 //
-a (idle, Idle)                  //
+a (idle, Fixed colour)          //
    a (pulse, Pulse)             //
    a (bargraph, Bargraph)       //
    a (cylon, Cylon)             //
    a (countdown, Countdown)     //
    a (random, Random)           //
    a (twinkle, Twinkle)         //
-   a (drop, Drop)               //
+   a (drop, Drop / drip)        //
    // Sound
-   s (audio, Audio experimental)//
-   s (volume, Volume bar graph) //
-   s (volumergb, Volume RGB bar graph)  //
+   s (audio, Audio)             //
+   s (volume, Volume)           //
+   s (volumergb, Volume RGB)    //
    // Ring/loop
    r (clock, Clock face)        //
-   r (stargate, Stargate dialling)
+   r (stargate, Stargate)       //
    //
    r (endtest, End Test)        //
    r (spin, Spin)               //
    r (lava, Lava Lamp)          //
    // Text
    t (text, Text)               //
-   t (kern, Text (kerned))      //
+   t (kern, Text kerned)        //
    t (time, Text time)          //
 #undef a
 #undef r

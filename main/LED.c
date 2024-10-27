@@ -1053,7 +1053,9 @@ web_root (httpd_req_t * req)
                   rgbw ? "RGBW" : "RGB");
    void button (const char *tag, const char *title)
    {
-      revk_web_send (req, "<input type=submit name='app' value='%s' title='%s'/>", tag, title);
+      revk_web_send (req,
+                     "<label for='%s'><div style='display:inline-block;text-align:center;'><input style='min-width:7rem;'type=submit name='app' value='%s' id='%s'><br>%s</div></label>",
+                     tag, tag, tag, title);
    }
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (!applist[i].ring && !applist[i].text && !applist[i].sound)
@@ -1080,11 +1082,7 @@ web_root (httpd_req_t * req)
          continue;
       char temp[10];
       sprintf (temp, "%d", p);
-      revk_web_send (req, "<div style='display:inline-block;text-align:center;'>");
-      button (temp, temp);
-      if (*name[p - 1])
-         revk_web_send (req, "<br>%s", name[p - 1]);
-      revk_web_send (req, "</div>");
+      button (temp, name[p - 1]);
    }
    revk_web_send (req, "</p></fieldset></form>");
    xSemaphoreTake (app_mutex, portMAX_DELAY);
