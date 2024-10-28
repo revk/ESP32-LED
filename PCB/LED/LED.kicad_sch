@@ -2340,6 +2340,229 @@
 				)
 			)
 		)
+		(symbol "RevK:ICS43434_MEMS_Mic"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "ICS43434"
+				(at -11.938 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Value" "ICS43434_MEMS_Mic"
+				(at 1.016 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Footprint" "RevK:ICS43434_MEMS_Mic"
+				(at -0.254 19.05 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2312010321_TDK-InvenSense-ICS-43434_C5656610.pdf"
+				(at -2.032 15.748 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "I2S Microphone"
+				(at -0.254 21.59 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "LCSC Part #" "C5656610"
+				(at 6.35 -8.128 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "microphone MEMS I2S TDK"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Knowles*SPH0645LM4H*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "ICS43434_MEMS_Mic_1_1"
+				(rectangle
+					(start -7.62 6.35)
+					(end 8.89 -6.35)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(circle
+					(center -3.81 0)
+					(radius 1.27)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 1.27) (xy -5.08 -1.27)
+					)
+					(stroke
+						(width 0.381)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin input line
+					(at 11.43 -1.27 180)
+					(length 2.54)
+					(name "WS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 11.43 3.81 180)
+					(length 2.54)
+					(name "LR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -8.89 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 11.43 1.27 180)
+					(length 2.54)
+					(name "SCK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 8.89 270)
+					(length 2.54)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 11.43 -3.81 180)
+					(length 2.54)
+					(name "SD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "RevK:MD89420-RegBlock"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -2715,211 +2938,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-			)
-		)
-		(symbol "RevK:T3902_MEMS_Mic"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "T3902"
-				(at -7.62 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Value" "T3902_MEMS_Mic"
-				(at 1.27 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Footprint" "RevK:T3902_MEMS_Mic"
-				(at -0.254 19.05 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2401291125_TDK-InvenSense-MMICT390200012_C3171752.pdf"
-				(at -2.032 15.748 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "I2S Microphone"
-				(at -0.254 21.59 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "LCSC Part #" "C3171752"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "microphone MEMS I2S TDK"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Knowles*SPH0645LM4H*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "T3902_MEMS_Mic_1_1"
-				(rectangle
-					(start -7.62 5.08)
-					(end 8.89 -5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(circle
-					(center -3.81 0)
-					(radius 1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -5.08 1.27) (xy -5.08 -1.27)
-					)
-					(stroke
-						(width 0.381)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin output line
-					(at 11.43 -2.54 180)
-					(length 2.54)
-					(name "DATA"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 11.43 2.54 180)
-					(length 2.54)
-					(name "SELECT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -7.62 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 11.43 0 180)
-					(length 2.54)
-					(name "CLK"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 7.62 270)
-					(length 2.54)
-					(name "VDD"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
 					)
 				)
 			)
@@ -4555,10 +4573,6 @@
 		(uuid "af4999b4-fd72-4fe4-8df7-d8ee06d48dc1")
 	)
 	(no_connect
-		(at 66.04 76.2)
-		(uuid "b1f73206-631a-4f91-8b99-55e44a904e72")
-	)
-	(no_connect
 		(at 66.04 66.04)
 		(uuid "c053934f-d73a-4026-8bbb-3f21a0847732")
 	)
@@ -4567,7 +4581,7 @@
 		(uuid "c0a4d1a9-5dfd-4144-8e85-4c2394147f49")
 	)
 	(no_connect
-		(at 66.04 86.36)
+		(at 66.04 76.2)
 		(uuid "cdcf62c0-808c-4c37-82aa-4a52cfa03103")
 	)
 	(no_connect
@@ -4579,7 +4593,7 @@
 		(uuid "d34eb50a-223a-44aa-88cc-2616cdedfadc")
 	)
 	(no_connect
-		(at 66.04 88.9)
+		(at 66.04 78.74)
 		(uuid "d6d50b9d-b41b-4a93-8f73-91e673ce2685")
 	)
 	(no_connect
@@ -4800,9 +4814,9 @@
 			)
 		)
 	)
-	(global_label "DATA"
+	(global_label "SD"
 		(shape output)
-		(at 229.87 95.885 0)
+		(at 228.6 96.52 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4812,7 +4826,7 @@
 		)
 		(uuid "3c3776f1-ec19-4731-83c6-c5509ed1ffb5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 236.6158 95.885 0)
+			(at 233.4105 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4822,9 +4836,9 @@
 			)
 		)
 	)
-	(global_label "CLK"
+	(global_label "SCK"
 		(shape output)
-		(at 66.04 83.82 0)
+		(at 66.04 88.9 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4834,7 +4848,7 @@
 		)
 		(uuid "48872986-313a-4f02-976d-4534b053f382")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 71.9391 83.82 0)
+			(at 72.1205 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5064,9 +5078,9 @@
 			)
 		)
 	)
-	(global_label "DATA"
+	(global_label "SD"
 		(shape input)
-		(at 66.04 78.74 0)
+		(at 66.04 83.82 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5076,7 +5090,51 @@
 		)
 		(uuid "9ad4dbb7-a527-4ac3-b5a1-c115355da77e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 72.7858 78.74 0)
+			(at 70.8505 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "WS"
+		(shape output)
+		(at 66.04 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9c925212-fed7-4c54-9d2b-aac059f3affd")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 71.0319 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "WS"
+		(shape input)
+		(at 228.6 93.98 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a73348d5-a1b0-452f-8861-ae875c2f46c6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 233.5919 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5130,9 +5188,9 @@
 			)
 		)
 	)
-	(global_label "CLK"
+	(global_label "SCK"
 		(shape input)
-		(at 229.87 93.345 0)
+		(at 228.6 91.44 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5142,7 +5200,7 @@
 		)
 		(uuid "c58cb7df-fae5-441f-a376-aa2fd0f6baf8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 235.7691 93.345 0)
+			(at 234.6805 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6229,6 +6287,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 228.6 88.9 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2cb344f3-2011-4706-a833-f125da923e6c")
+		(property "Reference" "#PWR07"
+			(at 234.95 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 233.553 88.9 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 228.6 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 228.6 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 228.6 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dcd7ba4d-18d6-4cf7-b7dd-f11ec830f24c")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#PWR07")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 32.385 137.16 0)
 		(unit 1)
@@ -6289,96 +6412,6 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "#PWR023")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:T3902_MEMS_Mic")
-		(at 218.44 93.345 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "30102078-4084-48e4-bb0d-149b02e39fcf")
-		(property "Reference" "T1"
-			(at 210.82 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Value" "T3902_MEMS_Mic"
-			(at 219.71 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:T3902_MEMS_Mic"
-			(at 218.186 74.295 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2401291125_TDK-InvenSense-MMICT390200012_C3171752.pdf"
-			(at 216.408 77.597 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "I2S Microphone"
-			(at 218.186 71.755 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C3171752"
-			(at 218.44 93.345 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "45962e9d-e5d0-476c-84ea-95b737c75011")
-		)
-		(pin "4"
-			(uuid "117a277e-64f4-4981-bec7-80ccca7a6846")
-		)
-		(pin "3"
-			(uuid "5f1b193b-7f87-42a3-bda3-c8a8f3a5e220")
-		)
-		(pin "5"
-			(uuid "dd654d08-9db4-442d-bf9d-1a31b89ca3f0")
-		)
-		(pin "2"
-			(uuid "44bf88de-4c3d-44ea-8d52-fb346b6527b9")
-		)
-		(instances
-			(project "LED"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "T1")
 					(unit 1)
 				)
 			)
@@ -7154,6 +7187,99 @@
 		)
 	)
 	(symbol
+		(lib_id "RevK:ICS43434_MEMS_Mic")
+		(at 217.17 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "50dd6f2e-b990-4398-86e4-846b2329390d")
+		(property "Reference" "ICS1"
+			(at 205.232 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "ICS43434_MEMS_Mic"
+			(at 218.186 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:ICS43434_MEMS_Mic"
+			(at 216.916 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2312010321_TDK-InvenSense-ICS-43434_C5656610.pdf"
+			(at 215.138 76.962 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "I2S Microphone"
+			(at 216.916 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C5656610"
+			(at 223.52 100.838 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7fde3fb3-2ec7-4c7e-b7b0-42a9ec71a137")
+		)
+		(pin "5"
+			(uuid "8b8fa384-7e04-4747-ab1a-49bde09e81ee")
+		)
+		(pin "6"
+			(uuid "df00fa48-993d-4525-b6ea-fa2cb25b2734")
+		)
+		(pin "3"
+			(uuid "30cbce02-ee35-4450-8342-22123c612e2e")
+		)
+		(pin "2"
+			(uuid "88599333-730c-4778-ad99-8b4245085317")
+		)
+		(pin "4"
+			(uuid "4887b97f-9059-4701-80e8-2cc798ca6d8e")
+		)
+		(instances
+			(project ""
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "ICS1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Generic:Conn_01x02")
 		(at 20.32 104.14 180)
 		(unit 1)
@@ -7645,7 +7771,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 218.44 85.725 0)
+		(at 217.17 83.82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7654,7 +7780,7 @@
 		(fields_autoplaced yes)
 		(uuid "829a4c43-439f-4f49-9f9d-8b6adbf9d41a")
 		(property "Reference" "#PWR02"
-			(at 218.44 89.535 0)
+			(at 217.17 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7663,7 +7789,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 218.44 81.5919 0)
+			(at 217.17 79.6869 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7671,7 +7797,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 85.725 0)
+			(at 217.17 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7680,7 +7806,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 218.44 85.725 0)
+			(at 217.17 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7689,7 +7815,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 218.44 85.725 0)
+			(at 217.17 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8483,7 +8609,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 218.44 100.965 0)
+		(at 217.17 101.6 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8491,7 +8617,7 @@
 		(dnp no)
 		(uuid "ba9aa225-1250-4141-a5a7-2fc3bfdbc345")
 		(property "Reference" "#PWR039"
-			(at 218.44 107.315 0)
+			(at 217.17 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8500,7 +8626,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 218.567 105.3592 0)
+			(at 217.297 105.9942 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8508,7 +8634,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 100.965 0)
+			(at 217.17 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8517,7 +8643,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 218.44 100.965 0)
+			(at 217.17 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8526,7 +8652,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 218.44 100.965 0)
+			(at 217.17 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8865,73 +8991,6 @@
 			(project "Generic"
 				(path "/babeabf2-f3b0-4ed5-8d9e-0215947e6cf3"
 					(reference "U4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 229.87 90.805 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d3af9891-d487-4556-9aad-3b27d169dfea")
-		(property "Reference" "#PWR07"
-			(at 226.06 90.805 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 233.045 90.805 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 229.87 90.805 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 229.87 90.805 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 229.87 90.805 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6866b7c6-ed1d-4050-ba18-6708eb22535f")
-		)
-		(instances
-			(project "LED"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR07")
 					(unit 1)
 				)
 			)
