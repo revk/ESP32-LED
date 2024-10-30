@@ -49,6 +49,17 @@ dofire (uint8_t n, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
       *w = 0;
 }
 
+static void
+doredpurple (uint8_t n, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+{
+   *r = 255 - cos8[n] / 4;
+   *g = 0;
+   *b = cos8[n];
+   *w = 0;
+}
+
+// --------------------------------------------------------------------------------
+
 uint8_t
 palette_rainbow (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
 {                               // Position based rainbow (starts in the red)
@@ -78,6 +89,13 @@ palette_cycling (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, u
 }
 
 uint8_t
+palette_redpurple (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+{                               // Position based redpurple
+   doredpurple (255 * p / n, r, g, b, w);
+   return v;
+}
+
+uint8_t
 palette_fire (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
 {                               // Value based fire black/red/yellow/white
    dofire (v, r, g, b, w);
@@ -98,8 +116,6 @@ uint8_t
 palette_neenaw (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
 {                               // Time based red/blue
    if (cps > 10)
-      t /= 2;
-   if (cps > 20)
       t /= 2;
    int q = t % 16;
    if (q == 1 || q == 3 || q == 5)

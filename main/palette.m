@@ -10,6 +10,7 @@ p(cycling,Cylcing rainbow)
 p(wheel,Cycling colour wheel)
 p(fire,Fire effect)
 p(xmas,Red/Green Xmas)
-p(neenaw,Red/Blue flashin)
+p(neenaw,Red/Blue flashing)
+p(redpurple,Red/Purple cycling)
 
 #undef p

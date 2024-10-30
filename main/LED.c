@@ -641,6 +641,9 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    if (suffix && strcmp (suffix, "add"))
       return led_add (suffix, 0, j);    // Process command to set apps
    xSemaphoreTake (app_mutex, portMAX_DELAY);
+   haon = 0;                    // All off
+   hachanged = 1;
+   b.hacheck = 1;
    int index = apptidy (suffix ? 0 : 1);
    if (!suffix)
       index = 0;                // Overwrite existing
