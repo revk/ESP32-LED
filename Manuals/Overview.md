@@ -107,8 +107,6 @@ A palette is simply a way colours change, they can be based on time, or position
 |`endtest`|White light each end, and at `top` if set, and R/G/B next to ends, allow testing `start` and `len`|
 |`drop`|Dropping balls|
 
-Note `drop` allows config including `gravity` (m/s²), `height` (m), `size` (m), `drag` (0-1), `bounce` (0-1), and `balls`.
-
 ### Audio apps
 
 |App|Meaning|

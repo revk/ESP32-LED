@@ -20,7 +20,8 @@ typedef struct
    float bounce;                // 0-1
    float size;                  // m
    uint8_t balls;
-   uint8_t backwards:1;
+   uint8_t up:1;
+   uint8_t random:1;
    ball_t ball[0];
 } config_t;
 
@@ -61,6 +62,10 @@ appdrop (app_t * a)
             if (jo_find (j, "balls") == JO_NUMBER)
                c->balls = jo_read_int (j);
          }
+         if (jo_find (j, "up") == JO_TRUE)
+            c->up = 1;
+         if (jo_find (j, "random") == JO_TRUE)
+            c->random = 1;
          jo_free (&j);
       }
       if (c->bounce < 0)
@@ -77,9 +82,9 @@ appdrop (app_t * a)
       if (c->height == 0)
          c->height = 1;
       if (c->height < 0)
-      {
+      {                         // bodgy way to set up
          c->height = 0 - c->height;
-         c->backwards = 1;
+         c->up = 1;
       }
       if (c->size <= 0)
          c->size = c->height * 9 / a->len;
@@ -94,7 +99,7 @@ appdrop (app_t * a)
          continue;
       if (esp_random () % cps)
          continue;
-      b->pos = a->cycle;
+      b->pos = (c->random ? esp_random () : a->cycle);
       b->position = c->height + c->size / 2;
       b->speed = -c->gravity * (esp_random () & 255) / 256 / cps;
       b->burried = 0;
@@ -109,7 +114,7 @@ appdrop (app_t * a)
          continue;
       int p = a->len * b->position / c->height;
       int n = a->len * c->size / c->height / 2;
-      if (c->backwards)
+      if (c->up)
          p = a->len - 1 - p;
       if (!n)
          n = 1;
