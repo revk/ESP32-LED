@@ -116,9 +116,9 @@ appdrop (app_t * a)
       for (int i = 0; i < n; i++)
       {
          uint8_t l = (int) a->fader * cos8[128 * i / n] / 255;
-         if (p - i >= 0)
+         if (p - i >= 0 && p - i < a->len)
             setl (a->start + p - i, a, b->pos, 255, l);
-         if (i && p + i < a->len)
+         if (p + i >= 0 && p + i < a->len && i)
             setl (a->start + p + i, a, b->pos, 255, l);
       }
       // Move
