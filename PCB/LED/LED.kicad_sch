@@ -2344,7 +2344,7 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "ICS43434"
+			(property "Reference" "U"
 				(at -11.938 7.62 0)
 				(effects
 					(font
@@ -4465,6 +4465,12 @@
 		(uuid "2452c2bd-1ff8-4f98-9fa7-e546a631adcd")
 	)
 	(junction
+		(at 217.17 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "74c8ce41-0038-460f-8e0d-d0e1e705fce1")
+	)
+	(junction
 		(at 165.1 97.79)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4481,6 +4487,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "eaf7bad2-f505-4235-ac62-4996b9281847")
+	)
+	(junction
+		(at 217.17 83.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ec0cafb4-2cdf-4341-a412-1d626faa1dfe")
 	)
 	(junction
 		(at 80.01 104.775)
@@ -4638,6 +4650,16 @@
 	)
 	(wire
 		(pts
+			(xy 217.17 101.6) (xy 239.395 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4335af45-1894-4bf2-8258-95b5fd4bc8da")
+	)
+	(wire
+		(pts
 			(xy 161.29 97.79) (xy 165.1 97.79)
 		)
 		(stroke
@@ -4645,6 +4667,16 @@
 			(type default)
 		)
 		(uuid "7331b4f5-537b-4797-b38c-6afa10e0716d")
+	)
+	(wire
+		(pts
+			(xy 239.395 101.6) (xy 239.395 95.885)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8ba9025b-aacb-4ac0-8d43-6534e2d5e0cc")
 	)
 	(wire
 		(pts
@@ -4675,6 +4707,16 @@
 			(type default)
 		)
 		(uuid "969cd739-7866-4507-879c-8a68be5e08b1")
+	)
+	(wire
+		(pts
+			(xy 217.17 83.82) (xy 239.395 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a31e0fd2-c818-4c00-9caf-86437bd7df19")
 	)
 	(wire
 		(pts
@@ -4715,6 +4757,16 @@
 			(type default)
 		)
 		(uuid "c82a2eee-3656-406a-a5cb-6b727ac05b34")
+	)
+	(wire
+		(pts
+			(xy 239.395 83.82) (xy 239.395 88.265)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca2ecc79-064e-47df-9bd2-9db69dda2c3c")
 	)
 	(wire
 		(pts
@@ -7187,99 +7239,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:ICS43434_MEMS_Mic")
-		(at 217.17 92.71 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "50dd6f2e-b990-4398-86e4-846b2329390d")
-		(property "Reference" "ICS1"
-			(at 205.232 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Value" "ICS43434_MEMS_Mic"
-			(at 218.186 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:ICS43434_MEMS_Mic"
-			(at 216.916 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2312010321_TDK-InvenSense-ICS-43434_C5656610.pdf"
-			(at 215.138 76.962 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "I2S Microphone"
-			(at 216.916 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5656610"
-			(at 223.52 100.838 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7fde3fb3-2ec7-4c7e-b7b0-42a9ec71a137")
-		)
-		(pin "5"
-			(uuid "8b8fa384-7e04-4747-ab1a-49bde09e81ee")
-		)
-		(pin "6"
-			(uuid "df00fa48-993d-4525-b6ea-fa2cb25b2734")
-		)
-		(pin "3"
-			(uuid "30cbce02-ee35-4450-8342-22123c612e2e")
-		)
-		(pin "2"
-			(uuid "88599333-730c-4778-ad99-8b4245085317")
-		)
-		(pin "4"
-			(uuid "4887b97f-9059-4701-80e8-2cc798ca6d8e")
-		)
-		(instances
-			(project ""
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "ICS1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector_Generic:Conn_01x02")
 		(at 20.32 104.14 180)
 		(unit 1)
@@ -8190,6 +8149,99 @@
 		)
 	)
 	(symbol
+		(lib_id "RevK:ICS43434_MEMS_Mic")
+		(at 217.17 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9c833f15-c95f-4f06-8707-2b9c84855cf4")
+		(property "Reference" "U1"
+			(at 205.232 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "ICS43434_MEMS_Mic"
+			(at 218.186 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:ICS43434_MEMS_Mic"
+			(at 216.916 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2312010321_TDK-InvenSense-ICS-43434_C5656610.pdf"
+			(at 215.138 76.962 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "I2S Microphone"
+			(at 216.916 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C5656610"
+			(at 223.52 100.838 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "6"
+			(uuid "4e6fadd2-4c67-4783-b959-ce5783ff3adf")
+		)
+		(pin "4"
+			(uuid "127d9f04-9c65-4048-be6a-07e2c9d70424")
+		)
+		(pin "5"
+			(uuid "d63939fe-5e76-4ac0-88cf-93c86ce72a28")
+		)
+		(pin "3"
+			(uuid "62c5a2a8-e28c-45a7-ae33-c4a238cd1086")
+		)
+		(pin "1"
+			(uuid "8d0d2867-1e34-498f-83c1-65b7d7ddce15")
+		)
+		(pin "2"
+			(uuid "67dd0378-dcab-423d-aa4c-4cc5debdc65a")
+		)
+		(instances
+			(project ""
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 38.735 144.78 0)
 		(unit 1)
@@ -8317,6 +8369,75 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "#PWR014")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 239.395 92.075 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ab675a24-dcd1-4e15-816a-028ba99aec13")
+		(property "Reference" "C8"
+			(at 248.285 93.488 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 248.285 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RevK:C_0402"
+			(at 238.4298 88.265 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 239.395 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 239.395 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "15a424f3-296a-4dd2-99d2-1253ed4d367c")
+		)
+		(pin "2"
+			(uuid "de326a23-9f8a-4e70-b453-338580475c68")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C8")
 					(unit 1)
 				)
 			)
