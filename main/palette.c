@@ -49,15 +49,6 @@ dofire (uint8_t n, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
       *w = 0;
 }
 
-static void
-doredpurple (uint8_t n, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
-{
-   *r = 255 - cos8[n] / 3;
-   *g = 0;
-   *b = cos8[n] / 2;
-   *w = 0;
-}
-
 // --------------------------------------------------------------------------------
 
 uint8_t
@@ -90,8 +81,11 @@ palette_cycling (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, u
 
 uint8_t
 palette_redpurple (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
-{                               // Position based redpurple
-   doredpurple (255 * p / n, r, g, b, w);
+{                               // Position based red/purple
+   *r = ((p & 1) ? 255 : 128);
+   *b = ((p & 1) ? 0 : 128);
+   *g = 0;
+   *w = 0;
    return v;
 }
 

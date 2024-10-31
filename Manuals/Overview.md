@@ -91,6 +91,7 @@ A palette is simply a way colours change, they can be based on time, or position
 |wheel|Time|Alternative colour bands like rainbow|
 |fire|Value|red to white based on value|
 |xmas|Position|Alternate red/green|
+|redpurple|Position|Alternate red/purple|
 |neenaw|Time|Red/blue flashing sequence|
 
 ### Simple apps
