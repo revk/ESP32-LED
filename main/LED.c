@@ -1255,7 +1255,7 @@ float audioband[AUDIOBANDS] = { 0 };
 
 SemaphoreHandle_t audio_mutex = NULL;
 
-static float audiogain = 1.0;
+static float audiogain = 50.0;
 static int16_t audioraw[AUDIOSAMPLES * AUDIOOVERSAMPLE];
 static float fftre[AUDIOSAMPLES];
 static float fftim[AUDIOSAMPLES];
@@ -1311,22 +1311,38 @@ i2s_task (void *arg)
       // ESP_LOGE (TAG, "Bytes %d/%d %6d %6d %6d %6d", n / sizeof (*audioraw), AUDIOSAMPLES, audioraw[0], audioraw[1], audioraw[2], audioraw[3]);
       if (n < sizeof (audioraw))
          continue;
+      float ref = 0,
+         mag = 0;
       {
          int r = 0;
          for (int i = 0; i < AUDIOSAMPLES; i++)
          {
-            fftre[i] = (float) audioraw[r++] / 32768 / AUDIOOVERSAMPLE;
+            float v = (float) audioraw[r++] / 32768;
+            mag += v * v;
+            fftre[i] = v * audiogain / AUDIOOVERSAMPLE;
             for (int q = 0; q < AUDIOOVERSAMPLE - 1; q++)
-               fftre[i] += (float) audioraw[r++] / 32768 / AUDIOOVERSAMPLE;
+            {
+               float v = (float) audioraw[r++] / 32768;
+               fftre[i] += v * audiogain / AUDIOOVERSAMPLE;
+               mag += v * v;
+            }
             fftim[i] = 0;
+            ref += fftre[i] * fftre[i];
          }
       }
+      // Gain adjust
+      ref = sqrt (ref / AUDIOSAMPLES);
+      if (ref > 1)
+         audiogain = (audiogain * 9 + audiogain / ref) / 10;    // Drop gain faster if overloading
+      else
+         audiogain = (audiogain * 99 + audiogain / ref) / 100;  // Bring back gain slowly
+      if (audiogain > AUDIOGAINMAX)
+         audiogain = AUDIOGAINMAX;
+      else if (audiogain < AUDIOGAINMIN)
+         audiogain = AUDIOGAINMIN;
       fft (fftre, fftim, AUDIOSAMPLES);
-      float mag = 0,
-         max = 0;
       float band[AUDIOBANDS] = { 0 };   // Should get main audio in first 16 or so slots
       int count[AUDIOBANDS] = { 0 };
-      if (audiolog)
       {                         // log frequency
          float low = log (AUDIOMIN),
             high = log (AUDIOMAX),
@@ -1337,38 +1353,25 @@ i2s_task (void *arg)
             int b = (l - low) / step;
             if (b >= 0 && b < AUDIOBANDS)       // In case of rounding going too far!
             {
-               band[b] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
-               count[b]++;
-            }
-         }
-      } else
-      {                         // linear frequency
-         float low = AUDIOMIN,
-            high = AUDIOMAX,
-            step = (high - low) / AUDIOBANDS;
-         for (int i = AUDIOMIN * AUDIOSAMPLES / AUDIORATE; i < AUDIOMAX * AUDIOSAMPLES / AUDIORATE && i < AUDIOSAMPLES / 2; i++)
-         {
-            float l = (float) i * AUDIORATE / AUDIOSAMPLES;
-            int b = (l - low) / step;
-            if (b >= 0 && b < AUDIOBANDS)       // In case of rounding going too far!
-            {
-               band[b] += sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
+               fftre[i] /= (AUDIOSAMPLES / 2);
+               fftim[i] /= (AUDIOSAMPLES / 2);
+               float v = sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
+               band[b] += v;
                count[b]++;
             }
          }
       }
-      for (int i = 0; i < AUDIOBANDS; i++)
-         if (count[i])
-         {
-            band[i] *= audiogain / count[i];
-            if (band[i] > max)
-               max = band[i];
-            mag += band[i];
-         }
-      mag /= AUDIOBANDS;
-      //ESP_LOGE (TAG, "FFT mag=%7.2f gain=%5.2f: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", mag, audiogain, band[0], band[1], band[2], band[3], band[4], band[5], band[6], band[7], band[8]);
+      for (int b = 0; b < AUDIOBANDS; b++)
+         //if (count[b]) band[b] = 10 * log10 (band[b] / count[b]); // Average, would seem sensible...
+         if (band[b])
+            band[b] = 10 * log10 (band[b]);     // OK no clue why but if we average we end up with way lower top frequencies
+      ESP_LOGE (TAG, "FFT %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f gain %6.2f", band[0],
+                band[3], band[6], band[9], band[12], band[15], band[18], band[21], audiogain);
+      for (int b = 0; b < AUDIOBANDS; b++)
+         band[b] = (band[b] + 25) / 30; // makes more 0-1 level output
+      //ESP_LOGE (TAG, "FFT %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21]);
       xSemaphoreTake (audio_mutex, portMAX_DELAY);
-      audiomag = mag;
+      audiomag = sqrt (mag / AUDIOSAMPLES / AUDIOOVERSAMPLE);
       for (int i = 0; i < AUDIOBANDS; i++)
       {
          if (band[i] > audioband[i] || !audiodamp)
@@ -1377,17 +1380,6 @@ i2s_task (void *arg)
             audioband[i] = (audioband[i] * audiodamp + band[i]) / (audiodamp + 1);
       }
       xSemaphoreGive (audio_mutex);
-      if (max)
-      {
-         if (max > 1)
-            audiogain = (audiogain * 9 + audiogain / max) / 10; // Drop gain faster if overloading
-         else
-            audiogain = (audiogain * 99 + audiogain / max) / 100;       // Bring back gain slowly
-         if (audiogain > AUDIOGAINMAX)
-            audiogain = AUDIOGAINMAX;
-         else if (audiogain < AUDIOGAINMIN)
-            audiogain = AUDIOGAINMIN;
-      }
    }
    vTaskDelete (NULL);
 }

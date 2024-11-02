@@ -116,6 +116,8 @@ appvolumergb (app_t * a)
       for (uint8_t i = c->b.start; i < c->b.start + c->b.len && i < AUDIOBANDS; i++)
          m += audioband[i];
       int v = m * 65536 / c->b.len;
+      if (m < 0)
+         v = 0;
       if (v > 65535)
          v = 65535;
       bargraph (a, pixelb, v, 65535, a->fader);

@@ -18,6 +18,8 @@ appaudio (app_t * a)
    for (int i = 0; i < AUDIOBANDS; i++)
    {
       int v = a->fader * audioband[i];
+      if (audioband[i] < 0)
+         v = 0;
       if (v >= 255)
       {
          v -= 255;

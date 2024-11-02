@@ -40,7 +40,7 @@
 #define	AUDIOBANDS	24      // How many bands we make log based
 #define	AUDIOSTEP	((AUDIOMAX-AUDIOMIN)/AUDIOBANDS)        // Hz steps
 #define	AUDIOGAINMIN	0.01
-#define	AUDIOGAINMAX	5
+#define	AUDIOGAINMAX	100
 extern SemaphoreHandle_t audio_mutex;
 extern float audioband[AUDIOBANDS];
 extern float audiomag;
