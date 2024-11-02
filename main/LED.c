@@ -1255,7 +1255,7 @@ float audioband[AUDIOBANDS] = { 0 };
 
 SemaphoreHandle_t audio_mutex = NULL;
 
-static float audiogain = 50.0;
+static float audiogain = AUDIOGAINMAX;
 static int16_t audioraw[AUDIOSAMPLES * AUDIOOVERSAMPLE];
 static float fftre[AUDIOSAMPLES];
 static float fftim[AUDIOSAMPLES];
