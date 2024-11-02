@@ -1365,8 +1365,7 @@ i2s_task (void *arg)
          //if (count[b]) band[b] = 10 * log10 (band[b] / count[b]); // Average, would seem sensible...
          if (band[b])
             band[b] = 10 * log10 (band[b]);     // OK no clue why but if we average we end up with way lower top frequencies
-      ESP_LOGE (TAG, "FFT %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f gain %6.2f", band[0],
-                band[3], band[6], band[9], band[12], band[15], band[18], band[21], audiogain);
+      //ESP_LOGE (TAG, "FFT %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f gain %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21], audiogain);
       for (int b = 0; b < AUDIOBANDS; b++)
          band[b] = (band[b] + 25) / 30; // makes more 0-1 level output
       //ESP_LOGE (TAG, "FFT %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21]);
