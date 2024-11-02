@@ -8,7 +8,7 @@ appaudio (app_t * a)
    if (!a->cycle)
    {                            // Sanity check / defaults
       if (!a->colourset)
-         setcolour (a, "revbow");
+         setcolour (a, "spin");
       free (a->data);
       a->data = malloc (AUDIOBANDS * 2);
    }

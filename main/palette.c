@@ -73,6 +73,13 @@ palette_wheel (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uin
 }
 
 uint8_t
+palette_spin (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
+{                               // Time/position based wheel
+   dowheel (255 * p / n + t, r, g, b, w);
+   return v;
+}
+
+uint8_t
 palette_cycling (uint8_t t, int p, int n, uint8_t v, uint8_t * r, uint8_t * g, uint8_t * b, uint8_t * w)
 {                               // Time based rainbow
    dorainbow (t, r, g, b, w);
