@@ -31,7 +31,7 @@ apptwinkle (app_t * a)
    for (int i = 0; i < a->len; i++)
    {
       uint8_t l = (int) (a->speed - a->step) * new[i] / a->speed + (int) a->step * old[i] / a->speed;
-      setl (a->start + i, a, i, a->len, l * q / 255);
+      setl (a->start + i, a, i, a->len, (int) l * q / 255);
    }
 
    return NULL;
