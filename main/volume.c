@@ -24,7 +24,7 @@ appvolume (app_t * a)
       if (!a->colourset)
          setcolour (a, "cycling");
       free (a->data);
-      memset (a->data = malloc (a->len), 0, a->len);
+      memset (a->data = mallocspi (a->len), 0, a->len);
    }
 
 

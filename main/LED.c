@@ -208,6 +208,7 @@ void
 appzap (app_t * a)
 {                               // Assumes mutex, Delete an app
    free (a->data);
+   free (a->config);
    memset (a, 0, sizeof (*a));
 }
 
@@ -237,6 +238,8 @@ addapp (int index, int preset, const char *name, jo_t j)
          }
          if (!a->app || a->name != applist[i].name || a->stop)
             appzap (a);
+         if (j)
+            a->config = jo_strdupj (j);
          a->name = applist[i].name;
          if (*colour[preset ? preset - 1 : 0])
             setcolour (a, colour[preset ? preset - 1 : 0]);     // Default colour from preset
@@ -299,7 +302,7 @@ addapp (int index, int preset, const char *name, jo_t j)
                      free (a->data);
                      int l = jo_strlen (j);
                      if (l)
-                        jo_strncpy (j, a->data = malloc (l + 1), l + 1);
+                        jo_strncpy (j, a->data = mallocspi (l + 1), l + 1);
                   }
                   continue;
                }
@@ -312,7 +315,7 @@ addapp (int index, int preset, const char *name, jo_t j)
                free (a->data);
                int l = jo_strlen (j);
                if (l)
-                  jo_strncpy (j, a->data = malloc (l + 1), l + 1);
+                  jo_strncpy (j, a->data = mallocspi (l + 1), l + 1);
             }
          } else if (j && jo_here (j) == JO_NUMBER)
             a->limit = limit_scale * jo_read_float (j); // Defaults
@@ -1133,10 +1136,13 @@ web_root (httpd_req_t * req)
             }
             if (a->preset)
             {
-               revk_web_send (req, " preset=%d", a->preset);
-               if (*config[a->preset - 1])
-                  revk_web_send (req, " config=%s", config[a->preset - 1]);
+               if (*name[a->preset - 1])
+                  revk_web_send (req, " preset=%s", name[a->preset - 1]);
+               else
+                  revk_web_send (req, " preset=%d", a->preset);
             }
+            if (a->config && *a->config)
+               revk_web_send (req, " config=%s", a->config);
             revk_web_send (req, "</li>");
          }
       }
@@ -1381,6 +1387,31 @@ i2s_task (void *arg)
       xSemaphoreGive (audio_mutex);
    }
    vTaskDelete (NULL);
+}
+
+uint8_t
+audiohz2band (uint32_t hz)
+{
+   if (hz)
+      return 0;
+   float low = log (AUDIOMIN),
+      high = log (AUDIOMAX),
+      val = log (hz);
+   int b = AUDIOBANDS * (val - low) / (high - low);
+   if (b < 0)
+      b = 0;
+   if (b >= AUDIOBANDS)
+      b = AUDIOBANDS;
+   return b;
+}
+
+uint32_t
+audioband2hz (uint8_t b)
+{
+   float low = log (AUDIOMIN),
+      high = log (AUDIOMAX),
+      val = b * (high - low) / AUDIOBANDS + low;
+   return exp (val);
 }
 
 #undef	N

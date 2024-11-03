@@ -9,7 +9,7 @@ apptwinkle (app_t * a)
    if (!a->cycle)
    {
       free (a->data);           // Not used supplied
-      a->data = malloc (a->len * 2);
+      a->data = mallocspi (a->len * 2);
       memset (a->data, 0, a->len * 2);
       if (!a->colourset)
          setcolour (a, "white");

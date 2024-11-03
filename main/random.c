@@ -8,7 +8,7 @@ apprandom (app_t * a)
    if (!a->cycle)
    {                            // Sanity check / defaults
       free (a->data);
-      a->data = malloc (8 * a->len);
+      a->data = mallocspi (8 * a->len);
       memset (a->data, 0, 8 * a->len);
       a->stage = 1;
    }

@@ -58,7 +58,7 @@ biggate (app_t * a)
       }
       if (!a->limit)
          a->limit = 90 * cps;
-      old = malloc (kawooshlen * 2 + sizeof (stargate_t));
+      old = mallocspi (kawooshlen * 2 + sizeof (stargate_t));
       new = old + kawooshlen;
       g = (void *) (new + kawooshlen);
       memset (g, 0, sizeof (*g));
@@ -321,7 +321,7 @@ appstargate (app_t * a)
    if (!a->cycle)
    {
       free (a->data);           // Not used supplied
-      a->data = malloc (a->len * 2 + 1);
+      a->data = mallocspi (a->len * 2 + 1);
    }
    uint8_t *old = a->data,
       *new = old + a->len,

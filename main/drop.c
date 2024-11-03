@@ -33,7 +33,7 @@ appdrop (app_t * a)
       if (!a->colourset)
          setcolour (a, "rainbow");
       free (a->data);
-      memset (a->data = malloc (sizeof (config_t)), 0, sizeof (config_t));
+      memset (a->data = mallocspi (sizeof (config_t)), 0, sizeof (config_t));
    }
    config_t *c = a->data;
    if (!a->cycle)
@@ -44,9 +44,9 @@ appdrop (app_t * a)
       c->gravity = 1;           // 9.8;
       c->bounce = 0.3;
       c->balls = 3;
-      if (a->preset && *config[a->preset - 1])
+      if (a->preset && a->config && *a->config)
       {
-         jo_t j = jo_parse_str (config[a->preset - 1]);
+         jo_t j = jo_parse_str (a->config);
          if (jo_here (j) == JO_OBJECT)
          {
             void setf (const char *tag, float *fp)
@@ -74,7 +74,6 @@ appdrop (app_t * a)
          c->drag = 0;
       if (c->drag > 1)
          c->drag = 1;
-      c->drag = pow (1.0 - c->drag, 1.0 / cps);
       if (c->balls < 1)
          c->balls = 1;
       if (c->balls > 10)
@@ -88,6 +87,23 @@ appdrop (app_t * a)
       }
       if (c->size <= 0)
          c->size = c->height * 9 / a->len;
+      // Report config
+      jo_t n = jo_object_alloc ();
+      jo_litf (n, "height", "%.2f", c->height);
+      jo_litf (n, "gravity", "%.2f", c->gravity);
+      jo_litf (n, "bounce", "%.2f", c->bounce);
+      jo_litf (n, "drag", "%.2f", c->drag);
+      jo_litf (n, "size", "%.2f", c->size);
+      jo_int (n, "balls", c->balls);
+      if (c->up)
+         jo_bool (n, "up", 1);
+      if (c->random)
+         jo_bool (n, "random", 1);
+      char *was = a->config;
+      a->config = jo_finisha (&n);
+      free (was);
+      // Adjust for use
+      c->drag = pow (1.0 - c->drag, 1.0 / cps);
       c = a->data = realloc (c, sizeof (config_t) + c->balls * sizeof (ball_t));
       memset (c->ball, 0, c->balls * sizeof (ball_t));
    }

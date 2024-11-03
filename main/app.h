@@ -44,6 +44,8 @@
 extern SemaphoreHandle_t audio_mutex;
 extern float audioband[AUDIOBANDS];
 extern float audiomag;
+uint8_t audiohz2band (uint32_t hz);
+uint32_t audioband2hz (uint8_t b);
 
 typedef struct app_s app_t;
 typedef const char *app_f (app_t *);    // Return NULL normally, "" for normal end, other string for error
@@ -90,6 +92,7 @@ struct app_s
    uint32_t cycle;              // This is set by caller - counts the cycle since started
    uint32_t stage;              // The stage of a sequential display
    uint32_t step;               // Steps in the stage
+   char *config;                // Malloc'd JSON config
    void *data;                  // Malloc'd data area
 };
 

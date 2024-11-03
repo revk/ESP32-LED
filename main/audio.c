@@ -10,7 +10,7 @@ appaudio (app_t * a)
       if (!a->colourset)
          setcolour (a, "spin");
       free (a->data);
-      a->data = malloc (AUDIOBANDS * 2);
+      a->data = mallocspi (AUDIOBANDS * 2);
    }
    uint8_t *c = a->data;
    uint8_t *w = c + AUDIOBANDS;
@@ -23,7 +23,7 @@ appaudio (app_t * a)
       if (v >= 255)
       {
          v -= 255;
-         v /= 4;
+         v *= 2;
          if (v > 255)
             v = 255;
          w[i] = v;

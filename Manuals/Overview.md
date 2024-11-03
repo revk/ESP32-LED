@@ -117,7 +117,7 @@ A palette is simply a way colours change, they can be based on time, or position
 |`volume`|Volume bar graph.|
 |`volumergb`|Volume RGB bar graph (red:high, green:mid, blue:base). Note, setting a *colour* causes colours to be restricted to colour set, e.g. set blue for *base*. Cannot use with a palette|
 
-Note that `volumergb` uses blue for *base* and red for *high* by default, but a JSON config in a preset can set `"r"`/`"g"`/`"b"` as an array of *start* and *len* in the 24 frequency bins instead.
+Note that `volumergb` uses blue for *base* and red for *high* by default, but a JSON config in a preset can set `"r"`/`"g"`/`"b"` as an array of *start* and *end* (either band number or Hz).
 
 ### Ring/loop apps
 
