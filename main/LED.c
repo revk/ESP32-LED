@@ -1347,8 +1347,10 @@ i2s_task (void *arg)
       else if (audiogain < AUDIOGAINMIN)
          audiogain = AUDIOGAINMIN;
       fft (fftre, fftim, AUDIOSAMPLES);
-      float band[AUDIOBANDS] = { 0 };   // Should get main audio in first 16 or so slots
-      int count[AUDIOBANDS] = { 0 };
+      float band[AUDIOBANDS];   // Should get main audio in first 16 or so slots
+      for (int b = 0; b < AUDIOBANDS; b++)
+         band[b] = NAN;
+      //int count[AUDIOBANDS] = { 0 };
       {                         // log frequency
          float low = log (AUDIOMIN),
             high = log (AUDIOMAX),
@@ -1362,15 +1364,20 @@ i2s_task (void *arg)
                fftre[i] /= (AUDIOSAMPLES / 2);
                fftim[i] /= (AUDIOSAMPLES / 2);
                float v = sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
-               band[b] += v;
-               count[b]++;
+               if (isnan (band[b]))
+                  band[b] = v;
+               else
+                  band[b] += v;
+               //count[b]++;
             }
          }
       }
       for (int b = 0; b < AUDIOBANDS; b++)
          //if (count[b]) band[b] = 10 * log10 (band[b] / count[b]); // Average, would seem sensible...
-         if (band[b])
+         if (!isnan (band[b]))
             band[b] = 10 * log10 (band[b]);     // OK no clue why but if we average we end up with way lower top frequencies
+         else if (b)
+            band[b] = band[b - 1];      // missed bin
       //ESP_LOGE (TAG, "FFT %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f gain %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21], audiogain);
       for (int b = 0; b < AUDIOBANDS; b++)
          band[b] = (band[b] + 25) / 25; // makes more 0-1 level output
