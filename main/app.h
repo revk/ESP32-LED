@@ -29,8 +29,6 @@
 
 #define	MAXAPPS	50
 
-//#define       AUDIOSAMPLES    2048
-//#define       AUDIORATE       48000L  // Hz (full rate
 #define	AUDIOOVERSAMPLE	4       // From raw to FFT
 #define	AUDIOHZ		((int)cps)      // Hz step
 #define	AUDIOSAMPLES	512     // Power of 2 (this is multiplied by oversample)
