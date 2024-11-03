@@ -238,8 +238,6 @@ addapp (int index, int preset, const char *name, jo_t j)
          }
          if (!a->app || a->name != applist[i].name || a->stop)
             appzap (a);
-         if (j)
-            a->config = jo_strdupj (j);
          a->name = applist[i].name;
          if (*colour[preset ? preset - 1 : 0])
             setcolour (a, colour[preset ? preset - 1 : 0]);     // Default colour from preset
@@ -266,6 +264,8 @@ addapp (int index, int preset, const char *name, jo_t j)
 #undef  u32d
             if (j && jo_here (j) == JO_OBJECT)
          {                      // Expects to be at start of object
+            if (j)
+               a->config = jo_strdupj (j);
             while (jo_next (j) == JO_TAG)
             {
 #define u8(s,n,d)         if(!jo_strcmp(j,#n)||!jo_strcmp(j,#s)){if(jo_next(j)==JO_NUMBER)a->n=jo_read_int(j);continue;}

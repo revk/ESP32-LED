@@ -41,10 +41,10 @@ appdrop (app_t * a)
       // Defaults
       c->height = 1;
       c->drag = 0.01;
-      c->gravity = 1;           // 9.8;
+      c->gravity = 1;           // 9.8 is way too fast even if realistic
       c->bounce = 0.3;
       c->balls = 3;
-      if (a->preset && a->config && *a->config)
+      if (a->config)
       {
          jo_t j = jo_parse_str (a->config);
          if (jo_here (j) == JO_OBJECT)

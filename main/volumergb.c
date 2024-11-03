@@ -72,7 +72,7 @@ appvolumergb (app_t * a)
    config_t *c = a->data + a->len * 3;
    if (!a->cycle)
    {
-      if (a->preset && a->config && *a->config)
+      if (a->config)
       {
          jo_t j = jo_parse_str (a->config);
          if (jo_here (j) == JO_OBJECT)
@@ -107,8 +107,9 @@ appvolumergb (app_t * a)
             set (&c->b, "b");
          }
          jo_free (&j);
-      } else
-      {                         // No config - set defaults
+      }
+      if (!c->b.len && !c->r.len && !c->g.len)
+      {                         // No r/g/b config - set defaults
          c->b.start = 0;
          c->b.len = AUDIOBANDS / 3;
          c->g.start = AUDIOBANDS / 3;
