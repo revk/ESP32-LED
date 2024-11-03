@@ -25,7 +25,7 @@ apptwinkle (app_t * a)
       memcpy (old, new, a->len);
       esp_fill_random (new, a->len);
       for (int i = 0; i < a->len; i++)
-         new[i] = new[i] / 4 + 32;
+         new[i] = (int) 2 *new[i] / 3 + 85;
    }
 
    for (int i = 0; i < a->len; i++)
