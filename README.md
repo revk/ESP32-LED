@@ -42,7 +42,7 @@ The USB-A module is designed to plug in directly to a USB-A socket and connector
 
 ## Software
 
-Both boards are designed so they can run WLED code. The code included here is different, but offeres a number of useful features.
+Both boards are designed so they can run WLED code. The code included here is different, but offers a number of useful features.
 
 * Handles various formats, RGB, RGBW, and some with other sequences like GRB.
 * Sound reactive using microphone.
