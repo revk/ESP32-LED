@@ -14,7 +14,7 @@ The USB-C module is designed to be small and work in-line between a USB-C cable 
 * Powerful ESP32-S3-MINI-1-N4-R2 dual CPU processor with 4MB Flash and 2MB SPI RAM, WiFi, Bluetooth, etc.
 * 3 contact WAGO connector for the LED strip, for simple and easy connection.
 * Switch mode power supply working from 4V to 35V (5V only when USB connected).
-* One board WS2812 style LED.
+* On board WS2812 style LED for status (separte to LED strip).
 * TDK ICS 43434 I2S dicitial microphone.
 * Single sided design with flat base to allow easy fixing under shelf, etc.
 * Functional USB for flashing and debug to ESP32.
