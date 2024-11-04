@@ -1057,10 +1057,10 @@ web_root (httpd_req_t * req)
    }
    revk_web_send (req, "<h1>LED controller: %s</h1>", hostname);
    revk_web_send (req,
-                  "<form method=get><fieldset><legend>Effect</legend><p>Colour:<input name=colour placeholder='#%s or colour name' size=30> or <select name=palette><option value=''>Palette</option>",
+                  "<form method=get><fieldset><legend>Effect</legend><p>Colour:<input name=colour placeholder='#%s or colour name' size=30> or <select name=palette><option value=''>--- Palette --- </option>",
                   rgbw ? "RGBW" : "RGB");
    for (int p = 0; palettes[p].name; p++)
-      revk_web_send (req, "<option value='%s'>%s</option>", palettes[p].name, palettes[p].description);
+      revk_web_send (req, "<option value='%s'>%s (%s)</option>", palettes[p].name, palettes[p].name, palettes[p].description);
    revk_web_send (req, "</select></p><p>");
    void button (const char *tag, const char *title)
    {

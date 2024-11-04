@@ -43,7 +43,7 @@ bit	ha.enable		.hide=1			// Enable Home Assistant
 bit	poweron		1	.hide=1 .live=1		// Start virtual strip 1 on power on
 
 s	name		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Name (must be set to appear in HA)
-s	colour		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Colour (default depends on effect)
+s	colour		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Colour or palette name or #RGB style
 u16	start		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// First LED (default 1)
 s16	top		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Top LED (default to first)
 u16	len		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Number of LEDs (default to end)
