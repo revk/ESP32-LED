@@ -35,9 +35,10 @@ appaudio (app_t * a)
       if (rgbw && !a->w)
          setW (a->start + i, w);
    }
+   xSemaphoreTake (audio_mutex, portMAX_DELAY);
    if (AUDIOBANDS > a->len)
       for (int i = 0; i < a->len; i++)
-      { // More bands, pack in to LEDs
+      {                         // More bands, pack in to LEDs
          float p1 = (float) i * AUDIOBANDS / a->len;
          float p2 = (float) (i + 1) * AUDIOBANDS / a->len;
          float v = 0;
@@ -56,12 +57,13 @@ appaudio (app_t * a)
          setled (i, v);
    } else
       for (int i = 0; i < a->len; i++)
-      { // more LEDs, interpolate to bands
+      {                         // more LEDs, interpolate to bands
          float p = (float) i * AUDIOBANDS / a->len;
          int x = p;
          p -= x;
          float v = audioband[x] * (1.0 - p) + audioband[x + 1] * p;
          setled (i, v);
       }
+   xSemaphoreGive (audio_mutex);
    return NULL;
 }
