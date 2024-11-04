@@ -6,7 +6,7 @@ This is a hardware and software project. The software is much like WLED, but my 
 
 ## In-line USB-C
 
-<img src=Manuals/USB-C-Top.png align=right width=50%>
+<img src=Manuals/USB-C-Top.png align=right width=45%>
 
 The USB-C module is designed to be small and work in-line between a USB-C cable and an LED strip.
 
@@ -29,8 +29,8 @@ The power supply means you can run from USB and power the strip from 5V USB, or 
 
 ## Plug-in USB-A
 
-<img src=Manuals/USB-A-Top.png width=50%>
-<img src=Manuals/USB-A-Bottom.png align=right width=50%>
+<img src=Manuals/USB-A-Top.png width=45%>
+<img src=Manuals/USB-A-Bottom.png align=right width=45%>
 
 The USB-A module is designed to plug in directly to a USB-A socket and ocnnectr to an LED strip.
 
