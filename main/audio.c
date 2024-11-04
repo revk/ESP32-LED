@@ -34,6 +34,7 @@ appaudio (app_t * a)
          c[i] = v;
       }
    }
+   // TODO if AUDIOBANDS is more than a->len, different logic
    xSemaphoreGive (audio_mutex);
    for (int i = 0; i < a->len; i++)
    {
