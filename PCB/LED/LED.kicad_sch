@@ -4616,6 +4616,12 @@
 		(uuid "74c8ce41-0038-460f-8e0d-d0e1e705fce1")
 	)
 	(junction
+		(at 135.89 106.045)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "77381273-5c59-4093-90ab-326b5b061e37")
+	)
+	(junction
 		(at 165.1 97.79)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4730,10 +4736,6 @@
 		(uuid "c053934f-d73a-4026-8bbb-3f21a0847732")
 	)
 	(no_connect
-		(at 35.56 76.2)
-		(uuid "c0a4d1a9-5dfd-4144-8e85-4c2394147f49")
-	)
-	(no_connect
 		(at 66.04 76.2)
 		(uuid "cdcf62c0-808c-4c37-82aa-4a52cfa03103")
 	)
@@ -4798,6 +4800,16 @@
 			(type default)
 		)
 		(uuid "4335af45-1894-4bf2-8258-95b5fd4bc8da")
+	)
+	(wire
+		(pts
+			(xy 130.175 106.045) (xy 135.89 106.045)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ae994b8-3394-4b15-bef3-c8488e266958")
 	)
 	(wire
 		(pts
@@ -4918,6 +4930,28 @@
 			(type default)
 		)
 		(uuid "ef943a76-af0c-46ce-8e6e-ca013ff94a3d")
+	)
+	(global_label "DC"
+		(shape input)
+		(at 135.89 98.425 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "14b49c7e-22ae-4d54-aaba-2bb0baea9eb5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 135.89 93.554 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(global_label "D+"
 		(shape bidirectional)
@@ -5271,6 +5305,28 @@
 			)
 		)
 	)
+	(global_label "ADC"
+		(shape input)
+		(at 35.56 76.2 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8b6668e3-59cd-4e32-b9c9-ed66e7b4608a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 29.6004 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "D+"
 		(shape bidirectional)
 		(at 184.15 77.47 0)
@@ -5487,6 +5543,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "ADC"
+		(shape output)
+		(at 130.175 106.045 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "fa3d9343-8240-468c-afd8-e4b17908af4f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 124.2154 106.045 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -7914,6 +7992,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 135.89 102.235 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7f300721-4a79-4356-84c7-5e07a1cc7922")
+		(property "Reference" "R1"
+			(at 137.795 102.235 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "124K"
+			(at 135.89 102.235 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:R_0402"
+			(at 134.112 102.235 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 135.89 102.235 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 135.89 102.235 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0b608a00-ed37-4518-a857-9954cbb3bf7c")
+		)
+		(pin "2"
+			(uuid "e4a2cfb3-1b0b-43e1-822f-e84b98ef4cf7")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 217.17 83.82 0)
 		(unit 1)
@@ -9038,6 +9183,72 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 135.89 113.665 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c0488d76-a39c-4423-a96b-28e91fc8a6ba")
+		(property "Reference" "#PWR015"
+			(at 135.89 120.015 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 135.763 117.475 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 135.89 113.665 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 135.89 113.665 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 135.89 113.665 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "82debd44-b28a-4878-b285-9e5e5228d092")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -10381,6 +10592,73 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 135.89 109.855 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fb7d8570-0ca2-4e12-a7b5-df500dbee2d4")
+		(property "Reference" "R3"
+			(at 137.795 109.855 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 135.89 109.855 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:R_0402"
+			(at 134.112 109.855 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 135.89 109.855 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 135.89 109.855 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "66aa394e-07cb-429c-a724-34152b0caa43")
+		)
+		(pin "2"
+			(uuid "3fa33ed5-a4b5-4428-9df6-fe332f787e8a")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "R3")
 					(unit 1)
 				)
 			)
