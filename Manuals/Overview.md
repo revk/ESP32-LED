@@ -85,14 +85,15 @@ A palette is simply a way colours change, they can be based on time, or position
 
 |Name|Type|Meaning|
 |----|----|-------|
-|rainbow|Position|Rainbow|
-|revbow|Position|Rainbow (reversed)|
-|cycling|Time|Rainbow|
-|wheel|Time|Alternative colour bands like rainbow|
-|fire|Value|red to white based on value|
-|xmas|Position|Alternate red/green|
-|redpurple|Position|Alternate red/purple|
-|neenaw|Time|Red/blue flashing sequence|
+|`rainbow`|Position|Rainbow|
+|`revbow`|Position|Rainbow (reversed)|
+|`cycling`|Time|Rainbow|
+|`wheel`|Time|Alternative colour bands like rainbow|
+|`spin`|Time+Position|Spinning colour wheel|
+|`fire`|Value|red to white based on value|
+|`xmas`|Position|Alternate red/green|
+|`redpurple`|Position|Alternate red/purple|
+|`neenaw`|Time|Red/blue flashing sequence|
 
 ### Simple apps
 
@@ -116,7 +117,7 @@ A palette is simply a way colours change, they can be based on time, or position
 |`volume`|Volume bar graph.|
 |`volumergb`|Volume RGB bar graph (red:high, green:mid, blue:base). Note, setting a *colour* causes colours to be restricted to colour set, e.g. set blue for *base*. Cannot use with a palette|
 
-Note that `volumergb` uses blue for *base* and red for *high* by default, but a JSON config in a preset can set `"r"`/`"g"`/`"b"` as an array of *start* and *len* in the 24 frequency bins instead.
+Note that `volumergb` uses blue for *base* and red for *high* by default, but a JSON config in a preset can set `"r"`/`"g"`/`"b"` as an array of *start* and *end* (Hz).
 
 ### Ring/loop apps
 

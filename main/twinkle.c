@@ -9,7 +9,7 @@ apptwinkle (app_t * a)
    if (!a->cycle)
    {
       free (a->data);           // Not used supplied
-      a->data = malloc (a->len * 2);
+      a->data = mallocspi (a->len * 2);
       memset (a->data, 0, a->len * 2);
       if (!a->colourset)
          setcolour (a, "white");
@@ -25,13 +25,13 @@ apptwinkle (app_t * a)
       memcpy (old, new, a->len);
       esp_fill_random (new, a->len);
       for (int i = 0; i < a->len; i++)
-         new[i] = new[i] / 4 + 32;
+         new[i] = (int) 2 *new[i] / 3 + 85;
    }
 
    for (int i = 0; i < a->len; i++)
    {
       uint8_t l = (int) (a->speed - a->step) * new[i] / a->speed + (int) a->step * old[i] / a->speed;
-      setl (a->start + i, a, i, a->len, l * q / 255);
+      setl (a->start + i, a, i, a->len, (int) l * q / 255);
    }
 
    return NULL;

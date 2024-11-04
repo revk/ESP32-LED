@@ -18,7 +18,7 @@ appclock (app_t * a)
    if (!a->cycle)
    {
       free (a->data);           // Not used supplied
-      a->data = malloc (sizeof (struct clock_s));
+      a->data = mallocspi (sizeof (struct clock_s));
    }
    struct clock_s *c = a->data;
    uint8_t top;

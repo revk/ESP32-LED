@@ -24,10 +24,16 @@ appvolume (app_t * a)
       if (!a->colourset)
          setcolour (a, "cycling");
       free (a->data);
-      memset (a->data = malloc (a->len), 0, a->len);
+      memset (a->data = mallocspi (a->len), 0, a->len);
    }
 
-   int v = audiomag * 65535 * 2;        // this is average, and we auto gain on peak, so this may make sense...
+
+   float m = 0;
+   for (uint8_t i = 0; i < AUDIOBANDS; i++)
+      m += audioband[i];
+   int v = m * 65536 / AUDIOBANDS * 2;
+   if (m < 0)
+      v = 0;
    if (v > 65535)
       v = 65535;
    bargraph (a, pixel, v, 65535, a->fader);

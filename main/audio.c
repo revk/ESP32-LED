@@ -8,9 +8,9 @@ appaudio (app_t * a)
    if (!a->cycle)
    {                            // Sanity check / defaults
       if (!a->colourset)
-         setcolour (a, "revbow");
+         setcolour (a, "spin");
       free (a->data);
-      a->data = malloc (AUDIOBANDS * 2);
+      a->data = mallocspi (AUDIOBANDS * 2);
    }
    uint8_t *c = a->data;
    uint8_t *w = c + AUDIOBANDS;
@@ -18,10 +18,12 @@ appaudio (app_t * a)
    for (int i = 0; i < AUDIOBANDS; i++)
    {
       int v = a->fader * audioband[i];
+      if (audioband[i] < 0)
+         v = 0;
       if (v >= 255)
       {
          v -= 255;
-         v /= 4;
+         v *= 2;
          if (v > 255)
             v = 255;
          w[i] = v;
