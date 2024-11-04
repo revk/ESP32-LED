@@ -29,8 +29,8 @@ The power supply means you can run from USB and power the strip from 5V USB, or 
 
 ## Plug-in USB-A
 
-<img src=Manuals/USB-A-Top.png align=right width=49%>
-<img src=Manuals/USB-A-Bottom.png width=49%>
+<img src=Manuals/USB-A-Top.png align=right width=48%>
+<img src=Manuals/USB-A-Bottom.png width=48%>
 
 The USB-A module is designed to plug in directly to a USB-A socket and ocnnectr to an LED strip.
 
