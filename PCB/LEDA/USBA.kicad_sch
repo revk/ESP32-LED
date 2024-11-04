@@ -3430,6 +3430,12 @@
 		)
 	)
 	(junction
+		(at 163.195 125.73)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "30380651-6821-44f8-aba0-dd1da18a80f8")
+	)
+	(junction
 		(at 135.255 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3548,10 +3554,6 @@
 		(uuid "d25dc523-7f7f-4bd9-bdaa-abea3f9f51d1")
 	)
 	(no_connect
-		(at 93.98 62.865)
-		(uuid "daef737f-3084-45f5-8b68-9a9488e4ccb3")
-	)
-	(no_connect
 		(at 124.46 60.325)
 		(uuid "e150ca6d-49f7-4161-8b9f-36e0e73bd4a7")
 	)
@@ -3562,6 +3564,16 @@
 	(no_connect
 		(at 93.98 90.805)
 		(uuid "fc9e4f5f-6ff4-45e2-af86-5394992e605e")
+	)
+	(wire
+		(pts
+			(xy 157.48 125.73) (xy 163.195 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0598ffb7-3697-4e1b-9c00-0bea4333cf33")
 	)
 	(wire
 		(pts
@@ -3617,7 +3629,7 @@
 			)
 		)
 	)
-	(global_label "VBUS"
+	(global_label "DC"
 		(shape input)
 		(at 222.25 40.005 180)
 		(fields_autoplaced yes)
@@ -3629,7 +3641,29 @@
 		)
 		(uuid "193c392d-4da5-4ec2-904c-c72a54ba5c93")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 215.0998 40.005 0)
+			(at 217.379 40.005 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "ADC"
+		(shape input)
+		(at 93.98 62.865 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1a5ef4d9-e386-4bc5-af69-5ee85dd2abe2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 88.0204 62.865 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3727,7 +3761,7 @@
 			)
 		)
 	)
-	(global_label "VBUS"
+	(global_label "DC"
 		(shape input)
 		(at 160.655 28.575 90)
 		(fields_autoplaced yes)
@@ -3739,7 +3773,7 @@
 		)
 		(uuid "483ac5fd-4628-49dd-99dd-a8f44581ce7b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.655 21.3454 90)
+			(at 160.655 23.704 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3767,6 +3801,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DC"
+		(shape input)
+		(at 163.195 118.11 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6abd388b-5419-4038-9b15-ee8857e2d5db")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 163.195 113.239 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -3815,7 +3871,7 @@
 			)
 		)
 	)
-	(global_label "VBUS"
+	(global_label "DC"
 		(shape output)
 		(at 196.215 94.615 180)
 		(fields_autoplaced yes)
@@ -3827,7 +3883,7 @@
 		)
 		(uuid "9d11d820-345b-4679-b843-95a24f6dfa2a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 188.9854 94.615 0)
+			(at 191.344 94.615 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3881,7 +3937,7 @@
 			)
 		)
 	)
-	(global_label "VBUS"
+	(global_label "DC"
 		(shape output)
 		(at 170.18 60.325 0)
 		(fields_autoplaced yes)
@@ -3893,12 +3949,34 @@
 		)
 		(uuid "acfb9f29-eb3b-4f43-a829-04bbfa1fac53")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 177.3302 60.325 0)
+			(at 175.051 60.325 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "ADC"
+		(shape output)
+		(at 157.48 125.73 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d0842c14-06b6-45ae-88b5-6c5ad0ee54aa")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 151.5204 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -5798,6 +5876,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 163.195 129.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "83a05c5c-1677-47b2-af3f-4da5f9011698")
+		(property "Reference" "R3"
+			(at 165.1 129.54 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 163.195 129.54 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:R_0402"
+			(at 161.417 129.54 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 163.195 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 163.195 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c391a0d1-0170-45bb-a464-6d40bdada084")
+		)
+		(pin "2"
+			(uuid "a796b452-e49b-4162-848d-2af9d1dbef95")
+		)
+		(instances
+			(project "USBA"
+				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 112.395 33.02 0)
 		(unit 1)
@@ -6525,6 +6670,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 163.195 121.92 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bbbb5938-2f38-4ff8-9f5e-ff7e61aa6640")
+		(property "Reference" "R2"
+			(at 165.1 121.92 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "124K"
+			(at 163.195 121.92 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:R_0402"
+			(at 161.417 121.92 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 163.195 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 163.195 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "25746c30-8fd3-4e91-a08c-11f986d8b4c2")
+		)
+		(pin "2"
+			(uuid "71ebd9c9-e067-45fb-98f7-3f9697556a71")
+		)
+		(instances
+			(project "USBA"
+				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RevK:ESP32-S3-MINI-1-N4R2")
 		(at 109.22 79.375 0)
 		(unit 1)
@@ -7005,6 +7217,72 @@
 			(project "USBA"
 				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
 					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 163.195 133.35 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d76ff3d7-aec3-4093-867f-7bcea71515fe")
+		(property "Reference" "#PWR05"
+			(at 163.195 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 163.068 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 163.195 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 163.195 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 163.195 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "87980283-4f6c-4605-ba58-0be4cc126222")
+		)
+		(instances
+			(project "USBA"
+				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
