@@ -1,6 +1,7 @@
 // Simple audio color
 
 #include "app.h"
+#include <math.h>
 
 const char *
 appaudio (app_t * a)
@@ -34,18 +35,43 @@ appaudio (app_t * a)
          c[i] = v;
       }
    }
+   // Apportion bands to LEDs allow for more or fewer bands than LEDs
    xSemaphoreGive (audio_mutex);
-   // TODO if AUDIOBANDS is more than a->len, different logic
-   for (int i = 0; i < a->len; i++)
-   {
-      float p = (float) i * AUDIOBANDS / a->len;
-      int x = p;
-      p -= x;
-      int vc = c[x] * (1.0 - p) + c[x + 1] * p;
-      int vw = w[x] * (1.0 - p) + w[x + 1] * p;
-      setl (a->start + i, a, i, a->len, vc);
-      if (rgbw && !a->w)
-         setW (a->start + i, vw);
-   }
+   if (AUDIOBANDS > a->len)
+      for (int i = 0; i < a->len; i++)
+      {
+         float p1 = (float) i * AUDIOBANDS / a->len;
+         float p2 = (float) (i + 1) * AUDIOBANDS / a->len;
+         int vc = 0,
+            vw = 0;
+         while (p1 < p2)
+         {
+            float q = ceil (p1);
+            if (q <= p1)
+               q = p1 + 1;
+            if (q > p2)
+               q = p2;
+            float f = q - p1;
+            vc += c[(int) p1] * f;
+            vw += w[(int) p1] * f;
+            p1 = q;
+         }
+         vc /= (float) AUDIOBANDS / a->len;
+         vw /= (float) AUDIOBANDS / a->len;
+         setl (a->start + i, a, i, a->len, vc);
+         if (rgbw && !a->w)
+            setW (a->start + i, vw);
+   } else
+      for (int i = 0; i < a->len; i++)
+      {
+         float p = (float) i * AUDIOBANDS / a->len;
+         int x = p;
+         p -= x;
+         int vc = c[x] * (1.0 - p) + c[x + 1] * p;
+         int vw = w[x] * (1.0 - p) + w[x + 1] * p;
+         setl (a->start + i, a, i, a->len, vc);
+         if (rgbw && !a->w)
+            setW (a->start + i, vw);
+      }
    return NULL;
 }
