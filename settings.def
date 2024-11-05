@@ -35,7 +35,7 @@ u8	ls.als	10	.hex=1				// Colour sensor ID
 gpio	audio.data	38				// I2S PDM Data
 gpio	audio.clock	40				// I2S PDM Clock
 bit	audio.right	1				// I2S PDM use right channel
-u8	audio.damp	7	.live=1			// Damping from peak (higher is slower)
+u8	audio.damp	3	.live=1			// Damping from peak (higher is slower)
 
 bit	ha.enable	1	.hide=1			// Enable Home Assistant
 bit	poweron		1	.hide=1 .live=1		// Start virtual strip 1 on power on
