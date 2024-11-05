@@ -4,6 +4,13 @@ A system to drive common RGB and RGBW LED strips (WS2812/SK6812, etc).
 
 This is a hardware and software project. The software is much like WLED, but my library and style, though without as many effects (yet). The hardware is designed to be compact and flexible, but also to be able to run WLED.
 
+## Purchasing
+
+* [Amazon - USB-C - This s/w pre loaded](https://www.amazon.co.uk/dp/B0C1W1XJS8) note new stock coming soon.
+* [Amazon - USB-C - Pre loaded with WLED](https://www.amazon.co.uk/dp/B0CG3S8JX3) note new stock coming soon.
+* [Amazon - USB-A - This s/w pre loaded](https://www.amazon.co.uk/dp/B0DGD5XPLT) note existing stock is TDM version of TDK mic.
+* [Amazon - simple fairy lights](https://www.amazon.co.uk/dp/B0D1CQCLBX) works well on 5V USB up to 100 (2 strips).
+
 ## In-line USB-C
 
 <img src=Manuals/USB-C-Top.png align=right width=50%>
@@ -19,6 +26,7 @@ The USB-C module is designed to be small and work in-line between a USB-C cable 
 * Single sided design with flat base to allow easy fixing under shelf, etc.
 * Functional USB for flashing and debug to ESP32.
 * Simple poptential divide to ADC pin to allow input voltage monitoring.
+* The USB-C module also has pads allowing a 6x6 surface mount contact switch to be soldered on the back.
 
 The power supply means you can run from USB and power the strip from 5V USB, or power from the strip, e.g. a 12V strip and external 12V supply (even at other end of strip). Don't connect USB at the same time as a higher voltage supply.
 

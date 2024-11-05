@@ -39,7 +39,7 @@ u8	audio.damp	7	.live=1			// Damping from peak (higher is slower)
 u16	audio.min	100	.live=1			// Audio min freq (recommended 4*cps)
 u16	audio.max	6400	.live=1			// Audio max freq (recommended 256*cps)
 
-bit	ha.enable		.hide=1			// Enable Home Assistant
+bit	ha.enable	1	.hide=1			// Enable Home Assistant
 bit	poweron		1	.hide=1 .live=1		// Start virtual strip 1 on power on
 
 s	name		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Name (must be set to appear in HA)
