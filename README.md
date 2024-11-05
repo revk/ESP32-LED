@@ -7,7 +7,7 @@ This is a hardware and software project. The software is much like WLED, but my 
 ## Purchasing
 
 * [Amazon - USB-C - This s/w pre loaded](https://www.amazon.co.uk/dp/B0C1W1XJS8) note new stock coming soon.
-* [Amazon - USB-C - Pre loaded with WLED](https://www.amazon.co.uk/dp/B0DGD5XPLT) note new stock coming soon.
+* [Amazon - USB-C - Pre loaded with WLED](https://www.amazon.co.uk/dp/B0CG3S8JX3) note new stock coming soon.
 * [Amazon - USB-A - This s/w pre loaded](https://www.amazon.co.uk/dp/B0DGD5XPLT) note existing stock is TDM version of TDK mic.
 
 ## In-line USB-C
