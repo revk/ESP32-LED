@@ -119,6 +119,8 @@ A palette is simply a way colours change, they can be based on time, or position
 
 Note that `volumergb` uses blue for *base* and red for *high* by default, but a JSON config in a preset can set `"r"`/`"g"`/`"b"` as an array of *start* and *end* (Hz).
 
+Note that `audio` and `volume` can have `"min"` and `"max"` in Hz, default is whole range.
+
 ### Ring/loop apps
 
 |App|Meaning|

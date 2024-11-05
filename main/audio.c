@@ -3,6 +3,13 @@
 #include "app.h"
 #include <math.h>
 
+typedef struct
+{
+   uint8_t min;
+   uint8_t max;
+   uint8_t damp[0];
+} config_t;
+
 const char *
 appaudio (app_t * a)
 {
@@ -10,7 +17,37 @@ appaudio (app_t * a)
    {                            // Sanity check / defaults
       if (!a->colourset)
          setcolour (a, "spin");
+      free (a->data);
+      memset (a->data = mallocspi (sizeof (config_t)), 0, sizeof (config_t));
+      config_t *c = a->data;
+      c->max = AUDIOBANDS;
+      if (a->config)
+      {
+         jo_t j = jo_parse_str (a->config);
+         if (jo_here (j) == JO_OBJECT)
+         {
+            if (jo_find (j, "min") == JO_NUMBER)
+               c->min = audiohz2band (jo_read_int (j));
+            if (jo_find (j, "max") == JO_NUMBER)
+               c->max = audiohz2band (jo_read_int (j)) + 1;
+         }
+         jo_free (&j);
+      }
+      if (c->min > AUDIOBANDS - 1)
+         c->min = AUDIOBANDS - 1;
+      if (c->max < c->min + 1)
+         c->max = c->min + 1;
+      if (c->max > AUDIOBANDS)
+         c->max = AUDIOBANDS;
+      // Report config
+      jo_t n = jo_object_alloc ();
+      jo_int (n, "min", audioband2hz (c->min));
+      jo_int (n, "max", audioband2hz (c->max));
+      char *was = a->config;
+      a->config = jo_finisha (&n);
+      free (was);
    }
+   config_t *c = a->data;
    void setled (int i, float v)
    {
       uint8_t c = 0,
@@ -35,12 +72,13 @@ appaudio (app_t * a)
       if (rgbw && !a->w)
          setW (a->start + i, w);
    }
+   uint8_t bands = c->max - c->min;
    xSemaphoreTake (audio_mutex, portMAX_DELAY);
-   if (AUDIOBANDS > a->len)
+   if (bands > a->len)
       for (int i = 0; i < a->len; i++)
       {                         // More bands, pack in to LEDs
-         float p1 = (float) i * AUDIOBANDS / a->len;
-         float p2 = (float) (i + 1) * AUDIOBANDS / a->len;
+         float p1 = c->min + (float) i * bands / a->len;
+         float p2 = c->min + (float) (i + 1) * bands / a->len;
          float v = 0;
          while (p1 < p2)
          {
@@ -53,12 +91,12 @@ appaudio (app_t * a)
             v += audioband[(int) p1] * f;
             p1 = q;
          }
-         v = v * a->len / AUDIOBANDS;
+         v = v * a->len / bands;
          setled (i, v);
    } else
       for (int i = 0; i < a->len; i++)
       {                         // more LEDs, interpolate to bands
-         float p = (float) i * AUDIOBANDS / a->len;
+         float p = c->min + (float) i * bands / a->len;
          int x = p;
          p -= x;
          float v = audioband[x] * (1.0 - p) + audioband[x + 1] * p;

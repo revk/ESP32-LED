@@ -985,6 +985,8 @@ revk_web_extra (httpd_req_t * req, int page)
    {
       revk_web_send (req,
                      "<tr><td colspan=3>Virtual strips are <i>lights</i> in Home Assistant. These can overlap if required.</td></tr>");
+      if (audiomag)
+         revk_web_send (req, "<tr><td colspan=3>Audio response %dHz to %dHz in %d bins.</td></tr>", AUDIOMIN, AUDIOMAX, AUDIOBANDS);
       if (!page && poweron)
          revk_web_send (req, "<tr><td colspan=3>This is the setting applied at power on.</td></tr>");
       if (!page)
