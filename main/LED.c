@@ -986,7 +986,11 @@ revk_web_extra (httpd_req_t * req, int page)
       revk_web_send (req,
                      "<tr><td colspan=3>Virtual strips are <i>lights</i> in Home Assistant. These can overlap if required.</td></tr>");
       if (audiomag)
-         revk_web_send (req, "<tr><td colspan=3>Audio response %dHz to %dHz in %d bins.</td></tr>", AUDIOMIN, AUDIOMAX, AUDIOBANDS);
+         revk_web_send (req,
+                        "<tr><td colspan=3>Audio response %dHz to %dHz in %d bins, e.g. Starting %dHz %dHz %dHz %dHz %dHz %dHz %dHz %dHz ... %dHz %dHz %dHz, but based on %dHz steps mapped to these bins.</td></tr>",
+                        AUDIOMIN, AUDIOMAX, AUDIOBANDS, audioband2hz (0), audioband2hz (1), audioband2hz (2), audioband2hz (3),
+                        audioband2hz (4), audioband2hz (5), audioband2hz (6), audioband2hz (7), audioband2hz (AUDIOBANDS - 3),
+                        audioband2hz (AUDIOBANDS - 2), audioband2hz (AUDIOBANDS - 1), cps);
       if (!page && poweron)
          revk_web_send (req, "<tr><td colspan=3>This is the setting applied at power on.</td></tr>");
       if (!page)
@@ -1352,7 +1356,6 @@ i2s_task (void *arg)
       float band[AUDIOBANDS];   // Should get main audio in first 16 or so slots
       for (int b = 0; b < AUDIOBANDS; b++)
          band[b] = NAN;
-      //int count[AUDIOBANDS] = { 0 };
       {                         // log frequency
          float low = log (AUDIOMIN),
             high = log (AUDIOMAX),
@@ -1370,16 +1373,21 @@ i2s_task (void *arg)
                   band[b] = v;
                else
                   band[b] += v;
-               //count[b]++;
             }
          }
       }
+      for (int b = 0; b < AUDIOBANDS - 1; b++)
+         if (!isnan (band[b]) && isnan (band[b + 1]))
+         {
+            int q = 2;
+            while (b + q < AUDIOBANDS && isnan (band[b + q]))
+               q++;
+            float v = band[b];
+            for (int z = 0; z < q; z++)
+               band[b + z] = v / q;
+         }
       for (int b = 0; b < AUDIOBANDS; b++)
-         //if (count[b]) band[b] = 10 * log10 (band[b] / count[b]); // Average, would seem sensible...
-         if (!isnan (band[b]))
-            band[b] = 10 * log10 (band[b]);     // OK no clue why but if we average we end up with way lower top frequencies
-         else if (b)
-            band[b] = band[b - 1];      // missed bin
+         band[b] = 10 * log10 (band[b]);        // OK no clue why but if we average we end up with way lower top frequencies
       //ESP_LOGE (TAG, "FFT %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f gain %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21], audiogain);
       for (int b = 0; b < AUDIOBANDS; b++)
          band[b] = (band[b] + 25) / 25; // makes more 0-1 level output

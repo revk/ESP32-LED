@@ -33,9 +33,9 @@
 #define	AUDIOHZ		((int)cps)      // Hz step
 #define	AUDIOSAMPLES	512     // Power of 2 (this is multiplied by oversample)
 #define	AUDIORATE	(AUDIOSAMPLES*AUDIOHZ)  // Hz which is multiplied by oversample (TDK 25-300ks/s in theory but 25k seemed not to work)
-#define	AUDIOMIN	((int)cps*4) // Hz
-#define	AUDIOMAX	((int)cps*256) // Hz
-#define	AUDIOBANDS	48      // How many bands we make log based
+#define	AUDIOMIN	((int)cps*2)    // Hz
+#define	AUDIOMAX	((int)cps*(AUDIOSAMPLES/2))     // Hz
+#define	AUDIOBANDS	42      // How many bands we make log based
 #define	AUDIOSTEP	((AUDIOMAX-AUDIOMIN)/AUDIOBANDS)        // Hz steps
 #define	AUDIOGAINMIN	0.01
 #define	AUDIOGAINMAX	50
