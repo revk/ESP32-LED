@@ -19,6 +19,7 @@ The USB-C module is designed to be small and work in-line between a USB-C cable 
 * Single sided design with flat base to allow easy fixing under shelf, etc.
 * Functional USB for flashing and debug to ESP32.
 * Simple poptential divide to ADC pin to allow input voltage monitoring.
+* The USB-C module also has pads allowing a 6x6 surface mount contact switch to be soldered on the back.
 
 The power supply means you can run from USB and power the strip from 5V USB, or power from the strip, e.g. a 12V strip and external 12V supply (even at other end of strip). Don't connect USB at the same time as a higher voltage supply.
 
