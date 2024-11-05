@@ -4,6 +4,12 @@ A system to drive common RGB and RGBW LED strips (WS2812/SK6812, etc).
 
 This is a hardware and software project. The software is much like WLED, but my library and style, though without as many effects (yet). The hardware is designed to be compact and flexible, but also to be able to run WLED.
 
+## Purchasing
+
+* [Amazon - USB-C - This s/w pre loaded](https://www.amazon.co.uk/dp/B0C1W1XJS8) note new stock coming soon.
+* We will also have a listing for the USB-C re-loaded with WLED software, but you can load your own s/w via USB.
+* [Amazon - USB-A - This s/w pre loaded](https://www.amazon.co.uk/dp/B0DGD5XPLT) note existing stock is TDM version of TDK mic.
+
 ## In-line USB-C
 
 <img src=Manuals/USB-C-Top.png align=right width=50%>
