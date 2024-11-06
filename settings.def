@@ -32,9 +32,9 @@ u8	webcontrol	2				// Web controls
 gpio	ls.scl						// Colour sensor SCL
 gpio	ls.sda						// Colour sensor SDA
 u8	ls.als	10	.hex=1				// Colour sensor ID
-gpio	audio.data	40				// I2S Data / SD
-gpio	audio.clock	42				// I2S Clock / SCK
-gpio	audio.ws	41				// I2S WS
+gpio	audio.data	38				// I2S Data / SD
+gpio	audio.clock	40				// I2S Clock / SCK
+gpio	audio.ws					// I2S WS
 bit	audio.right	1				// I2S PDM use right channel
 u8	audio.damp	3	.live=1			// Damping from peak (higher is slower)
 
