@@ -10,6 +10,7 @@ static const char TAG[] = "LED";
 #include <driver/uart.h>
 #include <driver/i2c.h>
 #include <driver/i2s_pdm.h>
+#include <driver/i2s_std.h>
 #include "led_strip.h"
 #include "app.h"
 #include <esp_http_server.h>
@@ -40,6 +41,7 @@ struct
    uint8_t haconfig:1;          // Send config
    uint8_t hacheck:1;           // Check presets
    uint8_t sound:1;             // An audio based effect is in use
+   uint8_t soundok:1;           // Receiving sound data
    uint8_t checksound:1;        // Temp
 } b;
 
@@ -615,7 +617,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       return NULL;
    }
-   if (suffix && (!strcasecmp (suffix, "stop") || !strcasecmp (suffix, "upgrade")))
+   if (suffix && !strcasecmp (suffix, "stop"))
       return led_stop ();
    if (suffix && !strncasecmp (suffix, "power", 5))
    {                            // Like tasmota
@@ -634,7 +636,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       return NULL;
    }
-   if (suffix && !strcmp (suffix, "dark"))
+   if (suffix && (!strcmp (suffix, "dark") || !strcasecmp (suffix, "upgrade")))
    {
       haon = 0;                 // All off
       hachanged = 1;
@@ -985,7 +987,7 @@ revk_web_extra (httpd_req_t * req, int page)
    {
       revk_web_send (req,
                      "<tr><td colspan=3>Virtual strips are <i>lights</i> in Home Assistant. These can overlap if required.</td></tr>");
-      if (audiomag)
+      if (b.soundok)
          revk_web_send (req,
                         "<tr><td colspan=3>Audio response %dHz to %dHz in %d bins, e.g. Starting %dHz %dHz %dHz %dHz %dHz %dHz %dHz %dHz ... %dHz %dHz %dHz, but based on %dHz steps mapped to these bins.</td></tr>",
                         AUDIOMIN, AUDIOMAX, AUDIOBANDS, audioband2hz (0), audioband2hz (1), audioband2hz (2), audioband2hz (3),
@@ -1085,11 +1087,13 @@ web_root (httpd_req_t * req)
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
       if (applist[i].text)
          button (applist[i].name, applist[i].description);
-   if (audiodata.set && audioclock.set)
+   if (b.soundok)
+   {
       revk_web_send (req, "<br>");
-   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-      if (applist[i].sound)
-         button (applist[i].name, applist[i].description);
+      for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+         if (applist[i].sound)
+            button (applist[i].name, applist[i].description);
+   }
    revk_web_send (req, "<br>");
    button ("stop", "Stop");
    revk_web_send (req, "</p></fieldset><fieldset><legend>Preset</legend><p>");
@@ -1267,10 +1271,6 @@ float audioband[AUDIOBANDS] = { 0 };
 
 SemaphoreHandle_t audio_mutex = NULL;
 
-static float audiogain = AUDIOGAINMAX;
-static int16_t audioraw[AUDIOSAMPLES * AUDIOOVERSAMPLE];
-static float fftre[AUDIOSAMPLES];
-static float fftim[AUDIOSAMPLES];
 void
 i2s_task (void *arg)
 {
@@ -1290,21 +1290,53 @@ i2s_task (void *arg)
    }
    esp_err_t err;
    i2s_chan_handle_t i = { 0 };
-   i2s_chan_config_t chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG (I2S_NUM_0, I2S_ROLE_MASTER);
+   i2s_chan_config_t chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG (I2S_NUM_AUTO, I2S_ROLE_MASTER);
    err = i2s_new_channel (&chan_cfg, NULL, &i);
-   i2s_pdm_rx_config_t cfg = {
-      .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (AUDIORATE * AUDIOOVERSAMPLE),
-      .slot_cfg = I2S_PDM_RX_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),
-      .gpio_cfg = {
-                   .clk = audioclock.num,
-                   .din = audiodata.num,
-                   .invert_flags = {
-                                    .clk_inv = audioclock.invert}
-                   }
-   };
-   cfg.slot_cfg.slot_mask = (audioright ? I2S_PDM_SLOT_RIGHT : I2S_PDM_SLOT_LEFT);
-   if (!err)
-      err = i2s_channel_init_pdm_rx_mode (i, &cfg);
+   uint8_t bytes = (audiows.set ? 4 : 2);
+   uint8_t *audioraw = mallocspi (bytes * AUDIOSAMPLES * AUDIOOVERSAMPLE);
+   float *fftre = mallocspi (sizeof (float) * AUDIOSAMPLES);
+   float *fftim = mallocspi (sizeof (float) * AUDIOSAMPLES);
+   float audiogain = AUDIOGAINMAX;
+   if (audiows.set)
+   {                            // 24 bit Philips format
+      i2s_std_config_t cfg = {
+         .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG (AUDIORATE * AUDIOOVERSAMPLE),
+         .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_32BIT, I2S_SLOT_MODE_STEREO),
+         .gpio_cfg = {
+                      .mclk = I2S_GPIO_UNUSED,
+                      .bclk = audioclock.num,
+                      .ws = audiows.num,
+                      .dout = I2S_GPIO_UNUSED,
+                      .din = audiodata.num,
+                      .invert_flags = {
+                                       .mclk_inv = false,
+                                       .bclk_inv = audioclock.invert,
+                                       .ws_inv = audiows.invert,
+                                       },
+                      },
+      };
+      cfg.slot_cfg.slot_mask = (audioright ? I2S_STD_SLOT_RIGHT : I2S_STD_SLOT_LEFT);
+      if (bytes == 3)
+         cfg.clk_cfg.mclk_multiple = 384;
+      if (!err)
+         err = i2s_channel_init_std_mode (i, &cfg);
+   } else
+   {                            // PDM 16 bit
+      i2s_pdm_rx_config_t cfg = {
+         .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (AUDIORATE * AUDIOOVERSAMPLE),
+         .slot_cfg = I2S_PDM_RX_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),
+         .gpio_cfg = {
+                      .clk = audioclock.num,
+                      .din = audiodata.num,
+                      .invert_flags = {
+                                       .clk_inv = audioclock.invert}
+                      }
+      };
+      cfg.slot_cfg.slot_mask = (audioright ? I2S_PDM_SLOT_RIGHT : I2S_PDM_SLOT_LEFT);
+      if (!err)
+         err = i2s_channel_init_pdm_rx_mode (i, &cfg);
+   }
+   gpio_pulldown_en (audiodata.num);
    if (!err)
       err = i2s_channel_enable (i);
    if (err)
@@ -1312,29 +1344,43 @@ i2s_task (void *arg)
       ESP_LOGE (TAG, "I2S failed");
       jo_t j = e (err, "Failed init I2S");
       revk_error ("i2s", &j);
+      vTaskDelete (NULL);
       return;
    }
+   ESP_LOGE (TAG, "Audio started, %d*%d bits at %dHz", AUDIOSAMPLES * AUDIOOVERSAMPLE, bytes * 8, AUDIORATE * AUDIOOVERSAMPLE);
    while (1)
    {
       size_t n = 0;
-      i2s_channel_read (i, audioraw, sizeof (audioraw), &n, 100);
+      i2s_channel_read (i, audioraw, bytes * AUDIOSAMPLES * AUDIOOVERSAMPLE, &n, 100);
+      if (n < bytes * AUDIOSAMPLES * AUDIOOVERSAMPLE)
+         continue;
+      if (*(int32_t *) audioraw)
+         b.soundok = 1;
       if (!b.sound)
          continue;              // Not needed
-      // ESP_LOGE (TAG, "Bytes %d/%d %6d %6d %6d %6d", n / sizeof (*audioraw), AUDIOSAMPLES, audioraw[0], audioraw[1], audioraw[2], audioraw[3]);
-      if (n < sizeof (audioraw))
-         continue;
       float ref = 0,
          mag = 0;
       {
-         int r = 0;
+         uint8_t *p = audioraw;
          for (int i = 0; i < AUDIOSAMPLES; i++)
          {
-            float v = (float) audioraw[r++] / 32768;
+            int32_t raw;
+            if (bytes == 4)
+               raw = *(int32_t *) p << 1;       // Philips mode 24 bits with top bit skipped
+            else
+               raw = *(int16_t *) p << 16;      // PDM 16 bit mode
+            p += bytes;
+            float v = (float) raw / 2147483648;
             mag += v * v;
             fftre[i] = v * audiogain / AUDIOOVERSAMPLE;
             for (int q = 0; q < AUDIOOVERSAMPLE - 1; q++)
             {
-               float v = (float) audioraw[r++] / 32768;
+               if (bytes == 4)
+                  raw = *(int32_t *) p << 1;    // Philips mode
+               else
+                  raw = *(int16_t *) p << 16;   // PDM 16 bit mode
+               p += bytes;
+               float v = (float) raw / 2147483648;
                fftre[i] += v * audiogain / AUDIOOVERSAMPLE;
                mag += v * v;
             }
