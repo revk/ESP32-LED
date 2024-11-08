@@ -27,7 +27,7 @@ bit	sk6812			.hide=1			// SK6812 (instead of WS2812)
 bit 	rgbw			.hide=1			// RGBW (no effects coded for this yet)
 bit	rgswap			.hide=1			// Red/green swap
 bit	bgswap			.hide=1			// Blue/green swap
-u16	leds		12	.hide=1	.array=2	// How many LEDs
+u16	leds			.hide=1	.array=2	// How many LEDs
 u8	webcontrol	2				// Web controls
 gpio	ls.scl						// Colour sensor SCL
 gpio	ls.sda						// Colour sensor SDA
