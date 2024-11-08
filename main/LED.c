@@ -763,14 +763,15 @@ led_task (void *x)
       revk_blink_init ();       // Library blink
    led_strip_handle_t strip[STRIPS] = { 0 };
    for (int s = 0; s < STRIPS; s++)
-      if (leds[s])
+      ledmax += leds[s];
+   for (int s = 0; s < STRIPS; s++)
+      if (leds[s] || !ledmax)
       {
-         ledmax += leds[s];
-         ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb[s].num, rgb[s].invert ? " (inverted)" : "", leds[s],
+         ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb[s].num, rgb[s].invert ? " (inverted)" : "", leds[s] ? : 4,
                    led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
          led_strip_config_t strip_config = {
             .strip_gpio_num = rgb[s].num,
-            .max_leds = leds[s] + (s ? 0 : led_status), // The number of LEDs in the strip,
+            .max_leds = (leds[s] ? : 4) + (s ? 0 : led_status), // The number of LEDs in the strip,
             .led_pixel_format = rgbw ? LED_PIXEL_FORMAT_GRBW : LED_PIXEL_FORMAT_GRB,    // Pixel format of your LED strip
             .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,  // LED strip model
             .flags.invert_out = rgb[s].invert,  // whether to invert the output signal(useful when your hardware has a level inverter)
@@ -783,15 +784,29 @@ led_task (void *x)
 #endif
          };
          REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip[s]));
-         REVK_ERR_CHECK (led_strip_clear (strip[s]));
+         if(strip[s])REVK_ERR_CHECK (led_strip_clear (strip[s]));
       }
-   if (!ledmax)
-      ledmax = 1;
-   ledr = calloc (ledmax, sizeof (*ledr));
-   ledg = calloc (ledmax, sizeof (*ledg));
-   ledb = calloc (ledmax, sizeof (*ledb));
+   ledr = calloc (ledmax ? : STRIPS * 4, sizeof (*ledr));
+   ledg = calloc (ledmax ? : STRIPS * 4, sizeof (*ledg));
+   ledb = calloc (ledmax ? : STRIPS * 4, sizeof (*ledb));
    if (rgbw)
-      ledw = calloc (ledmax, sizeof (*ledw));
+      ledw = calloc (ledmax ? : STRIPS * 4, sizeof (*ledw));
+   if (!ledmax)
+   {                            // Preset for no LEDs set
+      memset (ledr, 0, STRIPS * 4 * sizeof (*ledr));
+      memset (ledg, 0, STRIPS * 4 * sizeof (*ledg));
+      memset (ledb, 0, STRIPS * 4 * sizeof (*ledb));
+      if (ledw)
+         memset (ledw, 0, 8 * sizeof (*ledw));
+      for (int s = 0; s < STRIPS; s++)
+      {
+         ledr[0 + 4 * s] = 255;
+         ledg[1 + 4 * s] = 255;
+         ledb[2 + 4 * s] = 255;
+         if (ledw)
+            ledw[3 + 4 * s] = 255;
+      }
+   }
    if (poweron && *effect[0])
    {                            // Light 1 is default
       haon = 1;
@@ -801,35 +816,37 @@ led_task (void *x)
    uint32_t tick = 1000000LL / cps;
    while (1)
    {                            // Main loop
-      if (b.hacheck)
-         presetcheck ();
-      if (b.haconfig)
-         send_ha_config ();
-      if (hastatus)
-         send_ha_status ();
       usleep (tick - (esp_timer_get_time () % tick));
-      clear (1, ledmax);
-      xSemaphoreTake (app_mutex, portMAX_DELAY);
-      b.checksound = 0;
-      for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
-         for (unsigned int i = 0; i < MAXAPPS; i++)
-         {
-            app_t *a = &active[i];
-            if (a->sound)
-               b.checksound = 1;
-            if (a->preset == preset && a->app)
+      if (ledmax)
+      {
+         if (b.hacheck)
+            presetcheck ();
+         if (b.haconfig)
+            send_ha_config ();
+         if (hastatus)
+            send_ha_status ();
+         clear (1, ledmax);
+         xSemaphoreTake (app_mutex, portMAX_DELAY);
+         b.checksound = 0;
+         for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
+            for (unsigned int i = 0; i < MAXAPPS; i++)
             {
-               const char *name = a->name;
-               if (a->delay)
-               {                // Delayed start
-                  a->delay--;
-                  continue;
-               }
-               if (!a->cycle)
-               {                // Starting
-                  jo_t j = jo_object_alloc ();
-                  jo_int (j, "level", i);
-                  jo_string (j, "app", a->name);
+               app_t *a = &active[i];
+               if (a->sound)
+                  b.checksound = 1;
+               if (a->preset == preset && a->app)
+               {
+                  const char *name = a->name;
+                  if (a->delay)
+                  {             // Delayed start
+                     a->delay--;
+                     continue;
+                  }
+                  if (!a->cycle)
+                  {             // Starting
+                     jo_t j = jo_object_alloc ();
+                     jo_int (j, "level", i);
+                     jo_string (j, "app", a->name);
 #define u8(s,n,d)         if(a->n)jo_int(j,#n,a->n);
 #define u8d(s,n,d)         if(a->n)jo_litf(j,#n,"%.1f",1.0*a->n/cps);
 #define u8r(s,n,d)        u8(s,n,d)
@@ -840,7 +857,7 @@ led_task (void *x)
 #define s16r(s,n,d)        u8(s,n,d)
 #define u32(s,n,d)        u8(s,n,d)
 #define u32d(s,n,d)        u8d(s,n,d)
-                  params
+                     params
 #undef  u8
 #undef  u8d
 #undef  u8r
@@ -851,70 +868,71 @@ led_task (void *x)
 #undef  s16r
 #undef  u32
 #undef  u32d
-                     if (a->palette)
-                     jo_string (j, "colour", palettes[a->palette - 1].name);
-                  else if (a->colourset)
+                        if (a->palette)
+                        jo_string (j, "colour", palettes[a->palette - 1].name);
+                     else if (a->colourset)
+                     {
+                        if (rgbw)
+                        {
+                           if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17) && !(a->w % 17))
+                              jo_stringf (j, "colour", "%X%X%X%X", a->r / 17, a->g / 17, a->b / 17, a->w / 17);
+                           else
+                              jo_stringf (j, "colour", "%02X%02X%02X%02X", a->r, a->g, a->b, a->w);
+                        } else
+                        {
+                           if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
+                              jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
+                           else
+                              jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
+                        }
+                     }
+                     if (a->data)
+                        jo_string (j, "data", (char *) a->data);
+                     revk_info ("start", &j);
+                  }
+                  const char *e = a->app (a);
+                  if (e)
+                     a->stop = 1;
+                  a->cycle++;
+                  if (a->stop && !--a->stop)
                   {
-                     if (rgbw)
-                     {
-                        if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17) && !(a->w % 17))
-                           jo_stringf (j, "colour", "%X%X%X%X", a->r / 17, a->g / 17, a->b / 17, a->w / 17);
-                        else
-                           jo_stringf (j, "colour", "%02X%02X%02X%02X", a->r, a->g, a->b, a->w);
-                     } else
-                     {
-                        if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17))
-                           jo_stringf (j, "colour", "%X%X%X", a->r / 17, a->g / 17, a->b / 17);
-                        else
-                           jo_stringf (j, "colour", "%02X%02X%02X", a->r, a->g, a->b);
+                     uint8_t preset = a->preset;
+                     appzap (a);
+                     if (preset)
+                     {          // Last one ?
+                        int i;
+                        for (i = 0; i < MAXAPPS; i++)
+                           if (active[i].preset == preset)
+                              break;
+                        if (i == MAXAPPS)
+                        {       // Has turned off preset
+                           haon &= ~(1ULL << (preset - 1));
+                           hastatus |= (1ULL << (preset - 1));
+                        }
                      }
+                  } else if (!a->stop && a->limit && a->cycle >= a->limit)
+                     a->stop = a->fadeout;      // Tell app to stop
+                  if (a->stop)
+                     a->fader = a->bright * a->stop / a->fadeout;
+                  else if (a->cycle < a->fadein)
+                     a->fader = a->bright * a->cycle / a->fadein;
+                  else
+                     a->fader = a->bright;
+                  if (!a->app)
+                  {             // Done
+                     jo_t j = jo_object_alloc ();
+                     jo_int (j, "level", i);
+                     jo_string (j, "app", name);
+                     if (e && *e)
+                        jo_string (j, "error", e);
+                     revk_info ("done", &j);
                   }
-                  if (a->data)
-                     jo_string (j, "data", (char *) a->data);
-                  revk_info ("start", &j);
-               }
-               const char *e = a->app (a);
-               if (e)
-                  a->stop = 1;
-               a->cycle++;
-               if (a->stop && !--a->stop)
-               {
-                  uint8_t preset = a->preset;
-                  appzap (a);
-                  if (preset)
-                  {             // Last one ?
-                     int i;
-                     for (i = 0; i < MAXAPPS; i++)
-                        if (active[i].preset == preset)
-                           break;
-                     if (i == MAXAPPS)
-                     {          // Has turned off preset
-                        haon &= ~(1ULL << (preset - 1));
-                        hastatus |= (1ULL << (preset - 1));
-                     }
-                  }
-               } else if (!a->stop && a->limit && a->cycle >= a->limit)
-                  a->stop = a->fadeout; // Tell app to stop
-               if (a->stop)
-                  a->fader = a->bright * a->stop / a->fadeout;
-               else if (a->cycle < a->fadein)
-                  a->fader = a->bright * a->cycle / a->fadein;
-               else
-                  a->fader = a->bright;
-               if (!a->app)
-               {                // Done
-                  jo_t j = jo_object_alloc ();
-                  jo_int (j, "level", i);
-                  jo_string (j, "app", name);
-                  if (e && *e)
-                     jo_string (j, "error", e);
-                  revk_info ("done", &j);
                }
             }
-         }
-      b.sound = b.checksound;
-      xSemaphoreGive (app_mutex);
-      {
+         b.sound = b.checksound;
+         xSemaphoreGive (app_mutex);
+      }
+      {                         // Update display
          uint8_t *r = ledr;
          uint8_t *g = ledg;
          uint8_t *b = ledb;
@@ -934,9 +952,10 @@ led_task (void *x)
          for (int s = 0; s < STRIPS; s++)
             if (strip[s])
             {
+               int n = ledmax ? leds[s] : 4;
                if (rgbw)
                {
-                  for (unsigned int i = 0; i < leds[s]; i++)
+                  for (unsigned int i = 0; i < n; i++)
                      led_strip_set_pixel_rgbw (strip[s], i + (s ? 0 : led_status),      //
                                                gamma8[(unsigned int) maxr * r[i] / 255],        //
                                                gamma8[(unsigned int) maxg * g[i] / 255],        //
@@ -944,7 +963,7 @@ led_task (void *x)
                                                gamma8[(unsigned int) maxw * w[i] / 255]);
                } else
                {
-                  for (unsigned int i = 0; i < leds[s]; i++)
+                  for (unsigned int i = 0; i < n; i++)
                      led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),   //
                                           gamma8[(unsigned int) maxr * r[i] / 255],     //
                                           gamma8[(unsigned int) maxg * g[i] / 255],     //
@@ -990,9 +1009,9 @@ revk_web_extra (httpd_req_t * req, int page)
       if (b.soundok)
          revk_web_send (req,
                         "<tr><td colspan=3>Audio response %dHz to %dHz in %d bins, e.g. Starting %dHz %dHz %dHz %dHz %dHz %dHz %dHz %dHz ... %dHz %dHz %dHz, but based on %dHz steps mapped to these bins.</td></tr>",
-                        AUDIOMIN, AUDIOMAX, AUDIOBANDS, audioband2hz (0), audioband2hz (1), audioband2hz (2), audioband2hz (3),
-                        audioband2hz (4), audioband2hz (5), audioband2hz (6), audioband2hz (7), audioband2hz (AUDIOBANDS - 3),
-                        audioband2hz (AUDIOBANDS - 2), audioband2hz (AUDIOBANDS - 1), cps);
+                        AUDIOMIN, AUDIOMAX, AUDIOBANDS, audioband2hz (0), audioband2hz (1), audioband2hz (2),
+                        audioband2hz (3), audioband2hz (4), audioband2hz (5), audioband2hz (6), audioband2hz (7),
+                        audioband2hz (AUDIOBANDS - 3), audioband2hz (AUDIOBANDS - 2), audioband2hz (AUDIOBANDS - 1), cps);
       if (!page && poweron)
          revk_web_send (req, "<tr><td colspan=3>This is the setting applied at power on.</td></tr>");
       if (!page)
@@ -1064,48 +1083,53 @@ web_root (httpd_req_t * req)
       }
    }
    revk_web_send (req, "<h1>LED controller: %s</h1>", hostname);
-   revk_web_send (req,
-                  "<form method=get><fieldset><legend>Effect</legend><p>Colour:<input name=colour placeholder='#%s or colour name' size=30> or <select name=palette><option value=''>--- Palette --- </option>",
-                  rgbw ? "RGBW" : "RGB");
-   for (int p = 0; palettes[p].name; p++)
-      revk_web_send (req, "<option value='%s'>%s (%s)</option>", palettes[p].name, palettes[p].name, palettes[p].description);
-   revk_web_send (req, "</select></p><p>");
-   void button (const char *tag, const char *title)
+   if (!ledmax)
+      revk_web_send (req, "<h2>Please go to settings and set number of LEDs.</h2>");
+   else
    {
       revk_web_send (req,
-                     "<label for='%s'><div style='display:inline-block;text-align:center;'><input style='min-width:7rem;'type=submit name='app' value='%s' id='%s'><br>%s</div></label>",
-                     tag, tag, tag, title);
-   }
-   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-      if (!applist[i].ring && !applist[i].text && !applist[i].sound)
-         button (applist[i].name, applist[i].description);
-   revk_web_send (req, "<br>");
-   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-      if (applist[i].ring)
-         button (applist[i].name, applist[i].description);
-   revk_web_send (req, "<br>");
-   for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-      if (applist[i].text)
-         button (applist[i].name, applist[i].description);
-   if (b.soundok)
-   {
+                     "<form method=get><fieldset><legend>Effect</legend><p>Colour:<input name=colour placeholder='#%s or colour name' size=30> or <select name=palette><option value=''>--- Palette --- </option>",
+                     rgbw ? "RGBW" : "RGB");
+      for (int p = 0; palettes[p].name; p++)
+         revk_web_send (req, "<option value='%s'>%s (%s)</option>", palettes[p].name, palettes[p].name, palettes[p].description);
+      revk_web_send (req, "</select></p><p>");
+      void button (const char *tag, const char *title)
+      {
+         revk_web_send (req,
+                        "<label for='%s'><div style='display:inline-block;text-align:center;'><input style='min-width:7rem;'type=submit name='app' value='%s' id='%s'><br>%s</div></label>",
+                        tag, tag, tag, title);
+      }
+      for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+         if (!applist[i].ring && !applist[i].text && !applist[i].sound)
+            button (applist[i].name, applist[i].description);
       revk_web_send (req, "<br>");
       for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-         if (applist[i].sound)
+         if (applist[i].ring)
             button (applist[i].name, applist[i].description);
+      revk_web_send (req, "<br>");
+      for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+         if (applist[i].text)
+            button (applist[i].name, applist[i].description);
+      if (b.soundok)
+      {
+         revk_web_send (req, "<br>");
+         for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
+            if (applist[i].sound)
+               button (applist[i].name, applist[i].description);
+      }
+      revk_web_send (req, "<br>");
+      button ("stop", "Stop");
+      revk_web_send (req, "</p></fieldset><fieldset><legend>Preset</legend><p>");
+      for (int p = 1; p <= CONFIG_REVK_WEB_EXTRA_PAGES; p++)
+      {
+         if (!*config[p - 1] && !*effect[p - 1] && !*name[p - 1])
+            continue;
+         char temp[10];
+         sprintf (temp, "%d", p);
+         button (temp, name[p - 1]);
+      }
+      revk_web_send (req, "</p></fieldset></form>");
    }
-   revk_web_send (req, "<br>");
-   button ("stop", "Stop");
-   revk_web_send (req, "</p></fieldset><fieldset><legend>Preset</legend><p>");
-   for (int p = 1; p <= CONFIG_REVK_WEB_EXTRA_PAGES; p++)
-   {
-      if (!*config[p - 1] && !*effect[p - 1] && !*name[p - 1])
-         continue;
-      char temp[10];
-      sprintf (temp, "%d", p);
-      button (temp, name[p - 1]);
-   }
-   revk_web_send (req, "</p></fieldset></form>");
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    uint8_t found = 0;
    for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
@@ -1159,7 +1183,8 @@ web_root (httpd_req_t * req)
    if (found)
       revk_web_send (req, "</ul></fieldset>");
    xSemaphoreGive (app_mutex);
-   revk_web_send (req, "<p><a href=/>Reload</a></p>");
+   if (ledmax)
+      revk_web_send (req, "<p><a href=/>Reload</a></p>");
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
 }
 
@@ -1270,7 +1295,6 @@ float audiomag = 0;
 float audioband[AUDIOBANDS] = { 0 };
 
 SemaphoreHandle_t audio_mutex = NULL;
-
 void
 i2s_task (void *arg)
 {
@@ -1492,10 +1516,20 @@ app_main ()
    matter_main ();
 #endif
    revk_start ();
-   if (!cps)
-      cps = 10;
    if (dark)
       revk_blink (0, 0, "K");
+   if (cps < 10)
+      cps = 10;                 // Safety for division
+   memset (habright, 255, sizeof (habright));
+   if (rgbw)
+      memset (haw, 255, sizeof (hab));
+   else
+   {
+      memset (har, 255, sizeof (har));
+      memset (hag, 255, sizeof (hag));
+      memset (hab, 255, sizeof (hab));
+   }
+   revk_task ("LED", led_task, NULL, 4);
    if (lssda.set && lsscl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
    if (audiodata.set && audioclock.set)
@@ -1512,19 +1546,7 @@ app_main ()
          register_get_uri ("/", web_root);
       }
    }
-   if (cps < 10)
-      cps = 10;                 // Safety for division
-   memset (habright, 255, sizeof (habright));
-   if (rgbw)
-      memset (haw, 255, sizeof (hab));
-   else
-   {
-      memset (har, 255, sizeof (har));
-      memset (hag, 255, sizeof (hag));
-      memset (hab, 255, sizeof (hab));
-   }
    //hargb = -1;
-   revk_task ("LED", led_task, NULL, 4);
 }
 
 // Libraries
