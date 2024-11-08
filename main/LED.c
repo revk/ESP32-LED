@@ -784,13 +784,14 @@ led_task (void *x)
 #endif
          };
          REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip[s]));
-         if(strip[s])REVK_ERR_CHECK (led_strip_clear (strip[s]));
+         if (strip[s])
+            REVK_ERR_CHECK (led_strip_clear (strip[s]));
       }
-   ledr = calloc (ledmax ? : STRIPS * 4, sizeof (*ledr));
-   ledg = calloc (ledmax ? : STRIPS * 4, sizeof (*ledg));
-   ledb = calloc (ledmax ? : STRIPS * 4, sizeof (*ledb));
+   ledr = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledr));
+   ledg = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledg));
+   ledb = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledb));
    if (rgbw)
-      ledw = calloc (ledmax ? : STRIPS * 4, sizeof (*ledw));
+      ledw = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledw));
    if (!ledmax)
    {                            // Preset for no LEDs set
       memset (ledr, 0, STRIPS * 4 * sizeof (*ledr));
