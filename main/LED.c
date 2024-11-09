@@ -772,7 +772,7 @@ led_task (void *x)
          led_strip_config_t strip_config = {
             .strip_gpio_num = rgb[s].num,
             .max_leds = (leds[s] ? : 4) + (s ? 0 : led_status), // The number of LEDs in the strip,
-            .led_pixel_format = rgbw ? LED_PIXEL_FORMAT_GRBW : LED_PIXEL_FORMAT_GRB,    // Pixel format of your LED strip
+	    .color_component_format = rgbw? LED_PIXEL_FORMAT_GRBW:LED_STRIP_COLOR_COMPONENT_FMT_GRB,
             .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,  // LED strip model
             .flags.invert_out = rgb[s].invert,  // whether to invert the output signal(useful when your hardware has a level inverter)
          };
