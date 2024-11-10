@@ -1006,7 +1006,8 @@ revk_web_extra (httpd_req_t * req, int page)
    } else
    {
       revk_web_send (req,
-                     "<tr><td colspan=3>Virtual strips are <i>lights</i> in Home Assistant. These can overlap if required.</td></tr>");
+                     "<tr><td colspan=3><h2>Preset %d:</h2>Virtual strips are <i>lights</i> in Home Assistant if <tt>name</tt> is set. These can overlap if required.</td></tr>",
+                     page);
       if (b.soundok)
          revk_web_send (req,
                         "<tr><td colspan=3>Audio response %dHz to %dHz in %d bins, e.g. Starting %dHz %dHz %dHz %dHz %dHz %dHz %dHz %dHz ... %dHz %dHz %dHz, but based on %dHz steps mapped to these bins.</td></tr>",
