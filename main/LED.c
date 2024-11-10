@@ -1006,8 +1006,8 @@ revk_web_extra (httpd_req_t * req, int page)
    } else
    {
       revk_web_send (req,
-                     "<tr><td colspan=3><h2>Preset %d:</h2>Virtual strips are <i>lights</i> in Home Assistant if <tt>name</tt> is set. These can overlap if required.</td></tr>",
-                     page);
+                     "<tr><td colspan=3><h2>Preset %d:</h2>This preset (or <i>virtual strip</i>) appears as a <i>light</i> in Home Assistant if <tt>name</tt> is set. These can overlap if required.%s</td></tr>",
+                     page, haenable ? "" : " (HA is not enabled)");
       if (b.soundok)
          revk_web_send (req,
                         "<tr><td colspan=3>Audio response %dHz to %dHz in %d bins, e.g. Starting %dHz %dHz %dHz %dHz %dHz %dHz %dHz %dHz ... %dHz %dHz %dHz, but based on %dHz steps mapped to these bins.</td></tr>",
@@ -1252,6 +1252,7 @@ web_root (httpd_req_t * req)
       for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
          if (applist[i].text)
             button (applist[i].name, applist[i].description);
+      revk_web_send (req, "<div style='display:inline-block;'>Most text effects are better done as a preset or via MQTT.</div>");
       if (b.soundok)
       {
          revk_web_send (req, "<br>");
