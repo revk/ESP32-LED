@@ -1,5 +1,7 @@
 // Text block and time
 
+// TODO use config JSON for settings including height, direction, etc
+
 #include "app.h"
 #include "chars.h"
 
