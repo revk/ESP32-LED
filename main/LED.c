@@ -228,7 +228,7 @@ addapp (int index, int preset, const char *name, jo_t j)
       return NULL;
    }
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-      if (!strcasecmp (name, applist[i].name))
+      if (!strcasecmp (name, applist[i].name) || !strcasecmp (name, applist[i].description))
       {
          uint8_t setcolourj (jo_t j)
          {
@@ -426,7 +426,7 @@ led_add (const char *tag, int preset, jo_t j)
    if (!strcmp (tag, "*") && preset && haeffect[preset - 1] && *haeffect[preset - 1])
       tag = haeffect[preset - 1];
    for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-      if (!strcasecmp (tag, applist[i].name))
+      if (!strcasecmp (tag, applist[i].name) || !strcasecmp (tag, applist[i].description))
       {                         // Direct command
          xSemaphoreTake (app_mutex, portMAX_DELAY);
          int index = apptidy (1);
@@ -600,7 +600,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
             jo_strncpy (j, val, sizeof (val));
             int i;
             for (i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-               if (!strcasecmp (val, applist[i].name))
+               if (!strcasecmp (val, applist[i].name) || !strcasecmp (val, applist[i].description))
                   break;
             if (i == sizeof (applist) / sizeof (*applist))
                return "Unknown effect";
@@ -636,7 +636,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       return NULL;
    }
-   if (suffix && (!strcmp (suffix, "dark") || !strcasecmp (suffix, "upgrade")))
+   if (suffix && (!strcasecmp (suffix, "dark") || !strcasecmp (suffix, "upgrade")))
    {
       haon = 0;                 // All off
       hachanged = 1;
@@ -772,7 +772,7 @@ led_task (void *x)
          led_strip_config_t strip_config = {
             .strip_gpio_num = rgb[s].num,
             .max_leds = (leds[s] ? : 4) + (s ? 0 : led_status), // The number of LEDs in the strip,
-	    .color_component_format = rgbw? LED_STRIP_COLOR_COMPONENT_FMT_GRBW:LED_STRIP_COLOR_COMPONENT_FMT_GRB,
+            .color_component_format = rgbw ? LED_STRIP_COLOR_COMPONENT_FMT_GRBW : LED_STRIP_COLOR_COMPONENT_FMT_GRB,
             .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,  // LED strip model
             .flags.invert_out = rgb[s].invert,  // whether to invert the output signal(useful when your hardware has a level inverter)
          };
@@ -1050,6 +1050,18 @@ register_uri (const httpd_uri_t * uri_struct)
 }
 
 static void
+register_ws_uri (const char *uri, esp_err_t (*handler) (httpd_req_t * r))
+{
+   httpd_uri_t uri_struct = {
+      .uri = uri,
+      .method = HTTP_GET,
+      .handler = handler,
+      .is_websocket = true,
+   };
+   register_uri (&uri_struct);
+}
+
+static void
 register_get_uri (const char *uri, esp_err_t (*handler) (httpd_req_t * r))
 {
    httpd_uri_t uri_struct = {
@@ -1058,6 +1070,133 @@ register_get_uri (const char *uri, esp_err_t (*handler) (httpd_req_t * r))
       .handler = handler,
    };
    register_uri (&uri_struct);
+}
+
+static esp_err_t
+web_status (httpd_req_t * req)
+{                               // Web socket status report
+   int fd = httpd_req_to_sockfd (req);
+   void wsend (jo_t * jp)
+   {
+      char *js = jo_finisha (jp);
+      if (js)
+      {
+         httpd_ws_frame_t ws_pkt;
+         memset (&ws_pkt, 0, sizeof (httpd_ws_frame_t));
+         ws_pkt.payload = (uint8_t *) js;
+         ws_pkt.len = strlen (js);
+         ws_pkt.type = HTTPD_WS_TYPE_TEXT;
+         httpd_ws_send_frame_async (req->handle, fd, &ws_pkt);
+         free (js);
+      }
+   }
+   esp_err_t status (void)
+   {
+      jo_t j = jo_object_alloc ();
+      jo_array (j, "presets");
+      for (int p = 0; p < CONFIG_REVK_WEB_EXTRA_PAGES; p++)
+         jo_bool (j, NULL, (haon & (1ULL << p)) ? 1 : 0);
+      jo_close (j);
+      jo_array (j, "active");
+      for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
+         for (unsigned int i = 0; i < MAXAPPS; i++)
+         {
+            app_t *a = &active[i];
+            if (a->preset == preset && a->app && !a->stop)
+            {
+               jo_object (j, NULL);
+               if (*a->name)
+                  jo_string (j, "name", a->name);
+               if (a->start && a->start != 1)
+                  jo_int (j, "start", a->start);
+               if (a->len && a->len != ledmax)
+                  jo_int (j, "len", a->len);
+               if (a->bright < 255)
+                  jo_int (j, "bright", a->bright);
+               if (a->delay)
+                  jo_litf (j, "delay", "%.lf", 1.0 * a->delay / cps);
+               if (a->limit)
+                  jo_litf (j, "limit", "%.1f", 1.0 * a->limit / cps);
+               if (a->speed != cps)
+                  jo_litf (j, "speed", "%.1f", 1.0 * a->speed / cps);
+               if (a->fadein != cps)
+                  jo_litf (j, "fadein", "%.1f", 1.0 * a->fadein / cps);
+               if (a->fadeout != cps)
+                  jo_litf (j, "fadeout", "%.1f", 1.0 * a->fadeout / cps);
+               if (a->palette)
+                  jo_string (j, "colour", palettes[a->palette - 1].name);
+               else if (a->colourset)
+               {
+                  if (rgbw)
+                     jo_stringf (j, "colour", "#%02X%02X%02X%02X", a->r, a->g, a->b, a->w);
+                  else
+                     jo_stringf (j, "colour", "#%02X%02X%02X", a->r, a->g, a->b);
+               }
+               if (a->preset)
+               {
+                  if (*name[a->preset - 1])
+                     jo_string (j, "preset", name[a->preset - 1]);
+                  else
+                     jo_int (j, "preset", a->preset);
+               }
+               if (a->config && *a->config)
+                  jo_lit (j, "config", a->config);      // Already validated json
+               jo_close (j);
+            }
+         }
+      jo_close (j);
+      const char *reason;
+      int t = revk_shutting_down (&reason);
+      if (t)
+         jo_string (j, "shutdown", reason);
+      wsend (&j);
+      return ESP_OK;
+   }
+   if (req->method == HTTP_GET)
+      return status ();         // Send status on initial connect
+   // received packet
+   httpd_ws_frame_t ws_pkt;
+   uint8_t *buf = NULL;
+   memset (&ws_pkt, 0, sizeof (httpd_ws_frame_t));
+   ws_pkt.type = HTTPD_WS_TYPE_TEXT;
+   esp_err_t ret = httpd_ws_recv_frame (req, &ws_pkt, 0);
+   if (ret)
+      return ret;
+   if (!ws_pkt.len)
+      return status ();         // Empty string
+   buf = calloc (1, ws_pkt.len + 1);
+   if (!buf)
+      return ESP_ERR_NO_MEM;
+   ws_pkt.payload = buf;
+   ret = httpd_ws_recv_frame (req, &ws_pkt, ws_pkt.len);
+   if (!ret)
+   {
+      jo_t j = jo_parse_mem (buf, ws_pkt.len);
+      if (j && jo_here (j) == JO_OBJECT)
+      {
+         while (jo_next (j) == JO_TAG)
+         {
+            char tag[10];
+            jo_strncpy (j, tag, sizeof (tag));
+            jo_next (j);
+            int p = atoi (tag);
+            ESP_LOGE (TAG, "Setting %d=%d", p, jo_here (j));
+            if (p >= 1 && p <= CONFIG_REVK_WEB_EXTRA_PAGES)
+            {
+               if (jo_here (j) == JO_TRUE)
+                  haon |= (1ULL << (p - 1));
+               else if (jo_here (j) == JO_FALSE)
+                  haon &= ~(1ULL << (p - 1));
+               hachanged = 1;
+               b.hacheck = 1;
+            }
+            jo_skip (j);
+         }
+         jo_free (&j);
+      }
+   }
+   free (buf);
+   return status ();
 }
 
 static esp_err_t
@@ -1084,6 +1223,7 @@ web_root (httpd_req_t * req)
       }
    }
    revk_web_send (req, "<h1>LED controller: %s</h1>", hostname);
+   revk_web_send (req, "<p id=shutdown style='display:none;color:red;'></p>");
    if (!ledmax)
       revk_web_send (req, "<h2>Please go to settings and set number of LEDs.</h2>");
    else
@@ -1097,8 +1237,8 @@ web_root (httpd_req_t * req)
       void button (const char *tag, const char *title)
       {
          revk_web_send (req,
-                        "<label for='%s'><div style='display:inline-block;text-align:center;'><input style='min-width:7rem;'type=submit name='app' value='%s' id='%s'><br>%s</div></label>",
-                        tag, tag, tag, title);
+                        "<label for='%s'><div style='display:inline-block;text-align:center;'><input style='min-width:7rem;' type=submit name='app' value='%s' id='%s'></div></label>",
+                        tag, title, tag);
       }
       for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
          if (!applist[i].ring && !applist[i].text && !applist[i].sound)
@@ -1120,72 +1260,42 @@ web_root (httpd_req_t * req)
       }
       revk_web_send (req, "<br>");
       button ("stop", "Stop");
+      button ("dark", "Dark");
       revk_web_send (req, "</p></fieldset><fieldset><legend>Preset</legend><p>");
       for (int p = 1; p <= CONFIG_REVK_WEB_EXTRA_PAGES; p++)
       {
          if (!*config[p - 1] && !*effect[p - 1] && !*name[p - 1])
             continue;
-         char temp[10];
-         sprintf (temp, "%d", p);
-         button (temp, name[p - 1]);
+         revk_web_send (req,
+                        "<div style='display:inline-block;text-align:center;'><label class=switch><input type=checkbox id=\"%d\" onchange=\"w('%d',this.checked);\"%s><span class=slider></span></label><br><label for=\"%d\">%s</label></div></label>",
+                        p, p, haon & (1ULL << (p - 1)) ? " checked" : "", p, name[p - 1]);
       }
       revk_web_send (req, "</p></fieldset></form>");
    }
-   xSemaphoreTake (app_mutex, portMAX_DELAY);
-   uint8_t found = 0;
-   for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
-      for (unsigned int i = 0; i < MAXAPPS; i++)
-      {
-         app_t *a = &active[i];
-         if (a->preset == preset && a->app && !a->stop)
-         {
-            if (!found++)
-               revk_web_send (req, "<fieldset><legend>Active</legend><ul>");
-            revk_web_send (req, "<li>");
-            if (*a->name)
-               revk_web_send (req, "<b>%s</b>", a->name);
-            if (a->start && a->start != 1)
-               revk_web_send (req, " start=%d", a->start);
-            if (a->len && a->len != ledmax)
-               revk_web_send (req, " len=%d", a->len);
-            if (a->bright < 255)
-               revk_web_send (req, " bright=%d", a->bright);
-            if (a->delay)
-               revk_web_send (req, " delay=%.1f", 1.0 * a->delay / cps);
-            if (a->limit)
-               revk_web_send (req, " limit=%.1f", 1.0 * a->limit / cps);
-            if (a->speed != cps)
-               revk_web_send (req, " speed=%.1f", 1.0 * a->speed / cps);
-            if (a->fadein != cps)
-               revk_web_send (req, " fadein=%.1f", 1.0 * a->fadein / cps);
-            if (a->fadeout != cps)
-               revk_web_send (req, " fadeout=%.1f", 1.0 * a->fadeout / cps);
-            if (a->palette)
-               revk_web_send (req, " colour=%s", palettes[a->palette - 1].name);
-            else if (a->colourset)
-            {
-               if (rgbw)
-                  revk_web_send (req, " colour=#%02X%02X%02X%02X", a->r, a->g, a->b, a->w);
-               else
-                  revk_web_send (req, " colour=#%02X%02X%02X", a->r, a->g, a->b);
-            }
-            if (a->preset)
-            {
-               if (*name[a->preset - 1])
-                  revk_web_send (req, " preset=%s", name[a->preset - 1]);
-               else
-                  revk_web_send (req, " preset=%d", a->preset);
-            }
-            if (a->config && *a->config)
-               revk_web_send (req, " config=%s", a->config);
-            revk_web_send (req, "</li>");
-         }
-      }
-   if (found)
-      revk_web_send (req, "</ul></fieldset>");
-   xSemaphoreGive (app_mutex);
    if (ledmax)
-      revk_web_send (req, "<p><a href=/>Reload</a></p>");
+      revk_web_send (req, "<fieldset><legend>Active</legend><ul id=active></ul></fieldset>"     //
+                     "<script>" //
+                     "var ws=0;"        //
+                     "var reboot=0;"    //
+                     "function g(n){return document.getElementById(n);};"       //
+                     "function b(n,v){var d=g(n);if(d)d.checked=v;}"    //
+                     "function h(n,v){var d=g(n);if(d)d.style.display=v?'block':'none';}"       //
+                     "function s(n,v){var d=g(n);if(d)d.textContent=v;}"        //
+                     "function w(n,v){var m=new Object();m[n]=v;ws.send(JSON.stringify(m));}"   //
+                     "function c(){"    //
+                     "ws=new WebSocket((location.protocol=='https:'?'wss:':'ws:')+'//'+window.location.host+'/status');"        //
+                     "ws.onclose=function(v){ws=undefined;if(reboot)location.reload();};"       //
+                     "ws.onerror=function(v){ws.close();};"     //
+                     "ws.onmessage=function(v){"        //
+                     "o=JSON.parse(v.data);"    //
+                     "o.presets.forEach(function(e,i,a){b(i+1,e);});"   //
+                     "var a=document.createElement('ul');a.id='active';"        //
+                     "o.active.forEach(function(e,i,ar){l=document.createElement('li');l.textContent=JSON.stringify(e);a.appendChild(l);});"    //
+                     "g('active').replaceWith(a);"      //
+                     "if(o.shutdown){reboot=true;s('shutdown','Restarting: '+o.shutdown);h('shutdown',true);};" //
+                     "};};c();" //
+                     "setInterval(function() {if(!ws)c();else ws.send('');},1000);"     //
+                     "</script>");
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
 }
 
@@ -1545,6 +1655,7 @@ app_main ()
          if (webcontrol >= 2)
             revk_web_settings_add (webserver);
          register_get_uri ("/", web_root);
+         register_ws_uri ("/status", web_status);
       }
    }
    //hargb = -1;
