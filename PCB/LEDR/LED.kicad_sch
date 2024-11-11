@@ -5419,7 +5419,7 @@
 		(uuid "3b6982b8-3521-4890-bfec-5f645dfcab3c")
 	)
 	(no_connect
-		(at 35.56 66.04)
+		(at 35.56 68.58)
 		(uuid "3ba863ec-9576-4240-8247-730086e7aca4")
 	)
 	(no_connect
@@ -5894,7 +5894,7 @@
 	)
 	(global_label "LED"
 		(shape output)
-		(at 35.56 68.58 180)
+		(at 35.56 58.42 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5904,7 +5904,7 @@
 		)
 		(uuid "504cbac7-e2a9-41d8-a151-c0b77c2cb5f9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 29.7819 68.58 0)
+			(at 29.7819 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6136,7 +6136,7 @@
 	)
 	(global_label "ADC"
 		(shape input)
-		(at 35.56 58.42 180)
+		(at 35.56 66.04 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6146,7 +6146,7 @@
 		)
 		(uuid "8b6668e3-59cd-4e32-b9c9-ed66e7b4608a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 29.6004 58.42 0)
+			(at 29.6004 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
