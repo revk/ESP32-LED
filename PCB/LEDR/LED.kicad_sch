@@ -9876,7 +9876,7 @@
 				)
 			)
 		)
-		(property "Value" "G3VM-41GR8"
+		(property "Value" "Relay"
 			(at 159.385 141.1986 0)
 			(effects
 				(font
@@ -9911,7 +9911,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C2691601"
+		(property "LCSC Part #" "C2691608"
 			(at 159.385 135.255 0)
 			(effects
 				(font
@@ -11176,6 +11176,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC Part #" "C2765055"
+			(at 172.085 133.985 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "72a7c501-0fa0-4aee-b31b-127f703bb858")
 		)
@@ -11501,6 +11510,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 238.76 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C2765055"
 			(at 238.76 124.46 0)
 			(effects
 				(font
