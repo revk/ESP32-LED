@@ -1438,7 +1438,7 @@ i2s_task (void *arg)
    {                            // 24 bit Philips format
       i2s_std_config_t cfg = {
          .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG (AUDIORATE * AUDIOOVERSAMPLE),
-         .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_32BIT, I2S_SLOT_MODE_STEREO),
+         .slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_32BIT, I2S_SLOT_MODE_STEREO),
          .gpio_cfg = {
                       .mclk = I2S_GPIO_UNUSED,
                       .bclk = audioclock.num,
@@ -1503,7 +1503,7 @@ i2s_task (void *arg)
          {
             int32_t raw;
             if (bytes == 4)
-               raw = *(int32_t *) p << 1;       // Philips mode 24 bits with top bit skipped
+               raw = *(int32_t *) p; // PCM 32 bit (TDK populates top 24 bits and rest 0)
             else
                raw = *(int16_t *) p << 16;      // PDM 16 bit mode
             p += bytes;
