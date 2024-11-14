@@ -5592,6 +5592,16 @@
 	)
 	(wire
 		(pts
+			(xy 233.68 130.81) (xy 244.475 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf67fb16-9395-456a-88c2-2f812c313f4b")
+	)
+	(wire
+		(pts
 			(xy 184.15 64.77) (xy 186.69 64.77)
 		)
 		(stroke
@@ -6400,22 +6410,22 @@
 	)
 	(global_label "SKPPWR"
 		(shape input)
-		(at 233.68 130.81 0)
+		(at 244.475 138.43 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "e98af862-d130-4922-ad61-8a97db3c40f1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 243.7519 130.81 0)
+			(at 244.475 148.5019 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -9412,6 +9422,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 244.475 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8475494d-9428-4f8e-8c46-ab8e9a528d4c")
+		(property "Reference" "R8"
+			(at 246.38 134.62 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "300K"
+			(at 244.475 134.62 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:R_0402"
+			(at 242.697 134.62 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 244.475 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 244.475 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "43ab1f1d-786a-4ad6-bb85-1970708e8e6f")
+		)
+		(pin "2"
+			(uuid "b9d515fa-448e-4ab7-8cff-1418725cd5f1")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "R8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 66.04 60.96 90)
 		(unit 1)
@@ -10871,73 +10948,6 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "#PWR030")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 233.68 133.35 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "cddd8531-10da-489b-b6f2-6b1ce75ceadd")
-		(property "Reference" "#PWR031"
-			(at 240.03 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 236.9312 133.477 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 233.68 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 233.68 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 233.68 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6542606c-6c98-48dc-afd5-ff7cec78ebab")
-		)
-		(instances
-			(project "LED"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR031")
 					(unit 1)
 				)
 			)
