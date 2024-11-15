@@ -22854,11 +22854,11 @@
 		(layer "Eco1.User")
 		(uuid "0a38d369-e051-41c5-bc8c-573aa7675245")
 		(pts
-			(xy 122.05 92) (xy 122.05 108)
+			(xy 122.5 83) (xy 122.5 108)
 		)
 		(height -5.25)
-		(gr_text "16 mm"
-			(at 126.15 100 90)
+		(gr_text "25 mm"
+			(at 126.6 95.5 90)
 			(layer "Eco1.User")
 			(uuid "0a38d369-e051-41c5-bc8c-573aa7675245")
 			(effects
@@ -22886,11 +22886,11 @@
 		(layer "Eco1.User")
 		(uuid "ee20ca26-0835-4641-83de-f4db61e9a324")
 		(pts
-			(xy 123.05 94) (xy 77.05 94)
+			(xy 123 83) (xy 77 83)
 		)
 		(height 7.5)
 		(gr_text "46 mm"
-			(at 100.05 85.35 0)
+			(at 100 74.35 0)
 			(layer "Eco1.User")
 			(uuid "ee20ca26-0835-4641-83de-f4db61e9a324")
 			(effects
