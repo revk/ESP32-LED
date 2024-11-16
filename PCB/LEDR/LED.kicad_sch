@@ -6060,7 +6060,7 @@
 		(uuid "40799593-5139-424d-88c8-086021e0da98")
 	)
 	(no_connect
-		(at 35.56 55.88)
+		(at 35.56 60.96)
 		(uuid "42f6e4fb-06c2-461d-8306-2f989c5d4af2")
 	)
 	(no_connect
@@ -6080,7 +6080,7 @@
 		(uuid "58743b71-d142-4de8-ad2b-7696aac3ac56")
 	)
 	(no_connect
-		(at 35.56 58.42)
+		(at 35.56 71.12)
 		(uuid "71ba25bc-6077-4d2e-a97c-affcbafb60d1")
 	)
 	(no_connect
@@ -6227,7 +6227,7 @@
 	)
 	(wire
 		(pts
-			(xy 176.53 118.11) (xy 174.625 118.11)
+			(xy 176.53 118.11) (xy 175.26 118.11)
 		)
 		(stroke
 			(width 0)
@@ -6267,7 +6267,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 118.11) (xy 167.005 118.11)
+			(xy 166.37 118.11) (xy 167.64 118.11)
 		)
 		(stroke
 			(width 0)
@@ -6729,7 +6729,7 @@
 	)
 	(global_label "SKPSD"
 		(shape output)
-		(at 35.56 60.96 180)
+		(at 35.56 55.88 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6739,7 +6739,7 @@
 		)
 		(uuid "5fe26b57-9e11-42ed-b922-055aae09bb92")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 27 60.96 0)
+			(at 27 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7081,7 +7081,7 @@
 	)
 	(global_label "LED1"
 		(shape output)
-		(at 35.56 71.12 180)
+		(at 35.56 58.42 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7091,7 +7091,7 @@
 		)
 		(uuid "b2fcf4ab-1e4a-4a29-9a3f-b95f7bc1fefb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 28.5724 71.12 0)
+			(at 28.5724 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13944,7 +13944,7 @@
 	)
 	(symbol
 		(lib_id "RevK:ES05D1MC10")
-		(at 170.815 118.11 0)
+		(at 171.45 118.11 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13952,7 +13952,7 @@
 		(dnp no)
 		(uuid "f901df81-ec82-429e-b717-04a37de04856")
 		(property "Reference" "D3"
-			(at 170.688 121.158 0)
+			(at 171.323 121.158 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13960,7 +13960,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 170.815 115.8629 0)
+			(at 171.45 115.8629 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13968,7 +13968,7 @@
 			)
 		)
 		(property "Footprint" "RevK:DFN1006-2L"
-			(at 171.45 114.935 0)
+			(at 172.085 114.935 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13977,7 +13977,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 170.815 118.11 0)
+			(at 171.45 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13986,7 +13986,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 170.815 118.11 0)
+			(at 171.45 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13995,7 +13995,7 @@
 			)
 		)
 		(property "LCSC Part #" "C5137770"
-			(at 170.815 121.285 0)
+			(at 171.45 121.285 0)
 			(effects
 				(font
 					(size 1.27 1.27)
