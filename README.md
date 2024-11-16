@@ -24,7 +24,7 @@ This is the full specification module, with a lot of features.
 * USB-C connection - functional for flashing and debug as well as 5V power.
 * Powerful ESP32-S3-MINI-1-N4-R2 dual CPU processor with 4MB Flash and 2MB SPI RAM, WiFi, Bluetooth, etc.
 * 3 contact WAGO connector for the LED strip, for simple and easy connection.
-* 2 pin WAGO connector to solid state relay, 4.5A
+* 2 pin WAGO connector to solid state relay, 3.5A
 * Switch mode power supply working from 4V to 35V (5V only when USB connected).
 * TDK ICS 43434 I2S digital microphone.
 * MAX98357A I2S digital amplifier.
