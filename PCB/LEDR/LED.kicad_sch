@@ -6167,7 +6167,7 @@
 	)
 	(wire
 		(pts
-			(xy 257.175 37.465) (xy 257.175 40.005)
+			(xy 257.175 38.735) (xy 257.175 40.005)
 		)
 		(stroke
 			(width 0)
@@ -6344,6 +6344,16 @@
 			(type default)
 		)
 		(uuid "e1e46891-d638-4c7e-bb4f-a6663f89e9bc")
+	)
+	(wire
+		(pts
+			(xy 257.175 31.115) (xy 257.175 29.845)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4f65588-ffca-48c0-83e0-777dbcaad3d1")
 	)
 	(wire
 		(pts
@@ -10122,7 +10132,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 257.175 33.655 0)
+		(at 257.175 34.925 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10130,7 +10140,7 @@
 		(dnp no)
 		(uuid "725f2a6e-c711-487e-82c0-5dfd7f97b948")
 		(property "Reference" "C4"
-			(at 260.604 32.512 0)
+			(at 260.604 33.782 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10139,7 +10149,7 @@
 			)
 		)
 		(property "Value" "4.7uF"
-			(at 260.604 34.544 0)
+			(at 260.604 35.814 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10148,7 +10158,7 @@
 			)
 		)
 		(property "Footprint" "RevK:C_0402"
-			(at 258.1402 37.465 0)
+			(at 258.1402 38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10157,7 +10167,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 257.175 33.655 0)
+			(at 257.175 34.925 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10166,7 +10176,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 257.175 33.655 0)
+			(at 257.175 34.925 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10175,7 +10185,7 @@
 			)
 		)
 		(property "LCSC Part #" "C194427"
-			(at 257.175 33.655 0)
+			(at 257.175 34.925 0)
 			(effects
 				(font
 					(size 1.27 1.27)
