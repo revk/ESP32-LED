@@ -1026,8 +1026,8 @@ revk_web_extra (httpd_req_t * req, int page)
       }
       add ("name");
       add ("effect");
-      add ("start");
       add ("colour");
+      add ("start");
       add ("len");
       add ("top");
       add ("bright");
