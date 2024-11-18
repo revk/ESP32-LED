@@ -1411,7 +1411,6 @@ SemaphoreHandle_t audio_mutex = NULL;
 void
 i2s_task (void *arg)
 {
-   ESP_LOGE (TAG, "I2S init CLK %d DAT %d", audioclock.num, audiodata.num);
    jo_t e (esp_err_t err, const char *msg)
    {                            // Error
       jo_t j = jo_object_alloc ();
@@ -1436,6 +1435,7 @@ i2s_task (void *arg)
    float audiogain = AUDIOGAINMAX;
    if (audiows.set)
    {                            // 24 bit Philips format
+      ESP_LOGE (TAG, "I2S init CLK %d DAT %d WS %d", audioclock.num, audiodata.num, audiows.num);
       i2s_std_config_t cfg = {
          .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG (AUDIORATE * AUDIOOVERSAMPLE),
          .slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_32BIT, I2S_SLOT_MODE_STEREO),
@@ -1459,6 +1459,7 @@ i2s_task (void *arg)
          err = i2s_channel_init_std_mode (i, &cfg);
    } else
    {                            // PDM 16 bit
+      ESP_LOGE (TAG, "I2S init PDM CLK %d DAT %d", audioclock.num, audiodata.num);
       i2s_pdm_rx_config_t cfg = {
          .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (AUDIORATE * AUDIOOVERSAMPLE),
          .slot_cfg = I2S_PDM_RX_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),
@@ -1503,7 +1504,7 @@ i2s_task (void *arg)
          {
             int32_t raw;
             if (bytes == 4)
-               raw = *(int32_t *) p; // PCM 32 bit (TDK populates top 24 bits and rest 0)
+               raw = *(int32_t *) p;    // PCM 32 bit (TDK populates top 24 bits and rest 0)
             else
                raw = *(int16_t *) p << 16;      // PDM 16 bit mode
             p += bytes;
