@@ -68,13 +68,13 @@ The power supply means you can run from USB and power the strip from 5V USB, or 
 <img src=Manuals/USB-A-Top.jpg align=right width=48%>
 <img src=Manuals/USB-A-Bottom.jpg width=48%>
 
-<img src=Manuals/USB-A-Attached.jpg align=right width=40%>
-
 The USB-A module is designed to plug in directly to a USB-A socket and connector to an LED strip.
 
 * Very tiny 33.1mm x 15.4mm (38.2mm x 15.4mm including antenna), but bear in mind that 10mm disappears in to the USB-A socket.
 * All the same features as the USB-C, except double sided to make even smaller.
 * Very easy to fit directly on to end of LED strip allowing direct plug in to USB-A.
+
+<img src=Manuals/USB-A-Attached.jpg>
 
 ## Software
 
