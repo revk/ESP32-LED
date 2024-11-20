@@ -40,7 +40,7 @@ The power supply means you can run from USB and power the strip from 5V USB, or 
 
 ## In-line USB-C
 
-<img src=Manuals/USB-C-Top.png align=right width=50%>
+<img src=Manuals/USB-C-Top.jpg align=right width=50%>
 
 The USB-C module is designed to be small and work in-line between a USB-C cable and an LED strip.
 
@@ -65,8 +65,8 @@ The power supply means you can run from USB and power the strip from 5V USB, or 
 
 ## Plug-in USB-A
 
-<img src=Manuals/USB-A-Top.png align=right width=48%>
-<img src=Manuals/USB-A-Bottom.png width=48%>
+<img src=Manuals/USB-A-Top.jpg align=right width=48%>
+<img src=Manuals/USB-A-Bottom.jpg width=48%>
 
 <img src=Manuals/USB-A-Attached.jpg align=right width=40%>
 
