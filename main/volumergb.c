@@ -80,8 +80,8 @@ appvolumergb (app_t * a)
             uint8_t band (void)
             {
                int v = jo_read_int (j);
-               if (v >= AUDIOBANDS)
-                  v = audiohz2band (v);
+               if (v >= MICBANDS)
+                  v = michz2band (v);
                return v;
             }
             void set (band_t * b, const char *tag)
@@ -89,7 +89,7 @@ appvolumergb (app_t * a)
                jo_type_t t = jo_find (j, tag);
                if (!t)
                   return;
-               b->len = AUDIOBANDS / 3;
+               b->len = MICBANDS / 3;
                if (t == JO_NUMBER)
                   b->start = band ();
                else if (t == JO_ARRAY)
@@ -111,33 +111,33 @@ appvolumergb (app_t * a)
       if (!c->b.len && !c->r.len && !c->g.len)
       {                         // No r/g/b config - set defaults
          c->b.start = 0;
-         c->b.len = AUDIOBANDS / 3;
-         c->g.start = AUDIOBANDS / 3;
-         c->g.len = AUDIOBANDS / 3;
-         c->r.start = 2 * AUDIOBANDS / 3;
-         c->r.len = AUDIOBANDS / 3;
+         c->b.len = MICBANDS / 3;
+         c->g.start = MICBANDS / 3;
+         c->g.len = MICBANDS / 3;
+         c->r.start = 2 * MICBANDS / 3;
+         c->r.len = MICBANDS / 3;
       }
       // Report config
       jo_t n = jo_object_alloc ();
       if (c->b.len)
       {
          jo_array (n, "b");
-         jo_int (n, NULL, audioband2hz (c->b.start));
-         jo_int (n, NULL, audioband2hz (c->b.start + c->b.len));
+         jo_int (n, NULL, micband2hz (c->b.start));
+         jo_int (n, NULL, micband2hz (c->b.start + c->b.len));
          jo_close (n);
       }
       if (c->g.len)
       {
          jo_array (n, "g");
-         jo_int (n, NULL, audioband2hz (c->g.start));
-         jo_int (n, NULL, audioband2hz (c->g.start + c->g.len));
+         jo_int (n, NULL, micband2hz (c->g.start));
+         jo_int (n, NULL, micband2hz (c->g.start + c->g.len));
          jo_close (n);
       }
       if (c->r.len)
       {
          jo_array (n, "r");
-         jo_int (n, NULL, audioband2hz (c->r.start));
-         jo_int (n, NULL, audioband2hz (c->r.start + c->r.len));
+         jo_int (n, NULL, micband2hz (c->r.start));
+         jo_int (n, NULL, micband2hz (c->r.start + c->r.len));
          jo_close (n);
       }
       char *was = a->config;
@@ -147,8 +147,8 @@ appvolumergb (app_t * a)
    if (c->b.len)
    {                            // Low 1/4
       float m = 0;
-      for (uint8_t i = c->b.start; i < c->b.start + c->b.len && i < AUDIOBANDS; i++)
-         m += audioband[i];
+      for (uint8_t i = c->b.start; i < c->b.start + c->b.len && i < MICBANDS; i++)
+         m += micband[i];
       int v = m * 65536 / c->b.len;
       if (m < 0)
          v = 0;
@@ -159,8 +159,8 @@ appvolumergb (app_t * a)
    if (c->g.len)
    {                            // Mid 1/4
       float m = 0;
-      for (uint8_t i = c->g.start; i < c->g.start + c->g.len && i < AUDIOBANDS; i++)
-         m += audioband[i];
+      for (uint8_t i = c->g.start; i < c->g.start + c->g.len && i < MICBANDS; i++)
+         m += micband[i];
       int v = m * 65535 / c->g.len;
       if (m < 0)
          v = 0;
@@ -171,8 +171,8 @@ appvolumergb (app_t * a)
    if (c->r.len)
    {                            // High 1/2
       float m = 0;
-      for (uint8_t i = c->r.start; i < c->r.start + c->r.len && i < AUDIOBANDS; i++)
-         m += audioband[i];
+      for (uint8_t i = c->r.start; i < c->r.start + c->r.len && i < MICBANDS; i++)
+         m += micband[i];
       int v = m * 65535 / c->r.len;
       if (m < 0)
          v = 0;

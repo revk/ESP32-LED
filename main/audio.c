@@ -20,29 +20,29 @@ appaudio (app_t * a)
       free (a->data);
       memset (a->data = mallocspi (sizeof (config_t)), 0, sizeof (config_t));
       config_t *c = a->data;
-      c->max = AUDIOBANDS;
+      c->max = MICBANDS;
       if (a->config)
       {
          jo_t j = jo_parse_str (a->config);
          if (jo_here (j) == JO_OBJECT)
          {
             if (jo_find (j, "min") == JO_NUMBER)
-               c->min = audiohz2band (jo_read_int (j));
+               c->min = michz2band (jo_read_int (j));
             if (jo_find (j, "max") == JO_NUMBER)
-               c->max = audiohz2band (jo_read_int (j)) + 1;
+               c->max = michz2band (jo_read_int (j)) + 1;
          }
          jo_free (&j);
       }
-      if (c->min > AUDIOBANDS - 1)
-         c->min = AUDIOBANDS - 1;
+      if (c->min > MICBANDS - 1)
+         c->min = MICBANDS - 1;
       if (c->max < c->min + 1)
          c->max = c->min + 1;
-      if (c->max > AUDIOBANDS)
-         c->max = AUDIOBANDS;
+      if (c->max > MICBANDS)
+         c->max = MICBANDS;
       // Report config
       jo_t n = jo_object_alloc ();
-      jo_int (n, "min", audioband2hz (c->min));
-      jo_int (n, "max", audioband2hz (c->max));
+      jo_int (n, "min", micband2hz (c->min));
+      jo_int (n, "max", micband2hz (c->max));
       char *was = a->config;
       a->config = jo_finisha (&n);
       free (was);
@@ -73,7 +73,7 @@ appaudio (app_t * a)
          setW (a->start + i, w);
    }
    uint8_t bands = c->max - c->min;
-   xSemaphoreTake (audio_mutex, portMAX_DELAY);
+   xSemaphoreTake (mic_mutex, portMAX_DELAY);
    if (bands > a->len)
       for (int i = 0; i < a->len; i++)
       {                         // More bands, pack in to LEDs
@@ -88,7 +88,7 @@ appaudio (app_t * a)
             if (q > p2)
                q = p2;
             float f = q - p1;
-            v += audioband[(int) p1] * f;
+            v += micband[(int) p1] * f;
             p1 = q;
          }
          v = v * a->len / bands;
@@ -99,9 +99,9 @@ appaudio (app_t * a)
          float p = c->min + (float) i * bands / a->len;
          int x = p;
          p -= x;
-         float v = audioband[x] * (1.0 - p) + audioband[x + 1] * p;
+         float v = micband[x] * (1.0 - p) + micband[x + 1] * p;
          setled (i, v);
       }
-   xSemaphoreGive (audio_mutex);
+   xSemaphoreGive (mic_mutex);
    return NULL;
 }

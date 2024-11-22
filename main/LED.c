@@ -737,7 +737,7 @@ send_ha_config (void)
                jo_bool (j, "effect", 1);
                jo_array (j, "effect_list");
                for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
-                  if (!applist[i].text && ((audiodata.set && audioclock.set) || !applist[i].sound))
+                  if (!applist[i].text && ((micdata.set && micclock.set) || !applist[i].sound))
                      jo_string (j, NULL, applist[i].name);
             }
             revk_mqtt_send (NULL, 1, topic, &j);
@@ -1011,9 +1011,9 @@ revk_web_extra (httpd_req_t * req, int page)
       if (b.soundok)
          revk_web_send (req,
                         "<tr><td colspan=3>Audio response %dHz to %dHz in %d bins, e.g. Starting %dHz %dHz %dHz %dHz %dHz %dHz %dHz %dHz ... %dHz %dHz %dHz, but based on %dHz steps mapped to these bins.</td></tr>",
-                        AUDIOMIN, AUDIOMAX, AUDIOBANDS, audioband2hz (0), audioband2hz (1), audioband2hz (2),
-                        audioband2hz (3), audioband2hz (4), audioband2hz (5), audioband2hz (6), audioband2hz (7),
-                        audioband2hz (AUDIOBANDS - 3), audioband2hz (AUDIOBANDS - 2), audioband2hz (AUDIOBANDS - 1), cps);
+                        MICMIN, MICMAX, MICBANDS, micband2hz (0), micband2hz (1), micband2hz (2),
+                        micband2hz (3), micband2hz (4), micband2hz (5), micband2hz (6), micband2hz (7),
+                        micband2hz (MICBANDS - 3), micband2hz (MICBANDS - 2), micband2hz (MICBANDS - 1), cps);
       if (!page && poweron)
          revk_web_send (req, "<tr><td colspan=3>This is the setting applied at power on.</td></tr>");
       if (!page)
@@ -1404,10 +1404,10 @@ i2c_task (void *arg)
    }
 }
 
-float audiomag = 0;
-float audioband[AUDIOBANDS] = { 0 };
+float micmag = 0;
+float micband[MICBANDS] = { 0 };
 
-SemaphoreHandle_t audio_mutex = NULL;
+SemaphoreHandle_t mic_mutex = NULL;
 void
 i2s_task (void *arg)
 {
@@ -1418,63 +1418,63 @@ i2s_task (void *arg)
          jo_string (j, "message", msg);
       if (err)
          jo_string (j, "error", esp_err_to_name (err));
-      if (audiodata.set)
-         jo_int (j, "data", audiodata.num);
-      if (audioclock.set)
-         jo_int (j, "clock", audioclock.num);
+      if (micdata.set)
+         jo_int (j, "data", micdata.num);
+      if (micclock.set)
+         jo_int (j, "clock", micclock.num);
       return j;
    }
    esp_err_t err;
    i2s_chan_handle_t i = { 0 };
    i2s_chan_config_t chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG (I2S_NUM_AUTO, I2S_ROLE_MASTER);
    err = i2s_new_channel (&chan_cfg, NULL, &i);
-   uint8_t bytes = (audiows.set ? 4 : 2);
-   uint8_t *audioraw = mallocspi (bytes * AUDIOSAMPLES * AUDIOOVERSAMPLE);
-   float *fftre = mallocspi (sizeof (float) * AUDIOSAMPLES);
-   float *fftim = mallocspi (sizeof (float) * AUDIOSAMPLES);
-   float audiogain = AUDIOGAINMAX;
-   if (audiows.set)
+   uint8_t bytes = (micws.set ? 4 : 2);
+   uint8_t *micraw = mallocspi (bytes * MICSAMPLES * MICOVERSAMPLE);
+   float *fftre = mallocspi (sizeof (float) * MICSAMPLES);
+   float *fftim = mallocspi (sizeof (float) * MICSAMPLES);
+   float micgain = MICGAINMAX;
+   if (micws.set)
    {                            // 24 bit Philips format
-      ESP_LOGE (TAG, "I2S init CLK %d DAT %d WS %d", audioclock.num, audiodata.num, audiows.num);
+      ESP_LOGE (TAG, "I2S init CLK %d DAT %d WS %d", micclock.num, micdata.num, micws.num);
       i2s_std_config_t cfg = {
-         .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG (AUDIORATE * AUDIOOVERSAMPLE),
+         .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG (MICRATE * MICOVERSAMPLE),
          .slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_32BIT, I2S_SLOT_MODE_STEREO),
          .gpio_cfg = {
                       .mclk = I2S_GPIO_UNUSED,
-                      .bclk = audioclock.num,
-                      .ws = audiows.num,
+                      .bclk = micclock.num,
+                      .ws = micws.num,
                       .dout = I2S_GPIO_UNUSED,
-                      .din = audiodata.num,
+                      .din = micdata.num,
                       .invert_flags = {
                                        .mclk_inv = false,
-                                       .bclk_inv = audioclock.invert,
-                                       .ws_inv = audiows.invert,
+                                       .bclk_inv = micclock.invert,
+                                       .ws_inv = micws.invert,
                                        },
                       },
       };
-      cfg.slot_cfg.slot_mask = (audioright ? I2S_STD_SLOT_RIGHT : I2S_STD_SLOT_LEFT);
+      cfg.slot_cfg.slot_mask = (micright ? I2S_STD_SLOT_RIGHT : I2S_STD_SLOT_LEFT);
       if (bytes == 3)
          cfg.clk_cfg.mclk_multiple = 384;
       if (!err)
          err = i2s_channel_init_std_mode (i, &cfg);
    } else
    {                            // PDM 16 bit
-      ESP_LOGE (TAG, "I2S init PDM CLK %d DAT %d", audioclock.num, audiodata.num);
+      ESP_LOGE (TAG, "I2S init PDM CLK %d DAT %d", micclock.num, micdata.num);
       i2s_pdm_rx_config_t cfg = {
-         .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (AUDIORATE * AUDIOOVERSAMPLE),
+         .clk_cfg = I2S_PDM_RX_CLK_DEFAULT_CONFIG (MICRATE * MICOVERSAMPLE),
          .slot_cfg = I2S_PDM_RX_SLOT_DEFAULT_CONFIG (I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),
          .gpio_cfg = {
-                      .clk = audioclock.num,
-                      .din = audiodata.num,
+                      .clk = micclock.num,
+                      .din = micdata.num,
                       .invert_flags = {
-                                       .clk_inv = audioclock.invert}
+                                       .clk_inv = micclock.invert}
                       }
       };
-      cfg.slot_cfg.slot_mask = (audioright ? I2S_PDM_SLOT_RIGHT : I2S_PDM_SLOT_LEFT);
+      cfg.slot_cfg.slot_mask = (micright ? I2S_PDM_SLOT_RIGHT : I2S_PDM_SLOT_LEFT);
       if (!err)
          err = i2s_channel_init_pdm_rx_mode (i, &cfg);
    }
-   gpio_pulldown_en (audiodata.num);
+   gpio_pulldown_en (micdata.num);
    if (!err)
       err = i2s_channel_enable (i);
    if (err)
@@ -1485,22 +1485,22 @@ i2s_task (void *arg)
       vTaskDelete (NULL);
       return;
    }
-   ESP_LOGE (TAG, "Audio started, %d*%d bits at %dHz", AUDIOSAMPLES * AUDIOOVERSAMPLE, bytes * 8, AUDIORATE * AUDIOOVERSAMPLE);
+   ESP_LOGE (TAG, "Audio started, %d*%d bits at %dHz", MICSAMPLES * MICOVERSAMPLE, bytes * 8, MICRATE * MICOVERSAMPLE);
    while (1)
    {
       size_t n = 0;
-      i2s_channel_read (i, audioraw, bytes * AUDIOSAMPLES * AUDIOOVERSAMPLE, &n, 100);
-      if (n < bytes * AUDIOSAMPLES * AUDIOOVERSAMPLE)
+      i2s_channel_read (i, micraw, bytes * MICSAMPLES * MICOVERSAMPLE, &n, 100);
+      if (n < bytes * MICSAMPLES * MICOVERSAMPLE)
          continue;
-      if (*(int32_t *) audioraw)
+      if (*(int32_t *) micraw)
          b.soundok = 1;
       if (!b.sound)
          continue;              // Not needed
       float ref = 0,
          mag = 0;
       {
-         uint8_t *p = audioraw;
-         for (int i = 0; i < AUDIOSAMPLES; i++)
+         uint8_t *p = micraw;
+         for (int i = 0; i < MICSAMPLES; i++)
          {
             int32_t raw;
             if (bytes == 4)
@@ -1510,8 +1510,8 @@ i2s_task (void *arg)
             p += bytes;
             float v = (float) raw / 2147483648;
             mag += v * v;
-            fftre[i] = v * audiogain / AUDIOOVERSAMPLE;
-            for (int q = 0; q < AUDIOOVERSAMPLE - 1; q++)
+            fftre[i] = v * micgain / MICOVERSAMPLE;
+            for (int q = 0; q < MICOVERSAMPLE - 1; q++)
             {
                if (bytes == 4)
                   raw = *(int32_t *) p << 1;    // Philips mode
@@ -1519,7 +1519,7 @@ i2s_task (void *arg)
                   raw = *(int16_t *) p << 16;   // PDM 16 bit mode
                p += bytes;
                float v = (float) raw / 2147483648;
-               fftre[i] += v * audiogain / AUDIOOVERSAMPLE;
+               fftre[i] += v * micgain / MICOVERSAMPLE;
                mag += v * v;
             }
             fftim[i] = 0;
@@ -1527,31 +1527,31 @@ i2s_task (void *arg)
          }
       }
       // Gain adjust
-      ref = sqrt (ref / AUDIOSAMPLES);
+      ref = sqrt (ref / MICSAMPLES);
       if (ref > 1)
-         audiogain = (audiogain * 9 + audiogain / ref) / 10;    // Drop gain faster if overloading
+         micgain = (micgain * 9 + micgain / ref) / 10;    // Drop gain faster if overloading
       else
-         audiogain = (audiogain * 99 + audiogain / ref) / 100;  // Bring back gain slowly
-      if (audiogain > AUDIOGAINMAX)
-         audiogain = AUDIOGAINMAX;
-      else if (audiogain < AUDIOGAINMIN)
-         audiogain = AUDIOGAINMIN;
-      fft (fftre, fftim, AUDIOSAMPLES);
-      float band[AUDIOBANDS];   // Should get main audio in first 16 or so slots
-      for (int b = 0; b < AUDIOBANDS; b++)
+         micgain = (micgain * 99 + micgain / ref) / 100;  // Bring back gain slowly
+      if (micgain > MICGAINMAX)
+         micgain = MICGAINMAX;
+      else if (micgain < MICGAINMIN)
+         micgain = MICGAINMIN;
+      fft (fftre, fftim, MICSAMPLES);
+      float band[MICBANDS];   // Should get main audio in first 16 or so slots
+      for (int b = 0; b < MICBANDS; b++)
          band[b] = NAN;
       {                         // log frequency
-         float low = log (AUDIOMIN),
-            high = log (AUDIOMAX),
-            step = (high - low) / AUDIOBANDS;
-         for (int i = AUDIOMIN * AUDIOSAMPLES / AUDIORATE; i < AUDIOMAX * AUDIOSAMPLES / AUDIORATE && i < AUDIOSAMPLES / 2; i++)
+         float low = log (MICMIN),
+            high = log (MICMAX),
+            step = (high - low) / MICBANDS;
+         for (int i = MICMIN * MICSAMPLES / MICRATE; i < MICMAX * MICSAMPLES / MICRATE && i < MICSAMPLES / 2; i++)
          {
-            float l = log (i * AUDIORATE / AUDIOSAMPLES);
+            float l = log (i * MICRATE / MICSAMPLES);
             int b = (l - low) / step;
-            if (b >= 0 && b < AUDIOBANDS)       // In case of rounding going too far!
+            if (b >= 0 && b < MICBANDS)       // In case of rounding going too far!
             {
-               fftre[i] /= (AUDIOSAMPLES / 2);
-               fftim[i] /= (AUDIOSAMPLES / 2);
+               fftre[i] /= (MICSAMPLES / 2);
+               fftim[i] /= (MICSAMPLES / 2);
                float v = sqrt (fftre[i] * fftre[i] + fftim[i] * fftim[i]);
                if (isnan (band[b]))
                   band[b] = v;
@@ -1560,58 +1560,58 @@ i2s_task (void *arg)
             }
          }
       }
-      for (int b = 0; b < AUDIOBANDS - 1; b++)
+      for (int b = 0; b < MICBANDS - 1; b++)
          if (!isnan (band[b]) && isnan (band[b + 1]))
          {
             int q = 2;
-            while (b + q < AUDIOBANDS && isnan (band[b + q]))
+            while (b + q < MICBANDS && isnan (band[b + q]))
                q++;
             float v = band[b];
             for (int z = 0; z < q; z++)
                band[b + z] = v / q;
          }
-      for (int b = 0; b < AUDIOBANDS; b++)
+      for (int b = 0; b < MICBANDS; b++)
          band[b] = 10 * log10 (band[b]);        // OK no clue why but if we average we end up with way lower top frequencies
-      //ESP_LOGE (TAG, "FFT %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f gain %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21], audiogain);
-      for (int b = 0; b < AUDIOBANDS; b++)
+      //ESP_LOGE (TAG, "FFT %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f %6.1f gain %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21], micgain);
+      for (int b = 0; b < MICBANDS; b++)
          band[b] = (band[b] + 25) / 25; // makes more 0-1 level output
       //ESP_LOGE (TAG, "FFT %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21]);
-      xSemaphoreTake (audio_mutex, portMAX_DELAY);
-      audiomag = sqrt (mag / AUDIOSAMPLES / AUDIOOVERSAMPLE);
-      for (int i = 0; i < AUDIOBANDS; i++)
+      xSemaphoreTake (mic_mutex, portMAX_DELAY);
+      micmag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
+      for (int i = 0; i < MICBANDS; i++)
       {
-         if (band[i] > audioband[i] || !audiodamp)
-            audioband[i] = band[i];
+         if (band[i] > micband[i] || !micdamp)
+            micband[i] = band[i];
          else
-            audioband[i] = (audioband[i] * audiodamp + band[i]) / (audiodamp + 1);
+            micband[i] = (micband[i] * micdamp + band[i]) / (micdamp + 1);
       }
-      xSemaphoreGive (audio_mutex);
+      xSemaphoreGive (mic_mutex);
    }
    vTaskDelete (NULL);
 }
 
 uint8_t
-audiohz2band (uint32_t hz)
+michz2band (uint32_t hz)
 {
    if (hz)
       return 0;
-   float low = log (AUDIOMIN),
-      high = log (AUDIOMAX),
+   float low = log (MICMIN),
+      high = log (MICMAX),
       val = log (hz);
-   int b = AUDIOBANDS * (val - low) / (high - low);
+   int b = MICBANDS * (val - low) / (high - low);
    if (b < 0)
       b = 0;
-   if (b >= AUDIOBANDS)
-      b = AUDIOBANDS;
+   if (b >= MICBANDS)
+      b = MICBANDS;
    return b;
 }
 
 uint32_t
-audioband2hz (uint8_t b)
+micband2hz (uint8_t b)
 {
-   float low = log (AUDIOMIN),
-      high = log (AUDIOMAX),
-      val = b * (high - low) / AUDIOBANDS + low;
+   float low = log (MICMIN),
+      high = log (MICMAX),
+      val = b * (high - low) / MICBANDS + low;
    return exp (val);
 }
 
@@ -1622,8 +1622,8 @@ app_main ()
 {
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
-   audio_mutex = xSemaphoreCreateBinary ();
-   xSemaphoreGive (audio_mutex);
+   mic_mutex = xSemaphoreCreateBinary ();
+   xSemaphoreGive (mic_mutex);
    revk_boot (&app_callback);
 #ifdef	CONFIG_REVK_MATTER
    extern void matter_main (void);
@@ -1646,7 +1646,7 @@ app_main ()
    revk_task ("LED", led_task, NULL, 4);
    if (lssda.set && lsscl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
-   if (audiodata.set && audioclock.set)
+   if (micdata.set && micclock.set)
       revk_task ("i2s", i2s_task, NULL, 8);
    if (webcontrol)
    {                            // Web interface

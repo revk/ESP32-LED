@@ -29,21 +29,21 @@
 
 #define	MAXAPPS	50
 
-#define	AUDIOOVERSAMPLE	4       // From raw to FFT
-#define	AUDIOHZ		((int)cps)      // Hz step
-#define	AUDIOSAMPLES	512     // Power of 2 (this is multiplied by oversample)
-#define	AUDIORATE	(AUDIOSAMPLES*AUDIOHZ)  // Hz which is multiplied by oversample (TDK 25-300ks/s in theory but 25k seemed not to work)
-#define	AUDIOMIN	((int)cps*2)    // Hz
-#define	AUDIOMAX	((int)cps*(AUDIOSAMPLES/2))     // Hz
-#define	AUDIOBANDS	42      // How many bands we make log based
-#define	AUDIOSTEP	((AUDIOMAX-AUDIOMIN)/AUDIOBANDS)        // Hz steps
-#define	AUDIOGAINMIN	0.01
-#define	AUDIOGAINMAX	(audiomaxgain)
-extern SemaphoreHandle_t audio_mutex;
-extern float audioband[AUDIOBANDS];
-extern float audiomag;
-uint8_t audiohz2band (uint32_t hz);
-uint32_t audioband2hz (uint8_t b);
+#define	MICOVERSAMPLE	4       // From raw to FFT
+#define	MICHZ		((int)cps)      // Hz step
+#define	MICSAMPLES	512     // Power of 2 (this is multiplied by oversample)
+#define	MICRATE	(MICSAMPLES*MICHZ)  // Hz which is multiplied by oversample (TDK 25-300ks/s in theory but 25k seemed not to work)
+#define	MICMIN	((int)cps*2)    // Hz
+#define	MICMAX	((int)cps*(MICSAMPLES/2))     // Hz
+#define	MICBANDS	42      // How many bands we make log based
+#define	MICSTEP	((MICMAX-MICMIN)/MICBANDS)        // Hz steps
+#define	MICGAINMIN	0.01
+#define	MICGAINMAX	(micmaxgain)
+extern SemaphoreHandle_t mic_mutex;
+extern float micband[MICBANDS];
+extern float micmag;
+uint8_t michz2band (uint32_t hz);
+uint32_t micband2hz (uint8_t b);
 
 typedef struct app_s app_t;
 typedef const char *app_f (app_t *);    // Return NULL normally, "" for normal end, other string for error

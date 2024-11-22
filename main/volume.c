@@ -33,29 +33,29 @@ appvolume (app_t * a)
       free (a->data);
       memset (a->data = mallocspi (sizeof (config_t) + a->len), 0, sizeof (config_t) + a->len);
       config_t *c = a->data;
-      c->max = AUDIOBANDS;
+      c->max = MICBANDS;
       if (a->config)
       {
          jo_t j = jo_parse_str (a->config);
          if (jo_here (j) == JO_OBJECT)
          {
             if (jo_find (j, "min") == JO_NUMBER)
-               c->min = audiohz2band (jo_read_int (j));
+               c->min = michz2band (jo_read_int (j));
             if (jo_find (j, "max") == JO_NUMBER)
-               c->max = audiohz2band (jo_read_int (j)) + 1;
+               c->max = michz2band (jo_read_int (j)) + 1;
          }
          jo_free (&j);
       }
-      if (c->min > AUDIOBANDS - 1)
-         c->min = AUDIOBANDS - 1;
+      if (c->min > MICBANDS - 1)
+         c->min = MICBANDS - 1;
       if (c->max < c->min + 1)
          c->max = c->min + 1;
-      if (c->max > AUDIOBANDS)
-         c->max = AUDIOBANDS;
+      if (c->max > MICBANDS)
+         c->max = MICBANDS;
       // Report config
       jo_t n = jo_object_alloc ();
-      jo_int (n, "min", audioband2hz (c->min));
-      jo_int (n, "max", audioband2hz (c->max));
+      jo_int (n, "min", micband2hz (c->min));
+      jo_int (n, "max", micband2hz (c->max));
       char *was = a->config;
       a->config = jo_finisha (&n);
       free (was);
@@ -63,7 +63,7 @@ appvolume (app_t * a)
    config_t *c = a->data;
    float m = 0;
    for (uint8_t i = c->min; i < c->max; i++)
-      m += audioband[i];
+      m += micband[i];
    int v = m * 65536 * 2 / (c->max - c->min);
    if (m < 0)
       v = 0;
