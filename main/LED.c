@@ -40,8 +40,8 @@ struct
 {
    uint8_t haconfig:1;          // Send config
    uint8_t hacheck:1;           // Check presets
-   uint8_t sound:1;             // An audio based effect is in use
-   uint8_t soundok:1;           // Receiving sound data
+   uint8_t micon:1;             // An audio based effect is in use
+   uint8_t micok:1;           // Receiving sound data
    uint8_t checksound:1;        // Temp
 } b;
 
@@ -930,7 +930,7 @@ led_task (void *x)
                   }
                }
             }
-         b.sound = b.checksound;
+         b.micon = b.checksound;
          xSemaphoreGive (app_mutex);
       }
       {                         // Update display
@@ -1008,7 +1008,7 @@ revk_web_extra (httpd_req_t * req, int page)
       revk_web_send (req,
                      "<tr><td colspan=3><h2>Preset %d:</h2>This preset (or <i>virtual strip</i>) appears as a <i>light</i> in Home Assistant if <tt>name</tt> is set. These can overlap if required.%s</td></tr>",
                      page, haenable ? "" : " (HA is not enabled)");
-      if (b.soundok)
+      if (b.micok)
          revk_web_send (req,
                         "<tr><td colspan=3>Audio response %dHz to %dHz in %d bins, e.g. Starting %dHz %dHz %dHz %dHz %dHz %dHz %dHz %dHz ... %dHz %dHz %dHz, but based on %dHz steps mapped to these bins.</td></tr>",
                         MICMIN, MICMAX, MICBANDS, micband2hz (0), micband2hz (1), micband2hz (2),
@@ -1253,7 +1253,7 @@ web_root (httpd_req_t * req)
          if (applist[i].text)
             button (applist[i].name, applist[i].description);
       revk_web_send (req, "<div style='display:inline-block;'>Most text effects are better done as a preset or via MQTT.</div>");
-      if (b.soundok)
+      if (b.micok)
       {
          revk_web_send (req, "<br>");
          for (int i = 0; i < sizeof (applist) / sizeof (*applist); i++)
@@ -1409,7 +1409,7 @@ float micband[MICBANDS] = { 0 };
 
 SemaphoreHandle_t mic_mutex = NULL;
 void
-i2s_task (void *arg)
+mic_task (void *arg)
 {
    jo_t e (esp_err_t err, const char *msg)
    {                            // Error
@@ -1493,8 +1493,8 @@ i2s_task (void *arg)
       if (n < bytes * MICSAMPLES * MICOVERSAMPLE)
          continue;
       if (*(int32_t *) micraw)
-         b.soundok = 1;
-      if (!b.sound)
+         b.micok = 1;
+      if (!b.micon)
          continue;              // Not needed
       float ref = 0,
          mag = 0;
@@ -1647,7 +1647,7 @@ app_main ()
    if (lssda.set && lsscl.set)
       revk_task ("i2c", i2c_task, NULL, 4);
    if (micdata.set && micclock.set)
-      revk_task ("i2s", i2s_task, NULL, 8);
+      revk_task ("i2s", mic_task, NULL, 8);
    if (webcontrol)
    {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();  // When updating the code below, make sure this is enough
