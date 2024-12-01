@@ -16,6 +16,11 @@ static const char TAG[] = "LED";
 #include <esp_http_server.h>
 #include "fft.h"
 #include "math.h"
+#include "hal/adc_types.h"
+#include "esp_adc/adc_oneshot.h"
+#include "esp_adc/adc_cali.h"
+#include "esp_adc/adc_cali_scheme.h"
+#include "halib.h"
 
 #define a(a,d)	extern const char* app##a(app_t*);
 #include "apps.h"
@@ -41,9 +46,14 @@ struct
    uint8_t haconfig:1;          // Send config
    uint8_t hacheck:1;           // Check presets
    uint8_t micon:1;             // An audio based effect is in use
-   uint8_t micok:1;           // Receiving sound data
+   uint8_t micok:1;             // Receiving sound data
    uint8_t checksound:1;        // Temp
-} b;
+   uint8_t relay:1;             // Relay state
+} b = { 0 };
+
+#define	ADC_SCALE	134/10
+#define	ADC_ATTEN	ADC_ATTEN_DB_12
+int voltage = 0;                // current voltage (mV)
 
 static httpd_handle_t webserver = NULL;
 
@@ -747,11 +757,14 @@ send_ha_config (void)
    free (hastatus);
    free (lwt);
    free (cmd);
+   if(adc.set)
+   ha_config_sensor ("voltage", name: "Voltage", type: "voltage", unit:"V");
 }
 
 void
 led_task (void *x)
 {
+   revk_gpio_output (relay, 0);
    if (!rgb[0].set || !(gpio_ok (rgb[0].num) & 1))
    {
       ESP_LOGE (TAG, "Bad GPIO %d", rgb[0].num);
@@ -829,6 +842,7 @@ led_task (void *x)
          clear (1, ledmax);
          xSemaphoreTake (app_mutex, portMAX_DELAY);
          b.checksound = 0;
+         uint8_t found = 0;
          for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
             for (unsigned int i = 0; i < MAXAPPS; i++)
             {
@@ -837,6 +851,7 @@ led_task (void *x)
                   b.checksound = 1;
                if (a->preset == preset && a->app)
                {
+                  found++;
                   const char *name = a->name;
                   if (a->delay)
                   {             // Delayed start
@@ -932,6 +947,12 @@ led_task (void *x)
             }
          b.micon = b.checksound;
          xSemaphoreGive (app_mutex);
+         if (!b.relay && found)
+         {
+            revk_gpio_set (relay, b.relay = 1);
+            usleep (100000);
+         } else if (b.relay && !found)
+            revk_gpio_set (relay, b.relay = 0);
       }
       {                         // Update display
          uint8_t *r = ledr;
@@ -988,6 +1009,13 @@ led_task (void *x)
                REVK_ERR_CHECK (led_strip_refresh (strip[s]));
       }
    }
+}
+
+void
+revk_state_extra (jo_t j)
+{
+   if (voltage)
+      jo_litf (j, "voltage", "%d.%03d", voltage / 1000, voltage % 1000);
 }
 
 void
@@ -1224,7 +1252,7 @@ web_root (httpd_req_t * req)
       }
    }
    revk_web_send (req, "<h1>LED controller: %s</h1>", hostname);
-   revk_web_send (req, "<p id=shutdown style='display:none;color:red;'></p>");
+   revk_web_send (req, "<p id=shutdown style=' display:none;color:red;'></p>");
    if (!ledmax)
       revk_web_send (req, "<h2>Please go to settings and set number of LEDs.</h2>");
    else
@@ -1402,6 +1430,60 @@ i2c_task (void *arg)
       revk_info ("als", &j);
       sleep (1);
    }
+   vTaskDelete (NULL);
+}
+
+void
+adc_task (void *arg)
+{
+   adc_unit_t adc_unit = 0;
+   adc_channel_t adc_channel = 0;
+   adc_oneshot_unit_handle_t adc_handle;
+   adc_cali_handle_t adc_cali_handle = NULL;
+   adc_oneshot_io_to_channel (adc.num, &adc_unit, &adc_channel);
+   ESP_LOGE (TAG, "ADC %d unit %d channel %d", adc.num, adc_unit, adc_channel);
+   adc_oneshot_unit_init_cfg_t init_config1 = {
+      .unit_id = adc_unit,
+      .ulp_mode = ADC_ULP_MODE_DISABLE,
+   };
+   adc_oneshot_new_unit (&init_config1, &adc_handle);
+   ESP_LOGE (TAG, "Init done");
+   adc_oneshot_chan_cfg_t config = {
+      .bitwidth = ADC_BITWIDTH_DEFAULT,
+      .atten = ADC_ATTEN,
+   };
+   adc_oneshot_config_channel (adc_handle, adc_channel, &config);
+   ESP_LOGE (TAG, "Config done");
+
+#if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
+   adc_cali_curve_fitting_config_t cali_config = {
+      .unit_id = adc_unit,
+      .chan = adc_channel,
+      .atten = ADC_ATTEN,
+      .bitwidth = ADC_BITWIDTH_DEFAULT,
+   };
+   adc_cali_create_scheme_curve_fitting (&cali_config, &adc_cali_handle);
+#endif
+
+#if ADC_CALI_SCHEME_LINE_FITTING_SUPPORTED
+   adc_cali_line_fitting_config_t cali_config = {
+      .unit_id = adc_unit,
+      .atten = ADC_ATTEN,
+      .bitwidth = ADC_BITWIDTH_DEFAULT,
+   };
+   adc_cali_create_scheme_line_fitting (&cali_config, &adc_cali_handle);
+#endif
+   while (1)
+   {
+      int raw = 0,
+         volt = 0;
+      adc_oneshot_read (adc_handle, adc_channel, &raw);
+      adc_cali_raw_to_voltage (adc_cali_handle, raw, &volt);
+      voltage = volt * 134 / 10;
+      sleep (1);
+   }
+   adc_oneshot_del_unit (adc_handle);
+   vTaskDelete (NULL);
 }
 
 float micmag = 0;
@@ -1529,15 +1611,15 @@ mic_task (void *arg)
       // Gain adjust
       ref = sqrt (ref / MICSAMPLES);
       if (ref > 1)
-         micgain = (micgain * 9 + micgain / ref) / 10;    // Drop gain faster if overloading
+         micgain = (micgain * 9 + micgain / ref) / 10;  // Drop gain faster if overloading
       else
-         micgain = (micgain * 99 + micgain / ref) / 100;  // Bring back gain slowly
+         micgain = (micgain * 99 + micgain / ref) / 100;        // Bring back gain slowly
       if (micgain > MICGAINMAX)
          micgain = MICGAINMAX;
       else if (micgain < MICGAINMIN)
          micgain = MICGAINMIN;
       fft (fftre, fftim, MICSAMPLES);
-      float band[MICBANDS];   // Should get main audio in first 16 or so slots
+      float band[MICBANDS];     // Should get main audio in first 16 or so slots
       for (int b = 0; b < MICBANDS; b++)
          band[b] = NAN;
       {                         // log frequency
@@ -1548,7 +1630,7 @@ mic_task (void *arg)
          {
             float l = log (i * MICRATE / MICSAMPLES);
             int b = (l - low) / step;
-            if (b >= 0 && b < MICBANDS)       // In case of rounding going too far!
+            if (b >= 0 && b < MICBANDS) // In case of rounding going too far!
             {
                fftre[i] /= (MICSAMPLES / 2);
                fftim[i] /= (MICSAMPLES / 2);
@@ -1648,6 +1730,8 @@ app_main ()
       revk_task ("i2c", i2c_task, NULL, 4);
    if (micdata.set && micclock.set)
       revk_task ("i2s", mic_task, NULL, 8);
+   if (adc.set)
+      revk_task ("adc", adc_task, NULL, 4);
    if (webcontrol)
    {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();  // When updating the code below, make sure this is enough
