@@ -38,7 +38,7 @@ issue:
 image:
 	esptool.py read_flash 0 0x400000 s3.bin
 
-set:	solo wroom pico s3mt s3
+set:	pico s3
 
 settings.h:     components/ESP32-RevK/revk_settings settings.def components/ESP32-RevK/settings.def
 	components/ESP32-RevK/revk_settings $^
