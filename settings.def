@@ -14,6 +14,7 @@ u8	cps		10				// Change per second
 
 gpio	relay						// Relay for strip power
 gpio	adc						// ADC*13.4
+gpio	button						// Button
 
 gpio	blink			.array=3		// Status LED
 
