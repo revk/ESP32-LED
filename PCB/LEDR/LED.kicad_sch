@@ -6320,10 +6320,6 @@
 		(uuid "7d5c449e-70fb-4c4b-83f2-051d308a91d6")
 	)
 	(no_connect
-		(at 233.68 133.35)
-		(uuid "7eec6177-bb4e-4d79-8724-1dea6cead6de")
-	)
-	(no_connect
 		(at 35.56 93.98)
 		(uuid "8ea5a801-1422-497c-be83-e434efd10b21")
 	)
@@ -10381,6 +10377,73 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "#PWR037")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 233.68 133.35 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5f7ed1bb-bab0-4fb6-9dbb-23266d174957")
+		(property "Reference" "#PWR043"
+			(at 240.03 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 236.9312 133.477 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 233.68 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 233.68 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 233.68 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f07c535c-272e-4226-a973-3d8da8a95188")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#PWR043")
 					(unit 1)
 				)
 			)
