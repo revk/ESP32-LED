@@ -49,6 +49,7 @@ struct
    uint8_t micok:1;             // Receiving sound data
    uint8_t checksound:1;        // Temp
    uint8_t relay:1;             // Relay state
+   uint8_t press:1;             // Button pressed
 } b = { 0 };
 
 #define	ADC_SCALE	134/10
@@ -757,13 +758,14 @@ send_ha_config (void)
    free (hastatus);
    free (lwt);
    free (cmd);
-   if(adc.set)
-   ha_config_sensor ("voltage", name: "Voltage", type: "voltage", unit:"V");
+   if (adc.set)
+    ha_config_sensor ("voltage", name: "Voltage", type: "voltage", unit:"V");
 }
 
 void
 led_task (void *x)
 {
+   revk_gpio_input (button);
    revk_gpio_output (relay, 0);
    if (!rgb[0].set || !(gpio_ok (rgb[0].num) & 1))
    {
@@ -778,7 +780,7 @@ led_task (void *x)
    for (int s = 0; s < STRIPS; s++)
       ledmax += leds[s];
    for (int s = 0; s < STRIPS; s++)
-      if (leds[s] || !ledmax)
+      if (rgb[s].set && (leds[s] || !ledmax))
       {
          ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb[s].num, rgb[s].invert ? " (inverted)" : "", leds[s] ? : 4,
                    led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
@@ -831,6 +833,22 @@ led_task (void *x)
    while (1)
    {                            // Main loop
       usleep (tick - (esp_timer_get_time () % tick));
+      {
+         uint8_t press = revk_gpio_get (button);
+         if (press != b.press)
+         {
+            b.press = press;
+            if (press)
+            {                   // Crude
+               if (!haon)
+                  haon = (1ULL << (CONFIG_REVK_WEB_EXTRA_PAGES - 1));
+               else
+                  haon >>= 1;
+               hachanged = 1;
+               b.hacheck = 1;
+            }
+         }
+      }
       if (ledmax)
       {
          if (b.hacheck)
