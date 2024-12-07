@@ -1674,9 +1674,7 @@ mic_task (void *arg)
       else
          micgain = (micgain * 99 + micgain / max) / 100;        // Bring back gain slowly
       if (micgain > MICGAINMAX)
-         micgain = MICGAINMAX;
-      else if (micgain < MICGAINMIN)
-         micgain = MICGAINMIN;
+         micgain = MICGAINMAX; // Crude
       //ESP_LOGE (TAG, "FFT %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21]);
       xSemaphoreTake (mic_mutex, portMAX_DELAY);
       micmag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);

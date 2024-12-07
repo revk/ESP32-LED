@@ -37,7 +37,6 @@
 #define	MICMAX	((int)cps*(MICSAMPLES/2))     // Hz
 #define	MICBANDS	42      // How many bands we make log based
 #define	MICSTEP	((MICMAX-MICMIN)/MICBANDS)        // Hz steps
-#define	MICGAINMIN	0.001
 #define	MICGAINMAX	(micmaxgain)
 extern SemaphoreHandle_t mic_mutex;
 extern float micband[MICBANDS];
