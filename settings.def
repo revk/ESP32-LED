@@ -36,8 +36,8 @@ gpio	mic.clock	40	.old="audioclock"	// I2S Mic Clock / BCLK / SCK
 gpio	mic.ws			.old="audiows"		// I2S Mic WS / LR (not set for PDM mode)
 bit	mic.right		.old="audioright"	// I2S Mic use right channel
 u8	mic.damp	3	.old="audiodamp",.live=1	// I2S Mic Damping from peak (higher is slower)
-u16	mic.maxgain	1000	.old="audiomaxgain",.live=1	// I2S Mic Max auto gain
-u8	mic.scale	10	.live=1			// Gain scaling for reactive effects
+u8	mic.maxgain	30	.live=1,.unit="dB"	// Max mic gain
+u8	mic.range	10	.live=1,.unit="dB"	// Range for reactive effects
 
 bit	ha.enable	1	.hide=1			// Enable Home Assistant
 bit	poweron		1	.hide=1 .live=1		// Start virtual strip 1 on power on

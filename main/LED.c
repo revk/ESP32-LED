@@ -1532,7 +1532,9 @@ mic_task (void *arg)
    uint8_t *micraw = mallocspi (bytes * MICSAMPLES * MICOVERSAMPLE);
    float *fftre = mallocspi (sizeof (float) * MICSAMPLES);
    float *fftim = mallocspi (sizeof (float) * MICSAMPLES);
-   float micgain = MICGAINMAX;
+   float micgain = 10;
+   if (micrange <= 0)
+      micrange = 1;
    if (micws.set)
    {                            // 24 bit Philips format
       ESP_LOGE (TAG, "I2S init CLK %d DAT %d WS %d", micclock.num, micdata.num, micws.num);
@@ -1668,15 +1670,16 @@ mic_task (void *arg)
          band[b] = 10 * log10 (band[b]);        // OK no clue why but if we average we end up with way lower top frequencies
       }
       for (int b = 0; b < MICBANDS; b++)
-         band[b] = (band[b] + micscale) / micscale; // makes more 0-1 level output, max should be 1 so log will be 0
+         band[b] = (band[b] + micrange) / micrange;     // makes more 0-1 level output, max should be 1 so log will be 0
       //ESP_LOGE (TAG, "max %lf gain %lf", max, micgain);
       // Auto gain aims for max peak of 1
       if (max > 1)
          micgain = (micgain * 9 + micgain / max) / 10;  // Drop gain faster if overloading
       else if (max > 0)
          micgain = (micgain * 99 + micgain / max) / 100;        // Bring back gain slowly
-      if (micgain > MICGAINMAX)
-         micgain = MICGAINMAX;  // Crude
+      float limit = pow (10, (float) micmaxgain / 10);
+      if (micgain > limit)
+         micgain = limit;
       //ESP_LOGE (TAG, "FFT %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21]);
       xSemaphoreTake (mic_mutex, portMAX_DELAY);
       micmag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
