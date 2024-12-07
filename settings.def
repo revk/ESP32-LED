@@ -7,9 +7,9 @@ gpio	rgb		4	.array=2		// GPIO for LED chain
 #endif
 
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
-u8	cps		25				// Change per second
+u8	cps		25	.unit="/s"		// Change per second
 #else
-u8	cps		10				// Change per second
+u8	cps		10	.unit="/s"		// Change per second
 #endif
 
 gpio	relay						// Relay for strip power
@@ -18,9 +18,9 @@ gpio	button						// Button
 
 gpio	blink			.array=3		// Status LED
 
-u8	max.r		255				// Max RGB Red
-u8	max.g		255				// Max RGB Green
-u8	max.b		255				// Max RGB Blue
+u8	max.r		255	.unit="/255"		// Max RGB Red
+u8	max.g		255	.unit="/255"		// Max RGB Green
+u8	max.b		255	.unit="/255"		// Max RGB Blue
 u8	max.w		255				// Max RGBW White
 bit	sk6812			.hide=1			// SK6812 (instead of WS2812)
 bit 	rgbw			.hide=1			// RGBW (no effects coded for this yet)
@@ -37,6 +37,7 @@ gpio	mic.ws			.old="audiows"		// I2S Mic WS / LR (not set for PDM mode)
 bit	mic.right		.old="audioright"	// I2S Mic use right channel
 u8	mic.damp	3	.old="audiodamp",.live=1	// I2S Mic Damping from peak (higher is slower)
 u8	mic.maxgain	50	.old="audiomaxgain",.live=1	// I2S Mic Max auto gain
+u8	mic.gainlevel	50	.live=1,.unit="%"	// I2S Mic auto gain threshold
 
 bit	ha.enable	1	.hide=1			// Enable Home Assistant
 bit	poweron		1	.hide=1 .live=1		// Start virtual strip 1 on power on
@@ -47,12 +48,12 @@ u16	start		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// First LED (def
 s16	top		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Top LED (default to first)
 u16	len		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Number of LEDs (default to end)
 s	effect		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1   		// Default effect (leave blank for HA to pick)
-u8	bright		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Brightness
+u8	bright		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .unit="/255"	// Brightness
 s8	height		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Text height
-u32	delay		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1	// Delay time (s), default 1s
-u32	limit		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1	// Time limit (s), default none
-u8	speed		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1	// Cycle time (s), default 1s
-u8	fadein		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1	// Fade in time (s), default 1s
-u8	fadeout		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1	// Fade out time (s), default 1s
+u32	delay		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Delay time, default 1s
+u32	limit		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Time limit, default none
+u8	speed		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Cycle time, default 1s
+u8	fadein		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Fade in time, default 1s
+u8	fadeout		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Fade out time, default 1s
 json	config		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 		// Settings as JSON and effect specific settings
 

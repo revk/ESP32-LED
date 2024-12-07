@@ -1628,7 +1628,7 @@ mic_task (void *arg)
       }
       // Gain adjust
       ref = sqrt (ref / MICSAMPLES);
-      if (ref > 1)
+      if (ref*100 > micgainlevel)
          micgain = (micgain * 9 + micgain / ref) / 10;  // Drop gain faster if overloading
       else
          micgain = (micgain * 99 + micgain / ref) / 100;        // Bring back gain slowly
