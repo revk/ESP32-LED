@@ -36,8 +36,7 @@ issue:
 	git push
 
 image:
-	#esptool.py -b 460800 read_flash 0 0x400000 s3.bin
-	esptool.py -b 460800 read_flash 0 0x200000 s3.bin
+	esptool.py -b 460800 read_flash 0 0x400000 s3.bin
 
 set:	pico s3
 
