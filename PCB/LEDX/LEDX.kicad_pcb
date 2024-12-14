@@ -8,7 +8,7 @@
 	)
 	(paper "A4")
 	(title_block
-		(title "PCB-USBA")
+		(title "PCB-USBX")
 		(rev "1")
 		(comment 1 "www.me.uk")
 		(comment 2 "@TheRealRevK")
