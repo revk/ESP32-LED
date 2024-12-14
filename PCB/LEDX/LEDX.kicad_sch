@@ -5,7 +5,7 @@
 	(uuid "2d210a96-f81f-42a9-8bf4-1b43c11086f3")
 	(paper "A4")
 	(title_block
-		(title "Generic ESP32 USB-A")
+		(title "LED driver")
 		(date "${DATE}")
 		(rev "1")
 		(comment 1 "@TheRealRevK")
@@ -428,155 +428,6 @@
 						)
 					)
 					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
-		(symbol "RevK:78L05"
-			(pin_names
-				(offset 0.254)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at -3.81 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "78L05"
-				(at 0 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "RevK:SOT-23"
-				(at 0 5.842 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(italic yes)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2405110921_ALJ-78L05_C22392284.pdf"
-				(at 0 -19.558 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Positive 100mA 35V Linear Regulator, Fixed Output 5V"
-				(at 0 -18.288 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "LCSC Part #" "C18198409"
-				(at 0 -18.288 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Voltage Regulator 100mA Positive"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "SOIC*3.9x4.9mm*P1.27mm*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "78L05_0_1"
-				(rectangle
-					(start -5.08 1.905)
-					(end 5.08 -5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "78L05_1_1"
-				(pin power_out line
-					(at 7.62 0 180)
-					(length 2.54)
-					(name "OUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -7.62 0 0)
-					(length 2.54)
-					(name "IN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -7.62 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3626,12 +3477,102 @@
 				)
 			)
 		)
-	)
-	(junction
-		(at 175.26 92.075)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3282f984-970d-46df-9c44-7be79d60eb63")
+		(symbol "power:PWR_FLAG"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+		)
 	)
 	(junction
 		(at 184.785 97.155)
@@ -3654,6 +3595,10 @@
 		(uuid "04fd5d94-db80-4c5a-bdb6-86d262e0c676")
 	)
 	(no_connect
+		(at 93.98 80.645)
+		(uuid "353c570b-6fb9-411f-adc3-7d0c1320a1a5")
+	)
+	(no_connect
 		(at 93.98 65.405)
 		(uuid "3c33aecd-cb31-47a6-923d-b235d002255f")
 	)
@@ -3674,16 +3619,12 @@
 		(uuid "55a143b0-5476-4d0e-ac11-0ce8dc559ab2")
 	)
 	(no_connect
-		(at 74.93 40.005)
-		(uuid "613734cc-1003-41c5-a2ec-b4ad5662fffc")
-	)
-	(no_connect
 		(at 124.46 90.805)
 		(uuid "7dd05c10-497e-46d8-a0cb-7d8b7f6ee070")
 	)
 	(no_connect
-		(at 93.98 52.705)
-		(uuid "7e21061e-cdc3-421f-b2af-3209e7a76454")
+		(at 93.98 88.265)
+		(uuid "7e03ffcc-df38-48a2-8791-1ae30d66f4fd")
 	)
 	(no_connect
 		(at 124.46 83.185)
@@ -3704,6 +3645,18 @@
 	(no_connect
 		(at 124.46 88.265)
 		(uuid "9bc92cb0-a818-4f18-b755-3ab2778b4afd")
+	)
+	(no_connect
+		(at 93.98 83.185)
+		(uuid "a85ef629-23d0-4f1f-9c0e-90e97b846f01")
+	)
+	(no_connect
+		(at 93.98 85.725)
+		(uuid "a96f500a-072e-4f2c-98b3-6c5b1cdfc73d")
+	)
+	(no_connect
+		(at 160.655 90.17)
+		(uuid "abc20d54-fccf-45eb-bc3d-ce7bcb034416")
 	)
 	(no_connect
 		(at 124.46 78.105)
@@ -3728,10 +3681,6 @@
 	(no_connect
 		(at 93.98 78.105)
 		(uuid "c900db37-a406-4cef-b7e2-99b3cc345245")
-	)
-	(no_connect
-		(at 93.98 107.315)
-		(uuid "cb7595c1-8d61-4643-aa0a-03695f76fdc5")
 	)
 	(no_connect
 		(at 93.98 70.485)
@@ -3769,16 +3718,6 @@
 	)
 	(wire
 		(pts
-			(xy 165.735 92.075) (xy 175.26 92.075)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3e857486-ee10-4705-90f4-168363ee3618")
-	)
-	(wire
-		(pts
 			(xy 184.785 97.155) (xy 196.215 97.155)
 		)
 		(stroke
@@ -3796,26 +3735,6 @@
 			(type default)
 		)
 		(uuid "905147d5-fd8b-47c7-bd68-989abdb4dbf9")
-	)
-	(wire
-		(pts
-			(xy 175.26 92.075) (xy 175.26 93.345)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cc04f20c-111b-4465-917d-9d1a9db9194a")
-	)
-	(text "This only works for RGB not RGBW"
-		(exclude_from_sim no)
-		(at 146.05 137.922 0)
-		(effects
-			(font
-				(size 12.7 12.7)
-			)
-		)
-		(uuid "0b6cf49d-9d8c-49c4-ba06-8a85c7a9ff61")
 	)
 	(global_label "DC"
 		(shape input)
@@ -3901,28 +3820,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DC"
-		(shape input)
-		(at 150.495 92.075 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "311d0291-352c-4204-aaf7-a7dd00a0ab04")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 145.624 92.075 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -4015,6 +3912,28 @@
 			)
 		)
 	)
+	(global_label "LED1"
+		(shape output)
+		(at 93.98 52.705 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8c84f71f-6346-4add-97da-bfc038688973")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 86.9924 52.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "DC"
 		(shape output)
 		(at 196.215 94.615 180)
@@ -4081,6 +4000,28 @@
 			)
 		)
 	)
+	(global_label "DC"
+		(shape input)
+		(at 198.755 32.385 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "bbe6e46a-2c12-4f0a-b755-8bf5e917e66e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 198.755 37.256 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "WS"
 		(shape input)
 		(at 201.295 68.58 0)
@@ -4125,9 +4066,9 @@
 			)
 		)
 	)
-	(global_label "LED"
+	(global_label "LED2"
 		(shape input)
-		(at 171.45 97.155 180)
+		(at 153.035 90.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4137,7 +4078,7 @@
 		)
 		(uuid "efa1af43-62f5-44cb-bc0b-dace18286fd4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 165.6719 97.155 0)
+			(at 146.0474 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4147,7 +4088,7 @@
 			)
 		)
 	)
-	(global_label "LED"
+	(global_label "LED2"
 		(shape output)
 		(at 93.98 60.325 180)
 		(fields_autoplaced yes)
@@ -4159,7 +4100,7 @@
 		)
 		(uuid "efa56610-1780-422e-9ff2-e80fde19d92d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 88.2019 60.325 0)
+			(at 86.9924 60.325 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4187,6 +4128,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "LED1"
+		(shape input)
+		(at 179.07 97.155 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f4c347d1-6926-40c8-825e-53c9375e0ce6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 172.0824 97.155 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -4467,72 +4430,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 158.115 99.695 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1a0a5578-6718-4c4a-aeba-50893796f86e")
-		(property "Reference" "#PWR05"
-			(at 158.115 106.045 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 158.115 104.1384 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 158.115 99.695 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 158.115 99.695 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 158.115 99.695 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "cd082a61-4a35-42f6-8a69-efeedc3d80f6")
-		)
-		(instances
-			(project "LEDX"
-				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
-					(reference "#PWR05")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "RevK:Hidden")
 		(at 254.635 39.37 0)
 		(unit 1)
@@ -4635,6 +4532,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 186.69 32.385 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1cf8828a-5143-4959-bcbe-f0e917de57cf")
+		(property "Reference" "#PWR06"
+			(at 186.69 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 186.69 36.8284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 186.69 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 186.69 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 186.69 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "69b8be18-ecb8-4ea5-a138-52064b6d3cd9")
+		)
+		(instances
+			(project "LEDX"
+				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 135.255 99.06 0)
 		(unit 1)
@@ -4702,7 +4665,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 175.26 97.155 0)
+		(at 156.845 90.17 0)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4711,7 +4674,7 @@
 		(dnp no)
 		(uuid "27b2da48-c798-462d-a516-02e06a5c4a3f")
 		(property "Reference" "D1"
-			(at 175.26 97.155 0)
+			(at 156.845 90.17 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -4720,7 +4683,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 176.53 91.44 0)
+			(at 158.115 84.455 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4730,7 +4693,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 176.53 89.535 0)
+			(at 158.115 82.55 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4740,7 +4703,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 176.53 87.63 0)
+			(at 158.115 80.645 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4750,7 +4713,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 175.26 97.155 0)
+			(at 156.845 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4759,7 +4722,7 @@
 			)
 		)
 		(property "LCSC Part #" "C5349953"
-			(at 176.53 85.725 0)
+			(at 158.115 78.74 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5382,87 +5345,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:78L05")
-		(at 158.115 92.075 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5f6af562-7faf-487d-a7b8-5e94c5cfe9ad")
-		(property "Reference" "U3"
-			(at 158.115 86.0255 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "78L05"
-			(at 158.115 88.4498 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "RevK:SOT-23"
-			(at 160.655 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2405110921_ALJ-78L05_C22392284.pdf"
-			(at 158.115 111.633 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Positive 100mA 35V Linear Regulator, Fixed Output 5V"
-			(at 158.115 110.363 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C22392284"
-			(at 158.115 88.4499 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "5289d2b4-62ae-4855-bdd6-a39c155fb233")
-		)
-		(pin "1"
-			(uuid "05524262-cc15-4e83-9c93-40a06fe963c5")
-		)
-		(pin "3"
-			(uuid "776a883e-c53f-4e10-a109-00c54c8aa0bb")
-		)
-		(instances
-			(project "LEDX"
-				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
-					(reference "U3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 135.255 110.49 0)
 		(unit 1)
@@ -5725,72 +5607,6 @@
 			(project "USBA"
 				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
 					(reference "#PWR02")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 175.26 84.455 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6d2a8aad-675d-4483-8369-86592ed87981")
-		(property "Reference" "#PWR06"
-			(at 175.26 78.105 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 175.26 80.3219 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 175.26 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 175.26 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 175.26 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7668dae9-98e8-4a15-b72a-6e44599faf6c")
-		)
-		(instances
-			(project "LEDX"
-				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
-					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -6301,6 +6117,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 186.69 32.385 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "92487605-1bc4-476c-aaab-0d49995da6b3")
+		(property "Reference" "#FLG02"
+			(at 186.69 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 186.69 28.2519 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 186.69 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 186.69 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cbcb3888-f089-4086-a886-b2e475b40049")
+		)
+		(instances
+			(project "LEDX"
+				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+					(reference "#FLG02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RevK:PCB")
 		(at 250.19 172.72 0)
 		(unit 1)
@@ -6456,7 +6338,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 175.26 100.965 0)
+		(at 156.845 93.98 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6465,7 +6347,7 @@
 		(fields_autoplaced yes)
 		(uuid "a8251e78-21cf-4138-b467-ba9629a56e08")
 		(property "Reference" "#PWR022"
-			(at 175.26 107.315 0)
+			(at 156.845 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6474,7 +6356,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 175.26 105.4084 0)
+			(at 156.845 98.4234 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6482,7 +6364,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 175.26 100.965 0)
+			(at 156.845 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6491,7 +6373,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 175.26 100.965 0)
+			(at 156.845 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6500,7 +6382,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 175.26 100.965 0)
+			(at 156.845 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6581,6 +6463,72 @@
 			(project "USBA"
 				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
 					(reference "#PWR0105")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 156.845 86.36 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ae6a37a3-5b68-4ba9-a35b-e2ffa1c0c64d")
+		(property "Reference" "#PWR05"
+			(at 156.845 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 156.845 82.7842 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 156.845 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 156.845 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 156.845 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "89848156-d5d8-414d-8fbc-afb82888cb10")
+		)
+		(instances
+			(project "LEDX"
+				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -6714,75 +6662,6 @@
 			(project "USBA"
 				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
 					(reference "#PWR08")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 175.26 88.265 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b73ddbb2-ec02-4b9b-9013-3c122411ff5a")
-		(property "Reference" "C5"
-			(at 166.37 86.852 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100nF"
-			(at 166.37 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 176.2252 92.075 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 175.26 88.265 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 175.26 88.265 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "98200085-a2f1-4701-b63d-4dc96410ead5")
-		)
-		(pin "2"
-			(uuid "10a34c2f-ec7e-4a69-a03d-8e085d5704b3")
-		)
-		(instances
-			(project "LEDX"
-				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
-					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -7507,6 +7386,72 @@
 			(project "USBA"
 				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
 					(reference "#PWR027")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 198.755 32.385 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e8a61529-2d6b-4691-b3fd-06fb9527292e")
+		(property "Reference" "#FLG01"
+			(at 198.755 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 198.755 28.2519 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 198.755 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 198.755 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 198.755 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "aff402a6-290b-4d6b-b927-4898f09d3096")
+		)
+		(instances
+			(project ""
+				(path "/2d210a96-f81f-42a9-8bf4-1b43c11086f3"
+					(reference "#FLG01")
 					(unit 1)
 				)
 			)
