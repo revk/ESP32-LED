@@ -3654,10 +3654,6 @@
 		(uuid "04fd5d94-db80-4c5a-bdb6-86d262e0c676")
 	)
 	(no_connect
-		(at 124.46 67.945)
-		(uuid "3c025b12-fb3c-42b8-9cb7-00831fa8a983")
-	)
-	(no_connect
 		(at 93.98 65.405)
 		(uuid "3c33aecd-cb31-47a6-923d-b235d002255f")
 	)
@@ -3678,16 +3674,8 @@
 		(uuid "55a143b0-5476-4d0e-ac11-0ce8dc559ab2")
 	)
 	(no_connect
-		(at 124.46 103.505)
-		(uuid "5c6cb9dd-d8b5-4164-89b7-5453976eeac7")
-	)
-	(no_connect
 		(at 74.93 40.005)
 		(uuid "613734cc-1003-41c5-a2ec-b4ad5662fffc")
-	)
-	(no_connect
-		(at 124.46 70.485)
-		(uuid "75e652d8-f454-41bb-9504-f0059d6910d6")
 	)
 	(no_connect
 		(at 124.46 90.805)
@@ -3716,10 +3704,6 @@
 	(no_connect
 		(at 124.46 88.265)
 		(uuid "9bc92cb0-a818-4f18-b755-3ab2778b4afd")
-	)
-	(no_connect
-		(at 93.98 103.505)
-		(uuid "a3702f08-8bf4-457f-8e96-1af703291c44")
 	)
 	(no_connect
 		(at 124.46 78.105)
@@ -3847,7 +3831,7 @@
 	)
 	(global_label "WS"
 		(shape output)
-		(at 93.98 80.645 180)
+		(at 93.98 103.505 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3857,7 +3841,7 @@
 		)
 		(uuid "1e08e085-feee-4bcb-80f2-4c1cd3af8ac7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 88.9881 80.645 0)
+			(at 88.9881 103.505 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4001,22 +3985,22 @@
 	)
 	(global_label "SD"
 		(shape input)
-		(at 93.98 83.185 180)
+		(at 124.46 67.945 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "6cd67fb7-cdb7-4121-aff2-b4553d64bfea")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 89.1695 83.185 0)
+			(at 129.2705 67.945 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -4177,22 +4161,22 @@
 	)
 	(global_label "SCK"
 		(shape output)
-		(at 93.98 88.265 180)
+		(at 124.46 103.505 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "f1c609f4-2e78-4c36-9e4b-44c471f054a7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 87.8995 88.265 0)
+			(at 130.5405 103.505 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -6163,7 +6147,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 93.98 85.725 90)
+		(at 124.46 70.485 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6172,7 +6156,7 @@
 		(fields_autoplaced yes)
 		(uuid "8b1f0c59-cd2a-4997-871c-7cc802a12e30")
 		(property "Reference" "#PWR04"
-			(at 97.79 85.725 0)
+			(at 120.65 70.485 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6181,7 +6165,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 90.805 85.725 90)
+			(at 127.635 70.485 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6190,7 +6174,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 93.98 85.725 0)
+			(at 124.46 70.485 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6199,7 +6183,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 93.98 85.725 0)
+			(at 124.46 70.485 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6208,7 +6192,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 93.98 85.725 0)
+			(at 124.46 70.485 0)
 			(effects
 				(font
 					(size 1.27 1.27)
