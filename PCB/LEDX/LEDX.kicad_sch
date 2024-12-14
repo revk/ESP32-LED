@@ -3807,6 +3807,16 @@
 		)
 		(uuid "cc04f20c-111b-4465-917d-9d1a9db9194a")
 	)
+	(text "This only works for RGB not RGBW"
+		(exclude_from_sim no)
+		(at 146.05 137.922 0)
+		(effects
+			(font
+				(size 12.7 12.7)
+			)
+		)
+		(uuid "0b6cf49d-9d8c-49c4-ba06-8a85c7a9ff61")
+	)
 	(global_label "DC"
 		(shape input)
 		(at 222.25 40.005 180)

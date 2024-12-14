@@ -6789,6 +6789,16 @@
 		)
 		(uuid "ff557ac8-73da-4e0f-a684-82407c5227cf")
 	)
+	(text "This only works for RGB not RGBW"
+		(exclude_from_sim no)
+		(at 138.43 12.7 0)
+		(effects
+			(font
+				(size 12.7 12.7)
+			)
+		)
+		(uuid "80fdae3f-2748-4f18-9911-db9e3885015b")
+	)
 	(global_label "D+"
 		(shape bidirectional)
 		(at 224.155 67.31 0)
