@@ -31,8 +31,8 @@ u8	webcontrol	2				// Web controls
 gpio	ls.scl						// Colour sensor SCL
 gpio	ls.sda						// Colour sensor SDA
 u8	ls.als	10	.hex=1				// Colour sensor ID
-gpio	mic.data	38	.old="audiodata"	// I2S Mic Data / SD / DATA
-gpio	mic.clock	40	.old="audioclock"	// I2S Mic Clock / BCLK / SCK
+gpio	mic.data		.old="audiodata"	// I2S Mic Data / SD / DATA
+gpio	mic.clock		.old="audioclock"	// I2S Mic Clock / BCLK / SCK
 gpio	mic.ws			.old="audiows"		// I2S Mic WS / LR (not set for PDM mode)
 bit	mic.right		.old="audioright"	// I2S Mic use right channel
 u8	mic.damp	3	.old="audiodamp",.live=1	// I2S Mic Damping from peak (higher is slower)
