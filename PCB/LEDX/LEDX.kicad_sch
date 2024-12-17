@@ -3821,7 +3821,7 @@
 	)
 	(global_label "D+"
 		(shape bidirectional)
-		(at 240.665 108.585 0)
+		(at 240.665 109.855 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3831,7 +3831,7 @@
 		)
 		(uuid "0258731a-8510-4d1e-a838-80f3b57eef77")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 246.7909 108.585 0)
+			(at 246.7909 109.855 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4813,7 +4813,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 240.665 112.395 90)
+		(at 240.665 113.665 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4822,7 +4822,7 @@
 		(fields_autoplaced yes)
 		(uuid "21ccc4be-b275-46a7-9e90-79f1ef0408c9")
 		(property "Reference" "#PWR07"
-			(at 247.015 112.395 0)
+			(at 247.015 113.665 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4831,7 +4831,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 243.84 112.395 90)
+			(at 243.84 113.665 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4840,7 +4840,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 240.665 112.395 0)
+			(at 240.665 113.665 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4849,7 +4849,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 240.665 112.395 0)
+			(at 240.665 113.665 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4858,7 +4858,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 240.665 112.395 0)
+			(at 240.665 113.665 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7739,7 +7739,7 @@
 	)
 	(symbol
 		(lib_id "RevK:SquareSMD")
-		(at 240.665 108.585 180)
+		(at 240.665 109.855 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -7747,7 +7747,7 @@
 		(dnp no)
 		(uuid "e4db2c88-7da2-48cc-8b1c-757ebe66e0f2")
 		(property "Reference" "P3"
-			(at 234.315 108.585 0)
+			(at 234.315 109.855 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7756,7 +7756,7 @@
 			)
 		)
 		(property "Value" "Square"
-			(at 233.68 108.458 0)
+			(at 233.68 109.728 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7764,7 +7764,7 @@
 			)
 		)
 		(property "Footprint" "RevK:PAD-2mm"
-			(at 240.665 106.045 0)
+			(at 240.665 107.315 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7773,7 +7773,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 240.665 108.585 0)
+			(at 240.665 109.855 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7782,7 +7782,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 240.665 108.585 0)
+			(at 240.665 109.855 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8172,7 +8172,7 @@
 	)
 	(symbol
 		(lib_id "RevK:SquareSMD")
-		(at 240.665 112.395 180)
+		(at 240.665 113.665 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -8180,7 +8180,7 @@
 		(dnp no)
 		(uuid "f46bc485-5339-4ede-935e-65c8302e605b")
 		(property "Reference" "P4"
-			(at 234.315 112.395 0)
+			(at 234.315 113.665 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8189,7 +8189,7 @@
 			)
 		)
 		(property "Value" "Square"
-			(at 233.68 112.268 0)
+			(at 233.68 113.538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8197,7 +8197,7 @@
 			)
 		)
 		(property "Footprint" "RevK:PAD-2mm"
-			(at 240.665 109.855 0)
+			(at 240.665 111.125 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8206,7 +8206,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 240.665 112.395 0)
+			(at 240.665 113.665 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8215,7 +8215,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 240.665 112.395 0)
+			(at 240.665 113.665 0)
 			(effects
 				(font
 					(size 1.27 1.27)
