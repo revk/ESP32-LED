@@ -862,12 +862,13 @@ led_task (void *x)
          b.checksound = 0;
          uint8_t found = 0;
          for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
+         {
             for (unsigned int i = 0; i < MAXAPPS; i++)
             {
                app_t *a = &active[i];
                if (a->sound)
                   b.checksound = 1;
-               if (a->preset == preset && a->app)
+               if ((!stack || a->preset == preset) && a->app)
                {
                   found++;
                   const char *name = a->name;
@@ -963,6 +964,9 @@ led_task (void *x)
                   }
                }
             }
+            if (!stack)
+               break;
+         }
          b.micon = b.checksound;
          xSemaphoreGive (app_mutex);
          if (!b.relay && found)
@@ -1048,6 +1052,7 @@ revk_web_extra (httpd_req_t * req, int page)
       revk_web_setting (req, NULL, "rgbw");
       revk_web_setting (req, NULL, "rgswap");
       revk_web_setting (req, NULL, "poweron");
+      revk_web_setting (req, NULL, "stack");
       revk_web_setting (req, NULL, "haenable");
    } else
    {
@@ -1146,10 +1151,11 @@ web_status (httpd_req_t * req)
       jo_close (j);
       jo_array (j, "active");
       for (int preset = 0; preset <= CONFIG_REVK_WEB_EXTRA_PAGES; preset++)
+      {
          for (unsigned int i = 0; i < MAXAPPS; i++)
          {
             app_t *a = &active[i];
-            if (a->preset == preset && a->app && !a->stop)
+            if ((!stack || a->preset == preset) && a->app && !a->stop)
             {
                jo_object (j, NULL);
                if (*a->name)
@@ -1191,6 +1197,9 @@ web_status (httpd_req_t * req)
                jo_close (j);
             }
          }
+         if (!stack)
+            break;
+      }
       jo_close (j);
       const char *reason;
       int t = revk_shutting_down (&reason);

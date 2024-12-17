@@ -56,4 +56,4 @@ u8	speed		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s
 u8	fadein		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Fade in time, default 1s
 u8	fadeout		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Fade out time, default 1s
 json	config		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 		// Settings as JSON and effect specific settings
-
+bit	stack		1 .live=1 .hide=1			// Presets have priority, in order, else most recent on top
