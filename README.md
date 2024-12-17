@@ -1,18 +1,24 @@
 # ESP32-LED (WS2812/etc) Project
 
+## Amazon
+
+This part if for Amazon - as this is the *manufacturers web site* and so used as proof of title and list price. It is also links to where you can buy.
+
+|ASIN|List price|Title|
+|-----|----|----|
+|[B0CG3S8JX3](https://www.amazon.co.uk/dp/B0CG3S8JX3)|£22.99|ESP32-S3-MINI-1-N4-R2 powered USB-C in-line WS2812 LED strip controller with I2S microphone|
+|[B0DGD5XPLT](https://www.amazon.co.uk/dp/B0DGD5XPLT)|£22.99|ESP32-S3 LED Driver USB-A Direct, WS2812/SK6812 WLED/Home Assistant Compatible.|
+|[B0C1W1XJS8](https://www.amazon.co.uk/dp/B0C1W1XJS8)|£22.99|LED strip controller (WS2812B/SK6812) driver PCB (WiFi/MQTT/HomeAssistant controlled) (USB-C/WLED)|
+|[B0DNW8KQCM](https://www.amazon.co.uk/dp/B0DNW8KQCM)|£22.99|ESP32-S3 LED Driver USB-A Direct, WS2812/SK6812, pre Loaded with WLED Source Software|
+|[B0DPMZN9W9](https://www.amazon.co.uk/dp/B0DPMZN9W9)|£30.00|LED strip (WS2812B/SK6812) driver PCB (WiFi/MQTT/HomeAssistant controlled) with microphone, speaker driver, relay, and IR receiver. WLED/esphome compatible.|
+
+## Summary
+
 A system to drive common RGB and RGBW LED strips (WS2812/SK6812, etc).
 
 This is a hardware and software project. The software is much like WLED, but my library and style, though without as many effects (yet). The hardware is designed to be compact and flexible, but also to be able to run WLED.
 
 Note boards are branded A&A, AJK, and HIWTSI.
-
-## Purchasing
-
-* [Amazon - USB-C - This s/w pre loaded](https://www.amazon.co.uk/dp/B0C1W1XJS8) note new stock coming soon.
-* [Amazon - USB-C - Pre loaded with WLED](https://www.amazon.co.uk/dp/B0CG3S8JX3) note new stock coming soon.
-* [Amazon - USB-A - This s/w pre loaded](https://www.amazon.co.uk/dp/B0DGD5XPLT) note existing stock is TDM version of TDK mic.
-* [Amazon - simple fairy lights](https://www.amazon.co.uk/dp/B0D1CQCLBX) works well on 5V USB up to 100 (2 strips).
-* TBA for other models
 
 ## Full spec (USB-C)
 
