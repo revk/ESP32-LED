@@ -10,7 +10,7 @@ This part if for Amazon - as this is the *manufacturers web site* and so used as
 |[B0DGD5XPLT](https://www.amazon.co.uk/dp/B0DGD5XPLT)|£22.99|ESP32-S3 LED Driver USB-A Direct, WS2812/SK6812 WLED/Home Assistant Compatible.|
 |[B0C1W1XJS8](https://www.amazon.co.uk/dp/B0C1W1XJS8)|£22.99|LED strip controller (WS2812B/SK6812) driver PCB (WiFi/MQTT/HomeAssistant controlled) (USB-C/WLED)|
 |[B0DNW8KQCM](https://www.amazon.co.uk/dp/B0DNW8KQCM)|£22.99|ESP32-S3 LED Driver USB-A Direct, WS2812/SK6812, pre Loaded with WLED Source Software|
-|[B0DPMZN9W9](https://www.amazon.co.uk/dp/B0DPMZN9W9)|£30.00|LED strip (WS2812B/SK6812) driver PCB (WiFi/MQTT/HomeAssistant controlled) with microphone, speaker driver, relay, and IR receiver. WLED/esphome compatible.|
+|[B0DPMZN9W9](https://www.amazon.co.uk/dp/B0DPMZN9W9)|£35.00|LED strip (WS2812B/SK6812) driver PCB (WiFi/MQTT/HomeAssistant controlled) with microphone, speaker driver, relay, and IR receiver. WLED/esphome compatible.|
 
 ## Summary
 
