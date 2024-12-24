@@ -21,7 +21,7 @@ beta:
 	-git submodule update --recursive
 	-git commit -a
 	@make set
-	cp LED*.bin betarelease
+	cp ${PROJECT_NAME}*.bin betarelease
 	git commit -a -m betarelease
 	git push
 
@@ -30,8 +30,8 @@ issue:
 	-git submodule update --recursive
 	-git commit -a
 	@make set
-	cp LED*.bin release
-	cp LED*.bin betarelease
+	cp ${PROJECT_NAME}*.bin release
+	cp ${PROJECT_NAME}*.bin betarelease
 	git commit -a -m release
 	git push
 
