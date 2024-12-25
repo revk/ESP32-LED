@@ -14,6 +14,7 @@ leds:	placeleds
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d61.75 --zone-in=1.25 --zone-out=1.25 --diode=409 --count=27 --group=3 --spacing=4.12125 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d62.25 --zone-in=1.25 --zone-out=1.25 --diode=436 --count=27 --group=3 --spacing=5.060625 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d66.75 --zone-in=1.25 --zone-out=1.25 --diode=463 --count=45 --group=5 --spacing=6 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
+	./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d90 --diode=1 --count=60 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=1.25 --zone-out=1.25
 
 stl:    LED/LED.stl
 
