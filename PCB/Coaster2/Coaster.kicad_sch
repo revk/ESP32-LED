@@ -12,6 +12,108 @@
 		(comment 2 "www.me.uk")
 	)
 	(lib_symbols
+		(symbol "Connector:TestPoint"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.762) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:C"
 			(pin_numbers hide)
 			(pin_names
@@ -816,6 +918,12 @@
 		(uuid "04c7b401-076e-436e-a3a1-1b44e4462dc8")
 	)
 	(junction
+		(at 15.24 29.845)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "04e7d381-1a3f-4cf2-9bd3-1e790cf30e4a")
+	)
+	(junction
 		(at 203.2 55.245)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -922,6 +1030,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0adce7eb-7664-43d3-b0ba-e936cb574c27")
+	)
+	(junction
+		(at 248.92 48.895)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0b2d7683-1c6c-4758-b8f0-f5d7e997b164")
 	)
 	(junction
 		(at 141.605 99.695)
@@ -2628,6 +2742,12 @@
 		(uuid "645ca87a-573b-432e-87fe-540426dfa9c1")
 	)
 	(junction
+		(at 22.86 29.845)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "64667417-0f57-4ccc-86e6-3ed729eb8187")
+	)
+	(junction
 		(at 141.605 86.995)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3460,6 +3580,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "930d5bc7-366f-408f-9c3e-209a45c62ce4")
+	)
+	(junction
+		(at 22.86 22.225)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9318680d-2741-459b-b270-c0f9372ac641")
 	)
 	(junction
 		(at 22.86 106.045)
@@ -7042,6 +7168,16 @@
 			(type default)
 		)
 		(uuid "2fed514d-2411-4d93-8bfc-9d047b3a04e2")
+	)
+	(wire
+		(pts
+			(xy 22.86 19.05) (xy 22.86 22.225)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3122cbce-3511-418d-a246-ce655b83df95")
 	)
 	(wire
 		(pts
@@ -12705,6 +12841,16 @@
 	)
 	(wire
 		(pts
+			(xy 19.05 19.05) (xy 19.05 26.035)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "badbb261-bc57-4fb4-92be-366d55637257")
+	)
+	(wire
+		(pts
 			(xy 114.935 106.045) (xy 114.935 112.395)
 		)
 		(stroke
@@ -12832,6 +12978,16 @@
 			(type default)
 		)
 		(uuid "bf406841-c8bf-4e8c-b961-8163dd083922")
+	)
+	(wire
+		(pts
+			(xy 15.24 19.05) (xy 15.24 29.845)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf465680-137d-4261-a139-055948b6b200")
 	)
 	(wire
 		(pts
@@ -13282,6 +13438,16 @@
 			(type default)
 		)
 		(uuid "cac7e68c-a08d-455d-b5a7-d466aeee53da")
+	)
+	(wire
+		(pts
+			(xy 22.86 22.225) (xy 22.86 29.845)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cacf282f-bfeb-4ae5-9198-60cf80f43575")
 	)
 	(wire
 		(pts
@@ -28758,6 +28924,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 22.86 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5d84a273-884c-4043-aa69-563d8a393550")
+		(property "Reference" "TP3"
+			(at 21.082 13.335 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "PWR"
+			(at 24.257 16.9601 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:Round"
+			(at 27.94 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 27.94 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 22.86 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a5eb20b2-6f98-4dac-9c8e-5b63a66f21e5")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "TP3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RevK:WS2812B-1mm")
 		(at 19.05 42.545 90)
 		(mirror x)
@@ -35851,6 +36084,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 15.24 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8cda1bda-fcef-4a35-81e5-1bdd4e963b25")
+		(property "Reference" "TP1"
+			(at 13.462 13.335 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "GND"
+			(at 16.637 16.9601 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:Round"
+			(at 20.32 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 20.32 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 15.24 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "620031d1-0f5c-41b0-87b1-49be1493ab01")
+		)
+		(instances
+			(project ""
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "TP1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VCC")
 		(at 103.505 29.845 0)
 		(unit 1)
@@ -36227,6 +36527,73 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C85")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 19.05 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90a6b4cb-944b-4232-838e-6161e62b755a")
+		(property "Reference" "TP2"
+			(at 17.272 13.335 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "DIN"
+			(at 20.447 16.9601 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:Round"
+			(at 24.13 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 24.13 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 19.05 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "72edfabd-2788-418e-9c8e-aae880b5807a")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "TP2")
 					(unit 1)
 				)
 			)
@@ -40701,6 +41068,73 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C195")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 22.86 22.225 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "aeeb3d28-adb2-480b-b406-6412db50a3f9")
+		(property "Reference" "#PWR02"
+			(at 19.05 22.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 26.035 22.225 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 22.86 22.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 22.86 22.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 22.86 22.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c174f3fe-ffcf-4a44-a4cf-63b08d8d374a")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -47206,6 +47640,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 248.92 48.895 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e899f0ea-878b-4107-bed7-1e49cf16cb78")
+		(property "Reference" "#PWR041"
+			(at 248.92 55.245 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 248.92 53.0281 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 248.92 48.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 248.92 48.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 248.92 48.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "da9303e0-10a8-45fa-b67b-3bcf735fa8b0")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#PWR041")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 218.44 125.095 270)
 		(mirror x)
@@ -48826,72 +49326,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C193")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VCC")
-		(at 22.86 29.845 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f70d3958-9bbe-48d5-8d68-669057d4b835")
-		(property "Reference" "#PWR02"
-			(at 22.86 33.655 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VCC"
-			(at 22.86 25.7119 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 22.86 29.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 22.86 29.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 22.86 29.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d21f3d5f-78b6-45da-9f3d-f2866d6e81b1")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR02")
 					(unit 1)
 				)
 			)
