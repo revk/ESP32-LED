@@ -864,18 +864,6 @@
 		(uuid "06b94687-55d5-4922-a98a-9a71ff841b30")
 	)
 	(junction
-		(at 256.54 61.595)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0769bd6e-4f87-475e-9d3f-fb2c8823d892")
-	)
-	(junction
-		(at 267.97 48.895)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "079d02f3-db4a-4762-9ae2-d6621bf7380c")
-	)
-	(junction
 		(at 199.39 99.695)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1002,12 +990,6 @@
 		(uuid "0f79c631-0ada-4256-9009-b42d42d5d3d8")
 	)
 	(junction
-		(at 256.54 67.945)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0f8fa08a-91dc-471b-975d-2826360789da")
-	)
-	(junction
 		(at 176.53 144.145)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1096,12 +1078,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "14d03ed3-b31f-47d8-a4a9-d6db0128baab")
-	)
-	(junction
-		(at 256.54 125.095)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "150fbada-3a5c-4b04-9bec-25790115f285")
 	)
 	(junction
 		(at 22.86 118.745)
@@ -1206,12 +1182,6 @@
 		(uuid "1b43856b-21f9-49fa-9e3d-5348aca05a43")
 	)
 	(junction
-		(at 267.97 61.595)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1b503d0d-8ee2-4ca8-b017-ed58a005f6cc")
-	)
-	(junction
 		(at 137.795 61.595)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1306,18 +1276,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1fe10de7-4284-49bc-b03a-521d71397e09")
-	)
-	(junction
-		(at 260.35 36.195)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "201026a4-df1e-4d7f-b19f-48fb4c998a52")
-	)
-	(junction
-		(at 248.92 48.895)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "20455885-c1da-4ff2-88e5-24aed146830c")
 	)
 	(junction
 		(at 80.645 67.945)
@@ -1470,12 +1428,6 @@
 		(uuid "292dfd2c-52f7-4ec6-b65d-2daeed2735e1")
 	)
 	(junction
-		(at 256.54 118.745)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "29498b7e-44ae-42f6-96bd-49fb71ac7dd4")
-	)
-	(junction
 		(at 15.24 99.695)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1516,12 +1468,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2ae41537-0dae-4312-952a-5fc78f76911f")
-	)
-	(junction
-		(at 248.92 55.245)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2befab68-8427-4a59-b906-3e43f5a188e9")
 	)
 	(junction
 		(at 237.49 61.595)
@@ -2046,12 +1992,6 @@
 		(uuid "444aa794-aa9b-4a17-b4d2-aa005363d396")
 	)
 	(junction
-		(at 260.35 48.895)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "44d7a05e-6275-4298-ae90-973543781358")
-	)
-	(junction
 		(at 210.82 36.195)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2152,12 +2092,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4885cc64-e837-4f41-9f47-fe68f6a6f941")
-	)
-	(junction
-		(at 256.54 93.345)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "48a55aee-ee19-4ca8-8191-111df4a95ba5")
 	)
 	(junction
 		(at 73.025 67.945)
@@ -2400,12 +2334,6 @@
 		(uuid "55ed8829-13c6-43e5-9868-e101ca2a3153")
 	)
 	(junction
-		(at 256.54 112.395)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5667dc0f-e50b-4e9e-9752-7172f3686161")
-	)
-	(junction
 		(at 73.025 55.245)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2622,12 +2550,6 @@
 		(uuid "60718ef8-1eea-4b56-a4ef-ab8100506c86")
 	)
 	(junction
-		(at 248.92 137.795)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6084a18e-1b4c-4d6f-a110-1e53dabbc633")
-	)
-	(junction
 		(at 84.455 42.545)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2680,12 +2602,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "635468dc-9c97-46d7-9480-3146d9a794da")
-	)
-	(junction
-		(at 248.92 99.695)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "637375a2-3220-429b-bc9b-9fb5994ce666")
 	)
 	(junction
 		(at 130.175 118.745)
@@ -2898,12 +2814,6 @@
 		(uuid "6de73cc3-dc81-49f4-a66b-6f4b5724c51d")
 	)
 	(junction
-		(at 260.35 67.945)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6deb9be7-ac58-4a96-be29-4ca9fefbf813")
-	)
-	(junction
 		(at 180.34 106.045)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2968,12 +2878,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "70782d01-0af1-4c7e-9e55-29eb62cac531")
-	)
-	(junction
-		(at 260.35 55.245)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7083d828-53cb-4197-b959-6fb8992de197")
 	)
 	(junction
 		(at 176.53 74.295)
@@ -3096,12 +3000,6 @@
 		(uuid "7834e201-191b-46a1-8100-d503d5d2fc55")
 	)
 	(junction
-		(at 248.92 125.095)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "783a5a8c-c654-4bbf-9e62-ecff12af7f1f")
-	)
-	(junction
 		(at 126.365 61.595)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3148,12 +3046,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7aa2aa0c-ee5e-4dc6-a554-9f9ab23e548c")
-	)
-	(junction
-		(at 248.92 86.995)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7aa6dd92-a045-47b6-87bf-e07e57b52992")
 	)
 	(junction
 		(at 176.53 86.995)
@@ -3228,12 +3120,6 @@
 		(uuid "7eef5210-6605-4f13-8f87-119139e8c35f")
 	)
 	(junction
-		(at 256.54 131.445)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7f657965-a568-4667-9f4e-0fb94f11ffd9")
-	)
-	(junction
 		(at 168.91 125.095)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3244,12 +3130,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7fdc9567-11fc-4563-bf23-5507147bba33")
-	)
-	(junction
-		(at 267.97 67.945)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8044f754-6623-4420-bb9e-089c5a36634d")
 	)
 	(junction
 		(at 84.455 48.895)
@@ -3274,12 +3154,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8176a9e5-4ed5-4b39-86e7-6d424aae4540")
-	)
-	(junction
-		(at 256.54 48.895)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "821a4adc-536c-4d76-bb74-89643e99512b")
 	)
 	(junction
 		(at 80.645 106.045)
@@ -3396,12 +3270,6 @@
 		(uuid "88c529ca-7af1-4174-ba3e-11e4f18160d6")
 	)
 	(junction
-		(at 260.35 42.545)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "88e28779-2971-4220-94ff-8d11a4d35cd9")
-	)
-	(junction
 		(at 156.845 80.645)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3418,12 +3286,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "89a07c64-be04-4cdf-83ad-f031a418148e")
-	)
-	(junction
-		(at 248.92 150.495)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8a1a94b0-bce4-40a3-b666-e7f32da20762")
 	)
 	(junction
 		(at 84.455 99.695)
@@ -3600,12 +3462,6 @@
 		(uuid "930d5bc7-366f-408f-9c3e-209a45c62ce4")
 	)
 	(junction
-		(at 248.92 118.745)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "94070863-b1d1-4521-af9c-51936d6c3a9e")
-	)
-	(junction
 		(at 22.86 106.045)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3780,12 +3636,6 @@
 		(uuid "9c546b2c-e570-4294-a92c-a03b48c2a7f6")
 	)
 	(junction
-		(at 256.54 137.795)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9c7d8dbb-4828-49c2-a570-51116a08aecc")
-	)
-	(junction
 		(at 214.63 80.645)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3900,12 +3750,6 @@
 		(uuid "a2226c82-e818-4205-9ea0-3b5fe3b48111")
 	)
 	(junction
-		(at 248.92 93.345)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a22afe53-b491-4f3a-85d0-13722372666c")
-	)
-	(junction
 		(at 107.315 42.545)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3928,12 +3772,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a53a37fa-3f54-4dfb-a970-2479ab40d091")
-	)
-	(junction
-		(at 267.97 29.845)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a53b1c9a-fd4d-4855-97ae-c49722934d3a")
 	)
 	(junction
 		(at 114.935 137.795)
@@ -4024,12 +3862,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a94f2728-a9d0-489e-8953-3d1d87369d9f")
-	)
-	(junction
-		(at 256.54 80.645)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a9839d93-6582-4e75-9f1e-cfd0b828a1bd")
 	)
 	(junction
 		(at 80.645 86.995)
@@ -4386,12 +4218,6 @@
 		(uuid "bf458cd1-2155-419e-8384-d3eacb19508d")
 	)
 	(junction
-		(at 248.92 80.645)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "bf4c2f47-bd01-49d3-a0d1-134a902a9ae3")
-	)
-	(junction
 		(at 222.25 99.695)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4468,12 +4294,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c3e1c7da-a2b8-478a-8c8c-251a66546120")
-	)
-	(junction
-		(at 267.97 42.545)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c439c4f7-45ac-49b7-b313-176846d6f68a")
 	)
 	(junction
 		(at 214.63 93.345)
@@ -4554,12 +4374,6 @@
 		(uuid "c849db9c-ef6e-417f-96a4-c2b4abaec6a6")
 	)
 	(junction
-		(at 267.97 36.195)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c8f707c5-8f1c-43f3-99f7-26f9a05ae66e")
-	)
-	(junction
 		(at 191.77 80.645)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4576,12 +4390,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cb39748d-544b-48a6-84a3-dc71c497cbc6")
-	)
-	(junction
-		(at 256.54 99.695)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "cbf4622e-6a46-41fd-954a-1a4a009b952d")
 	)
 	(junction
 		(at 214.63 36.195)
@@ -4710,28 +4518,10 @@
 		(uuid "d3c85514-7ea8-404e-9139-0861938ac23d")
 	)
 	(junction
-		(at 248.92 131.445)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d4090bea-53f2-4c25-947c-617e8104716a")
-	)
-	(junction
-		(at 248.92 61.595)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d41a067d-b268-4cff-93e3-274b0aac5a26")
-	)
-	(junction
 		(at 222.25 29.845)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d4777e87-947d-4bc7-8510-1a6b0331f030")
-	)
-	(junction
-		(at 248.92 144.145)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d4fa5c89-8e65-4b35-a9af-c19f1f503c65")
 	)
 	(junction
 		(at 168.91 150.495)
@@ -4780,12 +4570,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d7816ba4-db15-4963-93b1-2fd61c34913d")
-	)
-	(junction
-		(at 260.35 61.595)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d794551b-d900-4a47-9a5e-8c7df9070cae")
 	)
 	(junction
 		(at 149.225 74.295)
@@ -4890,12 +4674,6 @@
 		(uuid "dcb60990-d8df-4d36-b63f-8003a3f7f97b")
 	)
 	(junction
-		(at 267.97 55.245)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "dd21717c-24cf-4474-9240-af1ee2624180")
-	)
-	(junction
 		(at 214.63 42.545)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4918,12 +4696,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "df027249-2b4d-45cd-9834-11455df0889d")
-	)
-	(junction
-		(at 248.92 67.945)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "df4640a7-af32-468d-a83f-d35dd40be087")
 	)
 	(junction
 		(at 237.49 150.495)
@@ -4960,12 +4732,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e10661e2-2873-454d-9ae8-04d1b1f98150")
-	)
-	(junction
-		(at 256.54 74.295)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e1292e6b-1237-470c-b300-7f57bee2f3dc")
 	)
 	(junction
 		(at 15.24 80.645)
@@ -5118,12 +4884,6 @@
 		(uuid "ebb4a1ed-b5ca-4434-9225-93c996cf51c2")
 	)
 	(junction
-		(at 248.92 106.045)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ebcd0e5c-84d3-41ea-99a9-2656ea6f2722")
-	)
-	(junction
 		(at 168.91 67.945)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5232,12 +4992,6 @@
 		(uuid "f0b6a39f-5ed3-41ad-bec8-6a19168930ca")
 	)
 	(junction
-		(at 256.54 86.995)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f0b9fcec-b364-4e36-a510-9bd0e4898e94")
-	)
-	(junction
 		(at 38.735 150.495)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5328,12 +5082,6 @@
 		(uuid "f483496b-869f-42a4-ad31-979d6a5a420e")
 	)
 	(junction
-		(at 256.54 55.245)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f4cd769f-5307-4cf1-997e-72faa5e10666")
-	)
-	(junction
 		(at 222.25 131.445)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5358,22 +5106,10 @@
 		(uuid "f529cd6c-492a-454c-b92a-20f9bcf763ab")
 	)
 	(junction
-		(at 248.92 112.395)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f584f62f-18a5-47a4-a493-1fbda0d66172")
-	)
-	(junction
 		(at 95.885 144.145)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f59acfcd-15f1-403a-8855-266e1378c1db")
-	)
-	(junction
-		(at 248.92 74.295)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f62aa982-a939-4a95-ba00-b5f649ebc1b6")
 	)
 	(junction
 		(at 84.455 80.645)
@@ -5382,22 +5118,10 @@
 		(uuid "f67a9d38-ba4c-468c-98ef-7cf62497f946")
 	)
 	(junction
-		(at 256.54 144.145)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f706112e-4bdb-4ae3-813e-b33c86b7cc68")
-	)
-	(junction
 		(at 126.365 99.695)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f72adcbd-9fb4-4172-8312-4862cb5cb22f")
-	)
-	(junction
-		(at 256.54 106.045)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f7dbdb59-4e58-40fa-9781-ec2c082d1e77")
 	)
 	(junction
 		(at 27.305 99.695)
@@ -5519,10 +5243,6 @@
 		(color 0 0 0 0)
 		(uuid "ff31de80-1bd8-4d8f-977b-c479efdc6260")
 	)
-	(no_connect
-		(at 264.16 71.755)
-		(uuid "442b014c-def5-4620-903d-d418eb6cfd95")
-	)
 	(wire
 		(pts
 			(xy 156.845 125.095) (xy 156.845 131.445)
@@ -5562,26 +5282,6 @@
 			(type default)
 		)
 		(uuid "013069ba-ecb3-440a-a40a-06f4bfdfa39f")
-	)
-	(wire
-		(pts
-			(xy 267.97 67.945) (xy 267.97 74.295)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0134c21d-9590-4046-b81c-e3a1132b1f5d")
-	)
-	(wire
-		(pts
-			(xy 260.35 55.245) (xy 260.35 61.595)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "015132d4-62fa-4f6a-8458-d60b7411c5e3")
 	)
 	(wire
 		(pts
@@ -5745,16 +5445,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 125.095) (xy 248.92 131.445)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "044e82a5-d88d-4688-99da-4335491c833a")
-	)
-	(wire
-		(pts
 			(xy 69.215 118.745) (xy 69.215 125.095)
 		)
 		(stroke
@@ -5855,16 +5545,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 67.945) (xy 248.92 74.295)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "067fdc8a-c748-4565-866b-e7790da14b13")
-	)
-	(wire
-		(pts
 			(xy 122.555 135.255) (xy 122.555 140.335)
 		)
 		(stroke
@@ -5872,16 +5552,6 @@
 			(type default)
 		)
 		(uuid "06dfaa7c-ffe7-476a-b910-1cb89a552829")
-	)
-	(wire
-		(pts
-			(xy 248.92 93.345) (xy 248.92 99.695)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "06eeb3e3-2880-430c-9634-5b5de89839a9")
 	)
 	(wire
 		(pts
@@ -6162,16 +5832,6 @@
 			(type default)
 		)
 		(uuid "0e69d10c-1250-4a03-a2b1-9553c303bf06")
-	)
-	(wire
-		(pts
-			(xy 267.97 55.245) (xy 267.97 61.595)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0ecab4ca-dade-4126-9ede-73ba27e255a7")
 	)
 	(wire
 		(pts
@@ -6505,16 +6165,6 @@
 	)
 	(wire
 		(pts
-			(xy 252.73 71.755) (xy 252.73 76.835)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "176740e3-98ea-4542-8420-35b96639223f")
-	)
-	(wire
-		(pts
 			(xy 191.77 137.795) (xy 191.77 144.145)
 		)
 		(stroke
@@ -6645,16 +6295,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 106.045) (xy 248.92 112.395)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1c7e1239-f03e-4782-b9ad-567e0f55d17b")
-	)
-	(wire
-		(pts
 			(xy 65.405 46.355) (xy 65.405 51.435)
 		)
 		(stroke
@@ -6672,16 +6312,6 @@
 			(type default)
 		)
 		(uuid "1d1013e3-7a87-48aa-b2de-fc99f65b9706")
-	)
-	(wire
-		(pts
-			(xy 248.92 48.895) (xy 248.92 55.245)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1d1f3eef-8891-4a35-a684-ca0552ade756")
 	)
 	(wire
 		(pts
@@ -6852,16 +6482,6 @@
 			(type default)
 		)
 		(uuid "21751f57-8edb-4343-bc36-dd13f6e5ef78")
-	)
-	(wire
-		(pts
-			(xy 252.73 147.955) (xy 252.73 154.305)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "21a29548-b5fa-45ac-9559-f29d29859585")
 	)
 	(wire
 		(pts
@@ -7365,16 +6985,6 @@
 	)
 	(wire
 		(pts
-			(xy 260.35 42.545) (xy 260.35 48.895)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2d5220de-9a6d-43c0-a44c-55259f3fcbb6")
-	)
-	(wire
-		(pts
 			(xy 31.115 33.655) (xy 31.115 38.735)
 		)
 		(stroke
@@ -7392,26 +7002,6 @@
 			(type default)
 		)
 		(uuid "2e7385ff-aec5-4fdd-b7a5-00a526a64ca1")
-	)
-	(wire
-		(pts
-			(xy 267.97 48.895) (xy 267.97 55.245)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2e990d75-d7ce-4dc2-b9e4-ea2884949d27")
-	)
-	(wire
-		(pts
-			(xy 256.54 125.095) (xy 256.54 131.445)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ee23f4f-3ac1-4a4e-b401-589bbcd8f712")
 	)
 	(wire
 		(pts
@@ -7542,16 +7132,6 @@
 			(type default)
 		)
 		(uuid "332fbb70-b91f-4d62-a1c7-4414e8d0bad5")
-	)
-	(wire
-		(pts
-			(xy 248.92 55.245) (xy 248.92 61.595)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "33a02060-5d6d-4f4b-ab37-b7bac298713b")
 	)
 	(wire
 		(pts
@@ -7875,16 +7455,6 @@
 	)
 	(wire
 		(pts
-			(xy 267.97 61.595) (xy 267.97 67.945)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3e711f2a-c139-4be2-9cb0-297bb8158b53")
-	)
-	(wire
-		(pts
 			(xy 65.405 135.255) (xy 65.405 140.335)
 		)
 		(stroke
@@ -7985,16 +7555,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 86.995) (xy 256.54 93.345)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4134a7fb-013d-418e-9852-8eae7e80469b")
-	)
-	(wire
-		(pts
 			(xy 46.355 74.295) (xy 46.355 80.645)
 		)
 		(stroke
@@ -8062,16 +7622,6 @@
 			(type default)
 		)
 		(uuid "43b6c336-5ea9-4c18-b0b4-9c52885bb8bc")
-	)
-	(wire
-		(pts
-			(xy 252.73 122.555) (xy 252.73 127.635)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "44798ada-1f9f-4743-9842-c59e811563e5")
 	)
 	(wire
 		(pts
@@ -8152,16 +7702,6 @@
 			(type default)
 		)
 		(uuid "479bbcd3-9df2-4bc9-821e-a4b16454bc21")
-	)
-	(wire
-		(pts
-			(xy 256.54 48.895) (xy 256.54 55.245)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "47c4fdd0-f7b3-4aa5-89b5-6e56b24dc0a9")
 	)
 	(wire
 		(pts
@@ -8345,16 +7885,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 131.445) (xy 248.92 137.795)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4b51dd2c-1cea-4798-a476-04ed4ad8d551")
-	)
-	(wire
-		(pts
 			(xy 57.785 36.195) (xy 57.785 42.545)
 		)
 		(stroke
@@ -8422,16 +7952,6 @@
 			(type default)
 		)
 		(uuid "4cf731f9-dd6e-449b-8dcd-e174db48162a")
-	)
-	(wire
-		(pts
-			(xy 252.73 135.255) (xy 252.73 140.335)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4dd34693-9bb9-4051-be3a-f2e702f466c6")
 	)
 	(wire
 		(pts
@@ -8682,16 +8202,6 @@
 			(type default)
 		)
 		(uuid "510c6f4d-53b4-40c8-a0ff-7976432d7f03")
-	)
-	(wire
-		(pts
-			(xy 256.54 67.945) (xy 256.54 74.295)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "51104f28-ce0d-4bd8-acf1-8ffc2622a5c6")
 	)
 	(wire
 		(pts
@@ -9085,16 +8595,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 144.145) (xy 248.92 150.495)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "59f783b8-b1c8-4fa6-b522-5803c4521d3c")
-	)
-	(wire
-		(pts
 			(xy 95.885 99.695) (xy 95.885 106.045)
 		)
 		(stroke
@@ -9122,16 +8622,6 @@
 			(type default)
 		)
 		(uuid "5bc53541-3de1-4dc6-b787-26eec26df0c2")
-	)
-	(wire
-		(pts
-			(xy 248.92 86.995) (xy 248.92 93.345)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5bde4c2f-4b3d-453f-8d08-a5d57964f06b")
 	)
 	(wire
 		(pts
@@ -9425,16 +8915,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 61.595) (xy 256.54 67.945)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "603b3ad2-7ebf-4045-9f04-9afd3f837395")
-	)
-	(wire
-		(pts
 			(xy 38.735 125.095) (xy 38.735 131.445)
 		)
 		(stroke
@@ -9452,16 +8932,6 @@
 			(type default)
 		)
 		(uuid "606d51c3-af46-4a93-b90a-3bc90fefeccd")
-	)
-	(wire
-		(pts
-			(xy 256.54 99.695) (xy 256.54 106.045)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61dfc394-6680-4412-b974-ad6fe7110060")
 	)
 	(wire
 		(pts
@@ -9612,16 +9082,6 @@
 			(type default)
 		)
 		(uuid "64db15bb-3ddc-4675-9780-1f906fc0628c")
-	)
-	(wire
-		(pts
-			(xy 256.54 74.295) (xy 256.54 80.645)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "64ed0396-7f37-420c-aede-17021895e1da")
 	)
 	(wire
 		(pts
@@ -9942,16 +9402,6 @@
 			(type default)
 		)
 		(uuid "69d1aef0-5e9b-4d05-9bd0-7f4086bc9c28")
-	)
-	(wire
-		(pts
-			(xy 252.73 109.855) (xy 252.73 114.935)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6a526c39-bdec-4316-886e-222f3f504bfb")
 	)
 	(wire
 		(pts
@@ -10305,16 +9755,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 118.745) (xy 256.54 125.095)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "722f1a48-78d9-4979-9237-5e4e153ce275")
-	)
-	(wire
-		(pts
 			(xy 95.885 74.295) (xy 95.885 80.645)
 		)
 		(stroke
@@ -10332,16 +9772,6 @@
 			(type default)
 		)
 		(uuid "72bec775-b70e-4e5e-9ae8-d25fb23e7a7c")
-	)
-	(wire
-		(pts
-			(xy 252.73 59.055) (xy 252.73 64.135)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "739f0ed2-9312-48ca-9daf-a98c25c540bb")
 	)
 	(wire
 		(pts
@@ -10505,16 +9935,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 137.795) (xy 248.92 144.145)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7719d451-c544-4df0-8a45-03d628d7f4c9")
-	)
-	(wire
-		(pts
 			(xy 88.265 97.155) (xy 88.265 102.235)
 		)
 		(stroke
@@ -10575,16 +9995,6 @@
 	)
 	(wire
 		(pts
-			(xy 267.97 29.845) (xy 267.97 36.195)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "789d66f0-9438-4b99-a178-1bcb9d76c111")
-	)
-	(wire
-		(pts
 			(xy 88.265 122.555) (xy 88.265 127.635)
 		)
 		(stroke
@@ -10642,16 +10052,6 @@
 			(type default)
 		)
 		(uuid "7b26b435-5288-4662-a9c5-34821d323af1")
-	)
-	(wire
-		(pts
-			(xy 260.35 48.895) (xy 260.35 55.245)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7b6eab17-5ff0-4e4a-8074-d53a1d5e8fcc")
 	)
 	(wire
 		(pts
@@ -10892,16 +10292,6 @@
 			(type default)
 		)
 		(uuid "80b3957f-ca95-4a67-9db5-3d3381d8e407")
-	)
-	(wire
-		(pts
-			(xy 264.16 26.035) (xy 258.445 26.035)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "80f83401-6c8c-4bb0-a9df-67cdb54d42a8")
 	)
 	(wire
 		(pts
@@ -11355,16 +10745,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 144.145) (xy 256.54 150.495)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "89b0d33f-2a02-4bfe-a558-52cd9f3702a8")
-	)
-	(wire
-		(pts
 			(xy 195.58 33.655) (xy 195.58 38.735)
 		)
 		(stroke
@@ -11555,16 +10935,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 74.295) (xy 248.92 80.645)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8d4c5e33-e3a3-44e0-9d0e-1f1326da6052")
-	)
-	(wire
-		(pts
 			(xy 84.455 36.195) (xy 84.455 42.545)
 		)
 		(stroke
@@ -11685,16 +11055,6 @@
 	)
 	(wire
 		(pts
-			(xy 258.445 154.305) (xy 252.73 154.305)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9096d043-ed79-4f97-8d38-16253140de1c")
-	)
-	(wire
-		(pts
 			(xy 210.82 118.745) (xy 210.82 125.095)
 		)
 		(stroke
@@ -11795,26 +11155,6 @@
 	)
 	(wire
 		(pts
-			(xy 260.35 29.845) (xy 260.35 36.195)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9427a3b5-2801-49ce-a590-f7e13af7d089")
-	)
-	(wire
-		(pts
-			(xy 252.73 84.455) (xy 252.73 89.535)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "943f8e5f-2601-43f4-bfe1-60b7d5f139e0")
-	)
-	(wire
-		(pts
 			(xy 180.34 86.995) (xy 180.34 93.345)
 		)
 		(stroke
@@ -11902,16 +11242,6 @@
 			(type default)
 		)
 		(uuid "967b4045-562d-42d2-9315-30b7f15220f4")
-	)
-	(wire
-		(pts
-			(xy 264.16 59.055) (xy 264.16 64.135)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9694b2ff-b465-43f5-b07e-c66b94c159d2")
 	)
 	(wire
 		(pts
@@ -12112,16 +11442,6 @@
 			(type default)
 		)
 		(uuid "9ae5bcdf-ca43-4eaa-8285-651140c38e02")
-	)
-	(wire
-		(pts
-			(xy 256.54 106.045) (xy 256.54 112.395)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9b62122d-0029-4a24-95de-611c672a5d63")
 	)
 	(wire
 		(pts
@@ -12625,16 +11945,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 131.445) (xy 256.54 137.795)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a9a088b5-d213-4cb2-9113-79445a77812c")
-	)
-	(wire
-		(pts
 			(xy 126.365 112.395) (xy 126.365 118.745)
 		)
 		(stroke
@@ -12642,16 +11952,6 @@
 			(type default)
 		)
 		(uuid "a9ee589f-16a3-4317-a1fc-67b232c9f9ca")
-	)
-	(wire
-		(pts
-			(xy 267.97 42.545) (xy 267.97 48.895)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aa001b70-1852-4f50-9ee1-181ba5982161")
 	)
 	(wire
 		(pts
@@ -12772,16 +12072,6 @@
 			(type default)
 		)
 		(uuid "ab91fe81-67d4-40ca-88a2-b439a7c1b385")
-	)
-	(wire
-		(pts
-			(xy 267.97 36.195) (xy 267.97 42.545)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "abe86621-4357-4bd9-9cd1-ec1c1bd48890")
 	)
 	(wire
 		(pts
@@ -13002,16 +12292,6 @@
 			(type default)
 		)
 		(uuid "aff9fdbb-698a-4e78-a52c-ec364ebd12b1")
-	)
-	(wire
-		(pts
-			(xy 260.35 61.595) (xy 260.35 67.945)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b0b8ebb0-4f47-464e-ac3f-d95ae1623afe")
 	)
 	(wire
 		(pts
@@ -13345,16 +12625,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 55.245) (xy 256.54 61.595)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b850cd11-d8a2-4088-852f-1d26f61268dc")
-	)
-	(wire
-		(pts
 			(xy 199.39 144.145) (xy 199.39 150.495)
 		)
 		(stroke
@@ -13575,16 +12845,6 @@
 	)
 	(wire
 		(pts
-			(xy 252.73 97.155) (xy 252.73 102.235)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bf90ec47-a662-43f5-867f-d806604359a9")
-	)
-	(wire
-		(pts
 			(xy 69.215 93.345) (xy 69.215 99.695)
 		)
 		(stroke
@@ -13642,16 +12902,6 @@
 			(type default)
 		)
 		(uuid "c159acd2-51a5-4353-b84e-3093df1bee5c")
-	)
-	(wire
-		(pts
-			(xy 264.16 46.355) (xy 264.16 51.435)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c1887d9a-3520-41fb-a728-98ce67525f07")
 	)
 	(wire
 		(pts
@@ -14035,16 +13285,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 80.645) (xy 248.92 86.995)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cad77da8-a487-4d36-91e0-66e66b9d3fa0")
-	)
-	(wire
-		(pts
 			(xy 15.24 36.195) (xy 15.24 42.545)
 		)
 		(stroke
@@ -14125,16 +13365,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 93.345) (xy 256.54 99.695)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cdb1d481-77df-4285-b351-1182a434de61")
-	)
-	(wire
-		(pts
 			(xy 130.175 93.345) (xy 130.175 99.695)
 		)
 		(stroke
@@ -14192,26 +13422,6 @@
 			(type default)
 		)
 		(uuid "cebae8f5-db40-4d72-b5a1-40008f1bb24d")
-	)
-	(wire
-		(pts
-			(xy 260.35 36.195) (xy 260.35 42.545)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cedf28f9-600c-4ad1-8475-f81d2e65557c")
-	)
-	(wire
-		(pts
-			(xy 258.445 26.035) (xy 258.445 154.305)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cef71c72-c6ea-4b70-891a-19830f6cc00c")
 	)
 	(wire
 		(pts
@@ -14322,16 +13532,6 @@
 			(type default)
 		)
 		(uuid "d34ac988-3b92-4645-a2e8-e38cbf2a727c")
-	)
-	(wire
-		(pts
-			(xy 260.35 67.945) (xy 260.35 74.295)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d38cbee3-8541-4c19-9c5b-9a07d71d8787")
 	)
 	(wire
 		(pts
@@ -14685,16 +13885,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 112.395) (xy 248.92 118.745)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "da1d6464-832e-45d5-88d2-9744a9569008")
-	)
-	(wire
-		(pts
 			(xy 31.115 154.305) (xy 31.115 147.955)
 		)
 		(stroke
@@ -14892,16 +14082,6 @@
 			(type default)
 		)
 		(uuid "df7ade8d-b54f-4aea-880d-6e8ae0502730")
-	)
-	(wire
-		(pts
-			(xy 248.92 99.695) (xy 248.92 106.045)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "df847a9f-131e-4e64-a03b-e9b51ed469e6")
 	)
 	(wire
 		(pts
@@ -15365,16 +14545,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 118.745) (xy 248.92 125.095)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eb7d55cc-dd68-47a9-8694-2bd103f82dc8")
-	)
-	(wire
-		(pts
 			(xy 103.505 36.195) (xy 103.505 42.545)
 		)
 		(stroke
@@ -15645,16 +14815,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 112.395) (xy 256.54 118.745)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f0f65fe5-15e9-406e-baa2-89eb33e64266")
-	)
-	(wire
-		(pts
 			(xy 167.005 26.035) (xy 167.005 154.305)
 		)
 		(stroke
@@ -15855,26 +15015,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 80.645) (xy 256.54 86.995)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f686acda-56ac-4432-ba94-c56e0930e68f")
-	)
-	(wire
-		(pts
-			(xy 256.54 137.795) (xy 256.54 144.145)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f68985a9-ecb6-47a7-b95e-d393179694ad")
-	)
-	(wire
-		(pts
 			(xy 214.63 86.995) (xy 214.63 93.345)
 		)
 		(stroke
@@ -15942,16 +15082,6 @@
 			(type default)
 		)
 		(uuid "f84dc6be-8c03-4d39-9a9c-634d8bf201ec")
-	)
-	(wire
-		(pts
-			(xy 248.92 61.595) (xy 248.92 67.945)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f868f87d-4277-4736-a60a-e52ddd8ffe77")
 	)
 	(wire
 		(pts
@@ -16245,16 +15375,6 @@
 	)
 	(wire
 		(pts
-			(xy 264.16 33.655) (xy 264.16 38.735)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ff713270-9504-415e-971c-fbeb7b383820")
-	)
-	(wire
-		(pts
 			(xy 50.165 36.195) (xy 50.165 42.545)
 		)
 		(stroke
@@ -16438,96 +15558,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "D76")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 252.73 55.245 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "01e26225-5569-422e-bd73-619cdb27b4dd")
-		(property "Reference" "D200"
-			(at 252.73 55.245 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 258.445 56.515 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 260.35 56.515 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 262.255 56.515 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 55.245 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 264.16 56.515 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "13305cd7-a472-4197-9f09-b7bfedacbc16")
-		)
-		(pin "2"
-			(uuid "939e9d6c-980a-4ca6-ada9-addd5ca6a429")
-		)
-		(pin "3"
-			(uuid "76735a7d-f909-4bac-ae80-438395bc170c")
-		)
-		(pin "4"
-			(uuid "7113926d-2c84-42b8-bcb0-861b5907038d")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D200")
 					(unit 1)
 				)
 			)
@@ -16956,96 +15986,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C45")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 264.16 42.545 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "04f3e01c-e640-4e1b-b25b-c48406028db2")
-		(property "Reference" "D209"
-			(at 264.16 42.545 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 269.875 43.815 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 271.78 43.815 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 273.685 43.815 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 264.16 42.545 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 275.59 43.815 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b086070a-15e0-4b67-9ba0-7422e4fdf47b")
-		)
-		(pin "2"
-			(uuid "06f65fc4-bb5d-4a7c-80b0-c108218ecd2d")
-		)
-		(pin "3"
-			(uuid "e3947744-2c07-4a70-98af-7af19c4136be")
-		)
-		(pin "4"
-			(uuid "7b019e51-7d8f-4ef2-a301-142407b2803b")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D209")
 					(unit 1)
 				)
 			)
@@ -18060,74 +17000,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C58")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 252.73 137.795 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "0c229998-c837-40cf-900c-b56803799c72")
-		(property "Reference" "C206"
-			(at 254.635 137.795 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 252.73 137.795 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 248.92 136.8298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 252.73 137.795 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 137.795 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "30eca8fb-adbe-4737-8928-d9639fd53b5d")
-		)
-		(pin "2"
-			(uuid "dad05c14-259c-455a-835d-ae541caa6a78")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C206")
 					(unit 1)
 				)
 			)
@@ -24323,96 +23195,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 252.73 118.745 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "35ebaabc-49c9-43eb-b1ed-a9b21e115920")
-		(property "Reference" "D205"
-			(at 252.73 118.745 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 258.445 120.015 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 260.35 120.015 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 262.255 120.015 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 118.745 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 264.16 120.015 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4beb32ad-4503-4e80-ad2f-3af2c1cee259")
-		)
-		(pin "2"
-			(uuid "2e10e2b1-7827-43e6-a058-ccc97756b40c")
-		)
-		(pin "3"
-			(uuid "b0491140-3af4-48c1-b1d7-dea7283c1ae7")
-		)
-		(pin "4"
-			(uuid "c476ff8a-9d0d-4c64-ad4e-6908ec493ad1")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D205")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 31.115 125.095 270)
 		(mirror x)
@@ -24475,96 +23257,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C18")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 252.73 144.145 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "36d009b8-17e4-4129-9418-ac85a2a64ac9")
-		(property "Reference" "D207"
-			(at 252.73 144.145 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 258.445 145.415 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 260.35 145.415 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 262.255 145.415 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 144.145 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 264.16 145.415 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "476a909c-fe92-4bfb-b6fd-b83cda14be1c")
-		)
-		(pin "2"
-			(uuid "c1abae90-a82f-48d3-9c0d-059d75401148")
-		)
-		(pin "3"
-			(uuid "2e41d2eb-ffe3-49fd-9c14-250bb7131f09")
-		)
-		(pin "4"
-			(uuid "6fad10a3-0a80-48a3-84a5-4869777e77a5")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D207")
 					(unit 1)
 				)
 			)
@@ -24859,96 +23551,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C52")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 264.16 29.845 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "396b1aee-fa7e-4d75-a7af-e32f561cc1f4")
-		(property "Reference" "D208"
-			(at 264.16 29.845 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 269.875 31.115 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 271.78 31.115 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 273.685 31.115 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 264.16 29.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 275.59 31.115 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9969f539-b57d-49b8-93f0-409540c78df7")
-		)
-		(pin "2"
-			(uuid "15dc0537-779b-49d1-af2d-a8ef2e66c8ce")
-		)
-		(pin "3"
-			(uuid "94dd838b-6172-4446-ad3e-71dfc879d641")
-		)
-		(pin "4"
-			(uuid "3c581353-7262-4816-bc94-0e60ea5953c3")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D208")
 					(unit 1)
 				)
 			)
@@ -25813,96 +24415,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 264.16 55.245 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "42bd01a3-d738-4791-95de-36a2c0225bd7")
-		(property "Reference" "D210"
-			(at 264.16 55.245 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 269.875 56.515 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 271.78 56.515 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 273.685 56.515 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 264.16 55.245 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 275.59 56.515 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a9a9392b-fa5d-456d-aa1a-560f723dd127")
-		)
-		(pin "2"
-			(uuid "25b7137e-6314-42b5-be57-90fc35efd11d")
-		)
-		(pin "3"
-			(uuid "9cc0da92-6a79-4260-a0ac-ba212f0df32c")
-		)
-		(pin "4"
-			(uuid "3e3389bf-25e3-4aa6-8150-ce043331a314")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D210")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 19.05 125.095 270)
 		(mirror x)
@@ -26735,74 +25247,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 264.16 36.195 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "48bf5932-7d27-4184-815b-3530b0c3fb9c")
-		(property "Reference" "C208"
-			(at 266.065 36.195 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 264.16 36.195 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 260.35 35.2298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 264.16 36.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 264.16 36.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4969f540-2022-4135-9578-67d473453cfc")
-		)
-		(pin "2"
-			(uuid "126d032f-2fa2-4c27-aee0-bbf88d6b8e62")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C208")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "RevK:WS2812B-1mm")
 		(at 31.115 118.745 90)
 		(mirror x)
@@ -27361,74 +25805,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "D118")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 252.73 99.695 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4d6807dc-1fb3-4eac-b078-d353fa7b2e16")
-		(property "Reference" "C203"
-			(at 254.635 99.695 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 252.73 99.695 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 248.92 98.7298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 252.73 99.695 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 99.695 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "1489270a-7ff2-40b1-be19-a2ad5a05393a")
-		)
-		(pin "2"
-			(uuid "a3ca6548-3dd7-46dd-9395-9abecbabaaee")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C203")
 					(unit 1)
 				)
 			)
@@ -30923,96 +29299,6 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 264.16 67.945 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "61489135-0d52-4b85-ac47-b9412a8b54ea")
-		(property "Reference" "D211"
-			(at 264.16 67.945 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 269.875 69.215 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 271.78 69.215 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 273.685 69.215 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 264.16 67.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 275.59 69.215 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a33bf7a5-e6cb-4c2a-ab2b-4cc9d7fe142b")
-		)
-		(pin "2"
-			(uuid "99e39a15-5667-4b24-9e1c-48118cc5efa2")
-		)
-		(pin "3"
-			(uuid "b89e8c4b-ae10-4a68-92f4-4d80c298122c")
-		)
-		(pin "4"
-			(uuid "13341a97-0135-4a6d-be61-30241973bae9")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D211")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:WS2812B-1mm")
 		(at 241.3 131.445 90)
 		(mirror x)
 		(unit 1)
@@ -31958,140 +30244,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 252.73 86.995 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "6751e6f5-6e0f-43be-afb4-7b8744b03dee")
-		(property "Reference" "C202"
-			(at 254.635 86.995 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 252.73 86.995 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 248.92 86.0298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 252.73 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "80991934-593a-48b0-908e-02ab2d1aa870")
-		)
-		(pin "2"
-			(uuid "f0fa0d38-6642-466c-b9d7-489ff90b1f6d")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C202")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 248.92 150.495 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "68d6cab2-2b78-4236-a9aa-5275ffcf4272")
-		(property "Reference" "#PWR041"
-			(at 248.92 156.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 248.92 154.6281 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 248.92 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 248.92 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 248.92 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "84f54de8-1463-4213-a487-64cbe995acd3")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR041")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "RevK:WS2812B-1mm")
 		(at 53.975 55.245 90)
 		(mirror x)
@@ -32266,72 +30418,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "D169")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VCC")
-		(at 267.97 29.845 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "69369349-4538-4bde-aa97-6a626856dc73")
-		(property "Reference" "#PWR044"
-			(at 267.97 33.655 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VCC"
-			(at 267.97 25.7119 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 267.97 29.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 267.97 29.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 267.97 29.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0a2d7a3c-7196-4299-b6b9-1c34b6a55be8")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR044")
 					(unit 1)
 				)
 			)
@@ -34477,96 +32563,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 252.73 106.045 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "75e66672-fe40-4441-80e2-06608d4d662a")
-		(property "Reference" "D204"
-			(at 252.73 106.045 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 258.445 107.315 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 260.35 107.315 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 262.255 107.315 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 106.045 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 264.16 107.315 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "cbfcb3b6-d600-4ea9-b1ff-7864088ed99e")
-		)
-		(pin "2"
-			(uuid "69022763-8b99-446e-9ad4-e3717d86ae80")
-		)
-		(pin "3"
-			(uuid "ede66347-8235-430e-a3ba-22c332d3d058")
-		)
-		(pin "4"
-			(uuid "37c80dd8-b994-4aed-96d3-39ee04748614")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D204")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 145.415 74.295 270)
 		(mirror x)
@@ -35237,96 +33233,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "D99")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 252.73 67.945 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "79a1c3f3-2aba-41cf-923a-fc70bd1d0952")
-		(property "Reference" "D201"
-			(at 252.73 67.945 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 258.445 69.215 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 260.35 69.215 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 262.255 69.215 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 67.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 264.16 69.215 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d6fde189-f740-4ee2-960c-96bcc30d73fb")
-		)
-		(pin "2"
-			(uuid "32f8e2ce-266f-4509-95a0-8219a9aecb16")
-		)
-		(pin "3"
-			(uuid "ce9866c8-a977-4dec-83d6-11766e31a2f7")
-		)
-		(pin "4"
-			(uuid "83c6f9a2-0d8e-4c38-b0f6-6aaea6a3582a")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D201")
 					(unit 1)
 				)
 			)
@@ -37766,96 +35672,6 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 252.73 131.445 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "89f05f17-b79c-4904-820f-a0918c026278")
-		(property "Reference" "D206"
-			(at 252.73 131.445 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 258.445 132.715 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 260.35 132.715 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 262.255 132.715 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 131.445 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 264.16 132.715 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6982773e-8b67-4fbf-a16d-add39042fff5")
-		)
-		(pin "2"
-			(uuid "b95024a6-406e-47d7-a2e7-79fd44d6b651")
-		)
-		(pin "3"
-			(uuid "df5baf76-e8ac-41ae-81bf-ecad3508da27")
-		)
-		(pin "4"
-			(uuid "9d632b76-fa2d-417d-893d-9d915bf39491")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D206")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:WS2812B-1mm")
 		(at 65.405 131.445 90)
 		(mirror x)
 		(unit 1)
@@ -38253,96 +36069,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C104")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 252.73 80.645 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8ef1fc82-f5cb-4382-b34c-5ffe7da4e348")
-		(property "Reference" "D202"
-			(at 252.73 80.645 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 258.445 81.915 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 260.35 81.915 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 262.255 81.915 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 80.645 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 264.16 81.915 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9d014ca9-be7a-47a5-8618-a8361961f36f")
-		)
-		(pin "2"
-			(uuid "a076e1ed-aa0b-4994-ba28-a5b3340b182c")
-		)
-		(pin "3"
-			(uuid "e9348625-69db-45d3-bd13-a35466e8f7cf")
-		)
-		(pin "4"
-			(uuid "cba3d303-8fa7-4ce8-ae42-656b355021dc")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D202")
 					(unit 1)
 				)
 			)
@@ -41590,96 +39316,6 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 252.73 93.345 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a63b3659-3d8b-4d1b-923c-24eb7bc55382")
-		(property "Reference" "D203"
-			(at 252.73 93.345 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 258.445 94.615 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 260.35 94.615 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 262.255 94.615 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 93.345 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part #" "C5349953"
-			(at 264.16 94.615 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3822e801-9c53-4b08-9386-12cf6e3c0e91")
-		)
-		(pin "2"
-			(uuid "5d9e1d03-1554-4314-880a-a5ef0501d668")
-		)
-		(pin "3"
-			(uuid "7238825b-ec62-4689-a61b-deb148b542ee")
-		)
-		(pin "4"
-			(uuid "6c450636-eecd-4ae7-81e4-cf4834fa4a83")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D203")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:WS2812B-1mm")
 		(at 160.655 144.145 90)
 		(mirror x)
 		(unit 1)
@@ -44085,74 +41721,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 264.16 74.295 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b73ce716-ffd7-4d4a-9d79-88258f62ddc3")
-		(property "Reference" "C211"
-			(at 266.065 74.295 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 264.16 74.295 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 260.35 73.3298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 264.16 74.295 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 264.16 74.295 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "018a057c-501f-42f1-a8d0-2388e060e125")
-		)
-		(pin "2"
-			(uuid "007437b1-ab6f-4bf1-9bd2-dde6b480e7d2")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C211")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "RevK:WS2812B-1mm")
 		(at 145.415 67.945 90)
 		(mirror x)
@@ -44553,74 +42121,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C194")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 252.73 61.595 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "bcadacea-3b47-4317-86bb-991f28c808e2")
-		(property "Reference" "C200"
-			(at 254.635 61.595 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 252.73 61.595 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 248.92 60.6298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 252.73 61.595 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 61.595 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "96ee14fd-a7cf-44de-8e4e-b5c2c8077941")
-		)
-		(pin "2"
-			(uuid "34959e11-e9a2-47e0-9df6-c82f78024d84")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C200")
 					(unit 1)
 				)
 			)
@@ -45385,74 +42885,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C47")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 252.73 112.395 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c1880fc0-7ee7-470a-8f0f-b24c76f69749")
-		(property "Reference" "C204"
-			(at 254.635 112.395 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 252.73 112.395 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 248.92 111.4298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 252.73 112.395 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 112.395 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f7a6c02c-26d5-4190-8dcd-20b377ecb1e6")
-		)
-		(pin "2"
-			(uuid "618ba0e5-84f4-40a6-885f-ebca62e8c599")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C204")
 					(unit 1)
 				)
 			)
@@ -47230,74 +44662,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 252.73 150.495 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d20247fb-27d8-4864-887c-8240882501d8")
-		(property "Reference" "C207"
-			(at 254.635 150.495 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 252.73 150.495 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 248.92 149.5298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 252.73 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b2ebb5b9-524e-4082-a2f7-205110eff8d8")
-		)
-		(pin "2"
-			(uuid "21085c4a-70ed-406d-8400-4ac2d18f66ac")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C207")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "RevK:WS2812B-1mm")
 		(at 99.695 55.245 90)
 		(mirror x)
@@ -48124,74 +45488,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "#PWR07")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 264.16 48.895 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d8cc149d-be09-41b8-8ac7-f59bad79cc52")
-		(property "Reference" "C209"
-			(at 266.065 48.895 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 264.16 48.895 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 260.35 47.9298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 264.16 48.895 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 264.16 48.895 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "823f7cc6-de33-433a-bd88-6ae82c3ee9f9")
-		)
-		(pin "2"
-			(uuid "7d42c00c-d7de-421d-b9cf-d7dca7492eb3")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C209")
 					(unit 1)
 				)
 			)
@@ -50115,74 +47411,6 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 264.16 61.595 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "eb930e4c-0f44-4c00-afef-ef154961c858")
-		(property "Reference" "C210"
-			(at 266.065 61.595 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 264.16 61.595 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 260.35 60.6298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 264.16 61.595 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 264.16 61.595 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "801f8759-e141-4ce8-9bc0-039505ece72e")
-		)
-		(pin "2"
-			(uuid "3d0aab32-131b-4120-97b5-3d611444ddd3")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C210")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
 		(at 88.265 125.095 270)
 		(mirror x)
 		(unit 1)
@@ -51738,74 +48966,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 252.73 125.095 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f787e30f-cf3d-4b5b-b1ef-d39c3155bfb3")
-		(property "Reference" "C205"
-			(at 254.635 125.095 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 252.73 125.095 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 248.92 124.1298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 252.73 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "5ae2e0ed-490d-46a3-881a-1ca09b04c094")
-		)
-		(pin "2"
-			(uuid "d386a2ac-f48c-4ef6-86bb-bfd1416a6ee3")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C205")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "RevK:WS2812B-1mm")
 		(at 88.265 29.845 90)
 		(mirror x)
@@ -52340,74 +49500,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C38")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 252.73 74.295 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fbebd6b0-708a-45e7-ac0b-cca941018eec")
-		(property "Reference" "C201"
-			(at 254.635 74.295 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 252.73 74.295 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "RevK:C_0402"
-			(at 248.92 73.3298 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 252.73 74.295 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 252.73 74.295 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fad31cba-4bba-412c-bfe7-e00b8bb03308")
-		)
-		(pin "2"
-			(uuid "f5ca97fb-a2ca-4143-969a-40b7a60c6902")
-		)
-		(instances
-			(project "Gate"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C201")
 					(unit 1)
 				)
 			)
