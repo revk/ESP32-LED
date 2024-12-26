@@ -25,6 +25,11 @@ leds:	placeleds
 	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d20 --diode=8 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
 	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d10 --diode=2 --count=6 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
 
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d80 --diode=37 --count=64 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4 
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d70 --diode=21 --count=16 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d60 --diode=5 --count=16 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d50 --diode=1 --count=4 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+
 stl:    LED/LED.stl
 
 PCBCase/case: PCBCase/case.c
