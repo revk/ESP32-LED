@@ -14,7 +14,16 @@ leds:	placeleds
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d61.75 --zone-in=1.25 --zone-out=1.25 --diode=409 --count=27 --group=3 --spacing=4.12125 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d62.25 --zone-in=1.25 --zone-out=1.25 --diode=436 --count=27 --group=3 --spacing=5.060625 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
 	#./placeleds Gate/Gate.kicad_pcb -x100 -y100 -d66.75 --zone-in=1.25 --zone-out=1.25 --diode=463 --count=45 --group=5 --spacing=6 --vias=0.8 --power-vias=0.8 --angle=200 --fill=VCC --tracks
-	./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d90 --diode=1 --count=60 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=1.25 --zone-out=1.25
+
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d90 --diode=140 --count=60 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d80 --diode=80 --count=60 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d70 --diode=68 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d60 --diode=56 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d50 --diode=44 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d40 --diode=32 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d30 --diode=20 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d20 --diode=8 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d10 --diode=2 --count=6 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.4 --zone-out=2.4
 
 stl:    LED/LED.stl
 
@@ -26,5 +35,5 @@ PCBCase/case: PCBCase/case.c
 	/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD $< -o $@
 	echo "Made $@"
 
-LED/LED.scad: LED/LED.kicad_pcb PCBCase/case Makefile
+LEDC/LED.scad: LEDC/LED.kicad_pcb PCBCase/case Makefile
 	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2

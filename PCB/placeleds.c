@@ -206,10 +206,10 @@ main (int argc, const char *argv[])
    {
       while ((footprint = pcb_find (pcb, "footprint", footprint)))
       {
-         pcb_t *t = pcb_find (footprint, "fp_text", NULL);
+         pcb_t *t = pcb_find (footprint, "property", NULL);
          if (!t)
             continue;
-         if (!t || t->valuen < 2 || !t->values[0].islit || strcmp (t->values[0].txt, "reference") || !t->values[1].istxt)
+         if (!t || t->valuen < 2 || !t->values[0].istxt || strcmp (t->values[0].txt, "Reference") || !t->values[1].istxt)
             continue;
          const char *ref = t->values[1].txt;
          if (*ref != (!group || (group & 1) ? 'D' : 'C'))
@@ -243,10 +243,10 @@ main (int argc, const char *argv[])
    footprint = NULL;
    while ((footprint = pcb_find (pcb, "footprint", footprint)))
    {
-      pcb_t *t = pcb_find (footprint, "fp_text", NULL);
+      pcb_t *t = pcb_find (footprint, "property", NULL);
       if (!t)
          continue;
-      if (!t || t->valuen < 2 || !t->values[0].islit || strcmp (t->values[0].txt, "reference") || !t->values[1].istxt)
+      if (!t || t->valuen < 2 || !t->values[0].istxt || strcmp (t->values[0].txt, "Reference") || !t->values[1].istxt)
          continue;
       const char *ref = t->values[1].txt;
       if (*ref == 'D')
