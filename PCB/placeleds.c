@@ -128,7 +128,7 @@ main (int argc, const char *argv[])
    else
       zoneo -= clearance / 2;
    double pada = 2 * padoffset / diameter;      // Angle for pad offset
-   double viaa = 2 * vias / diameter;      // Angle for via offset
+   double viaa = 2 * vias / diameter;   // Angle for via offset
    double spacinga = 2 * spacing / diameter;    // Angle for spacing of groups
    pcb_t *pcb = pcb_load (pcbfile);
    double ad (double d)
@@ -539,7 +539,7 @@ main (int argc, const char *argv[])
    {
       if (diameter)
       {                         // Ring
-				int tooclose = ((!group && (M_PI * 2 - (ad (count - 0.5) - angle * M_PI / 180)) < pada * 4+viaa*4) || (group && spacing < padoffset * 6+viaa*4));  // Too close together for data pins together at end
+         int tooclose = ((!group && (M_PI * 2 - (ad (count - 0.5) - angle * M_PI / 180)) < pada * 4 + viaa * 4) || (group && spacing < padoffset * 6 + viaa * 4));      // Too close together for data pins together at end
          double m = trackwidth / 2 + clearance + powervias / 2;
          double zi = zonei - powervias / 2;
          if (zi < m)
@@ -554,21 +554,23 @@ main (int argc, const char *argv[])
          // Data
          for (int d = 0; d < count - 1; d++)
             track (cx (d, pada, 0), cy (d, pada, 0),
-		   cx (0.5 + d, 0, 0), cy (0.5 + d, 0, 0),
-		   cx (1 + d, -pada, 0), cy (1 + d, -pada, 0), trackwidth);
+                   cx (0.5 + d, 0, 0), cy (0.5 + d, 0, 0), cx (1 + d, -pada, 0), cy (1 + d, -pada, 0), trackwidth);
          // Data end
-	 if(tooclose)
-	 { // Straight out to pad
-         	trackvia (cx (0, -pada, 0), cy (0, -pada, 0), cx (count-0.25, 0, -viaoffset), cy (count-0.25, 0, -viaoffset), trackwidth, vias);
-         	trackvia (cx (count-1, pada, 0), cy (count-1, pada, 0), cx (count-0.75, 0, viaoffset), cy (count-0.75, 0, viaoffset), trackwidth, vias);
-	 }else
-	 {
-         	trackvia (cx (0, -pada, 0), cy (0, -pada, 0), cx (0, -pada-viaa, -vias/2), cy (0, -pada-viaa, -vias/2), trackwidth, vias);
-		track (cx (count-1, pada, 0), cy (count-1, pada, 0),
-				cx (count-0.5, 0, 0), cy (count-0.5, 0, 0),
-				cx(0,-pada-viaa*3,0),cy(0,-pada-viaa*3,0),trackwidth);
-		trackvia(cx(0,-pada-viaa*3,0),cy(0,-pada-viaa*3,0),cx(0,-pada-viaa*3,-vias/3),cy(0,-pada-viaa*3,-vias/2),trackwidth, vias);
-	 }
+         if (tooclose)
+         {                      // Straight out to pad
+            trackvia (cx (0, -pada, 0), cy (0, -pada, 0), cx (count - 0.25, 0, -viaoffset), cy (count - 0.25, 0, -viaoffset),
+                      trackwidth, vias);
+            trackvia (cx (count - 1, pada, 0), cy (count - 1, pada, 0), cx (count - 0.75, 0, viaoffset),
+                      cy (count - 0.75, 0, viaoffset), trackwidth, vias);
+         } else
+         {
+            trackvia (cx (0, -pada, 0), cy (0, -pada, 0), cx (0, -pada - viaa, -vias / 2), cy (0, -pada - viaa, -vias / 2),
+                      trackwidth, vias);
+            track (cx (count - 1, pada, 0), cy (count - 1, pada, 0), cx (count - 0.5, 0, 0), cy (count - 0.5, 0, 0),
+                   cx (0, -pada - viaa * 3, 0), cy (0, -pada - viaa * 3, 0), trackwidth);
+            trackvia (cx (0, -pada - viaa * 3, 0), cy (0, -pada - viaa * 3, 0), cx (0, -pada - viaa * 3, -vias / 3),
+                      cy (0, -pada - viaa * 3, -vias / 2), trackwidth, vias);
+         }
          // Power
          for (int d = 0; d < count - 1; d++)
          {
@@ -579,18 +581,18 @@ main (int argc, const char *argv[])
          }
          // Power end
          track (cx (count - 0.5, 0, padoffset), cy (count - 0.5, 0, padoffset), cx (count - 0.25, 0, padoffset),
-                   cy (count - 0.25, 0, padoffset), cx (0, 0, padoffset), cy (0, 0, padoffset), trackwidth);
+                cy (count - 0.25, 0, padoffset), cx (0, 0, padoffset), cy (0, 0, padoffset), trackwidth);
          track (cx (count - 1, 0, -padoffset), cy (count - 1, 0, -padoffset), cx (count - 0.75, 0, -padoffset),
-                   cy (count - 0.75, 0, -padoffset), cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), trackwidth);
-	 // Power vias
+                cy (count - 0.75, 0, -padoffset), cx (count - 0.5, 0, -padoffset), cy (count - 0.5, 0, -padoffset), trackwidth);
+         // Power vias
          if (powervias)
          {
-               for (int d = 0; d < count; d++)
-                  trackviamaybe (cx (d, -pada, padoffset), cy (d, -pada, padoffset), cx (d, -pada, viaoffset),
-                                 cy (d, -pada, viaoffset), trackwidth, powervias,"GND");
-               for (int d = 0; d < count; d++)
-                  trackviamaybe (cx (d, pada, -padoffset), cy (d, pada, -padoffset), cx (d, pada, -viaoffset),
-                                 cy (d, pada, -viaoffset), trackwidth, powervias,fill?:"VCC");
+            for (int d = 0; d < count; d++)
+               trackviamaybe (cx (d, -pada, padoffset), cy (d, -pada, padoffset), cx (d, -pada, viaoffset),
+                              cy (d, -pada, viaoffset), trackwidth, powervias, "GND");
+            for (int d = 0; d < count; d++)
+               trackviamaybe (cx (d, pada, -padoffset), cy (d, pada, -padoffset), cx (d, pada, -viaoffset),
+                              cy (d, pada, -viaoffset), trackwidth, powervias, fill ? : "VCC");
          }
       } else if (sides)
       {                         // Grid with caps on sides
