@@ -1734,7 +1734,7 @@ micband2hz (uint8_t b)
 void
 app_main ()
 {
-	ESP_LOGE(TAG,"Started");
+   ESP_LOGE (TAG, "Started");
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    mic_mutex = xSemaphoreCreateBinary ();
@@ -1808,12 +1808,12 @@ bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
    }
    if (t < a->start + a->len - 1)
    {
-      int N = a->start + a->len - t-1;
+      int N = a->start + a->len - t;
       uint32_t n = (uint32_t) 256 * N * v / total;
       uint8_t f = n & 255;
       n /= 256;
-      int p = t + 1;
-      unsigned int i = 1;
+      int p = t;
+      unsigned int i = 0;
       while (i < n)
          pixel (a, p++, i++, N, fade);
       if (f)
