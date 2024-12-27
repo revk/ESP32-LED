@@ -1808,7 +1808,7 @@ bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
    }
    if (t < a->start + a->len - 1)
    {
-      int N = a->start + a->len - t;
+      int N = a->start + a->len - t-1;
       uint32_t n = (uint32_t) 256 * N * v / total;
       uint8_t f = n & 255;
       n /= 256;
