@@ -10394,7 +10394,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "f223929a-2277-4195-9a87-abe4c415743d")
 		(property "Reference" "SW1"
