@@ -1734,7 +1734,7 @@ micband2hz (uint8_t b)
 void
 app_main ()
 {
-   ESP_LOGE (TAG, "Started");
+   //ESP_LOGE (TAG, "Started");
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    mic_mutex = xSemaphoreCreateBinary ();
