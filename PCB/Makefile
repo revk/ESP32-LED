@@ -25,13 +25,13 @@ leds:	placeleds
 	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d20 --diode=8 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.5 --zone-out=2.5
 	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d10 --diode=2 --count=6 --fill=VCC --tracks --vias=0.8 --power-vias=0.8  --zone-in=2.5 --zone-out=2.5
 
-	./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d80 --diode=61 --count=64 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 
-	./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d72 --diode=29 --count=32 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
-	./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d64 --diode=13 --count=16 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
-	./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d56 --diode=5 --count=8 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
-	./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d48 --diode=1 --count=4 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d80 --diode=61 --count=64 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d72 --diode=29 --count=32 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d64 --diode=13 --count=16 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d56 --diode=5 --count=8 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
+	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d48 --diode=1 --count=4 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
 
-stl:    LED/LED.stl
+stl:    LEDC/LED.stl LEDR/LED.stl
 
 PCBCase/case: PCBCase/case.c
 	make -C PCBCase
@@ -43,3 +43,7 @@ PCBCase/case: PCBCase/case.c
 
 LEDC/LED.scad: LEDC/LED.kicad_pcb PCBCase/case Makefile
 	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2
+
+LEDR/LED.scad: LEDR/LED.kicad_pcb PCBCase/case Makefile
+	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2
+
