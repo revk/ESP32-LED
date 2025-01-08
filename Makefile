@@ -25,14 +25,10 @@ beta:
 	git commit -a -m betarelease
 	git push
 
-issue:  
-	-git pull
-	-git submodule update --recursive
+issue:	
 	-git commit -a
-	@make set
-	cp ${PROJECT_NAME}*.bin release
-	cp ${PROJECT_NAME}*.bin betarelease
-	git commit -a -m release
+	cp -f betarelease/$(PROJECT_NAME)*.bin release
+	git commit -a -m Release
 	git push
 
 image:
