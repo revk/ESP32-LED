@@ -93,6 +93,13 @@ The USB-A module is designed to plug in directly to a USB-A socket and connector
 * Even smaller, but no USB connector (USB can be accessed via TC2030 lead or solder pads if needed)
 * Designed for power from strip, e.g. 5V, 12V, 24V
 
+## Other designes
+
+Well, quite a few other PCBs...
+
+<img src=https://github.com/user-attachments/assets/79c369fa-d2cd-43f6-92ec-01f746bb96b4 align=right width=48%>
+<img src=https://github.com/user-attachments/assets/d5e7e25f-a918-4311-868a-3e9b72b282fa width=48%>
+
 ## Software
 
 Both boards are designed so they can run WLED code and esphome. The code included here is different, but offers a number of useful features.
