@@ -1,4 +1,4 @@
-all: placeleds stl
+all: placeleds png stl
 
 placeleds: placeleds.c PCBCase/pcb.c PCBCase/pcb.h
 	gcc -IPCBCase -O -o $@ $< PCBCase/pcb.c -lpopt -lm -g
@@ -33,6 +33,8 @@ leds:	placeleds
 
 stl:    LEDC/LED.stl LEDR/LED.stl
 
+png:	LEDC/top.png LEDC/bottom.png LEDA/top.png LEDA/bottom.png LEDX/top.png LEDX/bottom.png LEDR/top.png LEDR/bottom.png LEDx2/top.png LEDx2/bottom.png Coaster2/top.png Coaster2/bottom.png Coaster2/spacer.png
+
 PCBCase/case: PCBCase/case.c
 	make -C PCBCase
 
@@ -47,3 +49,41 @@ LEDC/LED.scad: LEDC/LED.kicad_pcb PCBCase/case Makefile
 LEDR/LED.scad: LEDR/LED.kicad_pcb PCBCase/case Makefile
 	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2
 
+LEDC/top.png: LEDC/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,0,30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+LEDC/bottom.png: LEDC/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,180,-30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+LEDA/top.png: LEDA/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,0,30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+LEDA/bottom.png: LEDA/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,180,-30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+LEDX/top.png: LEDX/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,0,30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+LEDX/bottom.png: LEDX/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,180,-30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+LEDR/top.png: LEDR/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,0,30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+LEDR/bottom.png: LEDR/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,180,-30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+LEDx2/top.png: LEDx2/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,0,30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+LEDx2/bottom.png: LEDx2/LED.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,180,-30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+Coaster2/top.png: Coaster2/Coaster.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,0,30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+Coaster2/bottom.png: Coaster2/Coaster.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,180,-30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
+
+Coaster2/spacer.png: Coaster2/Spacer.kicad_pcb
+	/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb render -o $@ $< --perspective --rotate ' -40,0,30' --zoom=0.85 --floor --pan ' -0.9,2.3,0' --width=2300 --height=1900 --background=opaque
