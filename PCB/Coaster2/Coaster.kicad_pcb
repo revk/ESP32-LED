@@ -94114,17 +94114,6 @@
 		(layer "B.SilkS")
 		(uuid "accc6d01-688e-437a-9226-811820fddee4")
 	)
-	(gr_rect
-		(start 96 111)
-		(end 104 119)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill solid)
-		(layer "B.SilkS")
-		(uuid "d96281db-0b10-459e-a98a-aaa35e8e39de")
-	)
 	(gr_circle
 		(center 80 134.641)
 		(end 83 134.641)
