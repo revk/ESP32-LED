@@ -1603,8 +1603,11 @@ mic_task (void *arg)
       i2s_channel_read (i, micraw, bytes * MICSAMPLES * MICOVERSAMPLE, &n, 100);
       if (n < bytes * MICSAMPLES * MICOVERSAMPLE)
          continue;
-      if (*(int32_t *) micraw)
+      if (!b.micok&&*(int32_t *) micraw)
+      {
          b.micok = 1;
+	 ESP_LOGE(TAG,"Audio running");
+      }
       if (!b.micon)
          continue;              // Not needed
       float mag = 0;
@@ -1732,9 +1735,49 @@ micband2hz (uint8_t b)
 #undef	N
 
 void
+bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
+{
+   if (!total)
+      total = 1;
+   int t = a->top;
+   if (t < 0)
+      t = -t;                   // TODO
+   if (t > a->start)
+   {
+      int N = t - a->start + 1;
+      uint32_t n = (uint32_t) 256 * N * v / total;
+      uint8_t f = n & 255;
+      n /= 256;
+      int p = t;
+      unsigned int i = 0;
+      while (i < n)
+         pixel (a, p--, i++, N, fade);
+      if (f)
+         pixel (a, p--, i++, N, ((int) f * fade / 255));
+      while (i < N)
+         pixel (a, p--, i++, N, 0);
+   }
+   if (t < a->start + a->len - 1)
+   {
+      int N = a->start + a->len - t;
+      uint32_t n = (uint32_t) 256 * N * v / total;
+      uint8_t f = n & 255;
+      n /= 256;
+      int p = t;
+      unsigned int i = 0;
+      while (i < n)
+         pixel (a, p++, i++, N, fade);
+      if (f)
+         pixel (a, p++, i++, N, ((int) f * fade / 255));
+      while (i < N)
+         pixel (a, p++, i++, N, 0);
+   }
+}
+
+void
 app_main ()
 {
-   ESP_LOGE (TAG, "Started");
+   //ESP_LOGE (TAG, "Started");
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    mic_mutex = xSemaphoreCreateBinary ();
@@ -1781,44 +1824,3 @@ app_main ()
    //hargb = -1;
 }
 
-// Libraries
-
-void
-bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
-{
-   if (!total)
-      total = 1;
-   int t = a->top;
-   if (t < 0)
-      t = -t;                   // TODO
-   if (t > a->start)
-   {
-      int N = t - a->start + 1;
-      uint32_t n = (uint32_t) 256 * N * v / total;
-      uint8_t f = n & 255;
-      n /= 256;
-      int p = t;
-      unsigned int i = 0;
-      while (i < n)
-         pixel (a, p--, i++, N, fade);
-      if (f)
-         pixel (a, p--, i++, N, ((int) f * fade / 255));
-      while (i < N)
-         pixel (a, p--, i++, N, 0);
-   }
-   if (t < a->start + a->len - 1)
-   {
-      int N = a->start + a->len - t;
-      uint32_t n = (uint32_t) 256 * N * v / total;
-      uint8_t f = n & 255;
-      n /= 256;
-      int p = t;
-      unsigned int i = 0;
-      while (i < n)
-         pixel (a, p++, i++, N, fade);
-      if (f)
-         pixel (a, p++, i++, N, ((int) f * fade / 255));
-      while (i < N)
-         pixel (a, p++, i++, N, 0);
-   }
-}
