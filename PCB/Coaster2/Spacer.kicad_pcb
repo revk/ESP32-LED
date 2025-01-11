@@ -117,7 +117,6 @@
 		)
 	)
 	(net 0 "")
-	(net 1 "GND")
 	(footprint "RevK:Shadow"
 		(layer "F.Cu")
 		(uuid "27d39794-933f-4b6c-b49e-401d39bddc09")
@@ -273,27 +272,5 @@
 		)
 		(layer "Edge.Cuts")
 		(uuid "ee54cd5c-586e-4e26-8cc1-f082a99fa3a1")
-	)
-	(zone
-		(net 1)
-		(net_name "GND")
-		(layer "F.Cu")
-		(uuid "d309da3b-a54c-4692-ade7-3d04d9210076")
-		(hatch edge 0.5)
-		(priority 3)
-		(connect_pads
-			(clearance 0.127)
-		)
-		(min_thickness 0.25)
-		(filled_areas_thickness no)
-		(fill yes
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-		)
-		(polygon
-			(pts
-				(xy 150 95) (xy 141 95) (xy 141 105) (xy 150 105)
-			)
-		)
 	)
 )
