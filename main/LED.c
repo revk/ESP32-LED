@@ -1520,6 +1520,9 @@ SemaphoreHandle_t mic_mutex = NULL;
 void
 mic_task (void *arg)
 {
+   revk_gpio_output (micclock, 0);
+   revk_gpio_output (micws, 0);
+   revk_gpio_input (micdata);
    usleep (500000);
    jo_t e (esp_err_t err, const char *msg)
    {                            // Error
