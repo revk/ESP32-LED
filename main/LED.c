@@ -1603,10 +1603,10 @@ mic_task (void *arg)
       i2s_channel_read (i, micraw, bytes * MICSAMPLES * MICOVERSAMPLE, &n, 100);
       if (n < bytes * MICSAMPLES * MICOVERSAMPLE)
          continue;
-      if (!b.micok&&*(int32_t *) micraw)
+      if (!b.micok && *(int32_t *) micraw)
       {
          b.micok = 1;
-	 ESP_LOGE(TAG,"Audio running");
+         ESP_LOGE (TAG, "Audio running");
       }
       if (!b.micon)
          continue;              // Not needed
@@ -1777,7 +1777,7 @@ bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
 void
 app_main ()
 {
-   //ESP_LOGE (TAG, "Started");
+   ESP_LOGE (TAG, "Started");
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    mic_mutex = xSemaphoreCreateBinary ();
@@ -1821,6 +1821,11 @@ app_main ()
          register_ws_uri ("/status", web_status);
       }
    }
+   if (micdata.set && micclock.set)
+   {
+      sleep (1);
+      if (!b.micok)
+         revk_blink (0, 0, "R");
+   }
    //hargb = -1;
 }
-
