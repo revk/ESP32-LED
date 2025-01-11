@@ -220,17 +220,6 @@
 		(layer "B.Mask")
 		(uuid "ed8f8bd6-8f56-4915-9f8c-cbe42896435e")
 	)
-	(gr_arc
-		(start 146 106)
-		(mid 53.610344 100)
-		(end 146 94)
-		(stroke
-			(width 9)
-			(type default)
-		)
-		(layer "F.Mask")
-		(uuid "7bdb8a31-e4e4-42c9-8410-d4b969180cf3")
-	)
 	(gr_line
 		(start 142 95)
 		(end 149.749 95)
