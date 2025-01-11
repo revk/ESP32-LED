@@ -8,7 +8,7 @@
 	)
 	(paper "A4")
 	(title_block
-		(title "PCB-LED")
+		(title "PCB-LEDC")
 		(rev "1")
 		(company "Adrian Kennard, Andrews & Arnold Ltd")
 	)
@@ -192,7 +192,7 @@
 		(uuid "0866cd55-3d96-421a-8a47-37487ad8d10e")
 		(at 109.4 94.175 180)
 		(property "Reference" "L2"
-			(at 0 -0.8 360)
+			(at 0 -0.8 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "52121afc-7fcb-4f9b-ba4d-9d80a292ffda")
@@ -204,7 +204,7 @@
 			)
 		)
 		(property "Value" "10uH"
-			(at 0 1.5 360)
+			(at 0 1.5 0)
 			(layer "F.Fab")
 			(uuid "bc38eff4-e94d-4430-afa5-874661034c36")
 			(effects
@@ -254,7 +254,7 @@
 			)
 		)
 		(property "Note" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8e6f537c-7493-43f5-852b-5872ef845db2")
@@ -266,7 +266,7 @@
 			)
 		)
 		(property "Part No" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "78c4b0b7-16b5-47c2-84a4-546d983131fb")
@@ -455,7 +455,7 @@
 			)
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -1.5 360)
+			(at 0 -1.5 0)
 			(layer "F.Fab")
 			(uuid "f9645f97-d66b-4435-a35b-c0f998607e6a")
 			(effects
@@ -748,7 +748,7 @@
 			)
 		)
 		(property "Note" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b3716813-fd4e-4a06-92b8-50023a6ee4a5")
@@ -760,7 +760,7 @@
 			)
 		)
 		(property "Part No" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "619d174f-8b8d-444b-a723-38bfe3661698")
@@ -1575,7 +1575,7 @@
 		(uuid "2db8f383-dc0f-444e-82a4-1063cc14a936")
 		(at 109.4 96.775 180)
 		(property "Reference" "C12"
-			(at 0 -0.8 360)
+			(at 0 -0.8 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "a653dfaa-a582-40ea-b086-2ee6fd75eb48")
@@ -1587,7 +1587,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 0 1 360)
+			(at 0 1 0)
 			(layer "F.Fab")
 			(uuid "e159a410-074f-4ca3-9ee2-6c0d7e3e6578")
 			(effects
@@ -1637,7 +1637,7 @@
 			)
 		)
 		(property "Note" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f3001e03-d422-48fd-b0b6-51de91b5d024")
@@ -1649,7 +1649,7 @@
 			)
 		)
 		(property "Part No" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "68c352c8-72d8-4fbe-a92d-7f549044dcb9")
@@ -1826,7 +1826,7 @@
 			(uuid "11a5fce0-1d2b-4a5b-8441-551d7a51fe66")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -1 360)
+			(at 0 -1 0)
 			(layer "F.Fab")
 			(uuid "155435ac-2b94-4813-bc97-b928874d73e5")
 			(effects
@@ -1971,7 +1971,7 @@
 			)
 		)
 		(property "Value" "10uF 35V"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "dc3dcfde-417f-4dc9-9570-aaaf053dfd28")
 			(effects
@@ -2200,7 +2200,7 @@
 			(uuid "1c27b0ab-0f0b-45b2-acf3-58a1496a3e48")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.8 360)
+			(at 0 -0.8 0)
 			(layer "F.Fab")
 			(uuid "717b4792-e498-47db-9701-0d5d0d017513")
 			(effects
@@ -4080,7 +4080,7 @@
 			)
 		)
 		(property "Note" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7766d48b-d50d-46ae-9884-6c359602458c")
@@ -4092,7 +4092,7 @@
 			)
 		)
 		(property "Part No" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b845cc2b-6121-4e3d-be7c-bc67892338c1")
@@ -5520,7 +5520,7 @@
 			)
 		)
 		(property "Note" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0d320819-15c4-4864-996c-70d951e9638f")
@@ -5532,7 +5532,7 @@
 			)
 		)
 		(property "Part No" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "79585965-3293-4bed-b87a-9b34d2154461")
@@ -7496,7 +7496,7 @@
 		(descr "SOT, 6 Pin (https://www.jedec.org/sites/default/files/docs/Mo-178c.PDF variant AB), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U7"
-			(at 0 -3.2 360)
+			(at 0 -3.2 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "99130b20-3faa-47bf-8d8e-7507d0be99b3")
@@ -7508,7 +7508,7 @@
 			)
 		)
 		(property "Value" "MD8942"
-			(at 0 -8 360)
+			(at 0 -8 0)
 			(layer "F.Fab")
 			(uuid "0bf324cd-1c4f-4fe3-b072-f894f43c9216")
 			(effects
@@ -7558,7 +7558,7 @@
 			)
 		)
 		(property "LCSC Part #" "C2684786"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d337d8c9-5e50-4480-9b53-d548c745f7aa")
@@ -9779,7 +9779,7 @@
 			)
 		)
 		(property "LCSC Part #" "C194427"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "82f4f679-7a95-4b0e-9a49-6c7521036ede")
@@ -9791,7 +9791,7 @@
 			)
 		)
 		(property "Note" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d0e22194-77c3-42ea-bdfd-c13a0337c871")
@@ -9803,7 +9803,7 @@
 			)
 		)
 		(property "Part No" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5117f4a5-8319-4c23-a8bb-3d1d753838ec")
@@ -10989,7 +10989,7 @@
 			)
 		)
 		(property "LCSC Part #" "C1691"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1aee15b0-f789-4b1e-af80-57606c9fb2f4")
@@ -11001,7 +11001,7 @@
 			)
 		)
 		(property "Note" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "775c746a-8ab7-43b9-bbd4-e573d5aaea84")
@@ -11013,7 +11013,7 @@
 			)
 		)
 		(property "Part No" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "90abcadc-6ec6-4052-82e3-212cc66d4144")
@@ -11231,7 +11231,7 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C14"
-			(at -1.6 0 360)
+			(at -1.6 0 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "64d4fed4-eba7-418d-9b53-0988f02a9580")
@@ -28454,9 +28454,8 @@
 				(xy 103.1995 95.631006) (xy 103.1995 95.650125) (xy 103.198596 95.665071) (xy 103.194355 95.699999)
 				(xy 103.198596 95.734926) (xy 103.1995 95.749873) (xy 103.1995 96.081006) (xy 103.1995 96.218994)
 				(xy 103.1995 96.218996) (xy 103.199499 96.218996) (xy 103.226418 96.354322) (xy 103.226421 96.354332)
-				(xy 103.279222 96.481807) (xy 103.355887 96.596545) (xy 104.303454 97.544112) (xy 104.303457 97.544114)
-				(xy 104.379274 97.594773) (xy 104.418189 97.620775) (xy 104.418191 97.620776) (xy 104.423256 97.62416)
-				(xy 104.422584 97.625165) (xy 104.467871 97.669655) (xy 104.483328 97.737793) (xy 104.459493 97.803472)
+				(xy 103.279222 96.481807) (xy 103.355887 96.596545) (xy 104.303454 97.544112) (xy 104.423254 97.624159)
+				(xy 104.422582 97.625163) (xy 104.467871 97.669655) (xy 104.483328 97.737793) (xy 104.459493 97.803472)
 				(xy 104.447251 97.817726) (xy 102.556305 99.708672) (xy 102.494982 99.742157) (xy 102.42529 99.737173)
 				(xy 102.369357 99.695301) (xy 102.354063 99.668444) (xy 102.324536 99.59716) (xy 102.324536 99.597159)
 				(xy 102.228282 99.471718) (xy 102.102841 99.375464) (xy 102.078322 99.365308) (xy 101.956762 99.314956)
