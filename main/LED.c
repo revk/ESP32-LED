@@ -1520,6 +1520,7 @@ SemaphoreHandle_t mic_mutex = NULL;
 void
 mic_task (void *arg)
 {
+   usleep (500000);
    jo_t e (esp_err_t err, const char *msg)
    {                            // Error
       jo_t j = jo_object_alloc ();
@@ -1825,7 +1826,7 @@ app_main ()
    {
       sleep (1);
       if (!b.micok)
-         revk_blink (0, 0, "R");
+         revk_blink (10, 0, "R");
    }
    //hargb = -1;
 }
