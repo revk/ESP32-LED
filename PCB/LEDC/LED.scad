@@ -1,6 +1,6 @@
 // Generated case design for LEDC/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-01-12 10:00:56
+// Generated 2025-01-12 15:02:29
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -63,7 +63,6 @@ translate([7.000089,8.000000,1.200000])m11(part,hole,block,casetop); // J2 (back
 parts_top=6;
 // Parts to go on PCB (bottom)
 module parts_bottom(part=false,hole=false,block=false){
-// Missing model SW1.1 SW_PUSH_6mm_H4.3mm (back)
 }
 
 parts_bottom=0;
