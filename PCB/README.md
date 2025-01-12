@@ -10,7 +10,7 @@ This is an open source project, but bear in mind you cannot sell boards bearing 
 
 Coaster board
 
-<img width=24% src=Coaster2/Coaster-90.png><img width=24% src=Coaster2/Coaster-bottom.png><img width=24% src=Coaster2/Spacer.png><img width=24% src=Coaster2/Coaster-panel.png>
+<img width=24% src=Coaster2/Coaster-90.png><img width=24% src=Coaster2/Coaster-bottom.png><img width=24% src=Coaster2/Spacer-90.png><img width=24% src=Coaster2/Coaster-panel.png>
 
 ## LEDA
 
