@@ -1,16 +1,5 @@
 # ESP32-LED (WS2812/etc) Project
 
-## Amazon
-
-This part if for Amazon - as this is the *manufacturers web site* and so used as proof of title and list price. It is also links to where you can buy.
-
-|ASIN|List price|Title|
-|-----|----|----|
-|[B0CG3S8JX3](https://www.amazon.co.uk/dp/B0CG3S8JX3)|£22.99|ESP32-S3-MINI-1-N4-R2 powered USB-C in-line WS2812 LED strip controller with I2S microphone|
-|[B0DGD5XPLT](https://www.amazon.co.uk/dp/B0DGD5XPLT)|£22.99|ESP32-S3 LED Driver USB-A Direct, WS2812/SK6812 WLED/Home Assistant Compatible.|
-|[B0C1W1XJS8](https://www.amazon.co.uk/dp/B0C1W1XJS8)|£22.99|LED strip controller (WS2812B/SK6812) driver PCB (WiFi/MQTT/HomeAssistant controlled) (USB-C/WLED)|
-|[B0DNW8KQCM](https://www.amazon.co.uk/dp/B0DNW8KQCM)|£22.99|ESP32-S3 LED Driver USB-A Direct, WS2812/SK6812, pre Loaded with WLED Source Software|
-|[B0DPMZN9W9](https://www.amazon.co.uk/dp/B0DPMZN9W9)|£35.00|LED strip (WS2812B/SK6812) driver PCB (WiFi/MQTT/HomeAssistant controlled) with microphone, speaker driver, relay, and IR receiver. WLED/esphome compatible.|
 
 ## Trademark
 
@@ -26,7 +15,7 @@ Note boards are branded A&A, AJK, and HIWTSI.
 
 ## Full spec (USB-C)
 
-<img src=Manuals/LEDR-Top.png align=right width=50%>
+<img src=PCB/LEDR/LED.png align=right width=50%>
 
 This is the full specification module, with a lot of features.
 
@@ -50,7 +39,7 @@ The power supply means you can run from USB and power the strip from 5V USB, or 
 
 ## In-line USB-C
 
-<img src=Manuals/USB-C-Top.jpg align=right width=50%>
+<img src=PCB/LEDC/LED.png align=right width=50%>
 
 The USB-C module is designed to be small and work in-line between a USB-C cable and an LED strip.
 
@@ -75,8 +64,7 @@ The power supply means you can run from USB and power the strip from 5V USB, or 
 
 ## Plug-in USB-A
 
-<img src=Manuals/USB-A-Top.jpg align=right width=48%>
-<img src=Manuals/USB-A-Bottom.jpg width=48%>
+<img src=PCB/LEDA/LED.png align=right width=48%><img src=PCB/LEDA/LED-bottom.png width=48%>
 
 The USB-A module is designed to plug in directly to a USB-A socket and connector to an LED strip.
 
@@ -88,7 +76,7 @@ The USB-A module is designed to plug in directly to a USB-A socket and connector
 
 ## Non USB, tiny board
 
-<img src=https://github.com/user-attachments/assets/2eb207d0-c523-490b-9d63-5dc1c4035d60 width=48%>
+<img src=PCB/LEDX/LED.png width=48%><img src=PCB/LEDX/LED-bottom.png width=48%>
 
 * Even smaller, but no USB connector (USB can be accessed via TC2030 lead or solder pads if needed)
 * Designed for power from strip, e.g. 5V, 12V, 24V
@@ -97,8 +85,7 @@ The USB-A module is designed to plug in directly to a USB-A socket and connector
 
 Well, quite a few other PCBs...
 
-<img src=https://github.com/user-attachments/assets/79c369fa-d2cd-43f6-92ec-01f746bb96b4 align=right width=48%>
-<img src=https://github.com/user-attachments/assets/d5e7e25f-a918-4311-868a-3e9b72b282fa width=48%>
+<img src=https://github.com/user-attachments/assets/d5e7e25f-a918-4311-868a-3e9b72b282fa width=48%><img src=PCB/Coaster2/Coaster.png width=48%>
 
 ## Software
 
