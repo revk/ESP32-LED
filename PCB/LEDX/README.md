@@ -11,7 +11,7 @@ Serial via USB direct to ESP32-S3.
 
 ## Programming
 
-Can be directly programmed using esptool, i.e. `idf.py flash` via the USB headers, or using the 5 pin serial pads on the back of the board.
+Can be directly programmed using esptool, i.e. `idf.py flash` via the TC2030 or USB solder pads on board.
 
 ![Top](LED.png)
 ![Bottom](LED-bottom.png)
