@@ -1520,10 +1520,6 @@ SemaphoreHandle_t mic_mutex = NULL;
 void
 mic_task (void *arg)
 {
-   revk_gpio_output (micclock, 0);
-   revk_gpio_output (micws, 0);
-   revk_gpio_input (micdata);
-   usleep (500000);
    jo_t e (esp_err_t err, const char *msg)
    {                            // Error
       jo_t j = jo_object_alloc ();
@@ -1796,6 +1792,12 @@ app_main ()
       revk_blink (0, 0, "K");
    if (cps < 10)
       cps = 10;                 // Safety for division
+   if (micdata.set && micclock.set)
+      revk_task ("i2s", mic_task, NULL, 8);
+   if (lssda.set && lsscl.set)
+      revk_task ("i2c", i2c_task, NULL, 4);
+   if (adc.set)
+      revk_task ("adc", adc_task, NULL, 4);
    memset (habright, 255, sizeof (habright));
    if (rgbw)
       memset (haw, 255, sizeof (hab));
@@ -1806,12 +1808,6 @@ app_main ()
       memset (hab, 255, sizeof (hab));
    }
    revk_task ("LED", led_task, NULL, 4);
-   if (lssda.set && lsscl.set)
-      revk_task ("i2c", i2c_task, NULL, 4);
-   if (micdata.set && micclock.set)
-      revk_task ("i2s", mic_task, NULL, 8);
-   if (adc.set)
-      revk_task ("adc", adc_task, NULL, 4);
    if (webcontrol)
    {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();  // When updating the code below, make sure this is enough

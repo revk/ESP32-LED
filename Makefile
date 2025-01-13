@@ -7,7 +7,7 @@ PROJECT_NAME := LED
 SUFFIX := $(shell components/ESP32-RevK/buildsuffix)
 export SUFFIX
 
-all:	settings.h
+all:	main/settings.h
 	@echo Make: build/$(PROJECT_NAME)$(SUFFIX).bin
 	@idf.py build
 	@cp build/$(PROJECT_NAME).bin $(PROJECT_NAME)$(SUFFIX).bin
@@ -38,7 +38,7 @@ image:
 
 set:	pico s3
 
-settings.h:     components/ESP32-RevK/revk_settings settings.def components/ESP32-RevK/settings.def
+main/settings.h:     components/ESP32-RevK/revk_settings main/settings.def components/ESP32-RevK/settings.def
 	components/ESP32-RevK/revk_settings $^
 
 components/ESP32-RevK/revk_settings: components/ESP32-RevK/revk_settings.c
