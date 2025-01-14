@@ -1818,7 +1818,7 @@ bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
 void
 app_main ()
 {
-   ESP_LOGE (TAG, "Started");
+   //ESP_LOGE (TAG, "Started");
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    mic_mutex = xSemaphoreCreateBinary ();
