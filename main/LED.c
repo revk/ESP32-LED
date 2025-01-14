@@ -1052,6 +1052,7 @@ revk_web_extra (httpd_req_t * req, int page)
       revk_web_setting (req, NULL, "rgbw");
       revk_web_setting (req, NULL, "rgswap");
       revk_web_setting (req, NULL, "poweron");
+      revk_web_setting (req, NULL, "clapon");
       revk_web_setting (req, NULL, "stack");
       revk_web_setting (req, NULL, "haenable");
    } else
@@ -1608,9 +1609,35 @@ mic_task (void *arg)
          b.micok = 1;
          ESP_LOGE (TAG, "Audio running");
       }
-      if (!b.micon)
-         continue;              // Not needed
       float mag = 0;
+      if (!b.micon)
+      {
+         if (!clapon)
+            continue;
+         uint8_t *p = micraw;
+         for (int i = 0; i < MICSAMPLES * MICOVERSAMPLE; i++)
+         {
+            int32_t raw;
+            if (bytes == 4)
+               raw = *(int32_t *) p;    // PCM 32 bit (TDK populates top 24 bits and rest 0)
+            else
+               raw = *(int16_t *) p << 16;      // PDM 16 bit mode
+            p += bytes;
+            float v = (float) raw / 2147483648;
+            mag += v * v;
+         }
+         mag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
+         if (mag > 0.1)
+         {                      // Loud noise - tap or loud clap
+            ESP_LOGD (TAG, "Mag %f", mag);
+            if (!(haon & 1))
+            {
+               haon |= 1;
+               hachanged |= 1;
+            }
+         }
+         continue;              // Not needed
+      }
       {
          uint8_t *p = micraw;
          for (int i = 0; i < MICSAMPLES; i++)
