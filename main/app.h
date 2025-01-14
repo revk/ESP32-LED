@@ -29,6 +29,7 @@
 
 #define	MAXAPPS	50
 
+#define	MICCLAP		0.1	// Clap level
 #define	MICOVERSAMPLE	4       // From raw to FFT
 #define	MICHZ		((int)cps)      // Hz step
 #define	MICSAMPLES	512     // Power of 2 (this is multiplied by oversample)

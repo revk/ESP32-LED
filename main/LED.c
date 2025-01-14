@@ -1626,10 +1626,10 @@ mic_task (void *arg)
             float v = (float) raw / 2147483648;
             mag += v * v;
          }
-         mag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
-         if (mag > 0.1)
+         micmag = mag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
+         if (micmag > MICCLAP)
          {                      // Loud noise - tap or loud clap
-            ESP_LOGD (TAG, "Mag %f", mag);
+            ESP_LOGD (TAG, "Clap start %f", micmag);
             if (!(haon & 1))
             {
                haon |= 1;
@@ -1722,6 +1722,13 @@ mic_task (void *arg)
       //ESP_LOGE (TAG, "FFT %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21]);
       xSemaphoreTake (mic_mutex, portMAX_DELAY);
       micmag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
+      if (clapon && micmag > MICCLAP && (haon & 1))
+      {                         // Restart
+         ESP_LOGD (TAG, "Clap restart %f", micmag);
+         for (unsigned int i = 0; i < MAXAPPS; i++)
+            if (active[i].preset == 1)
+               active[i].cycle = (active[i].fadein ? : 1);
+      }
       for (int i = 0; i < MICBANDS; i++)
       {
          if (band[i] > micband[i] || !micdamp)
