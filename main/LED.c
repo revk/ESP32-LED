@@ -499,7 +499,7 @@ presetcheck (void)
          continue;
       int p = a->preset - 1;
       if (haon & (1ULL << p))
-      {                         // Update in situe
+      {                         // Update in situ
          found |= (1ULL << p);
          if (changed & (1ULL << p))
          {                      // Update settings
@@ -560,6 +560,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    {                            // Power on init
       haon |= 1;
       hachanged |= 1;
+      b.hacheck = 1;
       return NULL;
    }
    if (suffix && isdigit ((int) (uint8_t) * suffix))
@@ -942,7 +943,8 @@ led_task (void *x)
                         if (i == MAXAPPS)
                         {       // Has turned off preset
                            haon &= ~(1ULL << (preset - 1));
-                           hastatus |= (1ULL << (preset - 1));
+                           hachanged |= (1ULL << (preset - 1));
+                           b.hacheck = 1;
                         }
                      }
                   } else if (!a->stop && a->limit && a->cycle >= a->limit)
@@ -1237,7 +1239,7 @@ web_status (httpd_req_t * req)
             jo_strncpy (j, tag, sizeof (tag));
             jo_next (j);
             int p = atoi (tag);
-            ESP_LOGE (TAG, "Setting %d=%d", p, jo_here (j));
+            ESP_LOGD (TAG, "Setting %d=%d", p, jo_here (j));
             if (p >= 1 && p <= CONFIG_REVK_WEB_EXTRA_PAGES)
             {
                if (jo_here (j) == JO_TRUE)
@@ -1634,6 +1636,7 @@ mic_task (void *arg)
             {
                haon |= 1;
                hachanged |= 1;
+               b.hacheck = 1;
             }
          }
          continue;              // Not needed
@@ -1727,8 +1730,11 @@ mic_task (void *arg)
          ESP_LOGD (TAG, "Clap restart %f", micmag);
          for (unsigned int i = 0; i < MAXAPPS; i++)
             if (active[i].preset == 1)
-               if (active[i].cycle > (active[i].fadein ? : 1))
+            {
+               active[i].stop = 0;
+               if (active[i].cycle > active[i].fadein)
                   active[i].cycle = (active[i].fadein ? : 1);
+            }
       }
       for (int i = 0; i < MICBANDS; i++)
       {
