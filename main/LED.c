@@ -1727,7 +1727,8 @@ mic_task (void *arg)
          ESP_LOGD (TAG, "Clap restart %f", micmag);
          for (unsigned int i = 0; i < MAXAPPS; i++)
             if (active[i].preset == 1)
-               active[i].cycle = (active[i].fadein ? : 1);
+               if (active[i].cycle > (active[i].fadein ? : 1))
+                  active[i].cycle = (active[i].fadein ? : 1);
       }
       for (int i = 0; i < MICBANDS; i++)
       {
