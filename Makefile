@@ -26,7 +26,9 @@ beta:
 	git push
 
 issue:	
+ifeq ($(shell uname),Darwin)
 	make -C PCB
+endif
 	-git pull
 	-git commit -a
 	cp -f release/beta/$(PROJECT_NAME)*.bin release
