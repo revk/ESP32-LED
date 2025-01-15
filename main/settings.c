@@ -48,7 +48,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_BIT,.name="haenable",.comment="Enable Home Assistant",.group=4,.len=8,.dot=2,.def="1",.bit=REVK_SETTINGS_BITFIELD_haenable,.hide=1},
  {.type=REVK_SETTINGS_UNSIGNED,.name="onpower",.comment="Activate specified effect on power up",.group=5,.len=7,.dot=2,.def="1",.ptr=&onpower,.size=sizeof(uint8_t),.hide=1,.live=1,.old="poweron"	},
  {.type=REVK_SETTINGS_UNSIGNED,.name="onclap",.comment="Activate specified effect on loud clap/tap",.group=5,.len=6,.dot=2,.ptr=&onclap,.size=sizeof(uint8_t),.hide=1,.live=1,.old="clapon"	},
- {.type=REVK_SETTINGS_UNSIGNED,.name="onbutton",.comment="Activate specified effect on button",.group=5,.len=8,.dot=2,.def="1",.ptr=&onbutton,.size=sizeof(uint8_t),.hide=1,.live=1},
+ {.type=REVK_SETTINGS_UNSIGNED,.name="onbutton",.comment="Activate specified effect on button press",.group=5,.len=8,.dot=2,.def="1",.ptr=&onbutton,.size=sizeof(uint8_t),.hide=1,.live=1},
  {.type=REVK_SETTINGS_STRING,.name="name",.comment="Name (must be set to appear in HA)",.len=4,.ptr=&name,.malloc=1,.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
  {.type=REVK_SETTINGS_STRING,.name="colour",.comment="Colour or palette name or #RGB style",.len=6,.ptr=&colour,.malloc=1,.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
  {.type=REVK_SETTINGS_UNSIGNED,.name="start",.comment="First LED (default 1)",.len=5,.ptr=&start,.size=sizeof(uint16_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
