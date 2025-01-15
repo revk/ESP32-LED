@@ -66,8 +66,6 @@ enum {
  REVK_SETTINGS_BITFIELD_bgswap,
  REVK_SETTINGS_BITFIELD_micright,
  REVK_SETTINGS_BITFIELD_haenable,
- REVK_SETTINGS_BITFIELD_poweron,
- REVK_SETTINGS_BITFIELD_clapon,
  REVK_SETTINGS_BITFIELD_stack,
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #endif
@@ -115,8 +113,6 @@ struct revk_settings_bits_s {
  uint8_t bgswap:1;	// Blue/green swap
  uint8_t micright:1;	// I2S Mic use right channel
  uint8_t haenable:1;	// Enable Home Assistant
- uint8_t poweron:1;	// Start effect 1 on power on
- uint8_t clapon:1;	// Clap to start effect 1
  uint8_t stack:1;	// Presets have priority, in order, else most recent on top
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #endif
@@ -185,8 +181,8 @@ extern uint8_t micdamp;	// I2S Mic Damping from peak (higher is slower)
 extern uint8_t micmaxgain;	// Max mic gain
 extern uint8_t micrange;	// Range for reactive effects
 #define	haenable	revk_settings_bits.haenable
-#define	poweron	revk_settings_bits.poweron
-#define	clapon	revk_settings_bits.clapon
+extern uint8_t poweron;	// Activate specified effect on power up
+extern uint8_t clapon;	// Activate specified effect on loud clap/tap
 extern char* name[CONFIG_REVK_WEB_EXTRA_PAGES];	// Name (must be set to appear in HA)
 extern char* colour[CONFIG_REVK_WEB_EXTRA_PAGES];	// Colour or palette name or #RGB style
 extern uint16_t start[CONFIG_REVK_WEB_EXTRA_PAGES];	// First LED (default 1)

@@ -556,11 +556,11 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       hastatus = -1;
    }
-   if (poweron && suffix && !strcmp (suffix, "init") && *effect[0])
+   if (poweron && poweron <= CONFIG_REVK_WEB_EXTRA_PAGES && suffix && !strcmp (suffix, "init") && *effect[poweron - 1])
    {                            // Power on init
-      haon |= 1;
-      hachanged |= 1;
-      b.hacheck = 1;
+      haon |= (1ULL << poweron);
+      hachanged |= (1ULL << poweron);
+      b.hacheck = (1ULL << poweron);
       return NULL;
    }
    if (suffix && isdigit ((int) (uint8_t) * suffix))
@@ -824,11 +824,11 @@ led_task (void *x)
             ledw[3 + 4 * s] = 255;
       }
    }
-   if (poweron && *effect[0])
+   if (poweron && poweron <= CONFIG_REVK_WEB_EXTRA_PAGES && *effect[poweron - 1])
    {                            // Light 1 is default
-      haon = 1;
-      hachanged = 1;
-      b.hacheck = 1;
+      haon = (1ULL << poweron);
+      hachanged = (1ULL << poweron);
+      b.hacheck = (1ULL << poweron);
    }
    uint32_t tick = 1000000LL / cps;
    while (1)
@@ -1068,8 +1068,10 @@ revk_web_extra (httpd_req_t * req, int page)
                         MICMIN, MICMAX, MICBANDS, micband2hz (0), micband2hz (1), micband2hz (2),
                         micband2hz (3), micband2hz (4), micband2hz (5), micband2hz (6), micband2hz (7),
                         micband2hz (MICBANDS - 3), micband2hz (MICBANDS - 2), micband2hz (MICBANDS - 1), cps);
-      if (!page && poweron)
+      if (poweron == page)
          revk_web_send (req, "<tr><td colspan=3>This is the setting applied at power on.</td></tr>");
+      if (clapon == page)
+         revk_web_send (req, "<tr><td colspan=3>This is the setting applied at loud clap.</td></tr>");
       if (!page)
          revk_web_send (req, "<tr><td colspan=3>These also define defaults for general MQTT control.</td></tr>");
       void add (const char *tag)
@@ -1614,7 +1616,7 @@ mic_task (void *arg)
       float mag = 0;
       if (!b.micon)
       {
-         if (!clapon)
+         if (!clapon || clapon > CONFIG_REVK_WEB_EXTRA_PAGES || !*effect[clapon - 1])
             continue;
          uint8_t *p = micraw;
          for (int i = 0; i < MICSAMPLES * MICOVERSAMPLE; i++)
@@ -1631,12 +1633,22 @@ mic_task (void *arg)
          micmag = mag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
          if (micmag > MICCLAP)
          {                      // Loud noise - tap or loud clap
-            ESP_LOGD (TAG, "Clap start %f", micmag);
-            if (!(haon & 1))
+            if (!(haon & (1ULL << clapon)))
             {
-               haon |= 1;
-               hachanged |= 1;
-               b.hacheck = 1;
+               ESP_LOGD (TAG, "Clap start effect %d (%f)", clapon, micmag);
+               haon |= (1ULL << clapon);
+               hachanged |= (1ULL << clapon);
+               b.hacheck = (1ULL << clapon);
+            } else
+            {
+               ESP_LOGD (TAG, "Clap restart effect %d (%f)", clapon, micmag);
+               for (unsigned int i = 0; i < MAXAPPS; i++)
+                  if (active[i].preset == clapon)
+                  {
+                     active[i].stop = 0;
+                     if (active[i].cycle > active[i].fadein)
+                        active[i].cycle = (active[i].fadein ? : 1);
+                  }
             }
          }
          continue;              // Not needed
@@ -1725,11 +1737,11 @@ mic_task (void *arg)
       //ESP_LOGE (TAG, "FFT %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21]);
       xSemaphoreTake (mic_mutex, portMAX_DELAY);
       micmag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
-      if (clapon && micmag > MICCLAP && (haon & 1))
+      if (clapon && clapon <= CONFIG_REVK_WEB_EXTRA_PAGES && *effect[clapon - 1] && micmag > MICCLAP && (haon & 1))
       {                         // Restart
-         ESP_LOGD (TAG, "Clap restart %f", micmag);
+         ESP_LOGD (TAG, "Clap restart effect %d (%f)", clapon, micmag);
          for (unsigned int i = 0; i < MAXAPPS; i++)
-            if (active[i].preset == 1)
+            if (active[i].preset == clapon)
             {
                active[i].stop = 0;
                if (active[i].cycle > active[i].fadein)
