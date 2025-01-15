@@ -556,11 +556,11 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       hastatus = -1;
    }
-   if (poweron && poweron <= CONFIG_REVK_WEB_EXTRA_PAGES && suffix && !strcmp (suffix, "init") && *effect[poweron - 1])
+   if (onpower && onpower <= CONFIG_REVK_WEB_EXTRA_PAGES && suffix && !strcmp (suffix, "init") && *effect[onpower - 1])
    {                            // Power on init
-      haon |= (1ULL << poweron);
-      hachanged |= (1ULL << poweron);
-      b.hacheck = (1ULL << poweron);
+      ESP_LOGD (TAG, "Power on effect %d (init)", onpower);
+      haon |= (1ULL << (onpower - 1));
+      b.hacheck = 1;
       return NULL;
    }
    if (suffix && isdigit ((int) (uint8_t) * suffix))
@@ -651,7 +651,6 @@ app_callback (int client, const char *prefix, const char *target, const char *su
    if (suffix && (!strcasecmp (suffix, "dark") || !strcasecmp (suffix, "upgrade")))
    {
       haon = 0;                 // All off
-      hachanged = 1;
       b.hacheck = 1;
       return led_stop ();
    }
@@ -659,7 +658,6 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       return led_add (suffix, 0, j);    // Process command to set apps
    xSemaphoreTake (app_mutex, portMAX_DELAY);
    haon = 0;                    // All off
-   hachanged = 1;
    b.hacheck = 1;
    int index = apptidy (suffix ? 0 : 1);
    if (!suffix)
@@ -824,28 +822,28 @@ led_task (void *x)
             ledw[3 + 4 * s] = 255;
       }
    }
-   if (poweron && poweron <= CONFIG_REVK_WEB_EXTRA_PAGES && *effect[poweron - 1])
+   if (onpower && onpower <= CONFIG_REVK_WEB_EXTRA_PAGES && *effect[onpower - 1])
    {                            // Light 1 is default
-      haon = (1ULL << poweron);
-      hachanged = (1ULL << poweron);
-      b.hacheck = (1ULL << poweron);
+      ESP_LOGD (TAG, "Power on effect %d", onpower);
+      haon = (1ULL << (onpower - 1));
+      b.hacheck = 1;
    }
    uint32_t tick = 1000000LL / cps;
    while (1)
    {                            // Main loop
       usleep (tick - (esp_timer_get_time () % tick));
+      if (onbutton && onbutton <= CONFIG_REVK_WEB_EXTRA_PAGES)
       {
          uint8_t press = revk_gpio_get (button);
          if (press != b.press)
          {
             b.press = press;
             if (press)
-            {                   // Crude
+            {
                if (!haon)
-                  haon = (1ULL << (CONFIG_REVK_WEB_EXTRA_PAGES - 1));
+                  haon |= (1ULL << (onbutton - 1));
                else
-                  haon >>= 1;
-               hachanged = 1;
+                  haon &= ~(1ULL << (onbutton - 1));
                b.hacheck = 1;
             }
          }
@@ -943,7 +941,6 @@ led_task (void *x)
                         if (i == MAXAPPS)
                         {       // Has turned off preset
                            haon &= ~(1ULL << (preset - 1));
-                           hachanged |= (1ULL << (preset - 1));
                            b.hacheck = 1;
                         }
                      }
@@ -1053,8 +1050,8 @@ revk_web_extra (httpd_req_t * req, int page)
       revk_web_setting (req, NULL, "sk6812");
       revk_web_setting (req, NULL, "rgbw");
       revk_web_setting (req, NULL, "rgswap");
-      revk_web_setting (req, NULL, "poweron");
-      revk_web_setting (req, NULL, "clapon");
+      revk_web_setting (req, NULL, "onpower");
+      revk_web_setting (req, NULL, "onclap");
       revk_web_setting (req, NULL, "stack");
       revk_web_setting (req, NULL, "haenable");
    } else
@@ -1068,9 +1065,9 @@ revk_web_extra (httpd_req_t * req, int page)
                         MICMIN, MICMAX, MICBANDS, micband2hz (0), micband2hz (1), micband2hz (2),
                         micband2hz (3), micband2hz (4), micband2hz (5), micband2hz (6), micband2hz (7),
                         micband2hz (MICBANDS - 3), micband2hz (MICBANDS - 2), micband2hz (MICBANDS - 1), cps);
-      if (poweron == page)
+      if (onpower == page)
          revk_web_send (req, "<tr><td colspan=3>This is the setting applied at power on.</td></tr>");
-      if (clapon == page)
+      if (onclap == page)
          revk_web_send (req, "<tr><td colspan=3>This is the setting applied at loud clap.</td></tr>");
       if (!page)
          revk_web_send (req, "<tr><td colspan=3>These also define defaults for general MQTT control.</td></tr>");
@@ -1248,7 +1245,6 @@ web_status (httpd_req_t * req)
                   haon |= (1ULL << (p - 1));
                else if (jo_here (j) == JO_FALSE)
                   haon &= ~(1ULL << (p - 1));
-               hachanged = 1;
                b.hacheck = 1;
             }
             jo_skip (j);
@@ -1616,7 +1612,7 @@ mic_task (void *arg)
       float mag = 0;
       if (!b.micon)
       {
-         if (!clapon || clapon > CONFIG_REVK_WEB_EXTRA_PAGES || !*effect[clapon - 1])
+         if (!onclap || onclap > CONFIG_REVK_WEB_EXTRA_PAGES || !*effect[onclap - 1])
             continue;
          uint8_t *p = micraw;
          for (int i = 0; i < MICSAMPLES * MICOVERSAMPLE; i++)
@@ -1633,17 +1629,16 @@ mic_task (void *arg)
          micmag = mag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
          if (micmag > MICCLAP)
          {                      // Loud noise - tap or loud clap
-            if (!(haon & (1ULL << clapon)))
+            if (!(haon & (1ULL << onclap)))
             {
-               ESP_LOGD (TAG, "Clap start effect %d (%f)", clapon, micmag);
-               haon |= (1ULL << clapon);
-               hachanged |= (1ULL << clapon);
-               b.hacheck = (1ULL << clapon);
+               ESP_LOGD (TAG, "Clap start effect %d (%f)", onclap, micmag);
+               haon |= (1ULL << (onclap - 1));
+               b.hacheck = 1;
             } else
             {
-               ESP_LOGD (TAG, "Clap restart effect %d (%f)", clapon, micmag);
+               ESP_LOGD (TAG, "Clap restart effect %d (%f)", onclap, micmag);
                for (unsigned int i = 0; i < MAXAPPS; i++)
-                  if (active[i].preset == clapon)
+                  if (active[i].preset == onclap)
                   {
                      active[i].stop = 0;
                      if (active[i].cycle > active[i].fadein)
@@ -1737,11 +1732,11 @@ mic_task (void *arg)
       //ESP_LOGE (TAG, "FFT %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21]);
       xSemaphoreTake (mic_mutex, portMAX_DELAY);
       micmag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
-      if (clapon && clapon <= CONFIG_REVK_WEB_EXTRA_PAGES && *effect[clapon - 1] && micmag > MICCLAP && (haon & 1))
+      if (onclap && onclap <= CONFIG_REVK_WEB_EXTRA_PAGES && *effect[onclap - 1] && micmag > MICCLAP && (haon & 1))
       {                         // Restart
-         ESP_LOGD (TAG, "Clap restart effect %d (%f)", clapon, micmag);
+         ESP_LOGD (TAG, "Clap restart effect %d (%f)", onclap, micmag);
          for (unsigned int i = 0; i < MAXAPPS; i++)
-            if (active[i].preset == clapon)
+            if (active[i].preset == onclap)
             {
                active[i].stop = 0;
                if (active[i].cycle > active[i].fadein)

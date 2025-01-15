@@ -181,8 +181,9 @@ extern uint8_t micdamp;	// I2S Mic Damping from peak (higher is slower)
 extern uint8_t micmaxgain;	// Max mic gain
 extern uint8_t micrange;	// Range for reactive effects
 #define	haenable	revk_settings_bits.haenable
-extern uint8_t poweron;	// Activate specified effect on power up
-extern uint8_t clapon;	// Activate specified effect on loud clap/tap
+extern uint8_t onpower;	// Activate specified effect on power up
+extern uint8_t onclap;	// Activate specified effect on loud clap/tap
+extern uint8_t onbutton;	// Activate specified effect on button
 extern char* name[CONFIG_REVK_WEB_EXTRA_PAGES];	// Name (must be set to appear in HA)
 extern char* colour[CONFIG_REVK_WEB_EXTRA_PAGES];	// Colour or palette name or #RGB style
 extern uint16_t start[CONFIG_REVK_WEB_EXTRA_PAGES];	// First LED (default 1)
