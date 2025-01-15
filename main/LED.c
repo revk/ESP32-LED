@@ -556,6 +556,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       hastatus = -1;
    }
+#if 0
    if (onpower && onpower <= CONFIG_REVK_WEB_EXTRA_PAGES && suffix && !strcmp (suffix, "init") && *effect[onpower - 1])
    {                            // Power on init
       ESP_LOGD (TAG, "Power on effect %d (init)", onpower);
@@ -563,6 +564,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       return NULL;
    }
+#endif
    if (suffix && isdigit ((int) (uint8_t) * suffix))
    {                            // HA command or web button
       char val[20];
@@ -583,11 +585,13 @@ app_callback (int client, const char *prefix, const char *target, const char *su
          }
          if (jo_find (j, "brightness"))
          {
+            hachanged |= (1ULL << (preset - 1));        // ideally only if actually changed
             habright[preset - 1] = jo_read_int (j);
             habrightset |= (1ULL << (preset - 1));
          }
          if (jo_find (j, "color"))
          {                      // r / g / b
+            hachanged |= (1ULL << (preset - 1));        // ideally only if actually changed
             while (jo_next (j) == JO_TAG)
             {
                jo_strncpy (j, val, sizeof (val));
@@ -609,6 +613,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
          {                      // effect
             if (*effect[preset - 1])
                return "Effect not expected";
+            hachanged |= (1ULL << (preset - 1));        // ideally only if actually changed
             jo_strncpy (j, val, sizeof (val));
             int i;
             for (i = 0; i < sizeof (applist) / sizeof (*applist); i++)
@@ -625,7 +630,6 @@ app_callback (int client, const char *prefix, const char *target, const char *su
             }
          }
       }
-      hachanged |= (1ULL << (preset - 1));
       b.hacheck = 1;
       return NULL;
    }
@@ -640,11 +644,14 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       jo_strncpy (j, val, sizeof (val));
       if (!strcasecmp (val, "off") || !strcmp (val, "0"))
          haon &= ~(1ULL << (preset - 1));       // Off
-      else if (!strcasecmp (val, "on") || !strcmp (val, "1") || !strcasecmp (val, "blink"))
-         haon |= (1ULL << (preset - 1));        // On(blink may as well be on)
-      else if (!strcasecmp (val, "2"))
-         haon ^= (1ULL << (preset - 1));        // Toggle
-      hachanged |= (1ULL << (preset - 1));
+      else
+      {
+         if (!strcasecmp (val, "on") || !strcmp (val, "1") || !strcasecmp (val, "blink"))
+            haon |= (1ULL << (preset - 1));     // On(blink may as well be on)
+         else if (!strcasecmp (val, "2"))
+            haon ^= (1ULL << (preset - 1));     // Toggle
+         hachanged |= (1ULL << (preset - 1));   // ideally only if actually changed
+      }
       b.hacheck = 1;
       return NULL;
    }
