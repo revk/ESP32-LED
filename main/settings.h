@@ -108,7 +108,7 @@ struct revk_settings_bits_s {
 #else
 #endif
  uint8_t sk6812:1;	// SK6812 (instead of WS2812)
- uint8_t rgbw:1;	// RGBW (no effects coded for this yet)
+ uint8_t rgbw:1;	// RGBW
  uint8_t rgswap:1;	// Red/green swap
  uint8_t bgswap:1;	// Blue/green swap
  uint8_t micright:1;	// I2S Mic use right channel
@@ -181,9 +181,9 @@ extern uint8_t micdamp;	// I2S Mic Damping from peak (higher is slower)
 extern uint8_t micmaxgain;	// Max mic gain
 extern uint8_t micrange;	// Range for reactive effects
 #define	haenable	revk_settings_bits.haenable
-extern uint8_t onpower;	// Activate specified effect on power up
-extern uint8_t onclap;	// Activate specified effect on loud clap/tap
-extern uint8_t onbutton;	// Activate specified effect on button press
+extern uint8_t onpower;	// Activate specified preset on power up
+extern uint8_t onclap;	// Activate specified preset on loud clap/tap
+extern uint8_t onbutton;	// Activate specified preset on button press
 extern char* name[CONFIG_REVK_WEB_EXTRA_PAGES];	// Name (must be set to appear in HA)
 extern char* colour[CONFIG_REVK_WEB_EXTRA_PAGES];	// Colour or palette name or #RGB style
 extern uint16_t start[CONFIG_REVK_WEB_EXTRA_PAGES];	// First LED (default 1)
