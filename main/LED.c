@@ -1051,7 +1051,10 @@ revk_web_extra (httpd_req_t * req, int page)
       revk_web_setting (req, NULL, "rgbw");
       revk_web_setting (req, NULL, "rgswap");
       revk_web_setting (req, NULL, "onpower");
-      revk_web_setting (req, NULL, "onclap");
+      if (b.micok)
+         revk_web_setting (req, NULL, "onclap");
+      if (button.set)
+         revk_web_setting (req, NULL, "onbutton");
       revk_web_setting (req, NULL, "stack");
       revk_web_setting (req, NULL, "haenable");
    } else
@@ -1065,6 +1068,8 @@ revk_web_extra (httpd_req_t * req, int page)
                         MICMIN, MICMAX, MICBANDS, micband2hz (0), micband2hz (1), micband2hz (2),
                         micband2hz (3), micband2hz (4), micband2hz (5), micband2hz (6), micband2hz (7),
                         micband2hz (MICBANDS - 3), micband2hz (MICBANDS - 2), micband2hz (MICBANDS - 1), cps);
+      if (page == 1)
+         revk_web_send (req, "<tr><td colspan=3>This is the defaults for web settings on main page.</td></tr>");
       if (onpower == page)
          revk_web_send (req, "<tr><td colspan=3>This is the setting applied at power on.</td></tr>");
       if (onclap == page)
@@ -1324,9 +1329,11 @@ web_root (httpd_req_t * req)
       {
          if (!*config[p - 1] && !*effect[p - 1] && !*name[p - 1])
             continue;
+         char num[10];
+         sprintf (num, "%d", p);
          revk_web_send (req,
                         "<div style='display:inline-block;text-align:center;'><label class=switch><input type=checkbox id=\"%d\" onchange=\"w('%d',this.checked);\"%s><span class=slider></span></label><br><label for=\"%d\">%s</label></div></label>",
-                        p, p, haon & (1ULL << (p - 1)) ? " checked" : "", p, name[p - 1]);
+                        p, p, haon & (1ULL << (p - 1)) ? " checked" : "", p, *name[p - 1] ? name[p - 1] : num);
       }
       revk_web_send (req, "</p></fieldset></form>");
    }
