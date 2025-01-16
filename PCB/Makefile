@@ -31,6 +31,12 @@ leds:	placeleds
 	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d56 --diode=5 --count=8 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
 	#./placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d48 --diode=1 --count=4 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
 
+	#./placeleds LED35/LED.kicad_pcb -x100 -y100 -d6 --diode=1 --count=4 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
+	#./placeleds LED35/LED.kicad_pcb -x100 -y100 -d11.5 --diode=5 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
+	#./placeleds LED35/LED.kicad_pcb -x100 -y100 -d17 --diode=17 --count=16 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
+	#./placeleds LED35/LED.kicad_pcb -x100 -y100 -d22.5 --diode=33 --count=24 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
+	#./placeleds LED35/LED.kicad_pcb -x100 -y100 -d28 --diode=57 --count=32 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
+
 stl:    LEDC/LED.stl LEDR/LED.stl
 
 png:	$(patsubst %.kicad_pcb,%.png,$(wildcard */*.kicad_pcb))

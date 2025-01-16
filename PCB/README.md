@@ -41,3 +41,9 @@ USB-C uber board
 USB-C dual LED board
 
 <img width=24% src=LEDx2/LED.png><img width=24% src=LEDx2/LED-90.png><img width=24% src=LEDx2/LED-bottom.png><img width=24% src=LEDx2/LED-panel.png>
+
+## LED35
+
+88 LED disk, 32mm diameter
+
+<img width=24% src=LED35/LED.png><img width=24% src=LED35/LED-bottom.png>
