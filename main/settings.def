@@ -1,9 +1,9 @@
 #ifdef  CONFIG_IDF_TARGET_ESP32
-gpio	rgb		22	.array=2		// GPIO for LED chain
+gpio	rgb		22	.array=2		// GPIOs for LED chains
 #endif
 
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
-gpio	rgb		4	.array=2		// GPIO for LED chain
+gpio	rgb		4	.array=2		// GPIOs for LED chains
 #endif
 
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
@@ -16,7 +16,7 @@ gpio	relay						// Relay for strip power
 gpio	adc						// ADC*13.4
 gpio	button						// Button
 
-gpio	blink			.array=3		// Status LED
+gpio	blink			.array=3		// Status LEDs, R, G, B (all the same for WS2812)
 
 u8	max.r		255	.unit="/255"		// Max RGB Red
 u8	max.g		255	.unit="/255"		// Max RGB Green
@@ -26,7 +26,7 @@ bit	sk6812			.hide=1			// SK6812 (instead of WS2812)
 bit 	rgbw			.hide=1			// RGBW
 bit	rgswap			.hide=1			// Red/green swap
 bit	bgswap			.hide=1			// Blue/green swap
-u16	leds			.hide=1	.array=2	// How many LEDs
+u16	leds			.hide=1	.array=2	// How many LEDs in each chain
 u8	webcontrol	2				// Web controls
 gpio	ls.scl						// Colour sensor SCL
 gpio	ls.sda						// Colour sensor SDA

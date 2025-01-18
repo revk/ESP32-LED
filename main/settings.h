@@ -146,10 +146,10 @@ struct revk_settings_bits_s {
 #endif
 };
 #ifdef  CONFIG_IDF_TARGET_ESP32
-extern revk_gpio_t rgb[2];	// GPIO for LED chain
+extern revk_gpio_t rgb[2];	// GPIOs for LED chains
 #endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
-extern revk_gpio_t rgb[2];	// GPIO for LED chain
+extern revk_gpio_t rgb[2];	// GPIOs for LED chains
 #endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 extern uint8_t cps;	// Change per second
@@ -159,7 +159,7 @@ extern uint8_t cps;	// Change per second
 extern revk_gpio_t relay;	// Relay for strip power
 extern revk_gpio_t adc;	// ADC*13.4
 extern revk_gpio_t button;	// Button
-extern revk_gpio_t blink[3];	// Status LED
+extern revk_gpio_t blink[3];	// Status LEDs, R, G, B (all the same for WS2812)
 extern uint8_t maxr;	// Max RGB Red
 extern uint8_t maxg;	// Max RGB Green
 extern uint8_t maxb;	// Max RGB Blue
@@ -168,7 +168,7 @@ extern uint8_t maxw;	// Max RGBW White
 #define	rgbw	revk_settings_bits.rgbw
 #define	rgswap	revk_settings_bits.rgswap
 #define	bgswap	revk_settings_bits.bgswap
-extern uint16_t leds[2];	// How many LEDs
+extern uint16_t leds[2];	// How many LEDs in each chain
 extern uint8_t webcontrol;	// Web controls
 extern revk_gpio_t lsscl;	// Colour sensor SCL
 extern revk_gpio_t lssda;	// Colour sensor SDA
@@ -224,7 +224,7 @@ extern char* topicha;	// MQTT Topic for homeassistant
 #define	prefixapp	revk_settings_bits.prefixapp
 #define	prefixhost	revk_settings_bits.prefixhost
 #ifdef	CONFIG_REVK_BLINK_DEF
-extern revk_gpio_t blink[3];	// LED array
+extern revk_gpio_t blink[3];	// R, G, B LED array (set all the same for WS2812 LED)
 #endif
 #define	dark	revk_settings_bits.dark
 #ifdef  CONFIG_IDF_TARGET_ESP32S3

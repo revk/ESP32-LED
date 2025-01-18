@@ -11,10 +11,10 @@ revk_settings_bits_t revk_settings_bits={0};
 #define	quote(s)	str(s)
 revk_settings_t const revk_settings[]={
 #ifdef  CONFIG_IDF_TARGET_ESP32
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="rgb",.comment="GPIO for LED chain",.len=3,.def="22",.ptr=&rgb,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=2},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="rgb",.comment="GPIOs for LED chains",.len=3,.def="22",.ptr=&rgb,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=2},
 #endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="rgb",.comment="GPIO for LED chain",.len=3,.def="4",.ptr=&rgb,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=2},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="rgb",.comment="GPIOs for LED chains",.len=3,.def="4",.ptr=&rgb,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=2},
 #endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
  {.type=REVK_SETTINGS_UNSIGNED,.name="cps",.comment="Change per second",.len=3,.def="25",.ptr=&cps,.size=sizeof(uint8_t),.unit="/s"		},
@@ -24,7 +24,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="relay",.comment="Relay for strip power",.len=5,.ptr=&relay,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="adc",.comment="ADC*13.4",.len=3,.ptr=&adc,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="button",.comment="Button",.len=6,.ptr=&button,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="Status LED",.len=5,.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=3},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="Status LEDs, R, G, B (all the same for WS2812)",.len=5,.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=3},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxr",.comment="Max RGB Red",.group=1,.len=4,.dot=3,.def="255",.ptr=&maxr,.size=sizeof(uint8_t),.unit="/255"		},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxg",.comment="Max RGB Green",.group=1,.len=4,.dot=3,.def="255",.ptr=&maxg,.size=sizeof(uint8_t),.unit="/255"		},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxb",.comment="Max RGB Blue",.group=1,.len=4,.dot=3,.def="255",.ptr=&maxb,.size=sizeof(uint8_t),.unit="/255"		},
@@ -33,7 +33,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_BIT,.name="rgbw",.comment="RGBW",.len=4,.bit=REVK_SETTINGS_BITFIELD_rgbw,.hide=1},
  {.type=REVK_SETTINGS_BIT,.name="rgswap",.comment="Red/green swap",.len=6,.bit=REVK_SETTINGS_BITFIELD_rgswap,.hide=1},
  {.type=REVK_SETTINGS_BIT,.name="bgswap",.comment="Blue/green swap",.len=6,.bit=REVK_SETTINGS_BITFIELD_bgswap,.hide=1},
- {.type=REVK_SETTINGS_UNSIGNED,.name="leds",.comment="How many LEDs",.len=4,.ptr=&leds,.size=sizeof(uint16_t),.hide=1,.array=2},
+ {.type=REVK_SETTINGS_UNSIGNED,.name="leds",.comment="How many LEDs in each chain",.len=4,.ptr=&leds,.size=sizeof(uint16_t),.hide=1,.array=2},
  {.type=REVK_SETTINGS_UNSIGNED,.name="webcontrol",.comment="Web controls",.len=10,.def="2",.ptr=&webcontrol,.size=sizeof(uint8_t)},
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="lsscl",.comment="Colour sensor SCL",.group=2,.len=5,.dot=2,.ptr=&lsscl,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="lssda",.comment="Colour sensor SDA",.group=2,.len=5,.dot=2,.ptr=&lssda,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
@@ -89,7 +89,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_BIT,.name="prefixapp",.comment="MQTT use appname/ in front of hostname in topic",.group=8,.len=9,.dot=6,.dq=1,.def=quote(CONFIG_REVK_PREFIXAPP),.bit=REVK_SETTINGS_BITFIELD_prefixapp,.revk=1},
  {.type=REVK_SETTINGS_BIT,.name="prefixhost",.comment="MQTT use (appname/)hostname/topic instead of topic/(appname/)hostname",.group=8,.len=10,.dot=6,.dq=1,.def=quote(CONFIG_REVK_PREFIXHOST),.bit=REVK_SETTINGS_BITFIELD_prefixhost,.revk=1},
 #ifdef	CONFIG_REVK_BLINK_DEF
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="LED array",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (set all the same for WS2812 LED)",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
 #endif
  {.type=REVK_SETTINGS_BIT,.name="dark",.comment="Default LED off",.len=4,.bit=REVK_SETTINGS_BITFIELD_dark,.revk=1,.live=1},
 #ifdef  CONFIG_IDF_TARGET_ESP32S3

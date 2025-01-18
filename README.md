@@ -86,10 +86,11 @@ The USB-A module is designed to plug in directly to a USB-A socket and connector
 Well, quite a few other PCBs...
 
 <img src=https://github.com/user-attachments/assets/d5e7e25f-a918-4311-868a-3e9b72b282fa width=48%><img src=PCB/Coaster2/Coaster.png width=48%>
+<img src=PCB/LED32/LED.png width=48%><img src=PCB/Gate/Gate.png width=48%>
 
 ## Software
 
-Both boards are designed so they can run WLED code and esphome. The code included here is different, but offers a number of useful features.
+The boards are designed so they can run WLED code and esphome. The code included here is different, but offers a number of useful features.
 
 * Handles various formats, RGB, RGBW, and some with other sequences like GRB.
 * Sound reactive using microphone.
