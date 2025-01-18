@@ -16,7 +16,7 @@ Coaster board
 
 USB-A board
 
-<img width=24% src=LEDA/LED.png><img width=24% src=LEDA/LED-90.png><img width=24% src=LEDA/LED-bottom.png><img width=24% src=LEDA/LED-panel.png>
+<img width=24% src=LEDA/LED.png><img width=24% src=LEDA/LED-alt-90.png><img width=24% src=LEDA/LED-bottom.png><img width=24% src=LEDA/LED-panel.png>
 
 ## LEDC
 
