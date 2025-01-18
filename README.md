@@ -33,7 +33,6 @@ This is the full specification module, with a lot of features.
 * Simple potential divide to ADC pin to allow input voltage monitoring.
 * Pads allowing a 6x6 surface mount contact switch to be soldered on the back.
 * 38kHz IR receiver module.
-* 5V LDO to WS2812 LED as 1st LED, operating as level shifter for LED output.
 * PCB marked with all GPIO numbers
 
 The power supply means you can run the board from USB and it will power the LED strip from that same 5V USB, or power the board from the strip, e.g. a 12V strip and external 12V supply (even at the other end of strip). Do not connect USB at the same time as a higher voltage supply. The solid state relay can be used to power control the strip, whether using the USB/5V supply or external supply.
