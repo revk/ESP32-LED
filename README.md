@@ -86,7 +86,7 @@ The USB-A module is designed to plug in directly to a USB-A socket and connector
 Well, quite a few other PCBs...
 
 <img src=https://github.com/user-attachments/assets/d5e7e25f-a918-4311-868a-3e9b72b282fa width=48%><img src=PCB/Coaster2/Coaster.png width=48%>
-<img src=PCB/LED32/LED.png width=48%>
+<img src=PCB/LED32/LED.png width=48%><img src=PCB/Gate/Gate.png width=48%>
 
 ## Software
 
