@@ -510,7 +510,7 @@ main (int argc, const char *argv[])
          pcb_append_num (xy, ax (d, o));
          pcb_append_num (xy, ay (d, o));
       }
-      int steps = M_PI * diameter / 2;
+      int steps = M_PI * diameter;
       xy (0, a);
       for (int d = 0; d <= steps; d++)
          xy (M_PI * 2 * d / steps, b);
