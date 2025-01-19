@@ -1208,6 +1208,9 @@ web_status (httpd_req_t * req)
                }
                if (a->config && *a->config)
                   jo_lit (j, "config", a->config);      // Already validated json
+               jo_int (j, "cycle", a->cycle);
+               if (a->stop)
+                  jo_int (j, "stop", a->stop);
                jo_close (j);
             }
          }
@@ -1640,7 +1643,7 @@ mic_task (void *arg)
          micmag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
          if (micmag > MICCLAP && onclap && onclap <= CONFIG_REVK_WEB_EXTRA_PAGES && *effect[onclap - 1])
          {                      // Loud noise - tap or loud clap
-            if (!(haon & (1ULL << onclap)))
+            if (!(haon & (1ULL << (onclap - 1))))
             {
                ESP_LOGD (TAG, "Clap start effect %d (%f)", onclap, micmag);
                haon |= (1ULL << (onclap - 1));
