@@ -887,7 +887,7 @@ led_task (void *x)
                   {             // Starting
                      jo_t j = jo_object_alloc ();
                      jo_int (j, "level", i);
-                     jo_string (j, "app", a->name);
+                     jo_string (j, "effect", a->name);
 #define u8(s,n,d)         if(a->n)jo_int(j,#n,a->n);
 #define u8d(s,n,d)         if(a->n)jo_litf(j,#n,"%.1f",1.0*a->n/cps);
 #define u8r(s,n,d)        u8(s,n,d)
@@ -1173,7 +1173,7 @@ web_status (httpd_req_t * req)
             {
                jo_object (j, NULL);
                if (*a->name)
-                  jo_string (j, "name", a->name);
+                  jo_string (j, "effect", a->name);
                if (a->start && a->start != 1)
                   jo_int (j, "start", a->start);
                if (a->len && a->len != ledmax)
@@ -1623,11 +1623,8 @@ mic_task (void *arg)
          b.micok = 1;
          ESP_LOGE (TAG, "Audio running");
       }
-      float mag = 0;
-      if (!b.micon)
-      {
-         if (!onclap || onclap > CONFIG_REVK_WEB_EXTRA_PAGES || !*effect[onclap - 1])
-            continue;
+      {                         // Magnitude
+         float mag = 0;
          uint8_t *p = micraw;
          for (int i = 0; i < MICSAMPLES * MICOVERSAMPLE; i++)
          {
@@ -1640,8 +1637,8 @@ mic_task (void *arg)
             float v = (float) raw / 2147483648;
             mag += v * v;
          }
-         micmag = mag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
-         if (micmag > MICCLAP)
+         micmag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
+         if (micmag > MICCLAP && onclap && onclap <= CONFIG_REVK_WEB_EXTRA_PAGES && *effect[onclap - 1])
          {                      // Loud noise - tap or loud clap
             if (!(haon & (1ULL << onclap)))
             {
@@ -1660,8 +1657,9 @@ mic_task (void *arg)
                   }
             }
          }
-         continue;              // Not needed
       }
+      if (!b.micon)
+         continue;
       {
          uint8_t *p = micraw;
          for (int i = 0; i < MICSAMPLES; i++)
@@ -1673,7 +1671,6 @@ mic_task (void *arg)
                raw = *(int16_t *) p << 16;      // PDM 16 bit mode
             p += bytes;
             float v = (float) raw / 2147483648;
-            mag += v * v;
             fftre[i] = v * micgain / MICOVERSAMPLE;
             for (int q = 0; q < MICOVERSAMPLE - 1; q++)
             {
@@ -1684,7 +1681,6 @@ mic_task (void *arg)
                p += bytes;
                float v = (float) raw / 2147483648;
                fftre[i] += v * micgain / MICOVERSAMPLE;
-               mag += v * v;
             }
             fftim[i] = 0;
          }
@@ -1745,18 +1741,6 @@ mic_task (void *arg)
          micgain = limit;
       //ESP_LOGE (TAG, "FFT %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f", band[0], band[3], band[6], band[9], band[12], band[15], band[18], band[21]);
       xSemaphoreTake (mic_mutex, portMAX_DELAY);
-      micmag = sqrt (mag / MICSAMPLES / MICOVERSAMPLE);
-      if (onclap && onclap <= CONFIG_REVK_WEB_EXTRA_PAGES && *effect[onclap - 1] && micmag > MICCLAP && (haon & 1))
-      {                         // Restart
-         ESP_LOGD (TAG, "Clap restart effect %d (%f)", onclap, micmag);
-         for (unsigned int i = 0; i < MAXAPPS; i++)
-            if (active[i].preset == onclap)
-            {
-               active[i].stop = 0;
-               if (active[i].cycle > active[i].fadein)
-                  active[i].cycle = (active[i].fadein ? : 1);
-            }
-      }
       for (int i = 0; i < MICBANDS; i++)
       {
          if (band[i] > micband[i] || !micdamp)
@@ -1766,6 +1750,7 @@ mic_task (void *arg)
       }
       xSemaphoreGive (mic_mutex);
    }
+
    vTaskDelete (NULL);
 }
 
