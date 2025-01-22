@@ -162,9 +162,9 @@ struct revk_settings_bits_s {
 #endif
 };
 #define	STRIPS	4
-extern revk_gpio_t ledgpio[STRIPS];	// GPIOs for LED chains
-extern uint16_t ledcount[STRIPS];	// How many LEDs in each chain
-extern uint8_t ledtype[STRIPS];	// Type of LED
+extern revk_gpio_t ledgpio[STRIPS];	// GPIOs for LED string
+extern uint16_t ledcount[STRIPS];	// How many LEDs in string
+extern uint8_t ledtype[STRIPS];	// Type of LED string
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 extern uint8_t cps;	// Change per second
 #else
