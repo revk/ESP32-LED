@@ -64,7 +64,6 @@ int voltage = 0;                // current voltage (mV)
 static httpd_handle_t webserver = NULL;
 
 int ledmax = 0;                 // Total LEDs
-#define	STRIPS	(sizeof(ledcount)/sizeof(ledcount[0]))
 
 uint8_t *ledr = NULL;
 uint8_t *ledg = NULL;
@@ -829,10 +828,11 @@ led_task (void *x)
          led_strip_rmt_config_t rmt_config = {
             .clk_src = RMT_CLK_SRC_DEFAULT,     // different clock source can lead to different power consumption
             .resolution_hz = 10 * 1000 * 1000,  // 10 MHz
-#ifdef	CONFIG_IDF_TARGET_ESP32S3
-            .flags.with_dma = true,
-#endif
          };
+#ifdef	CONFIG_IDF_TARGET_ESP32S3
+         if (!s)
+            rmt_config.flags.with_dma = true;   // Seems can only be one, investigate more on this
+#endif
          REVK_ERR_CHECK (led_strip_new_rmt_device (&strip_config, &rmt_config, &strip[s]));
          if (strip[s])
             REVK_ERR_CHECK (led_strip_clear (strip[s]));
