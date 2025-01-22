@@ -464,10 +464,7 @@ appstargate (app_t * a)
       for (int i = 0; i < a->len; i++)
       {
          uint8_t l = (int) (a->speed - a->step) * new[i] / a->speed + (int) a->step * old[i] / a->speed;
-         if (rgbw)
-            setRGBWl (a->start + i, 0, 0, 0, l, q);
-         else
-            setRGBl (a->start + i, l, l, l, q);
+         setRGBl (a->start + i, l, l, l, q);
       }
       if (!--a->step)
       {                         // Next

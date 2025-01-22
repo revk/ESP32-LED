@@ -22,6 +22,10 @@ static const char TAG[] = "LED";
 #include "esp_adc/adc_cali_scheme.h"
 #include "halib.h"
 
+#define	typeisrgbw(x)	(((x)%12)/6)
+#define	typeissk6812(x)	((x)/12)
+#define	typebase(x)	((x)%6)
+
 #define a(a,d)	extern const char* app##a(app_t*);
 #include "apps.h"
 
@@ -50,6 +54,7 @@ struct
    uint8_t checksound:1;        // Temp
    uint8_t relay:1;             // Relay state
    uint8_t press:1;             // Button pressed
+   uint8_t rgbw:1;              // If one of the strings is RGBW
 } b = { 0 };
 
 #define	ADC_SCALE	134/10
@@ -59,7 +64,7 @@ int voltage = 0;                // current voltage (mV)
 static httpd_handle_t webserver = NULL;
 
 int ledmax = 0;                 // Total LEDs
-#define	STRIPS	(sizeof(leds)/sizeof(leds[0]))
+#define	STRIPS	(sizeof(ledcount)/sizeof(ledcount[0]))
 
 uint8_t *ledr = NULL;
 uint8_t *ledg = NULL;
@@ -141,10 +146,10 @@ uint8_t
 setcolour (app_t * a, const char *colour)
 {
    uint8_t colourset = 0;
-   uint8_t r = 0;
-   uint8_t g = 0;
-   uint8_t b = 0;
-   uint8_t w = 0;
+   uint8_t R = 0;
+   uint8_t G = 0;
+   uint8_t B = 0;
+   uint8_t W = 0;
    int p = 0;
    for (p = 0; palettes[p].name && strcmp (palettes[p].name, colour); p++);
    if (palettes[p].name)
@@ -154,7 +159,7 @@ setcolour (app_t * a, const char *colour)
       return 1;
    }
    // Fixed colour
-   if (rgbw && !strcasecmp (colour, "white"))
+   if (b.rgbw && !strcasecmp (colour, "white"))
       colour = "#000F";
 #define	c(h,c)	else if(!strcasecmp(colour,#c))colour=#h;
    colours
@@ -168,37 +173,37 @@ setcolour (app_t * a, const char *colour)
       if (!c[3])
       {                         // RGB
          colourset = 1;
-         r = x (0) * 17;
-         g = x (1) * 17;
-         b = x (2) * 17;
-         w = 0;
+         R = x (0) * 17;
+         G = x (1) * 17;
+         B = x (2) * 17;
+         W = 0;
       } else if (isxdigit ((int) c[3]))
       {
          if (!c[4])
          {                      // # RGBW
             colourset = 1;
-            r = x (0) * 17;
-            g = x (1) * 17;
-            b = x (2) * 17;
-            w = x (3) * 17;
+            R = x (0) * 17;
+            G = x (1) * 17;
+            B = x (2) * 17;
+            W = x (3) * 17;
          } else if (isxdigit ((int) c[4]) && isxdigit ((int) c[5]))
          {
             if (!c[6])
             {                   // # RRGGBB
                colourset = 1;
-               r = x (0) * 16 + x (1);
-               g = x (2) * 16 + x (3);
-               b = x (4) * 16 + x (5);
-               w = 0;
+               R = x (0) * 16 + x (1);
+               G = x (2) * 16 + x (3);
+               B = x (4) * 16 + x (5);
+               W = 0;
             } else if (isxdigit ((int) c[6]) && isxdigit ((int) c[7]))
             {                   // # RRGGBBWW
                if (!c[8])
                {
                   colourset = 1;
-                  r = x (0) * 16 + x (1);
-                  g = x (2) * 16 + x (3);
-                  b = x (4) * 16 + x (5);
-                  w = x (6) * 16 + x (7);
+                  R = x (0) * 16 + x (1);
+                  G = x (2) * 16 + x (3);
+                  B = x (4) * 16 + x (5);
+                  W = x (6) * 16 + x (7);
                } else
                   return 0;
             }
@@ -208,10 +213,10 @@ setcolour (app_t * a, const char *colour)
    } else
       return 0;
    a->palette = 0;
-   a->r = r;
-   a->g = g;
-   a->b = b;
-   a->w = w;
+   a->r = R;
+   a->g = G;
+   a->b = B;
+   a->w = W;
    a->colourset = colourset;
    return 1;
 #undef x
@@ -685,7 +690,7 @@ send_ha_status (void)
          jo_t j = jo_object_alloc ();
          jo_string (j, "state", (haon & (1ULL << preset)) ? "ON" : "OFF");
          jo_int (j, "brightness", habright[preset]);
-         jo_string (j, "color_mode", rgbw ? "rgbw" : "rgb");
+         jo_string (j, "color_mode", b.rgbw ? "rgbw" : "rgb");
          if (!*effect[preset] && haeffect[preset])
             jo_string (j, "effect", haeffect[preset]);
          if (hargb & (1ULL << preset))
@@ -694,7 +699,7 @@ send_ha_status (void)
             jo_int (j, "r", har[preset]);
             jo_int (j, "g", hag[preset]);
             jo_int (j, "b", hab[preset]);
-            if (rgbw)
+            if (b.rgbw)
                jo_int (j, "w", haw[preset]);
          }
          char topic[10];
@@ -747,7 +752,7 @@ send_ha_config (void)
             jo_string (j, "schema", "json");
             jo_bool (j, "brightness", 1);
             jo_array (j, "supported_color_modes");
-            jo_string (j, NULL, rgbw ? "rgbw" : "rgb");
+            jo_string (j, NULL, b.rgbw ? "rgbw" : "rgb");
             jo_close (j);
             if (!*effect[i])
             {
@@ -773,30 +778,54 @@ led_task (void *x)
 {
    revk_gpio_input (button);
    revk_gpio_output (relay, 0);
-   if (!rgb[0].set || !(gpio_ok (rgb[0].num) & 1))
+   if (!ledgpio[0].set || !(gpio_ok (ledgpio[0].num) & 1))
    {
-      ESP_LOGE (TAG, "Bad GPIO %d", rgb[0].num);
+      ESP_LOGE (TAG, "Bad GPIO %d", ledgpio[0].num);
       vTaskDelete (NULL);
       return;
    }
-   uint8_t led_status = (blink[0].num == rgb[0].num ? 1 : 0);
+   uint8_t led_status = (blink[0].num == ledgpio[0].num ? 1 : 0);
    if (!led_status)
       revk_blink_init ();       // Library blink
    led_strip_handle_t strip[STRIPS] = { 0 };
    for (int s = 0; s < STRIPS; s++)
-      ledmax += leds[s];
+      ledmax += ledcount[s];
    for (int s = 0; s < STRIPS; s++)
-      if (rgb[s].set && (leds[s] || !ledmax))
+      if (ledgpio[s].set && (ledcount[s] || !ledmax))
       {
-         ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", rgb[s].num, rgb[s].invert ? " (inverted)" : "", leds[s] ? : 4,
-                   led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
+         ESP_LOGE (TAG, "Started using GPIO %d%s, %d LEDs%s", ledgpio[s].num, ledgpio[s].invert ? " (inverted)" : "",
+                   ledcount[s] ? : 4, led_status ? dark ? " (plus status, dark)" : " (plus status)" : "");
          led_strip_config_t strip_config = {
-            .strip_gpio_num = rgb[s].num,
-            .max_leds = (leds[s] ? : 4) + (s ? 0 : led_status), // The number of LEDs in the strip,
-            .color_component_format = rgbw ? LED_STRIP_COLOR_COMPONENT_FMT_GRBW : LED_STRIP_COLOR_COMPONENT_FMT_GRB,
-            .led_model = sk6812 ? LED_MODEL_SK6812 : LED_MODEL_WS2812,  // LED strip model
-            .flags.invert_out = rgb[s].invert,  // whether to invert the output signal(useful when your hardware has a level inverter)
+            .strip_gpio_num = ledgpio[s].num,
+            .max_leds = (ledcount[s] ? : 4) + (s ? 0 : led_status),     // The number of LEDs in the strip,
+            .color_component_format = LED_STRIP_COLOR_COMPONENT_FMT_GRB,
+            .led_model = typeissk6812 (ledtype[s]) ? LED_MODEL_SK6812 : LED_MODEL_WS2812,       // LED strip model
+            .flags.invert_out = ledgpio[s].invert,      // whether to invert the output signal(useful when your hardware has a level inverter)
          };
+         if (typeisrgbw (ledtype[s]))
+         {
+            strip_config.color_component_format.format.num_components = 4;
+            b.rgbw = 1;
+         }
+         uint8_t t = typebase (ledtype[s]);
+         if (t == REVK_SETTINGS_LEDTYPE_WS2812_RGB || t == REVK_SETTINGS_LEDTYPE_WS2812_RBG)
+            strip_config.color_component_format.format.r_pos = 0;
+         if (t == REVK_SETTINGS_LEDTYPE_WS2812_GRB || t == REVK_SETTINGS_LEDTYPE_WS2812_BRG)
+            strip_config.color_component_format.format.r_pos = 1;
+         if (t == REVK_SETTINGS_LEDTYPE_WS2812_GBR || t == REVK_SETTINGS_LEDTYPE_WS2812_BGR)
+            strip_config.color_component_format.format.r_pos = 2;
+         if (t == REVK_SETTINGS_LEDTYPE_WS2812_GBR || t == REVK_SETTINGS_LEDTYPE_WS2812_GRB)
+            strip_config.color_component_format.format.g_pos = 0;
+         if (t == REVK_SETTINGS_LEDTYPE_WS2812_RGB || t == REVK_SETTINGS_LEDTYPE_WS2812_BGR)
+            strip_config.color_component_format.format.g_pos = 1;
+         if (t == REVK_SETTINGS_LEDTYPE_WS2812_RBG || t == REVK_SETTINGS_LEDTYPE_WS2812_BRG)
+            strip_config.color_component_format.format.g_pos = 2;
+         if (t == REVK_SETTINGS_LEDTYPE_WS2812_BRG || t == REVK_SETTINGS_LEDTYPE_WS2812_BGR)
+            strip_config.color_component_format.format.b_pos = 0;
+         if (t == REVK_SETTINGS_LEDTYPE_WS2812_RBG || t == REVK_SETTINGS_LEDTYPE_WS2812_GBR)
+            strip_config.color_component_format.format.b_pos = 1;
+         if (t == REVK_SETTINGS_LEDTYPE_WS2812_RGB || t == REVK_SETTINGS_LEDTYPE_WS2812_GRB)
+            strip_config.color_component_format.format.b_pos = 2;
          led_strip_rmt_config_t rmt_config = {
             .clk_src = RMT_CLK_SRC_DEFAULT,     // different clock source can lead to different power consumption
             .resolution_hz = 10 * 1000 * 1000,  // 10 MHz
@@ -811,7 +840,7 @@ led_task (void *x)
    ledr = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledr));
    ledg = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledg));
    ledb = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledb));
-   if (rgbw)
+   if (b.rgbw)
       ledw = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledw));
    if (!ledmax)
    {                            // Preset for no LEDs set
@@ -913,7 +942,7 @@ led_task (void *x)
                         jo_string (j, "colour", palettes[a->palette - 1].name);
                      else if (a->colourset)
                      {
-                        if (rgbw)
+                        if (b.rgbw)
                         {
                            if (!(a->r % 17) && !(a->g % 17) && !(a->b % 17) && !(a->w % 17))
                               jo_stringf (j, "colour", "%X%X%X%X", a->r / 17, a->g / 17, a->b / 17, a->w / 17);
@@ -983,47 +1012,44 @@ led_task (void *x)
             revk_gpio_set (relay, b.relay = 0);
       }
       {                         // Update display
-         uint8_t *r = ledr;
-         uint8_t *g = ledg;
-         uint8_t *b = ledb;
-         uint8_t *w = ledw;
-         if (rgswap)
-         {
-            uint8_t *s = r;
-            r = g;
-            g = s;
-         }
-         if (bgswap)
-         {
-            uint8_t *s = r;
-            r = b;
-            b = s;
-         }
+         uint8_t *R = ledr;
+         uint8_t *G = ledg;
+         uint8_t *B = ledb;
+         uint8_t *W = ledw;
          for (int s = 0; s < STRIPS; s++)
             if (strip[s])
             {
-               int n = ledmax ? leds[s] : 4;
-               if (rgbw)
+               int n = ledmax ? ledcount[s] : 4;
+               if (b.rgbw)
                {
-                  for (unsigned int i = 0; i < n; i++)
-                     led_strip_set_pixel_rgbw (strip[s], i + (s ? 0 : led_status),      //
-                                               gamma8[(unsigned int) maxr * r[i] / 255],        //
-                                               gamma8[(unsigned int) maxg * g[i] / 255],        //
-                                               gamma8[(unsigned int) maxb * b[i] / 255],        //
-                                               gamma8[(unsigned int) maxw * w[i] / 255]);
+                  if (typeisrgbw (ledtype[s]))
+                     for (unsigned int i = 0; i < n; i++)
+                        led_strip_set_pixel_rgbw (strip[s], i + (s ? 0 : led_status),   //
+                                                  gamma8[(unsigned int) maxr * R[i] / 255],     //
+                                                  gamma8[(unsigned int) maxg * G[i] / 255],     //
+                                                  gamma8[(unsigned int) maxb * B[i] / 255],     //
+                                                  gamma8[(unsigned int) maxw * W[i] / 255]);
+                  else
+                     for (unsigned int i = 0; i < n; i++)
+#define max(a,b)	((a)>(b)?(a):(b))
+                        led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),        //
+                                             gamma8[(unsigned int) maxr * max (R[i], W[i]) / 255],      //
+                                             gamma8[(unsigned int) maxg * max (G[i], W[i]) / 255],      //
+                                             gamma8[(unsigned int) maxb * max (B[i], W[i]) / 255]);
+#undef max
                } else
                {
                   for (unsigned int i = 0; i < n; i++)
                      led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),   //
-                                          gamma8[(unsigned int) maxr * r[i] / 255],     //
-                                          gamma8[(unsigned int) maxg * g[i] / 255],     //
-                                          gamma8[(unsigned int) maxb * b[i] / 255]);
+                                          gamma8[(unsigned int) maxr * R[i] / 255],     //
+                                          gamma8[(unsigned int) maxg * G[i] / 255],     //
+                                          gamma8[(unsigned int) maxb * B[i] / 255]);
                }
-               r += leds[s];
-               g += leds[s];
-               b += leds[s];
-               if (w)
-                  w += leds[s];
+               R += ledcount[s];
+               G += ledcount[s];
+               B += ledcount[s];
+               if (W)
+                  W += ledcount[s];
                if (!s)
                {
                   if (led_status)
@@ -1051,12 +1077,8 @@ revk_web_extra (httpd_req_t * req, int page)
 {
    if (!page)
    {
-      revk_web_setting (req, NULL, "dark");
-      revk_web_setting (req, NULL, "leds1");
-      revk_web_setting (req, NULL, "leds2");
-      revk_web_setting (req, NULL, "sk6812");
-      revk_web_setting (req, NULL, "rgbw");
-      revk_web_setting (req, NULL, "rgswap");
+      if (blink[0].set)
+         revk_web_setting (req, NULL, "dark");
       revk_web_setting (req, NULL, "onpower");
       if (b.micok)
          revk_web_setting (req, NULL, "onclap");
@@ -1194,7 +1216,7 @@ web_status (httpd_req_t * req)
                   jo_string (j, "colour", palettes[a->palette - 1].name);
                else if (a->colourset)
                {
-                  if (rgbw)
+                  if (b.rgbw)
                      jo_stringf (j, "colour", "#%02X%02X%02X%02X", a->r, a->g, a->b, a->w);
                   else
                      jo_stringf (j, "colour", "#%02X%02X%02X", a->r, a->g, a->b);
@@ -1302,7 +1324,7 @@ web_root (httpd_req_t * req)
    {
       revk_web_send (req,
                      "<form method=get><fieldset><legend>Effect</legend><p>Colour:<input name=colour placeholder='#%s or colour name' size=30> or <select name=palette><option value=''>--- Palette --- </option>",
-                     rgbw ? "RGBW" : "RGB");
+                     b.rgbw ? "RGBW" : "RGB");
       for (int p = 0; palettes[p].name; p++)
          revk_web_send (req, "<option value='%s'>%s (%s)</option>", palettes[p].name, palettes[p].name, palettes[p].description);
       revk_web_send (req, "</select></p><p>");
@@ -1827,7 +1849,7 @@ bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
 void
 app_main ()
 {
-   //ESP_LOGE (TAG, "Started");
+   ESP_LOGE (TAG, "Started");
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    mic_mutex = xSemaphoreCreateBinary ();
@@ -1849,8 +1871,8 @@ app_main ()
    if (adc.set)
       revk_task ("adc", adc_task, NULL, 4);
    memset (habright, 255, sizeof (habright));
-   if (rgbw)
-      memset (haw, 255, sizeof (hab));
+   if (b.rgbw)
+      memset (haw, 255, sizeof (haw));
    else
    {
       memset (har, 255, sizeof (har));

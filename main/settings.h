@@ -10,7 +10,10 @@ struct revk_settings_s {
  void *ptr;
  const char name[16];
  const char *def;
- const char *flags;
+ union {
+  const char *flags;
+  const char *enums;
+ };
  const char *old;
  const char *unit;
  const char *comment;
@@ -34,8 +37,35 @@ struct revk_settings_s {
  uint8_t base64:1;
  uint8_t secret:1;
  uint8_t dq:1;
- uint8_t gpio:1;
  uint8_t rtc:1;
+ uint8_t gpio:1;
+ uint8_t isenum:1;
+};
+enum {
+ REVK_SETTINGS_LEDTYPE_WS2812_GRB,
+ REVK_SETTINGS_LEDTYPE_WS2812_GBR,
+ REVK_SETTINGS_LEDTYPE_WS2812_RGB,
+ REVK_SETTINGS_LEDTYPE_WS2812_RBG,
+ REVK_SETTINGS_LEDTYPE_WS2812_BGR,
+ REVK_SETTINGS_LEDTYPE_WS2812_BRG,
+ REVK_SETTINGS_LEDTYPE_WS2812_GRBW,
+ REVK_SETTINGS_LEDTYPE_WS2812_GBRW,
+ REVK_SETTINGS_LEDTYPE_WS2812_RGBW,
+ REVK_SETTINGS_LEDTYPE_WS2812_RBGW,
+ REVK_SETTINGS_LEDTYPE_WS2812_BGRW,
+ REVK_SETTINGS_LEDTYPE_WS2812_BRGW,
+ REVK_SETTINGS_LEDTYPE_SK7812_GRB,
+ REVK_SETTINGS_LEDTYPE_SK7812_GBR,
+ REVK_SETTINGS_LEDTYPE_SK7812_RGB,
+ REVK_SETTINGS_LEDTYPE_SK7812_RBG,
+ REVK_SETTINGS_LEDTYPE_SK7812_BGR,
+ REVK_SETTINGS_LEDTYPE_SK7812_BRG,
+ REVK_SETTINGS_LEDTYPE_SK7812_GRBW,
+ REVK_SETTINGS_LEDTYPE_SK7812_GBRW,
+ REVK_SETTINGS_LEDTYPE_SK7812_RGBW,
+ REVK_SETTINGS_LEDTYPE_SK7812_RBGW,
+ REVK_SETTINGS_LEDTYPE_SK7812_BGRW,
+ REVK_SETTINGS_LEDTYPE_SK7812_BRGW,
 };
 typedef struct revk_settings_blob_s revk_settings_blob_t;
 struct revk_settings_blob_s {
@@ -53,17 +83,9 @@ struct revk_gpio_s {
  uint16_t set:1;
 };
 enum {
-#ifdef  CONFIG_IDF_TARGET_ESP32
-#endif
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-#endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
 #endif
- REVK_SETTINGS_BITFIELD_sk6812,
- REVK_SETTINGS_BITFIELD_rgbw,
- REVK_SETTINGS_BITFIELD_rgswap,
- REVK_SETTINGS_BITFIELD_bgswap,
  REVK_SETTINGS_BITFIELD_micright,
  REVK_SETTINGS_BITFIELD_haenable,
  REVK_SETTINGS_BITFIELD_stack,
@@ -100,17 +122,9 @@ enum {
 };
 typedef struct revk_settings_bits_s revk_settings_bits_t;
 struct revk_settings_bits_s {
-#ifdef  CONFIG_IDF_TARGET_ESP32
-#endif
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-#endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
 #endif
- uint8_t sk6812:1;	// SK6812 (instead of WS2812)
- uint8_t rgbw:1;	// RGBW
- uint8_t rgswap:1;	// Red/green swap
- uint8_t bgswap:1;	// Blue/green swap
  uint8_t micright:1;	// I2S Mic use right channel
  uint8_t haenable:1;	// Enable Home Assistant
  uint8_t stack:1;	// Presets have priority, in order, else most recent on top
@@ -145,12 +159,9 @@ struct revk_settings_bits_s {
  uint8_t meshroot:1;	// This is preferred mesh root
 #endif
 };
-#ifdef  CONFIG_IDF_TARGET_ESP32
-extern revk_gpio_t rgb[2];	// GPIOs for LED chains
-#endif
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-extern revk_gpio_t rgb[2];	// GPIOs for LED chains
-#endif
+extern revk_gpio_t ledgpio[2];	// GPIOs for LED chains
+extern uint16_t ledcount[2];	// How many LEDs in each chain
+extern uint8_t ledtype[2];	// Type of LED
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 extern uint8_t cps;	// Change per second
 #else
@@ -164,11 +175,6 @@ extern uint8_t maxr;	// Max RGB Red
 extern uint8_t maxg;	// Max RGB Green
 extern uint8_t maxb;	// Max RGB Blue
 extern uint8_t maxw;	// Max RGBW White
-#define	sk6812	revk_settings_bits.sk6812
-#define	rgbw	revk_settings_bits.rgbw
-#define	rgswap	revk_settings_bits.rgswap
-#define	bgswap	revk_settings_bits.bgswap
-extern uint16_t leds[2];	// How many LEDs in each chain
 extern uint8_t webcontrol;	// Web controls
 extern revk_gpio_t lsscl;	// Colour sensor SCL
 extern revk_gpio_t lssda;	// Colour sensor SDA
@@ -292,6 +298,7 @@ enum {
  REVK_SETTINGS_JSON,
  REVK_SETTINGS_OCTET,
 };
+#define	REVK_SETTINGS_HAS_ENUM
 #define	REVK_SETTINGS_HAS_OLD
 #define	REVK_SETTINGS_HAS_UNIT
 #define	REVK_SETTINGS_HAS_COMMENT
