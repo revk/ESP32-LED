@@ -69,7 +69,7 @@ appaudio (app_t * a)
          c = v;
       }
       setl (a->start + i, a, i, a->len, c);
-      if (rgbw && !a->w)
+      if (!a->w)
          setW (a->start + i, w);
    }
    uint8_t bands = c->max - c->min;

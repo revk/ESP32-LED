@@ -1,10 +1,8 @@
-#ifdef  CONFIG_IDF_TARGET_ESP32
-gpio	rgb		22	.array=2		// GPIOs for LED chains
-#endif
+#define	STRIPS	4
 
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-gpio	rgb		4	.array=2		// GPIOs for LED chains
-#endif
+gpio	led.gpio		4	.array=STRIPS .old="rgb"		// GPIOs for LED string
+u16	led.count			.array=STRIPS .old="leds"	// How many LEDs in string
+enum	led.type			.array=STRIPS .enums="WS2812 GRB,WS2812 GBR,WS2812 RGB,WS2812 RBG,WS2812 BGR,WS2812 BRG,WS2812 GRBW,WS2812 GBRW,WS2812 RGBW,WS2812 RBGW,WS2812 BGRW,WS2812 BRGW,SK7812 GRB,SK7812 GBR,SK7812 RGB,SK7812 RBG,SK7812 BGR,SK7812 BRG,SK7812 GRBW,SK7812 GBRW,SK7812 RGBW,SK7812 RBGW,SK7812 BGRW,SK7812 BRGW" // Type of LED string
 
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 u8	cps		25	.unit="/s"		// Change per second
@@ -22,11 +20,8 @@ u8	max.r		255	.unit="/255"		// Max RGB Red
 u8	max.g		255	.unit="/255"		// Max RGB Green
 u8	max.b		255	.unit="/255"		// Max RGB Blue
 u8	max.w		255				// Max RGBW White
-bit	sk6812			.hide=1			// SK6812 (instead of WS2812)
-bit 	rgbw			.hide=1			// RGBW
-bit	rgswap			.hide=1			// Red/green swap
-bit	bgswap			.hide=1			// Blue/green swap
-u16	leds			.hide=1	.array=2	// How many LEDs in each chain
+
+
 u8	webcontrol	2				// Web controls
 gpio	ls.scl						// Colour sensor SCL
 gpio	ls.sda						// Colour sensor SDA
