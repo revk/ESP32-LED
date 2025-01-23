@@ -621,7 +621,7 @@
 					(hide yes)
 				)
 			)
-			(property "LCSC Part #" "C2980306"
+			(property "MPN" "C2980306"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1839,17 +1839,8 @@
 					(hide yes)
 				)
 			)
-			(property "LCSC Part #" "C87080"
+			(property "MPN" "C87080"
 				(at 5.715 -14.605 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "JLCPCB Rotation Offset" "90"
-				(at 30.48 -14.605 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2425,7 +2416,7 @@
 					(hide yes)
 				)
 			)
-			(property "LCSC Part #" "C709357"
+			(property "MPN" "C709357"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3025,7 +3016,7 @@
 					(hide yes)
 				)
 			)
-			(property "LCSC Part #" "C784564"
+			(property "MPN" "C784564"
 				(at -6.35 -6.985 0)
 				(effects
 					(font
@@ -6735,7 +6726,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C709357"
+		(property "MPN" "C709357"
 			(at 176.53 45.72 0)
 			(effects
 				(font
@@ -7059,7 +7050,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 105.41 0)
 			(effects
 				(font
@@ -7557,7 +7548,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 73.66 0)
 			(effects
 				(font
@@ -7778,7 +7769,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 88.9 0)
 			(effects
 				(font
@@ -8195,7 +8186,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 149.86 0)
 			(effects
 				(font
@@ -8613,7 +8604,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 90.17 0)
 			(effects
 				(font
@@ -8698,7 +8689,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 27.94 0)
 			(effects
 				(font
@@ -8783,7 +8774,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 13.97 0)
 			(effects
 				(font
@@ -9473,7 +9464,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C354575"
+		(property "MPN" "C354575"
 			(at 262.89 27.305 0)
 			(effects
 				(font
@@ -9555,7 +9546,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 12.7 0)
 			(effects
 				(font
@@ -10531,7 +10522,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C17024"
+		(property "MPN" "C17024"
 			(at 262.89 25.4 0)
 			(effects
 				(font
@@ -10613,7 +10604,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 134.62 0)
 			(effects
 				(font
@@ -11574,7 +11565,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C100001"
+		(property "MPN" "C100001"
 			(at 246.38 35.56 90)
 			(effects
 				(font
@@ -12000,7 +11991,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C30926"
+		(property "MPN" "C30926"
 			(at 262.89 21.59 0)
 			(effects
 				(font
@@ -12082,7 +12073,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 43.18 0)
 			(effects
 				(font
@@ -12779,17 +12770,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C87080"
+		(property "MPN" "C87080"
 			(at 252.095 36.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "JLCPCB Rotation Offset" "90"
-			(at 276.86 36.195 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12951,7 +12933,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 44.45 0)
 			(effects
 				(font
@@ -13036,7 +13018,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 29.21 0)
 			(effects
 				(font
@@ -13190,7 +13172,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 104.14 0)
 			(effects
 				(font
@@ -13315,7 +13297,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C2980306"
+		(property "MPN" "C2980306"
 			(at 186.69 127 0)
 			(effects
 				(font
@@ -13675,7 +13657,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 166.37 0)
 			(effects
 				(font
@@ -13959,7 +13941,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 151.13 0)
 			(effects
 				(font
@@ -14181,7 +14163,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 181.61 0)
 			(effects
 				(font
@@ -14597,7 +14579,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C14675"
+		(property "MPN" "C14675"
 			(at 239.395 31.75 90)
 			(effects
 				(font
@@ -14945,7 +14927,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 180.34 0)
 			(effects
 				(font
@@ -15566,7 +15548,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 120.65 0)
 			(effects
 				(font
@@ -15847,7 +15829,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 74.93 0)
 			(effects
 				(font
@@ -15998,7 +15980,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 165.1 0)
 			(effects
 				(font
@@ -16083,7 +16065,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 135.89 0)
 			(effects
 				(font
@@ -16575,7 +16557,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 119.38 0)
 			(effects
 				(font
@@ -16728,7 +16710,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 114.935 59.69 0)
 			(effects
 				(font
@@ -17423,7 +17405,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C143805"
+		(property "MPN" "C143805"
 			(at 262.89 29.21 0)
 			(effects
 				(font
@@ -17639,7 +17621,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C784564"
+		(property "MPN" "C784564"
 			(at 43.815 58.42 0)
 			(effects
 				(font
@@ -18064,7 +18046,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C19110"
+		(property "MPN" "C19110"
 			(at 262.89 23.495 0)
 			(effects
 				(font
