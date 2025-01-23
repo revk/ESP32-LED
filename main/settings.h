@@ -93,7 +93,9 @@ enum {
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #endif
  REVK_SETTINGS_BITFIELD_otaauto,
+#ifdef	CONFIG_REVK_WEB_BETA
  REVK_SETTINGS_BITFIELD_otabeta,
+#endif
  REVK_SETTINGS_BITFIELD_prefixapp,
  REVK_SETTINGS_BITFIELD_prefixhost,
 #ifdef	CONFIG_REVK_BLINK_DEF
@@ -133,7 +135,9 @@ struct revk_settings_bits_s {
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #endif
  uint8_t otaauto:1;	// OTA auto upgrade
+#ifdef	CONFIG_REVK_WEB_BETA
  uint8_t otabeta:1;	// OTA from beta release
+#endif
  uint8_t prefixapp:1;	// MQTT use appname/ in front of hostname in topic
  uint8_t prefixhost:1;	// MQTT use (appname/)hostname/topic instead of topic/(appname/)hostname
 #ifdef	CONFIG_REVK_BLINK_DEF
@@ -217,7 +221,9 @@ extern char* otahost;	// OTA hostname
 extern uint8_t otadays;	// OTA auto load (days)
 extern uint16_t otastart;	// OTA check after startup (min seconds)
 #define	otaauto	revk_settings_bits.otaauto
+#ifdef	CONFIG_REVK_WEB_BETA
 #define	otabeta	revk_settings_bits.otabeta
+#endif
 extern revk_settings_blob_t* otacert;	// OTA cert of otahost
 extern char* ntphost;	// NTP host
 extern char* tz;	// Timezone (<a href='https://gist.github.com/alwynallan/24d96091655391107939' target=_blank>info</a>)
