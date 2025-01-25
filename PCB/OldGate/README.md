@@ -1,4 +1,4 @@
-# Gate1
+# Gate2
 
 These files are for use in [KiCad](https://www.kicad.org).
 
@@ -8,4 +8,6 @@ This is an open source project, but bear in mind you cannot sell boards bearing 
 
 ## Images
 
-<img src='Gate1.png' width=32%><img src='Gate1-90.png' width=32%><img src='Gate1-bottom.png' width=32%>
+<img src='Gate2.png' width=32%><img src='Gate2-90.png' width=32%><img src='Gate2-bottom.png' width=32%>
+
+*Auto generated 2025-01-25T08:06:00*
