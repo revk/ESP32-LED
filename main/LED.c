@@ -586,6 +586,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
                haon |= (1ULL << (preset - 1));
             else
                haon &= ~(1ULL << (preset - 1));
+            hastatus |= (1ULL << (preset - 1));
          }
          if (jo_find (j, "brightness"))
          {
@@ -656,6 +657,7 @@ app_callback (int client, const char *prefix, const char *target, const char *su
             haon ^= (1ULL << (preset - 1));     // Toggle
          hachanged |= (1ULL << (preset - 1));   // ideally only if actually changed
       }
+      hastatus |= (1ULL << (preset - 1));
       b.hacheck = 1;
       return NULL;
    }
@@ -880,6 +882,7 @@ led_task (void *x)
                   haon |= (1ULL << (onbutton - 1));
                else
                   haon &= ~(1ULL << (onbutton - 1));
+               hastatus |= (1ULL << (onbutton - 1));
                b.hacheck = 1;
             }
          }
@@ -977,6 +980,7 @@ led_task (void *x)
                         if (i == MAXAPPS)
                         {       // Has turned off preset
                            haon &= ~(1ULL << (preset - 1));
+                           hastatus |= (1ULL << (preset - 1));
                            b.hacheck = 1;
                         }
                      }
@@ -1282,6 +1286,7 @@ web_status (httpd_req_t * req)
                   haon |= (1ULL << (p - 1));
                else if (jo_here (j) == JO_FALSE)
                   haon &= ~(1ULL << (p - 1));
+               hastatus |= (1ULL << (p - 1));
                b.hacheck = 1;
             }
             jo_skip (j);

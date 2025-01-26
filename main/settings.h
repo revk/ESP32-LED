@@ -83,7 +83,7 @@ struct revk_gpio_s {
  uint16_t set:1;
 };
 enum {
-#define	STRIPS	4
+#define	STRIPS	3
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
 #endif
@@ -125,7 +125,7 @@ enum {
 };
 typedef struct revk_settings_bits_s revk_settings_bits_t;
 struct revk_settings_bits_s {
-#define	STRIPS	4
+#define	STRIPS	3
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
 #endif
@@ -165,7 +165,7 @@ struct revk_settings_bits_s {
  uint8_t meshroot:1;	// This is preferred mesh root
 #endif
 };
-#define	STRIPS	4
+#define	STRIPS	3
 extern revk_gpio_t ledgpio[STRIPS];	// GPIOs for LED string
 extern uint16_t ledcount[STRIPS];	// How many LEDs in string
 extern uint8_t ledtype[STRIPS];	// Type of LED string

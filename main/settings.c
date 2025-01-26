@@ -10,7 +10,7 @@ revk_settings_bits_t revk_settings_bits={0};
 #define	str(s)	#s
 #define	quote(s)	str(s)
 revk_settings_t const revk_settings[]={
-#define	STRIPS	4
+#define	STRIPS	3
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledgpio",.comment="GPIOs for LED string",.group=1,.len=7,.dot=3,.def="4",.ptr=&ledgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS,.old="rgb"		},
  {.type=REVK_SETTINGS_UNSIGNED,.name="ledcount",.comment="How many LEDs in string",.group=1,.len=8,.dot=3,.ptr=&ledcount,.size=sizeof(uint16_t),.array=STRIPS,.old="leds"	},
  {.type=REVK_SETTINGS_UNSIGNED,.isenum=1,.name="ledtype",.comment="Type of LED string",.group=1,.len=7,.dot=3,.ptr=&ledtype,.size=sizeof(uint8_t),.array=STRIPS,.enums="WS2812 GRB,WS2812 GBR,WS2812 RGB,WS2812 RBG,WS2812 BGR,WS2812 BRG,WS2812 GRBW,WS2812 GBRW,WS2812 RGBW,WS2812 RBGW,WS2812 BGRW,WS2812 BRGW,SK7812 GRB,SK7812 GBR,SK7812 RGB,SK7812 RBG,SK7812 BGR,SK7812 BRG,SK7812 GRBW,SK7812 GBRW,SK7812 RGBW,SK7812 RBGW,SK7812 BGRW,SK7812 BRGW" },
@@ -145,7 +145,7 @@ revk_settings_t const revk_settings[]={
 {0}};
 #undef quote
 #undef str
-#define	STRIPS	4
+#define	STRIPS	3
 revk_gpio_t ledgpio[STRIPS]={0};
 uint16_t ledcount[STRIPS]={0};
 uint8_t ledtype[STRIPS]={0};
