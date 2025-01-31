@@ -2855,9 +2855,10 @@
 						(type none)
 					)
 				)
-				(circle
-					(center 3.81 -2.54)
-					(radius 0.127)
+				(polyline
+					(pts
+						(xy 3.81 -2.54) (xy 3.81 2.54)
+					)
 					(stroke
 						(width 0)
 						(type default)
@@ -2866,10 +2867,9 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy 3.81 -2.54) (xy 3.81 2.54)
-					)
+				(circle
+					(center 3.81 -2.54)
+					(radius 0.127)
 					(stroke
 						(width 0)
 						(type default)
@@ -3429,18 +3429,6 @@
 				)
 				(polyline
 					(pts
-						(xy -8.763 0.381) (xy -8.763 0.889)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy -8.763 0.381) (xy -9.271 0.381)
 					)
 					(stroke
@@ -3453,7 +3441,7 @@
 				)
 				(polyline
 					(pts
-						(xy -8.636 -0.635) (xy -8.636 -0.127)
+						(xy -8.763 0.381) (xy -8.763 0.889)
 					)
 					(stroke
 						(width 0)
@@ -3478,6 +3466,18 @@
 				(polyline
 					(pts
 						(xy -8.636 -0.635) (xy -9.525 0.254)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -8.636 -0.635) (xy -8.636 -0.127)
 					)
 					(stroke
 						(width 0)
@@ -3596,7 +3596,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.651 -3.556) (xy 1.524 -3.556)
+						(xy 1.651 -3.556) (xy 1.651 -3.302)
 					)
 					(stroke
 						(width 0)
@@ -3608,7 +3608,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.651 -3.556) (xy 1.651 -3.302)
+						(xy 1.651 -3.556) (xy 1.524 -3.556)
 					)
 					(stroke
 						(width 0)
@@ -4548,6 +4548,18 @@
 						(type outline)
 					)
 				)
+				(polyline
+					(pts
+						(xy -1.905 4.445) (xy -3.175 3.175) (xy -1.905 1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(circle
 					(center -1.905 3.175)
 					(radius 0.381)
@@ -4647,10 +4659,10 @@
 					)
 				)
 				(pin passive line
-					(at 7.62 5.08 180)
+					(at 7.62 1.27 180)
 					(length 2.54)
 					(hide yes)
-					(name "VBUS"
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4676,6 +4688,25 @@
 						)
 					)
 					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 1.27 180)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4712,25 +4743,6 @@
 						)
 					)
 					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 -5.08 180)
-					(length 2.54)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4863,7 +4875,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(arc
@@ -4875,7 +4887,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(arc
@@ -5493,18 +5505,6 @@
 				)
 				(polyline
 					(pts
-						(xy 0.635 2.159) (xy 3.175 4.699)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0.635 2.159) (xy 0.635 2.921)
 					)
 					(stroke
@@ -5529,7 +5529,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0.635 0.635) (xy 0.635 1.397)
+						(xy 0.635 2.159) (xy 3.175 4.699)
 					)
 					(stroke
 						(width 0)
@@ -5554,6 +5554,18 @@
 				(polyline
 					(pts
 						(xy 0.635 0.635) (xy 1.397 0.635)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.635 0.635) (xy 0.635 1.397)
 					)
 					(stroke
 						(width 0)
@@ -10903,7 +10915,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" " ~"
+		(property "Datasheet" "~"
 			(at 220.345 67.31 0)
 			(effects
 				(font
