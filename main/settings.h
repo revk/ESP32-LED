@@ -100,6 +100,8 @@ enum {
  REVK_SETTINGS_BITFIELD_prefixhost,
 #ifdef	CONFIG_REVK_BLINK_DEF
 #endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#endif
  REVK_SETTINGS_BITFIELD_dark,
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
@@ -141,6 +143,8 @@ struct revk_settings_bits_s {
  uint8_t prefixapp:1;	// MQTT use appname/ in front of hostname in topic
  uint8_t prefixhost:1;	// MQTT use (appname/)hostname/topic instead of topic/(appname/)hostname
 #ifdef	CONFIG_REVK_BLINK_DEF
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
 #endif
  uint8_t dark:1;	// Default LED off
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
@@ -240,6 +244,9 @@ extern char* topicha;	// MQTT Topic for homeassistant
 #define	prefixhost	revk_settings_bits.prefixhost
 #ifdef	CONFIG_REVK_BLINK_DEF
 extern revk_gpio_t blink[3];	// R, G, B LED array (set all the same for WS2812 LED)
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+extern uint16_t usbuptime;	// USB  turns off after this many seconds
 #endif
 #define	dark	revk_settings_bits.dark
 #ifdef  CONFIG_IDF_TARGET_ESP32S3

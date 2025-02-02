@@ -86,6 +86,9 @@ revk_settings_t const revk_settings[]={
 #ifdef	CONFIG_REVK_BLINK_DEF
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (set all the same for WS2812 LED)",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
 #endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+ {.type=REVK_SETTINGS_UNSIGNED,.name="usbuptime",.comment="USB  turns off after this many seconds",.len=9,.dq=1,.def=quote(CONFIG_REVK_USBUPTIME),.ptr=&usbuptime,.size=sizeof(uint16_t),.revk=1},
+#endif
  {.type=REVK_SETTINGS_BIT,.name="dark",.comment="Default LED off",.len=4,.bit=REVK_SETTINGS_BITFIELD_dark,.revk=1,.live=1},
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="factorygpio",.comment="Factory reset GPIO (press 3 times)",.len=11,.def="-21",.ptr=&factorygpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1},
@@ -213,6 +216,9 @@ char* topicerror=NULL;
 char* topicha=NULL;
 #ifdef	CONFIG_REVK_BLINK_DEF
 revk_gpio_t blink[3]={0};
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+uint16_t usbuptime=0;
 #endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 revk_gpio_t factorygpio={0};
