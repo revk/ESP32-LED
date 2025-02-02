@@ -96,15 +96,15 @@ enum {
 #ifdef	CONFIG_REVK_WEB_BETA
  REVK_SETTINGS_BITFIELD_otabeta,
 #endif
+ REVK_SETTINGS_BITFIELD_dark,
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#else
+#endif
  REVK_SETTINGS_BITFIELD_prefixapp,
  REVK_SETTINGS_BITFIELD_prefixhost,
 #ifdef	CONFIG_REVK_BLINK_DEF
-#endif
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-#endif
- REVK_SETTINGS_BITFIELD_dark,
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-#else
 #endif
 #ifdef  CONFIG_REVK_APMODE
 #ifdef	CONFIG_REVK_APCONFIG
@@ -140,15 +140,15 @@ struct revk_settings_bits_s {
 #ifdef	CONFIG_REVK_WEB_BETA
  uint8_t otabeta:1;	// OTA from beta release
 #endif
+ uint8_t dark:1;	// Default LED off
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#else
+#endif
  uint8_t prefixapp:1;	// MQTT use appname/ in front of hostname in topic
  uint8_t prefixhost:1;	// MQTT use (appname/)hostname/topic instead of topic/(appname/)hostname
 #ifdef	CONFIG_REVK_BLINK_DEF
-#endif
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-#endif
- uint8_t dark:1;	// Default LED off
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-#else
 #endif
 #ifdef  CONFIG_REVK_APMODE
 #ifdef	CONFIG_REVK_APCONFIG
@@ -229,9 +229,18 @@ extern uint16_t otastart;	// OTA check after startup (min seconds)
 #define	otabeta	revk_settings_bits.otabeta
 #endif
 extern revk_settings_blob_t* otacert;	// OTA cert of otahost
+#define	dark	revk_settings_bits.dark
 extern char* ntphost;	// NTP host
 extern char* tz;	// Timezone (<a href='https://gist.github.com/alwynallan/24d96091655391107939' target=_blank>info</a>)
 extern uint32_t watchdogtime;	// Watchdog (seconds)
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+extern uint16_t usbuptime;	// USB  turns off after this many seconds
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+extern revk_gpio_t factorygpio;	// Factory reset GPIO (press 3 times)
+#else
+extern revk_gpio_t factorygpio;	// Factory reset GPIO (press 3 times)
+#endif
 extern char* topicgroup[2];	// MQTT Alternative hostname accepted for commands
 extern char* topiccommand;	// MQTT Topic for commands
 extern char* topicsetting;	// MQTT Topic for settings
@@ -244,15 +253,6 @@ extern char* topicha;	// MQTT Topic for homeassistant
 #define	prefixhost	revk_settings_bits.prefixhost
 #ifdef	CONFIG_REVK_BLINK_DEF
 extern revk_gpio_t blink[3];	// R, G, B LED array (set all the same for WS2812 LED)
-#endif
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-extern uint16_t usbuptime;	// USB  turns off after this many seconds
-#endif
-#define	dark	revk_settings_bits.dark
-#ifdef  CONFIG_IDF_TARGET_ESP32S3
-extern revk_gpio_t factorygpio;	// Factory reset GPIO (press 3 times)
-#else
-extern revk_gpio_t factorygpio;	// Factory reset GPIO (press 3 times)
 #endif
 #ifdef  CONFIG_REVK_APMODE
 #ifdef	CONFIG_REVK_APCONFIG
