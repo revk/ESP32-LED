@@ -14,7 +14,7 @@ gpio	relay						// Relay for strip power
 gpio	adc						// ADC*13.4
 gpio	button						// Button
 
-gpio	blink			.array=3		// Status LEDs, R, G, B (all the same for WS2812)
+gpio	blink		"40,40,40"	.array=3		// Status LEDs, R, G, B (all the same for WS2812)
 
 u8	max.r		255	.unit="/255"		// Max RGB Red
 u8	max.g		255	.unit="/255"		// Max RGB Green
@@ -26,9 +26,9 @@ u8	webcontrol	2				// Web controls
 gpio	ls.scl						// Colour sensor SCL
 gpio	ls.sda						// Colour sensor SDA
 u8	ls.als	10	.hex=1				// Colour sensor ID
-gpio	mic.data		.old="audiodata"	// I2S Mic Data / SD / DATA
-gpio	mic.clock		.old="audioclock"	// I2S Mic Clock / BCLK / SCK
-gpio	mic.ws			.old="audiows"		// I2S Mic WS / LR (not set for PDM mode)
+gpio	mic.data	33	.old="audiodata"	// I2S Mic Data / SD / DATA
+gpio	mic.clock	34	.old="audioclock"	// I2S Mic Clock / BCLK / SCK
+gpio	mic.ws		47	.old="audiows"		// I2S Mic WS / LR (not set for PDM mode)
 bit	mic.right		.old="audioright"	// I2S Mic use right channel
 u8	mic.damp	3	.old="audiodamp",.live=1	// I2S Mic Damping from peak (higher is slower)
 u8	mic.maxgain	30	.live=1,.unit="dB"	// Max mic gain
