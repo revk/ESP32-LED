@@ -1,5 +1,5 @@
 (kicad_sch
-	(version 20241209)
+	(version 20250114)
 	(generator "eeschema")
 	(generator_version "9.0")
 	(uuid "2d210a96-f81f-42a9-8bf4-1b43c11086f3")
@@ -2945,6 +2945,17 @@
 						(type outline)
 					)
 				)
+				(circle
+					(center -1.905 4.445)
+					(radius 0.381)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(polyline
 					(pts
 						(xy -1.905 4.445) (xy -3.175 3.175) (xy -1.905 1.905)
@@ -2955,17 +2966,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(circle
-					(center -1.905 4.445)
-					(radius 0.381)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(circle
