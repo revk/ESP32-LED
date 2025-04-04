@@ -6069,7 +6069,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "RevK:ICS43434_MEMS_Mic_Open"
+		(property "Footprint" "RevK:ICS43434_MEMS_Mic"
 			(at 189.611 48.26 0)
 			(effects
 				(font
