@@ -11,7 +11,7 @@ revk_settings_bits_t revk_settings_bits={0};
 #define	quote(s)	str(s)
 revk_settings_t const revk_settings[]={
 #define	STRIPS	3
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledgpio",.comment="GPIOs for LED string",.group=1,.len=7,.dot=3,.def="1",.ptr=&ledgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS,.old="rgb"},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledgpio",.comment="GPIOs for LED string",.group=1,.len=7,.dot=3,.def="4",.ptr=&ledgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS,.old="rgb"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="ledcount",.comment="How many LEDs in string",.group=1,.len=8,.dot=3,.ptr=&ledcount,.size=sizeof(uint16_t),.array=STRIPS,.old="leds"},
  {.type=REVK_SETTINGS_UNSIGNED,.isenum=1,.name="ledtype",.comment="Type of LED string",.group=1,.len=7,.dot=3,.ptr=&ledtype,.size=sizeof(uint8_t),.array=STRIPS,.enums="WS2812 GRB,WS2812 GBR,WS2812 RGB,WS2812 RBG,WS2812 BGR,WS2812 BRG,WS2812 GRBW,WS2812 GBRW,WS2812 RGBW,WS2812 RBGW,WS2812 BGRW,WS2812 BRGW,SK7812 GRB,SK7812 GBR,SK7812 RGB,SK7812 RBG,SK7812 BGR,SK7812 BRG,SK7812 GRBW,SK7812 GBRW,SK7812 RGBW,SK7812 RBGW,SK7812 BGRW,SK7812 BRGW"},
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
@@ -22,7 +22,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="relay",.comment="Relay for strip power",.len=5,.ptr=&relay,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="adc",.comment="ADC*13.4",.len=3,.ptr=&adc,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="button",.comment="Button",.len=6,.ptr=&button,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="Status LEDs, R, G, B (all the same for WS2812)",.len=5,.def="4,4,4",.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=3},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="Status LEDs, R, G, B (all the same for WS2812)",.len=5,.def="40,40,40",.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=3},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxr",.comment="Max RGB Red",.group=2,.len=4,.dot=3,.def="255",.ptr=&maxr,.size=sizeof(uint8_t),.unit="/255"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxg",.comment="Max RGB Green",.group=2,.len=4,.dot=3,.def="255",.ptr=&maxg,.size=sizeof(uint8_t),.unit="/255"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxb",.comment="Max RGB Blue",.group=2,.len=4,.dot=3,.def="255",.ptr=&maxb,.size=sizeof(uint8_t),.unit="/255"},
@@ -32,8 +32,8 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="lssda",.comment="Colour sensor SDA",.group=3,.len=5,.dot=2,.ptr=&lssda,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="lsals",.comment="Colour sensor ID",.group=3,.len=5,.dot=2,.def="10",.ptr=&lsals,.size=sizeof(uint8_t),.hex=1},
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="micdata",.comment="I2S Mic Data / SD / DATA",.group=4,.len=7,.dot=3,.def="33",.ptr=&micdata,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.old="audiodata"},
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="micclock",.comment="I2S Mic Clock / BCLK / SCK",.group=4,.len=8,.dot=3,.def="48",.ptr=&micclock,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.old="audioclock"},
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="micws",.comment="I2S Mic WS / LR (not set for PDM mode)",.group=4,.len=5,.dot=3,.def="21",.ptr=&micws,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.old="audiows"},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="micclock",.comment="I2S Mic Clock / BCLK / SCK",.group=4,.len=8,.dot=3,.def="34",.ptr=&micclock,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.old="audioclock"},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="micws",.comment="I2S Mic WS / LR (not set for PDM mode)",.group=4,.len=5,.dot=3,.def="47",.ptr=&micws,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.old="audiows"},
  {.type=REVK_SETTINGS_BIT,.name="micright",.comment="I2S Mic use right channel",.group=4,.len=8,.dot=3,.bit=REVK_SETTINGS_BITFIELD_micright,.old="audioright"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="micdamp",.comment="I2S Mic Damping from peak (higher is slower)",.group=4,.len=7,.dot=3,.def="3",.ptr=&micdamp,.size=sizeof(uint8_t),.old="audiodamp",.live=1},
  {.type=REVK_SETTINGS_UNSIGNED,.name="micmaxgain",.comment="Max mic gain",.group=4,.len=10,.dot=3,.def="30",.ptr=&micmaxgain,.size=sizeof(uint8_t),.live=1,.unit="dB"},
