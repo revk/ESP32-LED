@@ -5147,7 +5147,7 @@
 	)
 	(global_label "DC"
 		(shape output)
-		(at 82.55 137.16 90)
+		(at 81.28 137.16 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5157,7 +5157,7 @@
 		)
 		(uuid "28f93639-cfef-4f9c-8977-a56443222b43")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 82.55 132.289 90)
+			(at 81.28 132.289 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5625,28 +5625,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DC"
-		(shape output)
-		(at 90.805 137.16 90)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c0600562-dfcf-4282-9bd1-8de09e727790")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 90.805 132.289 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -6614,84 +6592,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 116.205 140.335 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1ed73eea-049f-45c2-bf7a-07b41b508809")
-		(property "Reference" "C7"
-			(at 119.634 139.192 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100uF 35V"
-			(at 119.634 141.224 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:C_0603"
-			(at 117.1702 144.145 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 116.205 140.335 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 116.205 140.335 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "C385964"
-			(at 116.205 140.335 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ffb35d8b-b69d-4ac7-a72c-2be92e1b4252")
-		)
-		(pin "2"
-			(uuid "667483f4-cd03-49c2-aa9b-8ee068bf7c53")
-		)
-		(instances
-			(project "LED"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
 		(at 106.045 103.505 0)
 		(mirror x)
@@ -7180,7 +7080,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 82.55 144.78 0)
+		(at 81.28 144.78 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7189,7 +7089,7 @@
 		(fields_autoplaced yes)
 		(uuid "3bf896e5-1af6-4dfc-81ed-9c7d1a8d42fa")
 		(property "Reference" "#PWR04"
-			(at 82.55 151.13 0)
+			(at 81.28 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7198,7 +7098,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 82.55 149.2234 0)
+			(at 81.28 149.2234 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7206,7 +7106,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 82.55 144.78 0)
+			(at 81.28 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7215,7 +7115,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 82.55 144.78 0)
+			(at 81.28 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7224,7 +7124,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 82.55 144.78 0)
+			(at 81.28 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7885,7 +7785,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 116.205 136.525 0)
+		(at 64.77 137.16 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7894,7 +7794,7 @@
 		(fields_autoplaced yes)
 		(uuid "5920f99b-4d1b-4fa9-a063-60618a18fe36")
 		(property "Reference" "#PWR06"
-			(at 116.205 140.335 0)
+			(at 64.77 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7903,7 +7803,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 116.205 132.9492 0)
+			(at 64.77 133.5842 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7911,7 +7811,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 116.205 136.525 0)
+			(at 64.77 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7920,7 +7820,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 116.205 136.525 0)
+			(at 64.77 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7929,7 +7829,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 116.205 136.525 0)
+			(at 64.77 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7950,164 +7850,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 73.025 140.97 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5b37a901-4005-4a11-9c4f-5d747ef5de1a")
-		(property "Reference" "C5"
-			(at 73.914 130.556 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100uF 35V"
-			(at 69.342 133.35 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:C_0603"
-			(at 72.0598 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 73.025 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 73.025 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "C385964"
-			(at 73.025 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "769ae02a-9e9d-4883-901e-e1499d1b3a5b")
-		)
-		(pin "2"
-			(uuid "f7749084-6d81-4e1d-ae51-4aa9a603d558")
-		)
-		(instances
-			(project "LED"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 90.805 140.97 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "676a807f-7dca-4854-a9c4-7722f986f27d")
-		(property "Reference" "C14"
-			(at 89.535 130.302 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100uF 35V"
-			(at 87.249 143.764 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:C_0603"
-			(at 91.7702 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 90.805 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 90.805 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "C385964"
-			(at 90.805 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c8590883-3542-4e67-82b0-14dfe2916535")
-		)
-		(pin "2"
-			(uuid "b8ad3373-9cec-47aa-9299-8a08f5f156b0")
-		)
-		(instances
-			(project "LED"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
-		(at 116.205 144.145 0)
+		(at 64.77 144.78 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8116,7 +7860,7 @@
 		(fields_autoplaced yes)
 		(uuid "68a8cef4-3c87-4162-b9ae-0633c9124eed")
 		(property "Reference" "#PWR05"
-			(at 116.205 150.495 0)
+			(at 64.77 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8125,7 +7869,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 116.205 148.5884 0)
+			(at 64.77 149.2234 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8133,7 +7877,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 116.205 144.145 0)
+			(at 64.77 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8142,7 +7886,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 116.205 144.145 0)
+			(at 64.77 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8151,7 +7895,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 116.205 144.145 0)
+			(at 64.77 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8790,10 +8534,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "9b536d9b-fe68-4f6e-a72d-348853a04b8b")
 		(property "Reference" "C1"
-			(at 47.371 138.8688 0)
+			(at 44.196 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8802,7 +8545,7 @@
 			)
 		)
 		(property "Value" "220uF Tant"
-			(at 47.371 141.2931 0)
+			(at 42.672 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9220,6 +8963,84 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 64.77 140.97 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "abb610fb-d371-42e7-b636-68e315b25ab2")
+		(property "Reference" "C7"
+			(at 63.5 130.302 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF 35V"
+			(at 61.214 143.764 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RevK:C_0805"
+			(at 65.7352 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 64.77 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 64.77 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C6119901"
+			(at 64.77 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "13c0acd3-00d2-4860-9abe-b4820e994ae9")
+		)
+		(pin "2"
+			(uuid "f58fc4ba-ac02-4bc9-974c-7521a28d248d")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -9958,72 +9779,6 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 90.805 144.78 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d139beed-a743-4ac6-ae30-77c790704781")
-		(property "Reference" "#PWR027"
-			(at 90.805 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 90.805 149.2234 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 90.805 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 90.805 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 90.805 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b1e2fbd8-0740-401e-9c72-4c100da29cc9")
-		)
-		(instances
-			(project "LED"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR027")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 232.41 123.825 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10097,7 +9852,7 @@
 		(dnp no)
 		(uuid "d4f95097-1240-4032-a192-e84a5c663945")
 		(property "Reference" "C2"
-			(at 23.495 139.557 0)
+			(at 32.258 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10106,7 +9861,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 23.495 141.605 0)
+			(at 29.972 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10676,7 +10431,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 82.55 140.97 0)
+		(at 81.28 140.97 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10684,7 +10439,7 @@
 		(dnp no)
 		(uuid "f04ecd6e-99e1-4788-85ca-b0c0a52a288f")
 		(property "Reference" "C6"
-			(at 81.28 130.302 0)
+			(at 80.01 130.302 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10692,8 +10447,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100uF 35V"
-			(at 78.994 143.764 90)
+		(property "Value" "22uF 35V"
+			(at 77.724 143.764 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10701,8 +10456,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RevK:C_0603"
-			(at 83.5152 144.78 0)
+		(property "Footprint" "RevK:C_0805"
+			(at 82.2452 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10711,7 +10466,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 82.55 140.97 0)
+			(at 81.28 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10720,7 +10475,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 82.55 140.97 0)
+			(at 81.28 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10728,8 +10483,8 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "C385964"
-			(at 82.55 140.97 0)
+		(property "MPN" "C6119901"
+			(at 81.28 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10957,6 +10712,84 @@
 			(project "LED"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 73.025 140.97 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f5edb4db-ab78-409a-b46b-28ae46a323b1")
+		(property "Reference" "C5"
+			(at 71.755 130.302 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF 35V"
+			(at 69.469 143.764 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RevK:C_0805"
+			(at 73.9902 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 73.025 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 73.025 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C6119901"
+			(at 73.025 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "446156b6-d22d-469d-9e6c-db1a4500b23c")
+		)
+		(pin "2"
+			(uuid "e7222d0b-1362-4682-8053-957ecd8345ff")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C5")
 					(unit 1)
 				)
 			)
