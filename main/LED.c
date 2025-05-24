@@ -1398,10 +1398,13 @@ web_root (httpd_req_t * req)
                      "};};c();" //
                      "setInterval(function() {if(!ws)c();else ws.send('');},1000);"     //
                      "</script>");
+   revk_web_send (req,
+                  "<fieldset><legend>Software</legend>More information on this software is available at <a href='https://led.revk.uk/'>led.revk.uk</a>.");
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
    revk_web_send (req,
-                  "<fieldset><legend>Software</legend>More information on this software is available at <a href='https://led.revk.uk/'>led.revk.uk</a>. If you would rather run WLED, it is important to realise this is an <b>ESP32-S3</b>. Please visit <a href='https://hiwtsi.uk/LED/#setup'>Home Is Where The Smart Is</a> for instructions on reflashing, otherwise you could break things. That site also has details on LED strips and other controllers. </fieldset>");
+                  " If you would rather run WLED, it is important to realise this is an <b>ESP32-S3</b>. Please visit <a href='https://hiwtsi.uk/LED/#setup'>Home Is Where The Smart Is</a> for instructions on reflashing, otherwise you could break things. That site also has details on LED strips and other controllers.");
 #endif
+   revk_web_send (req, "</fieldset>");
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
 }
 
@@ -1530,7 +1533,6 @@ adc_task (void *arg)
    };
    adc_oneshot_config_channel (adc_handle, adc_channel, &config);
    ESP_LOGE (TAG, "Config done");
-
 #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
    adc_cali_curve_fitting_config_t cali_config = {
       .unit_id = adc_unit,
@@ -1540,7 +1542,6 @@ adc_task (void *arg)
    };
    adc_cali_create_scheme_curve_fitting (&cali_config, &adc_cali_handle);
 #endif
-
 #if ADC_CALI_SCHEME_LINE_FITTING_SUPPORTED
    adc_cali_line_fitting_config_t cali_config = {
       .unit_id = adc_unit,
