@@ -13,7 +13,7 @@ revk_settings_t const revk_settings[]={
 #define	STRIPS	3
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledgpio",.comment="GPIOs for LED string",.group=1,.len=7,.dot=3,.def="4",.ptr=&ledgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS,.old="rgb"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="ledcount",.comment="How many LEDs in string",.group=1,.len=8,.dot=3,.ptr=&ledcount,.size=sizeof(uint16_t),.array=STRIPS,.old="leds"},
- {.type=REVK_SETTINGS_UNSIGNED,.isenum=1,.name="ledtype",.comment="Type of LED string",.group=1,.len=7,.dot=3,.ptr=&ledtype,.size=sizeof(uint8_t),.array=STRIPS,.enums="WS2812 GRB,WS2812 GBR,WS2812 RGB,WS2812 RBG,WS2812 BGR,WS2812 BRG,WS2812 GRBW,WS2812 GBRW,WS2812 RGBW,WS2812 RBGW,WS2812 BGRW,WS2812 BRGW,SK7812 GRB,SK7812 GBR,SK7812 RGB,SK7812 RBG,SK7812 BGR,SK7812 BRG,SK7812 GRBW,SK7812 GBRW,SK7812 RGBW,SK7812 RBGW,SK7812 BGRW,SK7812 BRGW"},
+ {.type=REVK_SETTINGS_UNSIGNED,.isenum=1,.name="ledtype",.comment="Type of LED string",.group=1,.len=7,.dot=3,.ptr=&ledtype,.size=sizeof(uint8_t),.enums=REVK_SETTINGS_LEDTYPE_ENUMS,.array=STRIPS},
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
  {.type=REVK_SETTINGS_UNSIGNED,.name="cps",.comment="Change per second",.len=3,.def="25",.ptr=&cps,.size=sizeof(uint8_t),.unit="/s"},
 #else
@@ -60,7 +60,11 @@ revk_settings_t const revk_settings[]={
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
  {.type=REVK_SETTINGS_STRING,.name="password",.comment="Settings password<br>(not sent securely so use with care)",.len=8,.ptr=&password,.malloc=1,.revk=1,.hide=1,.secret=1},
 #endif
+#ifdef  CONFIG_MDNS_MAX_INTERFACES
+ {.type=REVK_SETTINGS_STRING,.name="hostname",.comment="Hostname[.local]<br>(used in DHCP and MQTT)",.len=8,.ptr=&hostname,.malloc=1,.revk=1,.hide=1},
+#else
  {.type=REVK_SETTINGS_STRING,.name="hostname",.comment="Host name<br>(used in DHCP and MQTT)",.len=8,.ptr=&hostname,.malloc=1,.revk=1,.hide=1},
+#endif
  {.type=REVK_SETTINGS_STRING,.name="appname",.comment="Application name",.len=7,.dq=1,.def=quote(CONFIG_REVK_APPNAME),.ptr=&appname,.malloc=1,.revk=1,.hide=1},
  {.type=REVK_SETTINGS_STRING,.name="otahost",.comment="OTA hostname",.group=7,.len=7,.dot=3,.dq=1,.def=quote(CONFIG_REVK_OTAHOST),.ptr=&otahost,.malloc=1,.revk=1,.live=1},
  {.type=REVK_SETTINGS_UNSIGNED,.name="otadays",.comment="OTA auto load (days)",.group=7,.len=7,.dot=3,.dq=1,.def=quote(CONFIG_REVK_OTADAYS),.ptr=&otadays,.size=sizeof(uint8_t),.revk=1},
@@ -152,6 +156,7 @@ revk_settings_t const revk_settings[]={
 revk_gpio_t ledgpio[STRIPS]={0};
 uint16_t ledcount[STRIPS]={0};
 uint8_t ledtype[STRIPS]={0};
+const char REVK_SETTINGS_LEDTYPE_ENUMS[]="WS2812 GRB,WS2812 GBR,WS2812 RGB,WS2812 RBG,WS2812 BGR,WS2812 BRG,WS2812 GRBW,WS2812 GBRW,WS2812 RGBW,WS2812 RBGW,WS2812 BGRW,WS2812 BRGW,SK7812 GRB,SK7812 GBR,SK7812 RGB,SK7812 RBG,SK7812 BGR,SK7812 BRG,SK7812 GRBW,SK7812 GBRW,SK7812 RGBW,SK7812 RBGW,SK7812 BGRW,SK7812 BRGW";
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 uint8_t cps=0;
 #else
@@ -195,7 +200,11 @@ char* config[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 char* password=NULL;
 #endif
+#ifdef  CONFIG_MDNS_MAX_INTERFACES
 char* hostname=NULL;
+#else
+char* hostname=NULL;
+#endif
 char* appname=NULL;
 char* otahost=NULL;
 uint8_t otadays=0;

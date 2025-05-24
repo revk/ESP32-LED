@@ -1398,6 +1398,10 @@ web_root (httpd_req_t * req)
                      "};};c();" //
                      "setInterval(function() {if(!ws)c();else ws.send('');},1000);"     //
                      "</script>");
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+   revk_web_send (req,
+                  "<fieldset><legend>Software</legend>More information on this software is available at <a href='https://led.revk.uk/'>led.revk.uk</a>. If you would rather run WLED, it is important to realise this is an <b>ESP32-S3</b>. Please visit <a href='https://hiwtsi.uk/LED/#setup'>Home Is Where The Smart Is</a> for instructions on reflashing, otherwise you could break things. That site also has details on LED strips and other controllers. </fieldset>");
+#endif
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
 }
 
@@ -1854,7 +1858,7 @@ bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
 void
 app_main ()
 {
-   //ESP_LOGE (TAG, "Started");
+   ESP_LOGE (TAG, "Started");
    app_mutex = xSemaphoreCreateBinary ();
    xSemaphoreGive (app_mutex);
    mic_mutex = xSemaphoreCreateBinary ();
