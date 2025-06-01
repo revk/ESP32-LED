@@ -1,5 +1,5 @@
 (kicad_sch
-	(version 20241209)
+	(version 20250114)
 	(generator "eeschema")
 	(generator_version "9.0")
 	(uuid "46c350bb-7de4-4e81-aafd-4af55e37aab0")
@@ -2855,9 +2855,10 @@
 						(type none)
 					)
 				)
-				(circle
-					(center 3.81 -2.54)
-					(radius 0.127)
+				(polyline
+					(pts
+						(xy 3.81 -2.54) (xy 3.81 2.54)
+					)
 					(stroke
 						(width 0)
 						(type default)
@@ -2866,10 +2867,9 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy 3.81 -2.54) (xy 3.81 2.54)
-					)
+				(circle
+					(center 3.81 -2.54)
+					(radius 0.127)
 					(stroke
 						(width 0)
 						(type default)
@@ -3417,7 +3417,7 @@
 				)
 				(polyline
 					(pts
-						(xy -8.763 0.381) (xy -9.271 0.381)
+						(xy -8.763 0.381) (xy -9.652 1.27)
 					)
 					(stroke
 						(width 0)
@@ -3429,7 +3429,7 @@
 				)
 				(polyline
 					(pts
-						(xy -8.763 0.381) (xy -9.652 1.27)
+						(xy -8.763 0.381) (xy -9.271 0.381)
 					)
 					(stroke
 						(width 0)
@@ -3465,7 +3465,7 @@
 				)
 				(polyline
 					(pts
-						(xy -8.636 -0.635) (xy -8.636 -0.127)
+						(xy -8.636 -0.635) (xy -9.144 -0.635)
 					)
 					(stroke
 						(width 0)
@@ -3477,7 +3477,7 @@
 				)
 				(polyline
 					(pts
-						(xy -8.636 -0.635) (xy -9.144 -0.635)
+						(xy -8.636 -0.635) (xy -8.636 -0.127)
 					)
 					(stroke
 						(width 0)
@@ -3596,7 +3596,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.651 -3.556) (xy 1.651 -3.302)
+						(xy 1.651 -3.556) (xy 1.524 -3.556)
 					)
 					(stroke
 						(width 0)
@@ -3608,7 +3608,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.651 -3.556) (xy 1.524 -3.556)
+						(xy 1.651 -3.556) (xy 1.651 -3.302)
 					)
 					(stroke
 						(width 0)
@@ -4673,7 +4673,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(arc
@@ -4685,7 +4685,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(polyline
