@@ -125,6 +125,43 @@ const uint8_t zig[256] =
    9, 7, 5, 3, 1
 };
 
+const uint8_t ir4x11id[] = {
+   0x5C, 0x5D, 0x41, 0x40,      //
+   0x58, 0x59, 0x45, 0x44,      //
+   0x54, 0x55, 0x49, 0x48,      //
+   0x50, 0x51, 0x4D, 0x4C,      //
+   0x1C, 0x1D, 0x1E, 0x1F,      //
+   0x18, 0x19, 0x1A, 0x1B,      //
+   0x14, 0x15, 0x16, 0x17,      //
+   0x10, 0x11, 0x12, 0x13,      //
+   0x0C, 0x0D, 0x0E, 0x0F,      //
+   0x08, 0x09, 0x0A, 0x0B,      //
+   0x04, 0x05, 0x06, 0x07,      //
+};
+
+const char *const ir4x11name[] = {
+   "+", "-", ">", "POWER",      //
+   "#F00", "#0F0", "#00F", "#FFF",      //
+   "#F40", "#0F4", "#40F", "#FEE",      //
+   "#F80", "#0F8", "#80F", "#FDD",      //
+   "#FC0", "#0FC", "#C0F", "#EEF",      //
+   "#FF0", "#0FF", "#F0F", "#DDF",      //
+   "R+", "G+", "B+", "Quick",   //
+   "R-", "G-", "B-", "Slow",    //
+   "DIY1", "DIY2", "DIY3", "AUTO",      //
+   "DIY4", "DIY5", "DIY6", "FLASH",     //
+   "JUMP3", "JUMP7", "FADE3", "FADE7",  //
+};
+
+const char *const ir4x6name[] = {
+   "+", "-", "OFF", "ON",       //
+   "#F00", "#0F0", "#00F", "#FFF",      //
+   "#F40", "#0F4", "#40F", "FLASH",     //
+   "#F80", "#0F8", "#80F", "STROBE",    //
+   "#FC0", "#0FC", "#C0F", "FADE",      //
+   "#FF0", "#0FF", "#F0F", "SMOOTH",    //
+};
+
 app_t active[MAXAPPS] = { 0 };
 
 uint64_t haon = 0;              // Bits, which are on
@@ -773,6 +810,15 @@ send_ha_config (void)
    free (cmd);
    if (adc.set)
     ha_config_sensor ("voltage", name: "Voltage", type: "voltage", unit:"V");
+   if (irha && irgpio.set)
+   {
+      if (ir4x11)
+         for (int q = 0; q < sizeof (ir4x11id); q++)
+            ha_config_trigger (ir4x11name[q],.info = "/irpress",.subtype = ir4x11name[q],.payload = ir4x11name[q]);
+      if (ir4x6)
+         for (int q = 0; q < sizeof (ir4x6name) / sizeof (*ir4x6name); q++)
+            ha_config_trigger (ir4x6name[q],.info = "/irpress",.subtype = ir4x6name[q],.payload = ir4x6name[q]);
+   }
 }
 
 void
@@ -1857,6 +1903,102 @@ bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
    }
 }
 
+const char *
+dokey (uint32_t key, uint8_t press)
+{
+   const char *k = NULL;
+   if (ir4x11 && !(key & 0xFFFFFF00))
+   {
+      int q = 0;
+      for (q = 0; q < sizeof (ir4x11id) && ir4x11id[q] != key; q++);
+      if (q < sizeof (ir4x11id))
+         k = ir4x11name[q];
+   }
+   if (ir4x6 && (key & 0xFFFFFF00) == 0x00100000 && (key & 0xFF) < sizeof (ir4x6name) / sizeof (*ir4x6name))
+      k = ir4x6name[key & 0xFF];
+   if (k && press)
+   {
+      xSemaphoreTake (app_mutex, portMAX_DELAY);
+      // TODO DIYn and presets?
+      if (!active[0].app)
+         addapp (0, 0, "idle", NULL);
+      uint8_t adjust (uint8_t v, char d)
+      {
+         if (d == '-')
+         {
+            if (v < 15)
+               v = 0;
+            else
+               v -= 15;
+         } else if (d == '+')
+         {
+            if (v > 240)
+               v = 255;
+            else
+               v += 15;
+         }
+         return v;
+      }
+      if (*k == 'P' || !strcmp (k, "OFF"))
+         active[0].stop = active[0].fadeout;
+      else if (*k == '#')
+         setcolour (&active[0], k);
+      else if (*k == '+' || *k == '-')
+         active[0].bright = adjust (active[0].bright, *k);
+      else if (*k == 'R')
+         active[0].r = adjust (active[0].r, k[1]);
+      else if (*k == 'G')
+         active[0].g = adjust (active[0].g, k[1]);
+      else if (*k == 'B')
+         active[0].b = adjust (active[0].b, k[1]);
+      xSemaphoreGive (app_mutex);
+   }
+   return k;
+}
+
+static void
+ir_callback (uint8_t coding, uint16_t lead0, uint16_t lead1, uint8_t len, uint8_t * data)
+{                               // Handle generic IR https://www.amazon.co.uk/dp/B07DJ58XGC
+   //ESP_LOGE (TAG, "IR CB %d %d %d %d", coding, lead0, lead1, len);
+   static uint32_t key = 0;
+   static uint8_t count = 0;
+   if (coding == IR_PDC && len == 32 && lead0 > 8500 && lead0 < 9500 && lead1 > 4000 && lead1 < 5000 && (data[2] ^ data[3]) == 0xFF)
+   {                            // Key (NEC) - normally address and inverted address, but allow for special cases, as long as code and inverted code.
+      key = (((data[0] ^ ~data[1]) & 0xFF) << 16 | (data[0] << 8) | data[2]);
+      count = 1;
+      //ESP_LOGE (TAG, "Key %04lX", key);
+   }
+   if (count && coding == IR_ZERO && len == 1 && lead0 > 8500 && lead0 < 9500 && lead1 > 1500 && lead1 < 2500 && key)
+   {                            // Continue - ignore for now
+      if (count < 255)
+         count++;
+      if (count == 10)
+      {                         // hold
+         jo_t j = jo_create_alloc ();
+         const char *k = dokey (key, 2);
+         if (k)
+            jo_string (j, NULL, k);
+         else
+            jo_stringf (j, NULL, "%04lX", key);
+         revk_info ("irhold", &j);
+      }
+   }
+   if (count && coding == IR_IDLE)
+   {
+      jo_t j = jo_create_alloc ();
+      const char *k = dokey (key, count < 10 ? 1 : 0);
+      if (k)
+         jo_string (j, NULL, k);
+      else
+         jo_stringf (j, NULL, "%04lX", key);
+      if (count < 10)
+         revk_info ("irpress", &j);
+      else
+         revk_info ("irrelease", &j);
+      count = 0;
+   }
+}
+
 void
 app_main ()
 {
@@ -1891,6 +2033,8 @@ app_main ()
       memset (hab, 255, sizeof (hab));
    }
    revk_task ("LED", led_task, NULL, 4);
+   if (irgpio.set)
+      ir_start (irgpio, ir_callback);
    if (webcontrol)
    {                            // Web interface
       httpd_config_t config = HTTPD_DEFAULT_CONFIG ();  // When updating the code below, make sure this is enough

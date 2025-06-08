@@ -15,10 +15,11 @@ gpio	adc						// ADC*13.4
 gpio	button						// Button
 
 gpio	ir.gpio						// IR receiver
-bit	ir.log						// IR log
-bit	ir.debug					// IR debug
-bit	ir.4x11						// 4x11 IR colour/LED remote
-bit	ir.4x6						// 4x6 IR colour/LED remote
+bit	ir.log		.live				// IR log
+bit	ir.debug	.live				// IR debug
+bit	ir.4x11		.live				// 4x11 IR colour/LED remote
+bit	ir.4x6		.live				// 4x6 IR colour/LED remote
+bit	ir.ha						// Announce keys to HA config
 
 gpio	blink		"40,40,40"	.array=3		// Status LEDs, R, G, B (all the same for WS2812)
 

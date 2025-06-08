@@ -92,6 +92,7 @@ enum {
  REVK_SETTINGS_BITFIELD_irdebug,
  REVK_SETTINGS_BITFIELD_ir4x11,
  REVK_SETTINGS_BITFIELD_ir4x6,
+ REVK_SETTINGS_BITFIELD_irha,
  REVK_SETTINGS_BITFIELD_micright,
  REVK_SETTINGS_BITFIELD_haenable,
  REVK_SETTINGS_BITFIELD_stack,
@@ -143,6 +144,7 @@ struct revk_settings_bits_s {
  uint8_t irdebug:1;	// IR debug
  uint8_t ir4x11:1;	// 4x11 IR colour/LED remote
  uint8_t ir4x6:1;	// 4x6 IR colour/LED remote
+ uint8_t irha:1;	// Announce keys to HA config
  uint8_t micright:1;	// I2S Mic use right channel
  uint8_t haenable:1;	// Enable Home Assistant
  uint8_t stack:1;	// Presets have priority, in order, else most recent on top
@@ -201,6 +203,7 @@ extern revk_gpio_t irgpio;	// IR receiver
 #define	irdebug	revk_settings_bits.irdebug
 #define	ir4x11	revk_settings_bits.ir4x11
 #define	ir4x6	revk_settings_bits.ir4x6
+#define	irha	revk_settings_bits.irha
 extern revk_gpio_t blink[3];	// Status LEDs, R, G, B (all the same for WS2812)
 extern uint8_t maxr;	// Max RGB Red
 extern uint8_t maxg;	// Max RGB Green
@@ -355,6 +358,7 @@ enum {
 #define REVK_SETTINGS_IRDEBUG
 #define REVK_SETTINGS_IR4X11
 #define REVK_SETTINGS_IR4X6
+#define REVK_SETTINGS_IRHA
 #define REVK_SETTINGS_BLINK
 #define REVK_SETTINGS_MAXR
 #define REVK_SETTINGS_MAXG
