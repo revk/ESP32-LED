@@ -21,6 +21,7 @@ static const char TAG[] = "LED";
 #include "esp_adc/adc_cali.h"
 #include "esp_adc/adc_cali_scheme.h"
 #include "halib.h"
+#include <ir.h>
 
 #define	typeisrgbw(x)	(((x)%12)/6)
 #define	typeissk6812(x)	((x)/12)
