@@ -13,7 +13,12 @@ u8	cps		10	.unit="/s"		// Change per second
 gpio	relay						// Relay for strip power
 gpio	adc						// ADC*13.4
 gpio	button						// Button
-gpio	ir						// IR receiver
+
+gpio	ir.gpio						// IR receiver
+bit	ir.log						// IR log
+bit	ir.debug					// IR debug
+bit	ir.4x11						// 4x11 IR colour/LED remote
+bit	ir.4x6						// 4x6 IR colour/LED remote
 
 gpio	blink		"40,40,40"	.array=3		// Status LEDs, R, G, B (all the same for WS2812)
 

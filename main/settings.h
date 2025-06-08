@@ -88,6 +88,10 @@ enum {
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
 #endif
+ REVK_SETTINGS_BITFIELD_irlog,
+ REVK_SETTINGS_BITFIELD_irdebug,
+ REVK_SETTINGS_BITFIELD_ir4x11,
+ REVK_SETTINGS_BITFIELD_ir4x6,
  REVK_SETTINGS_BITFIELD_micright,
  REVK_SETTINGS_BITFIELD_haenable,
  REVK_SETTINGS_BITFIELD_stack,
@@ -135,6 +139,10 @@ struct revk_settings_bits_s {
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
 #endif
+ uint8_t irlog:1;	// IR log
+ uint8_t irdebug:1;	// IR debug
+ uint8_t ir4x11:1;	// 4x11 IR colour/LED remote
+ uint8_t ir4x6:1;	// 4x6 IR colour/LED remote
  uint8_t micright:1;	// I2S Mic use right channel
  uint8_t haenable:1;	// Enable Home Assistant
  uint8_t stack:1;	// Presets have priority, in order, else most recent on top
@@ -188,6 +196,11 @@ extern uint8_t cps;	// Change per second
 extern revk_gpio_t relay;	// Relay for strip power
 extern revk_gpio_t adc;	// ADC*13.4
 extern revk_gpio_t button;	// Button
+extern revk_gpio_t irgpio;	// IR receiver
+#define	irlog	revk_settings_bits.irlog
+#define	irdebug	revk_settings_bits.irdebug
+#define	ir4x11	revk_settings_bits.ir4x11
+#define	ir4x6	revk_settings_bits.ir4x6
 extern revk_gpio_t blink[3];	// Status LEDs, R, G, B (all the same for WS2812)
 extern uint8_t maxr;	// Max RGB Red
 extern uint8_t maxg;	// Max RGB Green
@@ -337,6 +350,11 @@ enum {
 #define REVK_SETTINGS_RELAY
 #define REVK_SETTINGS_ADC
 #define REVK_SETTINGS_BUTTON
+#define REVK_SETTINGS_IRGPIO
+#define REVK_SETTINGS_IRLOG
+#define REVK_SETTINGS_IRDEBUG
+#define REVK_SETTINGS_IR4X11
+#define REVK_SETTINGS_IR4X6
 #define REVK_SETTINGS_BLINK
 #define REVK_SETTINGS_MAXR
 #define REVK_SETTINGS_MAXG
@@ -482,6 +500,6 @@ enum {
 #define	speed_scale	10
 #define	fadein_scale	10
 #define	fadeout_scale	10
-typedef uint8_t revk_setting_bits_t[14];
+typedef uint8_t revk_setting_bits_t[15];
 typedef uint8_t revk_setting_group_t[2];
 extern const char revk_settings_secret[];
