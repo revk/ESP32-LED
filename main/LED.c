@@ -814,10 +814,10 @@ send_ha_config (void)
    {
       if (ir4x11)
          for (int q = 0; q < sizeof (ir4x11id); q++)
-            ha_config_trigger (ir4x11name[q],.info = "/irpress",.subtype = ir4x11name[q],.payload = ir4x11name[q]);
+            ha_config_trigger (ir4x11name[q],.info = "/ir",.subtype = ir4x11name[q],.payload = ir4x11name[q]);
       if (ir4x6)
          for (int q = 0; q < sizeof (ir4x6name) / sizeof (*ir4x6name); q++)
-            ha_config_trigger (ir4x6name[q],.info = "/irpress",.subtype = ir4x6name[q],.payload = ir4x6name[q]);
+            ha_config_trigger (ir4x6name[q],.info = "/ir",.subtype = ir4x6name[q],.payload = ir4x6name[q]);
    }
 }
 
@@ -1903,8 +1903,8 @@ bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
    }
 }
 
-const char *
-dokey (uint32_t key, uint8_t press)
+void
+dokey (uint32_t key)
 {
    const char *k = NULL;
    if (ir4x11 && !(key & 0xFFFFFF00))
@@ -1916,44 +1916,49 @@ dokey (uint32_t key, uint8_t press)
    }
    if (ir4x6 && (key & 0xFFFFFF00) == 0x00100000 && (key & 0xFF) < sizeof (ir4x6name) / sizeof (*ir4x6name))
       k = ir4x6name[key & 0xFF];
-   if (k && press)
-   {
-      xSemaphoreTake (app_mutex, portMAX_DELAY);
-      // TODO DIYn and presets?
-      if (!active[0].app)
-         addapp (0, 0, "idle", NULL);
-      uint8_t adjust (uint8_t v, char d)
-      {
-         if (d == '-')
-         {
-            if (v < 15)
-               v = 0;
-            else
-               v -= 15;
-         } else if (d == '+')
-         {
-            if (v > 240)
-               v = 255;
-            else
-               v += 15;
-         }
-         return v;
-      }
-      if (*k == 'P' || !strcmp (k, "OFF"))
-         active[0].stop = active[0].fadeout;
-      else if (*k == '#')
-         setcolour (&active[0], k);
-      else if (*k == '+' || *k == '-')
-         active[0].bright = adjust (active[0].bright, *k);
-      else if (*k == 'R')
-         active[0].r = adjust (active[0].r, k[1]);
-      else if (*k == 'G')
-         active[0].g = adjust (active[0].g, k[1]);
-      else if (*k == 'B')
-         active[0].b = adjust (active[0].b, k[1]);
-      xSemaphoreGive (app_mutex);
+   if (!k)
+      return;
+   if (!strncmp (k, "DIY", 3))
+   {	// Preset control
+      app_callback (0, topiccommand, NULL, k + 3, NULL);
+      return;
    }
-   return k;
+   xSemaphoreTake (app_mutex, portMAX_DELAY);
+   if (!active[0].app)
+      addapp (0, 0, "idle", NULL);
+   uint8_t adjust (uint8_t v, char d)
+   {
+      if (d == '-')
+      {
+         if (v < 15)
+            v = 0;
+         else
+            v -= 15;
+      } else if (d == '+')
+      {
+         if (v > 240)
+            v = 255;
+         else
+            v += 15;
+      }
+      return v;
+   }
+   if (*k == 'P' || !strcmp (k, "OFF"))
+      active[0].stop = active[0].fadeout;
+   else if (*k == '#')
+      setcolour (&active[0], k);
+   else if (*k == '+' || *k == '-')
+      active[0].bright = adjust (active[0].bright, *k);
+   else if (*k == 'R')
+      active[0].r = adjust (active[0].r, k[1]);
+   else if (*k == 'G')
+      active[0].g = adjust (active[0].g, k[1]);
+   else if (*k == 'B')
+      active[0].b = adjust (active[0].b, k[1]);
+   xSemaphoreGive (app_mutex);
+   jo_t j = jo_create_alloc ();
+   jo_string (j, NULL, k);
+   revk_info ("ir", &j);
 }
 
 static void
@@ -1972,29 +1977,17 @@ ir_callback (uint8_t coding, uint16_t lead0, uint16_t lead1, uint8_t len, uint8_
    {                            // Continue - ignore for now
       if (count < 255)
          count++;
-      if (count == 10)
-      {                         // hold
-         jo_t j = jo_create_alloc ();
-         const char *k = dokey (key, 2);
-         if (k)
-            jo_string (j, NULL, k);
-         else
-            jo_stringf (j, NULL, "%04lX", key);
-         revk_info ("irhold", &j);
+      if (count == 10 || count == 20)
+      {
+         dokey (key);
+         count = 15;
       }
    }
    if (count && coding == IR_IDLE)
    {
-      jo_t j = jo_create_alloc ();
-      const char *k = dokey (key, count < 10 ? 1 : 0);
-      if (k)
-         jo_string (j, NULL, k);
-      else
-         jo_stringf (j, NULL, "%04lX", key);
       if (count < 10)
-         revk_info ("irpress", &j);
-      else
-         revk_info ("irrelease", &j);
+         dokey (key);
+      key = 0;
       count = 0;
    }
 }
