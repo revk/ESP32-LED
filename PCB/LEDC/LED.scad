@@ -1,6 +1,6 @@
 // Generated case design for LEDC/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-07-19 11:17:41
+// Generated 2025-07-19 13:05:21
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -391,15 +391,16 @@ module m11(part=false,hole=false,block=false,height)
 { // RevK:IR-SMD-4P,3.35x3.9mm IR-3.35x3.9
 if(part)
 {
-	b(0,0,0,3.35,3.9,4);
+	b(0,0,0,3.35,3.9,1.6);
+	translate([0,0.45,1.6])sphere(r=1.4);
 }
 if(hole)
 {
-	translate([0,0.275,0])cylinder(d1=5,d2=7,h=height+1,$fn=6);
+	translate([0,0.45,0])cylinder(d1=4,d2=6,h=height+1,$fn=6);
 }
 if(block)
 {
-	translate([0,0.275,0])cylinder(d1=7,d2=9,h=height+1,$fn=6);
+	translate([0,0.45,0])cylinder(d1=6,d2=8,h=height+1,$fn=6);
 }
 }
 
@@ -704,4 +705,4 @@ module bottom()
 		pcb(height,r=margin);
 	}
 }
-bottom(); translate([spacing,0,0])top();
+translate([spacing*2,0,0])preview();
