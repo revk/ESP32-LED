@@ -37,7 +37,7 @@ leds:	placeleds
 	#./placeleds LED32/LED.kicad_pcb -x100 -y100 -d22.5 --diode=33 --count=24 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 	#./placeleds LED32/LED.kicad_pcb -x100 -y100 -d28 --diode=57 --count=32 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 
-stl:    LEDC/LEDT.stl LEDR/LEDT.stl LEDC/LEDB.stl LEDR/LEDB.st
+stl:    LEDC/LEDT.stl LEDR/LEDT.stl LEDC/LEDB.stl LEDR/LEDB.stl
 
 png:	$(patsubst %.kicad_pcb,%.png,$(wildcard */*.kicad_pcb))
 
@@ -52,11 +52,11 @@ PCBCase/clean: PCBCase/clean.c
 	/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD $< -o $@
 	echo "Made $@"
 
-LEDC/LEDT.scad: LEDC/LED.kicad_pcb PCBCase/case Makefile
+LEDC/LEDT.scad: LEDC/LED.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --two-file
 
-LEDR/LEDT.scad: LEDR/LED.kicad_pcb PCBCase/case Makefile
+LEDR/LEDT.scad: LEDR/LED.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --two-file
 
-%.png:	%.kicad_pcb PCBCase/clean PCBCase/render Makefile
+%.png:	%.kicad_pcb PCBCase/clean PCBCase/render
 	PCBCase/render $<
