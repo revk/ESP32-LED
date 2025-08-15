@@ -1,6 +1,6 @@
 // Generated case design for LEDC/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-08-12 11:44:12
+// Generated 2025-08-15 13:18:35
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -96,7 +96,7 @@ translate([-9.099955,-6.900000,1.200000])m4(part,hole,block,casetop); // RevK:C_
 };
 module part_J5(part=true,hole=false,block=false)
 {
-translate([17.110045,0.000000,1.200000])rotate([0,0,90.000000])translate([0.000000,-2.400000,0.000000])rotate([90.000000,-0.000000,-0.000000])m7(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
+translate([17.610045,0.000000,1.200000])rotate([0,0,90.000000])translate([0.000000,-1.900000,0.000000])rotate([90.000000,0.000000,0.000000])m7(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
 };
 module part_R4(part=true,hole=false,block=false)
 {
@@ -126,7 +126,7 @@ translate([9.150045,-1.900000,1.200000])rotate([0,0,180.000000])m3(part,hole,blo
 };
 module part_R7(part=true,hole=false,block=false)
 {
-translate([14.300044,-6.900000,1.200000])rotate([0,0,90.000000])m2(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
+translate([14.003968,-6.595276,1.200000])rotate([0,0,90.000000])m2(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
 };
 module part_R5(part=true,hole=false,block=false)
 {
@@ -154,7 +154,7 @@ translate([-9.099955,6.900000,1.200000])m4(part,hole,block,casetop); // RevK:C_0
 };
 module part_C14(part=true,hole=false,block=false)
 {
-translate([15.300044,-6.500000,1.200000])rotate([0,0,90.000000])m3(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
+translate([15.250045,-6.200000,1.200000])rotate([0,0,90.000000])m3(part,hole,block,casetop); // RevK:C_0603_ C_0603_1608Metric (back)
 };
 module part_C11(part=true,hole=false,block=false)
 {
