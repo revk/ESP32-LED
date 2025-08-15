@@ -14,7 +14,7 @@ gpio	relay						// Relay for strip power
 gpio	adc						// ADC*13.4
 gpio	button						// Button
 
-gpio	ir.gpio						// IR receiver
+gpio	ir.gpio		36				// IR receiver
 bit	ir.log		.live				// IR log
 bit	ir.debug	.live				// IR debug
 bit	ir.4x11		.live				// 4x11 IR colour/LED remote

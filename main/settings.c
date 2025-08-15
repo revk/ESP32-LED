@@ -22,7 +22,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="relay",.comment="Relay for strip power",.len=5,.ptr=&relay,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="adc",.comment="ADC*13.4",.len=3,.ptr=&adc,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="button",.comment="Button",.len=6,.ptr=&button,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="irgpio",.comment="IR receiver",.group=2,.len=6,.dot=2,.ptr=&irgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="irgpio",.comment="IR receiver",.group=2,.len=6,.dot=2,.def="36",.ptr=&irgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕"},
  {.type=REVK_SETTINGS_BIT,.name="irlog",.comment="IR log",.group=2,.len=5,.dot=2,.bit=REVK_SETTINGS_BITFIELD_irlog,.live=1},
  {.type=REVK_SETTINGS_BIT,.name="irdebug",.comment="IR debug",.group=2,.len=7,.dot=2,.bit=REVK_SETTINGS_BITFIELD_irdebug,.live=1},
  {.type=REVK_SETTINGS_BIT,.name="ir4x11",.comment="4x11 IR colour/LED remote",.group=2,.len=6,.dot=2,.bit=REVK_SETTINGS_BITFIELD_ir4x11,.live=1},
