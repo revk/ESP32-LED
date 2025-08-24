@@ -103,7 +103,11 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_BIT,.name="prefixapp",.comment="MQTT use appname/ in front of hostname in topic",.group=10,.len=9,.dot=6,.dq=1,.def=quote(CONFIG_REVK_PREFIXAPP),.bit=REVK_SETTINGS_BITFIELD_prefixapp,.revk=1},
  {.type=REVK_SETTINGS_BIT,.name="prefixhost",.comment="MQTT use (appname/)hostname/topic instead of topic/(appname/)hostname",.group=10,.len=10,.dot=6,.dq=1,.def=quote(CONFIG_REVK_PREFIXHOST),.bit=REVK_SETTINGS_BITFIELD_prefixhost,.revk=1},
 #ifdef	CONFIG_REVK_BLINK_DEF
+#ifdef	CONFIG_REVK_BLINK_WS2812_DEF
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="WS2812 LED",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1},
+#else
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (set all the same for WS2812 LED)",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
+#endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
 #ifdef	CONFIG_REVK_APCONFIG
@@ -115,10 +119,10 @@ revk_settings_t const revk_settings[]={
 #endif
 #ifdef  CONFIG_REVK_MQTT
  {.type=REVK_SETTINGS_STRING,.name="mqtthost",.comment="MQTT hostname",.group=12,.len=8,.dot=4,.dq=1,.def=quote(CONFIG_REVK_MQTTHOST),.ptr=&mqtthost,.malloc=1,.revk=1,.array=CONFIG_REVK_MQTT_CLIENTS,.hide=1},
- {.type=REVK_SETTINGS_UNSIGNED,.name="mqttport",.comment="MQTT port",.group=12,.len=8,.dot=4,.dq=1,.def=quote(CONFIG_REVK_MQTTPORT),.ptr=&mqttport,.size=sizeof(uint16_t),.revk=1,.array=CONFIG_REVK_MQTT_CLIENTS,.hide=1},
+ {.type=REVK_SETTINGS_UNSIGNED,.name="mqttport",.comment="MQTT port",.group=12,.len=8,.dot=4,.dq=1,.def=quote(CONFIG_REVK_MQTTPORT),.ptr=&mqttport,.size=sizeof(uint16_t),.revk=1,.array=CONFIG_REVK_MQTT_CLIENTS},
  {.type=REVK_SETTINGS_STRING,.name="mqttuser",.comment="MQTT username",.group=12,.len=8,.dot=4,.dq=1,.def=quote(CONFIG_REVK_MQTTUSER),.ptr=&mqttuser,.malloc=1,.revk=1,.array=CONFIG_REVK_MQTT_CLIENTS,.hide=1},
  {.type=REVK_SETTINGS_STRING,.name="mqttpass",.comment="MQTT password",.group=12,.len=8,.dot=4,.dq=1,.def=quote(CONFIG_REVK_MQTTPASS),.ptr=&mqttpass,.malloc=1,.revk=1,.array=CONFIG_REVK_MQTT_CLIENTS,.secret=1,.hide=1},
- {.type=REVK_SETTINGS_BLOB,.name="mqttcert",.comment="MQTT CA certificate",.group=12,.len=8,.dot=4,.dq=1,.def=quote(CONFIG_REVK_MQTTCERT),.ptr=&mqttcert,.malloc=1,.revk=1,.array=CONFIG_REVK_MQTT_CLIENTS,.base64=1},
+ {.type=REVK_SETTINGS_BLOB,.name="mqttcert",.comment="MQTT CA certificate (for mqtts)",.group=12,.len=8,.dot=4,.dq=1,.def=quote(CONFIG_REVK_MQTTCERT),.ptr=&mqttcert,.malloc=1,.revk=1,.array=CONFIG_REVK_MQTT_CLIENTS,.base64=1},
 #endif
  {.type=REVK_SETTINGS_BLOB,.name="clientkey",.comment="Client Key (OTA and MQTT TLS)",.group=13,.len=9,.dot=6,.ptr=&clientkey,.malloc=1,.revk=1,.base64=1},
  {.type=REVK_SETTINGS_BLOB,.name="clientcert",.comment="Client certificate (OTA and MQTT TLS)",.group=13,.len=10,.dot=6,.ptr=&clientcert,.malloc=1,.revk=1,.base64=1},
@@ -239,7 +243,11 @@ char* topicinfo=NULL;
 char* topicerror=NULL;
 char* topicha=NULL;
 #ifdef	CONFIG_REVK_BLINK_DEF
+#ifdef	CONFIG_REVK_BLINK_WS2812_DEF
+revk_gpio_t blink={0};
+#else
 revk_gpio_t blink[3]={0};
+#endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
 #ifdef	CONFIG_REVK_APCONFIG
