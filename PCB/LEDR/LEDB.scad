@@ -1,6 +1,6 @@
 // Generated case design for LEDR/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-08-24 15:36:00
+// Generated 2025-08-24 15:48:39
 // title:	PCB-LEDR
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -793,4 +793,4 @@ module bottom()
 		pcb(height,r=margin);
 	}
 }
-difference(){bottom();translate([0.000000,0.000000,0])scale([-1,1])linear_extrude(0.500000)text("2025-06-22",size=3.000000,halign="center",valign="center",font="OCRB");}
+difference(){bottom();translate([0.000000,0.000000,-0.001])scale([-1,1])linear_extrude(0.500000)text("2025-06-22",size=3.000000,halign="center",valign="center",font="OCRB");}
