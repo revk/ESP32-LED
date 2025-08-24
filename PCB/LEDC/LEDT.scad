@@ -1,6 +1,6 @@
 // Generated case design for LEDC/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-08-24 09:47:12
+// Generated 2025-08-24 14:01:31
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -720,7 +720,7 @@ module top_edge()
 
 module top_pos()
 { // Position for plotting bottom
-	translate([casewall,casewall,pcbthickness+casetop])rotate([180,0,0])children();
+	translate([0,0,pcbthickness+casetop])rotate([180,0,0])children();
 }
 
 module pcb_pos()
@@ -776,7 +776,7 @@ module bottom_edge()
 
 module bottom_pos()
 {
-	translate([casewall,casewall,casebottom])children();
+	translate([0,0,casebottom])children();
 }
 
 module bottom()

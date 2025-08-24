@@ -1,6 +1,6 @@
 // Generated case design for LEDR/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-08-24 09:51:27
+// Generated 2025-08-24 14:05:45
 // title:	PCB-LEDR
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -721,7 +721,7 @@ module top_edge()
 
 module top_pos()
 { // Position for plotting bottom
-	translate([casewall,casewall,pcbthickness+casetop])rotate([180,0,0])children();
+	translate([0,0,pcbthickness+casetop])rotate([180,0,0])children();
 }
 
 module pcb_pos()
@@ -777,7 +777,7 @@ module bottom_edge()
 
 module bottom_pos()
 {
-	translate([casewall,casewall,casebottom])children();
+	translate([0,0,casebottom])children();
 }
 
 module bottom()
@@ -793,4 +793,4 @@ module bottom()
 		pcb(height,r=margin);
 	}
 }
-bottom();
+difference(){bottom();translate([0.000000,0.000000,0])scale([-1,1])linear_extrude(0.250000)text("2025-06-22",size=2.000000,halign="center",valign="center",font="OCRB");}
