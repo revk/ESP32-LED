@@ -1,13 +1,13 @@
 // Generated case design for LEDC/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-08-15 13:18:35
+// Generated 2025-08-24 09:47:12
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
 //
 
 // Globals
-margin=0.200000;
+margin=0.250000;
 lip=3.000000;
 lipa=0;
 lipt=2;
@@ -15,7 +15,7 @@ casebottom=2.000000;
 casetop=7.000000;
 casewall=3.000000;
 fit=0.000000;
-snap=0.100000;
+snap=0.150000;
 edge=2.000000;
 pcbthickness=1.200000;
 nohull=false;
@@ -170,7 +170,7 @@ translate([-0.049955,0.000000,1.200000])m12(part,hole,block,casetop); // U6 (bac
 };
 module part_J2(part=true,hole=false,block=false)
 {
-translate([-14.999955,0.000000,1.200000])m13(part,hole,block,casetop); // J2 (back)
+translate([-14.999955,0.000000,1.200000])m13(part,hole,block,casetop,453); // J2 (back)
 };
 // Parts to go on PCB (top)
 module parts_top(part=false,hole=false,block=false){
@@ -356,7 +356,7 @@ if(block)
 {
         hull()
         {
-                b(0,0,0,2.4,2.4,1);
+                b(0,0,.8,2.8,2.8,1);
                 translate([0,0,height])cylinder(d=4,h=1,$fn=16);
         }
 }
@@ -395,15 +395,19 @@ module m11(part=false,hole=false,block=false,height)
 if(part)
 {
 	b(0,0,0,3.35,3.9,1.6);
-	translate([0,0.45,1.6])sphere(r=1.4);
+	translate([0,0.45,1.6])sphere(r=1.4,$fn=24);
 }
 if(hole)
 {
-	translate([0,0.45,0])cylinder(d1=4,d2=6,h=height+1,$fn=6);
+	hull()
+	{
+		translate([0,0.45,1.6])cylinder(d=2.4,$fn=24);
+		translate([0,0.45,height])cylinder(d=6,h=height+1,$fn=6);
+	}
 }
 if(block)
 {
-	translate([0,0.45,0])cylinder(d1=6,d2=8,h=height+1,$fn=6);
+	translate([0,0.45,1.8])cylinder(d1=4.4,d2=8,h=height+1,$fn=6);
 }
 }
 
@@ -421,20 +425,20 @@ translate([-15.4/2,-15.45/2,0])
 }
 }
 
-module m13(part=false,hole=false,block=false,height)
+module m13(part=false,hole=false,block=false,height,N=0)
 { // J2
 // WAGO-2060-45x-998-404
-N=3;
+n=N%10; // 45x
 if(part)
 {
 	translate([-0.9,0,0])hull()
 	{
-		b(0,0,0,12.7,N*4-0.1,1);
-		translate([0.8,0,0])b(0,0,0,11.1,N*4-0.1,4.5);
+		b(0,0,0,12.7,n*4-0.1,1);
+		translate([0.8,0,0])b(0,0,0,11.1,n*4-0.1,4.5);
 	}
-	for(p=[0:N-1])hull()
+	for(p=[0:n-1])hull()
     {
-        translate([-6,-4*(N-1)/2+p*4,2])sphere(d=3,$fn=12);
+        translate([-6,-4*(n-1)/2+p*4,2])sphere(d=3,$fn=12);
         translate([-11.510,0,2])sphere(d=4,$fn=12);
     }
 }

@@ -1,13 +1,13 @@
 // Generated case design for LEDR/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-08-12 11:48:34
+// Generated 2025-08-24 09:51:27
 // title:	PCB-LEDR
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
 //
 
 // Globals
-margin=0.200000;
+margin=0.250000;
 lip=3.000000;
 lipa=0;
 lipt=2;
@@ -15,7 +15,7 @@ casebottom=2.000000;
 casetop=7.000000;
 casewall=3.000000;
 fit=0.000000;
-snap=0.100000;
+snap=0.150000;
 edge=2.000000;
 pcbthickness=1.200000;
 nohull=false;
@@ -162,7 +162,7 @@ translate([-14.325000,-1.350000,1.200000])m2(part,hole,block,casetop); // D2 (ba
 };
 module part_J6(part=true,hole=false,block=false)
 {
-translate([-14.975000,-8.250000,1.200000])m12(part,hole,block,casetop); // J6 (back)
+translate([-14.975000,-8.250000,1.200000])m12(part,hole,block,casetop,452); // J6 (back)
 };
 module part_U6(part=true,hole=false,block=false)
 {
@@ -170,7 +170,7 @@ translate([-0.025000,-0.250000,1.200000])m13(part,hole,block,casetop); // U6 (ba
 };
 module part_J2(part=true,hole=false,block=false)
 {
-translate([-14.975000,6.250000,1.200000])m14(part,hole,block,casetop); // J2 (back)
+translate([-14.975000,6.250000,1.200000])m12(part,hole,block,casetop,453); // J6 (back)
 };
 // Parts to go on PCB (top)
 module parts_top(part=false,hole=false,block=false){
@@ -378,7 +378,7 @@ if(block)
 {
         hull()
         {
-                b(0,0,0,2.4,2.4,1);
+                b(0,0,.8,2.8,2.8,1);
                 translate([0,0,height])cylinder(d=4,h=1,$fn=16);
         }
 }
@@ -412,20 +412,20 @@ if(hole)
 }
 }
 
-module m12(part=false,hole=false,block=false,height)
+module m12(part=false,hole=false,block=false,height,N=0)
 { // J6
 // WAGO-2060-45x-998-404
-N=2;
+n=N%10; // 45x
 if(part)
 {
 	translate([-0.9,0,0])hull()
 	{
-		b(0,0,0,12.7,N*4-0.1,1);
-		translate([0.8,0,0])b(0,0,0,11.1,N*4-0.1,4.5);
+		b(0,0,0,12.7,n*4-0.1,1);
+		translate([0.8,0,0])b(0,0,0,11.1,n*4-0.1,4.5);
 	}
-	for(p=[0:N-1])hull()
+	for(p=[0:n-1])hull()
     {
-        translate([-6,-4*(N-1)/2+p*4,2])sphere(d=3,$fn=12);
+        translate([-6,-4*(n-1)/2+p*4,2])sphere(d=3,$fn=12);
         translate([-11.510,0,2])sphere(d=4,$fn=12);
     }
 }
@@ -455,38 +455,6 @@ translate([-15.4/2,-15.45/2,0])
 		translate([0.7,0.5,0])cube([14,13.55,2.4]);
 		cube([15.4,20.5,0.8]);
 	}
-}
-}
-
-module m14(part=false,hole=false,block=false,height)
-{ // J2
-// WAGO-2060-45x-998-404
-N=3;
-if(part)
-{
-	translate([-0.9,0,0])hull()
-	{
-		b(0,0,0,12.7,N*4-0.1,1);
-		translate([0.8,0,0])b(0,0,0,11.1,N*4-0.1,4.5);
-	}
-	for(p=[0:N-1])hull()
-    {
-        translate([-6,-4*(N-1)/2+p*4,2])sphere(d=3,$fn=12);
-        translate([-11.510,0,2])sphere(d=4,$fn=12);
-    }
-}
-if(hole)
-{
-    hull()
-    {
-        translate([-11.510,0,2])sphere(d=4,$fn=12);
-        translate([-11.510,0,-height])sphere(d=4,$fn=12);
-    }
-    hull()
-    {
-        translate([-11.510,0,2])sphere(d=4,$fn=12);
-        translate([-50,0,2])sphere(d=4,$fn=12);
-    }
 }
 }
 
