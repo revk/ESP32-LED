@@ -1,4 +1,4 @@
-all: png stl
+all: png stl */README.md
 
 placeleds: placeleds.c PCBCase/pcb.c PCBCase/pcb.h
 	gcc -IPCBCase -O -o $@ $< PCBCase/pcb.c -lpopt -lm -g
@@ -63,3 +63,6 @@ LEDR/LEDT.scad: LEDR/LED.kicad_pcb PCBCase/case
 
 %.png:	%.kicad_pcb PCBCase/clean PCBCase/render
 	PCBCase/render $<
+
+%/README.md: %/*.kicad_pcb %/*.stl PCBCase/readme
+	PCBCase/readme $@
