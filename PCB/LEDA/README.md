@@ -1,10 +1,19 @@
-# LED
-
-These files are for use in [KiCad](https://www.kicad.org).
+# LEDA
 
 ## Trademark
 
 This is an open source project, but bear in mind you cannot sell boards bearing the Andrews & Arnold Ltd name, the A&A logo, the registered trademark AJK logo, or the GS1 allocated EANs assigned to Andrews & Arnold Ltd.
+
+## PCB Designs
+
+These files are for use with [KiCAD](https://www.kicad.org).
+
+- [LED](LED.kicad_pro)
+## 3D
+
+3D case designs are normally automatically created from the PCB so as to ensure correct details and placement of apertures, etc.
+
+- [USBA](USBA.stl)
 
 ## Images
 
@@ -12,4 +21,6 @@ This is an open source project, but bear in mind you cannot sell boards bearing 
 <img src='LED-alt.png' width=32%><img src='LED-alt-90.png' width=32%><img src='LED-alt-bottom.png' width=32%>
 <img src='LED-panel.png' width=49%><img src='LED-panel-bottom.png' width=49%>
 
-*Auto generated 2025-07-19T13:32:53*
+---
+
+*Auto generated README.md 2025-08-25T14:56:57*

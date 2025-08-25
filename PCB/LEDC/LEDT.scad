@@ -1,6 +1,6 @@
 // Generated case design for LEDC/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-08-25 14:18:11
+// Generated 2025-08-25 14:23:48
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -22,6 +22,13 @@ nohull=false;
 hullcap=1.000000;
 hulledge=1.000000;
 useredge=false;
+datex=0.000000;
+datey=0.000000;
+datet=0.500000;
+dateh=3.000000;
+datea=0;
+date="2025-08-15";
+datef="OCRB";
 spacing=62.000089;
 pcbwidth=46.000089;
 pcblength=16.000000;
@@ -790,6 +797,15 @@ module bottom()
 		}
 		parts_space();
 		pcb(height,r=margin);
+	}
+}
+
+module datecode()
+{
+	minkowski()
+	{
+		translate([datex,datey,-1])rotate(datea)scale([-1,1])linear_extrude(datet)text(date,size=dateh,halign="center",valign="center",font=datef);
+		cylinder(d1=datet,d2=0,h=datet,$fn=6);
 	}
 }
 top();
