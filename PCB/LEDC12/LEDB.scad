@@ -1,6 +1,6 @@
 // Generated case design for LEDC12/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-08-30 09:17:57
+// Generated 2025-09-04 12:09:34
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -27,7 +27,7 @@ datey=0.000000;
 datet=0.500000;
 dateh=3.000000;
 datea=0;
-date="2025-08-30";
+date="2025-09-04";
 datef="OCRB";
 spacing=62.000089;
 pcbwidth=46.000089;
@@ -60,7 +60,7 @@ translate([8.700045,1.300000,1.200000])rotate([0,0,180.000000])m4(part,hole,bloc
 };
 module part_R1(part=true,hole=false,block=false)
 {
-translate([8.200045,5.200000,1.200000])rotate([0,0,90.000000])m1(part,hole,block,casetop); // RevK:R_0201 R_0201_0603Metric (back)
+translate([8.400045,5.900000,1.200000])rotate([0,0,90.000000])m1(part,hole,block,casetop); // RevK:R_0201 R_0201_0603Metric (back)
 };
 module part_R3(part=true,hole=false,block=false)
 {
@@ -72,7 +72,7 @@ translate([11.500045,-0.400000,1.200000])rotate([0,0,-90.000000])m4(part,hole,bl
 };
 module part_C5(part=true,hole=false,block=false)
 {
-translate([-9.099955,-6.900000,1.200000])m5(part,hole,block,casetop); // RevK:C_0805 C_0805_2012Metric (back)
+translate([-9.399956,-6.900000,1.200000])m5(part,hole,block,casetop); // RevK:C_0805 C_0805_2012Metric (back)
 };
 module part_C13(part=true,hole=false,block=false)
 {
@@ -87,7 +87,7 @@ translate([20.180045,5.200000,1.200000])rotate([0,0,180.000000])m4(part,hole,blo
 };
 module part_R2(part=true,hole=false,block=false)
 {
-translate([-8.199956,-1.100000,1.200000])rotate([0,0,90.000000])m1(part,hole,block,casetop); // RevK:R_0201 R_0201_0603Metric (back)
+translate([-8.599955,-2.000000,1.200000])rotate([0,0,90.000000])m1(part,hole,block,casetop); // RevK:R_0201 R_0201_0603Metric (back)
 };
 module part_C1(part=true,hole=false,block=false)
 {
@@ -102,11 +102,11 @@ translate([12.050044,-0.380000,1.200000])rotate([0,0,-90.000000])m1(part,hole,bl
 };
 module part_C6(part=true,hole=false,block=false)
 {
-translate([8.200045,6.600000,1.200000])rotate([0,0,90.000000])m4(part,hole,block,casetop); // RevK:C_0201 C_0201_0603Metric (back)
+translate([8.400045,6.900000,1.200000])rotate([0,0,90.000000])m4(part,hole,block,casetop); // RevK:C_0201 C_0201_0603Metric (back)
 };
 module part_C15(part=true,hole=false,block=false)
 {
-translate([8.900045,-1.200000,1.200000])rotate([0,0,-90.000000])m5(part,hole,block,casetop); // RevK:C_0805 C_0805_2012Metric (back)
+translate([9.100044,-1.200000,1.200000])rotate([0,0,-90.000000])m5(part,hole,block,casetop); // RevK:C_0805 C_0805_2012Metric (back)
 };
 module part_C2(part=true,hole=false,block=false)
 {
@@ -168,7 +168,7 @@ translate([18.500045,6.200000,1.200000])rotate([0,0,90.000000])m1(part,hole,bloc
 };
 module part_C7(part=true,hole=false,block=false)
 {
-translate([-9.099955,6.900000,1.200000])m5(part,hole,block,casetop); // RevK:C_0805 C_0805_2012Metric (back)
+translate([-9.399956,6.900000,1.200000])m5(part,hole,block,casetop); // RevK:C_0805 C_0805_2012Metric (back)
 };
 module part_C14(part=true,hole=false,block=false)
 {
