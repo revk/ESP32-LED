@@ -5,6 +5,6 @@ b=3;    // Base
 e=8;    // Edge
 c=40;	// Centre diameter
 f=8;    // Foot diameter
-pcbt=1;	// PCB thickness
+pcbt=1.2;	// PCB thickness
 pcbmin=2;	// PCB component height (LEDs)
 pcbmax=4.5;	// PCB component height (center)
