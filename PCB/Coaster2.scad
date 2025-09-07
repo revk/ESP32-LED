@@ -1,7 +1,7 @@
 $fn=180;
-h=9;    // Height (and edge wall)
+h=10;    // Height (and edge wall)
 d=100;  // PCB diameter
-b=2;    // Base
+b=3;    // Base
 e=8;    // Edge
 c=40;	// Centre diameter
 f=8;    // Foot diameter
