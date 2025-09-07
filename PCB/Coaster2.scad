@@ -1,0 +1,10 @@
+$fn=360;
+h=8;    // Height (and edge wall)
+d=100;  // PCB diameter
+b=2;    // Base
+e=8;    // Edge
+c=40;	// Centre diameter
+f=5;    // Foot
+pcbt=1.2;	// PCB thickness
+pcbmin=2;	// PCB component height (LEDs)
+pcbmax=4.5;	// PCB component height (center)
