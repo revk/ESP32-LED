@@ -19,5 +19,9 @@ intersection()
 intersection()
 {
     cylinder(d=d,h=f);
-    for(a=[0:120:360])rotate(a)translate([d/2-f,0,b])sphere(d=f);
+    union()
+    {
+        for(a=[0:120:360])rotate(a)translate([d/2-f/2-2,0,b])sphere(d=f);
+        for(a=[0:120:360])rotate(a+60)translate([d/2-(f-1)/2-2,0,b])sphere(d=f-1);
+    }
 }
