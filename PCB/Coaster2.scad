@@ -1,5 +1,5 @@
 $fn=180;
-h=8;    // Height (and edge wall)
+h=9;    // Height (and edge wall)
 d=100;  // PCB diameter
 b=2;    // Base
 e=8;    // Edge
