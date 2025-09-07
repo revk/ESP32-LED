@@ -1,4 +1,4 @@
-$fn=360;
+$fn=180;
 h=8;    // Height (and edge wall)
 d=100;  // PCB diameter
 b=2;    // Base
