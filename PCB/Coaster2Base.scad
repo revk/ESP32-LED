@@ -22,6 +22,5 @@ translate([0,0,b])rotate([180,0,0])
             for(a=[0:120:359])rotate(a+60)translate([d/2-f/2-1,0,0])sphere(d=f);
             for(a=[0:120:359])rotate(a)translate([d/2-f/2-1,0,0])sphere(d=f-1);
         }
-    }
-    
+    }   
 }

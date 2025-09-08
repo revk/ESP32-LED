@@ -1,6 +1,6 @@
 // Generated case design for Coaster2/Coaster.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-09-07 17:01:52
+// Generated 2025-09-08 09:06:42
 // title:	Coaster
 //
 
@@ -16,6 +16,7 @@ fit=0.000000;
 snap=0.150000;
 edge=2.000000;
 pcbthickness=1.200000;
+function pcbthickness()=1.200000;
 nohull=false;
 hullcap=1.000000;
 hulledge=1.000000;
@@ -29,7 +30,9 @@ date="2025-09-07";
 datef="OCRB";
 spacing=116.000000;
 pcbwidth=100.000000;
+function pcbwidth()=100.000000;
 pcblength=100.000000;
+function pcblength()=100.000000;
 originx=100.000000;
 originy=100.000000;
 
