@@ -1,6 +1,6 @@
 $fn=180;
 h=10;    // Height (and edge wall)
-d=pcbwidth();  // PCB diameter
+d=100; //pcbwidth();  // PCB diameter
 b=3;    // Base
 e=8;    // Edge
 c=40;	// Centre diameter
@@ -12,11 +12,8 @@ pcbmax=4.5;	// PCB component height (center)
 
 module outside()
 {
-    minkowski()
-    {
-        translate([0,0,h/2])cylinder(d=d,h=0.001);
-        sphere(d=h);
-    }
+
+    hull()rotate_extrude()translate([d/2,h/2])circle(d=h);
 }
 
 module baseplate(t=0)
