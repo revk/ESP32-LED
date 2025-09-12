@@ -11,7 +11,7 @@ difference()
     translate([0,0,b])J3() // USB
     {
       translate([-5,1.51-8,0])cube([10,8.5,4]);
-      translate([0,1.51-8,0])rotate([90,0,0])
+      translate([0,1.51-8,2.5/2])rotate([90,0,0])
       {
         translate([0,0,-2])hull()
         {
@@ -21,7 +21,7 @@ difference()
         }
         translate([0,0,1.1])hull()
         {
-            w=11.5;h=7.5;
+            w=12.5;h=7.5;
             translate([-w/2+h/2,0,0])cylinder(d=h,h=100);
             translate([w/2-h/2,0,0])cylinder(d=h,h=100);
         }
