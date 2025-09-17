@@ -6,12 +6,25 @@ difference()
 {
     outside();
     baseplate(pcbt);
-    translate([0,0,-1])cylinder(d=d-e*2,h=b+1+pcbt+pcbmin);
-    translate([0,0,-1])cylinder(d=c,h=b+1+pcbt+pcbmax);
+    hull()
+    {
+        translate([0,0,-1])cylinder(d=d-e*2+pcbmin*2,h=b+1+pcbt);
+        translate([0,0,-1])cylinder(d=d-e*2,h=b+1+pcbt+pcbmin);
+    }
+    hull()
+    {
+        translate([0,0,-1])cylinder(d=c+pcbmax*2,h=b+1+pcbt);
+        translate([0,0,-1])cylinder(d=c,h=b+1+pcbt+pcbmax);
+    }
+    if(dip)hull()
+    {
+        translate([0,0,h])cylinder(d=d,h=1);
+        translate([0,0,h-dip])cylinder(d=d-dip*2,h=1);
+    }
     translate([0,0,b])J3() // USB
     {
-      translate([-5,1.51-8,0])cube([10,8.5,4]);
-      translate([0,1.51-8,2.5/2])rotate([90,0,0])
+      translate([-4.5,-2.3-4,0])cube([9,8,3.5]);
+      translate([0,-2.3-4,2.5/2])rotate([90,0,0])
       {
         translate([0,0,-2])hull()
         {

@@ -2,13 +2,14 @@ $fn=180;
 h=12;    // Height (and edge wall)
 d=pcbwidth();  // PCB diameter
 b=3;     // Base
-e=8;     // Edge
-c=40;	 // Centre diameter
+e=10;     // Edge
+c=38;	 // Centre diameter
 f=8;     // Foot diameter
 l=6;     // Lug
+dip=2;  // Dip in top
 pcbt=pcbthickness();	// PCB thickness
 pcbmin=2;	// PCB component height (LEDs)
-pcbmax=4;	// PCB component height (center)
+pcbmax=4;	// PCB component height (center) ** 4.5 **
 
 module outside()
 {
