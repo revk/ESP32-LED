@@ -1,6 +1,6 @@
 // Generated case design for Coaster2/Coaster.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-09-12 12:19:41
+// Generated 2025-09-17 07:58:59
 // title:	Coaster
 //
 
@@ -26,7 +26,7 @@ datey=0.000000;
 datet=0.500000;
 dateh=3.000000;
 datea=0;
-date="2025-09-12";
+date="2025-09-17";
 datef="OCRB";
 spacing=116.000000;
 pcbwidth=100.000000;
@@ -44,10 +44,10 @@ module part_C54(part=true,hole=false,block=false)
 {
 translate([-34.449852,10.450248,1.600000])rotate([0,0,163.125000])m0(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
 };
-module J3(){translate([43.510000,0.000000,1.600000])rotate([0,0,90.000000])children();}
+module J3(){translate([44.010000,0.000000,1.600000])rotate([0,0,90.000000])children();}
 module part_J3(part=true,hole=false,block=false)
 {
-translate([43.510000,0.000000,1.600000])rotate([0,0,90.000000])translate([0.000000,-2.400000,0.000000])rotate([90.000000,-0.000000,-0.000000])m1(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
+translate([44.010000,0.000000,1.600000])rotate([0,0,90.000000])translate([0.000000,-1.900000,0.000000])rotate([90.000000,0.000000,0.000000])m1(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
 };
 module C93(){translate([-1.962707,-39.951818,1.600000])rotate([0,0,-92.812500])children();}
 module part_C93(part=true,hole=false,block=false)
@@ -1769,7 +1769,7 @@ if(hole)
         hull()
         {
                 b(0,0,.8,1.2,1.2,1);
-                translate([0,0,height])cylinder(d=2.001,h=1,$fn=16);
+                translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=16);
         }
 }
 if(block)
@@ -1777,7 +1777,7 @@ if(block)
         hull()
         {
                 b(0,0,.8,2.8,2.8,1);
-                translate([0,0,height])cylinder(d=4,h=1,$fn=16);
+                translate([0,0,height])cylinder(d=2,h=1,$fn=16);
         }
 }
 }
@@ -1999,7 +1999,7 @@ module case_wall()
 	difference()
 	{
 		solid_case();
-		translate([0,0,-height])pcb_hulled(height*2);
+		translate([0,0,-height])pcb_hulled(height*2,0.02);
 	}
 }
 
@@ -2093,7 +2093,7 @@ module top_body()
 		intersection()
 		{
 			solid_case();
-			pcb_hulled(height);
+			pcb_hulled(casetop+pcbthickness,0.03);
 		}
 		if(parts_top)minkowski()
 		{
@@ -2104,8 +2104,12 @@ module top_body()
 	}
 	intersection()
 	{
-		solid_case();
-		parts_top(block=true);
+		pcb_hulled(casetop+pcbthickness,0.03);
+		union()
+		{
+			parts_top(block=true);
+			parts_bottom(block=true);
+		}
 	}
 }
 
@@ -2149,7 +2153,7 @@ module bottom_body()
 		intersection()
 		{
 			solid_case();
-			translate([0,0,-height])pcb_hulled(height+pcbthickness);
+			translate([0,0,-casebottom])pcb_hulled(casebottom+pcbthickness,0.03);
 		}
 		if(parts_bottom)minkowski()
 		{
@@ -2160,8 +2164,12 @@ module bottom_body()
 	}
 	intersection()
 	{
-		solid_case();
-		parts_bottom(block=true);
+		translate([0,0,-casebottom])pcb_hulled(casebottom+pcbthickness,0.03);
+		union()
+		{
+			parts_top(block=true);
+			parts_bottom(block=true);
+		}
 	}
 }
 
