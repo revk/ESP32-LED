@@ -1,6 +1,6 @@
 // Generated case design for LEDR/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-09-08 09:04:57
+// Generated 2025-09-18 11:54:06
 // title:	PCB-LEDR
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -387,15 +387,15 @@ rotate([-90,0,0])translate([-4.47,-3.84,0])
 		translate([0,1.7,0])cube([8.94,1.6,1.6301]);
 	}
 	if(hole)
-		translate([1.63,-20,1.63])
+		translate([1.63,-21.2-1,1.63])
 		rotate([-90,0,0])
 	{
 		// Plug
 		hull()
 		{
-			cylinder(d=2.5,h=21,$fn=24);
+			cylinder(d=2.5,h=24,$fn=24);
 			translate([5.68,0,0])
-			cylinder(d=2.5,h=21,$fn=24);
+			cylinder(d=2.5,h=24,$fn=24);
 		}
 		hull()
 		{
@@ -421,7 +421,7 @@ if(hole)
         hull()
         {
                 b(0,0,.8,1.2,1.2,1);
-                translate([0,0,height])cylinder(d=2.001,h=1,$fn=16);
+                translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=16);
         }
 }
 if(block)
@@ -429,7 +429,7 @@ if(block)
         hull()
         {
                 b(0,0,.8,2.8,2.8,1);
-                translate([0,0,height])cylinder(d=4,h=1,$fn=16);
+                translate([0,0,height])cylinder(d=2,h=1,$fn=16);
         }
 }
 }
@@ -459,6 +459,10 @@ if(hole)
 			cylinder(d=1,h=pcbthickness+0.02);
 			translate([0.75+casewall+1,0,0])cylinder(d=1,h=pcbthickness+0.02);
 		}
+}
+if(block)
+{
+    translate([1,0,-pcbthickness-5])cylinder(d=3,h=5);
 }
 }
 
@@ -628,8 +632,8 @@ module top_half(fit=0)
                 {
                 	union()
                 	{
-                		parts_top(part=true);
-                		parts_bottom(part=true);
+                		parts_top(part=true,hole=true);
+                		parts_bottom(part=true,hole=true);
                 	}
                 	translate([-0.01,-0.01,-height])cube([0.02,0.02,height]);
                 }
@@ -638,8 +642,8 @@ module top_half(fit=0)
         {
         	union()
                 {
-                	parts_top(part=true);
-                	parts_bottom(part=true);
+                	parts_top(part=true,hole=true);
+                	parts_bottom(part=true,hole=true);
                 }
                 translate([-0.01,-0.01,0])cube([0.02,0.02,height]);
         }
@@ -650,7 +654,7 @@ module case_wall()
 	difference()
 	{
 		solid_case();
-		translate([0,0,-height])pcb_hulled(height*2);
+		translate([0,0,-height])pcb_hulled(height*2,0.02);
 	}
 }
 
@@ -663,7 +667,7 @@ module top_side_hole()
 			parts_top(hole=true);
 			case_wall();
 		}
-		translate([0,0,-casebottom])pcb_hulled(height,casewall-edge);
+		translate([0,0,-casebottom])pcb_hulled(height,casewall);
 	}
 }
 
@@ -744,7 +748,7 @@ module top_body()
 		intersection()
 		{
 			solid_case();
-			pcb_hulled(height);
+			pcb_hulled(casetop+pcbthickness,0.03);
 		}
 		if(parts_top)minkowski()
 		{
@@ -755,8 +759,12 @@ module top_body()
 	}
 	intersection()
 	{
-		solid_case();
-		parts_top(block=true);
+		pcb_hulled(casetop+pcbthickness,0.03);
+		union()
+		{
+			parts_top(block=true);
+			parts_bottom(block=true);
+		}
 	}
 }
 
@@ -800,7 +808,7 @@ module bottom_body()
 		intersection()
 		{
 			solid_case();
-			translate([0,0,-height])pcb_hulled(height+pcbthickness);
+			translate([0,0,-casebottom])pcb_hulled(casebottom+pcbthickness,0.03);
 		}
 		if(parts_bottom)minkowski()
 		{
@@ -811,8 +819,12 @@ module bottom_body()
 	}
 	intersection()
 	{
-		solid_case();
-		parts_bottom(block=true);
+		translate([0,0,-casebottom])pcb_hulled(casebottom+pcbthickness,0.03);
+		union()
+		{
+			parts_top(block=true);
+			parts_bottom(block=true);
+		}
 	}
 }
 
