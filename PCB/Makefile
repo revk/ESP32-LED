@@ -72,10 +72,10 @@ LEDR/LEDT.scad: LEDR/LED.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --two-file
 
 LEDX/LEDT.scad: LEDX/LED.kicad_pcb PCBCase/case
-	PCBCase/case -o $@ $< --edge=2 --bottom=5.5 --top=4 --pcb=2 --two-file --date-angle=-30
+	PCBCase/case -o $@ $< --edge=2 --bottom=6 --top=4 --pcb=2 --two-file --date-angle=-34
 
 LEDX12/LEDT.scad: LEDX12/LED.kicad_pcb PCBCase/case
-	PCBCase/case -o $@ $< --edge=2 --bottom=5.5 --top=5.5 --pcb=2 --two-file --date-angle=-30
+	PCBCase/case -o $@ $< --edge=2 --bottom=6 --top=5.5 --pcb=2 --two-file --date-angle=-34
 
 Coaster2/Coaster.scad: Coaster2/Coaster.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --pcb=2 -n

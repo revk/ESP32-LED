@@ -1,6 +1,6 @@
 // Generated case design for LEDR/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-09-21 11:00:15
+// Generated 2025-09-21 13:27:16
 // title:	PCB-LEDR
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -11,8 +11,8 @@ margin=0.250000;
 lip=3.000000;
 lipa=0;
 lipt=2;
-casebottom=3.000000;
-casetop=5.000000;
+casebottom=2.000000;
+casetop=7.000000;
 casewall=3.000000;
 fit=0.000000;
 snap=0.150000;

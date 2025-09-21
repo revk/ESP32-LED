@@ -1,6 +1,6 @@
 // Generated case design for LEDX12/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-09-21 13:09:31
+// Generated 2025-09-21 13:28:40
 // title:	PCB-USBX
 // rev:	1
 // comment:	www.me.uk
@@ -12,7 +12,7 @@ margin=0.250000;
 lip=3.000000;
 lipa=0;
 lipt=2;
-casebottom=5.500000;
+casebottom=6.000000;
 casetop=5.500000;
 casewall=3.000000;
 fit=0.000000;
@@ -28,7 +28,7 @@ datex=0.000000;
 datey=0.000000;
 datet=0.500000;
 dateh=3.000000;
-datea=-30;
+datea=-34;
 date="2025-09-21";
 datef="OCRB";
 spacing=37.725000;
