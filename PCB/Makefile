@@ -37,7 +37,7 @@ leds:	placeleds
 	#./placeleds LED32/LED.kicad_pcb -x100 -y100 -d22.5 --diode=33 --count=24 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 	#./placeleds LED32/LED.kicad_pcb -x100 -y100 -d28 --diode=57 --count=32 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 
-stl:    LEDC/LEDT.stl LEDR/LEDT.stl LEDC12/LEDT.stl LEDC/LEDB.stl LEDR/LEDB.stl LEDC12/LEDB.stl Coaster2Top.stl Coaster2Base.stl Coaster2Top.stl
+stl:    LEDC/LEDT.stl LEDR/LEDT.stl LEDC12/LEDT.stl LEDX/LEDT.stl LEDX12/LEDT.stl LEDC/LEDB.stl LEDR/LEDB.stl LEDC12/LEDB.stl LEDX/LEDB.stl LEDX12/LEDB.stl Coaster2Top.stl Coaster2Base.stl Coaster2Top.stl
 
 png:	$(patsubst %.kicad_pcb,%.png,$(wildcard */*.kicad_pcb))
 
@@ -70,6 +70,12 @@ LEDC12/LEDT.scad: LEDC12/LED.kicad_pcb PCBCase/case
 
 LEDR/LEDT.scad: LEDR/LED.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --two-file
+
+LEDX/LEDT.scad: LEDX/LED.kicad_pcb PCBCase/case
+	PCBCase/case -o $@ $< --edge=2 --bottom=5.5 --top=4 --pcb=2 --two-file --date-angle=-30
+
+LEDX12/LEDT.scad: LEDX12/LED.kicad_pcb PCBCase/case
+	PCBCase/case -o $@ $< --edge=2 --bottom=5.5 --top=4 --pcb=2 --two-file --date-angle=-30
 
 Coaster2/Coaster.scad: Coaster2/Coaster.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --pcb=2 -n
