@@ -16,11 +16,8 @@ difference()
         translate([0,0,-1])cylinder(d=c+pcbmax*2,h=b+1+pcbt);
         translate([0,0,-1])cylinder(d=c,h=b+1+pcbt+pcbmax);
     }
-    if(dip)hull()
-    {
-        translate([0,0,h])cylinder(d=d,h=1);
-        translate([0,0,h-dip])cylinder(d=d-dip*2,h=1);
-    }
+    if(dip)
+       hull()rotate_extrude()translate([d/2-sqrt(h*h-(h-dip)*(h-dip)),h*3/2-dip])circle(d=h);
     translate([0,0,b])J3() // USB
     {
       translate([-4.5,-2.3-4,0])cube([9,8,3.5]);

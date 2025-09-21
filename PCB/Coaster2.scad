@@ -1,5 +1,5 @@
 $fn=180;
-h=12;    // Height (and edge wall)
+h=11;    // Height (and edge wall)
 d=pcbwidth()-0.5;  // PCB diameter
 b=2;     // Base
 e=10;     // Edge
@@ -14,11 +14,12 @@ pcbmax=4;	// PCB component height (center) ** 4.5 **
 module outside()
 {
 
-    hull()rotate_extrude()translate([d/2,h/2])circle(d=h);
+    rotate_extrude()translate([d/2,h/2])circle(d=h);
+    cylinder(d=d,h=h-dip/2);
 }
 
 module baseplate(t=0)
 {
     translate([0,0,-f-1])cylinder(d=d,h=b+1+f+0.01+t);
-    for(a=[60:60:359])rotate(a)translate([d/2,0,0])rotate(360/6/2)cylinder(d1=l-1,d2=l,h=b,$fn=6);
+    for(a=[30:60:359])rotate(a)translate([d/2,0,0])rotate(360/6/2)cylinder(d1=l-1,d2=l,h=b,$fn=6);
 }
