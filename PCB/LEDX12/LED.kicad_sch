@@ -9043,7 +9043,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RevK:WAGO-2060-453-998-404-S"
+		(property "Footprint" "RevK:WAGO-2060-453-998-404-O"
 			(at 201.295 97.155 0)
 			(effects
 				(font
