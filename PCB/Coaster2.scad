@@ -1,6 +1,6 @@
 $fn=180;
 h=11;    // Height (and edge wall)
-d=pcbwidth()-0.5;  // PCB diameter
+d=pcbwidth()-2;  // PCB diameter
 b=2;     // Base
 e=10;     // Edge
 c=38;	 // Centre diameter

@@ -20,7 +20,8 @@ difference()
        hull()rotate_extrude()translate([d/2-sqrt(h*h-(h-dip)*(h-dip)),h*3/2-dip])circle(d=h);
     translate([0,0,b])J3() // USB
     {
-      translate([-4.5,-2.3-4,0])cube([9,8,3.5]);
+    w=10;h=9;
+      translate([-w/2,-2.3-h/2,0])cube([w,h,3.5]);
       translate([0,-2.3-4,2.5/2])rotate([90,0,0])
       {
         translate([0,0,-2])hull()
