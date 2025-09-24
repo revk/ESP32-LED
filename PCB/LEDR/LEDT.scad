@@ -1,6 +1,6 @@
 // Generated case design for LEDR/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-09-21 13:27:16
+// Generated 2025-09-24 13:22:08
 // title:	PCB-LEDR
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -370,40 +370,44 @@ if(block)
 module m8(part=false,hole=false,block=false,height)
 { // RevK:USB-C-Socket-H CSP-USC16-TR
 // USB connector
-rotate([-90,0,0])translate([-4.47,-3.84,0])
+rotate([-90,0,0])translate([0,1.9,0])
 {
 	if(part)
 	{
-		b(4.47,7,0,7,2,0.2);	// Pads
-		translate([1.63,-0.2,1.63])
+        b(0,1.57,0,7,1.14,0.2); // Pads
+
+		translate([0,1.76-7.55,1.63])
 		rotate([-90,0,0])
 		hull()
 		{
+			translate([(8.94-3.26)/2,0,0])
 			cylinder(d=3.26,h=7.55,$fn=24);
-			translate([5.68,0,0])
+			translate([-(8.94-3.26)/2,0,0])
 			cylinder(d=3.26,h=7.55,$fn=24);
 		}
-		translate([0,6.2501,0])cube([8.94,1.1,1.6301]);
-		translate([0,1.7,0])cube([8.94,1.6,1.6301]);
+		translate([-8.94/2,0.99-1.1/2,0])cube([8.94,1.1,1.6301]);
+		translate([-8.94/2,-3.2-1.6/2,0])cube([8.94,1.6,1.6301]);
 	}
 	if(hole)
-		translate([1.63,-21.2-1,1.63])
+		translate([0,-5.79,1.63])
 		rotate([-90,0,0])
 	{
 		// Plug
 		hull()
 		{
-			cylinder(d=2.5,h=24,$fn=24);
-			translate([5.68,0,0])
-			cylinder(d=2.5,h=24,$fn=24);
+			translate([(8.34-2.5)/2,0,-23+1])
+			cylinder(d=2.5,h=23,$fn=24);
+			translate([-(8.34-2.5)/2,0,-23+1])
+			cylinder(d=2.5,h=23,$fn=24);
 		}
 		hull()
 		{
+            translate([(12-7)/2,0,-21-1])
 			cylinder(d=7,h=21,$fn=24);
-			translate([5.68,0,0])
+            translate([-(12-7)/2,0,-21-1])
 			cylinder(d=7,h=21,$fn=24);
 		}
-		translate([2.84,0,-100])
+		translate([0,0,-100-10])
 			cylinder(d=5,h=100,$fn=24);
 	}
 }
