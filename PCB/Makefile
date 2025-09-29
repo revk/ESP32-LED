@@ -37,7 +37,7 @@ leds:	placeleds
 	#./placeleds LED32/LED.kicad_pcb -x100 -y100 -d22.5 --diode=33 --count=24 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 	#./placeleds LED32/LED.kicad_pcb -x100 -y100 -d28 --diode=57 --count=32 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 
-stl:    LEDC/LEDT.stl LEDR/LEDT.stl LEDC12/LEDT.stl LEDX/LEDT.stl LEDX12/LEDT.stl LEDC/LEDB.stl LEDR/LEDB.stl LEDC12/LEDB.stl LEDX/LEDB.stl LEDX12/LEDB.stl Coaster2Top.stl Coaster2Base.stl Coaster2Top.stl
+stl:    LEDC/LEDT.stl LEDR/LEDT.stl LEDC12/LEDT.stl LEDX/LEDT.stl LEDX12/LEDT.stl Test/LEDT.stl LEDC/LEDB.stl LEDR/LEDB.stl LEDC12/LEDB.stl LEDX/LEDB.stl LEDX12/LEDB.stl Test/LEDB.stl Coaster2Top.stl Coaster2Base.stl Coaster2Top.stl
 
 png:	$(patsubst %.kicad_pcb,%.png,$(wildcard */*.kicad_pcb))
 
@@ -79,6 +79,9 @@ LEDX12/LEDT.scad: LEDX12/LED.kicad_pcb PCBCase/case
 
 Coaster2/Coaster.scad: Coaster2/Coaster.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --pcb=2 -n
+
+Test/LEDT.scad: Test/LED.kicad_pcb PCBCase/case
+	PCBCase/case -o $@ $< --bottom=2 --top=5 --two-file
 
 %.png:	%.kicad_pcb PCBCase/clean PCBCase/render
 	PCBCase/render $<
