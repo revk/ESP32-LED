@@ -1,6 +1,6 @@
 // Generated case design for Test/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-09-29 09:03:57
+// Generated 2025-09-30 15:41:01
 // title:	Test
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -11,9 +11,11 @@ margin=0.250000;
 lip=3.000000;
 lipa=0;
 lipt=2;
+casewall=3.000000;
 casebottom=2.000000;
 casetop=5.000000;
-casewall=3.000000;
+bottomthickness=0.000000;
+topthickness=0.000000;
 fit=0.000000;
 snap=0.150000;
 edge=2.000000;
@@ -28,7 +30,7 @@ datey=0.000000;
 datet=0.500000;
 dateh=3.000000;
 datea=0;
-date="2025-09-29";
+date="2025-09-30";
 datef="OCRB";
 spacing=41.000000;
 pcbwidth=25.000000;
@@ -44,12 +46,12 @@ module pcb(h=pcbthickness,r=0){linear_extrude(height=h)offset(r=r)polygon(points
 module D29(){translate([2.500000,7.500000,1.200000])rotate([0,0,180.000000])children();}
 module part_D29(part=true,hole=false,block=false)
 {
-translate([2.500000,7.500000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,7.500000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D22(){translate([2.500000,-10.000000,1.200000])rotate([0,0,180.000000])children();}
 module part_D22(part=true,hole=false,block=false)
 {
-translate([2.500000,-10.000000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,-10.000000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module TP2(){translate([-2.500000,-17.500000,1.200000])rotate([0,0,90.000000])children();}
 module part_TP2(part=true,hole=false,block=false)
@@ -58,28 +60,27 @@ module part_TP2(part=true,hole=false,block=false)
 module D18(){translate([-2.500000,0.100000,1.200000])children();}
 module part_D18(part=true,hole=false,block=false)
 {
-translate([-2.500000,0.100000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,0.100000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,0.100000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
-module D39(){translate([7.500000,4.300000,1.200000])rotate([0,0,180.000000])children();}
+module D39(){translate([7.500000,5.100000,1.200000])rotate([0,0,180.000000])children();}
 module part_D39(part=true,hole=false,block=false)
 {
-translate([7.500000,4.300000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,5.100000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D24(){translate([2.500000,-5.000000,1.200000])rotate([0,0,180.000000])children();}
 module part_D24(part=true,hole=false,block=false)
 {
-translate([2.500000,-5.000000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,-5.000000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D26(){translate([2.500000,0.000000,1.200000])rotate([0,0,180.000000])children();}
 module part_D26(part=true,hole=false,block=false)
 {
-translate([2.500000,0.000000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,0.000000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D5(){translate([-7.500000,-4.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D5(part=true,hole=false,block=false)
 {
-translate([-7.500000,-4.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,-4.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
 module TP5(){translate([0.000000,-20.500000,1.200000])rotate([0,0,90.000000])children();}
 module part_TP5(part=true,hole=false,block=false)
@@ -88,112 +89,107 @@ module part_TP5(part=true,hole=false,block=false)
 module D3(){translate([-7.500000,-8.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D3(part=true,hole=false,block=false)
 {
-translate([-7.500000,-8.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,-8.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
 module D10(){translate([-7.500000,5.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D10(part=true,hole=false,block=false)
 {
-translate([-7.500000,5.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,5.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
 module D31(){translate([7.500000,-12.500000,1.200000])rotate([0,0,180.000000])children();}
 module part_D31(part=true,hole=false,block=false)
 {
-translate([7.500000,-12.500000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,-12.500000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D9(){translate([-7.500000,3.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D9(part=true,hole=false,block=false)
 {
-translate([-7.500000,3.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,3.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
 module D12(){translate([-2.500000,-10.700000,1.200000])children();}
 module part_D12(part=true,hole=false,block=false)
 {
-translate([-2.500000,-10.700000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,-10.700000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,-10.700000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
 module D14(){translate([-2.500000,-7.100000,1.200000])children();}
 module part_D14(part=true,hole=false,block=false)
 {
-translate([-2.500000,-7.100000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,-7.100000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,-7.100000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
-module D38(){translate([7.500000,2.200000,1.200000])rotate([0,0,90.000000])children();}
+module D38(){translate([7.500000,2.900000,1.200000])rotate([0,0,90.000000])children();}
 module part_D38(part=true,hole=false,block=false)
 {
-translate([7.500000,2.200000,1.200000])rotate([0,0,90.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,2.900000,1.200000])rotate([0,0,90.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D15(){translate([-2.500000,-5.300000,1.200000])children();}
 module part_D15(part=true,hole=false,block=false)
 {
-translate([-2.500000,-5.300000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,-5.300000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,-5.300000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
 module D6(){translate([-7.500000,-2.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D6(part=true,hole=false,block=false)
 {
-translate([-7.500000,-2.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,-2.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
 module D20(){translate([-2.500000,3.700000,1.200000])children();}
 module part_D20(part=true,hole=false,block=false)
 {
-translate([-2.500000,3.700000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,3.700000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,3.700000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
 module D21(){translate([2.500000,-12.500000,1.200000])rotate([0,0,180.000000])children();}
 module part_D21(part=true,hole=false,block=false)
 {
-translate([2.500000,-12.500000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,-12.500000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D28(){translate([2.500000,5.000000,1.200000])rotate([0,0,180.000000])children();}
 module part_D28(part=true,hole=false,block=false)
 {
-translate([2.500000,5.000000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,5.000000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D30(){translate([2.500000,10.000000,1.200000])rotate([0,0,180.000000])children();}
 module part_D30(part=true,hole=false,block=false)
 {
-translate([2.500000,10.000000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,10.000000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
-module D35(){translate([7.500000,-4.100000,1.200000])rotate([0,0,180.000000])children();}
+module D35(){translate([7.500000,-3.700000,1.200000])rotate([0,0,180.000000])children();}
 module part_D35(part=true,hole=false,block=false)
 {
-translate([7.500000,-4.100000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,-3.700000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
-module D33(){translate([7.500000,-8.300000,1.200000])rotate([0,0,180.000000])children();}
+module D33(){translate([7.500000,-8.100000,1.200000])rotate([0,0,180.000000])children();}
 module part_D33(part=true,hole=false,block=false)
 {
-translate([7.500000,-8.300000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,-8.100000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
-module D34(){translate([7.500000,-6.200000,1.200000])rotate([0,0,90.000000])children();}
+module D34(){translate([7.500000,-5.900000,1.200000])rotate([0,0,90.000000])children();}
 module part_D34(part=true,hole=false,block=false)
 {
-translate([7.500000,-6.200000,1.200000])rotate([0,0,90.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,-5.900000,1.200000])rotate([0,0,90.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D2(){translate([-7.500000,-10.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D2(part=true,hole=false,block=false)
 {
-translate([-7.500000,-10.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,-10.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
 module D23(){translate([2.500000,-7.500000,1.200000])rotate([0,0,180.000000])children();}
 module part_D23(part=true,hole=false,block=false)
 {
-translate([2.500000,-7.500000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,-7.500000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D16(){translate([-2.500000,-3.500000,1.200000])children();}
 module part_D16(part=true,hole=false,block=false)
 {
-translate([-2.500000,-3.500000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,-3.500000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,-3.500000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
 module D8(){translate([-7.500000,1.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D8(part=true,hole=false,block=false)
 {
-translate([-7.500000,1.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,1.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
-module D40(){translate([7.500000,6.400000,1.200000])rotate([0,0,90.000000])children();}
+module D40(){translate([7.500000,7.300000,1.200000])rotate([0,0,90.000000])children();}
 module part_D40(part=true,hole=false,block=false)
 {
-translate([7.500000,6.400000,1.200000])rotate([0,0,90.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,7.300000,1.200000])rotate([0,0,90.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module TP3(){translate([2.500000,-17.500000,1.200000])rotate([0,0,90.000000])children();}
 module part_TP3(part=true,hole=false,block=false)
@@ -202,42 +198,41 @@ module part_TP3(part=true,hole=false,block=false)
 module D19(){translate([-2.500000,1.900000,1.200000])children();}
 module part_D19(part=true,hole=false,block=false)
 {
-translate([-2.500000,1.900000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,1.900000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,1.900000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
-module D36(){translate([7.500000,-2.000000,1.200000])rotate([0,0,90.000000])children();}
+module D36(){translate([7.500000,-1.500000,1.200000])rotate([0,0,90.000000])children();}
 module part_D36(part=true,hole=false,block=false)
 {
-translate([7.500000,-2.000000,1.200000])rotate([0,0,90.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,-1.500000,1.200000])rotate([0,0,90.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D25(){translate([2.500000,-2.500000,1.200000])rotate([0,0,180.000000])children();}
 module part_D25(part=true,hole=false,block=false)
 {
-translate([2.500000,-2.500000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,-2.500000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module TP4(){translate([7.500000,-17.500000,1.200000])rotate([0,0,90.000000])children();}
 module part_TP4(part=true,hole=false,block=false)
 {
 };
-module D37(){translate([7.472659,0.097648,1.200000])rotate([0,0,180.000000])children();}
+module D37(){translate([7.500000,0.700000,1.200000])rotate([0,0,180.000000])children();}
 module part_D37(part=true,hole=false,block=false)
 {
-translate([7.472659,0.097648,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,0.700000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D7(){translate([-7.500000,-0.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D7(part=true,hole=false,block=false)
 {
-translate([-7.500000,-0.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,-0.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
 module D1(){translate([-7.500000,-12.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D1(part=true,hole=false,block=false)
 {
-translate([-7.500000,-12.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,-12.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
 module D27(){translate([2.500000,2.500000,1.200000])rotate([0,0,180.000000])children();}
 module part_D27(part=true,hole=false,block=false)
 {
-translate([2.500000,2.500000,1.200000])rotate([0,0,180.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([2.500000,2.500000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module TP1(){translate([-7.500000,-17.500000,1.200000])rotate([0,0,90.000000])children();}
 module part_TP1(part=true,hole=false,block=false)
@@ -246,30 +241,27 @@ module part_TP1(part=true,hole=false,block=false)
 module D17(){translate([-2.500000,-1.700000,1.200000])children();}
 module part_D17(part=true,hole=false,block=false)
 {
-translate([-2.500000,-1.700000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,-1.700000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,-1.700000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
 module D11(){translate([-2.500000,-12.500000,1.200000])children();}
 module part_D11(part=true,hole=false,block=false)
 {
-translate([-2.500000,-12.500000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,-12.500000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,-12.500000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
-module D32(){translate([7.500000,-10.400000,1.200000])rotate([0,0,90.000000])children();}
+module D32(){translate([7.500000,-10.300000,1.200000])rotate([0,0,90.000000])children();}
 module part_D32(part=true,hole=false,block=false)
 {
-translate([7.500000,-10.400000,1.200000])rotate([0,0,90.000000])scale([2.000000,2.000000,1.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([7.500000,-10.300000,1.200000])rotate([0,0,90.000000])m0(part,hole,block,casetop); // D29 (back)
 };
 module D4(){translate([-7.500000,-6.500000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D4(part=true,hole=false,block=false)
 {
-translate([-7.500000,-6.500000,1.200000])rotate([0,0,-90.000000])m0(part,hole,block,casetop); // RevK:SMD2020 SMD1010 (back)
+translate([-7.500000,-6.500000,1.200000])rotate([0,0,-90.000000])m2(part,hole,block,casetop); // D5 (back)
 };
 module D13(){translate([-2.500000,-8.900000,1.200000])children();}
 module part_D13(part=true,hole=false,block=false)
 {
-translate([-2.500000,-8.900000,1.200000])translate([0.000000,0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
-translate([-2.500000,-8.900000,1.200000])translate([0.000000,-0.250000,0.000000])m1(part,hole,block,casetop); // RevK:SMD1615 LED_0603_1608Metric (back)
+translate([-2.500000,-8.900000,1.200000])m1(part,hole,block,casetop); // D18 (back)
 };
 // Parts to go on PCB (top)
 module parts_top(part=false,hole=false,block=false){
@@ -320,7 +312,7 @@ part_D4(part,hole,block);
 part_D13(part,hole,block);
 }
 
-parts_top=10;
+parts_top=40;
 // Parts to go on PCB (bottom)
 module parts_bottom(part=false,hole=false,block=false){
 }
@@ -328,7 +320,57 @@ module parts_bottom(part=false,hole=false,block=false){
 parts_bottom=0;
 module b(cx,cy,z,w,l,h){translate([cx-w/2,cy-l/2,z])cube([w,l,h]);}
 module m0(part=false,hole=false,block=false,height)
-{ // RevK:SMD2020 SMD1010
+{ // D29
+// 2x2mm LED
+if(part)
+{
+        b(0,0,0,2.0+0.2,2.0+0.2,0.65+0.2);
+}
+if(hole)
+{
+        hull()
+        {
+                b(0,0,.6+0.2,2.0+0.2,2.0+0.2,1);
+                translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=16);
+        }
+}
+if(block)
+{
+        hull()
+        {
+                b(0,0,.65+0.2,2.8,2.8,1);
+                translate([0,0,height])cylinder(d=2,h=1,$fn=16);
+        }
+}
+}
+
+module m1(part=false,hole=false,block=false,height)
+{ // D18
+// 1.6x1.5mm LED
+if(part)
+{
+        b(0,0,0,1.6+0.2,1.5+0.2,.6+0.2);
+}
+if(hole)
+{
+        hull()
+        {
+                b(0,0,.6+0.2,1.6+0.2,1.5+0.2,1);
+                translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=16);
+        }
+}
+if(block)
+{
+        hull()
+        {
+                b(0,0,.6+0.2,2.8,2.8,1);
+                translate([0,0,height])cylinder(d=2,h=1,$fn=16);
+        }
+}
+}
+
+module m2(part=false,hole=false,block=false,height)
+{ // D5
 // 1x1mm LED
 if(part)
 {
@@ -349,20 +391,6 @@ if(block)
                 b(0,0,.8,2.8,2.8,1);
                 translate([0,0,height])cylinder(d=2,h=1,$fn=16);
         }
-}
-}
-
-module m1(part=false,hole=false,block=false,height)
-{ // RevK:SMD1615 LED_0603_1608Metric
-if(part)
-{
-	b(0,0,0,1.6,0.8,0.25);
-	b(0,0,0,1.2,0.8,0.55);
-	b(0,0,0,0.8,0.8,0.95);
-}
-if(hole)
-{
-	b(0,0,0,0.999,0.999,20);
 }
 }
 
@@ -604,10 +632,14 @@ module top_body()
 			solid_case();
 			pcb_hulled(casetop+pcbthickness,0.03);
 		}
-		if(parts_top)minkowski()
+		if(parts_top||topthickness)minkowski()
 		{
-			if(nohull)parts_top(part=true);
-			else hull(){parts_top(part=true);pcb_hulled();}
+			union()
+			{
+				if(nohull)parts_top(part=true);
+				else hull(){parts_top(part=true);pcb_hulled();}
+				if(topthickness)pcb_hulled(casetop+pcbthickness-topthickness,0);
+			}
 			translate([0,0,margin-height])cylinder(r=margin*2,h=height,$fn=8);
 		}
 	}
@@ -664,10 +696,14 @@ module bottom_body()
 			solid_case();
 			translate([0,0,-casebottom])pcb_hulled(casebottom+pcbthickness,0.03);
 		}
-		if(parts_bottom)minkowski()
+		if(parts_bottom||bottomthickness)minkowski()
 		{
-			if(nohull)parts_bottom(part=true);
-			else hull()parts_bottom(part=true);
+			union()
+			{
+				if(nohull)parts_bottom(part=true);
+				else hull()parts_bottom(part=true);
+				if(bottomthickness)translate([0,0,bottomthickness-casebottom])pcb_hulled(casebottom+pcbthickness-bottomthickness,0);
+			}
 			translate([0,0,-margin])cylinder(r=margin*2,h=height,$fn=8);
 		}
 	}

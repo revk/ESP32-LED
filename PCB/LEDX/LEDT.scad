@@ -1,6 +1,6 @@
 // Generated case design for LEDX/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-09-24 13:33:54
+// Generated 2025-09-30 15:34:14
 // title:	PCB-USBX
 // rev:	1
 // comment:	www.me.uk
@@ -12,9 +12,11 @@ margin=0.250000;
 lip=3.000000;
 lipa=0;
 lipt=2;
+casewall=3.000000;
 casebottom=6.000000;
 casetop=4.000000;
-casewall=3.000000;
+bottomthickness=0.000000;
+topthickness=0.000000;
 fit=0.000000;
 snap=0.150000;
 edge=2.000000;
@@ -601,10 +603,14 @@ module top_body()
 			solid_case();
 			pcb_hulled(casetop+pcbthickness,0.03);
 		}
-		if(parts_top)minkowski()
+		if(parts_top||topthickness)minkowski()
 		{
-			if(nohull)parts_top(part=true);
-			else hull(){parts_top(part=true);pcb_hulled();}
+			union()
+			{
+				if(nohull)parts_top(part=true);
+				else hull(){parts_top(part=true);pcb_hulled();}
+				if(topthickness)pcb_hulled(casetop+pcbthickness-topthickness,0);
+			}
 			translate([0,0,margin-height])cylinder(r=margin*2,h=height,$fn=8);
 		}
 	}
@@ -661,10 +667,14 @@ module bottom_body()
 			solid_case();
 			translate([0,0,-casebottom])pcb_hulled(casebottom+pcbthickness,0.03);
 		}
-		if(parts_bottom)minkowski()
+		if(parts_bottom||bottomthickness)minkowski()
 		{
-			if(nohull)parts_bottom(part=true);
-			else hull()parts_bottom(part=true);
+			union()
+			{
+				if(nohull)parts_bottom(part=true);
+				else hull()parts_bottom(part=true);
+				if(bottomthickness)translate([0,0,bottomthickness-casebottom])pcb_hulled(casebottom+pcbthickness-bottomthickness,0);
+			}
 			translate([0,0,-margin])cylinder(r=margin*2,h=height,$fn=8);
 		}
 	}
