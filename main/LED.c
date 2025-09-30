@@ -1603,7 +1603,7 @@ adc_task (void *arg)
          volt = 0;
       adc_oneshot_read (adc_handle, adc_channel, &raw);
       adc_cali_raw_to_voltage (adc_cali_handle, raw, &volt);
-      voltage = volt * 134 / 10;
+      voltage = volt * ADC_SCALE;
       sleep (1);
    }
    adc_oneshot_del_unit (adc_handle);
