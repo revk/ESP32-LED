@@ -21,7 +21,7 @@ bit	ir.4x11		.live				// 4x11 IR colour/LED remote
 bit	ir.4x6		.live				// 4x6 IR colour/LED remote
 bit	ir.ha						// Announce keys to HA config
 
-gpio	blink		"21,21,21"	.array=3		// Status LEDs, R, G, B (all the same for WS2812)
+gpio	blink		"40,40,40"	.array=3		// Status LEDs, R, G, B (all the same for WS2812)
 
 u8	max.r		255	.unit="/255"		// Max RGB Red
 u8	max.g		255	.unit="/255"		// Max RGB Green
