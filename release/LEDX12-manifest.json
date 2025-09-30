@@ -1,5 +1,5 @@
 {
-  "url": "https://ota.revk.uk/LED-S3-MINI-N4-R2-manifest.json",
+  "url": "https://ota.revk.uk/LEDX12-manifest.json",
   "chip": "ESP32S3MCN4R2",
   "flash": [
     {
@@ -20,6 +20,16 @@
       "filename": "LED-S3-MINI-N4-R2.bin",
       "address": "10000",
       "url": "https://ota.revk.uk/LED-S3-MINI-N4-R2.bin"
+    },
+    {
+      "filename": "LEDX12-nvs1.bin",
+      "address": "9000",
+      "url": "https://ota.revk.uk/LEDX12-nvs1.bin"
+    },
+    {
+      "filename": "LEDX12-nvs2.bin",
+      "address": "3F0000",
+      "url": "https://ota.revk.uk/LEDX12-nvs2.bin"
     }
   ]
 }
