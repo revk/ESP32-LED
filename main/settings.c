@@ -28,7 +28,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_BIT,.name="ir4x11",.comment="4x11 IR colour/LED remote",.group=2,.len=6,.dot=2,.bit=REVK_SETTINGS_BITFIELD_ir4x11,.live=1},
  {.type=REVK_SETTINGS_BIT,.name="ir4x6",.comment="4x6 IR colour/LED remote",.group=2,.len=5,.dot=2,.bit=REVK_SETTINGS_BITFIELD_ir4x6,.live=1},
  {.type=REVK_SETTINGS_BIT,.name="irha",.comment="Announce keys to HA config",.group=2,.len=4,.dot=2,.bit=REVK_SETTINGS_BITFIELD_irha},
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="Status LEDs, R, G, B (all the same for WS2812)",.len=5,.def="21,21,21",.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=3},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="Status LEDs, R, G, B (all the same for WS2812)",.len=5,.def="40,40,40",.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=3},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxr",.comment="Max RGB Red",.group=3,.len=4,.dot=3,.def="255",.ptr=&maxr,.size=sizeof(uint8_t),.unit="/255"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxg",.comment="Max RGB Green",.group=3,.len=4,.dot=3,.def="255",.ptr=&maxg,.size=sizeof(uint8_t),.unit="/255"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxb",.comment="Max RGB Blue",.group=3,.len=4,.dot=3,.def="255",.ptr=&maxb,.size=sizeof(uint8_t),.unit="/255"},
