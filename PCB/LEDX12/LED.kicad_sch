@@ -3722,6 +3722,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "Clean up GPIOs"
+		(exclude_from_sim no)
+		(at 129.54 140.462 0)
+		(effects
+			(font
+				(size 12.7 12.7)
+			)
+		)
+		(uuid "0f47fb64-6a7a-41d1-a833-65d691221dec")
+	)
 	(junction
 		(at 134.62 180.34)
 		(diameter 0)
