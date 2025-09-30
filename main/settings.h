@@ -114,6 +114,9 @@ enum {
  REVK_SETTINGS_BITFIELD_prefixapp,
  REVK_SETTINGS_BITFIELD_prefixhost,
 #ifdef	CONFIG_REVK_BLINK_DEF
+#ifdef	CONFIG_REVK_BLINK_WS2812_DEF
+#else
+#endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
 #ifdef	CONFIG_REVK_APCONFIG
@@ -166,6 +169,9 @@ struct revk_settings_bits_s {
  uint8_t prefixapp:1;	// MQTT use appname/ in front of hostname in topic
  uint8_t prefixhost:1;	// MQTT use (appname/)hostname/topic instead of topic/(appname/)hostname
 #ifdef	CONFIG_REVK_BLINK_DEF
+#ifdef	CONFIG_REVK_BLINK_WS2812_DEF
+#else
+#endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
 #ifdef	CONFIG_REVK_APCONFIG
@@ -279,7 +285,11 @@ extern char* topicha;	// MQTT Topic for homeassistant
 #define	prefixapp	revk_settings_bits.prefixapp
 #define	prefixhost	revk_settings_bits.prefixhost
 #ifdef	CONFIG_REVK_BLINK_DEF
+#ifdef	CONFIG_REVK_BLINK_WS2812_DEF
+extern revk_gpio_t blink;	// WS2812 LED
+#else
 extern revk_gpio_t blink[3];	// R, G, B LED array (set all the same for WS2812 LED)
+#endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
 #ifdef	CONFIG_REVK_APCONFIG
@@ -294,7 +304,7 @@ extern char* mqtthost[CONFIG_REVK_MQTT_CLIENTS];	// MQTT hostname
 extern uint16_t mqttport[CONFIG_REVK_MQTT_CLIENTS];	// MQTT port
 extern char* mqttuser[CONFIG_REVK_MQTT_CLIENTS];	// MQTT username
 extern char* mqttpass[CONFIG_REVK_MQTT_CLIENTS];	// MQTT password
-extern revk_settings_blob_t* mqttcert[CONFIG_REVK_MQTT_CLIENTS];	// MQTT CA certificate
+extern revk_settings_blob_t* mqttcert[CONFIG_REVK_MQTT_CLIENTS];	// MQTT CA certificate (for mqtts)
 #endif
 extern revk_settings_blob_t* clientkey;	// Client Key (OTA and MQTT TLS)
 extern revk_settings_blob_t* clientcert;	// Client certificate (OTA and MQTT TLS)
@@ -434,7 +444,11 @@ enum {
 #define REVK_SETTINGS_PREFIXAPP
 #define REVK_SETTINGS_PREFIXHOST
 #ifdef	CONFIG_REVK_BLINK_DEF
+#ifdef	CONFIG_REVK_BLINK_WS2812_DEF
 #define REVK_SETTINGS_BLINK
+#else
+#define REVK_SETTINGS_BLINK
+#endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
 #ifdef	CONFIG_REVK_APCONFIG
