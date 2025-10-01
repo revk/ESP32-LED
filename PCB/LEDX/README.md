@@ -15,7 +15,7 @@ These files are for use with [KiCAD](https://www.kicad.org).
 
 |Design|Bottom|---|Top|---|
 |------|------|---|---|---|
-|LED|[LEDB](LEDB.stl)|[LEDT](LEDT.stl)|<img src='LEDB:png' size=25%>|<img src='LEDT:png' size=25%>|
+|LED|[LEDB](LEDB.stl)|<a href="LEDB.stl"><img src='LEDB.png' size=15%></a>|[LEDT](LEDT.stl)|<img src='LEDT.png' size=15%>|
 
 ## Images
 
@@ -24,4 +24,4 @@ These files are for use with [KiCAD](https://www.kicad.org).
 
 ---
 
-*Auto generated README.md 2025-10-01T15:07:02*
+*Auto generated README.md 2025-10-01T16:04:16*
