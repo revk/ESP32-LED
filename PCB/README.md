@@ -22,13 +22,13 @@ USB-A board
 
 USB-C board
 
-<img width=24% src=LEDC/LED.png><img width=24% src=LEDC/LED-90.png> <img width=24% src=LEDC/LED-bottom.png><img width=24% src=LEDC/LED-panel.png>
+<img width=24% src=LEDC12/LED.png><img width=24% src=LEDC12/LED-90.png> <img width=24% src=LEDC12/LED-bottom.png><img width=24% src=LEDC/LED-panel.png>
 
 ## LEDX
 
 Non USB board
 
-<img width=24% src=LEDX/LED.png><img width=24% src=LEDX/LED-90.png><img width=24% src=LEDX/LED-bottom.png><img width=24% src=LEDX/LED-panel.png>
+<img width=24% src=LEDX12/LED.png><img width=24% src=LEDX12/LED-90.png><img width=24% src=LEDX12/LED-bottom.png><img width=24% src=LEDX/LED-panel.png>
 
 ## LEDR
 
