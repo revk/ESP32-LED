@@ -18,11 +18,11 @@ These files are for use with [KiCAD](https://www.kicad.org).
 |------|------|---|
 |LED|<a href='LEDB.stl'><img src='LEDB.png' size=15%></a>|<a href='LEDT.stl'><img src='LEDT.png' size=15%></a>|
 
-## Images
+## PCB Images
 
 <img src='LED.png' width=32%><img src='LED-90.png' width=32%><img src='LED-bottom.png' width=32%>
 <img src='LED-panel.png' width=49%><img src='LED-panel-bottom.png' width=49%>
 
 ---
 
-*Auto generated README.md 2025-10-01T16:24:16*
+*Auto generated README.md 2025-10-01T18:26:24*

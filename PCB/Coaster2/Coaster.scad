@@ -1,6 +1,6 @@
 // Generated case design for Coaster2/Coaster.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-09-30 16:10:14
+// Generated 2025-10-01 18:26:16
 // title:	Coaster
 //
 

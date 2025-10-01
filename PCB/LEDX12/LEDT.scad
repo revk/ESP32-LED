@@ -1,6 +1,6 @@
 // Generated case design for LEDX12/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-01 10:06:36
+// Generated 2025-10-01 17:53:55
 // title:	LEDX12
 // rev:	1
 // comment:	www.me.uk
