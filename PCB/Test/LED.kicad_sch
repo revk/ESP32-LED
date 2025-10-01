@@ -2044,7 +2044,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 160.02 99.06 0)
 			(effects
 				(font
@@ -2132,7 +2132,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 113.665 139.065 0)
 			(effects
 				(font
@@ -2374,7 +2374,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 137.16 99.06 0)
 			(effects
 				(font
@@ -2462,7 +2462,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 174.625 139.065 0)
 			(effects
 				(font
@@ -2550,7 +2550,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 144.78 99.06 0)
 			(effects
 				(font
@@ -2703,7 +2703,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 113.665 119.38 0)
 			(effects
 				(font
@@ -2791,7 +2791,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 121.92 99.06 0)
 			(effects
 				(font
@@ -2879,7 +2879,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 175.26 99.06 0)
 			(effects
 				(font
@@ -3033,7 +3033,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 159.385 119.38 0)
 			(effects
 				(font
@@ -3121,7 +3121,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 144.145 139.065 0)
 			(effects
 				(font
@@ -3209,7 +3209,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 106.045 139.065 0)
 			(effects
 				(font
@@ -3362,7 +3362,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 144.145 119.38 0)
 			(effects
 				(font
@@ -3450,7 +3450,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 106.045 119.38 0)
 			(effects
 				(font
@@ -3691,7 +3691,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 136.525 139.065 0)
 			(effects
 				(font
@@ -3955,7 +3955,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 151.765 119.38 0)
 			(effects
 				(font
@@ -4043,7 +4043,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 152.4 99.06 0)
 			(effects
 				(font
@@ -4196,7 +4196,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 121.285 119.38 0)
 			(effects
 				(font
@@ -4504,7 +4504,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 174.625 119.38 0)
 			(effects
 				(font
@@ -4592,7 +4592,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 159.385 139.065 0)
 			(effects
 				(font
@@ -4680,7 +4680,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 129.54 99.06 0)
 			(effects
 				(font
@@ -4874,7 +4874,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 167.64 99.06 0)
 			(effects
 				(font
@@ -5027,7 +5027,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 167.005 119.38 0)
 			(effects
 				(font
@@ -5115,7 +5115,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 121.285 139.065 0)
 			(effects
 				(font
@@ -5291,7 +5291,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 167.005 139.065 0)
 			(effects
 				(font
@@ -5467,7 +5467,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 128.905 119.38 0)
 			(effects
 				(font
@@ -5639,7 +5639,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 151.765 139.065 0)
 			(effects
 				(font
@@ -5727,7 +5727,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 128.905 139.065 0)
 			(effects
 				(font
@@ -5947,7 +5947,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 136.525 119.38 0)
 			(effects
 				(font
@@ -6190,7 +6190,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 106.68 99.06 0)
 			(effects
 				(font
@@ -6432,7 +6432,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 114.3 99.06 0)
 			(effects
 				(font

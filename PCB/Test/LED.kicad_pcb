@@ -192,7 +192,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -415,7 +415,7 @@
 			(at 0 -1.45 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "184a6f55-a059-4bfe-8e6d-1e50e9719146")
+			(uuid "02b5d27b-cf94-4bcd-a29b-b13653a06b87")
 			(effects
 				(font
 					(size 1 1)
@@ -423,11 +423,11 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "387acbcf-f403-4ffa-8fd5-65675f744967")
+			(uuid "8dac65cf-4fec-41a8-b744-29be9ce0539a")
 			(effects
 				(font
 					(size 1 1)
@@ -440,7 +440,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "2c1df5ba-86ba-4f70-b528-88384271df92")
+			(uuid "477d2733-3972-462b-9b12-e81b9df33755")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -453,7 +453,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f4627522-1afc-40f9-a5e3-218054f7b535")
+			(uuid "89670fcd-ecad-4957-b845-2863a30e339c")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -727,7 +727,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -969,7 +969,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -1200,7 +1200,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -1431,7 +1431,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -2578,7 +2578,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -3090,7 +3090,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -3332,7 +3332,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -3574,7 +3574,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -3805,7 +3805,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -4328,7 +4328,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -4570,7 +4570,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -4801,7 +4801,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5032,7 +5032,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5263,7 +5263,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5494,7 +5494,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5725,7 +5725,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -6237,7 +6237,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -6468,7 +6468,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -6991,7 +6991,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -7295,7 +7295,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -7537,7 +7537,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -7768,7 +7768,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -8072,7 +8072,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -8865,7 +8865,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -9169,7 +9169,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -9411,7 +9411,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -9653,7 +9653,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-2020RGBC-WS2812B"
 			(at 0 2.25 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -10165,7 +10165,7 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
+		(property "Value" "XL-1615RGBC-WS2812B"
 			(at 0 2.25 0)
 			(layer "F.Fab")
 			(hide yes)
