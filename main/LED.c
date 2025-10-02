@@ -1687,14 +1687,14 @@ mic_task (void *arg)
       err = i2s_channel_enable (i);
    if (err)
    {
-	   printf("\nATE: FAIL\n");
+      revk_ate_fail ();
       ESP_LOGE (TAG, "I2S failed");
       jo_t j = e (err, "Failed init I2S");
       revk_error ("i2s", &j);
       vTaskDelete (NULL);
       return;
    }
-	   printf("\nATE: PASS\n");
+   revk_ate_pass ();
    ESP_LOGE (TAG, "Audio started, %d*%d bits at %dHz", MICSAMPLES * MICOVERSAMPLE, bytes * 8, MICRATE * MICOVERSAMPLE);
    while (1)
    {
@@ -1921,7 +1921,7 @@ dokey (uint32_t key)
    if (!k)
       return;
    if (!strncmp (k, "DIY", 3))
-   {	// Preset control
+   {                            // Preset control
       app_callback (0, topiccommand, NULL, k + 3, NULL);
       return;
    }
