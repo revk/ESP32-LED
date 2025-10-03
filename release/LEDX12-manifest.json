@@ -25,7 +25,7 @@
       "filename": "LED-S3-MINI-N4-R2.bin",
       "address": "10000",
       "url": "https://ota.revk.uk/LED-S3-MINI-N4-R2.bin",
-      "build":true
+      "app":true
     }
   ]
 }
