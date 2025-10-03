@@ -1694,7 +1694,6 @@ mic_task (void *arg)
       vTaskDelete (NULL);
       return;
    }
-   revk_ate_pass ();
    ESP_LOGE (TAG, "Audio started, %d*%d bits at %dHz", MICSAMPLES * MICOVERSAMPLE, bytes * 8, MICRATE * MICOVERSAMPLE);
    while (1)
    {
@@ -1706,6 +1705,7 @@ mic_task (void *arg)
       {
          b.micok = 1;
          ESP_LOGE (TAG, "Audio running");
+   revk_ate_pass ();
       }
       {                         // Magnitude
          float mag = 0;

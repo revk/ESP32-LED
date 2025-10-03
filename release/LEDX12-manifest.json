@@ -1,6 +1,12 @@
 {
   "url": "https://ota.revk.uk/LEDX12-manifest.json",
   "chip": "ESP32S3MCN4R2",
+  "check":false,
+  "setting":{
+	  "blink":[21,21,21],
+	  "mic":{"data":33,"clock":48,"ws":35},
+	  "ir":{"gpio":""}
+  },
   "flash": [
     {
       "filename": "LED-S3-MINI-N4-R2-bootloader.bin",
@@ -20,16 +26,6 @@
       "filename": "LED-S3-MINI-N4-R2.bin",
       "address": "10000",
       "url": "https://ota.revk.uk/LED-S3-MINI-N4-R2.bin"
-    },
-    {
-      "filename": "LEDX12-nvs1.bin",
-      "address": "9000",
-      "url": "https://ota.revk.uk/LEDX12-nvs1.bin"
-    },
-    {
-      "filename": "LEDX12-nvs2.bin",
-      "address": "3F0000",
-      "url": "https://ota.revk.uk/LEDX12-nvs2.bin"
     }
   ]
 }
