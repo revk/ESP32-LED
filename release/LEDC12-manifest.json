@@ -1,5 +1,5 @@
 {
-  "url": "https://ota.revk.uk/LEDX12-manifest.json",
+  "url": "https://ota.revk.uk/LEDC12-manifest.json",
   "chip": "ESP32S3MCN4R2",
   "setting":{
 	  "blink":[40,40,40],
