@@ -7,7 +7,7 @@
 	  "ir":{"gpio":36},
 	  "adc":8,
 	  "button":6,
-	  "factory":21
+	  "factorygpio":21
   },
   "flash": [
     {
