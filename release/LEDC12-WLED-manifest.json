@@ -1,8 +1,8 @@
 {
   "url": "https://ota.revk.uk/LEDC12-WLED-manifest.json",
-  "check": false,
   "start": "Ada",
-  "setting":{"v":true},
+  "wifi":{"ssid":"IoT", "pass":"security"},
+  "app":"WLED",
   "flash": [
     {
       "filename": "WLED-ESP32S3-boot.bin",
