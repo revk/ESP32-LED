@@ -1687,7 +1687,7 @@ mic_task (void *arg)
       err = i2s_channel_enable (i);
    if (err)
    {
-      revk_ate_fail ();
+      revk_ate_fail ("MIC/I2S failed");
       ESP_LOGE (TAG, "I2S failed");
       jo_t j = e (err, "Failed init I2S");
       revk_error ("i2s", &j);
@@ -1705,7 +1705,7 @@ mic_task (void *arg)
       {
          b.micok = 1;
          ESP_LOGE (TAG, "Audio running");
-   revk_ate_pass ();
+         revk_ate_pass ();
       }
       {                         // Magnitude
          float mag = 0;
