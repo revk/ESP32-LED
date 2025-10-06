@@ -1,5 +1,5 @@
 {
-  "url": "https://ota.revk.uk/LEDC12-WLED-manifest.json",
+  "url": "https://ota.revk.uk/LEDX12-WLED-manifest.json",
   "start": "Ada",
   "wifi":{"ssid":"IoT", "pass":"security"},
   "app":"WLED",
@@ -24,9 +24,9 @@
       "address": "10000"
     },
     {
-      "filename": "LEDC12-WLED-spiffs.bin",
+      "filename": "LEDX12-WLED-spiffs.bin",
       "address": "310000",
-      "url": "https://ota.revk.uk/LEDC12-WLED-spiffs.bin"
+      "url": "https://ota.revk.uk/LEDX12-WLED-spiffs.bin"
     }
   ]
 }
