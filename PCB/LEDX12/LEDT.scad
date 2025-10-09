@@ -1,6 +1,6 @@
 // Generated case design for LEDX12/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-09 09:35:12
+// Generated 2025-10-09 12:53:14
 // title:	LEDX12
 // rev:	1
 // comment:	www.me.uk
@@ -657,7 +657,7 @@ module top_body()
 				else hull(){parts_top(part=true);pcb_hulled();}
 				if(topthickness)pcb_hulled(casetop+pcbthickness-topthickness,0);
 			}
-			translate([0,0,margin-height])cylinder(r=margin*2,h=height,$fn=8);
+			translate([0,0,margin-height])cylinder(r=margin,h=height,$fn=8);
 		}
 	}
 	intersection()
@@ -721,7 +721,7 @@ module bottom_body()
 				else hull()parts_bottom(part=true);
 				if(bottomthickness)translate([0,0,bottomthickness-casebottom])pcb_hulled(casebottom+pcbthickness-bottomthickness,0);
 			}
-			translate([0,0,-margin])cylinder(r=margin*2,h=height,$fn=8);
+			translate([0,0,-margin])cylinder(r=margin,h=height,$fn=8);
 		}
 	}
 	intersection()

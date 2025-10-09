@@ -454,6 +454,168 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:L"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "L"
+				(at -1.27 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "L"
+				(at 1.905 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Inductor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "inductor choke coil reactor magnetic"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Choke_* *Coil* Inductor_* L_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "L_0_1"
+				(arc
+					(start 0 2.54)
+					(mid 0.6323 1.905)
+					(end 0 1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 1.27)
+					(mid 0.6323 0.635)
+					(end 0 0)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 0)
+					(mid 0.6323 -0.635)
+					(end 0 -1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -1.27)
+					(mid 0.6323 -1.905)
+					(end 0 -2.54)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "L_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:R"
 			(pin_numbers
 				(hide yes)
@@ -1978,104 +2140,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "RevK:Hidden"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim no)
-			(in_bom no)
-			(on_board yes)
-			(property "Reference" "Z"
-				(at 0.635 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "Hidden"
-				(at 4.445 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 1.905 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Part No" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Note" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Hidden_0_1"
-				(polyline
-					(pts
-						(xy -0.635 0) (xy 0.635 0)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0.635) (xy 0 -0.635)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "RevK:ICS43434_MEMS_Mic"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -2283,284 +2347,6 @@
 					(at 11.43 -3.81 180)
 					(length 2.54)
 					(name "SD"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "RevK:MD89420-RegBlock"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at -0.635 4.445 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "MD8942"
-				(at 0 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "RevK:SOT-23-6-MD8942"
-				(at 0 -24.13 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2101111937_Shanghai-Mingda-Microelectronics-MD8942_C2684786.pdf"
-				(at 0 -20.955 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Regulator and associated components."
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "MPN" "C2684786"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "MD89420-RegBlock_1_1"
-				(rectangle
-					(start -8.89 7.62)
-					(end 8.255 -6.985)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start 8.255 7.62)
-					(end 12.7 -6.985)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start 12.7 7.62)
-					(end 19.685 -6.985)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start 19.685 7.62)
-					(end 39.37 -6.985)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(text "0.794V"
-					(at 4.445 -5.715 0)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(text "CI\nCO\nCB\nRH\nRL\nRE\nLO"
-					(at 12.065 6.985 0)
-					(effects
-						(font
-							(size 1.185 1.185)
-						)
-						(justify right top)
-					)
-				)
-				(text "10uF\n10uF\n100nF\n124k\n39k2\n1M\n10uH"
-					(at 13.335 6.985 0)
-					(effects
-						(font
-							(size 1.185 1.185)
-						)
-						(justify left top)
-					)
-				)
-				(pin power_in line
-					(at -11.43 5.715 0)
-					(length 2.54)
-					(name "VIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at -11.43 0 0)
-					(length 2.54)
-					(name "VOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -11.43 -5.08 0)
-					(length 2.54)
-					(name "EN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -9.525 90)
-					(length 2.54)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -9.525 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 5.715 1.905 0)
-					(length 2.54)
-					(hide yes)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 5.715 0 0)
-					(length 2.54)
-					(hide yes)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 5.715 -1.905 0)
-					(length 2.54)
-					(hide yes)
-					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3213,6 +2999,208 @@
 						)
 					)
 					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "RevK:TPS562246"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -7.62 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "TPS562246"
+				(at -2.54 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "RevK:SOT-563"
+				(at 1.27 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps562246.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "2A Synchronous Step-Down Voltage Regulator 580kHz, adjustable output voltage, 4.5-17V Input Voltage, 0.804V-7V Output Voltage, SOT-563"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MPN" "C41833479"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "step-down dcdc buck"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOT?563*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TPS562246_0_1"
+				(rectangle
+					(start -7.62 5.08)
+					(end 7.62 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "TPS562246_1_1"
+				(pin power_in line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "VIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "EN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "SW"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "VBST"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "VFB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4496,6 +4484,12 @@
 		(uuid "07e7bf7b-7dc8-4a41-b649-2195696e5470")
 	)
 	(junction
+		(at 137.795 187.325)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "089ffa14-00f2-455b-9495-edce9977932f")
+	)
+	(junction
 		(at 92.075 67.945)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4544,10 +4538,28 @@
 		(uuid "0cf3d356-e01b-4b44-bc77-6a20a1a07195")
 	)
 	(junction
+		(at 111.76 179.705)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0d231cc1-d389-4707-a8c7-99fa0049bf73")
+	)
+	(junction
 		(at 22.86 48.895)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0d3b0f0a-a774-4ca6-896e-e47b7da9ce21")
+	)
+	(junction
+		(at 132.715 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0e3704cc-468b-4b10-8ce0-a3a5d24ffda5")
+	)
+	(junction
+		(at 122.555 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "107457d6-5b2c-40d5-8857-a06b24604596")
 	)
 	(junction
 		(at 73.025 74.295)
@@ -4658,6 +4670,12 @@
 		(uuid "1848ad54-2eeb-4bba-993f-9fd544c9420b")
 	)
 	(junction
+		(at 49.53 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "18c4a861-b32c-49d4-aaa1-8f0ed65414e7")
+	)
+	(junction
 		(at 141.605 112.395)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4706,6 +4724,12 @@
 		(uuid "1f0f8c3e-d2a6-4eab-b6f9-eb4d7a0eb04a")
 	)
 	(junction
+		(at 31.115 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1f9683d1-be97-41e4-8fcd-983c0db08cea")
+	)
+	(junction
 		(at 92.075 55.245)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4722,6 +4746,18 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1fe10de7-4284-49bc-b03a-521d71397e09")
+	)
+	(junction
+		(at 137.795 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2035d093-1081-4a58-81fe-3b7f3cbcbd43")
+	)
+	(junction
+		(at 55.245 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "206970d0-7f71-4482-bb3c-c50e3ffbc800")
 	)
 	(junction
 		(at 80.645 67.945)
@@ -4850,6 +4886,12 @@
 		(uuid "2ad4a166-b9af-4374-8c8a-d98d1fd30ebf")
 	)
 	(junction
+		(at 127.635 187.325)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2c2cab5b-7b6c-4f6a-afe2-e229ade54e95")
+	)
+	(junction
 		(at 103.505 125.095)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4916,6 +4958,12 @@
 		(uuid "336c862f-618e-46b2-8c60-aef2ab6dde86")
 	)
 	(junction
+		(at 107.95 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3386c4d0-e5fc-4994-8569-2e8be869f6a4")
+	)
+	(junction
 		(at 69.215 29.845)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4926,6 +4974,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "33e7fefe-eca3-41f3-911b-10e2e3a52969")
+	)
+	(junction
+		(at 99.695 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "34abc8a0-7e57-4d89-9d0f-96705a1f645f")
 	)
 	(junction
 		(at 137.795 144.145)
@@ -5054,6 +5108,12 @@
 		(uuid "3ead07e1-0e26-4d42-bc1d-80bb4cc6e5fe")
 	)
 	(junction
+		(at 111.76 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3f3a8357-6a52-42c3-84ad-4efa3270ed5f")
+	)
+	(junction
 		(at 73.025 48.895)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5148,6 +5208,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "444aa794-aa9b-4a17-b4d2-aa005363d396")
+	)
+	(junction
+		(at 86.995 174.625)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "45ab0ac2-92aa-4592-9296-e038d6227716")
 	)
 	(junction
 		(at 126.365 48.895)
@@ -5246,6 +5312,12 @@
 		(uuid "4fab2c9e-b3ab-419e-8067-92642551c5d5")
 	)
 	(junction
+		(at 111.76 187.325)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "506d3ba3-8d5b-45df-a90e-71b7491266ad")
+	)
+	(junction
 		(at 114.935 61.595)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5268,6 +5340,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "51b5f006-88d4-4a6e-a53d-ebfc30c10186")
+	)
+	(junction
+		(at 49.53 187.325)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "525fc8d4-269a-4948-87ff-656415aec319")
 	)
 	(junction
 		(at 184.785 140.335)
@@ -5478,6 +5556,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6124ffca-ea7f-4feb-990d-0ffa6e06a4bc")
+	)
+	(junction
+		(at 86.995 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "61d686e5-9ac8-4407-835f-6208fbd6c3c7")
 	)
 	(junction
 		(at 149.225 74.295)
@@ -5708,6 +5792,12 @@
 		(uuid "70782d01-0af1-4c7e-9e55-29eb62cac531")
 	)
 	(junction
+		(at 107.95 179.705)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "70c66b39-7f10-4979-96a2-699e872e6b54")
+	)
+	(junction
 		(at 107.315 118.745)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5822,6 +5912,12 @@
 		(uuid "7a27282b-265d-44cc-92b0-173b0b3c3723")
 	)
 	(junction
+		(at 63.5 177.165)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7a3ae123-486f-45d7-a5f7-8493337d51fd")
+	)
+	(junction
 		(at 15.24 67.945)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5838,6 +5934,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7d2f6777-7ad4-4d74-ad9e-34f6f46ad6a0")
+	)
+	(junction
+		(at 41.275 187.325)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7d36ef51-0481-4fe7-9cd9-5f222e265197")
 	)
 	(junction
 		(at 137.795 67.945)
@@ -5930,6 +6032,12 @@
 		(uuid "841c6332-15dc-4fe7-bc71-ff190eaa1045")
 	)
 	(junction
+		(at 46.355 137.795)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "86e4645e-13c2-43b8-8fa3-4bee9b9976c1")
+	)
+	(junction
 		(at 95.885 150.495)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5940,6 +6048,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8729765f-fe31-43de-9665-002e613381b2")
+	)
+	(junction
+		(at 41.275 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "873eb027-7325-4645-a6af-37b9e0c55f44")
 	)
 	(junction
 		(at 69.215 48.895)
@@ -6206,6 +6320,12 @@
 		(uuid "9dc665ff-6e29-4ec6-9e8e-246e2b90ade7")
 	)
 	(junction
+		(at 85.09 180.975)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9dfc2623-e213-4ca6-895c-87593d8d5ee3")
+	)
+	(junction
 		(at 46.355 36.195)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6216,6 +6336,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9e3f816c-c385-4f26-80b8-bec861e51862")
+	)
+	(junction
+		(at 46.355 131.445)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9e76b1f1-6554-454f-a790-8ab8d9df7d81")
 	)
 	(junction
 		(at 126.365 93.345)
@@ -6282,6 +6408,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a27df4bd-ed80-4a4e-bc5c-1d92bf2ab2d8")
+	)
+	(junction
+		(at 132.715 187.325)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a2fa0784-57be-4317-a3ea-01287323a063")
 	)
 	(junction
 		(at 34.925 80.645)
@@ -6362,6 +6494,12 @@
 		(uuid "a9994f0b-f07f-430a-9c99-34ecffa73bb4")
 	)
 	(junction
+		(at 117.475 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "aa47b0e9-b1bf-4278-9d8c-916a86cdc8cb")
+	)
+	(junction
 		(at 130.175 106.045)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6408,6 +6546,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "af55c191-9d9f-41c9-8311-0a281135f32a")
+	)
+	(junction
+		(at 36.195 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "af94a3da-6ea4-44a7-9fbe-f0ec706eaf55")
 	)
 	(junction
 		(at 46.355 80.645)
@@ -6494,6 +6638,12 @@
 		(uuid "b4507237-f987-477b-9e42-2dd94c68314d")
 	)
 	(junction
+		(at 74.93 187.325)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b46f23b9-ab3c-42cc-8820-f16d9bad6ade")
+	)
+	(junction
 		(at 38.735 118.745)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6504,6 +6654,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b4991830-11bf-4505-a173-a602a447ff28")
+	)
+	(junction
+		(at 122.555 187.325)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b4b32208-ce9b-421a-ba7a-bb3963b4dc0f")
 	)
 	(junction
 		(at 46.355 29.845)
@@ -6896,6 +7052,12 @@
 		(uuid "dacd3438-a319-493f-ab05-9f15e6375f47")
 	)
 	(junction
+		(at 127.635 172.085)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "db524077-7d10-496f-8fbd-96f59e5d97a6")
+	)
+	(junction
 		(at 107.315 61.595)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7208,6 +7370,12 @@
 		(uuid "f9a8fe5c-72ee-4c20-93e3-876d84cca8c3")
 	)
 	(junction
+		(at 117.475 187.325)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fb23b33e-8def-4c74-bf09-d44c9227a09c")
+	)
+	(junction
 		(at 46.355 42.545)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7270,10 +7438,6 @@
 	(no_connect
 		(at 179.07 63.5)
 		(uuid "5e1529b2-1a5b-40d5-aac8-4a2bad7712d4")
-	)
-	(no_connect
-		(at 226.06 152.4)
-		(uuid "60de2476-83d7-4a75-adf1-9db01dd11a73")
 	)
 	(no_connect
 		(at 179.07 35.56)
@@ -7511,6 +7675,16 @@
 	)
 	(wire
 		(pts
+			(xy 127.635 172.085) (xy 132.715 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "064e1da5-7826-4f78-a146-eae1eaee009f")
+	)
+	(wire
+		(pts
 			(xy 46.355 29.845) (xy 46.355 36.195)
 		)
 		(stroke
@@ -7621,6 +7795,16 @@
 	)
 	(wire
 		(pts
+			(xy 85.09 180.975) (xy 107.95 180.975)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "094aa1a2-ad07-4cd4-8793-d261dc0a2c6e")
+	)
+	(wire
+		(pts
 			(xy 103.505 144.145) (xy 103.505 150.495)
 		)
 		(stroke
@@ -7638,6 +7822,16 @@
 			(type default)
 		)
 		(uuid "09c9730a-0486-4e77-b130-f8be60ff5c48")
+	)
+	(wire
+		(pts
+			(xy 86.995 172.085) (xy 99.695 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "09fd907c-ca3a-4c85-901a-60ef3b12f2d0")
 	)
 	(wire
 		(pts
@@ -7898,6 +8092,16 @@
 			(type default)
 		)
 		(uuid "155b172f-25d1-4cd0-97d6-0f4a6ba3f585")
+	)
+	(wire
+		(pts
+			(xy 132.715 172.085) (xy 137.795 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "155d6a32-a16a-409f-ab16-7a7c0a5766dc")
 	)
 	(wire
 		(pts
@@ -8251,6 +8455,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 178.435) (xy 63.5 177.165)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23bab730-8cb1-4517-9b8c-2edea3d83326")
+	)
+	(wire
+		(pts
 			(xy 53.975 147.955) (xy 53.975 154.305)
 		)
 		(stroke
@@ -8411,6 +8625,16 @@
 	)
 	(wire
 		(pts
+			(xy 49.53 172.085) (xy 55.245 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2aad0910-b701-433a-bd5a-651e699b2813")
+	)
+	(wire
+		(pts
 			(xy 38.735 67.945) (xy 38.735 74.295)
 		)
 		(stroke
@@ -8518,6 +8742,16 @@
 			(type default)
 		)
 		(uuid "31ce4638-cab3-4de8-a528-f9998c4c50c4")
+	)
+	(wire
+		(pts
+			(xy 74.93 187.325) (xy 74.93 182.245)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "334bd650-6804-40a0-9c92-c7d096f392fd")
 	)
 	(wire
 		(pts
@@ -8688,6 +8922,16 @@
 			(type default)
 		)
 		(uuid "3c57c63c-2b12-428a-ab4e-a0f1add5e3d9")
+	)
+	(wire
+		(pts
+			(xy 31.115 172.085) (xy 31.115 173.355)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c75aaa4-c901-4e98-9240-bc5f11b4087e")
 	)
 	(wire
 		(pts
@@ -8868,6 +9112,26 @@
 			(type default)
 		)
 		(uuid "44246a3a-c2f3-46e0-8eec-cfe38b7195d7")
+	)
+	(wire
+		(pts
+			(xy 137.795 172.085) (xy 137.795 175.895)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4451f7b0-e465-4188-ab50-55e5004c29df")
+	)
+	(wire
+		(pts
+			(xy 117.475 172.085) (xy 122.555 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "44605578-ce5d-4f71-96fc-c2a1cb13d98b")
 	)
 	(wire
 		(pts
@@ -9231,6 +9495,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.95 172.085) (xy 111.76 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4fe9ff90-d908-4be1-ad46-ad795451519f")
+	)
+	(wire
+		(pts
 			(xy 50.165 125.095) (xy 50.165 131.445)
 		)
 		(stroke
@@ -9271,6 +9545,16 @@
 	)
 	(wire
 		(pts
+			(xy 111.76 172.085) (xy 117.475 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "507c106a-7ba9-4997-aea2-b568ad3d7531")
+	)
+	(wire
+		(pts
 			(xy 27.305 144.145) (xy 27.305 150.495)
 		)
 		(stroke
@@ -9278,6 +9562,16 @@
 			(type default)
 		)
 		(uuid "5082da45-e3f3-4249-9875-6da0c2ffedb5")
+	)
+	(wire
+		(pts
+			(xy 31.115 172.085) (xy 36.195 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "508971e6-e953-40a2-b8d6-b4d202c51834")
 	)
 	(wire
 		(pts
@@ -9411,6 +9705,16 @@
 	)
 	(wire
 		(pts
+			(xy 41.275 172.085) (xy 49.53 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "54272040-6332-453c-8ea0-a081e7d6a96e")
+	)
+	(wire
+		(pts
 			(xy 34.925 48.895) (xy 34.925 55.245)
 		)
 		(stroke
@@ -9448,6 +9752,16 @@
 			(type default)
 		)
 		(uuid "56617e71-23f8-40a9-8fcb-2016a69ee681")
+	)
+	(wire
+		(pts
+			(xy 85.09 174.625) (xy 86.995 174.625)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "56927f3b-3aeb-4dac-82f5-aa37d428238a")
 	)
 	(wire
 		(pts
@@ -9518,6 +9832,26 @@
 			(type default)
 		)
 		(uuid "580c495c-dcf3-4d68-8431-6f6b482978b9")
+	)
+	(wire
+		(pts
+			(xy 85.09 177.165) (xy 85.09 180.975)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "581c9bee-4f85-4eec-aee5-9080d2b3361a")
+	)
+	(wire
+		(pts
+			(xy 62.865 177.165) (xy 63.5 177.165)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "58af9289-479b-41aa-88ef-1c4ad7a1da75")
 	)
 	(wire
 		(pts
@@ -9771,6 +10105,16 @@
 	)
 	(wire
 		(pts
+			(xy 85.09 180.975) (xy 85.09 182.245)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "618518f5-fd1d-424e-b670-df385af7ff7c")
+	)
+	(wire
+		(pts
 			(xy 156.845 26.035) (xy 151.13 26.035)
 		)
 		(stroke
@@ -9838,6 +10182,16 @@
 			(type default)
 		)
 		(uuid "636e6377-2ab5-46e9-9b47-f3e5f5f4c9f2")
+	)
+	(wire
+		(pts
+			(xy 107.95 179.705) (xy 111.76 179.705)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "638a388e-429a-46b4-8ed7-368ad8a716c5")
 	)
 	(wire
 		(pts
@@ -9988,6 +10342,16 @@
 			(type default)
 		)
 		(uuid "685e7e27-2719-4ccb-8500-bf1cf7193e2c")
+	)
+	(wire
+		(pts
+			(xy 117.475 187.325) (xy 117.475 183.515)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "687b960e-3066-447a-813f-6eb4f34490c8")
 	)
 	(wire
 		(pts
@@ -10251,6 +10615,16 @@
 	)
 	(wire
 		(pts
+			(xy 46.355 131.445) (xy 46.355 137.795)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "711f6070-98c5-4b77-b8e4-42e175aeb7e0")
+	)
+	(wire
+		(pts
 			(xy 118.745 93.345) (xy 118.745 99.695)
 		)
 		(stroke
@@ -10411,6 +10785,16 @@
 	)
 	(wire
 		(pts
+			(xy 49.53 187.325) (xy 41.275 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77ebf91e-8908-4936-af22-abe5ec473a55")
+	)
+	(wire
+		(pts
 			(xy 88.265 122.555) (xy 88.265 127.635)
 		)
 		(stroke
@@ -10471,6 +10855,26 @@
 	)
 	(wire
 		(pts
+			(xy 132.715 183.515) (xy 132.715 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b107535-ed77-47cd-8ef8-7e9f652376c2")
+	)
+	(wire
+		(pts
+			(xy 127.635 187.325) (xy 122.555 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7baf0201-4270-4823-863e-84c7cbc9f8b2")
+	)
+	(wire
+		(pts
 			(xy 46.355 61.595) (xy 46.355 67.945)
 		)
 		(stroke
@@ -10498,6 +10902,16 @@
 			(type default)
 		)
 		(uuid "7d283bd5-0ea6-472f-9e70-017a0a623da9")
+	)
+	(wire
+		(pts
+			(xy 85.09 172.085) (xy 86.995 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d48eef1-e438-4960-9472-f63152a78020")
 	)
 	(wire
 		(pts
@@ -10558,6 +10972,16 @@
 			(type default)
 		)
 		(uuid "7fef1c46-4a05-45a4-8507-b0c4244cccc8")
+	)
+	(wire
+		(pts
+			(xy 127.635 183.515) (xy 127.635 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8014495c-aa27-4eb4-922c-e73265d7b323")
 	)
 	(wire
 		(pts
@@ -10921,6 +11345,16 @@
 	)
 	(wire
 		(pts
+			(xy 86.995 170.815) (xy 86.995 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a6e4e97-38a0-4437-bde7-50087ffe34dd")
+	)
+	(wire
+		(pts
 			(xy 103.505 99.695) (xy 103.505 106.045)
 		)
 		(stroke
@@ -10978,6 +11412,16 @@
 			(type default)
 		)
 		(uuid "8b80a249-63ed-4df3-afb0-ef6afc796498")
+	)
+	(wire
+		(pts
+			(xy 36.195 172.085) (xy 41.275 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8bcedd3a-bdeb-48b7-9c9d-193bfa57366c")
 	)
 	(wire
 		(pts
@@ -11131,6 +11575,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.315 172.085) (xy 107.95 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91b9d0f6-cc7e-4b14-8df9-53d68c3ffe64")
+	)
+	(wire
+		(pts
 			(xy 84.455 86.995) (xy 84.455 93.345)
 		)
 		(stroke
@@ -11221,6 +11675,16 @@
 	)
 	(wire
 		(pts
+			(xy 111.76 187.325) (xy 117.475 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95544590-e82f-440d-b245-aaf1d939e948")
+	)
+	(wire
+		(pts
 			(xy 145.415 71.755) (xy 145.415 76.835)
 		)
 		(stroke
@@ -11291,6 +11755,16 @@
 	)
 	(wire
 		(pts
+			(xy 31.115 187.325) (xy 31.115 180.975)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "97b312cb-921b-45ab-87ab-1b16bacc3448")
+	)
+	(wire
+		(pts
 			(xy 114.935 29.845) (xy 114.935 36.195)
 		)
 		(stroke
@@ -11318,6 +11792,16 @@
 			(type default)
 		)
 		(uuid "984a38ec-83e4-4ac3-b004-8e7ff6eec511")
+	)
+	(wire
+		(pts
+			(xy 137.795 183.515) (xy 137.795 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "98b26682-b7a0-4d33-9388-4d8ebb9cded8")
 	)
 	(wire
 		(pts
@@ -11621,6 +12105,26 @@
 	)
 	(wire
 		(pts
+			(xy 74.93 187.325) (xy 111.76 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5359992-9ab1-453e-98ff-66be604e4d7a")
+	)
+	(wire
+		(pts
+			(xy 41.275 172.085) (xy 41.275 173.355)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5a6e3d9-de9f-4e6d-8553-4a181ccda154")
+	)
+	(wire
+		(pts
 			(xy 145.415 84.455) (xy 145.415 89.535)
 		)
 		(stroke
@@ -11698,6 +12202,16 @@
 			(type default)
 		)
 		(uuid "a8411e7e-66b2-4514-8933-f7bad9d0c025")
+	)
+	(wire
+		(pts
+			(xy 49.53 180.975) (xy 49.53 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a8fafdb0-66df-408d-b245-26b9f02283b8")
 	)
 	(wire
 		(pts
@@ -11871,6 +12385,16 @@
 	)
 	(wire
 		(pts
+			(xy 122.555 187.325) (xy 117.475 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "adde9fd9-cb8d-479b-9588-2ecbb49f767d")
+	)
+	(wire
+		(pts
 			(xy 149.225 55.245) (xy 149.225 61.595)
 		)
 		(stroke
@@ -11938,6 +12462,16 @@
 			(type default)
 		)
 		(uuid "aff9fdbb-698a-4e78-a52c-ec364ebd12b1")
+	)
+	(wire
+		(pts
+			(xy 55.245 172.085) (xy 64.77 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b0a52ed6-8236-48d2-aa66-d44d02194527")
 	)
 	(wire
 		(pts
@@ -12041,6 +12575,16 @@
 	)
 	(wire
 		(pts
+			(xy 132.715 187.325) (xy 137.795 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b54beb28-56fc-4178-a6b9-f9b2b6ad9e28")
+	)
+	(wire
+		(pts
 			(xy 34.925 125.095) (xy 34.925 131.445)
 		)
 		(stroke
@@ -12088,6 +12632,16 @@
 			(type default)
 		)
 		(uuid "b6ad1a2b-03e3-4d69-9528-c81a791e3254")
+	)
+	(wire
+		(pts
+			(xy 49.53 172.085) (xy 49.53 173.355)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6d16d6c-a7ed-4437-8d95-510e8d78cedd")
 	)
 	(wire
 		(pts
@@ -12361,6 +12915,16 @@
 	)
 	(wire
 		(pts
+			(xy 132.715 187.325) (xy 127.635 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2bb8b4d-8cd3-4d18-ab7c-90ade6ba89c5")
+	)
+	(wire
+		(pts
 			(xy 133.985 26.035) (xy 128.27 26.035)
 		)
 		(stroke
@@ -12541,6 +13105,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.695 172.085) (xy 99.695 174.625)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca352288-c1b6-465b-9823-05128b71b842")
+	)
+	(wire
+		(pts
 			(xy 80.645 118.745) (xy 80.645 125.095)
 		)
 		(stroke
@@ -12611,6 +13185,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 177.165) (xy 64.77 177.165)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cbc77d42-6f12-4206-8663-7f68087ac15e")
+	)
+	(wire
+		(pts
 			(xy 130.175 118.745) (xy 130.175 125.095)
 		)
 		(stroke
@@ -12618,6 +13202,16 @@
 			(type default)
 		)
 		(uuid "cbd652ac-45f0-41d4-82a5-bf1b309f23ce")
+	)
+	(wire
+		(pts
+			(xy 127.635 172.085) (xy 127.635 175.895)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cca6fb94-e52a-4a6f-82b4-23cba3245236")
 	)
 	(wire
 		(pts
@@ -12668,6 +13262,16 @@
 			(type default)
 		)
 		(uuid "cefcf136-78de-46ce-8e3a-502957b2c39f")
+	)
+	(wire
+		(pts
+			(xy 132.715 172.085) (xy 132.715 175.895)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf8ff4fc-7a3f-41d6-bb49-608a8d2275f3")
 	)
 	(wire
 		(pts
@@ -12841,6 +13445,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.695 174.625) (xy 94.615 174.625)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d86c4041-902c-4297-b033-a3de94926ce2")
+	)
+	(wire
+		(pts
 			(xy 73.025 137.795) (xy 73.025 144.145)
 		)
 		(stroke
@@ -12928,6 +13542,16 @@
 			(type default)
 		)
 		(uuid "daadc5ad-d5f4-48e8-bfae-dc7d55642253")
+	)
+	(wire
+		(pts
+			(xy 55.245 172.085) (xy 55.245 177.165)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dac04b45-81d1-46e9-b9c8-e52d385b26bd")
 	)
 	(wire
 		(pts
@@ -13031,6 +13655,16 @@
 	)
 	(wire
 		(pts
+			(xy 41.275 180.975) (xy 41.275 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e031d929-6aa2-4a17-a75a-51c8e5e4030e")
+	)
+	(wire
+		(pts
 			(xy 61.595 80.645) (xy 61.595 86.995)
 		)
 		(stroke
@@ -13078,6 +13712,16 @@
 			(type default)
 		)
 		(uuid "e39f459a-b0d4-4fa4-8590-ca740af958e3")
+	)
+	(wire
+		(pts
+			(xy 107.95 180.975) (xy 107.95 179.705)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3a88e76-fd70-4816-9b85-d0d633361990")
 	)
 	(wire
 		(pts
@@ -13261,6 +13905,16 @@
 	)
 	(wire
 		(pts
+			(xy 41.275 187.325) (xy 31.115 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8803629-35bc-4643-8e04-3781ca86d673")
+	)
+	(wire
+		(pts
 			(xy 118.745 61.595) (xy 118.745 67.945)
 		)
 		(stroke
@@ -13288,6 +13942,16 @@
 			(type default)
 		)
 		(uuid "ea56e84c-0138-4a9e-8bca-3b544bdd4be4")
+	)
+	(wire
+		(pts
+			(xy 27.305 172.085) (xy 31.115 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb1446ca-1a19-4de6-a8ea-b7f3d04e5186")
 	)
 	(wire
 		(pts
@@ -13441,6 +14105,16 @@
 	)
 	(wire
 		(pts
+			(xy 74.93 187.325) (xy 49.53 187.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "efc6b4f7-cbe6-4998-b299-4bdbaf5e079f")
+	)
+	(wire
+		(pts
 			(xy 107.315 93.345) (xy 107.315 99.695)
 		)
 		(stroke
@@ -13458,6 +14132,16 @@
 			(type default)
 		)
 		(uuid "eff07f45-af27-43e4-9353-d16c91eae03e")
+	)
+	(wire
+		(pts
+			(xy 117.475 172.085) (xy 117.475 175.895)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f06d9810-24d8-4ac7-a0ac-95df24a9697d")
 	)
 	(wire
 		(pts
@@ -13508,6 +14192,16 @@
 			(type default)
 		)
 		(uuid "f1dfdae6-35ec-4317-86cc-f564ecdb9f74")
+	)
+	(wire
+		(pts
+			(xy 122.555 172.085) (xy 127.635 172.085)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f21aeff4-672a-40e5-822b-746ae3f828d9")
 	)
 	(wire
 		(pts
@@ -13588,6 +14282,16 @@
 			(type default)
 		)
 		(uuid "f37d2ee4-96d4-4bce-8b89-73040bd6612f")
+	)
+	(wire
+		(pts
+			(xy 86.995 174.625) (xy 86.995 175.895)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f4923b44-5165-4050-89e9-82df2d2c66f0")
 	)
 	(wire
 		(pts
@@ -13909,6 +14613,28 @@
 		)
 		(uuid "ff8e7421-a55c-4cf2-886c-fe30be0981d5")
 	)
+	(global_label "FB"
+		(shape passive)
+		(at 85.09 182.245 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "00657174-e43e-4597-9010-c12f84dd7a4a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 85.09 185.9821 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "VBUS"
 		(shape input)
 		(at 46.355 26.035 90)
@@ -14129,6 +14855,28 @@
 			)
 		)
 	)
+	(global_label "EN"
+		(shape passive)
+		(at 63.5 178.435 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "69930c3a-30ad-4015-b4f7-6faf36c1c765")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 63.5 182.293 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "VBUS"
 		(shape input)
 		(at 22.86 26.035 90)
@@ -14218,6 +14966,28 @@
 		)
 	)
 	(global_label "VBUS"
+		(shape input)
+		(at 27.305 172.085 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "73593ae2-c5cd-413d-a831-d19dacf5cebd")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 20.0754 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "VBUS"
 		(shape output)
 		(at 228.6 20.32 180)
 		(fields_autoplaced yes)
@@ -14257,6 +15027,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "BST"
+		(shape passive)
+		(at 86.995 175.895 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "97a7de79-b133-4a47-a776-c02eba9a117e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 86.995 180.7206 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -14459,28 +15251,6 @@
 			)
 		)
 	)
-	(global_label "VBUS"
-		(shape input)
-		(at 226.06 141.605 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "babdf2ea-d441-43ce-b097-2c45a48a6e8b")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 218.8304 141.605 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "SD"
 		(shape output)
 		(at 196.215 153.035 0)
@@ -14538,6 +15308,28 @@
 		(uuid "cac1883a-9760-421d-a1f4-90cd88fae298")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 215.3281 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "SW"
+		(shape passive)
+		(at 86.995 170.815 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "cb8943b3-2829-4162-bc96-de222bb600f1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 86.995 166.7756 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14705,7 +15497,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 47.9298 0)
 			(effects
 				(font
@@ -14927,84 +15719,6 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 255.27 123.825 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "01b998ce-c296-45c9-93cd-a340a56ca6c5")
-		(property "Reference" "C136"
-			(at 258.699 122.682 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10uF 35V"
-			(at 258.699 124.714 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:C_0603"
-			(at 256.2352 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 255.27 123.825 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 255.27 123.825 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "C194427"
-			(at 255.27 123.825 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e6a850dd-452f-4ab9-a2bf-c9c47916657b")
-		)
-		(pin "2"
-			(uuid "1bc58fce-c413-42e3-b7bf-97782f18ea79")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C136")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
 		(at 207.01 148.59 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -15012,7 +15726,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "03b9bf21-b02d-40aa-bf35-b3e577bea1e8")
-		(property "Reference" "C132"
+		(property "Reference" "C128"
 			(at 215.9 150.003 0)
 			(effects
 				(font
@@ -15030,7 +15744,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 206.0448 144.78 0)
 			(effects
 				(font
@@ -15066,7 +15780,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C132")
+					(reference "C128")
 					(unit 1)
 				)
 			)
@@ -15276,7 +15990,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 86.0298 0)
 			(effects
 				(font
@@ -15344,7 +16058,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 47.9298 0)
 			(effects
 				(font
@@ -15476,6 +16190,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 59.055 177.165 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "06a94112-0dfd-4a28-8050-30c8b8d4d6df")
+		(property "Reference" "R4"
+			(at 57.785 177.165 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "150k 1%"
+			(at 56.642 174.625 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RevK:R_0201"
+			(at 59.055 175.387 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 59.055 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 59.055 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C310173"
+			(at 59.055 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e9a071b8-c49f-4c20-99f8-cacbae2815f0")
+		)
+		(pin "2"
+			(uuid "33a3c8af-00e7-4954-95a5-b72db821a230")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
 		(at 42.545 106.045 270)
 		(unit 1)
@@ -15590,7 +16382,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 60.6298 0)
 			(effects
 				(font
@@ -15633,72 +16425,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3.3V")
-		(at 198.755 120.015 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "077f97fc-d6a5-410d-8a62-bc0ca6edf98e")
-		(property "Reference" "#PWR020"
-			(at 198.755 123.825 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 198.755 116.4392 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 198.755 120.015 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 198.755 120.015 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 198.755 120.015 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2314fa6d-e5b7-464f-bc77-c9766dc349e4")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR020")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 42.545 48.895 270)
 		(mirror x)
@@ -15724,7 +16450,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 47.9298 0)
 			(effects
 				(font
@@ -15947,7 +16673,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 47.9298 0)
 			(effects
 				(font
@@ -16193,7 +16919,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 124.1298 0)
 			(effects
 				(font
@@ -16261,7 +16987,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 35.2298 0)
 			(effects
 				(font
@@ -16329,7 +17055,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 136.8298 0)
 			(effects
 				(font
@@ -16664,7 +17390,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 60.6298 0)
 			(effects
 				(font
@@ -16707,6 +17433,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:L")
+		(at 103.505 172.085 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "10cbc75a-f2db-465b-94e9-fd11b2baf408")
+		(property "Reference" "L1"
+			(at 103.505 167.4352 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7uH"
+			(at 103.505 169.8595 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:L_5x5"
+			(at 103.505 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 103.505 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Inductor"
+			(at 103.505 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C307876"
+			(at 103.505 172.085 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d73c7c8d-6f5e-4a9e-8701-46629406de42")
+		)
+		(pin "2"
+			(uuid "8855e1e5-5c4f-4e4c-adf9-f4966266d391")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "L1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 88.265 61.595 270)
 		(mirror x)
@@ -16732,7 +17534,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 60.6298 0)
 			(effects
 				(font
@@ -16858,6 +17660,82 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "D13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 107.95 175.895 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "14187059-2b03-465a-9d4f-07ff49d98102")
+		(property "Reference" "C137"
+			(at 105.537 178.181 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "18pF"
+			(at 105.029 173.609 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:C_0201"
+			(at 106.9848 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 107.95 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 107.95 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C62164"
+			(at 107.95 175.895 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "dd87e409-f70e-4322-900f-9dea74451e57")
+		)
+		(pin "1"
+			(uuid "e767d12d-f023-41fe-8fa1-4554e37c0d9b")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C137")
 					(unit 1)
 				)
 			)
@@ -17026,7 +17904,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "156a5603-aae0-4b42-a6ee-2d9b546caae3")
-		(property "Reference" "R5"
+		(property "Reference" "R2"
 			(at 272.415 66.675 90)
 			(effects
 				(font
@@ -17042,7 +17920,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:R_0402"
+		(property "Footprint" "RevK:R_0201"
 			(at 272.415 70.358 90)
 			(effects
 				(font
@@ -17078,7 +17956,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "R5")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -17094,7 +17972,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "16ba58df-d7b3-43f7-9e20-7850c18b9c05")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR026"
 			(at 205.74 35.56 0)
 			(effects
 				(font
@@ -17145,7 +18023,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR024")
+					(reference "#PWR026")
 					(unit 1)
 				)
 			)
@@ -17177,7 +18055,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 124.1298 0)
 			(effects
 				(font
@@ -17220,96 +18098,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:Hidden")
-		(at 258.445 140.97 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "171aa2eb-3c88-4c66-b378-de674fc06b15")
-		(property "Reference" "C137"
-			(at 259.715 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10uF 35V"
-			(at 264.795 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:C_0603_"
-			(at 258.445 139.065 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 258.445 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 258.445 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "C194427"
-			(at 258.445 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Part No" ""
-			(at 258.445 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Note" ""
-			(at 258.445 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C137")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 19.05 112.395 270)
 		(mirror x)
@@ -17335,7 +18123,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 111.4298 0)
 			(effects
 				(font
@@ -17378,138 +18166,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3.3V")
-		(at 192.405 120.015 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "17c587b5-5743-476c-a6fb-03be89d44f82")
-		(property "Reference" "#PWR017"
-			(at 192.405 123.825 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 192.405 116.4392 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 192.405 120.015 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 192.405 120.015 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 192.405 120.015 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d36fb35e-71d9-4649-879a-28f9c5fc7198")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR017")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 255.27 127.635 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "18410cf0-5ee7-4b10-ad00-62f191d7d6f4")
-		(property "Reference" "#PWR036"
-			(at 255.27 133.985 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 255.27 132.0784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 255.27 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 255.27 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 255.27 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9d684502-2a41-4d99-9535-19249ca2edd6")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR036")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 122.555 112.395 270)
 		(mirror x)
@@ -17535,7 +18191,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 111.4298 0)
 			(effects
 				(font
@@ -17758,7 +18414,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 98.7298 0)
 			(effects
 				(font
@@ -18004,7 +18660,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 98.7298 0)
 			(effects
 				(font
@@ -18041,86 +18697,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C26")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RevK:Hidden")
-		(at 258.445 148.59 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1bfe77c6-dce6-48bd-9391-5fc1f414f86d")
-		(property "Reference" "R3"
-			(at 261.62 148.59 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "39k2"
-			(at 264.795 148.59 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:R_0402_"
-			(at 260.35 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 258.445 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 258.445 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Part No" ""
-			(at 258.445 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Note" ""
-			(at 258.445 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -18241,7 +18817,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 35.2298 0)
 			(effects
 				(font
@@ -18576,7 +19152,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 60.6298 0)
 			(effects
 				(font
@@ -18628,7 +19204,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "204c2360-e2a0-41e0-9ff2-e3fe5f1db217")
-		(property "Reference" "C134"
+		(property "Reference" "C130"
 			(at 226.441 87.4303 0)
 			(effects
 				(font
@@ -18646,7 +19222,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 224.4852 92.075 0)
 			(effects
 				(font
@@ -18682,7 +19258,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C134")
+					(reference "C130")
 					(unit 1)
 				)
 			)
@@ -18999,7 +19575,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 60.6298 0)
 			(effects
 				(font
@@ -19156,7 +19732,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 124.1298 0)
 			(effects
 				(font
@@ -19224,7 +19800,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 136.8298 0)
 			(effects
 				(font
@@ -19268,6 +19844,82 @@
 	)
 	(symbol
 		(lib_id "Device:C")
+		(at 127.635 179.705 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "252ade7d-0944-4b5a-9132-5f56ad81eb26")
+		(property "Reference" "C139"
+			(at 128.778 177.165 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 128.778 184.023 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:C_0201"
+			(at 126.6698 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 127.635 179.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 127.635 179.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C76934"
+			(at 127.635 179.705 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "6dea28bf-47ca-4286-a846-9bb255dd0024")
+		)
+		(pin "1"
+			(uuid "29facb71-cc50-4372-9cf6-eeb7851969d9")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C139")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
 		(at 133.985 99.695 270)
 		(mirror x)
 		(unit 1)
@@ -19292,7 +19944,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 98.7298 0)
 			(effects
 				(font
@@ -19449,7 +20101,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 136.8298 0)
 			(effects
 				(font
@@ -19501,7 +20153,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "28be93e5-621a-4d5f-9a61-5b66126c17c1")
-		(property "Reference" "#PWR027"
+		(property "Reference" "#PWR029"
 			(at 223.52 80.645 0)
 			(effects
 				(font
@@ -19551,7 +20203,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR027")
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -19583,7 +20235,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 98.7298 0)
 			(effects
 				(font
@@ -19740,7 +20392,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 136.8298 0)
 			(effects
 				(font
@@ -19961,6 +20613,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 137.795 179.705 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2f2e9dd6-6ae0-4e82-b32c-8ad39081619e")
+		(property "Reference" "C141"
+			(at 138.938 177.165 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "100nF"
+			(at 138.938 184.023 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:C_0201"
+			(at 136.8298 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 137.795 179.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 137.795 179.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C76934"
+			(at 137.795 179.705 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "16674b64-d281-4bca-af87-41536fcbc6d7")
+		)
+		(pin "1"
+			(uuid "06f15692-10c4-4b44-85e3-7ad6e1638f49")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C141")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
 		(at 133.985 67.945 270)
 		(unit 1)
@@ -20059,7 +20789,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "30642210-4f09-4036-983a-8c374e853184")
-		(property "Reference" "#PWR028"
+		(property "Reference" "#PWR030"
 			(at 223.52 98.425 0)
 			(effects
 				(font
@@ -20109,7 +20839,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR028")
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -20208,7 +20938,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 136.8298 0)
 			(effects
 				(font
@@ -20276,7 +21006,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 149.5298 0)
 			(effects
 				(font
@@ -20433,7 +21163,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 136.8298 0)
 			(effects
 				(font
@@ -20501,7 +21231,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 73.3298 0)
 			(effects
 				(font
@@ -20747,7 +21477,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 124.1298 0)
 			(effects
 				(font
@@ -20790,6 +21520,105 @@
 		)
 	)
 	(symbol
+		(lib_id "RevK:TPS562246")
+		(at 74.93 174.625 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "376afb77-8a8d-4568-aba0-68674bb0c52e")
+		(property "Reference" "U3"
+			(at 74.93 165.4005 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TPS562246"
+			(at 74.93 167.8248 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:SOT-563"
+			(at 76.2 180.975 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps562246.pdf"
+			(at 74.93 174.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2A Synchronous Step-Down Voltage Regulator 580kHz, adjustable output voltage, 4.5-17V Input Voltage, 0.804V-7V Output Voltage, SOT-563"
+			(at 74.93 174.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C41833479"
+			(at 74.93 174.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Rotation Offset" "180"
+			(at 74.93 174.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "4"
+			(uuid "d2df3851-a846-4862-b64d-f737a362c798")
+		)
+		(pin "2"
+			(uuid "bad69948-d306-4f61-8267-25207446c015")
+		)
+		(pin "6"
+			(uuid "3efac012-1f3e-4c17-8c1d-80af512eed13")
+		)
+		(pin "5"
+			(uuid "b471742f-3335-4a01-b467-896cb978c81f")
+		)
+		(pin "1"
+			(uuid "c2c60a19-399d-4f1c-828a-6f5a9298082f")
+		)
+		(pin "3"
+			(uuid "b909cd9e-1087-4fcb-99e3-987f5541517a")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RevK:VCUT")
 		(at 275.59 174.625 90)
 		(unit 1)
@@ -20799,7 +21628,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "387f0478-4662-4a46-914e-7556d0079ea2")
-		(property "Reference" "V3"
+		(property "Reference" "V4"
 			(at 274.32 174.625 0)
 			(effects
 				(font
@@ -20847,7 +21676,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "V3")
+					(reference "V4")
 					(unit 1)
 				)
 			)
@@ -20879,7 +21708,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 47.9298 0)
 			(effects
 				(font
@@ -20982,6 +21811,84 @@
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "#PWR032")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 117.475 179.705 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3bdd0113-27bc-43cf-aba0-3e338cf701dc")
+		(property "Reference" "C138"
+			(at 117.983 177.419 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47uF 6V"
+			(at 118.237 182.245 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RevK:C_0805"
+			(at 118.4402 183.515 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 117.475 179.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 117.475 179.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C16780"
+			(at 117.475 179.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "555ec4b5-162e-4913-a91f-649b391573b7")
+		)
+		(pin "1"
+			(uuid "16880a8b-ffde-45ec-bf25-355f588dad4b")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C138")
 					(unit 1)
 				)
 			)
@@ -21191,7 +22098,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 73.3298 0)
 			(effects
 				(font
@@ -21323,86 +22230,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:Hidden")
-		(at 258.445 146.685 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3ff84078-2960-4f71-83c6-1c7dd64a60e7")
-		(property "Reference" "R2"
-			(at 260.985 146.685 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "124k"
-			(at 264.795 146.685 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:R_0402_"
-			(at 258.445 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 258.445 146.685 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 258.445 146.685 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Part No" ""
-			(at 258.445 146.685 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Note" ""
-			(at 258.445 146.685 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "R2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
 		(at 111.125 67.945 270)
 		(unit 1)
@@ -21517,7 +22344,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 86.0298 0)
 			(effects
 				(font
@@ -21569,7 +22396,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "428a8f13-5b1b-4e7f-a688-0d30dfa94ea6")
-		(property "Reference" "J3"
+		(property "Reference" "J5"
 			(at 250.825 56.8157 0)
 			(effects
 				(font
@@ -21675,7 +22502,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "J3")
+					(reference "J5")
 					(unit 1)
 				)
 			)
@@ -21707,7 +22534,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 124.1298 0)
 			(effects
 				(font
@@ -21905,16 +22732,16 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 192.405 123.825 0)
+		(lib_id "Device:R")
+		(at 111.76 183.515 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "448b8e1c-1e99-436b-9d5d-84284fef0a3b")
-		(property "Reference" "C129"
-			(at 183.515 122.412 0)
+		(uuid "45ff6f5f-b438-4733-91e6-8467bf9e32b9")
+		(property "Reference" "R6"
+			(at 111.76 184.785 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21922,8 +22749,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100nF"
-			(at 183.515 124.46 0)
+		(property "Value" "33k 1%"
+			(at 114.046 187.071 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21931,8 +22758,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
-			(at 193.3702 127.635 0)
+		(property "Footprint" "RevK:R_0201"
+			(at 109.982 183.515 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21941,7 +22768,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 192.405 123.825 0)
+			(at 111.76 183.515 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21949,8 +22776,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
-			(at 192.405 123.825 0)
+		(property "Description" "Resistor"
+			(at 111.76 183.515 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C320835"
+			(at 111.76 183.515 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21959,15 +22795,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "15ed2b5d-c740-41dc-8df9-f938d8ee8be4")
+			(uuid "7f559403-73b3-49b4-9517-b32be1ab5d7f")
 		)
 		(pin "2"
-			(uuid "286ed3cc-7cbc-434f-98d0-8adff37c1d70")
+			(uuid "09b82742-0e9b-425b-b9b7-b1b9863bba1a")
 		)
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C129")
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -22057,6 +22893,82 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "D39")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 90.805 174.625 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "499c6e00-4afe-4f55-adcc-129f16dd4e9a")
+		(property "Reference" "C136"
+			(at 93.726 173.355 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 95.123 176.149 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:C_0201"
+			(at 94.615 173.6598 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 90.805 174.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 90.805 174.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C76934"
+			(at 90.805 174.625 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "b8351c7c-eb6e-45dc-ba80-804ab1da1f88")
+		)
+		(pin "1"
+			(uuid "68642186-f86e-42f5-8e1c-c3ba0021d2bb")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C136")
 					(unit 1)
 				)
 			)
@@ -22242,7 +23154,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 111.4298 0)
 			(effects
 				(font
@@ -22294,7 +23206,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4b3bb1bc-0a08-419f-94c3-5f6327e2fa41")
-		(property "Reference" "C131"
+		(property "Reference" "C127"
 			(at 207.391 121.7238 0)
 			(effects
 				(font
@@ -22357,7 +23269,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C131")
+					(reference "C127")
 					(unit 1)
 				)
 			)
@@ -22389,7 +23301,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 124.1298 0)
 			(effects
 				(font
@@ -22635,7 +23547,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 111.4298 0)
 			(effects
 				(font
@@ -22792,7 +23704,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 111.4298 0)
 			(effects
 				(font
@@ -22860,7 +23772,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 124.1298 0)
 			(effects
 				(font
@@ -23000,7 +23912,7 @@
 		(on_board yes)
 		(dnp yes)
 		(uuid "5242e8d7-eaea-449b-b47d-7cefea7191c9")
-		(property "Reference" "J5"
+		(property "Reference" "J3"
 			(at 206.756 99.568 0)
 			(effects
 				(font
@@ -23063,7 +23975,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "J5")
+					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -23095,7 +24007,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 47.9298 0)
 			(effects
 				(font
@@ -23162,7 +24074,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:R_0402"
+		(property "Footprint" "RevK:R_0201"
 			(at 221.742 80.645 90)
 			(effects
 				(font
@@ -23408,7 +24320,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 35.2298 0)
 			(effects
 				(font
@@ -23720,7 +24632,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 73.3298 0)
 			(effects
 				(font
@@ -23788,7 +24700,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 35.2298 0)
 			(effects
 				(font
@@ -23831,26 +24743,16 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3.3V")
-		(at 226.06 147.32 90)
+		(lib_id "Device:C")
+		(at 31.115 177.165 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5bd6ca64-f161-45fa-9d08-13d65dba52fb")
-		(property "Reference" "#PWR029"
-			(at 229.87 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 222.885 147.32 90)
+		(uuid "595132eb-26d6-4c27-a905-2e4cfb5d39ab")
+		(property "Reference" "C133"
+			(at 32.258 182.245 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23858,8 +24760,17 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 226.06 147.32 0)
+		(property "Value" "22uF 25V"
+			(at 27.94 186.055 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RevK:C_0805"
+			(at 32.0802 180.975 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23867,8 +24778,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 226.06 147.32 0)
+		(property "Datasheet" "~"
+			(at 31.115 177.165 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23876,22 +24787,34 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 226.06 147.32 0)
+		(property "Description" "Unpolarized capacitor"
+			(at 31.115 177.165 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
+		)
+		(property "MPN" "C45783"
+			(at 31.115 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "87b88683-c84e-4887-a8c8-8cfbc66d1d63")
 		)
 		(pin "1"
-			(uuid "bf34ee5d-8d96-4555-ae27-6c99caace27b")
+			(uuid "be396ed6-3ab6-4929-965a-360aeb440d2d")
 		)
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR029")
+					(reference "C133")
 					(unit 1)
 				)
 			)
@@ -23923,7 +24846,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 47.9298 0)
 			(effects
 				(font
@@ -24080,7 +25003,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 35.2298 0)
 			(effects
 				(font
@@ -24326,7 +25249,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 149.5298 0)
 			(effects
 				(font
@@ -24394,7 +25317,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 111.4298 0)
 			(effects
 				(font
@@ -24551,7 +25474,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 47.9298 0)
 			(effects
 				(font
@@ -24594,100 +25517,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:MD89420-RegBlock")
-		(at 237.49 147.32 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "65fef5d5-b307-46ec-9188-c5bd8f7c07a0")
-		(property "Reference" "U3"
-			(at 237.49 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MD8942"
-			(at 237.49 143.018 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "RevK:SOT-23-6-MD8942"
-			(at 237.49 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2101111937_Shanghai-Mingda-Microelectronics-MD8942_C2684786.pdf"
-			(at 237.49 168.275 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 237.49 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "C2684786"
-			(at 237.49 173.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f9f01f34-fcb9-40ea-8924-cdb7dbab176a")
-		)
-		(pin "2"
-			(uuid "3571c791-2b99-4674-8c9a-cd006323fec6")
-		)
-		(pin "3"
-			(uuid "afb04721-494e-4a44-bc5e-994c54fbf194")
-		)
-		(pin "4"
-			(uuid "dfbf579f-9066-48e3-a1fd-af0a463c5f65")
-		)
-		(pin "5"
-			(uuid "42b86054-8ed6-4e15-9fc4-bfc023f23da5")
-		)
-		(pin "6"
-			(uuid "2d565df5-9f63-43e7-a92d-fd8e6a7a799b")
-		)
-		(pin "7"
-			(uuid "e370983c-b1c1-43a0-95e4-c2a60aff3eb5")
-		)
-		(pin "8"
-			(uuid "e4e5503c-d29d-4958-abdb-a52f9d0f5246")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "U3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 99.695 112.395 270)
 		(mirror x)
@@ -24713,7 +25542,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 111.4298 0)
 			(effects
 				(font
@@ -24781,7 +25610,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 73.3298 0)
 			(effects
 				(font
@@ -24849,7 +25678,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 86.0298 0)
 			(effects
 				(font
@@ -24981,6 +25810,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 111.76 175.895 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6956e221-a868-4b64-af21-7777cad44bf3")
+		(property "Reference" "R5"
+			(at 111.76 177.165 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "150k 1%"
+			(at 114.046 177.419 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RevK:R_0201"
+			(at 109.982 175.895 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 111.76 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C310173"
+			(at 111.76 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "48dcab6f-0134-45f2-8395-51aad5ff0d78")
+		)
+		(pin "2"
+			(uuid "cf12b4b3-d208-4bc4-b004-39c2103a6717")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 76.835 112.395 270)
 		(mirror x)
@@ -25006,7 +25913,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 111.4298 0)
 			(effects
 				(font
@@ -25163,7 +26070,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 73.3298 0)
 			(effects
 				(font
@@ -25231,7 +26138,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 149.5298 0)
 			(effects
 				(font
@@ -25299,7 +26206,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 86.0298 0)
 			(effects
 				(font
@@ -25367,7 +26274,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 60.6298 0)
 			(effects
 				(font
@@ -25500,71 +26407,6 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 237.49 156.845 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "6c2b1e95-c50b-4e71-8f1f-223c849f5167")
-		(property "Reference" "#PWR031"
-			(at 237.49 163.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 237.617 161.2392 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 237.49 156.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 237.49 156.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 237.49 156.845 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4e870dc8-8a62-44b5-b536-edf05ef0e2ff")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR031")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 209.55 40.64 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -25573,7 +26415,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6cb03fea-af77-4998-921b-62b661972144")
-		(property "Reference" "#PWR025"
+		(property "Reference" "#PWR027"
 			(at 215.9 40.64 0)
 			(effects
 				(font
@@ -25624,7 +26466,72 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR025")
+					(reference "#PWR027")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 122.555 172.085 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6d256dc4-98c9-4114-9853-07c595bd7799")
+		(property "Reference" "#FLG04"
+			(at 122.555 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 122.682 168.402 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 122.555 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 122.555 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 122.555 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a98817aa-f3a8-4dd1-8aed-040bb4eaf59d")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#FLG04")
 					(unit 1)
 				)
 			)
@@ -25834,7 +26741,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 73.3298 0)
 			(effects
 				(font
@@ -25902,7 +26809,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 35.2298 0)
 			(effects
 				(font
@@ -26059,7 +26966,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 60.6298 0)
 			(effects
 				(font
@@ -26127,7 +27034,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 98.7298 0)
 			(effects
 				(font
@@ -26284,7 +27191,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 111.4298 0)
 			(effects
 				(font
@@ -26352,7 +27259,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 136.8298 0)
 			(effects
 				(font
@@ -26478,72 +27385,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "D43")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 255.27 120.015 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "772d5cca-8690-4400-9967-8b310b659aa0")
-		(property "Reference" "#PWR035"
-			(at 255.27 123.825 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 255.27 116.4392 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 255.27 120.015 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 255.27 120.015 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 255.27 120.015 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "bbf73b44-0afc-462b-a607-fb20b59d8ca4")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR035")
 					(unit 1)
 				)
 			)
@@ -27093,7 +27934,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7e28bd8a-3977-409d-9655-1dd14cb837e9")
-		(property "Reference" "#PWR026"
+		(property "Reference" "#PWR028"
 			(at 222.25 133.35 0)
 			(effects
 				(font
@@ -27143,7 +27984,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR026")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -27233,6 +28074,84 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "D29")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 41.275 177.165 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7ef03b08-886f-42e6-938e-163b68b1fa0e")
+		(property "Reference" "C134"
+			(at 42.418 180.975 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF 25V"
+			(at 38.1 186.055 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RevK:C_0402"
+			(at 42.2402 180.975 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 41.275 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 41.275 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C56392"
+			(at 41.275 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "9cc72964-6fa4-4e2f-ac96-27eda7894753")
+		)
+		(pin "1"
+			(uuid "432d6b5a-146e-40c0-a8a2-63d66a316df2")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C134")
 					(unit 1)
 				)
 			)
@@ -27353,7 +28272,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 86.0298 0)
 			(effects
 				(font
@@ -27692,7 +28611,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 153.035 73.3298 0)
 			(effects
 				(font
@@ -27824,156 +28743,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:Hidden")
-		(at 258.445 152.4 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "870b16ef-301e-426e-999a-c326d7f51cfa")
-		(property "Reference" "L1"
-			(at 259.715 152.4 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "10uH"
-			(at 264.795 152.4 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "RevK:L_4x4_"
-			(at 256.54 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 258.445 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 258.445 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Part No" ""
-			(at 258.445 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Note" ""
-			(at 258.445 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "L1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 198.755 123.825 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "8733dcb1-551c-485e-90b9-b2c7b188f391")
-		(property "Reference" "C130"
-			(at 197.485 113.411 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "22uF"
-			(at 196.215 111.125 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:C_0603"
-			(at 199.7202 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 198.755 123.825 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 198.755 123.825 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "854b194e-ed13-41d5-9f3e-b19622564509")
-		)
-		(pin "2"
-			(uuid "5d1e5924-5776-4e9b-9562-b27b9a17c5b8")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C130")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 19.05 86.995 270)
 		(mirror x)
@@ -27999,7 +28768,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 86.0298 0)
 			(effects
 				(font
@@ -28245,7 +29014,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 153.035 47.9298 0)
 			(effects
 				(font
@@ -28313,7 +29082,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 149.5298 0)
 			(effects
 				(font
@@ -28648,7 +29417,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 86.0298 0)
 			(effects
 				(font
@@ -28716,7 +29485,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 149.5298 0)
 			(effects
 				(font
@@ -28784,7 +29553,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 35.2298 0)
 			(effects
 				(font
@@ -28918,7 +29687,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 124.1298 0)
 			(effects
 				(font
@@ -29052,7 +29821,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 98.7298 0)
 			(effects
 				(font
@@ -29120,7 +29889,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 47.9298 0)
 			(effects
 				(font
@@ -29829,87 +30598,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:Hidden")
-		(at 258.445 144.78 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9c06d582-ee8a-4950-964b-04c45526a66e")
-		(property "Reference" "C139"
-			(at 263.525 144.78 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100nF"
-			(at 264.795 144.78 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "RevK:C_0603_"
-			(at 256.54 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 258.445 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 258.445 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Part No" ""
-			(at 258.445 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Note" ""
-			(at 258.445 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C139")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 145.415 150.495 270)
 		(mirror x)
@@ -29935,7 +30623,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 149.5298 0)
 			(effects
 				(font
@@ -30247,7 +30935,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 35.2298 0)
 			(effects
 				(font
@@ -30315,7 +31003,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 149.5298 0)
 			(effects
 				(font
@@ -30383,7 +31071,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 73.3298 0)
 			(effects
 				(font
@@ -30435,7 +31123,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a00c6302-e9f0-41c5-b20b-1a51979dd71f")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR024"
 			(at 204.47 123.825 0)
 			(effects
 				(font
@@ -30485,7 +31173,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR022")
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -30501,7 +31189,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a00fc58e-ae8d-46c1-bad1-c1df607b7c06")
-		(property "Reference" "J2"
+		(property "Reference" "J4"
 			(at 232.41 31.4155 0)
 			(effects
 				(font
@@ -30565,7 +31253,83 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "J2")
+					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 132.715 179.705 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a0895d58-26a8-4d72-ab8e-73b1cd88f9ab")
+		(property "Reference" "C140"
+			(at 133.858 177.165 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 133.858 184.023 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "RevK:C_0201"
+			(at 131.7498 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 132.715 179.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 132.715 179.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C76934"
+			(at 132.715 179.705 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "4cafc50b-f65e-436c-9f93-182c2756d500")
+		)
+		(pin "1"
+			(uuid "110030e6-10da-4025-b9f9-08aa74462658")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C140")
 					(unit 1)
 				)
 			)
@@ -30686,7 +31450,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 149.5298 0)
 			(effects
 				(font
@@ -31176,7 +31940,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 73.3298 0)
 			(effects
 				(font
@@ -31309,6 +32073,84 @@
 	)
 	(symbol
 		(lib_id "Device:C")
+		(at 49.53 177.165 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ab9ba4a3-8905-4f07-b9ce-dc2523520216")
+		(property "Reference" "C135"
+			(at 50.546 182.245 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF 25V"
+			(at 46.228 186.055 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RevK:C_0402"
+			(at 50.4952 180.975 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 49.53 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 49.53 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C56392"
+			(at 49.53 177.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "c1c4a426-808a-46dd-b466-7d970b304745")
+		)
+		(pin "1"
+			(uuid "0302f9a1-7329-4616-80f4-79169fd76b5b")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "C135")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
 		(at 19.05 99.695 270)
 		(mirror x)
 		(unit 1)
@@ -31333,7 +32175,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 98.7298 0)
 			(effects
 				(font
@@ -31385,7 +32227,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "afdfba97-cd61-434d-9cef-9088d3ae402c")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR025"
 			(at 204.47 133.985 0)
 			(effects
 				(font
@@ -31435,7 +32277,73 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR023")
+					(reference "#PWR025")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 137.795 187.325 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b07455c6-adca-451c-9571-64c433c84446")
+		(property "Reference" "#PWR039"
+			(at 144.145 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 144.78 187.325 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 137.795 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.795 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 137.795 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9e8f2bc8-7b56-410c-b255-5aa61425c959")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#PWR039")
 					(unit 1)
 				)
 			)
@@ -31985,7 +32893,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b66ca99c-124e-407b-9e1d-9ba3871e3646")
-		(property "Reference" "#PWR039"
+		(property "Reference" "#PWR017"
 			(at 182.245 93.345 0)
 			(effects
 				(font
@@ -32036,7 +32944,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR039")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -32068,7 +32976,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 86.0298 0)
 			(effects
 				(font
@@ -32136,7 +33044,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 60.6298 0)
 			(effects
 				(font
@@ -32179,72 +33087,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 192.405 127.635 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b7500079-80a1-4ba9-a6a9-6e0669a50016")
-		(property "Reference" "#PWR018"
-			(at 192.405 133.985 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 192.405 132.0784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 192.405 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 192.405 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 192.405 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d79a50fe-cbd2-49dc-a4dc-70ed8528328a")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR018")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 133.985 86.995 270)
 		(mirror x)
@@ -32270,7 +33112,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 86.0298 0)
 			(effects
 				(font
@@ -32338,7 +33180,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 35.2298 0)
 			(effects
 				(font
@@ -32561,7 +33403,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 149.5298 0)
 			(effects
 				(font
@@ -32718,7 +33560,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 60.6298 0)
 			(effects
 				(font
@@ -32786,7 +33628,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 136.8298 0)
 			(effects
 				(font
@@ -33009,7 +33851,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 111.4298 0)
 			(effects
 				(font
@@ -33077,7 +33919,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 35.2298 0)
 			(effects
 				(font
@@ -33145,7 +33987,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 124.1298 0)
 			(effects
 				(font
@@ -33286,7 +34128,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c643b168-bdb8-4d10-970b-2e49df2ae960")
-		(property "Reference" "V1"
+		(property "Reference" "V2"
 			(at 272.415 170.18 0)
 			(effects
 				(font
@@ -33333,7 +34175,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "V1")
+					(reference "V2")
 					(unit 1)
 				)
 			)
@@ -33519,7 +34361,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 38.735 86.0298 0)
 			(effects
 				(font
@@ -33570,7 +34412,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c9c57f29-aafa-4e82-b1ef-b1d62550aeb3")
-		(property "Reference" "#PWR019"
+		(property "Reference" "#PWR021"
 			(at 202.565 145.415 0)
 			(effects
 				(font
@@ -33620,7 +34462,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR019")
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -33636,7 +34478,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ca04f844-25bf-43e9-a846-932461951171")
-		(property "Reference" "#PWR038"
+		(property "Reference" "#PWR018"
 			(at 182.245 99.06 0)
 			(effects
 				(font
@@ -33687,7 +34529,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR038")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -33791,7 +34633,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cd8b5e11-631e-4151-8f46-5f0d89675c08")
-		(property "Reference" "#PWR030"
+		(property "Reference" "#PWR031"
 			(at 222.25 24.13 0)
 			(effects
 				(font
@@ -33841,7 +34683,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR030")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -33873,7 +34715,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 15.24 73.3298 0)
 			(effects
 				(font
@@ -34030,7 +34872,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 153.035 35.2298 0)
 			(effects
 				(font
@@ -34082,7 +34924,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d1429cd8-ab45-4ebd-a59a-6e676d864e08")
-		(property "Reference" "V4"
+		(property "Reference" "V1"
 			(at 267.97 174.625 0)
 			(effects
 				(font
@@ -34130,7 +34972,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "V4")
+					(reference "V1")
 					(unit 1)
 				)
 			)
@@ -34162,7 +35004,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 149.5298 0)
 			(effects
 				(font
@@ -34319,7 +35161,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 60.6298 0)
 			(effects
 				(font
@@ -34476,7 +35318,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 98.7298 0)
 			(effects
 				(font
@@ -34544,7 +35386,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 60.6298 0)
 			(effects
 				(font
@@ -34612,7 +35454,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 136.8298 0)
 			(effects
 				(font
@@ -35125,7 +35967,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 60.6298 0)
 			(effects
 				(font
@@ -35598,7 +36440,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d8023b75-af7a-4e81-9395-29a3295cd04b")
-		(property "Reference" "C135"
+		(property "Reference" "C131"
 			(at 242.189 122.682 0)
 			(effects
 				(font
@@ -35661,7 +36503,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C135")
+					(reference "C131")
 					(unit 1)
 				)
 			)
@@ -35693,7 +36535,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 47.9298 0)
 			(effects
 				(font
@@ -35850,7 +36692,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 111.4298 0)
 			(effects
 				(font
@@ -35918,7 +36760,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 35.2298 0)
 			(effects
 				(font
@@ -35986,7 +36828,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 98.7298 0)
 			(effects
 				(font
@@ -36232,7 +37074,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 86.0298 0)
 			(effects
 				(font
@@ -36389,7 +37231,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 111.4298 0)
 			(effects
 				(font
@@ -36457,7 +37299,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 153.035 60.6298 0)
 			(effects
 				(font
@@ -36525,7 +37367,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 107.315 124.1298 0)
 			(effects
 				(font
@@ -36562,72 +37404,6 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C88")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 198.755 127.635 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e2120b84-7c92-4967-9a18-1b2f2c330c53")
-		(property "Reference" "#PWR021"
-			(at 198.755 133.985 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 198.755 132.0784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 198.755 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 198.755 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 198.755 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f5ec446d-9d9c-429b-be66-d3c76743f56f")
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -36926,7 +37702,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 149.5298 0)
 			(effects
 				(font
@@ -36994,7 +37770,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 86.0298 0)
 			(effects
 				(font
@@ -37062,7 +37838,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 130.175 73.3298 0)
 			(effects
 				(font
@@ -37130,7 +37906,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 136.8298 0)
 			(effects
 				(font
@@ -37198,7 +37974,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 98.7298 0)
 			(effects
 				(font
@@ -37241,96 +38017,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:Hidden")
-		(at 258.445 142.875 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e9eb4042-2e57-4041-a70f-c84cdff8d611")
-		(property "Reference" "C138"
-			(at 259.715 142.875 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10uF 6.3V"
-			(at 264.795 142.875 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:C_0603_"
-			(at 258.445 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 258.445 142.875 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 258.445 142.875 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "C1691"
-			(at 258.445 142.875 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Part No" ""
-			(at 258.445 142.875 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Note" ""
-			(at 258.445 142.875 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C138")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "RevK:VCUT")
 		(at 272.415 177.8 0)
 		(unit 1)
@@ -37340,7 +38026,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ea344b59-4ec9-494e-8caa-ff43f9a7162d")
-		(property "Reference" "V2"
+		(property "Reference" "V3"
 			(at 272.415 176.53 0)
 			(effects
 				(font
@@ -37387,7 +38073,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "V2")
+					(reference "V3")
 					(unit 1)
 				)
 			)
@@ -37419,7 +38105,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 73.025 136.8298 0)
 			(effects
 				(font
@@ -37462,87 +38148,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:Hidden")
-		(at 258.445 150.495 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ead6207f-1bec-4f39-bf98-a65b59f0ac8a")
-		(property "Reference" "R4"
-			(at 259.715 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1M"
-			(at 264.795 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RevK:R_0402_"
-			(at 258.445 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 258.445 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 258.445 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Part No" ""
-			(at 258.445 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Note" ""
-			(at 258.445 150.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "Coaster"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "R4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 88.265 125.095 270)
 		(mirror x)
@@ -37568,7 +38173,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 124.1298 0)
 			(effects
 				(font
@@ -37605,6 +38210,136 @@
 			(project "Gate"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
 					(reference "C68")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 36.195 172.085 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ed11eeb1-f4bf-4435-ac3d-0d6b327ed13d")
+		(property "Reference" "#FLG03"
+			(at 36.195 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "DC"
+			(at 36.322 168.402 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 36.195 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 36.195 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 36.195 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3f1b94a6-7b49-45d0-89de-fa196c604b9d")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#FLG03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 122.555 187.325 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ed3faf6e-834e-486c-a007-2262be4f485f")
+		(property "Reference" "#FLG05"
+			(at 122.555 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 122.682 191.135 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 122.555 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 122.555 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 122.555 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4a41ee4d-b05c-4761-8293-e724712d8a1a")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#FLG05")
 					(unit 1)
 				)
 			)
@@ -37725,7 +38460,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 95.885 47.9298 0)
 			(effects
 				(font
@@ -37776,7 +38511,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "eed6bce9-b5da-403c-b3eb-0b81ec8f155f")
-		(property "Reference" "C133"
+		(property "Reference" "C129"
 			(at 225.679 122.047 0)
 			(effects
 				(font
@@ -37839,7 +38574,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "C133")
+					(reference "C129")
 					(unit 1)
 				)
 			)
@@ -37871,7 +38606,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 35.2298 0)
 			(effects
 				(font
@@ -38028,7 +38763,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 141.605 98.7298 0)
 			(effects
 				(font
@@ -38096,7 +38831,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 73.3298 0)
 			(effects
 				(font
@@ -38164,7 +38899,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 84.455 47.9298 0)
 			(effects
 				(font
@@ -38232,7 +38967,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 73.3298 0)
 			(effects
 				(font
@@ -38300,7 +39035,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 27.305 136.8298 0)
 			(effects
 				(font
@@ -38546,7 +39281,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 61.595 149.5298 0)
 			(effects
 				(font
@@ -38703,7 +39438,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 50.165 124.1298 0)
 			(effects
 				(font
@@ -38754,7 +39489,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fbe37d13-e3a0-4eb8-a44d-1e693807be1a")
-		(property "Reference" "R6"
+		(property "Reference" "R3"
 			(at 272.415 73.025 90)
 			(effects
 				(font
@@ -38770,7 +39505,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:R_0402"
+		(property "Footprint" "RevK:R_0201"
 			(at 272.415 69.342 90)
 			(effects
 				(font
@@ -38806,7 +39541,73 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "R6")
+					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 137.795 172.085 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fc0fbc83-09d2-4708-80cd-b7964fe2b8af")
+		(property "Reference" "#PWR038"
+			(at 133.985 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 137.668 170.053 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 137.795 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.795 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 137.795 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8d2db894-8e82-4032-bdc1-f1c4f9d63a4c")
+		)
+		(instances
+			(project "Coaster"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "#PWR038")
 					(unit 1)
 				)
 			)
@@ -38838,7 +39639,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RevK:C_0402"
+		(property "Footprint" "RevK:C_0201"
 			(at 118.745 98.7298 0)
 			(effects
 				(font
@@ -38889,7 +39690,7 @@
 		(on_board yes)
 		(dnp yes)
 		(uuid "fd2d5c2d-7df1-4cab-a5d7-43100e537c66")
-		(property "Reference" "J4"
+		(property "Reference" "J2"
 			(at 206.756 93.98 0)
 			(effects
 				(font
@@ -38952,7 +39753,7 @@
 		(instances
 			(project "Coaster"
 				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "J4")
+					(reference "J2")
 					(unit 1)
 				)
 			)

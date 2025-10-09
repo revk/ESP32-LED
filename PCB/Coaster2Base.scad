@@ -9,7 +9,7 @@ translate([0,0,b])rotate([180,0,0])
         outside();
         difference()
         {
-            baseplate();
+            baseplate(0,basemargin);
             translate([0,0,-0.01-pcbt])U1()translate([0.785,0,0])cylinder(d1=4,d2=2,h=b+0.03);
         }
     }
