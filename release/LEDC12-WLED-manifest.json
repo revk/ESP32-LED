@@ -19,14 +19,14 @@
       "url": "https://ota.revk.uk/WLED-ESP32S3-data.bin"
     },
     {
-      "url": "https://ota.revk.uk/WLED-ESP32-S3_4M_qspi.bin",
-      "filename": "WLED-ESP32-S3_4M_qspi.bin",
-      "address": "10000"
-    },
-    {
       "filename": "LEDC12-WLED-spiffs.bin",
       "address": "310000",
       "url": "https://ota.revk.uk/LEDC12-WLED-spiffs.bin"
+    },
+    {
+      "url": "https://ota.revk.uk/WLED-ESP32-S3_4M_qspi.bin",
+      "filename": "WLED-ESP32-S3_4M_qspi.bin",
+      "address": "10000"
     }
   ]
 }
