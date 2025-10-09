@@ -1,6 +1,6 @@
 // Generated case design for LEDR/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-01 17:38:34
+// Generated 2025-10-09 09:19:08
 // title:	PCB-LEDR
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -30,7 +30,7 @@ datey=0.000000;
 datet=0.500000;
 dateh=3.000000;
 datea=0;
-date="2025-06-22";
+date="2025-10-09";
 datef="OCRB";
 spacing=61.950000;
 pcbwidth=45.950000;
@@ -46,7 +46,7 @@ module pcb(h=pcbthickness,r=0){linear_extrude(height=h)offset(r=r)polygon(points
 module L2(){translate([10.925000,-3.835000,1.200000])children();}
 module part_L2(part=true,hole=false,block=false)
 {
-translate([10.925000,-3.835000,1.200000])rotate([-0.000000,-0.000000,-90.000000])m0(part,hole,block,casetop); // RevK:L_4x4_ TYA4020 (back)
+translate([10.925000,-3.835000,1.200000])scale([1.000000,1.000000,1.400000])rotate([0.000000,0.000000,-90.000000])m0(part,hole,block,casetop); // RevK:L_4x4_ TYA4020 (back)
 };
 module U3(){translate([-18.975000,-2.000000,1.200000])rotate([0,0,90.000000])children();}
 module part_U3(part=true,hole=false,block=false)
@@ -107,20 +107,20 @@ module part_U5(part=true,hole=false,block=false)
 {
 translate([11.275000,-9.850000,1.200000])rotate([0,0,180.000000])m7(part,hole,block,casetop); // U5 (back)
 };
-module J5(){translate([17.135000,-4.750000,1.200000])rotate([0,0,90.000000])children();}
+module J5(){translate([17.635000,-4.750000,1.200000])rotate([0,0,90.000000])children();}
 module part_J5(part=true,hole=false,block=false)
 {
-translate([17.135000,-4.750000,1.200000])rotate([0,0,90.000000])translate([0.000000,-2.400000,0.000000])rotate([90.000000,-0.000000,-0.000000])m8(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
+translate([17.635000,-4.750000,1.200000])rotate([0,0,90.000000])translate([0.000000,-1.900000,0.000000])rotate([90.000000,0.000000,0.000000])m8(part,hole,block,casetop); // RevK:USB-C-Socket-H CSP-USC16-TR (back)
 };
 module R4(){translate([10.925000,2.665000,1.200000])children();}
 module part_R4(part=true,hole=false,block=false)
 {
 translate([10.925000,2.665000,1.200000])m3(part,hole,block,casetop); // RevK:R_0402 R_0402_1005Metric (back)
 };
-module D1(){translate([-13.025000,-3.050000,1.200000])rotate([0,0,45.000000])children();}
+module D1(){translate([-12.625000,-3.050000,1.200000])children();}
 module part_D1(part=true,hole=false,block=false)
 {
-translate([-13.025000,-3.050000,1.200000])rotate([0,0,45.000000])m9(part,hole,block,casetop); // D1 (back)
+translate([-12.625000,-3.050000,1.200000])m9(part,hole,block,casetop); // D1 (back)
 };
 module R9(){translate([8.175000,-9.850000,1.200000])children();}
 module part_R9(part=true,hole=false,block=false)
@@ -417,16 +417,16 @@ rotate([-90,0,0])translate([0,1.9,0])
 
 module m9(part=false,hole=false,block=false,height)
 { // D1
-// 1x1mm LED
+// 1.6x1.5mm LED
 if(part)
 {
-        b(0,0,0,1.2,1.2,.8);
+        b(0,0,0,1.6+0.2,1.5+0.2,.6+0.2);
 }
 if(hole)
 {
         hull()
         {
-                b(0,0,.8,1.2,1.2,1);
+                b(0,0,.6+0.2,1.6+0.2,1.5+0.2,1);
                 translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=16);
         }
 }
@@ -434,7 +434,7 @@ if(block)
 {
         hull()
         {
-                b(0,0,.8,2.8,2.8,1);
+                b(0,0,.6+0.2,2.8,2.8,1);
                 translate([0,0,height])cylinder(d=2,h=1,$fn=16);
         }
 }

@@ -5174,7 +5174,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "RevK:WS2812B-1mm"
+		(symbol "RevK:WS2812B-1.5mm"
 			(pin_names
 				(offset 0.254)
 			)
@@ -5190,8 +5190,8 @@
 					)
 				)
 			)
-			(property "Value" "XL-1010RGBC-WS2812B"
-				(at 1.27 -5.715 0)
+			(property "Value" "XL-1615RGBC-WS2812B"
+				(at 1.27 5.715 0)
 				(effects
 					(font
 						(size 1 1)
@@ -5200,8 +5200,8 @@
 					(hide yes)
 				)
 			)
-			(property "Footprint" ""
-				(at 1.27 -7.62 0)
+			(property "Footprint" "RevK:SMD1615"
+				(at 1.27 7.62 0)
 				(effects
 					(font
 						(size 1 1)
@@ -5210,8 +5210,8 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-				(at 1.27 -9.525 0)
+			(property "Datasheet" "https://www.lcsc.com/datasheet/C5349954.pdf"
+				(at 1.27 9.525 0)
 				(effects
 					(font
 						(size 1 1)
@@ -5229,8 +5229,8 @@
 					(hide yes)
 				)
 			)
-			(property "MPN" "C5349953"
-				(at 1.27 -11.43 0)
+			(property "MPN" "C5349954"
+				(at 1.27 11.43 0)
 				(effects
 					(font
 						(size 1 1)
@@ -5257,10 +5257,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "WS2812B-1mm_1_1"
+			(symbol "WS2812B-1.5mm_1_1"
 				(polyline
 					(pts
-						(xy 0 3.175) (xy 3.175 0) (xy 0 -3.175) (xy -3.175 0) (xy 0 3.175)
+						(xy 0 -3.175) (xy 3.175 0) (xy 0 3.175) (xy -3.175 0) (xy 0 -3.175)
 					)
 					(stroke
 						(width 0)
@@ -5280,7 +5280,7 @@
 							)
 						)
 					)
-					(number "4"
+					(number "2"
 						(effects
 							(font
 								(size 1 1)
@@ -5291,7 +5291,7 @@
 				(pin power_in line
 					(at 0 3.81 270)
 					(length 0.5)
-					(name "-"
+					(name "+"
 						(effects
 							(font
 								(size 1 1)
@@ -5309,14 +5309,14 @@
 				(pin power_in line
 					(at 0 -3.81 90)
 					(length 0.5)
-					(name "+"
+					(name "-"
 						(effects
 							(font
 								(size 1 1)
 							)
 						)
 					)
-					(number "2"
+					(number "1"
 						(effects
 							(font
 								(size 1 1)
@@ -5334,7 +5334,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "4"
 						(effects
 							(font
 								(size 1 1)
@@ -10920,9 +10920,8 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-1mm")
+		(lib_id "RevK:WS2812B-1.5mm")
 		(at 264.16 81.28 0)
-		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10939,7 +10938,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 265.43 75.565 0)
+			(at 265.43 86.995 0)
 			(effects
 				(font
 					(size 1 1)
@@ -10948,7 +10947,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "RevK:SMD1010"
+		(property "Footprint" "RevK:SMD1615"
 			(at 265.43 73.66 0)
 			(effects
 				(font
@@ -10958,7 +10957,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C5349954.pdf"
 			(at 265.43 71.755 0)
 			(effects
 				(font
@@ -10977,7 +10976,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "C5349953"
+		(property "MPN" "C5349954"
 			(at 265.43 69.85 0)
 			(effects
 				(font

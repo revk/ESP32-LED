@@ -1,6 +1,6 @@
 // Generated case design for LEDC/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-01 17:32:33
+// Generated 2025-10-09 09:13:39
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -30,7 +30,7 @@ datey=0.000000;
 datet=0.500000;
 dateh=3.000000;
 datea=0;
-date="2025-08-15";
+date="2025-10-09";
 datef="OCRB";
 spacing=62.000089;
 pcbwidth=46.000089;
@@ -132,10 +132,10 @@ module part_R4(part=true,hole=false,block=false)
 {
 translate([10.900045,-0.675000,1.200000])rotate([0,0,180.000000])m2(part,hole,block,casetop); // RevK:R_0402_ R_0402_1005Metric (back)
 };
-module D1(){translate([21.200045,6.398959,1.200000])rotate([0,0,-135.000000])children();}
+module D1(){translate([21.300044,6.500000,1.200000])rotate([0,0,180.000000])children();}
 module part_D1(part=true,hole=false,block=false)
 {
-translate([21.200045,6.398959,1.200000])rotate([0,0,-135.000000])m8(part,hole,block,casetop); // D1 (back)
+translate([21.300044,6.500000,1.200000])rotate([0,0,180.000000])m8(part,hole,block,casetop); // D1 (back)
 };
 module C9(){translate([-13.099955,6.700000,1.200000])rotate([0,0,180.000000])children();}
 module part_C9(part=true,hole=false,block=false)
@@ -393,16 +393,16 @@ rotate([-90,0,0])translate([0,1.9,0])
 
 module m8(part=false,hole=false,block=false,height)
 { // D1
-// 1x1mm LED
+// 1.6x1.5mm LED
 if(part)
 {
-        b(0,0,0,1.2,1.2,.8);
+        b(0,0,0,1.6+0.2,1.5+0.2,.6+0.2);
 }
 if(hole)
 {
         hull()
         {
-                b(0,0,.8,1.2,1.2,1);
+                b(0,0,.6+0.2,1.6+0.2,1.5+0.2,1);
                 translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=16);
         }
 }
@@ -410,7 +410,7 @@ if(block)
 {
         hull()
         {
-                b(0,0,.8,2.8,2.8,1);
+                b(0,0,.6+0.2,2.8,2.8,1);
                 translate([0,0,height])cylinder(d=2,h=1,$fn=16);
         }
 }

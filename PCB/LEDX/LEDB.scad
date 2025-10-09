@@ -1,6 +1,6 @@
 // Generated case design for LEDX/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-01 17:50:31
+// Generated 2025-10-09 09:31:43
 // title:	PCB-USBX
 // rev:	1
 // comment:	www.me.uk
@@ -31,7 +31,7 @@ datey=0.000000;
 datet=0.500000;
 dateh=3.000000;
 datea=-34;
-date="2025-09-21";
+date="2025-10-09";
 datef="OCRB";
 spacing=37.725000;
 pcbwidth=21.725000;
@@ -97,12 +97,12 @@ translate([10.162500,-2.185000,1.200000])rotate([0,0,-90.000000])m0(part,hole,bl
 module L2(){translate([7.662500,-5.485000,1.200000])children();}
 module part_L2(part=true,hole=false,block=false)
 {
-translate([7.662500,-5.485000,1.200000])rotate([-0.000000,-0.000000,-90.000000])m6(part,hole,block,casetop); // RevK:L_4x4_ TYA4020 (back)
+translate([7.662500,-5.485000,1.200000])scale([1.000000,1.000000,1.400000])rotate([0.000000,0.000000,-90.000000])m6(part,hole,block,casetop); // RevK:L_4x4_ TYA4020 (back)
 };
-module C9(){translate([9.362500,5.200000,1.200000])children();}
+module C9(){translate([9.362500,5.100000,1.200000])children();}
 module part_C9(part=true,hole=false,block=false)
 {
-translate([9.362500,5.200000,1.200000])m5(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
+translate([9.362500,5.100000,1.200000])m5(part,hole,block,casetop); // RevK:C_0402 C_0402_1005Metric (back)
 };
 module PCB1(){translate([-3.137500,0.000000,1.200000])children();}
 module part_PCB1(part=true,hole=false,block=false)
@@ -249,16 +249,16 @@ if(part)
 
 module m2(part=false,hole=false,block=false,height)
 { // D1
-// 1x1mm LED
+// 1.6x1.5mm LED
 if(part)
 {
-        b(0,0,0,1.2,1.2,.8);
+        b(0,0,0,1.6+0.2,1.5+0.2,.6+0.2);
 }
 if(hole)
 {
         hull()
         {
-                b(0,0,.8,1.2,1.2,1);
+                b(0,0,.6+0.2,1.6+0.2,1.5+0.2,1);
                 translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=16);
         }
 }
@@ -266,7 +266,7 @@ if(block)
 {
         hull()
         {
-                b(0,0,.8,2.8,2.8,1);
+                b(0,0,.6+0.2,2.8,2.8,1);
                 translate([0,0,height])cylinder(d=2,h=1,$fn=16);
         }
 }
