@@ -18,11 +18,11 @@ leds:	PCBCase/placeleds
 	#PCBCase/placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d56 --diode=5 --count=8 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
 	#PCBCase/placeleds Coaster2/Coaster.kicad_pcb -x100 -y100 -d48 --diode=1 --count=4 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2
 
-	PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d80 --diode=61 --count=64 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2  --SMD1615
-	PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d72 --diode=29 --count=32 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 --SMD1615
-	PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d64 --diode=13 --count=16 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 --SMD1615
-	PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d56 --diode=5 --count=8 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 --SMD1615
-	PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d48 --diode=1 --count=4 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 --SMD1615
+	#PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d80 --diode=61 --count=64 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2  --SMD1615
+	#PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d72 --diode=29 --count=32 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 --SMD1615
+	#PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d64 --diode=13 --count=16 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 --SMD1615
+	#PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d56 --diode=5 --count=8 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 --SMD1615
+	#PCBCase/placeleds Coaster3/Coaster.kicad_pcb -x100 -y100 -d48 --diode=1 --count=4 --fill=VBUS --tracks --vias=0.8 --power-vias=0.8  --zone-in=2 --zone-out=2 --SMD1615
 
 	#PCBCase/placeleds LED32/LED.kicad_pcb -x100 -y100 -d6 --diode=1 --count=4 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 	#PCBCase/placeleds LED32/LED.kicad_pcb -x100 -y100 -d11.5 --diode=5 --count=12 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
@@ -30,7 +30,7 @@ leds:	PCBCase/placeleds
 	#PCBCase/placeleds LED32/LED.kicad_pcb -x100 -y100 -d22.5 --diode=33 --count=24 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 	#PCBCase/placeleds LED32/LED.kicad_pcb -x100 -y100 -d28 --diode=57 --count=32 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 
-stl:    LEDC/LEDT.stl LEDR/LEDT.stl LEDC12/LEDT.stl LEDX/LEDT.stl LEDX12/LEDT.stl Test/LEDT.stl LEDC/LEDB.stl LEDR/LEDB.stl LEDC12/LEDB.stl LEDX/LEDB.stl LEDX12/LEDB.stl Test/LEDB.stl Coaster2Top.stl Coaster2Base.stl Coaster2Top.stl
+stl:    LEDC/LEDT.stl LEDR/LEDT.stl LEDC12/LEDT.stl LEDX/LEDT.stl LEDX12/LEDT.stl Test/LEDT.stl LEDC/LEDB.stl LEDR/LEDB.stl LEDC12/LEDB.stl LEDX/LEDB.stl LEDX12/LEDB.stl Test/LEDB.stl Coaster2Base.stl Coaster2Top.stl
 
 png:	$(patsubst %.kicad_pcb,%.png,$(wildcard */*.kicad_pcb))
 
@@ -74,6 +74,9 @@ LEDX12/LEDT.scad: LEDX12/LED.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --edge=2 --bottom=6 --top=5.5 --pcb=2 --two-file --date-angle=-34
 
 Coaster2/Coaster.scad: Coaster2/Coaster.kicad_pcb PCBCase/case
+	PCBCase/case -o $@ $< --pcb=2 -n
+
+Coaster3/Coaster.scad: Coaster3/Coaster.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --pcb=2 -n
 
 Test/LEDT.scad: Test/LED.kicad_pcb PCBCase/case
