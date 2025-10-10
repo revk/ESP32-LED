@@ -1,6 +1,6 @@
 // Generated case design for LEDX12/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-10 07:51:49
+// Generated 2025-10-10 09:29:53
 // title:	LEDX12
 // rev:	1
 // comment:	www.me.uk
@@ -405,8 +405,8 @@ if(hole)
 {
     hull()
     {
-        translate([-11.510,0,2])sphere(d=4,$fn=12);
-        translate([-50,0,2])sphere(d=4,$fn=12);
+        translate([-11.510,0,2])sphere(d=5,$fn=12);
+        translate([-50,0,2])sphere(d=5,$fn=12);
     }
 }
 }
