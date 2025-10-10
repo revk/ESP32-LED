@@ -1,6 +1,6 @@
 // Generated case design for LEDX12/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-09 16:42:06
+// Generated 2025-10-10 07:51:49
 // title:	LEDX12
 // rev:	1
 // comment:	www.me.uk
@@ -31,7 +31,7 @@ datey=0.000000;
 datet=0.500000;
 dateh=3.000000;
 datea=-34;
-date="2025-10-09";
+date="2025-10-10";
 datef="OCRB";
 spacing=37.725000;
 pcbwidth=21.725000;
