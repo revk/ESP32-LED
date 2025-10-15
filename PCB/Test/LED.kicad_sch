@@ -859,456 +859,556 @@
 		)
 	)
 	(junction
-		(at 142.875 117.475)
+		(at 197.485 57.785)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0140c7f5-d846-45f4-b15a-40c6ba88c24a")
+	)
+	(junction
+		(at 248.92 57.785)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "03366baf-8d44-4cc7-8c17-0a182c79f1b3")
+	)
+	(junction
+		(at 144.145 90.805)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "07205dfc-183f-447f-8c8c-f9f7a0622a23")
 	)
 	(junction
-		(at 105.41 69.85)
+		(at 106.045 33.655)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "07f6fc06-2153-40fb-bc36-7fbde5bee240")
 	)
 	(junction
-		(at 128.27 89.535)
+		(at 212.725 65.405)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "08913ec5-6179-42fa-a425-cab7214afa58")
+	)
+	(junction
+		(at 241.3 65.405)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0c4ef3f6-dfd0-4492-b5fe-7b36a0c5cd9a")
+	)
+	(junction
+		(at 128.905 57.785)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "110e902a-3f83-4316-a7b5-1f129ea8d8f2")
 	)
 	(junction
-		(at 113.03 97.155)
+		(at 197.485 65.405)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "11fa28db-1edf-47dc-9b45-f8fc5a2b40fe")
+	)
+	(junction
+		(at 113.665 65.405)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1359b930-a5a9-4152-99dc-77f8708ea49a")
 	)
 	(junction
-		(at 166.37 77.47)
+		(at 167.005 41.275)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1672dbc9-eabe-4b88-bea6-92b426b3266b")
 	)
 	(junction
-		(at 113.03 69.85)
+		(at 113.665 33.655)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2331eee8-0d94-4896-a853-d8d06501ea4b")
 	)
 	(junction
-		(at 166.37 89.535)
+		(at 167.005 57.785)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2397a8b7-a0ca-4bde-8499-31f683ec0764")
 	)
 	(junction
-		(at 165.735 129.54)
+		(at 167.005 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2a4451e8-13cd-4db8-b537-b51b9ace9f38")
 	)
 	(junction
-		(at 150.495 129.54)
+		(at 151.765 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2bee7e40-ca02-4a83-80d3-b9504eb2cdc8")
 	)
 	(junction
-		(at 120.65 77.47)
+		(at 121.285 41.275)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2bf9bd21-599f-47c9-816e-3a3f2273558e")
 	)
 	(junction
-		(at 112.395 109.855)
+		(at 113.665 83.185)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2d9a9754-09ea-46d5-ac08-2c5dc67e61bb")
 	)
 	(junction
-		(at 158.75 69.85)
+		(at 248.92 65.405)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2f241517-5a92-44f2-a869-b796f8753b17")
+	)
+	(junction
+		(at 159.385 33.655)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "32cbcf5d-9f83-43c7-8844-dce613dde4be")
 	)
 	(junction
-		(at 127.635 129.54)
+		(at 226.06 57.785)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "352abcc9-f000-4e7b-bc54-74615aca1c6e")
+	)
+	(junction
+		(at 128.905 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "35df2039-d21e-4e0f-be42-1e2058af1eb9")
 	)
 	(junction
-		(at 142.875 137.16)
+		(at 144.145 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3a692ecc-803c-4aa6-9f89-63583bda5a3c")
 	)
 	(junction
-		(at 158.75 89.535)
+		(at 159.385 57.785)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3a8f6bd2-aa04-45f2-9d70-6e637239640e")
 	)
 	(junction
-		(at 112.395 137.16)
+		(at 189.865 65.405)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3f83b839-0ea8-4eae-8b28-26cf250e182b")
+	)
+	(junction
+		(at 113.665 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4334927e-94fb-48d0-a6cd-c75db2cdfb87")
 	)
 	(junction
-		(at 135.255 109.855)
+		(at 136.525 83.185)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "44c5e57e-85ed-4b40-acf4-e657b1b93985")
 	)
 	(junction
-		(at 105.41 77.47)
+		(at 106.045 41.275)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4859666d-7eb5-49b6-93ce-65026747ea70")
 	)
 	(junction
-		(at 105.41 89.535)
+		(at 106.045 57.785)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4a6701eb-e2ba-48a7-8d2b-7d04c48a1afd")
 	)
 	(junction
-		(at 135.89 77.47)
+		(at 136.525 41.275)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4d736b60-3450-4b03-b1dc-e38da124cfef")
 	)
 	(junction
-		(at 120.015 117.475)
+		(at 121.285 90.805)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5028535b-4ec4-4725-9460-3aa70d28d599")
 	)
 	(junction
-		(at 150.495 117.475)
+		(at 151.765 90.805)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "53b52209-2590-443b-96c3-390c06efb905")
 	)
 	(junction
-		(at 151.13 97.155)
+		(at 151.765 65.405)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "53b9263d-48b1-4aa6-aa38-b41290212946")
 	)
 	(junction
-		(at 151.13 69.85)
+		(at 205.105 57.785)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "56b72279-3120-4461-8c6a-a8a2bd59a2ac")
+	)
+	(junction
+		(at 151.765 33.655)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "57773ff4-bf42-40d2-a33b-e860c5f7a12c")
 	)
 	(junction
-		(at 113.03 89.535)
+		(at 113.665 57.785)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "589a3829-c41b-4bf8-96c8-1523f5b5a55f")
 	)
 	(junction
-		(at 135.255 117.475)
+		(at 136.525 90.805)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "64edff7a-35dd-4c72-a074-df5c0df64b95")
 	)
 	(junction
-		(at 158.115 129.54)
+		(at 159.385 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6527c84a-f828-474e-b967-a3b4b89fbf24")
 	)
 	(junction
-		(at 120.015 109.855)
+		(at 174.625 65.405)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "66590dfb-3054-466a-b001-f7d1c935d30a")
+	)
+	(junction
+		(at 121.285 83.185)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "666780f7-d183-402e-9b01-aebcbde2824e")
 	)
 	(junction
-		(at 135.255 129.54)
+		(at 136.525 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "683bc1d2-50c5-442d-a510-5ce5d4e5a70d")
 	)
 	(junction
-		(at 104.775 129.54)
+		(at 106.045 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6a502234-4432-4c3b-954d-e1e773d4e21a")
 	)
 	(junction
-		(at 105.41 97.155)
+		(at 233.68 65.405)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6a70610e-ad9d-456d-a16c-db2f3a62667f")
+	)
+	(junction
+		(at 106.045 65.405)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6b627988-d6c6-4449-8a28-aa6bef933c3e")
 	)
 	(junction
-		(at 158.75 97.155)
+		(at 159.385 65.405)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6c56aa6c-4957-486d-83a2-bdb1cbb82abd")
 	)
 	(junction
-		(at 150.495 137.16)
+		(at 151.765 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6d17954e-e83e-4817-8c82-aab032e68c43")
 	)
 	(junction
-		(at 143.51 89.535)
+		(at 144.145 57.785)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6f096914-c85c-4874-8f8d-ee529de7708c")
 	)
 	(junction
-		(at 135.255 137.16)
+		(at 136.525 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "75500910-2047-4568-99d8-ec609404852f")
 	)
 	(junction
-		(at 151.13 89.535)
+		(at 241.3 57.785)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7aa15c92-339c-47fe-b873-73a5aaa9e270")
+	)
+	(junction
+		(at 151.765 57.785)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "80072369-cf96-4fa7-a538-e53c819d1020")
 	)
 	(junction
-		(at 120.015 129.54)
+		(at 121.285 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "82f04bab-4f8e-43f0-bcb0-f3518d34bdf2")
 	)
 	(junction
-		(at 104.775 137.16)
+		(at 106.045 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8424722f-af5c-4f8d-b479-8754cdfc8028")
 	)
 	(junction
-		(at 127.635 109.855)
+		(at 128.905 83.185)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "89e881c8-85e5-4353-bb62-e212762726dd")
 	)
 	(junction
-		(at 165.735 117.475)
+		(at 167.005 90.805)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8b948236-e69a-4971-9770-92c545fe9118")
 	)
 	(junction
-		(at 112.395 117.475)
+		(at 113.665 90.805)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8f327697-90fb-4f3f-a0a6-499b9c227c1e")
 	)
 	(junction
-		(at 120.65 97.155)
+		(at 121.285 65.405)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "911571ff-51eb-4ae1-8fc2-3db9729aec0d")
 	)
 	(junction
-		(at 165.735 137.16)
+		(at 167.005 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9360e28d-75ab-4b78-8131-a693b8c7204b")
 	)
 	(junction
-		(at 166.37 97.155)
+		(at 167.005 65.405)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "941850ee-aa59-45f4-a14f-b0e659a79486")
 	)
 	(junction
-		(at 143.51 97.155)
+		(at 144.145 65.405)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "942fcba8-0e09-4578-a606-aaa7bd27a575")
 	)
 	(junction
-		(at 158.115 137.16)
+		(at 159.385 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9873c542-d37f-4f99-90c3-c1d926528d19")
 	)
 	(junction
-		(at 150.495 109.855)
+		(at 151.765 83.185)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "991ca066-26f7-4647-b6e1-8dfe4614f02c")
 	)
 	(junction
-		(at 143.51 69.85)
+		(at 144.145 33.655)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "993f0307-91fe-4370-b253-a81bb18d0bfe")
 	)
 	(junction
-		(at 112.395 129.54)
+		(at 113.665 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9abe6cfd-a14c-469f-8827-f55f6bdf8f90")
 	)
 	(junction
-		(at 135.89 97.155)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9c589233-9c0c-4d28-bf09-ec0e269ebf80")
-	)
-	(junction
-		(at 128.27 97.155)
+		(at 128.905 65.405)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9ceb208a-b119-4307-9c57-640eb1b973bd")
 	)
 	(junction
-		(at 151.13 77.47)
+		(at 151.765 41.275)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a0488ce9-68dd-4d1e-81d4-21b460d3f8a2")
 	)
 	(junction
-		(at 127.635 117.475)
+		(at 128.905 90.805)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a4260580-c12c-497f-a0b5-f93373f60739")
 	)
 	(junction
-		(at 166.37 69.85)
+		(at 167.005 33.655)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a55c0f7b-fabc-4633-a984-a87a7e9d8286")
 	)
 	(junction
-		(at 120.65 69.85)
+		(at 121.285 33.655)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b5af8765-d658-4aee-bb7b-cf831757deca")
 	)
 	(junction
-		(at 120.65 89.535)
+		(at 121.285 57.785)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ba679214-8734-44dc-ae45-23c52a85eba9")
 	)
 	(junction
-		(at 165.735 109.855)
+		(at 167.005 83.185)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bd029344-37be-4544-a86b-1edcca3f1cdc")
 	)
 	(junction
-		(at 113.03 77.47)
+		(at 113.665 41.275)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bf06fc60-944d-4f28-9722-3d645b8a0d6d")
 	)
 	(junction
-		(at 128.27 77.47)
+		(at 226.06 65.405)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c1768ef0-abb2-40e9-984f-622550cc68fe")
+	)
+	(junction
+		(at 189.865 57.785)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c2b5e3cc-48a1-454f-a395-2bc891c4b0c8")
+	)
+	(junction
+		(at 128.905 41.275)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ca170ac8-8d0d-4a2b-8dca-7141a2afbd9b")
 	)
 	(junction
-		(at 135.89 89.535)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "cc272a8a-d74b-4594-972a-9e23c7f47b33")
-	)
-	(junction
-		(at 135.89 69.85)
+		(at 136.525 33.655)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ccfbe8df-62cb-4b55-aaf9-abd04d54856d")
 	)
 	(junction
-		(at 142.875 129.54)
+		(at 233.68 57.785)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d33d5418-e012-4174-b81c-862ea48a97cd")
+	)
+	(junction
+		(at 144.145 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ddf61748-67b9-4b4c-b9a0-0fc8ddc498d9")
 	)
 	(junction
-		(at 127.635 137.16)
+		(at 128.905 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "deda9e11-d826-44a0-bdb2-65b2666128d4")
 	)
 	(junction
-		(at 158.75 77.47)
+		(at 212.725 57.785)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e3e2b301-adcb-412b-9922-cb14c517a758")
+	)
+	(junction
+		(at 159.385 41.275)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e427d4d1-dbda-40c0-a6c0-4b2d0f87e707")
 	)
 	(junction
-		(at 158.115 117.475)
+		(at 159.385 90.805)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e70c45b2-3943-4749-a3a7-9f1b6618da1f")
 	)
 	(junction
-		(at 128.27 69.85)
+		(at 128.905 33.655)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ec1db9b9-1033-48d3-b2ee-71c75feddaef")
 	)
 	(junction
-		(at 120.015 137.16)
+		(at 121.285 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "edf748ab-b6d5-47f2-bc6d-9df3168fafb7")
 	)
 	(junction
-		(at 142.875 109.855)
+		(at 174.625 57.785)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ee080411-a8f1-40cf-8817-4e589f64d8df")
+	)
+	(junction
+		(at 144.145 83.185)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ee975e61-c9a4-4bd8-9630-b0ab21eb3491")
 	)
 	(junction
-		(at 104.775 117.475)
+		(at 106.045 90.805)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f14a243e-2aab-4069-912f-9458c12f2158")
 	)
 	(junction
-		(at 143.51 77.47)
+		(at 144.145 41.275)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f28e9e3e-d8f3-4635-ab4c-d73d1dfeb6e8")
 	)
 	(junction
-		(at 104.775 109.855)
+		(at 106.045 83.185)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f3d8ec03-069a-4248-8306-3b4eea2939ab")
 	)
 	(junction
-		(at 158.115 109.855)
+		(at 205.105 65.405)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f5b67f25-2c49-4761-b78d-30426a1318c9")
+	)
+	(junction
+		(at 159.385 83.185)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ff4a4e89-2de6-4cff-82d5-1f0e357c58c5")
 	)
 	(no_connect
-		(at 177.8 93.345)
-		(uuid "276f2b65-ddb6-49e9-8be5-32e9024b43fa")
+		(at 191.135 82.55)
+		(uuid "8f6bde54-65e9-4472-bcbb-4c796780d15e")
 	)
 	(no_connect
-		(at 177.8 73.66)
+		(at 178.435 37.465)
 		(uuid "92772f50-2d7f-43e3-8b84-f98753e83ab5")
 	)
 	(no_connect
-		(at 177.165 113.665)
+		(at 178.435 86.995)
 		(uuid "b4c09da9-4355-40bc-880b-91e1c0613c71")
 	)
 	(no_connect
-		(at 177.165 133.35)
+		(at 178.435 106.68)
 		(uuid "e54e2299-901b-45c8-8bdd-8d9fbf0ffe75")
+	)
+	(no_connect
+		(at 260.35 61.595)
+		(uuid "ecae8d6a-ce7a-4773-9a1d-cc1a7268790d")
 	)
 	(wire
 		(pts
-			(xy 120.015 109.855) (xy 127.635 109.855)
+			(xy 121.285 83.185) (xy 128.905 83.185)
 		)
 		(stroke
 			(width 0)
@@ -1318,7 +1418,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.775 109.855) (xy 112.395 109.855)
+			(xy 106.045 83.185) (xy 113.665 83.185)
 		)
 		(stroke
 			(width 0)
@@ -1328,7 +1428,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 89.535) (xy 173.99 89.535)
+			(xy 167.005 57.785) (xy 174.625 57.785)
 		)
 		(stroke
 			(width 0)
@@ -1338,7 +1438,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 89.535) (xy 151.13 89.535)
+			(xy 144.145 57.785) (xy 151.765 57.785)
 		)
 		(stroke
 			(width 0)
@@ -1348,7 +1448,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 77.47) (xy 173.99 77.47)
+			(xy 167.005 41.275) (xy 174.625 41.275)
 		)
 		(stroke
 			(width 0)
@@ -1358,7 +1458,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 97.155) (xy 166.37 97.155)
+			(xy 159.385 65.405) (xy 167.005 65.405)
 		)
 		(stroke
 			(width 0)
@@ -1368,7 +1468,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 69.85) (xy 135.89 69.85)
+			(xy 128.905 33.655) (xy 136.525 33.655)
 		)
 		(stroke
 			(width 0)
@@ -1378,7 +1478,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.875 109.855) (xy 150.495 109.855)
+			(xy 144.145 83.185) (xy 151.765 83.185)
 		)
 		(stroke
 			(width 0)
@@ -1388,7 +1488,27 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 89.535) (xy 166.37 89.535)
+			(xy 241.3 57.785) (xy 248.92 57.785)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2325ab04-dd5a-4498-8176-33cf9ca00b5e")
+	)
+	(wire
+		(pts
+			(xy 205.105 65.405) (xy 212.725 65.405)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2caa2109-7396-4b8f-a090-73e2ff1b755c")
+	)
+	(wire
+		(pts
+			(xy 159.385 57.785) (xy 167.005 57.785)
 		)
 		(stroke
 			(width 0)
@@ -1398,7 +1518,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.115 137.16) (xy 165.735 137.16)
+			(xy 159.385 110.49) (xy 167.005 110.49)
 		)
 		(stroke
 			(width 0)
@@ -1408,7 +1528,7 @@
 	)
 	(wire
 		(pts
-			(xy 127.635 117.475) (xy 135.255 117.475)
+			(xy 128.905 90.805) (xy 136.525 90.805)
 		)
 		(stroke
 			(width 0)
@@ -1418,7 +1538,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 69.85) (xy 143.51 69.85)
+			(xy 136.525 33.655) (xy 144.145 33.655)
 		)
 		(stroke
 			(width 0)
@@ -1428,7 +1548,27 @@
 	)
 	(wire
 		(pts
-			(xy 142.875 129.54) (xy 150.495 129.54)
+			(xy 212.725 57.785) (xy 226.06 57.785)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49a1f9bb-65f8-413c-9137-f681379463b9")
+	)
+	(wire
+		(pts
+			(xy 178.435 61.595) (xy 186.055 61.595)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a04cdef-7c29-4691-94c2-c2cde18a4ad2")
+	)
+	(wire
+		(pts
+			(xy 144.145 102.87) (xy 151.765 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1438,7 +1578,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.255 137.16) (xy 142.875 137.16)
+			(xy 136.525 110.49) (xy 144.145 110.49)
 		)
 		(stroke
 			(width 0)
@@ -1448,7 +1588,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.735 117.475) (xy 173.355 117.475)
+			(xy 167.005 90.805) (xy 174.625 90.805)
 		)
 		(stroke
 			(width 0)
@@ -1458,7 +1598,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 77.47) (xy 113.03 77.47)
+			(xy 106.045 41.275) (xy 113.665 41.275)
 		)
 		(stroke
 			(width 0)
@@ -1468,7 +1608,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 69.85) (xy 158.75 69.85)
+			(xy 151.765 33.655) (xy 159.385 33.655)
 		)
 		(stroke
 			(width 0)
@@ -1478,7 +1618,17 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 89.535) (xy 128.27 89.535)
+			(xy 216.535 61.595) (xy 222.25 61.595)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "51fbd626-2419-4ea9-bd8a-bd7d01f4f1b5")
+	)
+	(wire
+		(pts
+			(xy 121.285 57.785) (xy 128.905 57.785)
 		)
 		(stroke
 			(width 0)
@@ -1488,7 +1638,17 @@
 	)
 	(wire
 		(pts
-			(xy 150.495 137.16) (xy 158.115 137.16)
+			(xy 212.725 65.405) (xy 226.06 65.405)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5532e647-e9f3-4257-89db-dfac19af6215")
+	)
+	(wire
+		(pts
+			(xy 151.765 110.49) (xy 159.385 110.49)
 		)
 		(stroke
 			(width 0)
@@ -1498,7 +1658,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 69.85) (xy 113.03 69.85)
+			(xy 106.045 33.655) (xy 113.665 33.655)
 		)
 		(stroke
 			(width 0)
@@ -1508,7 +1668,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.255 129.54) (xy 142.875 129.54)
+			(xy 136.525 102.87) (xy 144.145 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1518,7 +1678,17 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 89.535) (xy 158.75 89.535)
+			(xy 197.485 65.405) (xy 205.105 65.405)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61b9a401-d239-40be-af39-e8c6e755d9e5")
+	)
+	(wire
+		(pts
+			(xy 151.765 57.785) (xy 159.385 57.785)
 		)
 		(stroke
 			(width 0)
@@ -1528,7 +1698,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 97.155) (xy 151.13 97.155)
+			(xy 144.145 65.405) (xy 151.765 65.405)
 		)
 		(stroke
 			(width 0)
@@ -1538,17 +1708,17 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 89.535) (xy 135.89 89.535)
+			(xy 241.3 65.405) (xy 248.92 65.405)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "701b8138-d958-4f27-bd34-6bb5692d4e0d")
+		(uuid "6aa5e0a4-989f-43bf-9df4-50dfef52ff68")
 	)
 	(wire
 		(pts
-			(xy 127.635 137.16) (xy 135.255 137.16)
+			(xy 128.905 110.49) (xy 136.525 110.49)
 		)
 		(stroke
 			(width 0)
@@ -1558,7 +1728,17 @@
 	)
 	(wire
 		(pts
-			(xy 127.635 109.855) (xy 135.255 109.855)
+			(xy 205.105 57.785) (xy 212.725 57.785)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73eb72a7-3693-42dc-b6bb-66a646aa3660")
+	)
+	(wire
+		(pts
+			(xy 128.905 83.185) (xy 136.525 83.185)
 		)
 		(stroke
 			(width 0)
@@ -1568,7 +1748,17 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 89.535) (xy 120.65 89.535)
+			(xy 197.485 57.785) (xy 205.105 57.785)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76fc2898-29a8-4416-9c60-25ef281df74a")
+	)
+	(wire
+		(pts
+			(xy 113.665 57.785) (xy 121.285 57.785)
 		)
 		(stroke
 			(width 0)
@@ -1578,7 +1768,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 69.85) (xy 120.65 69.85)
+			(xy 113.665 33.655) (xy 121.285 33.655)
 		)
 		(stroke
 			(width 0)
@@ -1588,7 +1778,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 77.47) (xy 120.65 77.47)
+			(xy 113.665 41.275) (xy 121.285 41.275)
 		)
 		(stroke
 			(width 0)
@@ -1598,7 +1788,7 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 97.155) (xy 128.27 97.155)
+			(xy 121.285 65.405) (xy 128.905 65.405)
 		)
 		(stroke
 			(width 0)
@@ -1608,7 +1798,17 @@
 	)
 	(wire
 		(pts
-			(xy 127.635 129.54) (xy 135.255 129.54)
+			(xy 189.865 57.785) (xy 197.485 57.785)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "828709da-3c71-414d-b810-5f88dd20d206")
+	)
+	(wire
+		(pts
+			(xy 128.905 102.87) (xy 136.525 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1618,7 +1818,7 @@
 	)
 	(wire
 		(pts
-			(xy 120.015 137.16) (xy 127.635 137.16)
+			(xy 121.285 110.49) (xy 128.905 110.49)
 		)
 		(stroke
 			(width 0)
@@ -1628,7 +1828,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 97.155) (xy 120.65 97.155)
+			(xy 113.665 65.405) (xy 121.285 65.405)
 		)
 		(stroke
 			(width 0)
@@ -1638,7 +1838,17 @@
 	)
 	(wire
 		(pts
-			(xy 165.735 129.54) (xy 173.355 129.54)
+			(xy 248.92 65.405) (xy 256.54 65.405)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e1ab6b1-52d8-4a2a-96e5-57398e55e4ea")
+	)
+	(wire
+		(pts
+			(xy 167.005 102.87) (xy 174.625 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1648,7 +1858,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 77.47) (xy 135.89 77.47)
+			(xy 128.905 41.275) (xy 136.525 41.275)
 		)
 		(stroke
 			(width 0)
@@ -1658,7 +1868,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.875 137.16) (xy 150.495 137.16)
+			(xy 144.145 110.49) (xy 151.765 110.49)
 		)
 		(stroke
 			(width 0)
@@ -1668,7 +1878,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 69.85) (xy 173.99 69.85)
+			(xy 167.005 33.655) (xy 174.625 33.655)
 		)
 		(stroke
 			(width 0)
@@ -1678,7 +1888,17 @@
 	)
 	(wire
 		(pts
-			(xy 112.395 137.16) (xy 120.015 137.16)
+			(xy 233.68 57.785) (xy 241.3 57.785)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9fd52a5e-7d36-4b65-bd3d-dc1205e7a4f1")
+	)
+	(wire
+		(pts
+			(xy 113.665 110.49) (xy 121.285 110.49)
 		)
 		(stroke
 			(width 0)
@@ -1688,7 +1908,7 @@
 	)
 	(wire
 		(pts
-			(xy 112.395 117.475) (xy 120.015 117.475)
+			(xy 113.665 90.805) (xy 121.285 90.805)
 		)
 		(stroke
 			(width 0)
@@ -1698,7 +1918,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.775 117.475) (xy 112.395 117.475)
+			(xy 106.045 90.805) (xy 113.665 90.805)
 		)
 		(stroke
 			(width 0)
@@ -1708,17 +1928,27 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 97.155) (xy 135.89 97.155)
+			(xy 189.865 65.405) (xy 197.485 65.405)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ab85b638-63e1-4966-8170-fe95550cbc2d")
+		(uuid "ada4d5b9-beae-41e5-b350-3988276f1720")
 	)
 	(wire
 		(pts
-			(xy 112.395 109.855) (xy 120.015 109.855)
+			(xy 132.715 61.595) (xy 140.335 61.595)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ae62c33a-ba1f-4311-97c9-39452286ef79")
+	)
+	(wire
+		(pts
+			(xy 113.665 83.185) (xy 121.285 83.185)
 		)
 		(stroke
 			(width 0)
@@ -1728,7 +1958,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.255 109.855) (xy 142.875 109.855)
+			(xy 136.525 83.185) (xy 144.145 83.185)
 		)
 		(stroke
 			(width 0)
@@ -1738,7 +1968,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.735 109.855) (xy 173.355 109.855)
+			(xy 167.005 83.185) (xy 174.625 83.185)
 		)
 		(stroke
 			(width 0)
@@ -1748,7 +1978,17 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 97.155) (xy 113.03 97.155)
+			(xy 174.625 65.405) (xy 189.865 65.405)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb167613-cc51-455f-9c2a-0649cd477e87")
+	)
+	(wire
+		(pts
+			(xy 106.045 65.405) (xy 113.665 65.405)
 		)
 		(stroke
 			(width 0)
@@ -1758,7 +1998,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.735 137.16) (xy 173.355 137.16)
+			(xy 167.005 110.49) (xy 174.625 110.49)
 		)
 		(stroke
 			(width 0)
@@ -1768,7 +2008,27 @@
 	)
 	(wire
 		(pts
-			(xy 104.775 137.16) (xy 112.395 137.16)
+			(xy 174.625 57.785) (xy 189.865 57.785)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c04a97bb-5905-46c6-b41a-5aac84eff006")
+	)
+	(wire
+		(pts
+			(xy 233.68 65.405) (xy 241.3 65.405)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2777d1e-ac3f-46cf-8a53-49bc4dc00f79")
+	)
+	(wire
+		(pts
+			(xy 106.045 110.49) (xy 113.665 110.49)
 		)
 		(stroke
 			(width 0)
@@ -1778,7 +2038,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.115 129.54) (xy 165.735 129.54)
+			(xy 159.385 102.87) (xy 167.005 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1788,7 +2048,7 @@
 	)
 	(wire
 		(pts
-			(xy 112.395 129.54) (xy 120.015 129.54)
+			(xy 113.665 102.87) (xy 121.285 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1798,7 +2058,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 97.155) (xy 143.51 97.155)
+			(xy 128.905 65.405) (xy 144.145 65.405)
 		)
 		(stroke
 			(width 0)
@@ -1808,7 +2068,17 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 77.47) (xy 128.27 77.47)
+			(xy 248.92 57.785) (xy 256.54 57.785)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "caaf2f06-8de0-4238-9734-7e7578781609")
+	)
+	(wire
+		(pts
+			(xy 121.285 41.275) (xy 128.905 41.275)
 		)
 		(stroke
 			(width 0)
@@ -1818,7 +2088,7 @@
 	)
 	(wire
 		(pts
-			(xy 150.495 117.475) (xy 158.115 117.475)
+			(xy 151.765 90.805) (xy 159.385 90.805)
 		)
 		(stroke
 			(width 0)
@@ -1828,7 +2098,7 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 69.85) (xy 128.27 69.85)
+			(xy 121.285 33.655) (xy 128.905 33.655)
 		)
 		(stroke
 			(width 0)
@@ -1838,7 +2108,7 @@
 	)
 	(wire
 		(pts
-			(xy 150.495 129.54) (xy 158.115 129.54)
+			(xy 151.765 102.87) (xy 159.385 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1848,7 +2118,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.775 129.54) (xy 112.395 129.54)
+			(xy 106.045 102.87) (xy 113.665 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1858,7 +2128,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 97.155) (xy 158.75 97.155)
+			(xy 151.765 65.405) (xy 159.385 65.405)
 		)
 		(stroke
 			(width 0)
@@ -1868,7 +2138,17 @@
 	)
 	(wire
 		(pts
-			(xy 120.015 129.54) (xy 127.635 129.54)
+			(xy 226.06 57.785) (xy 233.68 57.785)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db85feac-5595-434c-a3d0-9aba30f9b59f")
+	)
+	(wire
+		(pts
+			(xy 121.285 102.87) (xy 128.905 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1878,7 +2158,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 77.47) (xy 158.75 77.47)
+			(xy 151.765 41.275) (xy 159.385 41.275)
 		)
 		(stroke
 			(width 0)
@@ -1888,7 +2168,7 @@
 	)
 	(wire
 		(pts
-			(xy 120.015 117.475) (xy 127.635 117.475)
+			(xy 121.285 90.805) (xy 128.905 90.805)
 		)
 		(stroke
 			(width 0)
@@ -1898,7 +2178,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 89.535) (xy 113.03 89.535)
+			(xy 106.045 57.785) (xy 113.665 57.785)
 		)
 		(stroke
 			(width 0)
@@ -1908,7 +2188,17 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 77.47) (xy 151.13 77.47)
+			(xy 226.06 65.405) (xy 233.68 65.405)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea705c71-9b97-4560-ae77-6e3607cc5ac8")
+	)
+	(wire
+		(pts
+			(xy 144.145 41.275) (xy 151.765 41.275)
 		)
 		(stroke
 			(width 0)
@@ -1918,7 +2208,7 @@
 	)
 	(wire
 		(pts
-			(xy 150.495 109.855) (xy 158.115 109.855)
+			(xy 151.765 83.185) (xy 159.385 83.185)
 		)
 		(stroke
 			(width 0)
@@ -1928,7 +2218,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 89.535) (xy 143.51 89.535)
+			(xy 128.905 57.785) (xy 144.145 57.785)
 		)
 		(stroke
 			(width 0)
@@ -1938,7 +2228,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.875 117.475) (xy 150.495 117.475)
+			(xy 144.145 90.805) (xy 151.765 90.805)
 		)
 		(stroke
 			(width 0)
@@ -1948,7 +2238,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 69.85) (xy 166.37 69.85)
+			(xy 159.385 33.655) (xy 167.005 33.655)
 		)
 		(stroke
 			(width 0)
@@ -1958,7 +2248,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.115 109.855) (xy 165.735 109.855)
+			(xy 159.385 83.185) (xy 167.005 83.185)
 		)
 		(stroke
 			(width 0)
@@ -1968,7 +2258,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 77.47) (xy 143.51 77.47)
+			(xy 136.525 41.275) (xy 144.145 41.275)
 		)
 		(stroke
 			(width 0)
@@ -1978,7 +2268,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 77.47) (xy 166.37 77.47)
+			(xy 159.385 41.275) (xy 167.005 41.275)
 		)
 		(stroke
 			(width 0)
@@ -1988,7 +2278,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.115 117.475) (xy 165.735 117.475)
+			(xy 159.385 90.805) (xy 167.005 90.805)
 		)
 		(stroke
 			(width 0)
@@ -1998,7 +2288,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.255 117.475) (xy 142.875 117.475)
+			(xy 136.525 90.805) (xy 144.145 90.805)
 		)
 		(stroke
 			(width 0)
@@ -2008,7 +2298,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 97.155) (xy 173.99 97.155)
+			(xy 167.005 65.405) (xy 174.625 65.405)
 		)
 		(stroke
 			(width 0)
@@ -2018,7 +2308,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 69.85) (xy 151.13 69.85)
+			(xy 144.145 33.655) (xy 151.765 33.655)
 		)
 		(stroke
 			(width 0)
@@ -2028,7 +2318,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
-		(at 158.75 93.345 0)
+		(at 159.385 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2036,7 +2326,7 @@
 		(dnp no)
 		(uuid "05064c59-5ca1-403f-822a-9eefdc1a8c5e")
 		(property "Reference" "D18"
-			(at 158.75 93.345 0)
+			(at 159.385 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -2045,7 +2335,7 @@
 			)
 		)
 		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 160.02 99.06 0)
+			(at 160.655 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2055,7 +2345,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1615"
-			(at 160.02 85.725 0)
+			(at 160.655 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2065,7 +2355,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 160.02 83.82 0)
+			(at 160.655 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2075,7 +2365,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 158.75 93.345 0)
+			(at 159.385 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2084,7 +2374,7 @@
 			)
 		)
 		(property "MPN" "C5349954"
-			(at 160.02 81.915 0)
+			(at 160.655 50.165 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2116,7 +2406,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 112.395 133.35 0)
+		(at 113.665 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2124,7 +2414,7 @@
 		(dnp no)
 		(uuid "0791b17e-c7d6-44fd-992b-43bbec3ae276")
 		(property "Reference" "D32"
-			(at 112.395 133.35 0)
+			(at 113.665 106.68 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -2133,7 +2423,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 113.665 139.065 0)
+			(at 114.935 112.395 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2143,7 +2433,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 113.665 125.73 0)
+			(at 114.935 99.06 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2153,7 +2443,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 113.665 123.825 0)
+			(at 114.935 97.155 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2163,7 +2453,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 112.395 133.35 0)
+			(at 113.665 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2172,7 +2462,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 113.665 121.92 0)
+			(at 114.935 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2204,7 +2494,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 128.27 73.66 0)
+		(at 128.905 37.465 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2212,7 +2502,7 @@
 		(dnp no)
 		(uuid "0a39df16-dbc2-44e5-895d-8ada45e841da")
 		(property "Reference" "D4"
-			(at 128.27 73.66 0)
+			(at 128.905 37.465 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -2221,7 +2511,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 129.54 79.375 0)
+			(at 130.175 43.18 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2231,7 +2521,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 129.54 81.28 0)
+			(at 130.175 45.085 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2241,7 +2531,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 129.54 83.185 0)
+			(at 130.175 46.99 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2251,7 +2541,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 128.27 73.66 0)
+			(at 128.905 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2260,7 +2550,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 129.54 85.09 0)
+			(at 130.175 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2292,7 +2582,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 104.775 117.475 0)
+		(at 106.045 90.805 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2301,7 +2591,7 @@
 		(fields_autoplaced yes)
 		(uuid "0dbcee1c-4104-41d9-ba83-0a57c81e2f9d")
 		(property "Reference" "#PWR04"
-			(at 104.775 123.825 0)
+			(at 106.045 97.155 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2310,7 +2600,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 104.775 121.9184 0)
+			(at 106.045 95.2484 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2318,7 +2608,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 104.775 117.475 0)
+			(at 106.045 90.805 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2327,7 +2617,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 104.775 117.475 0)
+			(at 106.045 90.805 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2336,7 +2626,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 104.775 117.475 0)
+			(at 106.045 90.805 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2357,96 +2647,8 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-1.5mm")
-		(at 135.89 93.345 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "11cc1c97-246b-4863-a7b6-55db28a4777e")
-		(property "Reference" "D15"
-			(at 135.89 93.345 0)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 137.16 99.06 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "RevK:SMD1615"
-			(at 137.16 85.725 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 137.16 83.82 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED with integrated controller"
-			(at 135.89 93.345 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "C5349954"
-			(at 137.16 81.915 0)
-			(effects
-				(font
-					(size 1 1)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f4295622-82b4-49bf-9b6a-773288374342")
-		)
-		(pin "2"
-			(uuid "10142cf3-d291-4e82-8623-52346cab2adf")
-		)
-		(pin "3"
-			(uuid "ca9ff543-b6d5-497b-8f50-2856b1e21efa")
-		)
-		(pin "4"
-			(uuid "a7ccf2e9-e456-483d-adab-628595de4abc")
-		)
-		(instances
-			(project "LED"
-				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
-					(reference "D15")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 173.355 133.35 0)
+		(at 174.625 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2454,7 +2656,7 @@
 		(dnp no)
 		(uuid "1363c00a-d22d-46d6-bd2d-c01ed3e36cd8")
 		(property "Reference" "D40"
-			(at 173.355 133.35 0)
+			(at 174.625 106.68 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -2463,7 +2665,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 174.625 139.065 0)
+			(at 175.895 112.395 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2473,7 +2675,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 174.625 125.73 0)
+			(at 175.895 99.06 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2483,7 +2685,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 174.625 123.825 0)
+			(at 175.895 97.155 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2493,7 +2695,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 173.355 133.35 0)
+			(at 174.625 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2502,7 +2704,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 174.625 121.92 0)
+			(at 175.895 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2534,7 +2736,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
-		(at 143.51 93.345 0)
+		(at 144.145 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2542,7 +2744,7 @@
 		(dnp no)
 		(uuid "19cda16e-3579-4394-b186-a968730be27c")
 		(property "Reference" "D16"
-			(at 143.51 93.345 0)
+			(at 144.145 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -2551,7 +2753,7 @@
 			)
 		)
 		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 144.78 99.06 0)
+			(at 145.415 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2561,7 +2763,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1615"
-			(at 144.78 85.725 0)
+			(at 145.415 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2571,7 +2773,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 144.78 83.82 0)
+			(at 145.415 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2581,7 +2783,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 143.51 93.345 0)
+			(at 144.145 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2590,7 +2792,7 @@
 			)
 		)
 		(property "MPN" "C5349954"
-			(at 144.78 81.915 0)
+			(at 145.415 50.165 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2622,7 +2824,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 101.6 93.345 90)
+		(at 102.235 61.595 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -2631,7 +2833,7 @@
 		(fields_autoplaced yes)
 		(uuid "249e211c-9da0-42b8-a702-82e90149c174")
 		(property "Reference" "TP2"
-			(at 98.298 88.5655 90)
+			(at 98.933 56.8155 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2639,7 +2841,7 @@
 			)
 		)
 		(property "Value" "TestPoint"
-			(at 98.298 90.9898 90)
+			(at 98.933 59.2398 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2647,7 +2849,7 @@
 			)
 		)
 		(property "Footprint" "RevK:PAD-2mm"
-			(at 101.6 88.265 0)
+			(at 102.235 56.515 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2656,7 +2858,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 101.6 88.265 0)
+			(at 102.235 56.515 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2665,7 +2867,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 101.6 93.345 0)
+			(at 102.235 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2687,7 +2889,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 112.395 113.665 0)
+		(at 113.665 86.995 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2695,7 +2897,7 @@
 		(dnp no)
 		(uuid "2692746f-cd0a-4b0c-b6a1-e442d7f11bb5")
 		(property "Reference" "D22"
-			(at 112.395 113.665 0)
+			(at 113.665 86.995 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -2704,7 +2906,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 113.665 119.38 0)
+			(at 114.935 92.71 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2714,7 +2916,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 113.665 106.045 0)
+			(at 114.935 79.375 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2724,7 +2926,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 113.665 104.14 0)
+			(at 114.935 77.47 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2734,7 +2936,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 112.395 113.665 0)
+			(at 113.665 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2743,7 +2945,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 113.665 102.235 0)
+			(at 114.935 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2775,15 +2977,15 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
-		(at 120.65 93.345 0)
+		(at 256.54 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "28e84183-7c0f-4ff3-ad8a-180d4deca4ce")
-		(property "Reference" "D13"
-			(at 120.65 93.345 0)
+		(uuid "28c65ccc-164c-4503-8199-68ed0b7b9b8a")
+		(property "Reference" "D48"
+			(at 256.54 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -2792,7 +2994,7 @@
 			)
 		)
 		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 121.92 99.06 0)
+			(at 257.81 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2802,7 +3004,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1615"
-			(at 121.92 85.725 0)
+			(at 257.81 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2812,7 +3014,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 121.92 83.82 0)
+			(at 257.81 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2822,7 +3024,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 120.65 93.345 0)
+			(at 256.54 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2831,7 +3033,95 @@
 			)
 		)
 		(property "MPN" "C5349954"
-			(at 121.92 81.915 0)
+			(at 257.81 50.165 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "44a35e3e-5b11-43f5-8a93-5641fe6b6d59")
+		)
+		(pin "2"
+			(uuid "ace396a4-43ce-4b35-bd1f-1102a7d7c0b5")
+		)
+		(pin "3"
+			(uuid "77e4fef9-9209-4e0a-83d3-78a5f117064a")
+		)
+		(pin "4"
+			(uuid "0fb02f36-eb9c-4cf0-9f94-99c4ff466470")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D48")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "RevK:WS2812B-1.5mm")
+		(at 121.285 61.595 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "28e84183-7c0f-4ff3-ad8a-180d4deca4ce")
+		(property "Reference" "D13"
+			(at 121.285 61.595 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Value" "XL-1615RGBC-WS2812B"
+			(at 122.555 67.31 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:SMD1615"
+			(at 122.555 53.975 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+			(at 122.555 52.07 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 121.285 61.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C5349954"
+			(at 122.555 50.165 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2863,7 +3153,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
-		(at 173.99 93.345 0)
+		(at 174.625 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2871,7 +3161,7 @@
 		(dnp no)
 		(uuid "3059ce14-15af-4d1a-8f3a-a074eadf17c4")
 		(property "Reference" "D20"
-			(at 173.99 93.345 0)
+			(at 174.625 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -2880,7 +3170,7 @@
 			)
 		)
 		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 175.26 99.06 0)
+			(at 175.895 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2890,7 +3180,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1615"
-			(at 175.26 85.725 0)
+			(at 175.895 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2900,7 +3190,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 175.26 83.82 0)
+			(at 175.895 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2910,7 +3200,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 173.99 93.345 0)
+			(at 174.625 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2919,7 +3209,7 @@
 			)
 		)
 		(property "MPN" "C5349954"
-			(at 175.26 81.915 0)
+			(at 175.895 50.165 0)
 			(effects
 				(font
 					(size 1 1)
@@ -2951,7 +3241,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 105.41 69.85 0)
+		(at 106.045 33.655 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2960,7 +3250,7 @@
 		(fields_autoplaced yes)
 		(uuid "35389d69-5af2-4068-8429-e74f828595e1")
 		(property "Reference" "#PWR017"
-			(at 105.41 73.66 0)
+			(at 106.045 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2969,7 +3259,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 105.41 65.7169 0)
+			(at 106.045 29.5219 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2977,7 +3267,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 105.41 69.85 0)
+			(at 106.045 33.655 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2986,7 +3276,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 69.85 0)
+			(at 106.045 33.655 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2995,7 +3285,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 105.41 69.85 0)
+			(at 106.045 33.655 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3017,7 +3307,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 158.115 113.665 0)
+		(at 159.385 86.995 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3025,7 +3315,7 @@
 		(dnp no)
 		(uuid "3850f5fe-cd2c-41d7-970e-13f67c7f05cc")
 		(property "Reference" "D28"
-			(at 158.115 113.665 0)
+			(at 159.385 86.995 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3034,7 +3324,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 159.385 119.38 0)
+			(at 160.655 92.71 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3044,7 +3334,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 159.385 106.045 0)
+			(at 160.655 79.375 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3054,7 +3344,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 159.385 104.14 0)
+			(at 160.655 77.47 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3064,7 +3354,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 158.115 113.665 0)
+			(at 159.385 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3073,7 +3363,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 159.385 102.235 0)
+			(at 160.655 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3105,7 +3395,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 142.875 133.35 0)
+		(at 144.145 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3113,7 +3403,7 @@
 		(dnp no)
 		(uuid "4100a127-0c4a-4a0a-adb2-ad05861251e3")
 		(property "Reference" "D36"
-			(at 142.875 133.35 0)
+			(at 144.145 106.68 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3122,7 +3412,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 144.145 139.065 0)
+			(at 145.415 112.395 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3132,7 +3422,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 144.145 125.73 0)
+			(at 145.415 99.06 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3142,7 +3432,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 144.145 123.825 0)
+			(at 145.415 97.155 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3152,7 +3442,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 142.875 133.35 0)
+			(at 144.145 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3161,7 +3451,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 144.145 121.92 0)
+			(at 145.415 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3193,7 +3483,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 104.775 133.35 0)
+		(at 106.045 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3201,7 +3491,7 @@
 		(dnp no)
 		(uuid "43f51858-58f0-4a2f-adbd-2f83ced13c75")
 		(property "Reference" "D31"
-			(at 104.775 133.35 0)
+			(at 106.045 106.68 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3210,7 +3500,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 106.045 139.065 0)
+			(at 107.315 112.395 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3220,7 +3510,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 106.045 125.73 0)
+			(at 107.315 99.06 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3230,7 +3520,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 106.045 123.825 0)
+			(at 107.315 97.155 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3240,7 +3530,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 104.775 133.35 0)
+			(at 106.045 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3249,7 +3539,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 106.045 121.92 0)
+			(at 107.315 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3281,7 +3571,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 100.965 113.665 90)
+		(at 102.235 86.995 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -3290,7 +3580,7 @@
 		(fields_autoplaced yes)
 		(uuid "4499d83f-ed74-4207-9a24-92e80277c639")
 		(property "Reference" "TP3"
-			(at 97.663 108.8855 90)
+			(at 98.933 82.2155 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3298,7 +3588,7 @@
 			)
 		)
 		(property "Value" "TestPoint"
-			(at 97.663 111.3098 90)
+			(at 98.933 84.6398 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3306,7 +3596,7 @@
 			)
 		)
 		(property "Footprint" "RevK:PAD-2mm"
-			(at 100.965 108.585 0)
+			(at 102.235 81.915 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3315,7 +3605,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 100.965 108.585 0)
+			(at 102.235 81.915 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3324,7 +3614,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 100.965 113.665 0)
+			(at 102.235 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3345,16 +3635,16 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-2mm")
-		(at 142.875 113.665 0)
+		(lib_id "RevK:WS2812B-1.5mm")
+		(at 212.725 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4902bd37-11b0-40ba-a404-73013388b92a")
-		(property "Reference" "D26"
-			(at 142.875 113.665 0)
+		(uuid "45a2a82d-bba5-4268-a797-fd9484dae1ae")
+		(property "Reference" "D45"
+			(at 212.725 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3362,8 +3652,8 @@
 				)
 			)
 		)
-		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 144.145 119.38 0)
+		(property "Value" "XL-1615RGBC-WS2812B"
+			(at 213.995 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3372,8 +3662,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "RevK:SMD2020"
-			(at 144.145 106.045 0)
+		(property "Footprint" "RevK:SMD1615"
+			(at 213.995 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3382,8 +3672,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 144.145 104.14 0)
+		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+			(at 213.995 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3393,7 +3683,95 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 142.875 113.665 0)
+			(at 212.725 61.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C5349954"
+			(at 213.995 50.165 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9fa680eb-0f53-4ad6-b996-661b49f36ad2")
+		)
+		(pin "2"
+			(uuid "859ae7ba-99e0-4608-933f-571e9184a20b")
+		)
+		(pin "3"
+			(uuid "91d488b1-1222-4091-915e-322c9d8fd1df")
+		)
+		(pin "4"
+			(uuid "64dfe81d-17ce-4cc4-befb-5cfd6f2ad351")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D45")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "RevK:WS2812B-2mm")
+		(at 144.145 86.995 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4902bd37-11b0-40ba-a404-73013388b92a")
+		(property "Reference" "D26"
+			(at 144.145 86.995 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Value" "XL-2020RGBC-WS2812B"
+			(at 145.415 92.71 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:SMD2020"
+			(at 145.415 79.375 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
+			(at 145.415 77.47 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 144.145 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3402,7 +3780,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 144.145 102.235 0)
+			(at 145.415 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3434,7 +3812,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 104.775 113.665 0)
+		(at 106.045 86.995 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3442,7 +3820,7 @@
 		(dnp no)
 		(uuid "49665297-cc29-4314-b279-cbeab19cf27f")
 		(property "Reference" "D21"
-			(at 104.775 113.665 0)
+			(at 106.045 86.995 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3451,7 +3829,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 106.045 119.38 0)
+			(at 107.315 92.71 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3461,7 +3839,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 106.045 106.045 0)
+			(at 107.315 79.375 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3471,7 +3849,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 106.045 104.14 0)
+			(at 107.315 77.47 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3481,7 +3859,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 104.775 113.665 0)
+			(at 106.045 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3490,7 +3868,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 106.045 102.235 0)
+			(at 107.315 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3522,7 +3900,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 135.89 73.66 0)
+		(at 136.525 37.465 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3530,7 +3908,7 @@
 		(dnp no)
 		(uuid "4e7e332b-3460-4b61-b82a-425f37a0e1a4")
 		(property "Reference" "D5"
-			(at 135.89 73.66 0)
+			(at 136.525 37.465 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3539,7 +3917,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 137.16 79.375 0)
+			(at 137.795 43.18 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3549,7 +3927,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 137.16 81.28 0)
+			(at 137.795 45.085 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3559,7 +3937,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 137.16 83.185 0)
+			(at 137.795 46.99 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3569,7 +3947,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 135.89 73.66 0)
+			(at 136.525 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3578,7 +3956,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 137.16 85.09 0)
+			(at 137.795 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3609,8 +3987,184 @@
 		)
 	)
 	(symbol
+		(lib_id "RevK:WS2812B-1.5mm")
+		(at 233.68 61.595 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "607873c6-ca52-496e-9d62-6ea3c0ee961c")
+		(property "Reference" "D41"
+			(at 233.68 61.595 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Value" "XL-1615RGBC-WS2812B"
+			(at 234.95 67.31 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:SMD1615"
+			(at 234.95 53.975 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+			(at 234.95 52.07 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 233.68 61.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C5349954"
+			(at 234.95 50.165 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4f0f2224-b415-4ea9-b79d-ac84bc00eb1d")
+		)
+		(pin "2"
+			(uuid "fb042e0f-a986-4669-8997-6d307b2af27a")
+		)
+		(pin "3"
+			(uuid "1e521748-6257-4b06-89d6-a6bf3e84b62e")
+		)
+		(pin "4"
+			(uuid "25ef0194-3c50-41f9-996b-85a6a683eb02")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "RevK:WS2812B-1.5mm")
+		(at 248.92 61.595 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "62e975d1-392e-4a72-b45d-be08a85ffdd9")
+		(property "Reference" "D47"
+			(at 248.92 61.595 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Value" "XL-1615RGBC-WS2812B"
+			(at 250.19 67.31 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:SMD1615"
+			(at 250.19 53.975 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+			(at 250.19 52.07 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 248.92 61.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C5349954"
+			(at 250.19 50.165 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "32af6c44-edf7-40c6-a4c8-40c4ec3abb80")
+		)
+		(pin "2"
+			(uuid "90316bec-acc7-4cf7-9e35-223ee1ac9427")
+		)
+		(pin "3"
+			(uuid "9e855619-31ca-483a-9ea2-536cdd703130")
+		)
+		(pin "4"
+			(uuid "21c74b3e-f039-4964-8e3e-ceed7c71962f")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D47")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 100.965 133.35 90)
+		(at 102.235 106.68 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -3619,7 +4173,7 @@
 		(fields_autoplaced yes)
 		(uuid "68f472c0-ce05-4c14-8266-7474e2f095c8")
 		(property "Reference" "TP4"
-			(at 97.663 128.5705 90)
+			(at 98.933 101.9005 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3627,7 +4181,7 @@
 			)
 		)
 		(property "Value" "TestPoint"
-			(at 97.663 130.9948 90)
+			(at 98.933 104.3248 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3635,7 +4189,7 @@
 			)
 		)
 		(property "Footprint" "RevK:PAD-2mm"
-			(at 100.965 128.27 0)
+			(at 102.235 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3644,7 +4198,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 100.965 128.27 0)
+			(at 102.235 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3653,7 +4207,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 100.965 133.35 0)
+			(at 102.235 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3675,7 +4229,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 135.255 133.35 0)
+		(at 136.525 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3683,7 +4237,7 @@
 		(dnp no)
 		(uuid "6d38847f-20ee-4ccc-ab83-9edecde94591")
 		(property "Reference" "D35"
-			(at 135.255 133.35 0)
+			(at 136.525 106.68 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3692,7 +4246,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 136.525 139.065 0)
+			(at 137.795 112.395 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3702,7 +4256,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 136.525 125.73 0)
+			(at 137.795 99.06 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3712,7 +4266,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 136.525 123.825 0)
+			(at 137.795 97.155 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3722,7 +4276,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 135.255 133.35 0)
+			(at 136.525 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3731,7 +4285,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 136.525 121.92 0)
+			(at 137.795 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3763,7 +4317,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 143.51 73.66 0)
+		(at 144.145 37.465 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3771,7 +4325,7 @@
 		(dnp no)
 		(uuid "70e40d56-49af-4ea0-88bc-435c9cd726f9")
 		(property "Reference" "D6"
-			(at 143.51 73.66 0)
+			(at 144.145 37.465 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3780,7 +4334,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 144.78 79.375 0)
+			(at 145.415 43.18 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3790,7 +4344,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 144.78 81.28 0)
+			(at 145.415 45.085 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3800,7 +4354,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 144.78 83.185 0)
+			(at 145.415 46.99 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3810,7 +4364,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 143.51 73.66 0)
+			(at 144.145 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3819,7 +4373,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 144.78 85.09 0)
+			(at 145.415 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3850,16 +4404,16 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-1mm")
-		(at 173.99 73.66 0)
+		(lib_id "RevK:WS2812B-1.5mm")
+		(at 226.06 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7d0b036a-63d9-4177-9d8d-d22c798947d6")
-		(property "Reference" "D10"
-			(at 173.99 73.66 0)
+		(uuid "7862b295-a9c1-45d6-8499-3586b4844d10")
+		(property "Reference" "D15"
+			(at 226.06 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3867,8 +4421,8 @@
 				)
 			)
 		)
-		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 175.26 79.375 0)
+		(property "Value" "XL-1615RGBC-WS2812B"
+			(at 227.33 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3877,8 +4431,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "RevK:SMD1010"
-			(at 175.26 81.28 0)
+		(property "Footprint" "RevK:SMD1615"
+			(at 227.33 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3888,7 +4442,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 175.26 83.185 0)
+			(at 227.33 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3898,7 +4452,95 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 173.99 73.66 0)
+			(at 226.06 61.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C5349954"
+			(at 227.33 50.165 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "006df283-e44a-45cc-89e5-f2387bb62b2a")
+		)
+		(pin "2"
+			(uuid "342148d0-0f65-420f-a3c7-fb2a5353f8d2")
+		)
+		(pin "3"
+			(uuid "b7cffb77-c2c5-4628-8e9b-b1f0c76d9a2a")
+		)
+		(pin "4"
+			(uuid "cea9fd3d-118a-41ac-a50d-119a9e676240")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "RevK:WS2812B-1mm")
+		(at 174.625 37.465 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7d0b036a-63d9-4177-9d8d-d22c798947d6")
+		(property "Reference" "D10"
+			(at 174.625 37.465 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Value" "XL-1010RGBC-WS2812B"
+			(at 175.895 43.18 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:SMD1010"
+			(at 175.895 45.085 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+			(at 175.895 46.99 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 174.625 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3907,7 +4549,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 175.26 85.09 0)
+			(at 175.895 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3939,7 +4581,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 150.495 113.665 0)
+		(at 151.765 86.995 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3947,7 +4589,7 @@
 		(dnp no)
 		(uuid "7e885a21-a204-4145-82e8-a93f6b40d505")
 		(property "Reference" "D27"
-			(at 150.495 113.665 0)
+			(at 151.765 86.995 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -3956,7 +4598,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 151.765 119.38 0)
+			(at 153.035 92.71 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3966,7 +4608,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 151.765 106.045 0)
+			(at 153.035 79.375 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3976,7 +4618,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 151.765 104.14 0)
+			(at 153.035 77.47 0)
 			(effects
 				(font
 					(size 1 1)
@@ -3986,7 +4628,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 150.495 113.665 0)
+			(at 151.765 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3995,7 +4637,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 151.765 102.235 0)
+			(at 153.035 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4027,7 +4669,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
-		(at 151.13 93.345 0)
+		(at 151.765 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4035,7 +4677,7 @@
 		(dnp no)
 		(uuid "80318d71-ecaa-4172-ad59-022923f76e84")
 		(property "Reference" "D17"
-			(at 151.13 93.345 0)
+			(at 151.765 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -4044,7 +4686,7 @@
 			)
 		)
 		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 152.4 99.06 0)
+			(at 153.035 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4054,7 +4696,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1615"
-			(at 152.4 85.725 0)
+			(at 153.035 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4064,7 +4706,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 152.4 83.82 0)
+			(at 153.035 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4074,7 +4716,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 151.13 93.345 0)
+			(at 151.765 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4083,7 +4725,7 @@
 			)
 		)
 		(property "MPN" "C5349954"
-			(at 152.4 81.915 0)
+			(at 153.035 50.165 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4115,7 +4757,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 101.6 73.66 90)
+		(at 102.235 37.465 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -4124,7 +4766,7 @@
 		(fields_autoplaced yes)
 		(uuid "80b05dba-03e4-4bdb-b2a3-94fff247c21b")
 		(property "Reference" "TP1"
-			(at 98.298 68.8805 90)
+			(at 98.933 32.6855 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4132,7 +4774,7 @@
 			)
 		)
 		(property "Value" "TestPoint"
-			(at 98.298 71.3048 90)
+			(at 98.933 35.1098 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4140,7 +4782,7 @@
 			)
 		)
 		(property "Footprint" "RevK:PAD-2mm"
-			(at 101.6 68.58 0)
+			(at 102.235 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4149,7 +4791,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 101.6 68.58 0)
+			(at 102.235 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4158,7 +4800,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 101.6 73.66 0)
+			(at 102.235 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4180,7 +4822,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 120.015 113.665 0)
+		(at 121.285 86.995 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4188,7 +4830,7 @@
 		(dnp no)
 		(uuid "871ec3b0-a598-4386-ae46-6fb7fa832761")
 		(property "Reference" "D23"
-			(at 120.015 113.665 0)
+			(at 121.285 86.995 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -4197,7 +4839,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 121.285 119.38 0)
+			(at 122.555 92.71 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4207,7 +4849,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 121.285 106.045 0)
+			(at 122.555 79.375 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4217,7 +4859,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 121.285 104.14 0)
+			(at 122.555 77.47 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4227,7 +4869,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 120.015 113.665 0)
+			(at 121.285 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4236,7 +4878,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 121.285 102.235 0)
+			(at 122.555 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4268,16 +4910,15 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 104.775 109.855 0)
+		(at 106.045 83.185 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "94053024-33be-43cf-a6d7-b1f44b398220")
 		(property "Reference" "#PWR03"
-			(at 104.775 113.665 0)
+			(at 106.045 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4286,7 +4927,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 104.775 105.7219 0)
+			(at 106.045 79.0519 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4294,7 +4935,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 104.775 109.855 0)
+			(at 106.045 83.185 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4303,7 +4944,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 104.775 109.855 0)
+			(at 106.045 83.185 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4312,7 +4953,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 104.775 109.855 0)
+			(at 106.045 83.185 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4334,7 +4975,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 113.03 73.66 0)
+		(at 113.665 37.465 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4342,7 +4983,7 @@
 		(dnp no)
 		(uuid "9946658a-4688-4dc4-a567-5045a7dbf29a")
 		(property "Reference" "D2"
-			(at 113.03 73.66 0)
+			(at 113.665 37.465 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -4351,7 +4992,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 114.3 79.375 0)
+			(at 114.935 43.18 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4361,7 +5002,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 114.3 81.28 0)
+			(at 114.935 45.085 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4371,7 +5012,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 114.3 83.185 0)
+			(at 114.935 46.99 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4381,7 +5022,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 113.03 73.66 0)
+			(at 113.665 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4390,7 +5031,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 114.3 85.09 0)
+			(at 114.935 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4422,7 +5063,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 104.775 129.54 0)
+		(at 106.045 102.87 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4431,7 +5072,7 @@
 		(fields_autoplaced yes)
 		(uuid "9bd9bad2-c2dd-49b7-a2c8-89c8c4599869")
 		(property "Reference" "#PWR05"
-			(at 104.775 133.35 0)
+			(at 106.045 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4440,7 +5081,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 104.775 125.4069 0)
+			(at 106.045 98.7369 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4448,7 +5089,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 104.775 129.54 0)
+			(at 106.045 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4457,7 +5098,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 104.775 129.54 0)
+			(at 106.045 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4466,7 +5107,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 104.775 129.54 0)
+			(at 106.045 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4487,16 +5128,16 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-2mm")
-		(at 173.355 113.665 0)
+		(lib_id "RevK:WS2812B-1.5mm")
+		(at 205.105 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a3ec7a6c-88f1-4400-85dc-f42c15673dc9")
-		(property "Reference" "D30"
-			(at 173.355 113.665 0)
+		(uuid "9e02f14f-9c55-4648-b39a-66c2474aef11")
+		(property "Reference" "D44"
+			(at 205.105 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -4504,8 +5145,8 @@
 				)
 			)
 		)
-		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 174.625 119.38 0)
+		(property "Value" "XL-1615RGBC-WS2812B"
+			(at 206.375 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4514,8 +5155,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "RevK:SMD2020"
-			(at 174.625 106.045 0)
+		(property "Footprint" "RevK:SMD1615"
+			(at 206.375 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4524,8 +5165,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 174.625 104.14 0)
+		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+			(at 206.375 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4535,7 +5176,95 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 173.355 113.665 0)
+			(at 205.105 61.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C5349954"
+			(at 206.375 50.165 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7a8cb78e-9e11-4d11-a5c0-dab88db42b26")
+		)
+		(pin "2"
+			(uuid "bb6e7301-404f-4eb8-b5f0-bd9d58c63f60")
+		)
+		(pin "3"
+			(uuid "57731079-1eed-46fe-9662-41723017c64a")
+		)
+		(pin "4"
+			(uuid "ec5f8958-18c0-4d50-84c8-dee1312c55da")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D44")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "RevK:WS2812B-2mm")
+		(at 174.625 86.995 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a3ec7a6c-88f1-4400-85dc-f42c15673dc9")
+		(property "Reference" "D30"
+			(at 174.625 86.995 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Value" "XL-2020RGBC-WS2812B"
+			(at 175.895 92.71 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:SMD2020"
+			(at 175.895 79.375 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
+			(at 175.895 77.47 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 174.625 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4544,7 +5273,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 174.625 102.235 0)
+			(at 175.895 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4575,16 +5304,16 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-2mm")
-		(at 158.115 133.35 0)
+		(lib_id "RevK:WS2812B-1.5mm")
+		(at 189.865 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "aa101865-48bb-440e-a848-ddf792e58930")
-		(property "Reference" "D38"
-			(at 158.115 133.35 0)
+		(uuid "a57c5502-d491-41ec-9c63-2c645e5063a6")
+		(property "Reference" "D42"
+			(at 189.865 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -4592,8 +5321,8 @@
 				)
 			)
 		)
-		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 159.385 139.065 0)
+		(property "Value" "XL-1615RGBC-WS2812B"
+			(at 191.135 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4602,8 +5331,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "RevK:SMD2020"
-			(at 159.385 125.73 0)
+		(property "Footprint" "RevK:SMD1615"
+			(at 191.135 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4612,8 +5341,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 159.385 123.825 0)
+		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+			(at 191.135 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4623,7 +5352,95 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 158.115 133.35 0)
+			(at 189.865 61.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C5349954"
+			(at 191.135 50.165 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f9e85673-9376-4910-9dcc-abb9d9378b89")
+		)
+		(pin "2"
+			(uuid "bd339402-863f-415f-b8b4-ccae0cb9c7cb")
+		)
+		(pin "3"
+			(uuid "906c2eed-fccf-405e-bc5b-b5da500f311e")
+		)
+		(pin "4"
+			(uuid "24db262c-05c5-46d4-b3fe-f329d0c26404")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D42")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "RevK:WS2812B-2mm")
+		(at 159.385 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "aa101865-48bb-440e-a848-ddf792e58930")
+		(property "Reference" "D38"
+			(at 159.385 106.68 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Value" "XL-2020RGBC-WS2812B"
+			(at 160.655 112.395 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:SMD2020"
+			(at 160.655 99.06 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
+			(at 160.655 97.155 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 159.385 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4632,7 +5449,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 159.385 121.92 0)
+			(at 160.655 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4664,7 +5481,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
-		(at 128.27 93.345 0)
+		(at 128.905 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4672,7 +5489,7 @@
 		(dnp no)
 		(uuid "af7af88f-bcf2-4e9b-9b29-9858f7a91039")
 		(property "Reference" "D14"
-			(at 128.27 93.345 0)
+			(at 128.905 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -4681,7 +5498,7 @@
 			)
 		)
 		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 129.54 99.06 0)
+			(at 130.175 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4691,7 +5508,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1615"
-			(at 129.54 85.725 0)
+			(at 130.175 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4701,7 +5518,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 129.54 83.82 0)
+			(at 130.175 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4711,7 +5528,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 128.27 93.345 0)
+			(at 128.905 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4720,7 +5537,7 @@
 			)
 		)
 		(property "MPN" "C5349954"
-			(at 129.54 81.915 0)
+			(at 130.175 50.165 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4752,7 +5569,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 105.41 73.66 0)
+		(at 106.045 37.465 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4760,7 +5577,7 @@
 		(dnp no)
 		(uuid "b17db46f-9a5c-4b41-8053-ab842de06cb2")
 		(property "Reference" "D1"
-			(at 105.41 73.66 0)
+			(at 106.045 37.465 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -4769,7 +5586,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 106.68 79.375 0)
+			(at 107.315 43.18 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4779,7 +5596,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 106.68 81.28 0)
+			(at 107.315 45.085 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4789,7 +5606,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 106.68 83.185 0)
+			(at 107.315 46.99 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4799,7 +5616,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 105.41 73.66 0)
+			(at 106.045 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4808,7 +5625,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 106.68 85.09 0)
+			(at 107.315 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4858,7 +5675,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
-		(at 166.37 93.345 0)
+		(at 167.005 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4866,7 +5683,7 @@
 		(dnp no)
 		(uuid "b21db438-8ded-4b71-956a-5f63e0e72904")
 		(property "Reference" "D19"
-			(at 166.37 93.345 0)
+			(at 167.005 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -4875,7 +5692,7 @@
 			)
 		)
 		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 167.64 99.06 0)
+			(at 168.275 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4885,7 +5702,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1615"
-			(at 167.64 85.725 0)
+			(at 168.275 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4895,7 +5712,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 167.64 83.82 0)
+			(at 168.275 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4905,7 +5722,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 166.37 93.345 0)
+			(at 167.005 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4914,7 +5731,7 @@
 			)
 		)
 		(property "MPN" "C5349954"
-			(at 167.64 81.915 0)
+			(at 168.275 50.165 0)
 			(effects
 				(font
 					(size 1 1)
@@ -4946,7 +5763,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 100.965 151.13 90)
+		(at 102.235 124.46 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -4955,7 +5772,7 @@
 		(fields_autoplaced yes)
 		(uuid "b5058d6d-38d6-45e7-a179-0c2a14ad1cac")
 		(property "Reference" "TP5"
-			(at 97.663 146.3505 90)
+			(at 98.933 119.6805 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4963,7 +5780,7 @@
 			)
 		)
 		(property "Value" "TestPoint"
-			(at 97.663 148.7748 90)
+			(at 98.933 122.1048 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4971,7 +5788,7 @@
 			)
 		)
 		(property "Footprint" "RevK:PAD-2mm"
-			(at 100.965 146.05 0)
+			(at 102.235 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4980,7 +5797,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 100.965 146.05 0)
+			(at 102.235 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4989,7 +5806,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 100.965 151.13 0)
+			(at 102.235 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5011,7 +5828,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 165.735 113.665 0)
+		(at 167.005 86.995 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5019,7 +5836,7 @@
 		(dnp no)
 		(uuid "befb48cb-053d-4d3d-a9d4-7d0006084ecf")
 		(property "Reference" "D29"
-			(at 165.735 113.665 0)
+			(at 167.005 86.995 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -5028,7 +5845,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 167.005 119.38 0)
+			(at 168.275 92.71 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5038,7 +5855,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 167.005 106.045 0)
+			(at 168.275 79.375 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5048,7 +5865,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 167.005 104.14 0)
+			(at 168.275 77.47 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5058,7 +5875,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 165.735 113.665 0)
+			(at 167.005 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5067,7 +5884,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 167.005 102.235 0)
+			(at 168.275 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5099,7 +5916,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 120.015 133.35 0)
+		(at 121.285 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5107,7 +5924,7 @@
 		(dnp no)
 		(uuid "bf65c6ad-be56-40b7-8f58-23c2ad69e321")
 		(property "Reference" "D33"
-			(at 120.015 133.35 0)
+			(at 121.285 106.68 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -5116,7 +5933,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 121.285 139.065 0)
+			(at 122.555 112.395 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5126,7 +5943,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 121.285 125.73 0)
+			(at 122.555 99.06 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5136,7 +5953,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 121.285 123.825 0)
+			(at 122.555 97.155 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5146,7 +5963,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 120.015 133.35 0)
+			(at 121.285 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5155,7 +5972,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 121.285 121.92 0)
+			(at 122.555 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5187,7 +6004,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 151.13 73.66 0)
+		(at 151.765 37.465 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5195,7 +6012,7 @@
 		(dnp no)
 		(uuid "bff7da0c-d0ea-430e-8ba5-9869427b0e55")
 		(property "Reference" "D7"
-			(at 151.13 73.66 0)
+			(at 151.765 37.465 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -5204,7 +6021,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 152.4 79.375 0)
+			(at 153.035 43.18 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5214,7 +6031,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 152.4 81.28 0)
+			(at 153.035 45.085 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5224,7 +6041,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 152.4 83.185 0)
+			(at 153.035 46.99 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5234,7 +6051,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 151.13 73.66 0)
+			(at 151.765 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5243,7 +6060,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 152.4 85.09 0)
+			(at 153.035 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5274,16 +6091,16 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-2mm")
-		(at 165.735 133.35 0)
+		(lib_id "RevK:WS2812B-1.5mm")
+		(at 241.3 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c0b35f4e-44d6-4b41-a8d0-e250a465b60d")
-		(property "Reference" "D39"
-			(at 165.735 133.35 0)
+		(uuid "c05f148a-bfd7-4d6f-be58-b8f1dcafa5b6")
+		(property "Reference" "D46"
+			(at 241.3 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -5291,8 +6108,8 @@
 				)
 			)
 		)
-		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 167.005 139.065 0)
+		(property "Value" "XL-1615RGBC-WS2812B"
+			(at 242.57 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5301,8 +6118,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "RevK:SMD2020"
-			(at 167.005 125.73 0)
+		(property "Footprint" "RevK:SMD1615"
+			(at 242.57 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5311,8 +6128,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 167.005 123.825 0)
+		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+			(at 242.57 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5322,7 +6139,95 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 165.735 133.35 0)
+			(at 241.3 61.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C5349954"
+			(at 242.57 50.165 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "70a8555f-ec2f-4a69-a712-db83e88f6a87")
+		)
+		(pin "2"
+			(uuid "738d8207-3c67-4cb8-a9e4-b6c02ca46da1")
+		)
+		(pin "3"
+			(uuid "aa63ddab-0a11-46c9-9915-8a701d6197b8")
+		)
+		(pin "4"
+			(uuid "96bfc260-c4fa-4e38-a21d-637642f119fc")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D46")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "RevK:WS2812B-2mm")
+		(at 167.005 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c0b35f4e-44d6-4b41-a8d0-e250a465b60d")
+		(property "Reference" "D39"
+			(at 167.005 106.68 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Value" "XL-2020RGBC-WS2812B"
+			(at 168.275 112.395 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:SMD2020"
+			(at 168.275 99.06 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
+			(at 168.275 97.155 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 167.005 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5331,7 +6236,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 167.005 121.92 0)
+			(at 168.275 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5363,7 +6268,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 158.75 73.66 0)
+		(at 159.385 37.465 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5371,7 +6276,7 @@
 		(dnp no)
 		(uuid "c0e72461-8533-4c04-a66a-c51b45737dcd")
 		(property "Reference" "D8"
-			(at 158.75 73.66 0)
+			(at 159.385 37.465 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -5380,7 +6285,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 160.02 79.375 0)
+			(at 160.655 43.18 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5390,7 +6295,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 160.02 81.28 0)
+			(at 160.655 45.085 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5400,7 +6305,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 160.02 83.185 0)
+			(at 160.655 46.99 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5410,7 +6315,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 158.75 73.66 0)
+			(at 159.385 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5419,7 +6324,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 160.02 85.09 0)
+			(at 160.655 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5451,7 +6356,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 127.635 113.665 0)
+		(at 128.905 86.995 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5459,7 +6364,7 @@
 		(dnp no)
 		(uuid "c4ad049e-5290-45c1-9630-6df04e7da45c")
 		(property "Reference" "D24"
-			(at 127.635 113.665 0)
+			(at 128.905 86.995 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -5468,7 +6373,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 128.905 119.38 0)
+			(at 130.175 92.71 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5478,7 +6383,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 128.905 106.045 0)
+			(at 130.175 79.375 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5488,7 +6393,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 128.905 104.14 0)
+			(at 130.175 77.47 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5498,7 +6403,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 127.635 113.665 0)
+			(at 128.905 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5507,7 +6412,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 128.905 102.235 0)
+			(at 130.175 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5539,7 +6444,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 105.41 77.47 0)
+		(at 106.045 41.275 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5548,7 +6453,7 @@
 		(fields_autoplaced yes)
 		(uuid "c577eeb5-0044-4fde-82d4-32fd6fd96ec2")
 		(property "Reference" "#PWR018"
-			(at 105.41 83.82 0)
+			(at 106.045 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5557,7 +6462,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 105.41 81.9134 0)
+			(at 106.045 45.7184 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5565,7 +6470,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 105.41 77.47 0)
+			(at 106.045 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5574,7 +6479,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 77.47 0)
+			(at 106.045 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5583,7 +6488,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 105.41 77.47 0)
+			(at 106.045 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5623,7 +6528,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 150.495 133.35 0)
+		(at 151.765 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5631,7 +6536,7 @@
 		(dnp no)
 		(uuid "c7a85aee-c37a-46d9-8105-d879844f2bea")
 		(property "Reference" "D37"
-			(at 150.495 133.35 0)
+			(at 151.765 106.68 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -5640,7 +6545,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 151.765 139.065 0)
+			(at 153.035 112.395 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5650,7 +6555,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 151.765 125.73 0)
+			(at 153.035 99.06 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5660,7 +6565,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 151.765 123.825 0)
+			(at 153.035 97.155 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5670,7 +6575,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 150.495 133.35 0)
+			(at 151.765 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5679,7 +6584,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 151.765 121.92 0)
+			(at 153.035 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5710,16 +6615,16 @@
 		)
 	)
 	(symbol
-		(lib_id "RevK:WS2812B-2mm")
-		(at 127.635 133.35 0)
+		(lib_id "RevK:WS2812B-1.5mm")
+		(at 197.485 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "cee665aa-36a0-46cc-aa52-eaae2b4a73c8")
-		(property "Reference" "D34"
-			(at 127.635 133.35 0)
+		(uuid "cab3e1e2-a4bd-430c-a7d1-720d0f335dc9")
+		(property "Reference" "D43"
+			(at 197.485 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -5727,8 +6632,8 @@
 				)
 			)
 		)
-		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 128.905 139.065 0)
+		(property "Value" "XL-1615RGBC-WS2812B"
+			(at 198.755 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5737,8 +6642,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "RevK:SMD2020"
-			(at 128.905 125.73 0)
+		(property "Footprint" "RevK:SMD1615"
+			(at 198.755 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5747,8 +6652,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 128.905 123.825 0)
+		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
+			(at 198.755 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5758,7 +6663,95 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 127.635 133.35 0)
+			(at 197.485 61.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "C5349954"
+			(at 198.755 50.165 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "afa3e90d-a26f-497f-9fb1-02654560fe70")
+		)
+		(pin "2"
+			(uuid "2f04439e-56ac-47eb-95a5-76c8aa8fb75f")
+		)
+		(pin "3"
+			(uuid "a8c4d607-8e36-4bbc-aad9-83bdd523bcab")
+		)
+		(pin "4"
+			(uuid "a94a735f-101e-4f7d-b6d5-c833c9a780a2")
+		)
+		(instances
+			(project "LED"
+				(path "/46c350bb-7de4-4e81-aafd-4af55e37aab0"
+					(reference "D43")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "RevK:WS2812B-2mm")
+		(at 128.905 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cee665aa-36a0-46cc-aa52-eaae2b4a73c8")
+		(property "Reference" "D34"
+			(at 128.905 106.68 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Value" "XL-2020RGBC-WS2812B"
+			(at 130.175 112.395 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RevK:SMD2020"
+			(at 130.175 99.06 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
+			(at 130.175 97.155 0)
+			(effects
+				(font
+					(size 1 1)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller"
+			(at 128.905 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5767,7 +6760,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 128.905 121.92 0)
+			(at 130.175 95.25 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5799,7 +6792,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 104.775 137.16 0)
+		(at 106.045 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5808,7 +6801,7 @@
 		(fields_autoplaced yes)
 		(uuid "d0709a66-d725-4f90-b52a-b4494c954baa")
 		(property "Reference" "#PWR06"
-			(at 104.775 143.51 0)
+			(at 106.045 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5817,7 +6810,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 104.775 141.6034 0)
+			(at 106.045 114.9334 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5825,7 +6818,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 104.775 137.16 0)
+			(at 106.045 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5834,7 +6827,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 104.775 137.16 0)
+			(at 106.045 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5843,7 +6836,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 104.775 137.16 0)
+			(at 106.045 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5865,7 +6858,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 105.41 89.535 0)
+		(at 106.045 57.785 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5874,7 +6867,7 @@
 		(fields_autoplaced yes)
 		(uuid "d2282cf2-7aff-46fe-b70f-8229d42dadd7")
 		(property "Reference" "#PWR01"
-			(at 105.41 93.345 0)
+			(at 106.045 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5883,7 +6876,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 105.41 85.4019 0)
+			(at 106.045 53.6519 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5891,7 +6884,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 105.41 89.535 0)
+			(at 106.045 57.785 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5900,7 +6893,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 89.535 0)
+			(at 106.045 57.785 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5909,7 +6902,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 105.41 89.535 0)
+			(at 106.045 57.785 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5931,7 +6924,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-2mm")
-		(at 135.255 113.665 0)
+		(at 136.525 86.995 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5939,7 +6932,7 @@
 		(dnp no)
 		(uuid "d2d5595a-0303-475b-8986-f948ad708aae")
 		(property "Reference" "D25"
-			(at 135.255 113.665 0)
+			(at 136.525 86.995 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -5948,7 +6941,7 @@
 			)
 		)
 		(property "Value" "XL-2020RGBC-WS2812B"
-			(at 136.525 119.38 0)
+			(at 137.795 92.71 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5958,7 +6951,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD2020"
-			(at 136.525 106.045 0)
+			(at 137.795 79.375 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5968,7 +6961,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C5349955.html"
-			(at 136.525 104.14 0)
+			(at 137.795 77.47 0)
 			(effects
 				(font
 					(size 1 1)
@@ -5978,7 +6971,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 135.255 113.665 0)
+			(at 136.525 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5987,7 +6980,7 @@
 			)
 		)
 		(property "MPN" "C5349955"
-			(at 136.525 102.235 0)
+			(at 137.795 75.565 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6019,7 +7012,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 100.965 151.13 90)
+		(at 102.235 124.46 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6028,7 +7021,7 @@
 		(fields_autoplaced yes)
 		(uuid "dfc4449f-1957-494c-9951-15f74f7a1378")
 		(property "Reference" "#PWR07"
-			(at 107.315 151.13 0)
+			(at 108.585 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6037,7 +7030,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 104.14 151.13 90)
+			(at 105.41 124.46 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6046,7 +7039,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 100.965 151.13 0)
+			(at 102.235 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6055,7 +7048,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 100.965 151.13 0)
+			(at 102.235 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6064,7 +7057,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 100.965 151.13 0)
+			(at 102.235 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6086,7 +7079,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 166.37 73.66 0)
+		(at 167.005 37.465 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6094,7 +7087,7 @@
 		(dnp no)
 		(uuid "e2b74b36-642f-4c3f-9596-642624f42fe3")
 		(property "Reference" "D9"
-			(at 166.37 73.66 0)
+			(at 167.005 37.465 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -6103,7 +7096,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 167.64 79.375 0)
+			(at 168.275 43.18 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6113,7 +7106,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 167.64 81.28 0)
+			(at 168.275 45.085 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6123,7 +7116,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 167.64 83.185 0)
+			(at 168.275 46.99 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6133,7 +7126,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 166.37 73.66 0)
+			(at 167.005 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6142,7 +7135,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 167.64 85.09 0)
+			(at 168.275 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6174,7 +7167,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
-		(at 105.41 93.345 0)
+		(at 106.045 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6182,7 +7175,7 @@
 		(dnp no)
 		(uuid "e77fa73f-4564-4f9c-9a42-36433268a6f5")
 		(property "Reference" "D11"
-			(at 105.41 93.345 0)
+			(at 106.045 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -6191,7 +7184,7 @@
 			)
 		)
 		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 106.68 99.06 0)
+			(at 107.315 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6201,7 +7194,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1615"
-			(at 106.68 85.725 0)
+			(at 107.315 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6211,7 +7204,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 106.68 83.82 0)
+			(at 107.315 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6221,7 +7214,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 105.41 93.345 0)
+			(at 106.045 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6230,7 +7223,7 @@
 			)
 		)
 		(property "MPN" "C5349954"
-			(at 106.68 81.915 0)
+			(at 107.315 50.165 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6262,7 +7255,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1mm")
-		(at 120.65 73.66 0)
+		(at 121.285 37.465 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6270,7 +7263,7 @@
 		(dnp no)
 		(uuid "ec32efd3-b3e5-4195-af09-11e21ab96e2b")
 		(property "Reference" "D3"
-			(at 120.65 73.66 0)
+			(at 121.285 37.465 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -6279,7 +7272,7 @@
 			)
 		)
 		(property "Value" "XL-1010RGBC-WS2812B"
-			(at 121.92 79.375 0)
+			(at 122.555 43.18 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6289,7 +7282,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1010"
-			(at 121.92 81.28 0)
+			(at 122.555 45.085 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6299,7 +7292,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 121.92 83.185 0)
+			(at 122.555 46.99 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6309,7 +7302,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 120.65 73.66 0)
+			(at 121.285 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6318,7 +7311,7 @@
 			)
 		)
 		(property "MPN" "C5349953"
-			(at 121.92 85.09 0)
+			(at 122.555 48.895 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6350,7 +7343,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 105.41 97.155 0)
+		(at 106.045 65.405 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6359,7 +7352,7 @@
 		(fields_autoplaced yes)
 		(uuid "ed84c484-4e29-43ab-98f7-a93e13838547")
 		(property "Reference" "#PWR02"
-			(at 105.41 103.505 0)
+			(at 106.045 71.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6368,7 +7361,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 105.41 101.5984 0)
+			(at 106.045 69.8484 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6376,7 +7369,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 105.41 97.155 0)
+			(at 106.045 65.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6385,7 +7378,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 97.155 0)
+			(at 106.045 65.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6394,7 +7387,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 105.41 97.155 0)
+			(at 106.045 65.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6416,7 +7409,7 @@
 	)
 	(symbol
 		(lib_id "RevK:WS2812B-1.5mm")
-		(at 113.03 93.345 0)
+		(at 113.665 61.595 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6424,7 +7417,7 @@
 		(dnp no)
 		(uuid "eda177fe-c7b9-4d60-a654-68f13407ae51")
 		(property "Reference" "D12"
-			(at 113.03 93.345 0)
+			(at 113.665 61.595 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -6433,7 +7426,7 @@
 			)
 		)
 		(property "Value" "XL-1615RGBC-WS2812B"
-			(at 114.3 99.06 0)
+			(at 114.935 67.31 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6443,7 +7436,7 @@
 			)
 		)
 		(property "Footprint" "RevK:SMD1615"
-			(at 114.3 85.725 0)
+			(at 114.935 53.975 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6453,7 +7446,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2301111010_XINGLIGHT-XL-1010RGBC-WS2812B_C5349953.pdf"
-			(at 114.3 83.82 0)
+			(at 114.935 52.07 0)
 			(effects
 				(font
 					(size 1 1)
@@ -6463,7 +7456,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 113.03 93.345 0)
+			(at 113.665 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6472,7 +7465,7 @@
 			)
 		)
 		(property "MPN" "C5349954"
-			(at 114.3 81.915 0)
+			(at 114.935 50.165 0)
 			(effects
 				(font
 					(size 1 1)
