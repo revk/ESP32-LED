@@ -14,8 +14,9 @@ These files are for use with [KiCAD](https://www.kicad.org).
 
 3D case designs are normally automatically created from the PCB so as to ensure correct details and placement of apertures, etc.
 
-- [LEDB](LEDB.stl)
-- [LEDT](LEDT.stl)
+|Design|Bottom|Top|Combined|
+|------|------|---|--------|
+|LED|<a href='LEDB.stl'><img src='LEDB.png' size=15%></a>|<a href='LEDT.stl'><img src='LEDT.png' size=15%></a>|<a href='LEDC.stl'><img src='LEDC.png' size=15%></a>|
 
 ## PCB Images
 
@@ -24,4 +25,4 @@ These files are for use with [KiCAD](https://www.kicad.org).
 
 ---
 
-*Auto generated README.md 2025-10-20T14:53:37*
+*Auto generated README.md 2025-10-20T15:43:21*
