@@ -30,7 +30,7 @@ leds:	PCBCase/placeleds
 	#PCBCase/placeleds LED32/LED.kicad_pcb -x100 -y100 -d22.5 --diode=33 --count=24 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 	#PCBCase/placeleds LED32/LED.kicad_pcb -x100 -y100 -d28 --diode=57 --count=32 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 
-stl:    LEDC/LEDT.stl LEDR/LEDT.stl LEDC12/LEDT.stl LEDX/LEDT.stl LEDX12/LEDT.stl Test/LEDT.stl LEDC/LEDB.stl LEDR/LEDB.stl LEDC12/LEDB.stl LEDX/LEDB.stl LEDX12/LEDB.stl Test/LEDB.stl Coaster2Base.stl Coaster2Top.stl
+stl:    LED[CX]/LED[TBC].stl LEDR/LED[TBC].stl LED[CX]12/LED[TBC].stl Test/LED[TBC].stl Coaster2Base.stl Coaster2Top.stl
 
 png:	$(patsubst %.kicad_pcb,%.png,$(wildcard */*.kicad_pcb))
 

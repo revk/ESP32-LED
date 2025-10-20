@@ -1,6 +1,6 @@
 // Generated case design for LEDC12/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-09 16:33:38
+// Generated 2025-10-20 13:53:28
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
@@ -46,7 +46,7 @@ module pcb(h=pcbthickness,r=0){linear_extrude(height=h)offset(r=r)polygon(points
 module L1(){translate([11.400045,5.200000,1.200000])rotate([0,0,180.000000])children();}
 module part_L1(part=true,hole=false,block=false)
 {
-translate([11.400045,5.200000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // L1 (back)
+translate([11.400045,5.200000,1.200000])rotate([0,0,180.000000])m0(part,hole,block,casetop); // L1
 };
 module R9(){translate([12.600044,-0.400000,1.200000])rotate([0,0,90.000000])children();}
 module part_R9(part=true,hole=false,block=false)
@@ -56,12 +56,12 @@ translate([12.600044,-0.400000,1.200000])rotate([0,0,90.000000])m1(part,hole,blo
 module U3(){translate([20.200045,-6.200000,1.200000])children();}
 module part_U3(part=true,hole=false,block=false)
 {
-translate([20.200045,-6.200000,1.200000])m2(part,hole,block,casetop); // U3 (back)
+translate([20.200045,-6.200000,1.200000])m2(part,hole,block,casetop); // U3
 };
 module D2(){translate([-8.599955,2.000000,1.200000])rotate([0,0,-90.000000])children();}
 module part_D2(part=true,hole=false,block=false)
 {
-translate([-8.599955,2.000000,1.200000])rotate([0,0,-90.000000])m3(part,hole,block,casetop); // D2 (back)
+translate([-8.599955,2.000000,1.200000])rotate([0,0,-90.000000])m3(part,hole,block,casetop); // D2
 };
 module C3(){translate([8.700045,1.300000,1.200000])rotate([0,0,180.000000])children();}
 module part_C3(part=true,hole=false,block=false)
@@ -149,7 +149,7 @@ translate([-13.099955,-6.700000,1.200000])rotate([0,0,180.000000])m1(part,hole,b
 module D1(){translate([21.200045,6.398959,1.200000])rotate([0,0,180.000000])children();}
 module part_D1(part=true,hole=false,block=false)
 {
-translate([21.200045,6.398959,1.200000])rotate([0,0,180.000000])m6(part,hole,block,casetop); // D1 (back)
+translate([21.200045,6.398959,1.200000])rotate([0,0,180.000000])m6(part,hole,block,casetop); // D1
 };
 module C9(){translate([14.900045,-6.900000,1.200000])children();}
 module part_C9(part=true,hole=false,block=false)
@@ -177,7 +177,7 @@ translate([8.700045,2.500000,1.200000])m4(part,hole,block,casetop); // RevK:C_02
 module U4(){translate([12.037544,1.400000,1.200000])rotate([0,0,-90.000000])children();}
 module part_U4(part=true,hole=false,block=false)
 {
-translate([12.037544,1.400000,1.200000])rotate([0,0,-90.000000])m9(part,hole,block,casetop); // U4 (back)
+translate([12.037544,1.400000,1.200000])rotate([0,0,-90.000000])m9(part,hole,block,casetop); // U4
 };
 module R7(){translate([17.900045,6.200000,1.200000])rotate([0,0,-90.000000])children();}
 module part_R7(part=true,hole=false,block=false)
@@ -192,7 +192,7 @@ translate([14.400045,-5.900000,1.200000])m1(part,hole,block,casetop); // RevK:R_
 module U1(){translate([0.000045,0.000000,1.200000])children();}
 module part_U1(part=true,hole=false,block=false)
 {
-translate([0.000045,0.000000,1.200000])m10(part,hole,block,casetop); // U1 (back)
+translate([0.000045,0.000000,1.200000])m10(part,hole,block,casetop); // U1
 };
 module C10(){translate([11.800044,-1.850000,1.200000])rotate([0,0,180.000000])children();}
 module part_C10(part=true,hole=false,block=false)
@@ -232,7 +232,7 @@ translate([11.150045,-5.150000,1.200000])m12(part,hole,block,casetop); // RevK:I
 module J2(){translate([-14.999955,0.000000,1.200000])children();}
 module part_J2(part=true,hole=false,block=false)
 {
-translate([-14.999955,0.000000,1.200000])m13(part,hole,block,casetop,453); // J2 (back)
+translate([-14.999955,0.000000,1.200000])m13(part,hole,block,casetop,453); // J2
 };
 // Parts to go on PCB (top)
 module parts_top(part=false,hole=false,block=false){
@@ -369,22 +369,24 @@ module m6(part=false,hole=false,block=false,height)
 // 1.6x1.5mm LED
 if(part)
 {
-        b(0,0,0,1.6+0.2,1.5+0.2,.6+0.2);
+
+        b(0,0,0,1.5,1.6,0.28);
+        b(0,0,0,1.5,1,0.6);
 }
 if(hole)
 {
         hull()
         {
-                b(0,0,.6+0.2,1.6+0.2,1.5+0.2,1);
-                translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=16);
+                b(0,0,0.1,1.5,1.6,0.1);
+                translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=17);
         }
 }
 if(block)
 {
         hull()
         {
-                b(0,0,.6+0.2,2.8,2.8,1);
-                translate([0,0,height])cylinder(d=2,h=1,$fn=16);
+                b(0,0,0.1,3.5,3.6,0.1);
+                translate([0,0,height])cylinder(d=2,h=1,$fn=17);
         }
 }
 }

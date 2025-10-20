@@ -1,6 +1,6 @@
 // Generated case design for LEDX/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-09 16:38:40
+// Generated 2025-10-20 12:52:49
 // title:	PCB-USBX
 // rev:	1
 // comment:	www.me.uk
@@ -62,7 +62,7 @@ translate([7.662500,-2.885000,1.200000])m0(part,hole,block,casetop); // RevK:C_0
 module D1(){translate([9.362500,6.500000,1.200000])rotate([0,0,180.000000])children();}
 module part_D1(part=true,hole=false,block=false)
 {
-translate([9.362500,6.500000,1.200000])rotate([0,0,180.000000])m2(part,hole,block,casetop); // D1 (back)
+translate([9.362500,6.500000,1.200000])rotate([0,0,180.000000])m2(part,hole,block,casetop); // D1
 };
 module R9(){translate([7.662500,1.015000,1.200000])children();}
 module part_R9(part=true,hole=false,block=false)
@@ -77,7 +77,7 @@ translate([5.862500,1.015000,1.200000])m3(part,hole,block,casetop); // RevK:R_04
 module U1(){translate([6.262500,6.000000,1.200000])rotate([0,0,90.000000])children();}
 module part_U1(part=true,hole=false,block=false)
 {
-translate([6.262500,6.000000,1.200000])rotate([0,0,90.000000])m4(part,hole,block,casetop); // U1 (back)
+translate([6.262500,6.000000,1.200000])rotate([0,0,90.000000])m4(part,hole,block,casetop); // U1
 };
 module C1(){translate([7.462500,2.400000,1.200000])rotate([0,0,90.000000])children();}
 module part_C1(part=true,hole=false,block=false)
@@ -111,7 +111,7 @@ module part_PCB1(part=true,hole=false,block=false)
 module U2(){translate([-3.137500,0.000000,1.200000])rotate([0,0,90.000000])children();}
 module part_U2(part=true,hole=false,block=false)
 {
-translate([-3.137500,0.000000,1.200000])rotate([0,0,90.000000])m7(part,hole,block,casetop); // U2 (back)
+translate([-3.137500,0.000000,1.200000])rotate([0,0,90.000000])m7(part,hole,block,casetop); // U2
 };
 module R10(){translate([9.462500,1.015000,1.200000])children();}
 module part_R10(part=true,hole=false,block=false)
@@ -153,7 +153,7 @@ parts_top=3;
 module D2(){translate([-9.637500,-7.000000,0.000000])rotate([180,0,0])children();}
 module part_D2(part=true,hole=false,block=false)
 {
-translate([-9.637500,-7.000000,0.000000])rotate([180,0,0])m8(part,hole,block,casebottom); // D2
+translate([-9.637500,-7.000000,0.000000])rotate([180,0,0])m8(part,hole,block,casebottom); // D2 (back)
 };
 module C3(){translate([-9.437500,6.900000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])children();}
 module part_C3(part=true,hole=false,block=false)
@@ -176,7 +176,7 @@ module part_P2(part=true,hole=false,block=false)
 module J2(){translate([-4.137500,0.000000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])children();}
 module part_J2(part=true,hole=false,block=false)
 {
-translate([-4.137500,0.000000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])m9(part,hole,block,casebottom,453); // J2
+translate([-4.137500,0.000000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])m9(part,hole,block,casebottom,453); // J2 (back)
 };
 module V1(){translate([-3.137500,8.000000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])children();}
 module part_V1(part=true,hole=false,block=false)
@@ -252,22 +252,24 @@ module m2(part=false,hole=false,block=false,height)
 // 1.6x1.5mm LED
 if(part)
 {
-        b(0,0,0,1.6+0.2,1.5+0.2,.6+0.2);
+
+        b(0,0,0,1.5,1.6,0.28);
+        b(0,0,0,1.5,1,0.6);
 }
 if(hole)
 {
         hull()
         {
-                b(0,0,.6+0.2,1.6+0.2,1.5+0.2,1);
-                translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=16);
+                b(0,0,0.1,1.5,1.6,0.1);
+                translate([0,0,height])cylinder(d=1.001,h=0.001,$fn=17);
         }
 }
 if(block)
 {
         hull()
         {
-                b(0,0,.6+0.2,2.8,2.8,1);
-                translate([0,0,height])cylinder(d=2,h=1,$fn=16);
+                b(0,0,0.1,3.5,3.6,0.1);
+                translate([0,0,height])cylinder(d=2,h=1,$fn=17);
         }
 }
 }
@@ -359,8 +361,8 @@ if(hole)
 {
     hull()
     {
-        translate([-11.510,0,2])sphere(d=4,$fn=12);
-        translate([-50,0,2])sphere(d=4,$fn=12);
+        translate([-11.510,0,2])sphere(d=5,$fn=12);
+        translate([-50,0,2])sphere(d=5,$fn=12);
     }
 }
 }
