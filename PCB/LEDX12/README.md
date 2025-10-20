@@ -16,7 +16,7 @@ These files are for use with [KiCAD](https://www.kicad.org).
 
 |Design|Bottom|Top|
 |------|------|---|
-|LED|<a href='LEDB.stl'><img src='LEDB.png' size=15%></a>|<a href='LEDT.stl'><img src='LEDT.png' size=15%></a>|
+|LED|<a href='LEDB.stl'><img src='LEDB.png' size=15%></a>|<a href='LEDT.stl'><img src='LEDC.png' size=15%></a>|
 
 ## PCB Images
 
