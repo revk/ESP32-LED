@@ -49,14 +49,15 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_UNSIGNED,.name="onclap",.comment="Activate specified preset on loud clap/tap",.group=7,.len=6,.dot=2,.ptr=&onclap,.size=sizeof(uint8_t),.hide=1,.live=1,.old="clapon"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="onbutton",.comment="Activate specified preset on button press",.group=7,.len=8,.dot=2,.def="1",.ptr=&onbutton,.size=sizeof(uint8_t),.hide=1,.live=1},
  {.type=REVK_SETTINGS_STRING,.name="name",.comment="Name (must be set to appear in HA)",.len=4,.ptr=&name,.malloc=1,.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
+ {.type=REVK_SETTINGS_STRING,.name="effect",.comment="Default effect (leave blank for HA to pick)",.len=6,.ptr=&effect,.malloc=1,.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
  {.type=REVK_SETTINGS_STRING,.name="colour",.comment="Colour or palette name or #RGB style",.len=6,.ptr=&colour,.malloc=1,.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
  {.type=REVK_SETTINGS_UNSIGNED,.name="start",.comment="First LED (default 1)",.len=5,.ptr=&start,.size=sizeof(uint16_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
  {.type=REVK_SETTINGS_SIGNED,.name="top",.comment="Top LED (default to first)",.len=3,.ptr=&top,.size=sizeof(int16_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
  {.type=REVK_SETTINGS_UNSIGNED,.name="len",.comment="Number of LEDs (default to end)",.len=3,.ptr=&len,.size=sizeof(uint16_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
- {.type=REVK_SETTINGS_STRING,.name="effect",.comment="Default effect (leave blank for HA to pick)",.len=6,.ptr=&effect,.malloc=1,.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
  {.type=REVK_SETTINGS_UNSIGNED,.name="bright",.comment="Brightness",.len=6,.ptr=&bright,.size=sizeof(uint8_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.unit="/255"},
  {.type=REVK_SETTINGS_SIGNED,.name="height",.comment="Text height",.len=6,.ptr=&height,.size=sizeof(int8_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
  {.type=REVK_SETTINGS_UNSIGNED,.name="delay",.comment="Delay time, default 1s",.len=5,.ptr=&delay,.size=sizeof(uint32_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
+ {.type=REVK_SETTINGS_UNSIGNED,.name="timed",.comment="Timed start if not 0000 (use limit to stop)",.len=5,.ptr=&timed,.size=sizeof(uint16_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.digits=4,.unit="MMHH"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="limit",.comment="Time limit, default none",.len=5,.ptr=&limit,.size=sizeof(uint32_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="speed",.comment="Cycle time, default 1s",.len=5,.ptr=&speed,.size=sizeof(uint8_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="fadein",.comment="Fade in time, default 1s",.len=6,.ptr=&fadein,.size=sizeof(uint8_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
@@ -195,14 +196,15 @@ uint8_t onpower=0;
 uint8_t onclap=0;
 uint8_t onbutton=0;
 char* name[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
+char* effect[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 char* colour[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint16_t start[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 int16_t top[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint16_t len[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
-char* effect[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint8_t bright[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 int8_t height[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint32_t delay[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
+uint16_t timed[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint32_t limit[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint8_t speed[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint8_t fadein[CONFIG_REVK_WEB_EXTRA_PAGES]={0};

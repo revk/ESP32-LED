@@ -231,14 +231,15 @@ extern uint8_t onpower;	// Activate specified preset on power up
 extern uint8_t onclap;	// Activate specified preset on loud clap/tap
 extern uint8_t onbutton;	// Activate specified preset on button press
 extern char* name[CONFIG_REVK_WEB_EXTRA_PAGES];	// Name (must be set to appear in HA)
+extern char* effect[CONFIG_REVK_WEB_EXTRA_PAGES];	// Default effect (leave blank for HA to pick)
 extern char* colour[CONFIG_REVK_WEB_EXTRA_PAGES];	// Colour or palette name or #RGB style
 extern uint16_t start[CONFIG_REVK_WEB_EXTRA_PAGES];	// First LED (default 1)
 extern int16_t top[CONFIG_REVK_WEB_EXTRA_PAGES];	// Top LED (default to first)
 extern uint16_t len[CONFIG_REVK_WEB_EXTRA_PAGES];	// Number of LEDs (default to end)
-extern char* effect[CONFIG_REVK_WEB_EXTRA_PAGES];	// Default effect (leave blank for HA to pick)
 extern uint8_t bright[CONFIG_REVK_WEB_EXTRA_PAGES];	// Brightness
 extern int8_t height[CONFIG_REVK_WEB_EXTRA_PAGES];	// Text height
 extern uint32_t delay[CONFIG_REVK_WEB_EXTRA_PAGES];	// Delay time, default 1s
+extern uint16_t timed[CONFIG_REVK_WEB_EXTRA_PAGES];	// Timed start if not 0000 (use limit to stop)
 extern uint32_t limit[CONFIG_REVK_WEB_EXTRA_PAGES];	// Time limit, default none
 extern uint8_t speed[CONFIG_REVK_WEB_EXTRA_PAGES];	// Cycle time, default 1s
 extern uint8_t fadein[CONFIG_REVK_WEB_EXTRA_PAGES];	// Fade in time, default 1s
@@ -390,14 +391,15 @@ enum {
 #define REVK_SETTINGS_ONCLAP
 #define REVK_SETTINGS_ONBUTTON
 #define REVK_SETTINGS_NAME
+#define REVK_SETTINGS_EFFECT
 #define REVK_SETTINGS_COLOUR
 #define REVK_SETTINGS_START
 #define REVK_SETTINGS_TOP
 #define REVK_SETTINGS_LEN
-#define REVK_SETTINGS_EFFECT
 #define REVK_SETTINGS_BRIGHT
 #define REVK_SETTINGS_HEIGHT
 #define REVK_SETTINGS_DELAY
+#define REVK_SETTINGS_TIMED
 #define REVK_SETTINGS_LIMIT
 #define REVK_SETTINGS_SPEED
 #define REVK_SETTINGS_FADEIN

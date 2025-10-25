@@ -1170,6 +1170,7 @@ revk_web_extra (httpd_req_t * req, int page)
       add ("top");
       add ("bright");
       add ("delay");
+      add ("timed");
       add ("limit");
       add ("speed");
       add ("fadein");
@@ -2048,6 +2049,22 @@ app_main ()
       sleep (1);
       if (!b.micok)
          revk_blink (10, 0, "R");
+   }
+   while (1)
+   {
+      time_t now = time (0);
+      if (now < 1000000000)
+      {                         // Clock not set
+         sleep (1);
+         continue;
+      }
+      struct tm t;
+      localtime_r (&now, &t);
+      int hhmm = t.tm_hour * 100 + t.tm_min;
+      for (int p = 0; p < CONFIG_REVK_WEB_EXTRA_PAGES; p++)
+         if (timed[p] && timed[p] == hhmm)
+            haon |= (1 << p);
+      sleep (60 - (now % 60));
    }
    //hargb = -1;
 }

@@ -47,14 +47,15 @@ u8	on.clap			.hide=1	.live=1	.old="clapon"	// Activate specified preset on loud 
 u8	on.button	1	.hide=1	.live=1	// Activate specified preset on button press
 
 s	name		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Name (must be set to appear in HA)
+s	effect		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1   		// Default effect (leave blank for HA to pick)
 s	colour		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Colour or palette name or #RGB style
 u16	start		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// First LED (default 1)
 s16	top		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Top LED (default to first)
 u16	len		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Number of LEDs (default to end)
-s	effect		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1   		// Default effect (leave blank for HA to pick)
 u8	bright		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .unit="/255"	// Brightness
 s8	height		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1		// Text height
 u32	delay		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Delay time, default 1s
+u16     timed           .array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .digits=4 .unit="MMHH"	// Timed start if not 0000 (use limit to stop)
 u32	limit		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Time limit, default none
 u8	speed		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Cycle time, default 1s
 u8	fadein		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit="s"	// Fade in time, default 1s
