@@ -23,6 +23,8 @@ static const char TAG[] = "LED";
 #include "halib.h"
 #include <ir.h>
 
+struct b_str b = { 0 };
+
 #define	typeisrgbw(x)	(((x)%12)/6)
 #define	typeissk6812(x)	((x)/12)
 #define	typebase(x)	((x)%6)
@@ -45,18 +47,6 @@ struct applist_s
 #define t(a,d)	{#a,#d,&app##a,0,1,0},
 #include "apps.h"
 };
-
-struct
-{
-   uint8_t haconfig:1;          // Send config
-   uint8_t hacheck:1;           // Check presets
-   uint8_t micon:1;             // An audio based effect is in use
-   uint8_t micok:1;             // Receiving sound data
-   uint8_t checksound:1;        // Temp
-   uint8_t relay:1;             // Relay state
-   uint8_t press:1;             // Button pressed
-   uint8_t rgbw:1;              // If one of the strings is RGBW
-} b = { 0 };
 
 #define	ADC_SCALE	134/10
 #define	ADC_ATTEN	ADC_ATTEN_DB_12

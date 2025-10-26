@@ -3,6 +3,18 @@
 #include "revk.h"
 #include "palette.h"
 
+extern struct b_str
+{
+   uint8_t haconfig:1;          // Send config
+   uint8_t hacheck:1;           // Check presets
+   uint8_t micon:1;             // An audio based effect is in use
+   uint8_t micok:1;             // Receiving sound data
+   uint8_t checksound:1;        // Temp
+   uint8_t relay:1;             // Relay state
+   uint8_t press:1;             // Button pressed
+   uint8_t rgbw:1;              // If one of the strings is RGBW
+} b;
+
 #define	params		\
 	u16r(s,start,)	\
 	u16r(l,len,)	\

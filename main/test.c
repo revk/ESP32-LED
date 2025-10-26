@@ -43,13 +43,21 @@ apptest (app_t * a)
          setRGBW (i, 0, 0, 0, 255);
       break;
    case 8:
-      for (int i = a->start; i < a->start + a->len; i++)
-         setRGBW (i, 0, 0, 0, 255 - l);
-      break;
+      if (b.rgbw)
+      {
+         for (int i = a->start; i < a->start + a->len; i++)
+            setRGBW (i, 0, 0, 0, 255 - l);
+         break;
+      }
+      __attribute__((fallthrough));
    case 9:
-      for (int i = a->start; i < a->start + a->len; i++)
-         setRGBW (i, 0, 0, 0, 0);
-      break;
+      if (b.rgbw)
+      {
+         for (int i = a->start; i < a->start + a->len; i++)
+            setRGBW (i, 0, 0, 0, 0);
+         break;
+      }
+      __attribute__((fallthrough));
    default:
       setRGB (a->start - 1, 255, 0, 0);
       setRGB (a->start + 1, 255, 0, 0);
