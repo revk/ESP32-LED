@@ -1436,8 +1436,9 @@ web_root (httpd_req_t * req)
                      "};};c();" //
                      "setInterval(function() {if(!ws)c();else ws.send('');},1000);"     //
                      "</script>");
-   revk_web_send (req,
-                  "<fieldset><legend>Software</legend>More information on this software is available at <a href='https://led.revk.uk/'>led.revk.uk</a>.");
+   if (!ledmax)
+      revk_web_send (req,
+                     "<fieldset><legend>Software</legend>More information on this software is available at <a href='https://led.revk.uk/'>led.revk.uk</a>.");
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
    if (!ledmax)
       revk_web_send (req,
