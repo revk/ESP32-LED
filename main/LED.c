@@ -1439,8 +1439,9 @@ web_root (httpd_req_t * req)
    revk_web_send (req,
                   "<fieldset><legend>Software</legend>More information on this software is available at <a href='https://led.revk.uk/'>led.revk.uk</a>.");
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
-   revk_web_send (req,
-                  " If you would rather run WLED, it is important to realise this is an <b>ESP32-S3</b>. Please visit <a href='https://hiwtsi.uk/LED/#setup'>Home Is Where The Smart Is</a> for instructions on reflashing, otherwise you could break things. That site also has details on LED strips and other controllers.");
+   if (!ledmax)
+      revk_web_send (req,
+                     " If you would rather run WLED, it is important to realise this is an <b>ESP32-S3</b>. Please visit <a href='https://hiwtsi.uk/LED/#setup'>Home Is Where The Smart Is</a> for instructions on reflashing, otherwise you could break things. That site also has details on LED strips and other controllers.");
 #endif
    revk_web_send (req, "</fieldset>");
    return revk_web_foot (req, 0, webcontrol >= 2 ? 1 : 0, NULL);
