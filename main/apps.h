@@ -30,7 +30,7 @@ a (idle, Fixed colour)          //
    r (clock, Clock face)        //
    r (stargate, Stargate)       //
    //
-   r (endtest, End Test)        //
+   r (test, Test)        //
    r (spin, Spin)               //
    r (lava, Lava Lamp)          //
    // Text
