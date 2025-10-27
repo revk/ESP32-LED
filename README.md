@@ -16,7 +16,7 @@ Note boards are branded A&A, AJK, and HIWTSI.
 
 ## Cautions
 
-* Do not reverse power polarity - especially if 12V. You may get away with 5V, but 12V is likely to cause visual and effects and magic smoke.
+* Do not reverse power polarity - especially if 12V. You may get away with 5V, but 12V is likely to cause visual effects and magic smoke, and very much not working any more.
 * Do not connect to strip without GND. Again you may get away with 5V, but with 12V this will likely pull the output GPIO up to 12V and make it not work any more.
 
 ## In-line USB-C
