@@ -59,6 +59,12 @@ apptest (app_t * a)
       }
       __attribute__((fallthrough));
    default:
+      if (a->colourset)
+      {                         // Fixed colour
+         for (int i = 0; i < a->len; i++)
+            setl (a->start + i, a, i, a->len, 255);
+         break;
+      }
       setRGB (a->start - 1, 255, 0, 0);
       setRGB (a->start + 1, 255, 0, 0);
       setRGB (a->start + a->len - 1 - 1, 255, 0, 0);

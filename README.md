@@ -80,6 +80,7 @@ The USB-A module is designed to plug in directly to a USB-A socket and connector
 
 * Even smaller, but no USB connector (USB can be accessed via TC2030 lead or solder pads if needed)
 * Designed for power from strip, e.g. 5V or 12V
+
 ## Other designs
 
 Well, quite a few other PCBs...
