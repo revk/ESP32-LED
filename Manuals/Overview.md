@@ -106,7 +106,7 @@ A palette is simply a way colours change, they can be based on time, or position
 |`countdown`|Count LEDs until limit (default 60 seconds)|
 |`random`|Fading between random colours|
 |`twinkle`|All lights constantly fading different random levels of selected colour|
-|`endtest`|White light each end, and at `top` if set, and R/G/B next to ends, allow testing `start` and `len`|
+|`test`|Does RGB or RGBW colour cycle, then shows a ruler to make counting LEDs easy (if colour set the shows that colour instead of ruler)|
 |`drop`|Dropping balls|
 
 ### Audio apps

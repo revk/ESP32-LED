@@ -14,28 +14,10 @@ This is a hardware and software project. The software is much like WLED, but my 
 
 Note boards are branded A&A, AJK, and HIWTSI.
 
-## Full spec (USB-C)
+## Cautions
 
-<img src=PCB/LEDR/LED.png align=right width=50%>
-
-This is the full specification module, with a lot of features.
-
-* Small: 46mm x 25mm (including antenna).
-* USB-C connection - functional for flashing and debug as well as 5V power.
-* Powerful ESP32-S3-MINI-1-N4-R2 dual CPU processor with 4MB Flash and 2MB SPI RAM, WiFi, Bluetooth, etc.
-* 3 pin WAGO connector for the LED strip, for simple and easy connection.
-* 2 pin WAGO connector to solid state relay, 3.5A
-* Switch mode power supply working from 4V to 35V (5V only when USB connected).
-* TDK ICS 43434 I2S digital microphone.
-* MAX98357A I2S digital amplifier.
-* 2 pin WAGO connector for 4Ω speaker.
-* Single-sided design with flat base to allow easy fixing under a shelf, etc.
-* Simple potential divide to ADC pin to allow input voltage monitoring.
-* Pads allowing a 6x6 surface mount contact switch to be soldered on the back.
-* 38kHz IR receiver module.
-* PCB marked with all GPIO numbers
-
-The power supply means you can run the board from USB and it will power the LED strip from that same 5V USB, or power the board from the strip, e.g. a 12V strip and external 12V supply (even at the other end of strip). Do not connect USB at the same time as a higher voltage supply. The solid state relay can be used to power control the strip, whether using the USB/5V supply or external supply.
+* Do not reverse power polarity - especially if 12V. You may get away with 5V, but 12V is likely to cause visual effects and magic smoke, and very much not working any more.
+* Do not connect to strip without GND. Again you may get away with 5V, but with 12V this will likely pull the output GPIO up to 12V and make it not work any more.
 
 ## In-line USB-C
 
@@ -80,6 +62,7 @@ The USB-A module is designed to plug in directly to a USB-A socket and connector
 
 * Even smaller, but no USB connector (USB can be accessed via TC2030 lead or solder pads if needed)
 * Designed for power from strip, e.g. 5V or 12V
+
 ## Other designs
 
 Well, quite a few other PCBs...
