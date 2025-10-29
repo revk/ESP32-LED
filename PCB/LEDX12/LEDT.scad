@@ -1,6 +1,6 @@
 // Generated case design for LEDX12/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-20 12:58:20
+// Generated 2025-10-28 09:29:06
 // title:	LEDX12
 // rev:	1
 // comment:	www.me.uk
@@ -31,7 +31,7 @@ datey=0.000000;
 datet=0.500000;
 dateh=3.000000;
 datea=-34;
-date="2025-10-13";
+date="2025-10-28";
 datef="OCRB";
 spacing=37.725000;
 pcbwidth=21.725000;
@@ -166,19 +166,24 @@ module part_D2(part=true,hole=false,block=false)
 {
 translate([-10.137500,2.000000,0.000000])rotate([0,0,-90.000000])rotate([180,0,0])m9(part,hole,block,casebottom); // D2 (back)
 };
-module C12(){translate([-1.487500,-6.900000,0.000000])rotate([180,0,0])children();}
+module C12(){translate([-5.737500,-6.900000,0.000000])rotate([180,0,0])children();}
 module part_C12(part=true,hole=false,block=false)
 {
-translate([-1.487500,-6.900000,0.000000])rotate([180,0,0])m10(part,hole,block,casebottom); // RevK:C_0603 C_0603_1608Metric
+translate([-5.737500,-6.900000,0.000000])rotate([180,0,0])m10(part,hole,block,casebottom); // RevK:C_0603 C_0603_1608Metric
 };
 module V2(){translate([-3.137500,-8.000000,0.000000])rotate([180,0,0])children();}
 module part_V2(part=true,hole=false,block=false)
 {
 };
-module C16(){translate([1.162500,-6.900000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])children();}
+module C16(){translate([-3.087500,-6.900000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])children();}
 module part_C16(part=true,hole=false,block=false)
 {
-translate([1.162500,-6.900000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])m10(part,hole,block,casebottom); // RevK:C_0603 C_0603_1608Metric
+translate([-3.087500,-6.900000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])m10(part,hole,block,casebottom); // RevK:C_0603 C_0603_1608Metric
+};
+module D6(){translate([5.062500,-6.800000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])children();}
+module part_D6(part=true,hole=false,block=false)
+{
+translate([5.062500,-6.800000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])m11(part,hole,block,casebottom); // D6 (back)
 };
 module P2(){translate([9.362500,6.000000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])children();}
 module part_P2(part=true,hole=false,block=false)
@@ -208,7 +213,7 @@ module part_P4(part=true,hole=false,block=false)
 module J1(){translate([-4.137500,0.000000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])children();}
 module part_J1(part=true,hole=false,block=false)
 {
-translate([-4.137500,0.000000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])m11(part,hole,block,casebottom,453); // J1 (back)
+translate([-4.137500,0.000000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])m12(part,hole,block,casebottom,453); // J1 (back)
 };
 module C14(){translate([-9.837500,7.100000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])children();}
 module part_C14(part=true,hole=false,block=false)
@@ -220,10 +225,10 @@ module part_R4(part=true,hole=false,block=false)
 {
 translate([-8.687500,7.100000,0.000000])rotate([0,0,180.000000])rotate([180,0,0])m3(part,hole,block,casebottom); // RevK:R_0201 R_0201_0603Metric
 };
-module C2(){translate([3.612500,-7.000000,0.000000])rotate([180,0,0])children();}
+module C2(){translate([-0.637500,-7.000000,0.000000])rotate([180,0,0])children();}
 module part_C2(part=true,hole=false,block=false)
 {
-translate([3.612500,-7.000000,0.000000])rotate([180,0,0])m0(part,hole,block,casebottom); // RevK:C_0402 C_0402_1005Metric
+translate([-0.637500,-7.000000,0.000000])rotate([180,0,0])m0(part,hole,block,casebottom); // RevK:C_0402 C_0402_1005Metric
 };
 // Parts to go on PCB (bottom)
 module parts_bottom(part=false,hole=false,block=false){
@@ -231,6 +236,7 @@ part_D2(part,hole,block);
 part_C12(part,hole,block);
 part_V2(part,hole,block);
 part_C16(part,hole,block);
+part_D6(part,hole,block);
 part_P2(part,hole,block);
 part_J2(part,hole,block);
 part_C1(part,hole,block);
@@ -243,7 +249,7 @@ part_R4(part,hole,block);
 part_C2(part,hole,block);
 }
 
-parts_bottom=2;
+parts_bottom=3;
 module b(cx,cy,z,w,l,h){translate([cx-w/2,cy-l/2,z])cube([w,l,h]);}
 module m0(part=false,hole=false,block=false,height)
 { // RevK:C_0402 C_0402_1005Metric
@@ -386,7 +392,17 @@ if(part)
 }
 }
 
-module m11(part=false,hole=false,block=false,height,N=0)
+module m11(part=false,hole=false,block=false,height)
+{ // D6
+// SOD-123 Diode
+if(part)
+{
+	b(0,0,0,2.85,1.8,1.35); // part
+	b(0,0,0,4.2,1.2,0.7); // pads
+}
+}
+
+module m12(part=false,hole=false,block=false,height,N=0)
 { // J1
 // WAGO-2060-45x-998-404
 n=N%10; // 45x
