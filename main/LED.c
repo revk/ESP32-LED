@@ -588,15 +588,6 @@ app_callback (int client, const char *prefix, const char *target, const char *su
       b.hacheck = 1;
       hastatus = -1;
    }
-#if 0
-   if (onpower && onpower <= CONFIG_REVK_WEB_EXTRA_PAGES && suffix && !strcmp (suffix, "init") && *effect[onpower - 1])
-   {                            // Power on init
-      ESP_LOGD (TAG, "Power on effect %d (init)", onpower);
-      haon |= (1ULL << (onpower - 1));
-      b.hacheck = 1;
-      return NULL;
-   }
-#endif
    if (suffix && isdigit ((int) (uint8_t) * suffix))
    {                            // HA command or web button
       char val[20];
@@ -2055,7 +2046,10 @@ app_main ()
       int hhmm = t.tm_hour * 100 + t.tm_min;
       for (int p = 0; p < CONFIG_REVK_WEB_EXTRA_PAGES; p++)
          if (timed[p] && timed[p] == hhmm)
-            haon |= (1 << p);
+         {
+            haon |= (1ULL << p);
+            hastatus |= (1ULL << p);
+         }
       sleep (60 - (now % 60));
    }
    //hargb = -1;
