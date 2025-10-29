@@ -2049,6 +2049,7 @@ app_main ()
          {
             haon |= (1ULL << p);
             hastatus |= (1ULL << p);
+            b.hacheck = 1;
          }
       sleep (60 - (now % 60));
    }
