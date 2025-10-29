@@ -2047,7 +2047,7 @@ app_main ()
       uint64_t t = 0;
       for (int p = 0; p < CONFIG_REVK_WEB_EXTRA_PAGES; p++)
          if (timed[p] && timed[p] == hhmm)
-            t |= (1ULL < p);
+            t |= (1ULL << p);
       if (t)
       {
          haon |= t;
