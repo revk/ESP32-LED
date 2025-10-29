@@ -2,6 +2,7 @@
   "url": "https://ota.revk.uk/LEDX12-manifest.json",
   "chip": "ESP32S3MCN4R2",
   "setting":{
+	  "ledgpio1":1,
 	  "factorygpio":"",
 	  "blink":[21,21,21],
 	  "mic":{"data":33,"clock":48,"ws":35},
