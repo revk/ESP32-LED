@@ -2041,16 +2041,19 @@ app_main ()
          sleep (1);
          continue;
       }
-      struct tm t;
-      localtime_r (&now, &t);
-      int hhmm = t.tm_hour * 100 + t.tm_min;
+      struct tm tm;
+      localtime_r (&now, &tm);
+      int hhmm = tm.tm_hour * 100 + tm.tm_min;
+      uint64_t t = 0;
       for (int p = 0; p < CONFIG_REVK_WEB_EXTRA_PAGES; p++)
          if (timed[p] && timed[p] == hhmm)
-         {
-            haon |= (1ULL << p);
-            hastatus |= (1ULL << p);
-            b.hacheck = 1;
-         }
+            t |= (1ULL < p);
+      if (t)
+      {
+         haon |= t;
+         hastatus |= t;
+         b.hacheck = 1;
+      }
       sleep (60 - (now % 60));
    }
    //hargb = -1;
