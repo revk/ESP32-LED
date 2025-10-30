@@ -1,6 +1,6 @@
 // Generated case design for LEDX/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-20 12:52:49
+// Generated 2025-10-30 15:14:01
 // title:	PCB-USBX
 // rev:	1
 // comment:	www.me.uk
@@ -33,6 +33,13 @@ dateh=3.000000;
 datea=-34;
 date="2025-10-09";
 datef="OCRB";
+logox=0.000000;
+logoy=0.000000;
+logot=0.500000;
+logoh=10.000000;
+logoa=0;
+logo="A";
+logof="AJK";
 spacing=37.725000;
 pcbwidth=21.725000;
 function pcbwidth()=21.725000;
@@ -725,6 +732,15 @@ module datecode()
 	{
 		translate([datex,datey,-1])rotate(datea)scale([-1,1])linear_extrude(1)text(date,size=dateh,halign="center",valign="center",font=datef);
 		cylinder(d1=datet,d2=0,h=datet,$fn=6);
+	}
+}
+
+module logocode()
+{
+	minkowski()
+	{
+		translate([logox,logoy,-1])rotate(logoa)scale([-1,1])linear_extrude(1)text(logo,size=logoh,halign="center",valign="center",font=logof);
+		cylinder(d1=logot,d2=0,h=logot,$fn=6);
 	}
 }
 difference(){bottom();datecode();}

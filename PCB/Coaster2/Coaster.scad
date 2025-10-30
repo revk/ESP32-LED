@@ -1,6 +1,6 @@
 // Generated case design for Coaster2/Coaster.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-10-20 13:39:55
+// Generated 2025-10-30 15:18:02
 // title:	Coaster
 //
 
@@ -30,6 +30,13 @@ dateh=3.000000;
 datea=0;
 date="2025-09-17";
 datef="OCRB";
+logox=0.000000;
+logoy=0.000000;
+logot=0.500000;
+logoh=10.000000;
+logoa=0;
+logo="A";
+logof="AJK";
 spacing=116.000000;
 pcbwidth=100.000000;
 function pcbwidth()=100.000000;
@@ -2221,5 +2228,14 @@ module datecode()
 	{
 		translate([datex,datey,-1])rotate(datea)scale([-1,1])linear_extrude(1)text(date,size=dateh,halign="center",valign="center",font=datef);
 		cylinder(d1=datet,d2=0,h=datet,$fn=6);
+	}
+}
+
+module logocode()
+{
+	minkowski()
+	{
+		translate([logox,logoy,-1])rotate(logoa)scale([-1,1])linear_extrude(1)text(logo,size=logoh,halign="center",valign="center",font=logof);
+		cylinder(d1=logot,d2=0,h=logot,$fn=6);
 	}
 }
