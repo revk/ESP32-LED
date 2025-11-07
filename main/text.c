@@ -15,7 +15,7 @@ showtext (app_t *a, const char *data, uint8_t dokern)
       h = -a->height;
       flip = 1;
    }
-   uint32_t w = a->len / h;      // Width
+   uint32_t w = a->len / h;     // Width
    if (!w)
       return "No space";
    {
@@ -31,7 +31,7 @@ showtext (app_t *a, const char *data, uint8_t dokern)
    uint8_t l = a->fader;
    unsigned char k[8];
    memset (k, 0xFE, 8);         // Previous character - stretched
-   int32_t c = -(int) a->step / a->speed;   // Column, starts off left
+   int32_t c = -(int) a->step;  // Column, starts off left
    uint32_t pos = 0;
    while (c < w && *data)
    {
@@ -86,7 +86,7 @@ showtext (app_t *a, const char *data, uint8_t dokern)
       if (c <= 0 && pos == 1)
       {                         // First whole character off left - this is where to start next character
          a->stage++;
-         a->step = -c * a->speed;
+         a->step = -c;
       }
       for (int x = 0; x < 6; x++)
       {

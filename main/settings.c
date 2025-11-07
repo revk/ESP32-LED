@@ -59,7 +59,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_UNSIGNED,.name="delay",.comment="Delay time, default 1s",.len=5,.ptr=&delay,.size=sizeof(uint32_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="timed",.comment="Timed start if not 0000 (use limit to stop)",.len=5,.ptr=&timed,.size=sizeof(uint16_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.digits=4,.unit="MMHH"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="limit",.comment="Time limit, default none",.len=5,.ptr=&limit,.size=sizeof(uint32_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
- {.type=REVK_SETTINGS_UNSIGNED,.name="speed",.comment="Cycle time, default 1s",.len=5,.ptr=&speed,.size=sizeof(uint16_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=2,.unit="s"},
+ {.type=REVK_SETTINGS_UNSIGNED,.name="speed",.comment="Cycle time, default 1s",.len=5,.ptr=&speed,.size=sizeof(uint8_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="fadein",.comment="Fade in time, default 1s",.len=6,.ptr=&fadein,.size=sizeof(uint8_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="fadeout",.comment="Fade out time, default 1s",.len=7,.ptr=&fadeout,.size=sizeof(uint8_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
  {.type=REVK_SETTINGS_JSON,.name="config",.comment="Settings as JSON and effect specific settings",.len=6,.ptr=&config,.malloc=1,.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
@@ -206,7 +206,7 @@ int8_t height[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint32_t delay[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint16_t timed[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint32_t limit[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
-uint16_t speed[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
+uint8_t speed[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint8_t fadein[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 uint8_t fadeout[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
 char* config[CONFIG_REVK_WEB_EXTRA_PAGES]={0};
