@@ -6,7 +6,7 @@
 #include "chars.h"
 
 static const char *
-showtext (app_t * a, const char *data, uint8_t dokern)
+showtext (app_t *a, const char *data, uint8_t dokern)
 {
    uint8_t flip = 0;
    uint8_t h = a->height;
@@ -31,7 +31,7 @@ showtext (app_t * a, const char *data, uint8_t dokern)
    uint8_t l = a->fader;
    unsigned char k[8];
    memset (k, 0xFE, 8);         // Previous character - stretched
-   int c = -(int) a->step;      // Column, starts off left
+   int c = -(int) a->step / a->speed;   // Column, starts off left
    uint32_t pos = 0;
    while (c < w && *data)
    {
@@ -86,7 +86,7 @@ showtext (app_t * a, const char *data, uint8_t dokern)
       if (c <= 0 && pos == 1)
       {                         // First whole character off left - this is where to start next character
          a->stage++;
-         a->step = -c;
+         a->step = -c * a->speed;
       }
       for (int x = 0; x < 6; x++)
       {
@@ -118,7 +118,7 @@ showtext (app_t * a, const char *data, uint8_t dokern)
 }
 
 const char *
-apptime (app_t * a)
+apptime (app_t *a)
 {
    if (!a->cycle)
    {
@@ -134,7 +134,7 @@ apptime (app_t * a)
 }
 
 const char *
-apptext (app_t * a)
+apptext (app_t *a)
 {
    if (!a->cycle)
    {
@@ -147,7 +147,7 @@ apptext (app_t * a)
 }
 
 const char *
-appkern (app_t * a)
+appkern (app_t *a)
 {
    if (!a->cycle)
    {
