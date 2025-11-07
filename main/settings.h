@@ -241,7 +241,7 @@ extern int8_t height[CONFIG_REVK_WEB_EXTRA_PAGES];	// Text height
 extern uint32_t delay[CONFIG_REVK_WEB_EXTRA_PAGES];	// Delay time, default 1s
 extern uint16_t timed[CONFIG_REVK_WEB_EXTRA_PAGES];	// Timed start if not 0000 (use limit to stop)
 extern uint32_t limit[CONFIG_REVK_WEB_EXTRA_PAGES];	// Time limit, default none
-extern uint8_t speed[CONFIG_REVK_WEB_EXTRA_PAGES];	// Cycle time, default 1s
+extern uint16_t speed[CONFIG_REVK_WEB_EXTRA_PAGES];	// Cycle time, default 1s
 extern uint8_t fadein[CONFIG_REVK_WEB_EXTRA_PAGES];	// Fade in time, default 1s
 extern uint8_t fadeout[CONFIG_REVK_WEB_EXTRA_PAGES];	// Fade out time, default 1s
 extern char* config[CONFIG_REVK_WEB_EXTRA_PAGES];	// Settings as JSON and effect specific settings
@@ -517,7 +517,7 @@ enum {
 #define	REVK_SETTINGS_HAS_OCTET
 #define	delay_scale	10
 #define	limit_scale	10
-#define	speed_scale	10
+#define	speed_scale	100
 #define	fadein_scale	10
 #define	fadeout_scale	10
 typedef uint8_t revk_setting_bits_t[15];

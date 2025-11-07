@@ -1,30 +1,30 @@
 {
-  "url": "https://ota.revk.uk/LEDX12-WLED-manifest.json",
+  "url": "https://hiwtsi.uk/WLED/LEDX12-WLED-manifest.json",
   "start": "Ada",
   "wifi":{"ssid":"IoT", "pass":"security"},
   "app":"WLED",
   "flash": [
     {
       "filename": "WLED-ESP32S3-boot.bin",
-      "url": "https://ota.revk.uk/WLED-ESP32S3-boot.bin"
+      "url": "https://hiwtsi.uk/WLED/WLED-ESP32S3-boot.bin"
     },
     {
       "filename": "WLED-ESP32S3-pt.bin",
       "address": "8000",
-      "url": "https://ota.revk.uk/WLED-ESP32S3-pt.bin"
+      "url": "https://hiwtsi.uk/WLED/WLED-ESP32S3-pt.bin"
     },
     {
       "filename": "WLED-ESP32S3-data.bin",
       "address": "E000",
-      "url": "https://ota.revk.uk/WLED-ESP32S3-data.bin"
+      "url": "https://hiwtsi.uk/WLED/WLED-ESP32S3-data.bin"
     },
     {
       "filename": "LEDX12-WLED-spiffs.bin",
       "address": "310000",
-      "url": "https://ota.revk.uk/LEDX12-WLED-spiffs.bin"
+      "url": "https://hiwtsi.uk/WLED/LEDX12-WLED-spiffs.bin"
     },
     {
-      "url": "https://ota.revk.uk/WLED-ESP32-S3_4M_qspi.bin",
+      "url": "https://hiwtsi.uk/WLED/WLED-ESP32-S3_4M_qspi.bin",
       "filename": "WLED-ESP32-S3_4M_qspi.bin",
       "address": "10000"
     }
