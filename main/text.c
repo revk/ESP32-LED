@@ -15,7 +15,7 @@ showtext (app_t *a, const char *data, uint8_t dokern)
       h = -a->height;
       flip = 1;
    }
-   uint32_t w = a->len / h;     // Width
+   uint8_t w = a->len / h;      // Width
    if (!w)
       return "No space";
    {
@@ -31,7 +31,7 @@ showtext (app_t *a, const char *data, uint8_t dokern)
    uint8_t l = a->fader;
    unsigned char k[8];
    memset (k, 0xFE, 8);         // Previous character - stretched
-   int32_t c = -(int) a->step;  // Column, starts off left
+   int c = -(int) a->step;      // Column, starts off left
    uint32_t pos = 0;
    while (c < w && *data)
    {
