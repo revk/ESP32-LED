@@ -1,6 +1,6 @@
 // Generated case design for LEDX/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-11-01 10:07:14
+// Generated 2025-11-08 07:24:51
 // title:	PCB-USBX
 // rev:	1
 // comment:	www.me.uk
