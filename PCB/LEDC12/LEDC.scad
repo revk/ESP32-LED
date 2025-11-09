@@ -1,6 +1,6 @@
 // Generated case design for LEDC12/LED.kicad_pcb
 // By https://github.com/revk/PCBCase
-// Generated 2025-11-08 16:52:19
+// Generated 2025-11-09 11:00:33
 // title:	PCB-LEDC
 // rev:	1
 // company:	Adrian Kennard, Andrews & Arnold Ltd
