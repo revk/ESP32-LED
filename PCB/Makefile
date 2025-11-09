@@ -5,7 +5,7 @@ leds:	PCBCase/placeleds
 
 	#PCBCase/placeleds 5x9/5x9.kicad_pcb --cols=5 --rows=9 --fill=VCC --power-vias=0.8 --vias=0.8 --tracks
 
-	#PCBCase/placeleds 30x9/30x9.kicad_pcb --cols=30 --rows=9 --spacing=2.54 --fill=VCC --power-vias=0.8 --vias=0.8 --SMD1615 --zone-in=0 --zone-out=0 --tracks
+	PCBCase/placeleds 30x9/30x9.kicad_pcb --cols=30 --rows=9 --spacing=2.54 --fill=VCC --power-vias=0.8 --vias=0.8 --SMD1615 --zone-in=0 --zone-out=0 --tracks
 
 	#PCBCase/placeleds Gate/Gate.kicad_pcb -x100 -y100 -r49.25 --zone-in=1.75 --zone-out=1.25   --diode=1 --count=117 --vias=0.8 --power-vias=0.8 --angle=181.5384615 --fill=VCC --tracks
 	#PCBCase/placeleds Gate/Gate.kicad_pcb -x100 -y100 -d51.75 --zone-in=1.75 --zone-out=1.25 --diode=118 --count=117 --vias=0.8 --power-vias=0.8 --angle=181.5384615 --fill=VCC --tracks
