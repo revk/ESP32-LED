@@ -16,19 +16,21 @@ all:	main/settings.h
 	@cp build/partition_table/partition-table.bin $(PROJECT_NAME)$(SUFFIX)-partition-table.bin
 	@echo Done: build/$(PROJECT_NAME)$(SUFFIX).bin
 
-beta:  
+beta:	
 	-git pull
 	-git submodule update --recursive
 	-git commit -a
 	@make set
-	cp ${PROJECT_NAME}*.bin release/beta
-	git commit -a -m release/beta
+	cp $(PROJECT_NAME)*.bin release/beta
+	rsync -az release/beta/$(PROJECT_NAME)* ota.faikout.uk:/var/www/ota/beta/
+	git commit -a -m Beta
 	git push
 
 issue:	
 	-git pull
 	-git commit -a
 	cp -f release/beta/$(PROJECT_NAME)*.bin release
+	rsync -az release/$(PROJECT_NAME)* ota.faikout.uk:/var/www/ota/
 	git commit -a -m Release
 	git push
 
