@@ -746,7 +746,7 @@ send_ha_config (void)
       jo_close (j);
       jo_string (j, "name", hostname);
       jo_string (j, "sw", revk_version);
-      jo_string (j, "mdl", appname);
+      jo_string (j, "mdl", revk_app);
       jo_string (j, "mf", "RevK");
       jo_stringf (j, "cu", "http://%s.local/", hostname);
       jo_close (j);

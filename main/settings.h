@@ -254,7 +254,6 @@ extern char* hostname;	// Hostname[.local]<br>(used in DHCP and MQTT)
 #else
 extern char* hostname;	// Host name<br>(used in DHCP and MQTT)
 #endif
-extern char* appname;	// Application name
 extern char* otahost;	// OTA hostname
 extern uint8_t otadays;	// OTA auto load (days)
 extern uint16_t otastart;	// OTA check after startup (min seconds)
@@ -414,7 +413,6 @@ enum {
 #else
 #define REVK_SETTINGS_HOSTNAME
 #endif
-#define REVK_SETTINGS_APPNAME
 #define REVK_SETTINGS_OTAHOST
 #define REVK_SETTINGS_OTADAYS
 #define REVK_SETTINGS_OTASTART
