@@ -34,7 +34,7 @@ leds:	PCBCase/placeleds
 	#PCBCase/placeleds LED32/LED.kicad_pcb -x100 -y100 -d22.5 --diode=33 --count=24 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 	#PCBCase/placeleds LED32/LED.kicad_pcb -x100 -y100 -d28 --diode=57 --count=32 --fill=VCC --tracks --vias=0.8 --power-vias=0.8 --zone-in=1.375 --zone-out=1.375
 
-stl:    LED[CX]/LED[TBC].stl LEDR/LED[TBC].stl LED[CX]12/LED[TBC].stl Test/LED[TBC].stl Coaster2Base.stl Coaster2Top.stl
+stl:    LED[CXAR]/LED[TBC].stl LED[CX]12/LED[TBC].stl Test/LED[TBC].stl Coaster2Base.stl Coaster2Top.stl
 
 png:	$(patsubst %.kicad_pcb,%.png,$(wildcard */*.kicad_pcb))
 
@@ -63,19 +63,22 @@ Coaster2Base.stl: Coaster2Base.scad Coaster2.scad Coaster2/Coaster.scad
 	echo "Made $@"
 
 LEDC/LEDT.scad: LEDC/LED.kicad_pcb PCBCase/case
-	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --two-file
+	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --split-file
+
+LEDA/LEDT.scad: LEDA/LED.kicad_pcb PCBCase/case
+	PCBCase/case -o $@ $< --edge=2 --bottom=7 --top=7 --pcb=4 --case=3 --split-file --logo-x=-7 --date-angle=30 --date-height=2.5 --date-x=-7 
 
 LEDC12/LEDT.scad: LEDC12/LED.kicad_pcb PCBCase/case
-	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --two-file
+	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --split-file
 
 LEDR/LEDT.scad: LEDR/LED.kicad_pcb PCBCase/case
-	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --two-file
+	PCBCase/case -o $@ $< --edge=2 --bottom=2 --top=7 --pcb=2 --split-file
 
 LEDX/LEDT.scad: LEDX/LED.kicad_pcb PCBCase/case
-	PCBCase/case -o $@ $< --edge=2 --bottom=6 --top=4 --pcb=2 --two-file --date-angle=-34
+	PCBCase/case -o $@ $< --edge=2 --bottom=6 --top=4 --pcb=2 --split-file --date-angle=-34
 
 LEDX12/LEDT.scad: LEDX12/LED.kicad_pcb PCBCase/case
-	PCBCase/case -o $@ $< --edge=2 --bottom=6 --top=5.5 --pcb=2 --two-file --date-angle=-34
+	PCBCase/case -o $@ $< --edge=2 --bottom=6 --top=5.5 --pcb=2 --split-file --date-angle=-34
 
 Coaster2/Coaster.scad: Coaster2/Coaster.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --pcb=2 -n
@@ -84,7 +87,7 @@ Coaster3/Coaster.scad: Coaster3/Coaster.kicad_pcb PCBCase/case
 	PCBCase/case -o $@ $< --pcb=2 -n
 
 Test/LEDT.scad: Test/LED.kicad_pcb PCBCase/case
-	PCBCase/case -o $@ $< --bottom=2 --top=5 --two-file
+	PCBCase/case -o $@ $< --bottom=2 --top=5 --split-file
 
 %.png:	%.kicad_pcb PCBCase/clean PCBCase/render
 	PCBCase/render $<
