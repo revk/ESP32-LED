@@ -22,17 +22,17 @@ beta:
 	-git commit -a
 	@make set
 	cp $(PROJECT_NAME)*.bin release/beta
-	rsync -az release/beta/$(PROJECT_NAME)* ota.faikout.uk:/var/www/ota/beta/
 	git commit -a -m Beta
 	git push
+	rsync -az release/beta/$(PROJECT_NAME)* ota.faikout.uk:/var/www/ota/beta/
 
 issue:	
 	-git pull
 	-git commit -a
 	cp -f release/beta/$(PROJECT_NAME)*.bin release
-	rsync -az release/$(PROJECT_NAME)* ota.faikout.uk:/var/www/ota/
 	git commit -a -m Release
 	git push
+	rsync -az release/$(PROJECT_NAME)* ota.faikout.uk:/var/www/ota/
 
 image:
 	esptool.py -b 460800 read_flash 0 0x400000 s3.bin
