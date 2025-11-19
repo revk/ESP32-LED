@@ -13,7 +13,7 @@ showtext (app_t *a, const char *data, uint8_t dokern)
    int32_t h = textheight;
    if (!h)
       return "No height";
-   int32_t w = a->len / h;      // Width
+   int32_t w = (a->len + h - 1) / h;    // Width
    if (!w)
       return "No space";
    int s = (a->speed / 6 ? : 1);        // this is number of steps for each speed seconds. We want to go faster by the character width basis
