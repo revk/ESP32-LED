@@ -20,7 +20,6 @@ extern struct b_str
 	u16r(l,len,)	\
 	s16r(t,top,)	\
 	u8(b,bright,)	\
-	s8(h,height,)	\
 	u8d(f,fadein,)	\
 	u8d(f,fadeout,)	\
 	u32d(S,speed,)	\

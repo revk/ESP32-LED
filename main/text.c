@@ -8,18 +8,19 @@
 static const char *
 showtext (app_t *a, const char *data, uint8_t dokern)
 {
-   uint8_t flip = 0;
-   uint8_t h = a->height;
-   if (a->height < 0)
-   {
-      h = -a->height;
-      flip = 1;
-   }
-   uint8_t w = a->len / h;      // Width
+   // stage is character position - number of characters to skip
+   // pos is pixel position - number of pixels off left to skip
+   int32_t h = textheight;
+   if (!h)
+      return "No height";
+   int32_t w = a->len / h;      // Width
    if (!w)
       return "No space";
+   int s = (a->speed / 6 ? : 1);        // this is number of steps for each speed seconds. We want to go faster by the character width basis
+   // h is pixels high
+   // w is pixels wide
    {
-      int c = a->stage;         // Whole characters
+      int c = a->stage;         // Whole characters to skip for where we are (stage)
       while (c && *data)
       {
          c--;
@@ -31,18 +32,16 @@ showtext (app_t *a, const char *data, uint8_t dokern)
    uint8_t l = a->fader;
    unsigned char k[8];
    memset (k, 0xFE, 8);         // Previous character - stretched
-   int c = -(int) a->step;      // Column, starts off left
-   uint32_t pos = 0;
+   int32_t c = -(int) a->step / s;      // Column, starts off left
+   uint32_t pos = 0;            // character pos relative to this (stage) character
    while (c < w && *data)
    {
       char t[5],
        *o = t;
-      if (*data)
-      {
+      // Next (UTF-8) char
+      *o++ = *data++;
+      while (o < t + sizeof (t) - 1 && (*data & 0xC0) == 0x80)
          *o++ = *data++;
-         while (o < t + sizeof (t) - 1 && (*data & 0xC0) == 0x80)
-            *o++ = *data++;
-      }
       *o = 0;
       int i = 0;
       if (*t)
@@ -56,7 +55,7 @@ showtext (app_t *a, const char *data, uint8_t dokern)
          continue;
       }
       if (dokern)
-      {
+      {                         // Kerning calc
          unsigned char k2[8];   // This character, stretched
          if (!i)
             memset (k2, 0xFC, 8);       // Space 4 pixels
@@ -83,22 +82,22 @@ showtext (app_t *a, const char *data, uint8_t dokern)
             }
          memcpy (k, k2, 8);
       }
-      if (c <= 0 && pos == 1)
-      {                         // First whole character off left - this is where to start next character
+      if (!c && pos == 1)
+      {                         // First whole character is off left - this is where to start next character
          a->stage++;
-         a->step = -c;
+         a->step = 0;
       }
       for (int x = 0; x < 6; x++)
       {
          if (c >= 0 && c < w)
          {
-            if ((c ^ flip) & 1)
+            if (textsnake ? ((c ^ textflip) & 1) : !textflip)
                for (int y = 0; y < h; y++)
-               {
+               {                // Up
                   if (y < 8 && chars[i].b[y] & (0x80 >> x))
                      setl (a->start + c * h + y, a, c * h + y, a->len, l);
             } else
-            {
+            {                   // Down
                for (int y = 0; y < h; y++)
                   if (y < 8 && chars[i].b[y] & (0x80 >> x))
                      setl (a->start + c * h + h - 1 - y, a, c * h + y, a->len, l);
@@ -120,16 +119,21 @@ showtext (app_t *a, const char *data, uint8_t dokern)
 const char *
 apptime (app_t *a)
 {
+   if (!textheight)
+      return "No height";
    if (!a->cycle)
    {
       if (!a->colourset)
          setcolour (a, "cycling");
    }
-   char temp[6];
+   char temp[10];
    time_t now = time (0);
    struct tm tm;
    localtime_r (&now, &tm);
-   snprintf (temp, sizeof (temp), "%02d:%02d", tm.tm_hour, tm.tm_min);
+   if (a->len / textheight > 40)
+      snprintf (temp, sizeof (temp), "%02d:%02d:%02d", tm.tm_hour, tm.tm_min, tm.tm_sec);
+   else
+      snprintf (temp, sizeof (temp), "%02d:%02d", tm.tm_hour, tm.tm_min);
    return showtext (a, temp, 1);
 }
 

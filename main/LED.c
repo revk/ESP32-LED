@@ -170,7 +170,7 @@ const char *haeffect[CONFIG_REVK_WEB_EXTRA_PAGES] = { 0 };      // Selected effe
 static SemaphoreHandle_t app_mutex = NULL;
 
 uint8_t
-setcolour (app_t * a, const char *colour)
+setcolour (app_t *a, const char *colour)
 {
    uint8_t colourset = 0;
    uint8_t R = 0;
@@ -250,7 +250,7 @@ setcolour (app_t * a, const char *colour)
 }
 
 void
-appzap (app_t * a)
+appzap (app_t *a)
 {                               // Assumes mutex, Delete an app
    free (a->data);
    free (a->config);
@@ -392,8 +392,6 @@ addapp (int index, int preset, const char *name, jo_t j)
             a->fadeout = fadeout_scale; //  1.0 s
          if (!a->bright)
             a->bright = 255;
-         if (!a->height)
-            a->height = 8;      //  Adjust for scale and cps
          a->delay = cps * a->delay / delay_scale;
          a->limit = cps * a->limit / limit_scale;
          a->speed = cps * a->speed / speed_scale ? : 1;
@@ -1105,7 +1103,7 @@ revk_state_extra (jo_t j)
 }
 
 void
-revk_web_extra (httpd_req_t * req, int page)
+revk_web_extra (httpd_req_t *req, int page)
 {
    if (!page)
    {
@@ -1161,7 +1159,7 @@ revk_web_extra (httpd_req_t * req, int page)
 }
 
 static void
-register_uri (const httpd_uri_t * uri_struct)
+register_uri (const httpd_uri_t *uri_struct)
 {
    esp_err_t res = httpd_register_uri_handler (webserver, uri_struct);
    if (res != ESP_OK)
@@ -1171,7 +1169,7 @@ register_uri (const httpd_uri_t * uri_struct)
 }
 
 static void
-register_ws_uri (const char *uri, esp_err_t (*handler) (httpd_req_t * r))
+register_ws_uri (const char *uri, esp_err_t (*handler) (httpd_req_t *r))
 {
    httpd_uri_t uri_struct = {
       .uri = uri,
@@ -1183,7 +1181,7 @@ register_ws_uri (const char *uri, esp_err_t (*handler) (httpd_req_t * r))
 }
 
 static void
-register_get_uri (const char *uri, esp_err_t (*handler) (httpd_req_t * r))
+register_get_uri (const char *uri, esp_err_t (*handler) (httpd_req_t *r))
 {
    httpd_uri_t uri_struct = {
       .uri = uri,
@@ -1194,7 +1192,7 @@ register_get_uri (const char *uri, esp_err_t (*handler) (httpd_req_t * r))
 }
 
 static esp_err_t
-web_status (httpd_req_t * req)
+web_status (httpd_req_t *req)
 {                               // Web socket status report
    int fd = httpd_req_to_sockfd (req);
    void wsend (jo_t * jp)
@@ -1328,7 +1326,7 @@ web_status (httpd_req_t * req)
 }
 
 static esp_err_t
-web_root (httpd_req_t * req)
+web_root (httpd_req_t *req)
 {
    if (revk_link_down () && webcontrol >= 2)
       return revk_web_settings (req);   // Direct to web set up
@@ -1850,7 +1848,7 @@ micband2hz (uint8_t b)
 #undef	N
 
 void
-bargraph (app_t * a, pixel_t * pixel, int v, int total, uint8_t fade)
+bargraph (app_t *a, pixel_t *pixel, int v, int total, uint8_t fade)
 {
    if (!total)
       total = 1;
@@ -1948,7 +1946,7 @@ dokey (uint32_t key)
 }
 
 static void
-ir_callback (uint8_t coding, uint16_t lead0, uint16_t lead1, uint8_t len, uint8_t * data)
+ir_callback (uint8_t coding, uint16_t lead0, uint16_t lead1, uint8_t len, uint8_t *data)
 {                               // Handle generic IR https://www.amazon.co.uk/dp/B07DJ58XGC
    //ESP_LOGE (TAG, "IR CB %d %d %d %d", coding, lead0, lead1, len);
    static uint32_t key = 0;

@@ -96,6 +96,8 @@ enum {
  REVK_SETTINGS_BITFIELD_micright,
  REVK_SETTINGS_BITFIELD_haenable,
  REVK_SETTINGS_BITFIELD_stack,
+ REVK_SETTINGS_BITFIELD_textflip,
+ REVK_SETTINGS_BITFIELD_textsnake,
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #endif
 #ifdef  CONFIG_MDNS_MAX_INTERFACES
@@ -151,6 +153,8 @@ struct revk_settings_bits_s {
  uint8_t micright:1;	// I2S Mic use right channel
  uint8_t haenable:1;	// Enable Home Assistant
  uint8_t stack:1;	// Presets have priority, in order, else most recent on top
+ uint8_t textflip:1;	// Flip up/down
+ uint8_t textsnake:1;	// Assume snake order
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #endif
 #ifdef  CONFIG_MDNS_MAX_INTERFACES
@@ -237,7 +241,6 @@ extern uint16_t start[CONFIG_REVK_WEB_EXTRA_PAGES];	// First LED (default 1)
 extern int16_t top[CONFIG_REVK_WEB_EXTRA_PAGES];	// Top LED (default to first)
 extern uint16_t len[CONFIG_REVK_WEB_EXTRA_PAGES];	// Number of LEDs (default to end)
 extern uint8_t bright[CONFIG_REVK_WEB_EXTRA_PAGES];	// Brightness
-extern int8_t height[CONFIG_REVK_WEB_EXTRA_PAGES];	// Text height
 extern uint32_t delay[CONFIG_REVK_WEB_EXTRA_PAGES];	// Delay time, default 1s
 extern uint16_t timed[CONFIG_REVK_WEB_EXTRA_PAGES];	// Timed start if not 0000 (use limit to stop)
 extern uint32_t limit[CONFIG_REVK_WEB_EXTRA_PAGES];	// Time limit, default none
@@ -246,6 +249,9 @@ extern uint8_t fadein[CONFIG_REVK_WEB_EXTRA_PAGES];	// Fade in time, default 1s
 extern uint8_t fadeout[CONFIG_REVK_WEB_EXTRA_PAGES];	// Fade out time, default 1s
 extern char* config[CONFIG_REVK_WEB_EXTRA_PAGES];	// Settings as JSON and effect specific settings
 #define	stack	revk_settings_bits.stack
+extern uint8_t textheight;	// Default height of any text blocks
+#define	textflip	revk_settings_bits.textflip
+#define	textsnake	revk_settings_bits.textsnake
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 extern char* password;	// Settings password<br>(not sent securely so use with care)
 #endif
@@ -396,7 +402,6 @@ enum {
 #define REVK_SETTINGS_TOP
 #define REVK_SETTINGS_LEN
 #define REVK_SETTINGS_BRIGHT
-#define REVK_SETTINGS_HEIGHT
 #define REVK_SETTINGS_DELAY
 #define REVK_SETTINGS_TIMED
 #define REVK_SETTINGS_LIMIT
@@ -405,6 +410,9 @@ enum {
 #define REVK_SETTINGS_FADEOUT
 #define REVK_SETTINGS_CONFIG
 #define REVK_SETTINGS_STACK
+#define REVK_SETTINGS_TEXTHEIGHT
+#define REVK_SETTINGS_TEXTFLIP
+#define REVK_SETTINGS_TEXTSNAKE
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #define REVK_SETTINGS_PASSWORD
 #endif
@@ -519,5 +527,5 @@ enum {
 #define	fadein_scale	10
 #define	fadeout_scale	10
 typedef uint8_t revk_setting_bits_t[15];
-typedef uint8_t revk_setting_group_t[2];
+typedef uint8_t revk_setting_group_t[3];
 extern const char revk_settings_secret[];
