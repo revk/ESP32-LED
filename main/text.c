@@ -59,6 +59,8 @@ showtext (app_t *a, const char *data, uint8_t dokern)
          unsigned char k2[8];   // This character, stretched
          if (!i)
             memset (k2, 0xFC, 8);       // Space 4 pixels
+         else if (dokern == 2)
+            memset (k2, strchr (".:|", *t) ? 0x78 : 0xFE, 8);   // Thin or full
          else
          {
             unsigned char k3[8];
@@ -134,7 +136,10 @@ apptime (app_t *a)
       snprintf (temp, sizeof (temp), "%02d:%02d:%02d", tm.tm_hour, tm.tm_min, tm.tm_sec);
    else
       snprintf (temp, sizeof (temp), "%02d:%02d", tm.tm_hour, tm.tm_min);
-   return showtext (a, temp, 1);
+   for (char *p = temp; *p; p++)
+      if (*p == '0')
+         *p = 'O';              // nicer for a clock - later we must add choice of zeros as an option
+   return showtext (a, temp, 2);
 }
 
 const char *
