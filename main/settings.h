@@ -93,6 +93,7 @@ enum {
  REVK_SETTINGS_BITFIELD_ir4x11,
  REVK_SETTINGS_BITFIELD_ir4x6,
  REVK_SETTINGS_BITFIELD_irha,
+ REVK_SETTINGS_BITFIELD_usegamma,
  REVK_SETTINGS_BITFIELD_micright,
  REVK_SETTINGS_BITFIELD_haenable,
  REVK_SETTINGS_BITFIELD_stack,
@@ -150,6 +151,7 @@ struct revk_settings_bits_s {
  uint8_t ir4x11:1;	// 4x11 IR colour/LED remote
  uint8_t ir4x6:1;	// 4x6 IR colour/LED remote
  uint8_t irha:1;	// Announce keys to HA config
+ uint8_t usegamma:1;	// Use gamme
  uint8_t micright:1;	// I2S Mic use right channel
  uint8_t haenable:1;	// Enable Home Assistant
  uint8_t stack:1;	// Presets have priority, in order, else most recent on top
@@ -219,6 +221,7 @@ extern uint8_t maxr;	// Max RGB Red
 extern uint8_t maxg;	// Max RGB Green
 extern uint8_t maxb;	// Max RGB Blue
 extern uint8_t maxw;	// Max RGBW White
+#define	usegamma	revk_settings_bits.usegamma
 extern uint8_t webcontrol;	// Web controls
 extern revk_gpio_t lsscl;	// Colour sensor SCL
 extern revk_gpio_t lssda;	// Colour sensor SDA
@@ -382,6 +385,7 @@ enum {
 #define REVK_SETTINGS_MAXG
 #define REVK_SETTINGS_MAXB
 #define REVK_SETTINGS_MAXW
+#define REVK_SETTINGS_USEGAMMA
 #define REVK_SETTINGS_WEBCONTROL
 #define REVK_SETTINGS_LSSCL
 #define REVK_SETTINGS_LSSDA
@@ -530,6 +534,6 @@ enum {
 #define	speed_scale	10
 #define	fadein_scale	10
 #define	fadeout_scale	10
-typedef uint8_t revk_setting_bits_t[15];
+typedef uint8_t revk_setting_bits_t[16];
 typedef uint8_t revk_setting_group_t[3];
 extern const char revk_settings_secret[];

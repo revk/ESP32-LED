@@ -23,10 +23,11 @@ bit	ir.ha						// Announce keys to HA config
 
 gpio	blink		"40,40,40"	.array=3		// Status LEDs, R, G, B (all the same for WS2812)
 
-u8	max.r		255	.unit="/255"		// Max RGB Red
-u8	max.g		255	.unit="/255"		// Max RGB Green
-u8	max.b		255	.unit="/255"		// Max RGB Blue
+u8	max.r		255	.live .unit="/255"	// Max RGB Red
+u8	max.g		255	.live .unit="/255"	// Max RGB Green
+u8	max.b		255	.live .unit="/255"	// Max RGB Blue
 u8	max.w		255				// Max RGBW White
+bit	usegamma	1	.live			// Use gamme
 
 
 u8	webcontrol	2				// Web controls

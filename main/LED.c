@@ -1050,30 +1050,60 @@ led_task (void *x)
             if (strip[s])
             {
                int n = ledmax ? ledcount[s] : 4;
-               if (b.rgbw)
+               if (usegamma)
                {
-                  if (typeisrgbw (ledtype[s]))
-                     for (unsigned int i = 0; i < n; i++)
-                        led_strip_set_pixel_rgbw (strip[s], i + (s ? 0 : led_status),   //
-                                                  gamma8[(unsigned int) maxr * R[i] / 255],     //
-                                                  gamma8[(unsigned int) maxg * G[i] / 255],     //
-                                                  gamma8[(unsigned int) maxb * B[i] / 255],     //
-                                                  gamma8[(unsigned int) maxw * W[i] / 255]);
-                  else
-                     for (unsigned int i = 0; i < n; i++)
+                  if (b.rgbw)
+                  {
+                     if (typeisrgbw (ledtype[s]))
+                        for (unsigned int i = 0; i < n; i++)
+                           led_strip_set_pixel_rgbw (strip[s], i + (s ? 0 : led_status),        //
+                                                     gamma8[(unsigned int) maxr * R[i] / 255],  //
+                                                     gamma8[(unsigned int) maxg * G[i] / 255],  //
+                                                     gamma8[(unsigned int) maxb * B[i] / 255],  //
+                                                     gamma8[(unsigned int) maxw * W[i] / 255]);
+                     else
+                        for (unsigned int i = 0; i < n; i++)
 #define max(a,b)	((a)>(b)?(a):(b))
-                        led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),        //
-                                             gamma8[(unsigned int) maxr * max (R[i], W[i]) / 255],      //
-                                             gamma8[(unsigned int) maxg * max (G[i], W[i]) / 255],      //
-                                             gamma8[(unsigned int) maxb * max (B[i], W[i]) / 255]);
+                           led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),     //
+                                                gamma8[(unsigned int) maxr * max (R[i], W[i]) / 255],   //
+                                                gamma8[(unsigned int) maxg * max (G[i], W[i]) / 255],   //
+                                                gamma8[(unsigned int) maxb * max (B[i], W[i]) / 255]);
 #undef max
+                  } else
+                  {
+                     for (unsigned int i = 0; i < n; i++)
+                        led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),        //
+                                             gamma8[(unsigned int) maxr * R[i] / 255],  //
+                                             gamma8[(unsigned int) maxg * G[i] / 255],  //
+                                             gamma8[(unsigned int) maxb * B[i] / 255]);
+                  }
                } else
                {
-                  for (unsigned int i = 0; i < n; i++)
-                     led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),   //
-                                          gamma8[(unsigned int) maxr * R[i] / 255],     //
-                                          gamma8[(unsigned int) maxg * G[i] / 255],     //
-                                          gamma8[(unsigned int) maxb * B[i] / 255]);
+                  if (b.rgbw)
+                  {
+                     if (typeisrgbw (ledtype[s]))
+                        for (unsigned int i = 0; i < n; i++)
+                           led_strip_set_pixel_rgbw (strip[s], i + (s ? 0 : led_status),        //
+                                                     (unsigned int) maxr * R[i] / 255,  //
+                                                     (unsigned int) maxg * G[i] / 255,  //
+                                                     (unsigned int) maxb * B[i] / 255,  //
+                                                     (unsigned int) maxw * W[i] / 255);
+                     else
+                        for (unsigned int i = 0; i < n; i++)
+#define max(a,b)	((a)>(b)?(a):(b))
+                           led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),     //
+                                                (unsigned int) maxr * max (R[i], W[i]) / 255,   //
+                                                (unsigned int) maxg * max (G[i], W[i]) / 255,   //
+                                                (unsigned int) maxb * max (B[i], W[i]) / 255);
+#undef max
+                  } else
+                  {
+                     for (unsigned int i = 0; i < n; i++)
+                        led_strip_set_pixel (strip[s], i + (s ? 0 : led_status),        //
+                                             (unsigned int) maxr * R[i] / 255,  //
+                                             (unsigned int) maxg * G[i] / 255,  //
+                                             (unsigned int) maxb * B[i] / 255);
+                  }
                }
                R += ledcount[s];
                G += ledcount[s];
