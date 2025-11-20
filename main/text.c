@@ -50,23 +50,25 @@ showtext (app_t *a, const char *data, uint8_t dokern)
       {                         // pack to smaller
          int y = CHARH - 1;
          int p = CHARH - h;
-         while (y)
-         {
-            if (!b[y])
-            {                   // Blank at end
-               p--;
-               y--;
-               continue;
-            }
-            if (b[y - 1] == b[y])
-            {                   // Packable
-               p--;
-               y--;
-               memmove (b + y, b + y + 1, CHARH - y - 1);
-               b[CHARH - 1] = 0;
-               continue;
-            }
+         while (y && p && !b[y])
+         {                      // Blank at end
+            p--;
             y--;
+         }
+         while (y && p)
+         {                      // Pack duplicates until in space if possible
+            y--;
+            if (b[y] != b[y + 1])
+               continue;
+            p--;
+            memmove (b + y, b + y + 1, CHARH - y - 1);
+            b[CHARH - 1] = 0;
+         }
+         while (p && !b[0])
+         {                      // Blank at top
+            p--;
+            memmove (b, b + 1, CHARH - 1);
+            b[CHARH - 1] = 0;
          }
       }
       uint8_t offset = 0;       // left offset
@@ -152,7 +154,7 @@ apptime (app_t *a)
    time_t now = time (0);
    struct tm tm;
    localtime_r (&now, &tm);
-   if (a->len / textheight > 40)
+   if (a->len / gridheight > 40)
       snprintf (temp, sizeof (temp), "%02d:%02d:%02d", tm.tm_hour, tm.tm_min, tm.tm_sec);
    else
       snprintf (temp, sizeof (temp), "%02d:%02d", tm.tm_hour, tm.tm_min);
