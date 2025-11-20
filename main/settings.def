@@ -62,6 +62,8 @@ u8	fadeout		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 .decimal=1 .unit=
 json	config		.array=CONFIG_REVK_WEB_EXTRA_PAGES .live=1 .hide=1 		// Settings as JSON and effect specific settings
 bit	stack		1 .live=1 .hide=1			// Presets have priority, in order, else most recent on top
 
-u8	text.height	8 .live=1 .unit="pixels"		// Default height of any text blocks
-bit	text.flip	.live=1					// Flip up/down
-bit	text.snake	.live=1					// Assume snake order
+u8	text.height	0 .live=1 .unit="pixels"		// text heigh (default grid height)
+u8	grid.height	8 .live=1 .unit="pixels"		// grid height
+u8	grid.width	8 .live=1 .unit="pixels"		// grid width before repeat grids
+bit	grid.flip	.live=1					// grid swap up/down
+bit	grid.snake	.live=1					// grid swap each column

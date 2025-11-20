@@ -96,8 +96,8 @@ enum {
  REVK_SETTINGS_BITFIELD_micright,
  REVK_SETTINGS_BITFIELD_haenable,
  REVK_SETTINGS_BITFIELD_stack,
- REVK_SETTINGS_BITFIELD_textflip,
- REVK_SETTINGS_BITFIELD_textsnake,
+ REVK_SETTINGS_BITFIELD_gridflip,
+ REVK_SETTINGS_BITFIELD_gridsnake,
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #endif
 #ifdef  CONFIG_MDNS_MAX_INTERFACES
@@ -153,8 +153,8 @@ struct revk_settings_bits_s {
  uint8_t micright:1;	// I2S Mic use right channel
  uint8_t haenable:1;	// Enable Home Assistant
  uint8_t stack:1;	// Presets have priority, in order, else most recent on top
- uint8_t textflip:1;	// Flip up/down
- uint8_t textsnake:1;	// Assume snake order
+ uint8_t gridflip:1;	// grid swap up/down
+ uint8_t gridsnake:1;	// grid swap each column
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #endif
 #ifdef  CONFIG_MDNS_MAX_INTERFACES
@@ -249,9 +249,11 @@ extern uint8_t fadein[CONFIG_REVK_WEB_EXTRA_PAGES];	// Fade in time, default 1s
 extern uint8_t fadeout[CONFIG_REVK_WEB_EXTRA_PAGES];	// Fade out time, default 1s
 extern char* config[CONFIG_REVK_WEB_EXTRA_PAGES];	// Settings as JSON and effect specific settings
 #define	stack	revk_settings_bits.stack
-extern uint8_t textheight;	// Default height of any text blocks
-#define	textflip	revk_settings_bits.textflip
-#define	textsnake	revk_settings_bits.textsnake
+extern uint8_t textheight;	// text heigh (default grid height)
+extern uint8_t gridheight;	// grid height
+extern uint8_t gridwidth;	// grid width before repeat grids
+#define	gridflip	revk_settings_bits.gridflip
+#define	gridsnake	revk_settings_bits.gridsnake
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 extern char* password;	// Settings password<br>(not sent securely so use with care)
 #endif
@@ -411,8 +413,10 @@ enum {
 #define REVK_SETTINGS_CONFIG
 #define REVK_SETTINGS_STACK
 #define REVK_SETTINGS_TEXTHEIGHT
-#define REVK_SETTINGS_TEXTFLIP
-#define REVK_SETTINGS_TEXTSNAKE
+#define REVK_SETTINGS_GRIDHEIGHT
+#define REVK_SETTINGS_GRIDWIDTH
+#define REVK_SETTINGS_GRIDFLIP
+#define REVK_SETTINGS_GRIDSNAKE
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #define REVK_SETTINGS_PASSWORD
 #endif
