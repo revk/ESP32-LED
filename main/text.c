@@ -120,12 +120,12 @@ showtext (app_t *a, const char *data, uint8_t dokern)
                for (int y = 0; y < h; y++)
                {                // Up
                   if (y < CHARH && b[y] & (0x80 >> x))
-                     setl (a->start + c * gridheight + y, a, c * gridheight + y, a->len, l);
+                     setl (a->start + c * gridheight + y, a, c, w, l);
             } else
             {                   // Down
                for (int y = 0; y < h; y++)
                   if (y < CHARH && b[y] & (0x80 >> x))
-                     setl (a->start + c * gridheight + gridheight - 1 - y, a, c * gridheight + y, a->len, l);
+                     setl (a->start + c * gridheight + gridheight - 1 - y, a, c, w, l);
             }
          }
          c++;
