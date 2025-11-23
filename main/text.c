@@ -131,7 +131,7 @@ showtext (app_t *a, const char *data, uint8_t dokern)
          c++;
       }
    }
-   if (c <= w && !*d)
+   if (c <= w + h && !*d)
    {                            // Back to start
       a->stage = 0;
       a->step = 0;
