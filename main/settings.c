@@ -13,7 +13,11 @@ revk_settings_t const revk_settings[]={
 #define	STRIPS	3
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledgpio",.comment="GPIOs for LED string",.group=1,.len=7,.dot=3,.def="4",.ptr=&ledgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS,.old="rgb"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="ledcount",.comment="How many LEDs in string",.group=1,.len=8,.dot=3,.ptr=&ledcount,.size=sizeof(uint16_t),.array=STRIPS,.old="leds"},
+#ifdef	CONFIG_REVK_LED
  {.type=REVK_SETTINGS_UNSIGNED,.isenum=1,.name="ledtype",.comment="Type of LED string",.group=1,.len=7,.dot=3,.ptr=&ledtype,.size=sizeof(uint8_t),.enums=REVK_SETTINGS_LEDTYPE_ENUMS,.array=STRIPS},
+#else
+ {.type=REVK_SETTINGS_UNSIGNED,.isenum=1,.name="ledtype",.comment="Type of LED string",.group=1,.len=7,.dot=3,.ptr=&ledtype,.size=sizeof(uint8_t),.enums=REVK_SETTINGS_LEDTYPE_ENUMS,.array=STRIPS},
+#endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
  {.type=REVK_SETTINGS_UNSIGNED,.name="cps",.comment="Change per second",.len=3,.def="25",.ptr=&cps,.size=sizeof(uint8_t),.unit="/s"},
 #else
@@ -64,7 +68,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_UNSIGNED,.name="fadeout",.comment="Fade out time, default 1s",.len=7,.ptr=&fadeout,.size=sizeof(uint8_t),.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1,.decimal=1,.unit="s"},
  {.type=REVK_SETTINGS_JSON,.name="config",.comment="Settings as JSON and effect specific settings",.len=6,.ptr=&config,.malloc=1,.array=CONFIG_REVK_WEB_EXTRA_PAGES,.live=1,.hide=1},
  {.type=REVK_SETTINGS_BIT,.name="stack",.comment="Presets have priority, in order, else most recent on top",.len=5,.def="1",.bit=REVK_SETTINGS_BITFIELD_stack,.live=1,.hide=1},
- {.type=REVK_SETTINGS_UNSIGNED,.name="textheight",.comment="text heigh (default grid height)",.group=8,.len=10,.dot=4,.def="0",.ptr=&textheight,.size=sizeof(uint8_t),.live=1,.unit="pixels"},
+ {.type=REVK_SETTINGS_UNSIGNED,.name="textheight",.comment="text height (default grid height)",.group=8,.len=10,.dot=4,.def="0",.ptr=&textheight,.size=sizeof(uint8_t),.live=1,.unit="pixels"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="gridheight",.comment="grid height",.group=9,.len=10,.dot=4,.def="8",.ptr=&gridheight,.size=sizeof(uint8_t),.live=1,.unit="pixels"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="gridwidth",.comment="grid width before repeat grids",.group=9,.len=9,.dot=4,.def="8",.ptr=&gridwidth,.size=sizeof(uint8_t),.live=1,.unit="pixels"},
  {.type=REVK_SETTINGS_BIT,.name="gridflip",.comment="grid swap up/down",.group=9,.len=8,.dot=4,.bit=REVK_SETTINGS_BITFIELD_gridflip,.live=1},
@@ -110,6 +114,7 @@ revk_settings_t const revk_settings[]={
 #ifdef	CONFIG_REVK_BLINK_DEF
 #ifdef	CONFIG_REVK_BLINK_WS2812_DEF
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="WS2812 LED",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1},
+ {.type=REVK_SETTINGS_BIT,.name="ws2812rgb",.comment="Reverse green and red on WS2812 LED",.len=9,.def="0",.bit=REVK_SETTINGS_BITFIELD_ws2812rgb,.revk=1},
 #else
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (set all the same for WS2812 LED)",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
 #endif
@@ -170,8 +175,13 @@ revk_settings_t const revk_settings[]={
 #define	STRIPS	3
 revk_gpio_t ledgpio[STRIPS]={0};
 uint16_t ledcount[STRIPS]={0};
+#ifdef	CONFIG_REVK_LED
+uint8_t ledtype[STRIPS]={0};
+const char REVK_SETTINGS_LEDTYPE_ENUMS[]="WS2812 GRB,WS2812 GBR,WS2812 RGB,WS2812 RBG,WS2812 BGR,WS2812 BRG,WS2812 GRBW,WS2812 GBRW,WS2812 RGBW,WS2812 RBGW,WS2812 BGRW,WS2812 BRGW,SK6812 GRB,SK6812 GBR,SK6812 RGB,SK6812 RBG,SK6812 BGR,SK6812 BRG,SK6812 GRBW,SK6812 GBRW,SK6812 RGBW,SK6812 RBGW,SK6812 BGRW,SK6812 BRGW,XING GRB,XING GBR,XING RGB,XING RBG,XING BGR,XING BRG,XING GRBW,XING GBRW,XING RGBW,XING RBGW,XING BGRW,XING BRGW";
+#else
 uint8_t ledtype[STRIPS]={0};
 const char REVK_SETTINGS_LEDTYPE_ENUMS[]="WS2812 GRB,WS2812 GBR,WS2812 RGB,WS2812 RBG,WS2812 BGR,WS2812 BRG,WS2812 GRBW,WS2812 GBRW,WS2812 RGBW,WS2812 RBGW,WS2812 BGRW,WS2812 BRGW,SK6812 GRB,SK6812 GBR,SK6812 RGB,SK6812 RBG,SK6812 BGR,SK6812 BRG,SK6812 GRBW,SK6812 GBRW,SK6812 RGBW,SK6812 RBGW,SK6812 BGRW,SK6812 BRGW";
+#endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 uint8_t cps=0;
 #else
@@ -299,5 +309,41 @@ uint16_t meshwidth=0;
 uint16_t meshdepth=0;
 uint16_t meshmax=0;
 char* meshpass=NULL;
+#endif
+#define	STRIPS	3
+#ifdef	CONFIG_REVK_LED
+#else
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#else
+#endif
+#ifdef	CONFIG_REVK_SETTINGS_PASSWORD
+#endif
+#ifdef  CONFIG_MDNS_MAX_INTERFACES
+#else
+#endif
+#ifdef	CONFIG_REVK_WEB_BETA
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#else
+#endif
+#ifdef	CONFIG_REVK_BLINK_DEF
+#ifdef	CONFIG_REVK_BLINK_WS2812_DEF
+#else
+#endif
+#endif
+#ifdef  CONFIG_REVK_APMODE
+#ifdef	CONFIG_REVK_APCONFIG
+#endif
+#endif
+#ifdef  CONFIG_REVK_MQTT
+#endif
+#if     defined(CONFIG_REVK_WIFI) || defined(CONFIG_REVK_MESH)
+#endif
+#ifndef	CONFIG_REVK_MESH
+#endif
+#ifdef	CONFIG_REVK_MESH
 #endif
 const char revk_settings_secret[]="✶✶✶✶✶✶✶✶";

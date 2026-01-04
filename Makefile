@@ -24,7 +24,7 @@ beta:
 	cp $(PROJECT_NAME)*.bin release/beta
 	git commit -a -m Beta
 	git push
-	rsync -az release/beta/$(PROJECT_NAME)* ota.faikout.uk:/var/www/ota/beta/
+	rsync -az release/beta/$(PROJECT_NAME)* ota.revk.uk:/var/www/ota/beta/
 
 issue:	
 	-git pull
@@ -32,12 +32,12 @@ issue:
 	cp -f release/beta/$(PROJECT_NAME)*.bin release
 	git commit -a -m Release
 	git push
-	rsync -az release/$(PROJECT_NAME)* ota.faikout.uk:/var/www/ota/
+	rsync -az release/$(PROJECT_NAME)* ota.revk.uk:/var/www/ota/
 
 image:
 	esptool.py -b 460800 read_flash 0 0x400000 s3.bin
 
-set:	pico s3
+set:	s3
 
 main/settings.h:     components/ESP32-RevK/revk_settings main/settings.def components/ESP32-RevK/settings.def
 	components/ESP32-RevK/revk_settings $^

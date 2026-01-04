@@ -11,7 +11,6 @@ static const char TAG[] = "LED";
 #include <driver/i2c.h>
 #include <driver/i2s_pdm.h>
 #include <driver/i2s_std.h>
-#include "led_strip.h"
 #include "app.h"
 #include <esp_http_server.h>
 #include "fft.h"
@@ -26,7 +25,8 @@ static const char TAG[] = "LED";
 struct b_str b = { 0 };
 
 #define	typeisrgbw(x)	(((x)%12)/6)
-#define	typeissk6812(x)	((x)/12)
+#define	typeissk6812(x)	((x)/12==1)
+#define	typeisxing(x)	((x)/12==2)
 #define	typebase(x)	((x)%6)
 
 #define a(a,d)	extern const char* app##a(app_t*);
@@ -811,12 +811,30 @@ led_task (void *x)
       vTaskDelete (NULL);
       return;
    }
-   uint8_t led_status = (blink[0].num == ledgpio[0].num ? 1 : 0);
-   if (!led_status)
-      revk_blink_init ();       // Library blink
-   led_strip_handle_t strip[STRIPS] = { 0 };
    for (int s = 0; s < STRIPS; s++)
       ledmax += ledcount[s];
+#ifdef	CONFIG_REVK_LED
+   const uint8_t led_status=0;	// blink_init will make a single LED strip
+#else
+   uint8_t led_status = (blink[0].num == ledgpio[0].num ? 1 : 0);
+#endif
+   if (!led_status)
+      revk_blink_init ();       // Library blink
+#ifdef	CONFIG_REVK_LED
+   led_strip_t strip[STRIPS] = { 0 };
+   for (int s = 0; s < STRIPS; s++)
+      if (ledgpio[s].set && (ledcount[s] || !ledmax))
+      {
+         const char *e = led_strip (&strip[s], ledgpio[s].num,
+                                    ledgpio[s].invert,
+                                   typeissk6812(ledtype[s]) ? LED_SK6812 : typeisxing(ledtype[s])?LED_XINGLIGHT:LED_WS2812,
+                                    (ledcount[s] ? : 4) + (s ? 0 : led_status), typeisrgbw (ledtype[s]) ? 4 : 3,
+                                    ledtype[s] % 6);
+         if (e)
+            ESP_LOGE (TAG, "Fail %s", e);
+      }
+#else
+   led_strip_handle_t strip[STRIPS] = { 0 };
    for (int s = 0; s < STRIPS; s++)
       if (ledgpio[s].set && (ledcount[s] || !ledmax))
       {
@@ -865,6 +883,7 @@ led_task (void *x)
          if (strip[s])
             REVK_ERR_CHECK (led_strip_clear (strip[s]));
       }
+#endif
    ledr = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledr));
    ledg = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledg));
    ledb = mallocspi ((ledmax ? : STRIPS * 4) * sizeof (*ledb));
@@ -1052,6 +1071,14 @@ led_task (void *x)
                int n = ledmax ? ledcount[s] : 4;
                if (usegamma)
                {
+#ifdef	CONFIG_REVK_LED
+                  for (unsigned int i = 0; i < n; i++)
+                     led_set (strip[s], i + (s ? 0 : led_status),       //
+                              gamma8[(unsigned int) maxr * R[i] / 255], //
+                              gamma8[(unsigned int) maxg * G[i] / 255], //
+                              gamma8[(unsigned int) maxb * B[i] / 255], //
+                              W ? gamma8[(unsigned int) maxw * W[i] / 255] : 0);
+#else
                   if (b.rgbw)
                   {
                      if (typeisrgbw (ledtype[s]))
@@ -1077,8 +1104,17 @@ led_task (void *x)
                                              gamma8[(unsigned int) maxg * G[i] / 255],  //
                                              gamma8[(unsigned int) maxb * B[i] / 255]);
                   }
+#endif
                } else
                {
+#ifdef	CONFIG_REVK_LED
+                  for (unsigned int i = 0; i < n; i++)
+                     led_set (strip[s], i + (s ? 0 : led_status),       //
+                              (unsigned int) maxr * R[i] / 255, //
+                              (unsigned int) maxg * G[i] / 255, //
+                              (unsigned int) maxb * B[i] / 255, //
+                              W ? (unsigned int) maxw * W[i] / 255 : 0);
+#else
                   if (b.rgbw)
                   {
                      if (typeisrgbw (ledtype[s]))
@@ -1104,6 +1140,7 @@ led_task (void *x)
                                              (unsigned int) maxg * G[i] / 255,  //
                                              (unsigned int) maxb * B[i] / 255);
                   }
+#endif
                }
                R += ledcount[s];
                G += ledcount[s];
@@ -1112,15 +1149,21 @@ led_task (void *x)
                   W += ledcount[s];
                if (!s)
                {
+#ifndef  CONFIG_REVK_LED     
                   if (led_status)
                      revk_led (strip[s], 0, 255, revk_blinker ());
                   else
                      revk_blink_do ();  // Library blink
+#endif
                }
             }
+#ifdef  CONFIG_REVK_LED
+	 revk_blink_do();
+#else
          for (int s = 0; s < STRIPS; s++)
             if (strip[s])
                REVK_ERR_CHECK (led_strip_refresh (strip[s]));
+#endif
       }
    }
 }
@@ -2022,7 +2065,7 @@ app_main ()
    revk_start ();
    if (dark)
       revk_blink (0, 0, "K");
-   if (cps < 10)
+   if (!cps)
       cps = 10;                 // Safety for division
    if (micdata.set && micclock.set)
       revk_task ("i2s", mic_task, NULL, 8);

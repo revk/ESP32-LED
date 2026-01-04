@@ -41,6 +41,48 @@ struct revk_settings_s {
  uint8_t gpio:1;
  uint8_t isenum:1;
 };
+#define	STRIPS	3
+#ifdef	CONFIG_REVK_LED
+extern const char REVK_SETTINGS_LEDTYPE_ENUMS[];
+enum {
+REVK_SETTINGS_LEDTYPE_WS2812_GRB,
+REVK_SETTINGS_LEDTYPE_WS2812_GBR,
+REVK_SETTINGS_LEDTYPE_WS2812_RGB,
+REVK_SETTINGS_LEDTYPE_WS2812_RBG,
+REVK_SETTINGS_LEDTYPE_WS2812_BGR,
+REVK_SETTINGS_LEDTYPE_WS2812_BRG,
+REVK_SETTINGS_LEDTYPE_WS2812_GRBW,
+REVK_SETTINGS_LEDTYPE_WS2812_GBRW,
+REVK_SETTINGS_LEDTYPE_WS2812_RGBW,
+REVK_SETTINGS_LEDTYPE_WS2812_RBGW,
+REVK_SETTINGS_LEDTYPE_WS2812_BGRW,
+REVK_SETTINGS_LEDTYPE_WS2812_BRGW,
+REVK_SETTINGS_LEDTYPE_SK6812_GRB,
+REVK_SETTINGS_LEDTYPE_SK6812_GBR,
+REVK_SETTINGS_LEDTYPE_SK6812_RGB,
+REVK_SETTINGS_LEDTYPE_SK6812_RBG,
+REVK_SETTINGS_LEDTYPE_SK6812_BGR,
+REVK_SETTINGS_LEDTYPE_SK6812_BRG,
+REVK_SETTINGS_LEDTYPE_SK6812_GRBW,
+REVK_SETTINGS_LEDTYPE_SK6812_GBRW,
+REVK_SETTINGS_LEDTYPE_SK6812_RGBW,
+REVK_SETTINGS_LEDTYPE_SK6812_RBGW,
+REVK_SETTINGS_LEDTYPE_SK6812_BGRW,
+REVK_SETTINGS_LEDTYPE_SK6812_BRGW,
+REVK_SETTINGS_LEDTYPE_XING_GRB,
+REVK_SETTINGS_LEDTYPE_XING_GBR,
+REVK_SETTINGS_LEDTYPE_XING_RGB,
+REVK_SETTINGS_LEDTYPE_XING_RBG,
+REVK_SETTINGS_LEDTYPE_XING_BGR,
+REVK_SETTINGS_LEDTYPE_XING_BRG,
+REVK_SETTINGS_LEDTYPE_XING_GRBW,
+REVK_SETTINGS_LEDTYPE_XING_GBRW,
+REVK_SETTINGS_LEDTYPE_XING_RGBW,
+REVK_SETTINGS_LEDTYPE_XING_RBGW,
+REVK_SETTINGS_LEDTYPE_XING_BGRW,
+REVK_SETTINGS_LEDTYPE_XING_BRGW,
+};
+#else
 extern const char REVK_SETTINGS_LEDTYPE_ENUMS[];
 enum {
 REVK_SETTINGS_LEDTYPE_WS2812_GRB,
@@ -68,6 +110,39 @@ REVK_SETTINGS_LEDTYPE_SK6812_RBGW,
 REVK_SETTINGS_LEDTYPE_SK6812_BGRW,
 REVK_SETTINGS_LEDTYPE_SK6812_BRGW,
 };
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#else
+#endif
+#ifdef	CONFIG_REVK_SETTINGS_PASSWORD
+#endif
+#ifdef  CONFIG_MDNS_MAX_INTERFACES
+#else
+#endif
+#ifdef	CONFIG_REVK_WEB_BETA
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#endif
+#ifdef  CONFIG_IDF_TARGET_ESP32S3
+#else
+#endif
+#ifdef	CONFIG_REVK_BLINK_DEF
+#ifdef	CONFIG_REVK_BLINK_WS2812_DEF
+#else
+#endif
+#endif
+#ifdef  CONFIG_REVK_APMODE
+#ifdef	CONFIG_REVK_APCONFIG
+#endif
+#endif
+#ifdef  CONFIG_REVK_MQTT
+#endif
+#if     defined(CONFIG_REVK_WIFI) || defined(CONFIG_REVK_MESH)
+#endif
+#ifndef	CONFIG_REVK_MESH
+#endif
+#ifdef	CONFIG_REVK_MESH
+#endif
 typedef struct revk_settings_blob_s revk_settings_blob_t;
 struct revk_settings_blob_s {
  uint16_t len;
@@ -85,6 +160,9 @@ struct revk_gpio_s {
 };
 enum {
 #define	STRIPS	3
+#ifdef	CONFIG_REVK_LED
+#else
+#endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
 #endif
@@ -118,6 +196,7 @@ enum {
  REVK_SETTINGS_BITFIELD_prefixhost,
 #ifdef	CONFIG_REVK_BLINK_DEF
 #ifdef	CONFIG_REVK_BLINK_WS2812_DEF
+ REVK_SETTINGS_BITFIELD_ws2812rgb,
 #else
 #endif
 #endif
@@ -143,6 +222,9 @@ enum {
 typedef struct revk_settings_bits_s revk_settings_bits_t;
 struct revk_settings_bits_s {
 #define	STRIPS	3
+#ifdef	CONFIG_REVK_LED
+#else
+#endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
 #endif
@@ -176,6 +258,7 @@ struct revk_settings_bits_s {
  uint8_t prefixhost:1;	// MQTT use (appname/)hostname/topic instead of topic/(appname/)hostname
 #ifdef	CONFIG_REVK_BLINK_DEF
 #ifdef	CONFIG_REVK_BLINK_WS2812_DEF
+ uint8_t ws2812rgb:1;	// Reverse green and red on WS2812 LED
 #else
 #endif
 #endif
@@ -201,7 +284,11 @@ struct revk_settings_bits_s {
 #define	STRIPS	3
 extern revk_gpio_t ledgpio[STRIPS];	// GPIOs for LED string
 extern uint16_t ledcount[STRIPS];	// How many LEDs in string
+#ifdef	CONFIG_REVK_LED
 extern uint8_t ledtype[STRIPS];	// Type of LED string
+#else
+extern uint8_t ledtype[STRIPS];	// Type of LED string
+#endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 extern uint8_t cps;	// Change per second
 #else
@@ -252,7 +339,7 @@ extern uint8_t fadein[CONFIG_REVK_WEB_EXTRA_PAGES];	// Fade in time, default 1s
 extern uint8_t fadeout[CONFIG_REVK_WEB_EXTRA_PAGES];	// Fade out time, default 1s
 extern char* config[CONFIG_REVK_WEB_EXTRA_PAGES];	// Settings as JSON and effect specific settings
 #define	stack	revk_settings_bits.stack
-extern uint8_t textheight;	// text heigh (default grid height)
+extern uint8_t textheight;	// text height (default grid height)
 extern uint8_t gridheight;	// grid height
 extern uint8_t gridwidth;	// grid width before repeat grids
 #define	gridflip	revk_settings_bits.gridflip
@@ -298,6 +385,7 @@ extern char* topicha;	// MQTT Topic for homeassistant
 #ifdef	CONFIG_REVK_BLINK_DEF
 #ifdef	CONFIG_REVK_BLINK_WS2812_DEF
 extern revk_gpio_t blink;	// WS2812 LED
+#define	ws2812rgb	revk_settings_bits.ws2812rgb
 #else
 extern revk_gpio_t blink[3];	// R, G, B LED array (set all the same for WS2812 LED)
 #endif
@@ -365,7 +453,11 @@ enum {
 #define	STRIPS	3
 #define REVK_SETTINGS_LEDGPIO
 #define REVK_SETTINGS_LEDCOUNT
+#ifdef	CONFIG_REVK_LED
 #define REVK_SETTINGS_LEDTYPE
+#else
+#define REVK_SETTINGS_LEDTYPE
+#endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #define REVK_SETTINGS_CPS
 #else
@@ -462,6 +554,7 @@ enum {
 #ifdef	CONFIG_REVK_BLINK_DEF
 #ifdef	CONFIG_REVK_BLINK_WS2812_DEF
 #define REVK_SETTINGS_BLINK
+#define REVK_SETTINGS_WS2812RGB
 #else
 #define REVK_SETTINGS_BLINK
 #endif
