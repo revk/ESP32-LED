@@ -827,7 +827,9 @@ led_task (void *x)
       {
          const char *e = led_strip (&strip[s], ledgpio[s].num,
                                     ledgpio[s].invert,
+#ifdef	REVK_LED_FULL
                                    typeissk6812(ledtype[s]) ? LED_SK6812 : typeisxing(ledtype[s])?LED_XINGLIGHT:LED_WS2812,
+#endif
                                     (ledcount[s] ? : 4) + (s ? 0 : led_status), typeisrgbw (ledtype[s]) ? 4 : 3,
                                     ledtype[s] % 6);
          if (e)
