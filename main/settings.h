@@ -41,7 +41,7 @@ struct revk_settings_s {
  uint8_t gpio:1;
  uint8_t isenum:1;
 };
-#define	STRIPS	3
+#define	STRIPS	5
 #ifdef	CONFIG_REVK_LED
 #ifdef	REVK_LED_FULL
 extern const char REVK_SETTINGS_LEDTYPE_ENUMS[];
@@ -177,7 +177,7 @@ struct revk_gpio_s {
  uint16_t set:1;
 };
 enum {
-#define	STRIPS	3
+#define	STRIPS	5
 #ifdef	CONFIG_REVK_LED
 #ifdef	REVK_LED_FULL
 #else
@@ -242,7 +242,7 @@ enum {
 };
 typedef struct revk_settings_bits_s revk_settings_bits_t;
 struct revk_settings_bits_s {
-#define	STRIPS	3
+#define	STRIPS	5
 #ifdef	CONFIG_REVK_LED
 #ifdef	REVK_LED_FULL
 #else
@@ -305,7 +305,7 @@ struct revk_settings_bits_s {
  uint8_t meshroot:1;	// This is preferred mesh root
 #endif
 };
-#define	STRIPS	3
+#define	STRIPS	5
 extern revk_gpio_t ledgpio[STRIPS];	// GPIOs for LED string
 extern uint16_t ledcount[STRIPS];	// How many LEDs in string
 #ifdef	CONFIG_REVK_LED
@@ -478,7 +478,7 @@ enum {
  REVK_SETTINGS_JSON,
  REVK_SETTINGS_OCTET,
 };
-#define	STRIPS	3
+#define	STRIPS	5
 #define REVK_SETTINGS_LEDGPIO
 #define REVK_SETTINGS_LEDCOUNT
 #ifdef	CONFIG_REVK_LED

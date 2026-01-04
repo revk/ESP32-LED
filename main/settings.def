@@ -1,4 +1,4 @@
-#define	STRIPS	3
+#define	STRIPS	5
 
 gpio	led.gpio		4	.array=STRIPS .old="rgb"		// GPIOs for LED string
 u16	led.count			.array=STRIPS .old="leds"	// How many LEDs in string

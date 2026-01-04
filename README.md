@@ -74,7 +74,10 @@ Well, quite a few other PCBs...
 
 The boards are designed so they can run WLED code and esphome. The code included here is different, but offers a number of useful features.
 
-* Handles various formats, RGB, RGBW, and some with other sequences like GRB.
+* Handles multiple strips on different GPIOs.
+* Handles all 6 ways to order RGB.
+* Handles RGB and RGBW strips.
+* Handles multiple strips on same GPIO even when different RGB/RGBW format.
 * Sound reactive using microphone.
 * Links in to Home Assistant.
 * Allows a set of HA "lights" which can be various sections of the strip(s), even overlapping.
