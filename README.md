@@ -77,7 +77,7 @@ The boards are designed so they can run WLED code and esphome. The code included
 * Handles multiple strips on different GPIOs.
 * Handles all 6 ways to order RGB.
 * Handles RGB and RGBW strips.
-* Handles multiple strips on same GPIO even when different RGB/RGBW format.
+* Handles multiple strips on same GPIO even when different RGB/RGBW format. Up to 2048 RGBW or 2730 RGBW LEDs per GPIO.
 * Sound reactive using microphone.
 * Links in to Home Assistant.
 * Allows a set of HA "lights" which can be various sections of the strip(s), even overlapping.
