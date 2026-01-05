@@ -14,7 +14,7 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledgpio",.comment="GPIOs for LED string",.group=1,.len=7,.dot=3,.def="4",.ptr=&ledgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS,.old="rgb"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="ledcount",.comment="How many LEDs in string",.group=1,.len=8,.dot=3,.ptr=&ledcount,.size=sizeof(uint16_t),.array=STRIPS,.old="leds"},
 #ifdef	CONFIG_REVK_LED
-#ifdef	REVK_LED_FULL
+#ifdef	CONFIG_REVK_LED_FULL
  {.type=REVK_SETTINGS_UNSIGNED,.isenum=1,.name="ledtype",.comment="Type of LED string",.group=1,.len=7,.dot=3,.ptr=&ledtype,.size=sizeof(uint8_t),.enums=REVK_SETTINGS_LEDTYPE_ENUMS,.array=STRIPS},
 #else
  {.type=REVK_SETTINGS_UNSIGNED,.isenum=1,.name="ledtype",.comment="LED string colour coding",.group=1,.len=7,.dot=3,.ptr=&ledtype,.size=sizeof(uint8_t),.enums=REVK_SETTINGS_LEDTYPE_ENUMS,.array=STRIPS},
@@ -180,7 +180,7 @@ revk_settings_t const revk_settings[]={
 revk_gpio_t ledgpio[STRIPS]={0};
 uint16_t ledcount[STRIPS]={0};
 #ifdef	CONFIG_REVK_LED
-#ifdef	REVK_LED_FULL
+#ifdef	CONFIG_REVK_LED_FULL
 uint8_t ledtype[STRIPS]={0};
 const char REVK_SETTINGS_LEDTYPE_ENUMS[]="WS2812 GRB,WS2812 GBR,WS2812 RGB,WS2812 RBG,WS2812 BGR,WS2812 BRG,WS2812 GRBW,WS2812 GBRW,WS2812 RGBW,WS2812 RBGW,WS2812 BGRW,WS2812 BRGW,SK6812 GRB,SK6812 GBR,SK6812 RGB,SK6812 RBG,SK6812 BGR,SK6812 BRG,SK6812 GRBW,SK6812 GBRW,SK6812 RGBW,SK6812 RBGW,SK6812 BGRW,SK6812 BRGW,XING GRB,XING GBR,XING RGB,XING RBG,XING BGR,XING BRG,XING GRBW,XING GBRW,XING RGBW,XING RBGW,XING BGRW,XING BRGW";
 #else
@@ -321,7 +321,7 @@ char* meshpass=NULL;
 #endif
 #define	STRIPS	5
 #ifdef	CONFIG_REVK_LED
-#ifdef	REVK_LED_FULL
+#ifdef	CONFIG_REVK_LED_FULL
 #else
 #endif
 #else

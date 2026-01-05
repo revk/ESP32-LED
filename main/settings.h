@@ -43,7 +43,7 @@ struct revk_settings_s {
 };
 #define	STRIPS	5
 #ifdef	CONFIG_REVK_LED
-#ifdef	REVK_LED_FULL
+#ifdef	CONFIG_REVK_LED_FULL
 extern const char REVK_SETTINGS_LEDTYPE_ENUMS[];
 enum {
 REVK_SETTINGS_LEDTYPE_WS2812_GRB,
@@ -179,7 +179,7 @@ struct revk_gpio_s {
 enum {
 #define	STRIPS	5
 #ifdef	CONFIG_REVK_LED
-#ifdef	REVK_LED_FULL
+#ifdef	CONFIG_REVK_LED_FULL
 #else
 #endif
 #else
@@ -244,7 +244,7 @@ typedef struct revk_settings_bits_s revk_settings_bits_t;
 struct revk_settings_bits_s {
 #define	STRIPS	5
 #ifdef	CONFIG_REVK_LED
-#ifdef	REVK_LED_FULL
+#ifdef	CONFIG_REVK_LED_FULL
 #else
 #endif
 #else
@@ -309,7 +309,7 @@ struct revk_settings_bits_s {
 extern revk_gpio_t ledgpio[STRIPS];	// GPIOs for LED string
 extern uint16_t ledcount[STRIPS];	// How many LEDs in string
 #ifdef	CONFIG_REVK_LED
-#ifdef	REVK_LED_FULL
+#ifdef	CONFIG_REVK_LED_FULL
 extern uint8_t ledtype[STRIPS];	// Type of LED string
 #else
 extern uint8_t ledtype[STRIPS];	// LED string colour coding
@@ -482,7 +482,7 @@ enum {
 #define REVK_SETTINGS_LEDGPIO
 #define REVK_SETTINGS_LEDCOUNT
 #ifdef	CONFIG_REVK_LED
-#ifdef	REVK_LED_FULL
+#ifdef	CONFIG_REVK_LED_FULL
 #define REVK_SETTINGS_LEDTYPE
 #else
 #define REVK_SETTINGS_LEDTYPE
