@@ -827,7 +827,7 @@ led_task (void *x)
       {
          const char *e = led_strip (&strip[s], ledgpio[s],
 #ifdef	CONFIG_REVK_LED_TEST
-                                    ledloop[s],
+                                    ledgpio[s],	// No loop back
 #endif
 #ifdef	CONFIG_REVK_LED_FULL
                                     typeissk6812 (ledtype[s]) ? LED_SK6812 : typeisxing (ledtype[s]) ? LED_XINGLIGHT : LED_WS2812,

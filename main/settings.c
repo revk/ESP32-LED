@@ -12,9 +12,6 @@ revk_settings_bits_t revk_settings_bits={0};
 revk_settings_t const revk_settings[]={
 #define	STRIPS	5
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledgpio",.comment="GPIO for LED string",.group=1,.len=7,.dot=3,.def="4",.ptr=&ledgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS,.old="rgb"},
-#ifdef	CONFIG_REVK_LED_TEST
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledloop",.comment="GPIO for LED string loopback test",.group=1,.len=7,.dot=3,.ptr=&ledloop,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS},
-#endif
  {.type=REVK_SETTINGS_UNSIGNED,.name="ledcount",.comment="How many LEDs in string",.group=1,.len=8,.dot=3,.ptr=&ledcount,.size=sizeof(uint16_t),.array=STRIPS,.old="leds"},
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
@@ -39,7 +36,11 @@ revk_settings_t const revk_settings[]={
  {.type=REVK_SETTINGS_BIT,.name="ir4x11",.comment="4x11 IR colour/LED remote",.group=2,.len=6,.dot=2,.bit=REVK_SETTINGS_BITFIELD_ir4x11,.live=1},
  {.type=REVK_SETTINGS_BIT,.name="ir4x6",.comment="4x6 IR colour/LED remote",.group=2,.len=5,.dot=2,.bit=REVK_SETTINGS_BITFIELD_ir4x6,.live=1},
  {.type=REVK_SETTINGS_BIT,.name="irha",.comment="Announce keys to HA config",.group=2,.len=4,.dot=2,.bit=REVK_SETTINGS_BITFIELD_irha},
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="Status LEDs, R, G, B (all the same for WS2812)",.len=5,.def="40,40,40",.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=3},
+#ifdef  CONFIG_REVK_LED_TEST
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (for WS2818, set first two the same, third can be loop test)",.len=5,.def="40 40",.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=3},
+#else
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (for WS2812, set first two the same)",.len=5,.def="40 40",.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=3},
+#endif
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxr",.comment="Max RGB Red",.group=3,.len=4,.dot=3,.def="255",.ptr=&maxr,.size=sizeof(uint8_t),.live=1,.unit="/255"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxg",.comment="Max RGB Green",.group=3,.len=4,.dot=3,.def="255",.ptr=&maxg,.size=sizeof(uint8_t),.live=1,.unit="/255"},
  {.type=REVK_SETTINGS_UNSIGNED,.name="maxb",.comment="Max RGB Blue",.group=3,.len=4,.dot=3,.def="255",.ptr=&maxb,.size=sizeof(uint8_t),.live=1,.unit="/255"},
@@ -130,7 +131,7 @@ revk_settings_t const revk_settings[]={
 #ifdef	CONFIG_REVK_LED_TEST
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (for WS2818, set first two the same, third can be loop test)",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
 #else
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (for WS2812, set first two the same",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (for WS2812, set first two the same)",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
 #endif
 #endif
 #endif
@@ -189,9 +190,6 @@ revk_settings_t const revk_settings[]={
 #undef str
 #define	STRIPS	5
 revk_gpio_t ledgpio[STRIPS]={0};
-#ifdef	CONFIG_REVK_LED_TEST
-revk_gpio_t ledloop[STRIPS]={0};
-#endif
 uint16_t ledcount[STRIPS]={0};
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
@@ -214,7 +212,11 @@ revk_gpio_t relay={0};
 revk_gpio_t adc={0};
 revk_gpio_t button={0};
 revk_gpio_t irgpio={0};
+#ifdef  CONFIG_REVK_LED_TEST
 revk_gpio_t blink[3]={0};
+#else
+revk_gpio_t blink[3]={0};
+#endif
 uint8_t maxr=0;
 uint8_t maxg=0;
 uint8_t maxb=0;
@@ -342,8 +344,6 @@ uint16_t meshmax=0;
 char* meshpass=NULL;
 #endif
 #define	STRIPS	5
-#ifdef	CONFIG_REVK_LED_TEST
-#endif
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
 #else
@@ -351,6 +351,9 @@ char* meshpass=NULL;
 #else
 #endif
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
+#else
+#endif
+#ifdef  CONFIG_REVK_LED_TEST
 #else
 #endif
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD

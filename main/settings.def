@@ -1,9 +1,6 @@
 #define	STRIPS	5
 
 gpio	led.gpio		4	.array=STRIPS .old="rgb"		// GPIO for LED string
-#ifdef	CONFIG_REVK_LED_TEST
-gpio	led.loop			.array=STRIPS 		// GPIO for LED string loopback test
-#endif
 u16	led.count			.array=STRIPS .old="leds"	// How many LEDs in string
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
@@ -32,7 +29,11 @@ bit	ir.4x11		.live				// 4x11 IR colour/LED remote
 bit	ir.4x6		.live				// 4x6 IR colour/LED remote
 bit	ir.ha						// Announce keys to HA config
 
-gpio	blink		"40,40,40"	.array=3		// Status LEDs, R, G, B (all the same for WS2812)
+#ifdef  CONFIG_REVK_LED_TEST
+gpio    blink           "40 40"       .array=3		// R, G, B LED array (for WS2818, set first two the same, third can be loop test)
+#else
+gpio    blink           "40 40"       .array=3		// R, G, B LED array (for WS2812, set first two the same)
+#endif
 
 u8	max.r		255	.live .unit="/255"	// Max RGB Red
 u8	max.g		255	.live .unit="/255"	// Max RGB Green

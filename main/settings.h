@@ -42,8 +42,6 @@ struct revk_settings_s {
  uint8_t isenum:1;
 };
 #define	STRIPS	5
-#ifdef	CONFIG_REVK_LED_TEST
-#endif
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
 extern const char REVK_SETTINGS_LEDTYPE_ENUMS[];
@@ -134,6 +132,9 @@ REVK_SETTINGS_LEDTYPE_SK6812_BRGW,
 #ifdef  CONFIG_IDF_TARGET_ESP32S3
 #else
 #endif
+#ifdef  CONFIG_REVK_LED_TEST
+#else
+#endif
 #ifdef	CONFIG_REVK_SETTINGS_PASSWORD
 #endif
 #ifdef  CONFIG_MDNS_MAX_INTERFACES
@@ -185,8 +186,6 @@ struct revk_gpio_s {
 };
 enum {
 #define	STRIPS	5
-#ifdef	CONFIG_REVK_LED_TEST
-#endif
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
 #else
@@ -201,6 +200,9 @@ enum {
  REVK_SETTINGS_BITFIELD_ir4x11,
  REVK_SETTINGS_BITFIELD_ir4x6,
  REVK_SETTINGS_BITFIELD_irha,
+#ifdef  CONFIG_REVK_LED_TEST
+#else
+#endif
  REVK_SETTINGS_BITFIELD_usegamma,
  REVK_SETTINGS_BITFIELD_micright,
  REVK_SETTINGS_BITFIELD_haenable,
@@ -257,8 +259,6 @@ enum {
 typedef struct revk_settings_bits_s revk_settings_bits_t;
 struct revk_settings_bits_s {
 #define	STRIPS	5
-#ifdef	CONFIG_REVK_LED_TEST
-#endif
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
 #else
@@ -273,6 +273,9 @@ struct revk_settings_bits_s {
  uint8_t ir4x11:1;	// 4x11 IR colour/LED remote
  uint8_t ir4x6:1;	// 4x6 IR colour/LED remote
  uint8_t irha:1;	// Announce keys to HA config
+#ifdef  CONFIG_REVK_LED_TEST
+#else
+#endif
  uint8_t usegamma:1;	// Use gamme
  uint8_t micright:1;	// I2S Mic use right channel
  uint8_t haenable:1;	// Enable Home Assistant
@@ -328,9 +331,6 @@ struct revk_settings_bits_s {
 };
 #define	STRIPS	5
 extern revk_gpio_t ledgpio[STRIPS];	// GPIO for LED string
-#ifdef	CONFIG_REVK_LED_TEST
-extern revk_gpio_t ledloop[STRIPS];	// GPIO for LED string loopback test
-#endif
 extern uint16_t ledcount[STRIPS];	// How many LEDs in string
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
@@ -355,7 +355,11 @@ extern revk_gpio_t irgpio;	// IR receiver
 #define	ir4x11	revk_settings_bits.ir4x11
 #define	ir4x6	revk_settings_bits.ir4x6
 #define	irha	revk_settings_bits.irha
-extern revk_gpio_t blink[3];	// Status LEDs, R, G, B (all the same for WS2812)
+#ifdef  CONFIG_REVK_LED_TEST
+extern revk_gpio_t blink[3];	// R, G, B LED array (for WS2818, set first two the same, third can be loop test)
+#else
+extern revk_gpio_t blink[3];	// R, G, B LED array (for WS2812, set first two the same)
+#endif
 extern uint8_t maxr;	// Max RGB Red
 extern uint8_t maxg;	// Max RGB Green
 extern uint8_t maxb;	// Max RGB Blue
@@ -446,7 +450,7 @@ extern revk_gpio_t blinktest;	// WS2812 LED loopback for testing LED strip
 #ifdef	CONFIG_REVK_LED_TEST
 extern revk_gpio_t blink[3];	// R, G, B LED array (for WS2818, set first two the same, third can be loop test)
 #else
-extern revk_gpio_t blink[3];	// R, G, B LED array (for WS2812, set first two the same
+extern revk_gpio_t blink[3];	// R, G, B LED array (for WS2812, set first two the same)
 #endif
 #endif
 #endif
@@ -512,9 +516,6 @@ enum {
 };
 #define	STRIPS	5
 #define REVK_SETTINGS_LEDGPIO
-#ifdef	CONFIG_REVK_LED_TEST
-#define REVK_SETTINGS_LEDLOOP
-#endif
 #define REVK_SETTINGS_LEDCOUNT
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
@@ -539,7 +540,11 @@ enum {
 #define REVK_SETTINGS_IR4X11
 #define REVK_SETTINGS_IR4X6
 #define REVK_SETTINGS_IRHA
+#ifdef  CONFIG_REVK_LED_TEST
 #define REVK_SETTINGS_BLINK
+#else
+#define REVK_SETTINGS_BLINK
+#endif
 #define REVK_SETTINGS_MAXR
 #define REVK_SETTINGS_MAXG
 #define REVK_SETTINGS_MAXB
