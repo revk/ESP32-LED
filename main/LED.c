@@ -837,6 +837,10 @@ led_task (void *x)
          if (e)
             ESP_LOGE (TAG, "Fail %s", e);
       }
+#ifdef  CONFIG_REVK_LED
+   if (led_send ())
+      revk_ate_fail ("LED fail");
+#endif
 #else
    led_strip_handle_t strip[STRIPS] = { 0 };
    for (int s = 0; s < STRIPS; s++)
@@ -1764,7 +1768,6 @@ mic_task (void *arg)
       {
          b.micok = 1;
          ESP_LOGE (TAG, "Audio running");
-         revk_ate_pass ();
       }
       {                         // Magnitude
          float mag = 0;
@@ -2108,6 +2111,7 @@ app_main ()
       if (!b.micok)
          revk_blink (10, 0, "R");
    }
+   revk_ate_pass ();
    while (1)
    {
       time_t now = time (0);
