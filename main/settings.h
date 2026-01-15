@@ -42,7 +42,7 @@ struct revk_settings_s {
  uint8_t isenum:1;
 };
 #define	STRIPS	5
-#ifdef	CONFIG_REVK_LED_TESt
+#ifdef	CONFIG_REVK_LED_TEST
 #endif
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
@@ -182,7 +182,7 @@ struct revk_gpio_s {
 };
 enum {
 #define	STRIPS	5
-#ifdef	CONFIG_REVK_LED_TESt
+#ifdef	CONFIG_REVK_LED_TEST
 #endif
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
@@ -251,7 +251,7 @@ enum {
 typedef struct revk_settings_bits_s revk_settings_bits_t;
 struct revk_settings_bits_s {
 #define	STRIPS	5
-#ifdef	CONFIG_REVK_LED_TESt
+#ifdef	CONFIG_REVK_LED_TEST
 #endif
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
@@ -319,7 +319,7 @@ struct revk_settings_bits_s {
 };
 #define	STRIPS	5
 extern revk_gpio_t ledgpio[STRIPS];	// GPIO for LED string
-#ifdef	CONFIG_REVK_LED_TESt
+#ifdef	CONFIG_REVK_LED_TEST
 extern revk_gpio_t ledloop[STRIPS];	// GPIO for LED string loopback test
 #endif
 extern uint16_t ledcount[STRIPS];	// How many LEDs in string
@@ -499,7 +499,7 @@ enum {
 };
 #define	STRIPS	5
 #define REVK_SETTINGS_LEDGPIO
-#ifdef	CONFIG_REVK_LED_TESt
+#ifdef	CONFIG_REVK_LED_TEST
 #define REVK_SETTINGS_LEDLOOP
 #endif
 #define REVK_SETTINGS_LEDCOUNT

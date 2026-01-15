@@ -12,7 +12,7 @@ revk_settings_bits_t revk_settings_bits={0};
 revk_settings_t const revk_settings[]={
 #define	STRIPS	5
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledgpio",.comment="GPIO for LED string",.group=1,.len=7,.dot=3,.def="4",.ptr=&ledgpio,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS,.old="rgb"},
-#ifdef	CONFIG_REVK_LED_TESt
+#ifdef	CONFIG_REVK_LED_TEST
  {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="ledloop",.comment="GPIO for LED string loopback test",.group=1,.len=7,.dot=3,.ptr=&ledloop,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.array=STRIPS},
 #endif
  {.type=REVK_SETTINGS_UNSIGNED,.name="ledcount",.comment="How many LEDs in string",.group=1,.len=8,.dot=3,.ptr=&ledcount,.size=sizeof(uint16_t),.array=STRIPS,.old="leds"},
@@ -185,7 +185,7 @@ revk_settings_t const revk_settings[]={
 #undef str
 #define	STRIPS	5
 revk_gpio_t ledgpio[STRIPS]={0};
-#ifdef	CONFIG_REVK_LED_TESt
+#ifdef	CONFIG_REVK_LED_TEST
 revk_gpio_t ledloop[STRIPS]={0};
 #endif
 uint16_t ledcount[STRIPS]={0};
@@ -334,7 +334,7 @@ uint16_t meshmax=0;
 char* meshpass=NULL;
 #endif
 #define	STRIPS	5
-#ifdef	CONFIG_REVK_LED_TESt
+#ifdef	CONFIG_REVK_LED_TEST
 #endif
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL
