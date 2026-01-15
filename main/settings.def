@@ -1,6 +1,9 @@
 #define	STRIPS	5
 
-gpio	led.gpio		4	.array=STRIPS .old="rgb"		// GPIOs for LED string
+gpio	led.gpio		4	.array=STRIPS .old="rgb"		// GPIO for LED string
+#ifdef	CONFIG_REVK_LED_TESt
+gpio	led.loop			.array=STRIPS 		// GPIO for LED string loopback test
+#endif
 u16	led.count			.array=STRIPS .old="leds"	// How many LEDs in string
 #ifdef	CONFIG_REVK_LED
 #ifdef	CONFIG_REVK_LED_FULL

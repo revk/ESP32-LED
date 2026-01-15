@@ -814,7 +814,7 @@ led_task (void *x)
    for (int s = 0; s < STRIPS; s++)
       ledmax += ledcount[s];
 #ifdef	CONFIG_REVK_LED
-   const uint8_t led_status=0;	// blink_init will make a single LED strip
+   const uint8_t led_status = 0;        // blink_init will make a single LED strip
 #else
    uint8_t led_status = (blink[0].num == ledgpio[0].num ? 1 : 0);
 #endif
@@ -825,10 +825,12 @@ led_task (void *x)
    for (int s = 0; s < STRIPS; s++)
       if (ledgpio[s].set && (ledcount[s] || !ledmax))
       {
-         const char *e = led_strip (&strip[s], ledgpio[s].num,
-                                    ledgpio[s].invert,
+         const char *e = led_strip (&strip[s], ledgpio[s],
+#ifdef	CONFIG_REVK_LED_TEST
+                                    ledloop[s],
+#endif
 #ifdef	CONFIG_REVK_LED_FULL
-                                   typeissk6812(ledtype[s]) ? LED_SK6812 : typeisxing(ledtype[s])?LED_XINGLIGHT:LED_WS2812,
+                                    typeissk6812 (ledtype[s]) ? LED_SK6812 : typeisxing (ledtype[s]) ? LED_XINGLIGHT : LED_WS2812,
 #endif
                                     (ledcount[s] ? : 4) + (s ? 0 : led_status), typeisrgbw (ledtype[s]) ? 4 : 3,
                                     ledtype[s] % 6);
@@ -1151,7 +1153,7 @@ led_task (void *x)
                   W += ledcount[s];
                if (!s)
                {
-#ifndef  CONFIG_REVK_LED     
+#ifndef  CONFIG_REVK_LED
                   if (led_status)
                      revk_led (strip[s], 0, 255, revk_blinker ());
                   else
@@ -1160,7 +1162,7 @@ led_task (void *x)
                }
             }
 #ifdef  CONFIG_REVK_LED
-	 revk_blink_do();
+         revk_blink_do ();
 #else
          for (int s = 0; s < STRIPS; s++)
             if (strip[s])
