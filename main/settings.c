@@ -127,7 +127,11 @@ revk_settings_t const revk_settings[]={
 #endif
  {.type=REVK_SETTINGS_BIT,.name="ws2812rgb",.comment="Reverse green and red on WS2812 LED",.len=9,.def="0",.bit=REVK_SETTINGS_BITFIELD_ws2812rgb,.revk=1},
 #else
- {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (set all the same for WS2812 LED)",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
+#ifdef	CONFIG_REVK_LED_TEST
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (for WS2818, set first two the same, third can be loop test)",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
+#else
+ {.type=REVK_SETTINGS_UNSIGNED,.gpio=1,.name="blink",.comment="R, G, B LED array (for WS2812, set first two the same",.len=5,.dq=1,.def=quote(CONFIG_REVK_BLINK),.ptr=&blink,.size=sizeof(revk_gpio_t),.fix=1,.set=1,.flags="- ~↓↕⇕",.revk=1,.array=3},
+#endif
 #endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
@@ -286,7 +290,11 @@ revk_gpio_t blink={0};
 revk_gpio_t blinktest={0};
 #endif
 #else
+#ifdef	CONFIG_REVK_LED_TEST
 revk_gpio_t blink[3]={0};
+#else
+revk_gpio_t blink[3]={0};
+#endif
 #endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
@@ -362,6 +370,9 @@ char* meshpass=NULL;
 #ifdef	CONFIG_REVK_LED_TEST
 #endif
 #else
+#ifdef	CONFIG_REVK_LED_TEST
+#else
+#endif
 #endif
 #endif
 #ifdef  CONFIG_REVK_APMODE

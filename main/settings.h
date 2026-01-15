@@ -151,6 +151,9 @@ REVK_SETTINGS_LEDTYPE_SK6812_BRGW,
 #ifdef	CONFIG_REVK_LED_TEST
 #endif
 #else
+#ifdef	CONFIG_REVK_LED_TEST
+#else
+#endif
 #endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
@@ -227,6 +230,9 @@ enum {
 #endif
  REVK_SETTINGS_BITFIELD_ws2812rgb,
 #else
+#ifdef	CONFIG_REVK_LED_TEST
+#else
+#endif
 #endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
@@ -296,6 +302,9 @@ struct revk_settings_bits_s {
 #endif
  uint8_t ws2812rgb:1;	// Reverse green and red on WS2812 LED
 #else
+#ifdef	CONFIG_REVK_LED_TEST
+#else
+#endif
 #endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
@@ -434,7 +443,11 @@ extern revk_gpio_t blinktest;	// WS2812 LED loopback for testing LED strip
 #endif
 #define	ws2812rgb	revk_settings_bits.ws2812rgb
 #else
-extern revk_gpio_t blink[3];	// R, G, B LED array (set all the same for WS2812 LED)
+#ifdef	CONFIG_REVK_LED_TEST
+extern revk_gpio_t blink[3];	// R, G, B LED array (for WS2818, set first two the same, third can be loop test)
+#else
+extern revk_gpio_t blink[3];	// R, G, B LED array (for WS2812, set first two the same
+#endif
 #endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
@@ -614,7 +627,11 @@ enum {
 #endif
 #define REVK_SETTINGS_WS2812RGB
 #else
+#ifdef	CONFIG_REVK_LED_TEST
 #define REVK_SETTINGS_BLINK
+#else
+#define REVK_SETTINGS_BLINK
+#endif
 #endif
 #endif
 #ifdef  CONFIG_REVK_APMODE
