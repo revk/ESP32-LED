@@ -827,7 +827,7 @@ led_task (void *x)
       {
          const char *e = led_strip (&strip[s], ledgpio[s],
 #ifdef	CONFIG_REVK_LED_TEST
-                                    ledgpio[s],	// No loop back
+                                    ledgpio[s], // No loop back
 #endif
 #ifdef	CONFIG_REVK_LED_FULL
                                     typeissk6812 (ledtype[s]) ? LED_SK6812 : typeisxing (ledtype[s]) ? LED_XINGLIGHT : LED_WS2812,
@@ -1360,7 +1360,7 @@ web_status (httpd_req_t *req)
       return ESP_OK;
    }
    if (req->method == HTTP_GET)
-      return status ();         // Send status on initial connect
+      return status ();
    // received packet
    httpd_ws_frame_t ws_pkt;
    uint8_t *buf = NULL;
@@ -1494,7 +1494,7 @@ web_root (httpd_req_t *req)
                      "function w(n,v){var m=new Object();m[n]=v;ws.send(JSON.stringify(m));}"   //
                      "function c(){"    //
                      "ws=new WebSocket((location.protocol=='https:'?'wss:':'ws:')+'//'+window.location.host+'/status');"        //
-                     "ws.onclose=function(v){ws=undefined;if(reboot)location.reload();};"       //
+                     "ws.onclose=function(v){if(reboot)location.reload();};"    //
                      "ws.onerror=function(v){ws.close();};"     //
                      "ws.onmessage=function(v){"        //
                      "o=JSON.parse(v.data);"    //
@@ -1503,8 +1503,9 @@ web_root (httpd_req_t *req)
                      "o.active.forEach(function(e,i,ar){l=document.createElement('li');l.textContent=JSON.stringify(e);a.appendChild(l);});"    //
                      "g('active').replaceWith(a);"      //
                      "if(o.shutdown){reboot=true;s('shutdown','Restarting: '+o.shutdown);h('shutdown',true);};" //
-                     "};};c();" //
-                     "setInterval(function() {if(!ws)c();else ws.send('');},1000);"     //
+                     "};};"     //
+                     "c();"	//
+                     "setInterval(function() {if(ws.readyState==3)c();else if(ws.readyState==1)ws.send('');},1000);"    //
                      "</script>");
    if (!ledmax)
       revk_web_send (req,
